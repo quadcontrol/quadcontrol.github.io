@@ -1,0 +1,46 @@
+
+/* === Paleta de cores para MkDocs Material === */
+/* Estilo: escuro tipo ChatGPT com verde QuadControl */
+
+:root {
+  /* Barra superior */
+  --md-primary-bg-color:        #cccccc;  /* Texto */
+  --md-primary-fg-color:        #2b2b2b;  /* Fundo */
+  
+  /* Corpo */
+  --md-default-bg-color:        #333333;  /* Fundo */
+  --md-default-fg-color:        #cccccc;  /* Texto */
+
+  /* Destaques e interaÃ§Ãµes */
+  --md-accent-fg-color:         #12abdb;  /* Cor de botÃµes, links hover e elementos ativos */
+
+  /* Tipografia */
+  --md-typeset-color:           #e0e0e0;  /* Texto nos documentos */
+  --md-typeset-a-color:         #21c663;  /* Cor dos links */
+  --md-typeset-mark-color:      #fff59d;  /* Cor de destaque (==marcado==) */
+
+  /* Blocos de cÃ³digo */
+  --md-code-fg-color:           #dcdcdc;  /* Texto do cÃ³digo */
+  --md-code-bg-color:           #2b2b2b;  /* Fundo do bloco de cÃ³digo */
+  --md-code-hl-color:           #21c663;  /* Linha destacada */
+  --md-code-hl-number-color:    #888888;  /* NÃºmeros da linha de cÃ³digo */
+
+  /* RodapÃ© */
+  --md-footer-bg-color:         #1a1a1a;  /* Fundo do rodapÃ© */
+  --md-footer-fg-color:         #aaaaaa;  /* Texto do rodapÃ© */
+}
+
+/* === Links ativos na navegaÃ§Ã£o lateral === */
+.md-nav__link--active,
+.md-nav__link--active:hover {
+  color: #21c663 !important;      /* Cor do link ativo */
+  font-weight: bold;              /* Negrito para destacar mais */
+}
+
+.md-nav__link--active::before {
+  background-color: #00ff99 !important;  /* Barrinha lateral indicando item ativo */
+}
+
+.md-typeset h1 {
+  color: var(--md-typeset-color) !important;
+}

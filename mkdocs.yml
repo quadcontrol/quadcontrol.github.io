@@ -14,3 +14,30 @@ extra:
 # Tema (se estiver usando)
 theme:
   name: material
+  palette:
+    - scheme: slate
+  features:
+    - content.code.copy
+
+nav:
+  - Início: index.md
+  - Introduction:
+    - Installations: installations.md
+  - Aerodynamics:
+    - Basic Concepts: aerodynamics_basic_concepts.md
+    - Parameters estimation:
+      - Motor coefficients: aerodynamics_motor_coefficients.md
+      - Lift coefficient: aerodynamics_lift_coefficient.md
+      - Drag coefficient: aerodynamics_drag_coefficient.md
+  - Control:
+    - Architecture: control_architecture.md
+    - Mixer: control_mixer.md
+    - Attitude:
+      - Estimator: control_attitude_estimator.md
+      - Controller: control_attitude_controller.md
+    - Vertical Position:
+      - Estimator: control_vertical_estimator.md
+      - Controller: control_vertical_controller.md
+    - Horizontal Position:
+      - Estimator: control_horizontal_estimator.md
+      - Controller: control_horizontal_controller.md

@@ -1,0 +1,16 @@
+site_name: QuadControl
+site_url: https://quadcontrol.github.io/
+repo_url: https://github.com/quadcontrol/quadcontrol.github.io
+edit_uri: ""
+use_directory_urls: false
+
+# IMPORTANTE:
+# Adicione isso para garantir root correto
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/quadcontrol
+
+# Tema (se estiver usando)
+theme:
+  name: material

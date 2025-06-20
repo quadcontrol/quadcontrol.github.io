@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aerodynamics-basic-concepts" class="md-skip">
+        <a href="#aerodinamica" class="md-skip">
           Skip to content
         </a>
       
@@ -1258,7 +1258,7 @@
 
 
 
-<h1 id="aerodynamics-basic-concepts">Aerodynamics - Basic concepts</h1>
+<h1 id="aerodinamica">Aerodinâmica</h1>
 <hr />
 <h2 id="aerofolio">Aerofólio</h2>
 <p>O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.</p>
@@ -1266,13 +1266,14 @@
 <h3 id="forcas-aerodinamicas">Forças aerodinâmicas</h3>
 <p>A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar. </p>
 <p><img alt="Aerofólio" src="../images/clark_y_profile.png" /></p>
-<p>Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação <span class="arithmatex">\(f_l\)</span> (perpendicular à velocidade <span class="arithmatex">\(v\)</span>), ele também produz uma força indesejada e arrasto <span class="arithmatex">\(f_d\)</span> (paralela à velocidade <span class="arithmatex">\(v\)</span>). </p>
-<p>As forças de sustentação e arrasto são dadas por:</p>
-<div class="arithmatex">\[
+<p>Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação <span class="arithmatex">\(f_l\)</span> (perpendicular à velocidade <span class="arithmatex">\(v\)</span>):
+$$
 f_l = \frac{1}{2} \rho A C_l v^2 
-\hspace{5cm}
+$$</p>
+<p>Ele também produz uma força indesejada de arrasto <span class="arithmatex">\(f_d\)</span> (paralela à velocidade <span class="arithmatex">\(v\)</span>):
+$$
 f_d = \frac{1}{2} \rho A C_d v^2 
-\]</div>
+$$</p>
 <p>Onde:</p>
 <ul>
 <li><span class="arithmatex">\(\rho\)</span> - Densidade do ar (<span class="arithmatex">\(kg/m^3\)</span>)</li>
@@ -1291,19 +1292,20 @@ f_d = \frac{1}{2} \rho A C_d v^2
 </ul>
 <p>Para aerofólios que se movem a velocidades subsônicas (<span class="arithmatex">\(&lt;1.000km/h\)</span>), apenas o ângulo de ataque <span class="arithmatex">\(\alpha\)</span>, representado na figura abaixo, acaba apresentando uma influência significativa.</p>
 <p><img alt="Aerofólio com ângulo de ataque" src="images/aerofolio_com_angulo_ataque.png" /></p>
-<p>Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados\footnote{Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores} pelo gráfico da Figura \ref{fig/graficos/grafico_coeficientes_aerodinamicos_perfil_clark_y}.</p>
+<p>Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo gráfico abaixo.</p>
 <p><img alt="Coeficientes aerodinâmicos de um aerofólio com perfil Clark Y" src="images/coeficientes_aerodinamicos_perfil_clark_y.png" /></p>
-<p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (aproximadamente em <span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como <code>estol'' ou simplesmente</code>perda de sustentação'', e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência).</p>
+<p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (aproximadamente em <span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência).</p>
 <hr />
 <h3 id="drone-de-asas-fixas">Drone de asas fixas</h3>
+<p>Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone de asas fixas.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
-<p>Vamos considerar um drone de asa fixa (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante. Considere que esse drone possui as seguintes características<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
+<p>Considerar um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
 <ul>
-<li>Massa de <span class="arithmatex">\(30g\)</span> e comprimento de <span class="arithmatex">\(9cm\)</span></li>
-<li>Asas perfil Clark Y com <span class="arithmatex">\(9cm\)</span> de envergadura</li>
+<li>Massa de <span class="arithmatex">\(40g\)</span> e comprimento de <span class="arithmatex">\(10cm\)</span></li>
+<li>Asas perfil Clark Y com <span class="arithmatex">\(10cm\)</span> de envergadura</li>
 <li>Propulsores com <span class="arithmatex">\(60\%\)</span> de eficiência </li>
-<li>Bateria de <span class="arithmatex">\(3,7V\)</span> e <span class="arithmatex">\(250mAh\)</span></li>
+<li>Bateria de <span class="arithmatex">\(3,7V\)</span> e <span class="arithmatex">\(350mAh\)</span></li>
 </ul>
 <details class="info">
 <summary>a) Desenhe o diagrama de corpo livre das forças que atuam nesse drone</summary>
@@ -1312,8 +1314,8 @@ f_d = \frac{1}{2} \rho A C_d v^2
 <summary>b) Determine a área total das asas do drone assumindo que seu corpo é triangular</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    A &amp;= \frac{9 \cdot 9}{2} \\
-    A &amp;= 40,5 \text{cm}^2
+    A &amp;= \frac{10 \cdot 10}{2} \\
+    A &amp;= 50 \text{cm}^2
 \end{align*}
 \]</div>
 </details>
@@ -1334,8 +1336,8 @@ f_d = \frac{1}{2} \rho A C_d v^2
     f_l - f_p &amp;= 0 \\
     \frac{1}{2} \rho A C_l v^2 - mg &amp;= 0 \\
     v &amp;= \sqrt{\frac{2mg}{\rho AC_l}} \\
-    v &amp;= \sqrt{\frac{2 \cdot 0,03 \cdot 9,81}{1,225 \cdot 40,5 \times 10^{-4} \cdot 0,35}} \\
-    v &amp;= 18,41 \text{m/s} \quad (\approx 66\text{km/h})
+    v &amp;= \sqrt{\frac{2 \cdot 0,04 \cdot 9,81}{1,225 \cdot 50 \times 10^{-4} \cdot 0,35}} \\
+    v &amp;= 19,13 \text{m/s} \quad (\approx 69\text{km/h})
 \end{align*}
 \]</div>
 </details>
@@ -1347,8 +1349,8 @@ f_d = \frac{1}{2} \rho A C_d v^2
     f_e - f_d &amp;= 0 \\
     f_e - \frac{1}{2} \rho A C_d v^2  &amp;= 0 \\
     f_e &amp;= \frac{1}{2} \rho A C_d v^2 \\
-    f_e &amp;= \frac{1}{2} 1,225 \cdot 40,5 \times 10^{-4} \cdot 0,02 \cdot 18,41^2 \\
-    f_e &amp;= 0,0168 \text{N}
+    f_e &amp;= \frac{1}{2} 1,225 \cdot 50 \times 10^{-4} \cdot 0,02 \cdot 19,13^2 \\
+    f_e &amp;= 0,0224 \text{N}
 \end{align*}
 \]</div>
 </details>
@@ -1357,16 +1359,16 @@ f_d = \frac{1}{2} \rho A C_d v^2
 <div class="arithmatex">\[
 \begin{align*}
     P_m &amp;= f_e v \\
-    P_m &amp;= 0,0168 \cdot 18,41 \\
-    P_m &amp;= 0,310 \text{W}
+    P_m &amp;= 0,0224 \cdot 19,13 \\
+    P_m &amp;= 0,429 \text{W}
 \end{align*}
 \]</div>
 <div class="arithmatex">\[
 \begin{align*}
     \eta &amp;= \frac{P_m}{P_e} \\
     P_e &amp;= \frac{P_m}{\eta} \\
-    P_e &amp;= \frac{0,310}{0,6} \\
-    P_e &amp;= 0,516 \text{W}
+    P_e &amp;= \frac{0,429}{0,6} \\
+    P_e &amp;= 0,715 \text{W}
 \end{align*}
 \]</div>
 </details>
@@ -1377,8 +1379,8 @@ f_d = \frac{1}{2} \rho A C_d v^2
     E &amp;= P_e \Delta t \\
     e_s i_s &amp;= P_e \Delta t \\
     \Delta t &amp;= \frac{e_s i_s}{P_e} \\
-    \Delta t &amp;= \frac{3,7 (\cdot 0,25 \cdot 3600)}{0,516} \\
-    \Delta t &amp;= 6.453\text{s} \quad (\approx 1\text{h}48\text{min})
+    \Delta t &amp;= \frac{3,7 \cdot ( 0,35 \cdot 3600)}{0,715} \\
+    \Delta t &amp;= 6.519 \text{s} \quad (\approx 1\text{h}49\text{min})
 \end{align*}
 \]</div>
 </details>
@@ -1720,7 +1722,10 @@ Compare este resultado, do drone multi rotor, com o anterior, do drone de asas f
 <hr />
 <ol>
 <li id="fn:1">
-<p>Considere <span class="arithmatex">\(g = 9,81\text{m/s}^2\)</span> e <span class="arithmatex">\(\rho = 1,225\text{kg/m}^3\)</span>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Considere <span class="arithmatex">\(g = 9,81\text{m/s}^2\)</span> e <span class="arithmatex">\(\rho = 1,225\text{kg/m}^3\)</span>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

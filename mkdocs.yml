@@ -1,20 +1,18 @@
 site_name: QuadControl
-# site_url: https://quadcontrol.github.io/
-# repo_url: https://github.com/quadcontrol/quadcontrol.github.io
-# edit_uri: ""
-# use_directory_urls: false
-
-# extra:
-#   social:
-#     - icon: fontawesome/brands/github
-#       link: https://github.com/quadcontrol
 
 theme:
   name: material
-  palette:
-    - scheme: slate
+  logo: images/logo.png
+  favicon: images/favicon.png
+  # palette:
+  # - scheme: slate
+  #     primary: black
+  #     accent: light green
   features:
     - content.code.copy
+
+extra_css:
+  - styles/colors.css
 
 nav:
   - Início: index.md

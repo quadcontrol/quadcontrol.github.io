@@ -12,7 +12,7 @@ O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos p
 
 A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar. 
 
-![Aerofólio](images/aerofolio.png)
+![Aerofólio](images/clark_y_profile.png)
     
 Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação $f_l$ (perpendicular à velocidade $v$), ele também produz uma força indesejada e arrasto $f_d$ (paralela à velocidade $v$). 
 

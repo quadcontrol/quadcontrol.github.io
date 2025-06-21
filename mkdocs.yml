@@ -4,40 +4,48 @@ theme:
   name: material
   logo: images/logo.png
   favicon: images/favicon.png
-  # palette:
-  # - scheme: slate
-  #     primary: black
-  #     accent: light green
+  palette:
+  - scheme: slate
+    primary: black
+    # accent: light green
   features:
-    - content.code.copy
+    - content.code.copy # Habilita botão de copiar no código
+    - content.code.title
 
-extra_css:
-  - styles/colors.css
+# extra_css:
+  # - styles/colors.css
 
 nav:
-  - Início: index.md
-  - Introduction:
-    - Installations: installations.md
-  - Aerodynamics:
-    - Basic Concepts: aerodynamics_basic_concepts.md
-    - Parameters estimation:
-      - Motor coefficients: aerodynamics_motor_coefficients.md
-      - Lift coefficient: aerodynamics_lift_coefficient.md
-      - Drag coefficient: aerodynamics_drag_coefficient.md
-  - Control:
-    - Architecture: control_architecture.md
-    - Mixer: control_mixer.md
-    - Attitude:
-      - Estimator: control_attitude_estimator.md
-      - Controller: control_attitude_controller.md
-    - Vertical Position:
-      - Estimator: control_vertical_estimator.md
-      - Controller: control_vertical_controller.md
-    - Horizontal Position:
-      - Estimator: control_horizontal_estimator.md
-      - Controller: control_horizontal_controller.md
+  - Início: home.md
+  - Primeiros Passos:
+    - Instalações: x.md
+    - Sensores: x.md
+    - Motores: x.md
+  - Conceitos básicos:
+    - Aerodinâmica: basic_concepts/aerodynamics.md
+  - Identificação:
+    - Massa e Momento de Inércia: identification/mass_and_moment_of_inertia.md
+    - Coeficientes do Motor: identification/motor_coeficients.md
+    - Constante de Sustentação: identification/lift_constant.md
+    - Constante de Arrasto: identification/drag_constant.md
+  - Modelagem:
+    - Cinemática: x.md
+    - Cinética: x.md
+  - Controle: 
+    - Arquitetura: x.md
+    - Mixer: x.md
+    - Atitude:
+      - Estimador de Atitude: x.md
+      - Controlador de Atitude: x.md
+    - Vertical:
+      - Estimador Vertical: x.md
+      - Controlador Vertical: x.md
+    - Horizontal:
+      - Estimador Horizontal: x.md
+      - Controlador Horizontal: x.md
 
 markdown_extensions:
+  - footnotes
   - pymdownx.tasklist
   - attr_list
   - def_list
@@ -48,7 +56,9 @@ markdown_extensions:
       generic: true
   - admonition
   - pymdownx.details
-  - footnotes
+  - pymdownx.highlight:
+      linenums: true           # Mostra números de linha no código
+
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6

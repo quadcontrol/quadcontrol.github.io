@@ -447,15 +447,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#drone-de-asas-fixas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Drone de asas fixas
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -484,15 +475,6 @@
   <a href="#constantes-aerodinamicas" class="md-nav__link">
     <span class="md-ellipsis">
       Constantes aerodinâmicas
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drone-multi-rotor" class="md-nav__link">
-    <span class="md-ellipsis">
-      Drone multi-rotor
     </span>
   </a>
   
@@ -1191,15 +1173,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#drone-de-asas-fixas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Drone de asas fixas
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1233,15 +1206,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#drone-multi-rotor" class="md-nav__link">
-    <span class="md-ellipsis">
-      Drone multi-rotor
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1264,19 +1228,18 @@
 
 
 <h1 id="aerodinamica">Aerodinâmica</h1>
-<p>Este secção introduzuz os conceitos básicos da aerodinâmica de um drone.</p>
+<p>Esta seção introduz alguns conceitos básicos sobre aerodinâmica que são essenciais para entender a física de um drone.</p>
 <hr />
 <h2 id="aerofolio">Aerofólio</h2>
 <p>O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.</p>
-<hr />
 <h3 id="forcas-aerodinamicas">Forças aerodinâmicas</h3>
 <p>A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar.</p>
 <p><img alt="Airfoil1" src="../images/airfoil1.pdf" style="display: block; margin: auto;" width="350" /></p>
 <p>Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação <span class="arithmatex">\(f_l\)</span> (perpendicular à velocidade <span class="arithmatex">\(v\)</span>), ele também produz uma força indesejada de arrasto <span class="arithmatex">\(f_d\)</span> (paralela à velocidade <span class="arithmatex">\(v\)</span>):
 $$
-f_l = \frac{1}{2} \rho A C_l v^2 
-\qquad
-f_d = \frac{1}{2} \rho A C_d v^2 
+    f_l = \frac{1}{2} \rho A C_l v^2 
+    \qquad
+    f_d = \frac{1}{2} \rho A C_d v^2 
 $$</p>
 <p>Onde:</p>
 <ul>
@@ -1286,7 +1249,6 @@ $$</p>
 <li><span class="arithmatex">\(C_d\)</span> - Coeficiente de arrasto (adimensional)</li>
 <li><span class="arithmatex">\(v\)</span> - Velocidade linear do aerofólio (<span class="arithmatex">\(m/s\)</span>)</li>
 </ul>
-<hr />
 <h3 id="coeficientes-aerodinamicos">Coeficientes aerodinâmicos</h3>
 <p>Os coeficientes de sustentação e arrasto não são constantes, eles variam conforme as seguintes condições aerodinâmicas:</p>
 <ul>
@@ -1299,12 +1261,9 @@ $$</p>
 <p>Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo gráfico abaixo.</p>
 <p><img alt="Coeficientes aerodinâmicos de um aerofólio com perfil Clark Y" src="images/coeficientes_aerodinamicos_perfil_clark_y.png" /></p>
 <p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (aproximadamente em <span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência).</p>
-<hr />
-<h3 id="drone-de-asas-fixas">Drone de asas fixas</h3>
-<p>Para consolidar esses conceitos, vamos considerar um exemplo bem simples de um drone de asas fixas.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
-<p>Considerar um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<p>Para consolidar esses conceitos, considere um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
 <ul>
 <li>Massa de <span class="arithmatex">\(40g\)</span> e comprimento de <span class="arithmatex">\(10cm\)</span></li>
 <li>Asas perfil Clark Y com <span class="arithmatex">\(10cm\)</span> de envergadura</li>
@@ -1392,7 +1351,6 @@ $$</p>
 <hr />
 <h2 id="helice">Hélice</h2>
 <p>Uma hélice é composta por <span class="arithmatex">\(n\)</span> pás, onde cada pá pode ser interpretada como um aerofólio.</p>
-<hr />
 <h3 id="forcas-e-torques-aerodinamicos">Forças e torques aerodinâmicos</h3>
 <p>Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo.</p>
 <p><img alt="Propeller1" src="../images/propeller1.pdf" style="display: block; margin: auto;" width="350" /></p>
@@ -1456,7 +1414,6 @@ f_p = \underbrace{\rho A C_l d^2}_{k_l} \omega^2
 <li><span class="arithmatex">\(k_l\)</span> - Coeficiente de sustentação da hélice (<span class="arithmatex">\(N.s^2/rad^2\)</span>)</li>
 <li><span class="arithmatex">\(k_d\)</span> - Coeficiente de arrasto da hélice (<span class="arithmatex">\(N.m.s^2/rad^2\)</span>)</li>
 </ul>
-<hr />
 <h3 id="constantes-aerodinamicas">Constantes aerodinâmicas</h3>
 <p>Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice produz, que dependem do quadrado de sua velocidade angular:</p>
 <p><img alt="Propeller3" src="../images/propeller3.pdf" style="display: block; margin: auto;" width="350" /></p>
@@ -1498,12 +1455,9 @@ f_l = k_l \omega^2
 </details>
 </div>
 <p>Esses dois parâmetros serão determinados experimentalmente (<a href="../../identification/lift_constant/"><span class="arithmatex">\(k_l\)</span></a> e <a href="../../identification/drag_constant/"><span class="arithmatex">\(k_d\)</span></a>), e você verá que a chegará em valores muito próximos aos estimados acima.</p>
-<hr />
-<h3 id="drone-multi-rotor">Drone multi-rotor</h3>
-<p>Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone multi-rotor.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 5</p>
-<p>Considerar um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<p>Para consolidar esses conceitos, considere um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
 <ul>
 <li>Massa de <span class="arithmatex">\(40g\)</span></li>
 <li>Hélices com constante de sustentação de <span class="arithmatex">\(2,0\times10^{-8} \text{N}.\text{s}^2/\text{rad}^2\)</span> e constante de arrasto de <span class="arithmatex">\(2,0\times10^{-10} \text{N}.\text{m}.\text{s}^2\text{/rad}^2\)</span></li>

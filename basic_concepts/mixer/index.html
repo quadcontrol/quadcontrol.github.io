@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../motor_coeficients/">
+        <link rel="prev" href="../aerodynamics/">
       
       
-        <link rel="next" href="../drag_constant/">
+        <link rel="next" href="../../identification/mass_and_moment_of_inertia/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Constante de Sustentação - QuadControl</title>
+        <title>Mixer - QuadControl</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#identificacao-da-constante-de-sustentacao" class="md-skip">
+        <a href="#mixer" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Constante de Sustentação
+              Mixer
             
           </span>
         </div>
@@ -327,18 +327,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -354,7 +356,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Conceitos básicos
@@ -368,128 +370,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basic_concepts/aerodynamics/" class="md-nav__link">
+      <a href="../aerodynamics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Aerodinâmica
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../basic_concepts/mixer/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Mixer
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Identificação
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Identificação
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mass_and_moment_of_inertia/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Massa e Momento de Inércia
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../motor_coeficients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Coeficientes do Motor
     
   </span>
   
@@ -521,7 +407,7 @@
   
   
   <span class="md-ellipsis">
-    Constante de Sustentação
+    Mixer
     
   </span>
   
@@ -534,7 +420,7 @@
   
   
   <span class="md-ellipsis">
-    Constante de Sustentação
+    Mixer
     
   </span>
   
@@ -557,9 +443,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#movimentos-basicos-de-um-quadricoptero" class="md-nav__link">
     <span class="md-ellipsis">
+      Movimentos básicos de um quadricóptero
+    </span>
+  </a>
+  
+</li>
       
+        <li class="md-nav__item">
+  <a href="#transformacao-de-entradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformação de entradas
     </span>
   </a>
   
@@ -574,6 +469,51 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificação
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Identificação
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -581,7 +521,76 @@
   
   
     <li class="md-nav__item">
-      <a href="../drag_constant/" class="md-nav__link">
+      <a href="../../identification/mass_and_moment_of_inertia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Massa e Momento de Inércia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identification/motor_coeficients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Coeficientes do Motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identification/lift_constant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constante de Sustentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identification/drag_constant/" class="md-nav__link">
         
   
   
@@ -1089,9 +1098,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#movimentos-basicos-de-um-quadricoptero" class="md-nav__link">
     <span class="md-ellipsis">
+      Movimentos básicos de um quadricóptero
+    </span>
+  </a>
+  
+</li>
       
+        <li class="md-nav__item">
+  <a href="#transformacao-de-entradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformação de entradas
     </span>
   </a>
   
@@ -1113,10 +1131,15 @@
 
 
 
-<h1 id="identificacao-da-constante-de-sustentacao">Identificação da constante de sustentação</h1>
-<p>Nesta seção, você irá determinar experimentalmente os parâmetros do motor e implementar e validar uma função de controle para ele.</p>
+<h1 id="mixer">Mixer</h1>
+<p>Esta secção descreve as forças e torques que atuam em um quadricóptero e como elas influenciam o seu comportamento dinâmico.</p>
 <hr />
-<h2 id="_1"></h2>
+<h2 id="movimentos-basicos-de-um-quadricoptero">Movimentos básicos de um quadricóptero</h2>
+<p>Um quadricóptero possui 4 hélices que, uma vez em movimento com velocidades angulares <span class="arithmatex">\(\omega_1\)</span>, <span class="arithmatex">\(\omega_2\)</span>, <span class="arithmatex">\(\omega_3\)</span> e <span class="arithmatex">\(\omega_4\)</span>, produzem 4 forças de sustentação <span class="arithmatex">\(f_1\)</span>, <span class="arithmatex">\(f_2\)</span>, <span class="arithmatex">\(f_3\)</span> e <span class="arithmatex">\(f_4\)</span> e 4 torques de arrasto <span class="arithmatex">\(\tau_1\)</span>, <span class="arithmatex">\(\tau_2\)</span>, <span class="arithmatex">\(\tau_3\)</span> e <span class="arithmatex">\(\tau_4\)</span>, conforme a figura abaixo.</p>
+<p><img alt="Quadcopter1" src="../images/quadcopter1.pdf" style="display: block; margin: auto;" width="600" /></p>
+<p><img alt="Quadcopter2" src="../images/quadcopter2.pdf" style="display: block; margin: auto;" width="600" /></p>
+<p>--</p>
+<h2 id="transformacao-de-entradas">Transformação de entradas</h2>
 
 
 

@@ -12,7 +12,7 @@
         <link rel="prev" href="../../home/">
       
       
-        <link rel="next" href="../../identification/mass_and_moment_of_inertia/">
+        <link rel="next" href="../mixer/">
       
       
       <link rel="icon" href="../../images/favicon.png">
@@ -300,7 +300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../firs_steps/motors.md" class="md-nav__link">
         
   
   
@@ -507,6 +507,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mixer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixer
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1241,6 +1264,7 @@
 
 
 <h1 id="aerodinamica">Aerodinâmica</h1>
+<p>Este secção introduzuz os conceitos básicos da aerodinâmica de um drone.</p>
 <hr />
 <h2 id="aerofolio">Aerofólio</h2>
 <p>O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.</p>
@@ -1264,7 +1288,7 @@ $$</p>
 </ul>
 <hr />
 <h3 id="coeficientes-aerodinamicos">Coeficientes aerodinâmicos</h3>
-<p>Os coeficientes aerodinâmicos não são constantes, eles variam conforme as seguintes condições aerodinâmicas:</p>
+<p>Os coeficientes de sustentação e arrasto não são constantes, eles variam conforme as seguintes condições aerodinâmicas:</p>
 <ul>
 <li>Ângulo de ataque (<span class="arithmatex">\(\alpha\)</span>), que é o ângulo que a linha média do aerofólio (também chamada de ``corda'') faz com o vetor velocidade</li>
 <li>Número de Reynolds (<span class="arithmatex">\(\frac{\rho v D}{\mu}\)</span>), que é uma medida adimensional e define o regime de escoamento do ar (laminar ou turbulento)</li>
@@ -1277,7 +1301,7 @@ $$</p>
 <p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (aproximadamente em <span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência).</p>
 <hr />
 <h3 id="drone-de-asas-fixas">Drone de asas fixas</h3>
-<p>Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone de asas fixas.</p>
+<p>Para consolidar esses conceitos, vamos considerar um exemplo bem simples de um drone de asas fixas.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
 <p>Considerar um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
@@ -1370,7 +1394,7 @@ $$</p>
 <p>Uma hélice é composta por <span class="arithmatex">\(n\)</span> pás, onde cada pá pode ser interpretada como um aerofólio.</p>
 <hr />
 <h3 id="forcas-e-torques-aerodinamicos">Forças e torques aerodinâmicos</h3>
-<p>Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo:</p>
+<p>Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo.</p>
 <p><img alt="Propeller1" src="../images/propeller1.pdf" style="display: block; margin: auto;" width="350" /></p>
 <p>Onde:</p>
 <ul>
@@ -1379,51 +1403,51 @@ $$</p>
 </ul>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
-<p>Determine as forças de sustentação <span class="arithmatex">\(f_{l_{1,2}}\)</span> e arrasto <span class="arithmatex">\(f_{d_{1,2}}\)</span> nas pás da hélice em função de sua velocidade angular</p>
+<p>Determine as forças de sustentação <span class="arithmatex">\(f_l\)</span> e arrasto <span class="arithmatex">\(f_d\)</span> nas pás da hélice em função de sua velocidade angular</p>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    f_{l_{1,2}} &amp;= \frac{1}{2} \rho A C_l v^2 \\ 
-    f_{l_{1,2}} &amp;= \frac{1}{2} \rho A C_l (\omega d )^2 \\
-    f_{l_{1,2}} &amp;= \frac{1}{2} \rho A C_l d^2 \omega^2 
+    f_l &amp;= \frac{1}{2} \rho A C_l v^2 \\ 
+    f_l &amp;= \frac{1}{2} \rho A C_l (\omega d )^2 \\
+    f_l &amp;= \frac{1}{2} \rho A C_l d^2 \omega^2 
 \end{align*}
 \]</div>
 <div class="arithmatex">\[
 \begin{align*}
-    f_{d_{1,2}} &amp;= \frac{1}{2} \rho A C_d v^2 \\ 
-    f_{d_{1,2}} &amp;= \frac{1}{2} \rho A C_d (\omega d )^2 \\
-    f_{d_{1,2}} &amp;= \frac{1}{2} \rho A C_d d^2 \omega^2 
+    f_d &amp;= \frac{1}{2} \rho A C_d v^2 \\ 
+    f_d &amp;= \frac{1}{2} \rho A C_d (\omega d )^2 \\
+    f_d &amp;= \frac{1}{2} \rho A C_d d^2 \omega^2 
 \end{align*}
 \]</div>
 </details>
 </div>
-<p>As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação e torque de arrasto total, conforme a figura abaixo.</p>
+<p>As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação total <span class="arithmatex">\(f_p\)</span> e torque de arrasto total <span class="arithmatex">\(\tau_d\)</span>, conforme a figura abaixo.</p>
 <p><img alt="Propeller2" src="../images/propeller2.pdf" style="display: block; margin: auto;" width="350" /></p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 3</p>
-<p>Determine a força de sustentação total <span class="arithmatex">\(f_l\)</span> e torque de arrasto total <span class="arithmatex">\(\tau_d\)</span></p>
+<p>Determine a força de sustentação total <span class="arithmatex">\(f_p\)</span> e torque de arrasto total <span class="arithmatex">\(\tau_d\)</span></p>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    f_l &amp;= 2 f_{l_{1,2}} \\
-    f_l &amp;= 2 \left( \frac{1}{2} \rho A C_l d^2 \omega^2  \right) \\
-    f_l &amp;= \rho A C_l d^2 \omega^2 
+    f_p &amp;= 2 f_l \\
+    f_p &amp;= 2 \left( \frac{1}{2} \rho A C_l d^2 \omega^2  \right) \\
+    f_p &amp;= \rho A C_l d^2 \omega^2 
 \end{align*}
 \]</div>
 <div class="arithmatex">\[
 \begin{align*}
-    \tau_d &amp;= 2 \left( d f_{d_{1,2}} \right) \\ 
+    \tau_d &amp;= 2 \left( d f_d \right) \\ 
     \tau_d &amp;= 2 \left( d \left( \frac{1}{2} \rho A C_d d^2 \omega^2 \right) \right) \\
     \tau_d &amp;= \rho A C_d d^3 \omega^2 
 \end{align*}
 \]</div>
 </details>
 </div>
-<p>Como todos os parâmetros são constantes e apenas a velocidade angular <span class="arithmatex">\(\omega\)</span> varia, a força de sustentação e o torque de arrasto total podem ser simplificados por:</p>
+<p>Como todos os parâmetros são constantes e apenas a velocidade angular <span class="arithmatex">\(\omega\)</span> varia, a força de sustentação total e o torque de arrasto total podem ser simplificados por:</p>
 <div class="arithmatex">\[
-f_l = \underbrace{\rho A C_l d^2}_{k_l} \omega^2 
+f_p = \underbrace{\rho A C_l d^2}_{k_l} \omega^2 
 \qquad
 \tau_d = \underbrace{\rho A C_d d^3}_{k_d} \omega^2 
 \]</div>
@@ -1434,29 +1458,41 @@ f_l = \underbrace{\rho A C_l d^2}_{k_l} \omega^2
 </ul>
 <hr />
 <h3 id="constantes-aerodinamicas">Constantes aerodinâmicas</h3>
-<p>Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice produz, que dependem do quadrado de sua velocidade angular:
-$$
+<p>Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice produz, que dependem do quadrado de sua velocidade angular:</p>
+<p><img alt="Propeller3" src="../images/propeller3.pdf" style="display: block; margin: auto;" width="350" /></p>
+<div class="arithmatex">\[
 f_l = k_l \omega^2 
-\hspace{5cm}
+\qquad
 \tau_d = k_d \omega^2 
-$$</p>
+\]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 4</p>
-<p>Com o auxílio de uma régua, estime<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque <span class="arithmatex">\(\alpha = 5^\circ\)</span>, sendo a constante de sustentação igual porém a constante de arrasto 10x maior devido à turbulência gerada pela hélice.</p>
+<p>Com o auxílio de uma régua, estime<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque <span class="arithmatex">\(\alpha = 5^\circ\)</span>, sendo a constante de sustentação igual, porém a constante de arrasto 10x maior<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. </p>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
+\left\{
+    \begin{align*}
+        \rho &amp;= 1,225 kg/m^3 \\
+        A &amp;= 2,5 \cdot 0,5 = 1,25 cm^2 \\
+        d &amp;= 1,5 cm \\
+        C_l &amp;= 0,7 \\
+        C_d &amp;= 0,04 \cdot 10 = 0,4 
+    \end{align*}
+\right.
+\]</div>
+<div class="arithmatex">\[
 \begin{align*}
-    k_l &amp;= 2 \left( \frac{1}{2} \rho A C_l d^2 \right) \\
-    k_l &amp;= 2 \left( \frac{1}{2} 1,225 \cdot (2,1 \times 10^{-2} \cdot 0,6 \times 10^{-2}) \cdot 0,7 \cdot (1,5 \times 10^{-2})^2 \right) \\
-    k_l &amp;= 2,43 \times10^{-8} \text{N.s}^2\text{/rad}^2
+    k_l &amp;= \rho A C_l d^2\\
+    k_l &amp;= 1,225 \cdot (1,25 \cdot 10^{-4}) \cdot 0,7 \cdot (1,5 \times 10^{-2})^2 \\
+    k_l &amp;= 2,41 \times10^{-8} \text{N.s}^2\text{/rad}^2
 \end{align*}
 \]</div>
 <div class="arithmatex">\[
 \begin{align*}
-    k_d &amp;= 2 \left( \frac{1}{2} \rho A C_d d^2 \right) d \\
-    k_d &amp;= 2 \left( \frac{1}{2} 1,225 \cdot (2,1 \times 10^{-2} \cdot 0,6 \times 10^{-2}) \cdot 0,4 \cdot (1,5 \times 10^{-2})^2 \right) \cdot 1,5 \times 10^{-2} \\
-    k_d &amp;= 2,08 \times10^{-10} \text{N.m.s}^2\text{/rad}^2
+    k_d &amp;= \rho A C_d d^3 \\
+    k_d &amp;= 1,225 \cdot (1,25 \cdot 10^{-4}) \cdot 0,4 \cdot (1,5 \times 10^{-2})^3 \\
+    k_d &amp;= 2,07 \times10^{-10} \text{N.m.s}^2\text{/rad}^2
 \end{align*}
 \]</div>
 </details>
@@ -1482,7 +1518,7 @@ $$</p>
 <div class="arithmatex">\[
 \begin{align*}
     \sum f_y &amp;= 0 \\
-    4 f_l - f_p &amp;= 0 \\
+    4 f_p - f_w &amp;= 0 \\
     4 k_l \omega^2 - mg &amp;= 0 \\
     \omega &amp;= \sqrt{\frac{mg}{4 k_l}} \\
     \omega &amp;= \sqrt{\frac{0,04 \cdot 9,81}{4 \cdot 2,0\times10^{-8}}} \\
@@ -1546,6 +1582,9 @@ $$</p>
 </li>
 <li id="fn:3">
 <p>Estamos preocupados apenas com a ordem de grandeza dos resultados.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Devido à turbulência gerada pela hélice.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

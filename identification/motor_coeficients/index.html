@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#identificacao-da-constante-de-sustentacao" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -295,7 +300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../firs_steps/motors.md" class="md-nav__link">
         
   
   
@@ -369,6 +374,29 @@
   
   <span class="md-ellipsis">
     Aerodinâmica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_concepts/mixer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixer
     
   </span>
   
@@ -462,6 +490,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Coeficientes do Motor
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -474,6 +517,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      PWM
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1008,6 +1079,25 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      PWM
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1023,9 +1113,23 @@
 
 
 
-  <h1>Coeficientes do Motor</h1>
-
-
+<h1 id="identificacao-da-constante-de-sustentacao">Identificação da constante de sustentação</h1>
+<p>Nesta secção, você irá determinar experimentalmente os parâmetros do motor e implementar e validar uma função de controle para ele.</p>
+<hr />
+<h2 id="pwm">PWM</h2>
+<p>O PWM ("pulse width modulation") é uma técnica para controlar a potência de um sinal utilizando uma comutação digital. Ao mudar rapidamente o sinal entre o um e zero ("on-off"), e variando a fração de tempo que o sinal está no máximo, pode-se controlar a potência transmitida (isto é, modulando a largura do pulso), conforme a figura abaixo.</p>
+<p><img alt="PWM1" src="../images/pwm1.pdf" style="display: block; margin: auto;" width="350" />
+<img alt="PWM2" src="../images/pwm2.pdf" style="display: block; margin: auto;" width="350" />
+<img alt="PWM3" src="../images/pwm3.pdf" style="display: block; margin: auto;" width="350" /></p>
+<p>Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Conforme visto no secção dos <a href="../../first_steps/motors/">motores</a>, no programa é possível definir um valor real entre <code>0.0</code> e <code>1.0</code> que corresponde ao sinal PWM do motor. </p>
+<p>Você irá implementar um controlador para os motores, isto é, uma função que, dada uma velocidade angular desejada <span class="arithmatex">\(\omega\)</span>, determine o sinal PWM correspondente, conforme o diagrama de blocos abaixo:</p>
+<div class="arithmatex">\[\begin{figure}[H]
+    \centering
+    \input{tikz/diagrama_de_blocos/mixer/controlador_do_motor}
+    \caption{Controlador do motor}
+    \label{fig/diagrama_de_blocos/mixer/controlador_do_motor}
+\end{figure}\]</div>
+<p>Dado que o drone não possui sensores para medir a velocidade angular dos motores, este será um controlador em malha aberta. No entanto, como ainda vamos projetar um controlador em malha fechada em um nível superior (cascata), isto não será um problema. Precisamos apenas garantir que a dinâmica dos motores em malha aberta seja significativamente (5x) mais rápida que a do controlador em malha fechada no nível superior.</p>
 
 
 

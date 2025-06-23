@@ -45,3 +45,10 @@
   color: var(--md-typeset-color) !important;
 }
 
+hr {
+  border: none;
+  /* height: 1px; */
+  background-color: #666666;  /* Altere para a cor desejada */
+  margin: 2em 0;
+}
+

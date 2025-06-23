@@ -26,9 +26,6 @@
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
       
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
-      
       
 
 
@@ -46,6 +43,8 @@
       
     
     
+      <link rel="stylesheet" href="../../styles/colors.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -56,14 +55,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -113,18 +105,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -1266,8 +1246,8 @@
 <p>O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.</p>
 <hr />
 <h3 id="forcas-aerodinamicas">Forças aerodinâmicas</h3>
-<p>A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar. </p>
-<p><img alt="Aerofólio" src="images/clark_y_profile.png" /></p>
+<p>A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar.</p>
+<p><img alt="Airfoil1" src="../images/airfoil1.pdf" style="display: block; margin: auto;" width="350" /></p>
 <p>Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação <span class="arithmatex">\(f_l\)</span> (perpendicular à velocidade <span class="arithmatex">\(v\)</span>):
 $$
 f_l = \frac{1}{2} \rho A C_l v^2 
@@ -1293,7 +1273,7 @@ $$</p>
 <li>Número Mach (<span class="arithmatex">\(\frac{v}{v_s}\)</span>), que é a razão entre a velocidade e a velocidade do som e define o regime de velocidade (subsônica, supersônica e hipersônica)</li>
 </ul>
 <p>Para aerofólios que se movem a velocidades subsônicas (<span class="arithmatex">\(&lt;1.000km/h\)</span>), apenas o ângulo de ataque <span class="arithmatex">\(\alpha\)</span>, representado na figura abaixo, acaba apresentando uma influência significativa.</p>
-<p><img alt="Aerofólio com ângulo de ataque" src="images/aerofolio_com_angulo_ataque.png" /></p>
+<p><img alt="Airfoil2" src="../images/airfoil2.pdf" style="display: block; margin: auto;" width="350" /></p>
 <p>Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo gráfico abaixo.</p>
 <p><img alt="Coeficientes aerodinâmicos de um aerofólio com perfil Clark Y" src="images/coeficientes_aerodinamicos_perfil_clark_y.png" /></p>
 <p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (aproximadamente em <span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência).</p>
@@ -1393,7 +1373,7 @@ $$</p>
 <hr />
 <h3 id="forcas-e-torques-aerodinamicos">Forças e torques aerodinâmicos</h3>
 <p>Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo:</p>
-<p><img alt="Hélice com forças de sustentação e arrasto nas pás" src="images/helice_1.png" /></p>
+<p><img alt="Propeller1" src="../images/propeller1.pdf" style="display: block; margin: auto;" width="350" /></p>
 <p>Onde:</p>
 <ul>
 <li><span class="arithmatex">\(d\)</span> - Distância do centro de pressão ao eixo de rotação (<span class="arithmatex">\(m\)</span>)</li>
@@ -1421,7 +1401,7 @@ $$</p>
 </details>
 </div>
 <p>As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação e torque de arrasto total, conforme a figura abaixo.</p>
-<p><img alt="Hélice com força de sustentação e torque de arrasto total" src="images/helice_2.png" /></p>
+<p><img alt="Propeller2" src="../images/propeller2.pdf" style="display: block; margin: auto;" width="350" /></p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 3</p>
 <p>Determine a força de sustentação total <span class="arithmatex">\(f_l\)</span> e torque de arrasto total <span class="arithmatex">\(\tau_d\)</span></p>

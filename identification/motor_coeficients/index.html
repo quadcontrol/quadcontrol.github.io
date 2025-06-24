@@ -26,6 +26,9 @@
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
       
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -43,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../styles/colors.css">
+      <link rel="stylesheet" href="../../styles/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -55,7 +58,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -105,6 +115,18 @@
         </div>
       </div>
     </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -537,6 +559,33 @@
   <a href="#pwm" class="md-nav__link">
     <span class="md-ellipsis">
       PWM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tacometro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tacômetro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ajuste-de-curva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajuste de curva
     </span>
   </a>
   
@@ -1097,6 +1146,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tacometro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tacômetro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ajuste-de-curva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajuste de curva
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1117,19 +1193,332 @@
 <p>Nesta secção, você irá determinar experimentalmente os parâmetros do motor e implementar e validar uma função de controle para ele.</p>
 <hr />
 <h2 id="pwm">PWM</h2>
-<p>O PWM ("pulse width modulation") é uma técnica para controlar a potência de um sinal utilizando uma comutação digital. Ao mudar rapidamente o sinal entre o um e zero ("on-off"), e variando a fração de tempo que o sinal está no máximo, pode-se controlar a potência transmitida (isto é, modulando a largura do pulso), conforme a figura abaixo.</p>
-<p><img alt="PWM1" src="../images/pwm1.pdf" style="display: block; margin: auto;" width="350" />
-<img alt="PWM2" src="../images/pwm2.pdf" style="display: block; margin: auto;" width="350" />
-<img alt="PWM3" src="../images/pwm3.pdf" style="display: block; margin: auto;" width="350" /></p>
+<p>O PWM ("pulse width modulation") é uma técnica para controlar a potência de um sinal utilizando uma comutação digital. Ao mudar rapidamente o sinal entre um e zero ("on-off"), e variando a fração de tempo que o sinal está no máximo, pode-se controlar a potência transmitida (isto é, modulando a largura do pulso), conforme a figura abaixo.</p>
+<p><img alt="PWM1" src="../images/pwm1.pdf" style="display: block; margin: auto;" width="450" />
+<img alt="PWM2" src="../images/pwm2.pdf" style="display: block; margin: auto;" width="450" />
+<img alt="PWM3" src="../images/pwm3.pdf" style="display: block; margin: auto;" width="450" /></p>
 <p>Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Conforme visto no secção dos <a href="../../first_steps/motors/">motores</a>, no programa é possível definir um valor real entre <code>0.0</code> e <code>1.0</code> que corresponde ao sinal PWM do motor. </p>
-<p>Você irá implementar um controlador para os motores, isto é, uma função que, dada uma velocidade angular desejada <span class="arithmatex">\(\omega\)</span>, determine o sinal PWM correspondente, conforme o diagrama de blocos abaixo:</p>
-<div class="arithmatex">\[\begin{figure}[H]
-    \centering
-    \input{tikz/diagrama_de_blocos/mixer/controlador_do_motor}
-    \caption{Controlador do motor}
-    \label{fig/diagrama_de_blocos/mixer/controlador_do_motor}
-\end{figure}\]</div>
-<p>Dado que o drone não possui sensores para medir a velocidade angular dos motores, este será um controlador em malha aberta. No entanto, como ainda vamos projetar um controlador em malha fechada em um nível superior (cascata), isto não será um problema. Precisamos apenas garantir que a dinâmica dos motores em malha aberta seja significativamente (5x) mais rápida que a do controlador em malha fechada no nível superior.</p>
+<p>Você irá implementar uma função que, dada uma velocidade angular desejada <span class="arithmatex">\(\omega\)</span>, determine o sinal PWM correspondente. </p>
+<hr />
+<h2 id="tacometro">Tacômetro</h2>
+<p>Para medir a velocidade angular da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro, conforme a figura abaixo.</p>
+<p><img alt="Tachometer" src="../images/tachometer.png" style="display: block; margin: auto;" width="450" /></p>
+<p>Para utilizar o tacômetro, você deve fixar um pequeno pedaço de fita refletora em uma das hélices, conforme a figura abaixo. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. </p>
+<p><img alt="Reflective Strip" src="../images/reflective_strip.jpg" style="display: block; margin: auto;" width="450" /></p>
+<p>O tacômetro pode detectar quando a tira passa pelo seu feixe de luz, assim, a velocidade de rotação é calculada contando quantas vezes a tira passa em um determinado período de tempo. </p>
+<p>O tacômetro DT-2234C+ registra a velocidade angular enquanto você pressiona o botão TEST, uma vez que este botão é liberado, ele armazena os valores mínimo, máximo e médio, que você pode conferir apertando o botão MEM.</p>
+<hr />
+<h2 id="experimento">Experimento</h2>
+<p>Você deve carregar no drone um programa que ligue apenas o motor cuja hélice está com o pedaço de fita refletora com um determinado valor de sinal PWM. Serão levantados dados de velocidade angular da hélice para 10 valores distintos de sinal PWM (<code>0.1</code> até <code>1.0</code>), e, para cada valor de sinal PWM, você deverá realizar o experimento 3 vezes e tirar uma média. Durante o experimento, você deverá coletar dados para preencher a tabela abaixo.</p>
+<table>
+<thead>
+<tr>
+<th>PWM</th>
+<th>N1 (rpm)</th>
+<th>N2 (rpm)</th>
+<th>N3 (rpm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0.1</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.2</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.3</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.4</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.5</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.6</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.7</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.8</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>0.9</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>1.0</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Para facilitar o experimento, você pode controlar o valor do PWM através do CFClient.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lab2.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;commander.h&quot;</span><span class="c1">     // Access to commanded setpoints (e.g., commanderGetSetpoint)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
+
+<span class="c1">// Global variables to store the desired setpoint, the current state (not used here) and the computed PWM value.</span>
+<span class="n">setpoint_t</span><span class="w"> </span><span class="n">setpoint</span><span class="p">;</span>
+<span class="n">state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">pwm</span><span class="p">;</span>
+
+<span class="c1">// Main application</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Infinite loop (runs forever)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Check if the drone is armed (i.e., ready to fly)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">supervisorIsArmed</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Fetch the latest setpoint from the commander and also fetch the current estimated state (not used here)</span>
+<span class="w">            </span><span class="n">commanderGetSetpoint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">setpoint</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Compute a PWM value proportional to the commanded altitude (Z axis position)</span>
+<span class="w">            </span><span class="c1">// The altitude command increases in 0.5 m steps, and we want the PWM to increase by 0.1 for each step.</span>
+<span class="w">            </span><span class="c1">// Therefore, we divide Z by 5.0 so that: 0.5 m → 0.1 PWM</span>
+<span class="w">            </span><span class="n">pwm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// If not armed, stop the motor (set PWM to zero)</span>
+<span class="w">            </span><span class="n">pwm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// Send the PWM signal to motor M1, scaling it to match the expected range [0, UINT16_MAX]</span>
+<span class="w">        </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Wait for 100 milliseconds before running the next iteration (10 Hz control loop)</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>As etapas para coletar um dado são as seguintes:</p>
+<ol>
+<li>Garanta que a bateria do drone está cheia  </li>
+<li>Prenda o drone na mesa com fita crepe  </li>
+<li>Ligue o motor da hélice que possui a fita refletora por aproximadamente <strong>5 s</strong> com um valor específico de sinal PWM  </li>
+<li>Aponte o tacômetro para a hélice segurando a aproximadamente <strong>30 cm</strong> de distância e, em seguida, pressione o botão <strong>TEST</strong>  </li>
+<li>Mantenha o botão <strong>TEST</strong> pressionado o tempo todo, certificando-se de que o feixe aponta para onde a faixa refletora passa  </li>
+<li>Mantenha essa posição até o motor desligar, quando você pode soltar o botão <strong>TEST</strong>  </li>
+<li>Pressione o botão <strong>MEM</strong> uma vez e espere aparecer a segunda leitura, que corresponde à velocidade máxima (em rpm) observada durante o experimento  </li>
+<li>Anote o número que aparece na tela</li>
+</ol>
+<hr />
+<h2 id="ajuste-de-curva">Ajuste de curva</h2>
+<p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular das hélice <span class="arithmatex">\(\omega\)</span> com o sinal PWM correspondente do motor (note que você precisa converter a velocidade angular de <span class="arithmatex">\(rpm\)</span> para <span class="arithmatex">\(rad/s\)</span>), conforme o gráfico abaixo.</p>
+<p>Há diversos tipos de funções de ajuste para esta curva (linear, exponencial, polinomial, etc.):</p>
+<div class="arithmatex">\[
+    \text{PWM} = f(\omega)
+\]</div>
+<p>Para definir qual é melhor para este caso, é necessário se aprofundar na dinâmica do sistema. O esquema eletromecânico de um motor elétrico com uma hélice pode ser visto no diagrama abaixo<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<p><img alt="Electric Motor" src="../images/electric_motor.pdf" style="display: block; margin: auto;" width="600" /></p>
+<p>Onde:</p>
+<ul>
+<li><span class="arithmatex">\(e_a\)</span> - Tensão de armadura (<span class="arithmatex">\(V\)</span>)</li>
+<li><span class="arithmatex">\(i_a\)</span> - Corrente de armadura (<span class="arithmatex">\(A\)</span>)</li>
+<li><span class="arithmatex">\(R_a\)</span> - Resistência de armadura (<span class="arithmatex">\(\Omega\)</span>)</li>
+<li><span class="arithmatex">\(L_a\)</span> - Indutância de armadura (<span class="arithmatex">\(H\)</span>)</li>
+<li><span class="arithmatex">\(e_b\)</span> - Tensão contra-eletromotriz (<span class="arithmatex">\(V\)</span>)</li>
+<li><span class="arithmatex">\(\omega\)</span> - Velocidade angular do motor/hélice (<span class="arithmatex">\(rad/s\)</span>)</li>
+<li><span class="arithmatex">\(\tau_m\)</span> - Torque do motor (<span class="arithmatex">\(N.m\)</span>)</li>
+<li><span class="arithmatex">\(k_d\)</span> - Constante de arrasto da hélice (<span class="arithmatex">\(N.m.s^2/rad^2\)</span>)</li>
+<li><span class="arithmatex">\(b\)</span> - Coeficiente de atrito viscoso do motor (<span class="arithmatex">\(N.m.s/rad\)</span>)</li>
+<li><span class="arithmatex">\(I\)</span> - Momento de inércia do motor/hélice (<span class="arithmatex">\(kg.m^2\)</span>)</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Exercício 1</p>
+<p>Aplique a lei de Kirchoff das tensões no circuito de armadura.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum_{i=1}^n e_i &amp;= 0 \\
+    e_a - R_a i_a - L_a \frac{d}{dt} i_a - e_b &amp;= 0
+\end{align*}
+\]</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 2</p>
+<p>Aplique a 2º lei de Newton em torno do eixo do motor.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum_{i=1}^n \tau_i &amp;= I \frac{d}{dt} \omega \\
+    \tau_m - k_d \omega^2 - b \omega &amp;= I \frac{d}{dt} \omega
+\end{align*}
+\]</div>
+</details>
+</div>
+<p>Em um motor de corrente contínua, o torque do motor <span class="arithmatex">\(\tau_m\)</span> é diretamente proporcional à corrente de armadura <span class="arithmatex">\(i_a\)</span>, e a tensão contra-eletromotriz <span class="arithmatex">\(e_b\)</span> é diretamente proporcional à velocidade angular <span class="arithmatex">\(\omega\)</span>:</p>
+<div class="arithmatex">\[
+\tau_m = K_m i_a 
+\qquad
+e_b = K_m \omega   
+\]</div>
+<p>Onde:</p>
+<ul>
+<li><span class="arithmatex">\(K_m\)</span> - Constante de torque do motor (<span class="arithmatex">\(N.m/A\)</span> ou <span class="arithmatex">\(V.s/rad\)</span>).</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Exercício 3</p>
+<p>Substitua o torque do motor <span class="arithmatex">\(\tau_m\)</span> e a tensão contra-eletromotriz <span class="arithmatex">\(e_b\)</span> nas duas equações diferenciais obtidas anteriormente.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\left\{
+    \begin{array}{l}
+        L_a \dfrac{d}{dt} i_a + R_a i_a + K_m \omega = e_a \\ \\
+        I \dfrac{d}{dt} \omega + k_d \omega^2 + b \omega - K_m i_a = 0
+    \end{array}
+\right.
+\]</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 4</p>
+<p>Quando o motor entra em regime, a corrente de armadura <span class="arithmatex">\(i_a\)</span> e a velocidade angular <span class="arithmatex">\(\omega\)</span> tornam-se constantes (essa é a definição de ``regime''). Iguale as derivadas da corrente de armadura <span class="arithmatex">\(i_a\)</span> e da velocidade angular <span class="arithmatex">\(\omega\)</span> a zero e isole a corrente de armadura <span class="arithmatex">\(i_a\)</span> nas duas equações.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align*}
+        L_a \cancelto{0}{\dfrac{d}{dt} i_a} + R_a i_a + K_m \omega &amp;= e_a \\
+        R_a i_a &amp;= e_a - K_m \omega \\
+        i_a &amp;= \dfrac{1}{R_a} e_a - \dfrac{K_m}{R_a} \omega
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    I \cancelto{0}{\dfrac{d}{dt} \omega} + k_d \omega^2 + b \omega - K_m i_a &amp;= 0 \\
+    K_m i_a &amp;= k_d \omega^2 + b \omega \\
+    i_a &amp;= \dfrac{k_d}{K_m} \omega^2 + \dfrac{b}{K_m} \omega
+\end{align*}
+\]</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 5</p>
+<p>Iguale a corrente de armadura <span class="arithmatex">\(i_a\)</span> obtida em cada uma das equações e isole a tensão de armadura <span class="arithmatex">\(e_a\)</span> na equação.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \dfrac{1}{R_a} e_a - \dfrac{K_m}{R_a} \omega &amp;= \dfrac{k_d}{K_m} \omega^2 + \dfrac{b}{K_m} \omega\\
+    \dfrac{1}{R_a} e_a &amp;= \dfrac{k_d}{K_m} \omega^2 + \dfrac{b}{K_m} \omega + \dfrac{K_m}{R_a} \omega \\
+    e_a &amp;= \dfrac{R_a k_d}{K_m} \omega^2 + \dfrac{R_a b + K_m^2}{K_m} \omega
+\end{align*}
+\]</div>
+</details>
+</div>
+<p>O sinal PWM é a razão entre a tensão de armadura <span class="arithmatex">\(e_a\)</span> e a tensão da bateria <span class="arithmatex">\(e_s\)</span>:</p>
+<div class="arithmatex">\[
+    \text{PWM} = \frac{e_a}{e_s}
+\]</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 6</p>
+<p>Substitua a tensão de armadura <span class="arithmatex">\(e_a\)</span> na equação anterior e isole o sinal PWM na equação.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    e_a &amp;= \dfrac{R_a k_d}{K_m} \omega^2 + \dfrac{R_a b + K_m^2}{K_m} \omega \\
+    e_s \text{PWM} &amp;= \dfrac{R_a k_d}{K_m} \omega^2 + \dfrac{R_a b + K_m^2}{K_m} \omega \\
+    \text{PWM} &amp;= \dfrac{R_a k_d}{K_me_s} \omega^2 + \dfrac{R_a b + K_m^2}{K_me_s} \omega
+\end{align*}
+\]</div>
+</details>
+</div>
+<p>Você deve ter chegado a:</p>
+<div class="arithmatex">\[
+    \text{PWM} =\dfrac{R_a k_d}{K_me_s} \omega^2 + \dfrac{R_a b + K_m^2}{K_me_s} \omega
+\]</div>
+<p>Como <span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span> e <span class="arithmatex">\(e_s\)</span> são parâmetros fixos, podemos agrupá-los em duas constantes:</p>
+<div class="arithmatex">\[
+    \text{PWM} = \underbrace{\dfrac{R_a k_d}{K_me_s}}_{a_2} \omega^2 + \underbrace{\dfrac{R_a b + K_m^2}{K_me_s}}_{a_1} \omega
+\]</div>
+<p>Ou seja, o tipo de função mais adequado para realizar esse mapeamento é uma função polinomial de 2º grau cujo termo de ordem zero é nulo:</p>
+<div class="arithmatex">\[
+    \text{PWM} = a_2 \omega^2 + a_1 \omega + \cancelto{0}{a_0}  
+\]</div>
+<p>Dessa forma, ao invés de determinar os valores de cada parâmetro (<span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span> e <span class="arithmatex">\(e_s\)</span>), você irá determinar experimentalmente apenas os valores das constantes <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (dica: utilize o Curve Fitting Toolbox do MATLAB).</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Embora o Crazyflie utilize um motor elétrico de corrente contínua sem escovas e não com escovas, a equação matemática de ambos é equivalente.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 

@@ -9,7 +9,8 @@
 
 /* Link ativo na barra lateral */
 [data-md-color-scheme="slate"] .md-nav__item .md-nav__link--active {
-  color: #00B8D5;
+  color: #65DD18;
+  font-weight: bold;
 }
 
 /* Cor dos links no conteúdo */

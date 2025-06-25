@@ -15,10 +15,11 @@
 
 /* Cor dos links no conteúdo */
 [data-md-color-scheme="slate"] .md-typeset a {
-  color: #00B8D5;
+  color: #65DD18;
 }
 
 /* Hover dos links no conteúdo */
 [data-md-color-scheme="slate"] .md-typeset a:hover {
   color: #65DD18;
+  font-weight: bold;
 }

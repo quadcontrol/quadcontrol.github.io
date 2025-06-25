@@ -1282,7 +1282,10 @@
 </tr>
 </tbody>
 </table>
-<p>Para facilitar o experimento, você pode controlar o valor do PWM através do CFClient.</p>
+<p>Para facilitar o experimento, você pode controlar o valor do PWM com os botões <code>Up</code> e <code>Down</code> do Commando Based Flight Control através do CFClient.</p>
+<p><img alt="Commando Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" />
+<img alt="Commando Based Flight Control" src="../images/cbfc.png" style="display: block; margin: auto;" width="100%" /></p>
+<p>O código abaixo possui um exemplo de programa que faz exatamente isso.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lab2.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1363,14 +1366,16 @@
 </code></pre></div></td></tr></table></div>
 <p>As etapas para coletar um dado são as seguintes:</p>
 <ol>
-<li>Garanta que a bateria do drone está cheia  </li>
-<li>Prenda o drone na mesa com fita crepe  </li>
-<li>Ligue o motor da hélice que possui a fita refletora por aproximadamente <strong>5 s</strong> com um valor específico de sinal PWM  </li>
-<li>Aponte o tacômetro para a hélice segurando a aproximadamente <strong>30 cm</strong> de distância e, em seguida, pressione o botão <strong>TEST</strong>  </li>
-<li>Mantenha o botão <strong>TEST</strong> pressionado o tempo todo, certificando-se de que o feixe aponta para onde a faixa refletora passa  </li>
-<li>Mantenha essa posição até o motor desligar, quando você pode soltar o botão <strong>TEST</strong>  </li>
-<li>Pressione o botão <strong>MEM</strong> uma vez e espere aparecer a segunda leitura, que corresponde à velocidade máxima (em rpm) observada durante o experimento  </li>
+<li>Garanta que a bateria do drone está carregada </li>
+<li>Prenda o drone na mesa com uma fita crepe</li>
+<li>Arme o drone apertando o botão <code>Arm</code> no CFClient</li>
+<li>Ligue o motor com um valor específico de sinal PWM com o Commando Based Flight Control do CFClient</li>
+<li>Aponte o tacômetro para a hélice segurando a aproximadamente <span class="arithmatex">\(30 cm\)</span> de distância e, em seguida, pressione o botão <code>TEST</code>  </li>
+<li>Mantenha o botão <code>TEST</code> pressionado o tempo todo, certificando-se de que o feixe aponta para onde a faixa refletora passa  </li>
+<li>Mantenha essa posição por alguns segundos e solte o botão <code>TEST</code>  </li>
+<li>Pressione o botão <code>MEM</code> uma vez e espere aparecer a segunda leitura, que corresponde à velocidade máxima (em rpm) observada durante o experimento  </li>
 <li>Anote o número que aparece na tela</li>
+<li>Repita as etapas 4-9 para outros valores de sinal PWM</li>
 </ol>
 <hr />
 <h2 id="ajuste-de-curva">Ajuste de curva</h2>

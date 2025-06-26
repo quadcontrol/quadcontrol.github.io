@@ -44,6 +44,8 @@
       
     
     
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -61,13 +63,18 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#identificacao-da-constante-de-arrasto" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -113,7 +120,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
     
   
 </form>
@@ -207,7 +214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../home/" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -313,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../firs_steps/motors.md" class="md-nav__link">
         
   
   
@@ -387,6 +394,29 @@
   
   <span class="md-ellipsis">
     Aerodinâmica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_concepts/mixer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixer
     
   </span>
   
@@ -526,6 +556,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Constante de Arrasto
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -538,6 +583,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentos-teoricos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentos teóricos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedimento-experimental" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimento experimental
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1026,6 +1108,34 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentos-teoricos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentos teóricos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedimento-experimental" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimento experimental
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1041,9 +1151,21 @@
 
 
 
-  <h1>Constante de Arrasto</h1>
-
-
+<h1 id="identificacao-da-constante-de-arrasto">Identificação da constante de arrasto</h1>
+<p>Nesta secção, você irá determinar experimentalmente a constante de arrasto das hélices <span class="arithmatex">\(k_d\)</span>.</p>
+<hr />
+<h2 id="fundamentos-teoricos">Fundamentos teóricos</h2>
+<p>As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já <a href="../../basic_concepts/aerodynamics/">deduzimos</a> que o torque de arrasto de uma hélice <span class="arithmatex">\(\tau\)</span> é proporcional à velocidade angular da hélice <span class="arithmatex">\(\omega\)</span> ao quadrado.</p>
+<p><img alt="Drag Torque" src="../images/drag_torque.pdf" style="display: block; margin: auto;" width="350" /></p>
+<div class="arithmatex">\[
+    \tau = k_d \omega^2
+\]</div>
+<p>Onde:</p>
+<ul>
+<li><span class="arithmatex">\(k_d\)</span> - Constante de arrasto (<span class="arithmatex">\(N.m.s^2\)</span>)   </li>
+</ul>
+<hr />
+<h2 id="procedimento-experimental">Procedimento experimental</h2>
 
 
 

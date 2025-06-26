@@ -1,0 +1,25 @@
+/* Tema slate (cores base) */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2b2b2b;      /* Fundo da barra superior */
+  --md-default-bg-color: #333333;      /* Fundo do corpo */
+  --md-accent-fg-color: #65DD18;       /* Cor de destaque */
+  --md-code-fg-color: #ffffff;         /* Texto em blocos de código */
+  --md-code-bg-color: #2b2b2b;         /* Fundo dos blocos de código */
+}
+
+/* Link ativo na barra lateral */
+[data-md-color-scheme="slate"] .md-nav__item .md-nav__link--active {
+  color: #65DD18;
+  font-weight: bold;
+}
+
+/* Cor dos links no conteúdo */
+[data-md-color-scheme="slate"] .md-typeset a {
+  color: #65DD18;
+}
+
+/* Hover dos links no conteúdo */
+[data-md-color-scheme="slate"] .md-typeset a:hover {
+  color: #65DD18;
+  font-weight: bold;
+}

@@ -1,27 +1,24 @@
 # Aerodinâmica
 
+Esta seção introduz alguns conceitos básicos sobre aerodinâmica que são essenciais para entender a física de um drone.
+
 ---
     
 ## Aerofólio
 
 O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.
 
----
-
 ### Forças aerodinâmicas
 
-A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar. 
+A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar.
 
-![Aerofólio](images/clark_y_profile.png)
-    
-Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação $f_l$ (perpendicular à velocidade $v$):
-$$
-f_l = \frac{1}{2} \rho A C_l v^2 
-$$
+![Airfoil1](images/airfoil1.pdf){: width="400" style="display: block; margin: auto;" }
 
-Ele também produz uma força indesejada de arrasto $f_d$ (paralela à velocidade $v$):
+Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação $f_l$ (perpendicular à velocidade $v$), ele também produz uma força indesejada de arrasto $f_d$ (paralela à velocidade $v$):
 $$
-f_d = \frac{1}{2} \rho A C_d v^2 
+    f_l = \frac{1}{2} \rho A C_l v^2 
+    \qquad
+    f_d = \frac{1}{2} \rho A C_d v^2 
 $$
 
 Onde:
@@ -32,11 +29,9 @@ Onde:
 - $C_d$ - Coeficiente de arrasto (adimensional)
 - $v$ - Velocidade linear do aerofólio ($m/s$)
 
----
-
 ### Coeficientes aerodinâmicos
 
-Os coeficientes aerodinâmicos não são constantes, eles variam conforme as seguintes condições aerodinâmicas:
+Os coeficientes de sustentação e arrasto não são constantes, eles variam conforme as seguintes condições aerodinâmicas:
 
 - Ângulo de ataque ($\alpha$), que é o ângulo que a linha média do aerofólio (também chamada de ``corda'') faz com o vetor velocidade
 - Número de Reynolds ($\frac{\rho v D}{\mu}$), que é uma medida adimensional e define o regime de escoamento do ar (laminar ou turbulento)
@@ -44,25 +39,19 @@ Os coeficientes aerodinâmicos não são constantes, eles variam conforme as seg
 
 Para aerofólios que se movem a velocidades subsônicas ($<1.000km/h$), apenas o ângulo de ataque $\alpha$, representado na figura abaixo, acaba apresentando uma influência significativa.
 
-![Aerofólio com ângulo de ataque](images/aerofolio_com_angulo_ataque.png)
+![Airfoil2](images/airfoil2.pdf){: width="400" style="display: block; margin: auto;" }
 
 Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados[^1] pelo gráfico abaixo.
 
 [^1]: Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.
 
-![Coeficientes aerodinâmicos de um aerofólio com perfil Clark Y](images/coeficientes_aerodinamicos_perfil_clark_y.png)
+![ClarkY](images/clarky.pdf){: width="600" style="display: block; margin: auto;" }
 
-Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (aproximadamente em $\alpha=18^{\circ}$). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência).
-
----
-
-### Drone de asas fixas
-
-Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone de asas fixas.
+Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo ($\alpha=18^{\circ}$). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência). Note que o coeficiente de sustentação é nulo com uma leve inclinação negativa ($\alpha=-5^{\circ}$), e negativo abaixo disso.
 
 !!! question "Exercício 1"
 
-    Considerar um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características[^2]:
+    Para consolidar esses conceitos, considere um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características[^2]:
     
     [^2]: Considere $g = 9,81\text{m/s}^2$ e $\rho = 1,225\text{kg/m}^3$
     
@@ -148,13 +137,11 @@ Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone
 
 Uma hélice é composta por $n$ pás, onde cada pá pode ser interpretada como um aerofólio.
 
----
-
 ### Forças e torques aerodinâmicos
 
-Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo:
+Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo.
 
-![Hélice com forças de sustentação e arrasto nas pás](images/helice_1.png)
+![Propeller1](images/propeller1.pdf){: width=400" style="display: block; margin: auto;" }
 
 Onde:
 
@@ -162,53 +149,53 @@ Onde:
 - $\omega$ - Velocidade angular da hélice ($rad/s$)
 
 !!! question "Exercício 2"
-    Determine as forças de sustentação $f_{l_{1,2}}$ e arrasto $f_{d_{1,2}}$ nas pás da hélice em função de sua velocidade angular
+    Determine as forças de sustentação $f_l$ e arrasto $f_d$ nas pás da hélice em função de sua velocidade angular
     ??? info "Resposta"
         $$
         \begin{align*}
-            f_{l_{1,2}} &= \frac{1}{2} \rho A C_l v^2 \\ 
-            f_{l_{1,2}} &= \frac{1}{2} \rho A C_l (\omega d )^2 \\
-            f_{l_{1,2}} &= \frac{1}{2} \rho A C_l d^2 \omega^2 
+            f_l &= \frac{1}{2} \rho A C_l v^2 \\ 
+            f_l &= \frac{1}{2} \rho A C_l (\omega d )^2 \\
+            f_l &= \frac{1}{2} \rho A C_l d^2 \omega^2 
         \end{align*}
         $$
 
         $$
         \begin{align*}
-            f_{d_{1,2}} &= \frac{1}{2} \rho A C_d v^2 \\ 
-            f_{d_{1,2}} &= \frac{1}{2} \rho A C_d (\omega d )^2 \\
-            f_{d_{1,2}} &= \frac{1}{2} \rho A C_d d^2 \omega^2 
+            f_d &= \frac{1}{2} \rho A C_d v^2 \\ 
+            f_d &= \frac{1}{2} \rho A C_d (\omega d )^2 \\
+            f_d &= \frac{1}{2} \rho A C_d d^2 \omega^2 
         \end{align*}
         $$
 
-As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação e torque de arrasto total, conforme a figura abaixo.
+As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação e torque de arrasto da hélice, conforme a figura abaixo.
 
-![Hélice com força de sustentação e torque de arrasto total](images/helice_2.png)
+![Propeller2](images/propeller2.pdf){: width="400" style="display: block; margin: auto;" }
 
 !!! question "Exercício 3"
-    Determine a força de sustentação total $f_l$ e torque de arrasto total $\tau_d$
+    Determine a força de sustentação $f$ e torque de arrasto $\tau$ da hélice
     ??? info "Resposta"
         $$
         \begin{align*}
-            f_l &= 2 f_{l_{1,2}} \\
-            f_l &= 2 \left( \frac{1}{2} \rho A C_l d^2 \omega^2  \right) \\
-            f_l &= \rho A C_l d^2 \omega^2 
+            f &= 2 f_l \\
+            f &= 2 \left( \frac{1}{2} \rho A C_l d^2 \omega^2  \right) \\
+            f &= \rho A C_l d^2 \omega^2 
         \end{align*}
         $$
 
         $$
         \begin{align*}
-            \tau_d &= 2 \left( d f_{d_{1,2}} \right) \\ 
-            \tau_d &= 2 \left( d \left( \frac{1}{2} \rho A C_d d^2 \omega^2 \right) \right) \\
-            \tau_d &= \rho A C_d d^3 \omega^2 
+            \tau &= 2 \left( d f_d \right) \\ 
+            \tau &= 2 \left( d \left( \frac{1}{2} \rho A C_d d^2 \omega^2 \right) \right) \\
+            \tau &= \rho A C_d d^3 \omega^2 
         \end{align*}
         $$
 
-Como todos os parâmetros são constantes e apenas a velocidade angular $\omega$ varia, a força de sustentação e o torque de arrasto total podem ser simplificados por:
+Como todos os parâmetros são constantes e apenas a velocidade angular $\omega$ varia, a força de sustentação e torque de arrasto de uma hélice podem ser simplificados por:
 
 $$
-f_l = \underbrace{\rho A C_l d^2}_{k_l} \omega^2 
-\hspace{5cm}
-\tau_d = \underbrace{\rho A C_d d^3}_{k_d} \omega^2 
+f = \underbrace{\rho A C_l d^2}_{k_l} \omega^2 
+\qquad
+\tau = \underbrace{\rho A C_d d^3}_{k_d} \omega^2 
 $$
 
 Onde:
@@ -216,50 +203,58 @@ Onde:
 - $k_l$ - Coeficiente de sustentação da hélice ($N.s^2/rad^2$)
 - $k_d$ - Coeficiente de arrasto da hélice ($N.m.s^2/rad^2$)
 
----
-
 ### Constantes aerodinâmicas
 
 Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice produz, que dependem do quadrado de sua velocidade angular:
+
+![Propeller3](images/propeller3.pdf){: width="350" style="display: block; margin: auto;" }
+
 $$
-f_l = k_l \omega^2 
-\hspace{5cm}
-\tau_d = k_d \omega^2 
+f = k_l \omega^2 
+\qquad
+\tau = k_d \omega^2 
 $$
 
 !!! question "Exercício 4"
-    Com o auxílio de uma régua, estime[^3] as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque $\alpha = 5^\circ$, sendo a constante de sustentação igual porém a constante de arrasto 10x maior devido à turbulência gerada pela hélice.
+    Com o auxílio de uma régua, estime[^3] as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque $\alpha = 5^\circ$, sendo a constante de sustentação igual, porém a constante de arrasto 10x maior[^4]. 
 
     [^3]: Estamos preocupados apenas com a ordem de grandeza dos resultados.
+    [^4]: Devido à turbulência gerada pela hélice.
 
     ??? info "Resposta"
         $$
+        \left\{
+            \begin{align*}
+                \rho &= 1,225 kg/m^3 \\
+                A &= 2,5 \cdot 0,5 = 1,25 cm^2 \\
+                d &= 1,5 cm \\
+                C_l &= 0,7 \\
+                C_d &= 0,04 \cdot 10 = 0,4 
+            \end{align*}
+        \right.
+        $$
+        
+        $$
         \begin{align*}
-            k_l &= 2 \left( \frac{1}{2} \rho A C_l d^2 \right) \\
-            k_l &= 2 \left( \frac{1}{2} 1,225 \cdot (2,1 \times 10^{-2} \cdot 0,6 \times 10^{-2}) \cdot 0,7 \cdot (1,5 \times 10^{-2})^2 \right) \\
-            k_l &= 2,43 \times10^{-8} \text{N.s}^2\text{/rad}^2
+            k_l &= \rho A C_l d^2\\
+            k_l &= 1,225 \cdot (1,25 \cdot 10^{-4}) \cdot 0,7 \cdot (1,5 \times 10^{-2})^2 \\
+            k_l &= 2,41 \times10^{-8} \text{N.s}^2\text{/rad}^2
         \end{align*}
         $$
 
         $$
         \begin{align*}
-            k_d &= 2 \left( \frac{1}{2} \rho A C_d d^2 \right) d \\
-            k_d &= 2 \left( \frac{1}{2} 1,225 \cdot (2,1 \times 10^{-2} \cdot 0,6 \times 10^{-2}) \cdot 0,4 \cdot (1,5 \times 10^{-2})^2 \right) \cdot 1,5 \times 10^{-2} \\
-            k_d &= 2,08 \times10^{-10} \text{N.m.s}^2\text{/rad}^2
+            k_d &= \rho A C_d d^3 \\
+            k_d &= 1,225 \cdot (1,25 \cdot 10^{-4}) \cdot 0,4 \cdot (1,5 \times 10^{-2})^3 \\
+            k_d &= 2,07 \times10^{-10} \text{N.m.s}^2\text{/rad}^2
         \end{align*}
         $$
 
 Esses dois parâmetros serão determinados experimentalmente ([$k_l$](../identification/lift_constant.md) e [$k_d$](../identification/drag_constant.md)), e você verá que a chegará em valores muito próximos aos estimados acima.
 
----
-
-### Drone multi-rotor
-
-Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone multi-rotor.
-
 !!! question "Exercício 5"
 
-    Considerar um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características[^2]:
+    Para consolidar esses conceitos, considere um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características[^2]:
         
     - Massa de $40g$
     - Hélices com constante de sustentação de $2,0\times10^{-8} \text{N}.\text{s}^2/\text{rad}^2$ e constante de arrasto de $2,0\times10^{-10} \text{N}.\text{m}.\text{s}^2\text{/rad}^2$
@@ -272,10 +267,10 @@ Para consolidar esses conceitos, vamos considerar um exemplo simples de um drone
         $$
         \begin{align*}
             \sum f_y &= 0 \\
-            4 f_l - f_p &= 0 \\
+            4 f - f_w &= 0 \\
             4 k_l \omega^2 - mg &= 0 \\
             \omega &= \sqrt{\frac{mg}{4 k_l}} \\
-            \omega &= \sqrt{\frac{0,04 \cdot 9,81}{4 \cdot 2,0\times10^{-8}}} \\
+            \omega &= \sqrt{\frac{0,04 \cdot 9,81}{4 \cdot (2,0\times10^{-8})}} \\
             \omega &= 2.215 \text{rad/s} \quad (\approx 21.149\text{rpm})
         \end{align*}
         $$

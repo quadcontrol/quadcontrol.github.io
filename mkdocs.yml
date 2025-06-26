@@ -5,24 +5,26 @@ theme:
   logo: images/logo.png
   favicon: images/favicon.png
   palette:
-  - scheme: slate
-    primary: black
-    # accent: light green
+   - scheme: slate
+    #  primary: #65DD18
+    #  accent: #65DD18
   features:
     - content.code.copy # Habilita botão de copiar no código
     - content.code.title
 
-# extra_css:
+extra_css:
   # - styles/colors.css
+  - styles/extra.css
 
 nav:
-  - Início: home.md
+  - Início: index.md
   - Primeiros Passos:
     - Instalações: x.md
     - Sensores: x.md
-    - Motores: x.md
+    - Motores: firs_steps/motors.md
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
+    - Mixer: basic_concepts/mixer.md
   - Identificação:
     - Massa e Momento de Inércia: identification/mass_and_moment_of_inertia.md
     - Coeficientes do Motor: identification/motor_coeficients.md

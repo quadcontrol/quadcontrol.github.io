@@ -4,7 +4,7 @@ Nesta secção, você irá determinar experimentalmente a constante de sustenta�
 
 ---
 
-## Fundamentos teóricos
+## 📚 Fundamentos teóricos
 
 As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já [deduzimos](../basic_concepts/aerodynamics.md) que a força de sustentação de uma hélice $f$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado.
     
@@ -20,7 +20,7 @@ Onde:
 
 ---
 
-## Procedimento experimental
+## 🧪 Procedimento experimental
 
 Para medir a força de de sustentação $f$ da hélice, você pode utilizar um suporte e uma balança. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
 
@@ -120,7 +120,7 @@ Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 
 ---
 
-## Análise de Dados
+## 📈 Análise de Dados
 
 Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular $\omega$ com a força de sustentação $f$ da hélice (note que você precisa converter a a leitura da balança de $g$ para $N$ e devidir por 4, dado que estamos interessados na força de uma única hélice).
 
@@ -132,7 +132,9 @@ $$
 $$
 
 Determine o valor de $k_l$ fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.
+
+---
     
-## Validação dos resultados
+## ✅ Validação dos resultados
 
 Compare o resultado obtido com o [estimado anteriormente](../basic_concepts/aerodynamics.md). É esperado que a constante de sustentação $k_l$ seja da ordem de grandeza de $10^{-8}N.s^2$. 

@@ -581,7 +581,7 @@
         <li class="md-nav__item">
   <a href="#fundamentos-teoricos" class="md-nav__link">
     <span class="md-ellipsis">
-      Fundamentos teóricos
+      📚 Fundamentos teóricos
     </span>
   </a>
   
@@ -590,7 +590,7 @@
         <li class="md-nav__item">
   <a href="#procedimento-experimental" class="md-nav__link">
     <span class="md-ellipsis">
-      Procedimento experimental
+      🧪 Procedimento experimental
     </span>
   </a>
   
@@ -599,7 +599,7 @@
         <li class="md-nav__item">
   <a href="#analise-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      Análise de Dados
+      📈 Análise de Dados
     </span>
   </a>
   
@@ -608,7 +608,7 @@
         <li class="md-nav__item">
   <a href="#validacao-dos-resultados" class="md-nav__link">
     <span class="md-ellipsis">
-      Validação dos resultados
+      ✅ Validação dos resultados
     </span>
   </a>
   
@@ -1140,7 +1140,7 @@
         <li class="md-nav__item">
   <a href="#fundamentos-teoricos" class="md-nav__link">
     <span class="md-ellipsis">
-      Fundamentos teóricos
+      📚 Fundamentos teóricos
     </span>
   </a>
   
@@ -1149,7 +1149,7 @@
         <li class="md-nav__item">
   <a href="#procedimento-experimental" class="md-nav__link">
     <span class="md-ellipsis">
-      Procedimento experimental
+      🧪 Procedimento experimental
     </span>
   </a>
   
@@ -1158,7 +1158,7 @@
         <li class="md-nav__item">
   <a href="#analise-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      Análise de Dados
+      📈 Análise de Dados
     </span>
   </a>
   
@@ -1167,7 +1167,7 @@
         <li class="md-nav__item">
   <a href="#validacao-dos-resultados" class="md-nav__link">
     <span class="md-ellipsis">
-      Validação dos resultados
+      ✅ Validação dos resultados
     </span>
   </a>
   
@@ -1192,7 +1192,7 @@
 <h1 id="identificacao-da-constante-de-sustentacao">Identificação da constante de sustentação</h1>
 <p>Nesta secção, você irá determinar experimentalmente a constante de sustentação das hélices <span class="arithmatex">\(k_l\)</span>.</p>
 <hr />
-<h2 id="fundamentos-teoricos">Fundamentos teóricos</h2>
+<h2 id="fundamentos-teoricos">📚 Fundamentos teóricos</h2>
 <p>As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já <a href="../../basic_concepts/aerodynamics/">deduzimos</a> que a força de sustentação de uma hélice <span class="arithmatex">\(f\)</span> é proporcional à velocidade angular da hélice <span class="arithmatex">\(\omega\)</span> ao quadrado.</p>
 <p><img alt="Lift Force" src="../images/lift_force.pdf" style="display: block; margin: auto;" width="350" /></p>
 <div class="arithmatex">\[
@@ -1203,7 +1203,7 @@
 <li><span class="arithmatex">\(k_l\)</span> - Constante de sustentação (<span class="arithmatex">\(N.s^2\)</span>)   </li>
 </ul>
 <hr />
-<h2 id="procedimento-experimental">Procedimento experimental</h2>
+<h2 id="procedimento-experimental">🧪 Procedimento experimental</h2>
 <p>Para medir a força de de sustentação <span class="arithmatex">\(f\)</span> da hélice, você pode utilizar um suporte e uma balança. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. </p>
 <p>O suporte possui um imã em sua base que deixa ele bem firma na balança. Você pode zerar a balança com o quadcoptero apertando o botão <code>T</code>, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.</p>
 <p>Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular <span class="arithmatex">\(\omega\)</span>. Serão levantados dados de peso na balança para 10 valores distintos de <span class="arithmatex">\(omega\)</span> (<span class="arithmatex">\(200rad/s\)</span> até <span class="arithmatex">\(2.000rad/s\)</span>), e, para cada valor de <span class="arithmatex">\(\omega\)</span>, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor de <span class="arithmatex">\(\omega\)</span> com os botões <code>Up</code> e <code>Down</code> do Command Based Flight Control através do CFClient.</p>
@@ -1402,14 +1402,15 @@
 </tbody>
 </table>
 <hr />
-<h2 id="analise-de-dados">Análise de Dados</h2>
+<h2 id="analise-de-dados">📈 Análise de Dados</h2>
 <p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular <span class="arithmatex">\(\omega\)</span> com a força de sustentação <span class="arithmatex">\(f\)</span> da hélice (note que você precisa converter a a leitura da balança de <span class="arithmatex">\(g\)</span> para <span class="arithmatex">\(N\)</span> e devidir por 4, dado que estamos interessados na força de uma única hélice).</p>
 <p>Você já sabe que o melhor ajuste para esta curva é uma função polinomial de 2º grau cujos termos de ordem um e zero são nulos:</p>
 <div class="arithmatex">\[
     f = k_l \omega^2
 \]</div>
 <p>Determine o valor de <span class="arithmatex">\(k_l\)</span> fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.</p>
-<h2 id="validacao-dos-resultados">Validação dos resultados</h2>
+<hr />
+<h2 id="validacao-dos-resultados">✅ Validação dos resultados</h2>
 <p>Compare o resultado obtido com o <a href="../../basic_concepts/aerodynamics/">estimado anteriormente</a>. É esperado que a constante de sustentação <span class="arithmatex">\(k_l\)</span> seja da ordem de grandeza de <span class="arithmatex">\(10^{-8}N.s^2\)</span>. </p>
 
 

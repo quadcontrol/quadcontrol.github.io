@@ -4,7 +4,7 @@ Esta seção introduz alguns conceitos básicos sobre aerodinâmica que são ess
 
 ---
     
-## Aerofólio
+## ✈️ Aerofólio
 
 O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.
 
@@ -133,7 +133,7 @@ Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coefici
  
 ---
 
-## Hélice
+## 🚁 Hélice
 
 Uma hélice é composta por $n$ pás, onde cada pá pode ser interpretada como um aerofólio.
 

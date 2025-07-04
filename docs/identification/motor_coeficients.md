@@ -111,6 +111,8 @@ Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 
 Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular das hélice $\omega$ com o sinal PWM correspondente do motor (note que você precisa converter a velocidade angular de $rpm$ para $rad/s$).
 
+![PWM](images/pwm_graph.svg){: width=100% style="display: block; margin: auto;" }
+
 Há diversos tipos de funções de ajuste para esta curva (linear, exponencial, polinomial, etc.):
     
 $$

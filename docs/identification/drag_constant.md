@@ -21,3 +21,10 @@ Onde:
 ---
 
 ## Procedimento experimental
+
+---
+
+## Análise de dados
+
+
+![Drag Torque](images/drag_torque_graph.svg){: width=100% style="display: block; margin: auto;" }

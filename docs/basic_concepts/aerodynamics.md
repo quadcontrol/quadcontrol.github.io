@@ -4,7 +4,7 @@ Esta seção introduz alguns conceitos básicos sobre aerodinâmica que são ess
 
 ---
     
-## ✈️ Aerofólio
+## Aerofólio
 
 O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.
 
@@ -45,7 +45,7 @@ Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e uti
 
 [^1]: Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.
 
-![ClarkY](images/clarky.pdf){: width="600" style="display: block; margin: auto;" }
+![ClarkY](images/clarky.svg){: width=100% style="display: block; margin: auto;" }
 
 Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo ($\alpha=18^{\circ}$). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência). Note que o coeficiente de sustentação é nulo com uma leve inclinação negativa ($\alpha=-5^{\circ}$), e negativo abaixo disso.
 
@@ -133,7 +133,7 @@ Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coefici
  
 ---
 
-## 🚁 Hélice
+## Hélice
 
 Uma hélice é composta por $n$ pás, onde cada pá pode ser interpretada como um aerofólio.
 

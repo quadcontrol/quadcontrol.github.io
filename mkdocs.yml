@@ -19,9 +19,11 @@ extra_css:
 nav:
   - Início: index.md
   - Primeiros Passos:
-    - Instalações: x.md
+    - Instalações (Windows): first_steps/installations_windows.md
+    - Instalações (Mac): x.md
+    - Firmware: x.md
     - Sensores: x.md
-    - Motores: firs_steps/motors.md
+    - Motores: first_steps/motors.md
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
     - Mixer: basic_concepts/mixer.md

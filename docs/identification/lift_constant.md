@@ -4,7 +4,7 @@ Nesta secção, você irá determinar experimentalmente a constante de sustenta�
 
 ---
 
-## 📚 Fundamentos teóricos
+## Fundamentos teóricos
 
 As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já [deduzimos](../basic_concepts/aerodynamics.md) que a força de sustentação de uma hélice $f$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado.
     
@@ -20,7 +20,7 @@ Onde:
 
 ---
 
-## 🧪 Procedimento experimental
+## Procedimento experimental
 
 Para medir a força de de sustentação $f$ da hélice, você pode utilizar um suporte e uma balança. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
 
@@ -108,8 +108,6 @@ Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 
 | $\omega(rad/s)$ | $W_1(g)$ | $W_2(g)$ | $W_3(g)$ |
 |-------|----------|----------|----------|
-| $200$ |          |          |          |
-| $400$ |          |          |          |
 | $600$ |          |          |          |
 | $800$ |          |          |          |
 | $1200$ |          |          |          |
@@ -117,12 +115,16 @@ Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 | $1600$ |          |          |          |
 | $1800$ |          |          |          |
 | $2000$ |          |          |          |
+| $2200$ |          |          |          |
+| $2400$ |          |          |          |
 
 ---
 
-## 📈 Análise de Dados
+## Análise de Dados
 
-Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular $\omega$ com a força de sustentação $f$ da hélice (note que você precisa converter a a leitura da balança de $g$ para $N$ e devidir por 4, dado que estamos interessados na força de uma única hélice).
+Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular $\omega$ com a força de sustentação $f$ da hélice (note que você precisa converter a a leitura da balança de $g$ para $N$ e dividir por 4, dado que estamos interessados na força de uma única hélice).
+
+![Lift Force](images/lift_force_graph.svg){: width=100% style="display: block; margin: auto;" }
 
 
 Você já sabe que o melhor ajuste para esta curva é uma função polinomial de 2º grau cujos termos de ordem um e zero são nulos:
@@ -135,6 +137,6 @@ Determine o valor de $k_l$ fazendo esse ajuste de curva (dica: utilize o Curve F
 
 ---
     
-## ✅ Validação dos resultados
+## Validação dos resultados
 
 Compare o resultado obtido com o [estimado anteriormente](../basic_concepts/aerodynamics.md). É esperado que a constante de sustentação $k_l$ seja da ordem de grandeza de $10^{-8}N.s^2$. 

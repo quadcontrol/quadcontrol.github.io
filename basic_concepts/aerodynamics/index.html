@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../../first_steps/motors/">
       
       
         <link rel="next" href="../mixer/">
@@ -276,12 +276,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../../first_steps/installations_windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalações (Windows)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../x.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Instalações
+    Instalações (Mac)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../x.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firmware
     
   </span>
   
@@ -322,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../firs_steps/motors.md" class="md-nav__link">
+      <a href="../../first_steps/motors/" class="md-nav__link">
         
   
   
@@ -444,11 +490,11 @@
         <li class="md-nav__item">
   <a href="#aerofolio" class="md-nav__link">
     <span class="md-ellipsis">
-      ✈️ Aerofólio
+      Aerofólio
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="✈️ Aerofólio">
+    <nav class="md-nav" aria-label="Aerofólio">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -477,11 +523,11 @@
         <li class="md-nav__item">
   <a href="#helice" class="md-nav__link">
     <span class="md-ellipsis">
-      🚁 Hélice
+      Hélice
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚁 Hélice">
+    <nav class="md-nav" aria-label="Hélice">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1170,11 +1216,11 @@
         <li class="md-nav__item">
   <a href="#aerofolio" class="md-nav__link">
     <span class="md-ellipsis">
-      ✈️ Aerofólio
+      Aerofólio
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="✈️ Aerofólio">
+    <nav class="md-nav" aria-label="Aerofólio">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1203,11 +1249,11 @@
         <li class="md-nav__item">
   <a href="#helice" class="md-nav__link">
     <span class="md-ellipsis">
-      🚁 Hélice
+      Hélice
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚁 Hélice">
+    <nav class="md-nav" aria-label="Hélice">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1252,7 +1298,7 @@
 <h1 id="aerodinamica">Aerodinâmica</h1>
 <p>Esta seção introduz alguns conceitos básicos sobre aerodinâmica que são essenciais para entender a física de um drone.</p>
 <hr />
-<h2 id="aerofolio">✈️ Aerofólio</h2>
+<h2 id="aerofolio">Aerofólio</h2>
 <p>O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos parâmetros aerodinâmicos. No entanto, para obter o conhecimento necessário, começaremos examinando as forças aerodinâmicas em um aerofólio.</p>
 <h3 id="forcas-aerodinamicas">Forças aerodinâmicas</h3>
 <p>A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar.</p>
@@ -1281,7 +1327,7 @@ $$</p>
 <p>Para aerofólios que se movem a velocidades subsônicas (<span class="arithmatex">\(&lt;1.000km/h\)</span>), apenas o ângulo de ataque <span class="arithmatex">\(\alpha\)</span>, representado na figura abaixo, acaba apresentando uma influência significativa.</p>
 <p><img alt="Airfoil2" src="../images/airfoil2.pdf" style="display: block; margin: auto;" width="400" /></p>
 <p>Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo gráfico abaixo.</p>
-<p><img alt="ClarkY" src="../images/clarky.pdf" style="display: block; margin: auto;" width="600" /></p>
+<p><img alt="ClarkY" src="../images/clarky.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (<span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência). Note que o coeficiente de sustentação é nulo com uma leve inclinação negativa (<span class="arithmatex">\(\alpha=-5^{\circ}\)</span>), e negativo abaixo disso.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
@@ -1371,7 +1417,7 @@ $$</p>
 </details>
 </div>
 <hr />
-<h2 id="helice">🚁 Hélice</h2>
+<h2 id="helice">Hélice</h2>
 <p>Uma hélice é composta por <span class="arithmatex">\(n\)</span> pás, onde cada pá pode ser interpretada como um aerofólio.</p>
 <h3 id="forcas-e-torques-aerodinamicos">Forças e torques aerodinâmicos</h3>
 <p>Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo.</p>

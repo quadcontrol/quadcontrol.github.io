@@ -26,7 +26,6 @@ Para medir a força de de sustentação $f$ da hélice, você pode utilizar um s
 
 
 O suporte possui um imã em sua base que deixa ele bem firma na balança. Você pode zerar a balança com o quadcoptero apertando o botão `T`, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.
-    
 
 Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular $\omega$. Serão levantados dados de peso na balança para 10 valores distintos de $omega$ ($200rad/s$ até $2.000rad/s$), e, para cada valor de $\omega$, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor de $\omega$ com os botões `Up` e `Down` do Command Based Flight Control através do CFClient.
 
@@ -95,7 +94,7 @@ void appMain(void *param)
 }
 ```
 
-As etapas para coletar um dado são as seguintes:
+As etapas para coletar os dados são as seguintes:
 
 1. Garanta que a bateria do drone está carregada 
 2. Prenda o drone no dispositivo e zere a balança presionando o botão `T`
@@ -106,7 +105,7 @@ As etapas para coletar um dado são as seguintes:
 
 Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 
-| $\omega(rad/s)$ | $W_1(g)$ | $W_2(g)$ | $W_3(g)$ |
+| $\omega \, (rad/s)$ | $W_1 \, (g)$ | $W_2 \, (g)$ | $W_3 \, (g)$ |
 |-------|----------|----------|----------|
 | $600$ |          |          |          |
 | $800$ |          |          |          |

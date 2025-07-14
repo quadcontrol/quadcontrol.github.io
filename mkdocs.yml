@@ -1,9 +1,10 @@
 site_name: QuadControl
+site_url: https://www.quadcontrol.io
 
 theme:
   name: material
   logo: images/logo.png
-  favicon: images/favicon.png
+  favicon: images/logo.png
   palette:
    - scheme: slate
     #  primary: #65DD18

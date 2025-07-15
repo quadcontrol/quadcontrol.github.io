@@ -422,6 +422,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#plataforma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plataforma
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -433,6 +442,30 @@
       Compilando o firmware
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Compilando o firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flash" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flash
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1280,6 +1313,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#plataforma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plataforma
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1291,6 +1333,30 @@
       Compilando o firmware
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Compilando o firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flash" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flash
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1311,23 +1377,50 @@
 
 
 <h1 id="firmware">Firmware</h1>
-<p>Nesta secção </p>
+<p>Esta secção contém as instruções para clonar, configurar e compilar o firmware do Crazyflie.</p>
 <hr />
 <h2 id="clonando-o-firmware">Clonando o firmware</h2>
 <h3 id="fork">Fork</h3>
 <ol>
-<li>Crie um "fork" do repositório que contém o <a href="https://github.com/quadcontrol/quadcontrol-firmware">firmware</a> para a sua conta do GitHub.</li>
+<li>Crie um <em>fork</em> do repositório que contém o <a href="https://github.com/quadcontrol/quadcontrol-firmware">firmware</a> para a sua conta do GitHub.</li>
 </ol>
 <h3 id="clone">Clone</h3>
 <ol>
-<li>Clone o repositório "forkado" da sua conta do GitHub para seu computador.</li>
-</ol>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/&lt;github_account&gt;/quadcontrol-firmware.git
-</code></pre></div></td></tr></table></div>
+<li>
+<p>Abre o Visual Studio Code</p>
+</li>
+<li>
+<p>Clique em <code>Clone Git Repository...</code></p>
+</li>
+<li>
+<p>Coloque o endereço do repositório <em>forkado</em> para sua conta do GitHub:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>https://github.com/username/quadcontrol-firmware.git
+</code></pre></div></td></tr></table></div></p>
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>
-<p>Você deve substituir <code>&lt;github_account&gt;</code> pelo seu nome de usuário do GitHub</p>
+<p>Você deve substituir <code>username</code> pelo seu nome de usuário do GitHub</p>
 </div>
+</li>
+<li>
+<p>Pressione <code>Enter</code> e selecione o local onde você quer salvar esse repositório.</p>
+</li>
+<li>
+<p>Quando ele terminar de clonar e perguntar se você gostaria de abrir o repositório clonado, clique em <code>Open</code>.</p>
+</li>
+<li>
+<p>Abra uma janela do terminal clicando em <code>Terminal</code> &gt; <code>New Terminal</code> (ou usando o atalho <code>Crtl</code>+<code>Shift</code>+<code>'</code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Caso esteja utilizando Windows, ele abre por padrão um terminal do PowerShell, mas você deve alternar para um terminal do WSL (Ubuntu) 
+<img alt="Firmware" src="../images/firmware.png" style="display: block; margin: auto;" width="450" /></p>
+</div>
+</li>
+<li>
+<p>Inicialize todos os submódulos pelo terminal:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
 <h3 id="organizacao">Organização</h3>
 <p>O firmware é composto por 2 pastas e 2 arquivos.</p>
 <p><img alt="Firmware" src="../images/firmware.png" style="display: block; margin: auto;" width="450" /></p>
@@ -1335,19 +1428,29 @@
 <ul>
 <li><code>crazyflie-firmware</code> - Pasta que contém o firmware do Crazyflie, o qual utilizaremos como submódulo</li>
 <li><code>src</code> - Pasta que contém os programas que vamos desenvolver ao longo do curso</li>
-<li><code>Kbuild</code> - Arquivo que configura o programa que será compilado</li>
-<li><code>radio.config</code> - Arquivo que configura o canal de rádio utilizado para se comunicar com o Crazyflie</li>
+<li><code>Kbuild</code> - Arquivo que define o programa que será compilado</li>
+<li><code>radio.config</code> - Arquivo que define o canal de rádio utilizado para se comunicar com o Crazyflie</li>
 </ul>
 <hr />
 <h2 id="configurando-o-firmware">Configurando o firmware</h2>
 <h3 id="radio">Radio</h3>
-<p>Abra o arquivo <code>radio.config</code> e altere o canal do rádio conforme a numeração do seu Crazyflie 2.1 Brushless. 
+<ol>
+<li>
+<p>Abra o arquivo <code>radio.config</code></p>
+</li>
+<li>
+<p>Altere o canal do rádio conforme a numeração do seu Crazyflie. 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">radio.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">RADIO_CHANNEL</span><span class="o">=</span><span class="mi">1</span>
 </code></pre></div></td></tr></table></div></p>
-<p>Fazemos isso para que</p>
+</li>
+</ol>
 <h3 id="by-pass">By-pass</h3>
+<ol>
+<li>
 <p>Navegue até a página <code>crazyflie-firwmare</code> &gt; <code>src</code> &gt; <code>modules</code> &gt; <code>src</code> e abra o arquivo <code>stabilizer.c</code>.</p>
-<p>Comente as linhas 220-223, 323 e 353, conforme abaixo:</p>
+</li>
+<li>
+<p>Comente as linhas 220-223, 323 e 353, conforme abaixo:
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">stabilizer.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">218</span>
 <span class="normal">219</span>
 <span class="normal">220</span>
@@ -1369,12 +1472,42 @@
 <span class="normal">354</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// motorsStop();</span>
 <span class="w">      </span><span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-<p>Fazemos isso para bipassar o algoritmo proprietário do controlador do Crazyflie 2.1 Brushless (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).</p>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Informação</p>
+<p>Fazemos isso para bipassar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).</p>
+</div>
+<h3 id="plataforma">Plataforma</h3>
+<ol>
+<li>Configure o firmware para a paltaforma do Crazyflie 2.1 Brushless:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>cf21bl_defconfig
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></li>
+</ol>
 <hr />
 <h2 id="compilando-o-firmware">Compilando o firmware</h2>
+<h3 id="build">Build</h3>
+<ol>
+<li>Compile o firmware:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make
+</code></pre></div></td></tr></table></div></li>
+</ol>
+<h3 id="flash">Flash</h3>
+<ol>
+<li>
+<p>Programe o firmware no Crazyflie:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>cload
+</code></pre></div></td></tr></table></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<ul>
+<li>O Crazyflie 2.1 Brushless precisa estar ligado</li>
+<li>O Crazyradio PA precisa estar conectado na porta USB</li>
+</ul>
+</div>
+</li>
+</ol>
 
 
 

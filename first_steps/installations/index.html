@@ -1271,61 +1271,65 @@
 <h3 id="arm-toolchain">ARM Toolchain</h3>
 <ol>
 <li>
-<p>Pressione <code>Iniciar</code> e digite "Windows PowerShell". Depois, clique com o botão direito e selecione <code>Executar como administrador</code>.</p>
+<p>Pressione <code>Iniciar</code> e digite "Windows PowerShell". Em seguida, clique com o botão direito e selecione <code>Executar como administrador</code>.</p>
 </li>
 <li>
-<p>Instale o WSL (Subsistema do Windows para Linux) pelo PowerShell:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl<span class="w"> </span>--install
+<p>Instale o WSL (Subsistema do Windows para Linux):
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl<span class="w"> </span>--install
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Após a instalação, reinicie o computador.</p>
 </li>
 <li>
-<p>Depois que o computador tiver reiniciado, ele abrirá automaticamente o terminal WSL (Ubuntu). Caso ele não abra, você pode abri-lo pelo PowerShell:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl
+<p>Depois que o computador tiver reiniciado, ele abrirá automaticamente o terminal WSL (Ubuntu). Caso ele não abra, você deverá abri-lo:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
-<p>Na primeira vez, será solicitado que você crie um nome de usuário para o Linux e defina uma senha (não necessariamente a mesma do Windows). Os passos seguintes deverão ser realizados no terminal WSL.</p>
+<p>Na primeira vez, será solicitado que você crie um nome de usuário para o Linux e defina uma senha (não necessariamente a mesma do Windows). </p>
 </li>
 <li>
 <p>Atualize a lista de pacotes:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Instale o Make:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>make<span class="w"> </span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>make<span class="w"> </span>
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Verifique a instalação do Make:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>--version
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Instale o toolchain ARM embarcado:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc-arm-none-eabi
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc-arm-none-eabi
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Verifique a instalação do toolchain ARM embarcado:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>arm-none-eabi-gcc<span class="w"> </span>--version
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>arm-none-eabi-gcc<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Caso tudo tenha dado certo, você poderá fechar o terminal WSL.</p>
 </li>
 </ol>
 <h3 id="python">Python</h3>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Não pule essa etapa mesmo que você já tenha uma distribuição do Python instalado em seu computador, precisamos instalar uma distribuição especifica (3.11.9) para tudo funcionar. Mas fique tranquilo que qualquer distribuição já instalada continuára funcionando normalmente.</p>
+</div>
 <ol>
 <li>
-<p>Baixe o Python 3.11.9 em seu <a href="http://www.python.org/downloads/release/python-3119">site oficial</a> e instale ele certificando-se de marcar a caixa <code>[✓] Add python.exe to PATH</code>.</p>
+<p>Baixe o Python 3.11.9 em seu <a href="http://www.python.org/downloads/release/python-3119">site oficial</a> (é o arquivo <code>Windows installer (64-bit)</code> localizado lá embaixo em <code>Files</code>) </p>
 </li>
 <li>
-<p>Verifique a instalação do Python e do PIP (Gerenciador de Pacotes Python):
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<p>Instale ele certificando-se de marcar a caixa <code>[✓] Add python.exe to PATH</code>.</p>
+</li>
+<li>
+<p>Verifique a instalação do Python e do PIP (Gerenciador de Pacotes Python) pelo PowerShell:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>--version
 pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
@@ -1334,13 +1338,13 @@ pip<span class="w"> </span>--version
 <h3 id="crazyflie-client">Crazyflie Client</h3>
 <ol>
 <li>
-<p>Instale o Crazyflie Client usando o PIP:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>cfclient
+<p>Instale o Crazyflie Client usando o PIP pelo PowerShell:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>cfclient
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Verifique a instalação do Crazyflie Client:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>

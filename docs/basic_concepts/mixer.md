@@ -8,7 +8,7 @@ Esta seção descreve as forças e torques que atuam em um quadricóptero e como
 
 Um quadricóptero possui 4 hélices que, uma vez em movimento com velocidades angulares $\omega_1$, $\omega_2$, $\omega_3$ e $\omega_4$, produzem 4 forças de sustentação $f_1$, $f_2$, $f_3$ e $f_4$ e 4 torques de arrasto $\tau_1$, $\tau_2$, $\tau_3$ e $\tau_4$, conforme a figura abaixo.
 
-![Quadcopter1](images/quadcopter1.pdf){: width="500" style="display: block; margin: auto;" }
+![Quadcopter1](images/quadcopter1.svg){: width="500" style="display: block; margin: auto;" }
 
 Para um quadricóptero se movimentar verticalmente, basta variar as velocidades angulares das 4 hélices simultaneamente, conforme a figura abaixo.
 
@@ -37,7 +37,7 @@ Enquanto que, para um quadricóptero rotacionar em torno de seus eixos, basta va
 
 As 4 forças $f_i$ e 4 torques $\tau_i$ das hélices podem ser representadas por 1 única força de propulsão total $f_t$ e 3 torques $\tau_x$, $\tau_y$ e $\tau_z$, um em torno de cada eixo do quadricóptero, conforme a figura abaixo.
 
-![Quadcopter2](images/quadcopter2.pdf){: width="500" style="display: block; margin: auto;" }
+![Quadcopter2](images/quadcopter2.svg){: width="500" style="display: block; margin: auto;" }
 
 Na secção de [aerodinâmica](../basic_concepts/aerodynamics.md) verificamos que as forças e torques das hélices são proporcionais ao quadrado de suas velocidades angulares:
 

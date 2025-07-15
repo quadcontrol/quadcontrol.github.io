@@ -12,6 +12,7 @@ theme:
   features:
     - content.code.copy # Habilita botão de copiar no código
     - content.code.title
+  open_in_new_tab: true
 
 extra_css:
   # - styles/colors.css
@@ -20,11 +21,10 @@ extra_css:
 nav:
   - Início: index.md
   - Primeiros Passos:
-    - Instalações (Windows): first_steps/installations_windows.md
-    - Instalações (Mac): x.md
-    - Firmware: x.md
-    - Sensores: x.md
+    - Instalações: first_steps/installations.md
+    - Firmware: first_steps/firmware.md
     - Motores: first_steps/motors.md
+    - Sensores: first_steps/sensors.md
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
     - Mixer: basic_concepts/mixer.md
@@ -60,7 +60,6 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - admonition
-  - pymdownx.details
   - pymdownx.highlight:
       linenums: true           # Mostra números de linha no código
 

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="227.30267"
+   height="99.080002"
+   viewBox="0 0 227.30267 99.080002"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath18">
+      <path
+         d="M 0,0 H 170.477 V 74.31 H 0 Z"
+         id="path16" />
+    </clipPath>
+  </defs>
+  <g
+     id="g8"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,99.08)">
+    <g
+       id="g10" />
+    <g
+       id="g12">
+      <g
+         id="g14"
+         clip-path="url(#clipPath18)">
+        <path
+           d="M 0,0 H 170.477 V 74.31 H 0 Z"
+           style="fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path20" />
+        <g
+           id="g22"
+           transform="translate(56.892,15.895)">
+          <path
+             d="m -42.5202,0 0.07094,0.3313 0.07092,0.1968 0.14146,0.29414 0.28374,0.44248 0.56664,0.68212 0.56704,0.58436 1.13411,1.06492 1.41699,1.08392 1.41744,0.86595 1.41743,0.72926 1.41741,0.63539 2.83442,1.08741 2.83486,0.93081 2.83487,0.79717 2.83441,0.68254 2.83485,0.58566 2.83443,0.49613 2.83485,0.40397 2.83484,0.3149 2.83443,0.2392 2.83485,0.17777 2.83443,0.1302 L 0,12.85242 l 2.83484,0.07179 2.83443,0.04543 2.83485,0.01687 2.83443,-0.01471 2.83484,-0.04974 2.83485,-0.08563 2.83443,-0.12026 2.83485,-0.15268 2.83441,-0.18211 2.83487,-0.20976 2.83486,-0.23575 2.83442,-0.26125 2.83484,-0.28679 2.83443,-0.31184 L 42.5202,10.73817 45.35506,10.3757 48.18947,9.98988 51.02432,9.582 53.85875,9.1538 56.69362,8.70697 59.52846,8.2433 62.36288,7.7623 65.19774,7.2649 68.03217,6.7506 70.867,6.21988 73.70186,5.67271 76.53629,5.10999 79.37114,4.5317 82.20555,3.93867 85.04042,3.33096 87.87527,2.7094 90.7097,2.07271 93.54454,1.42044 94.96198,1.08955 96.37897,0.75606 97.79639,0.42084 99.21382,0.08476 V -0.08476 L 97.79639,-0.1371 96.37897,-0.189 94.96198,-0.2409 93.54454,-0.29324 90.7097,-0.39705 87.87527,-0.5013 85.04042,-0.60553 82.20555,-0.70935 79.37114,-0.81358 76.53629,-0.91783 73.70186,-1.02206 70.867,-1.12589 68.03217,-1.23012 65.19774,-1.33437 62.36288,-1.43817 59.52846,-1.54242 56.69362,-1.64665 53.85875,-1.75047 51.02432,-1.8547 48.18947,-1.95895 45.35506,-2.06276 42.5202,-2.167 39.68535,-2.2708 36.85092,-2.37506 34.01608,-2.4793 31.18166,-2.5831 28.3468,-2.68733 25.51193,-2.79202 22.67752,-2.89626 19.84267,-3.0005 17.00824,-3.10474 14.17339,-3.20811 11.33855,-3.31107 8.50412,-3.414 5.66927,-3.51738 2.83484,-3.62206 0,-3.7289 l -2.83484,-0.1077 -2.83443,-0.10597 -2.83485,-0.09948 -2.83443,-0.08867 -2.83484,-0.07398 -2.83485,-0.05404 -2.83443,-0.02942 -2.83485,0.00215 -2.83441,0.03937 -2.83487,0.08261 -2.83486,0.13019 -2.83442,0.18902 -1.41741,0.15357 -1.41743,0.21583 -1.41744,0.27162 -1.41699,0.33046 -1.13411,0.46758 -0.56704,0.38106 -0.56664,0.53462 -0.28374,0.3828 -0.14146,0.26515 -0.07092,0.18037 L -42.5202,0"
+             style="fill:none;stroke:#cccccc;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path24" />
+        </g>
+        <g
+           id="g26"
+           transform="translate(56.892,15.895)">
+          <path
+             d="M -56.69362,0 H 113.3872"
+             style="fill:none;stroke:#666666;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:2.98883, 2.98883;stroke-dashoffset:0;stroke-opacity:1"
+             id="path28" />
+        </g>
+        <g
+           id="g30"
+           transform="translate(56.892,15.895)">
+          <path
+             d="M 0,0 H -27.88852"
+             style="fill:none;stroke:#00b8d5;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path32" />
+        </g>
+        <g
+           id="g34"
+           transform="rotate(180,14.50174,7.9475)">
+          <path
+             d="M -1.19551,1.59401 C -1.09587,0.99626 0,0.09961 0.29886,0 0,-0.09961 -1.09587,-0.99626 -1.19551,-1.59401"
+             style="fill:none;stroke:#00b8d5;stroke-width:0.31879;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path36" />
+        </g>
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,32.065,19.415)"
+           style="font-variant:normal;font-weight:normal;font-size:9.9626px;font-family:CMMI10;-inkscape-font-specification:CMMI10;writing-mode:lr-tb;fill:#00b8d5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text40"><tspan
+             x="0"
+             y="0"
+             id="tspan38">v</tspan></text>
+        <g
+           id="g42"
+           transform="translate(56.892,15.895)">
+          <path
+             d="M 0,0 H 41.81284"
+             style="fill:none;stroke:#65dd18;stroke-width:0.79701;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path44" />
+        </g>
+        <g
+           id="g46"
+           transform="translate(98.70484,15.895)">
+          <path
+             d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722"
+             style="fill:none;stroke:#65dd18;stroke-width:0.6376;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path48" />
+        </g>
+        <g
+           id="g50">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,103.131,5.258)"
+             style="font-variant:normal;font-weight:normal;font-size:9.9626px;font-family:CMMI10;-inkscape-font-specification:CMMI10;writing-mode:lr-tb;fill:#65dd18;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text54"><tspan
+               x="0"
+               y="0"
+               id="tspan52">f</tspan></text>
+        </g>
+        <g
+           id="g56">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,108.008,3.763)"
+             style="font-variant:normal;font-weight:normal;font-size:6.9738px;font-family:CMMI7;-inkscape-font-specification:CMMI7;writing-mode:lr-tb;fill:#65dd18;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text60"><tspan
+               x="0"
+               y="0"
+               id="tspan58">d</tspan></text>
+        </g>
+        <g
+           id="g62"
+           transform="translate(56.892,15.895)">
+          <path
+             d="M 0,0 V 41.81284"
+             style="fill:none;stroke:#65dd18;stroke-width:0.79701;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path64" />
+        </g>
+        <g
+           id="g66"
+           transform="rotate(90,-0.40792,57.29992)">
+          <path
+             d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722"
+             style="fill:none;stroke:#65dd18;stroke-width:0.6376;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path68" />
+        </g>
+        <g
+           id="g70">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,52.924,64.071)"
+             style="font-variant:normal;font-weight:normal;font-size:9.9626px;font-family:CMMI10;-inkscape-font-specification:CMMI10;writing-mode:lr-tb;fill:#65dd18;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text74"><tspan
+               x="0"
+               y="0"
+               id="tspan72">f</tspan></text>
+        </g>
+        <g
+           id="g76">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,57.802,62.577)"
+             style="font-variant:normal;font-weight:normal;font-size:6.9738px;font-family:CMMI7;-inkscape-font-specification:CMMI7;writing-mode:lr-tb;fill:#65dd18;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text80"><tspan
+               x="0"
+               y="0"
+               id="tspan78">l</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

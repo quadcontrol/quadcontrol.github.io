@@ -340,9 +340,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#arm-toolchain" class="md-nav__link">
+  <a href="#visual-studio-code" class="md-nav__link">
     <span class="md-ellipsis">
-      ARM Toolchain
+      Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git
     </span>
   </a>
   
@@ -367,9 +376,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#visual-studio-code" class="md-nav__link">
+  <a href="#arm-toolchain" class="md-nav__link">
     <span class="md-ellipsis">
-      Visual Studio Code
+      ARM Toolchain
     </span>
   </a>
   
@@ -1197,9 +1206,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#arm-toolchain" class="md-nav__link">
+  <a href="#visual-studio-code" class="md-nav__link">
     <span class="md-ellipsis">
-      ARM Toolchain
+      Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git
     </span>
   </a>
   
@@ -1224,9 +1242,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#visual-studio-code" class="md-nav__link">
+  <a href="#arm-toolchain" class="md-nav__link">
     <span class="md-ellipsis">
-      Visual Studio Code
+      ARM Toolchain
     </span>
   </a>
   
@@ -1268,52 +1286,13 @@
 <h2 id="windows">Windows</h2>
 <p><img alt="Windows" src="../images/windows.svg" width="100" /></p>
 <p>Caso seu sistema operacional seja Windows, siga o passo a passo abaixo:</p>
-<h3 id="arm-toolchain">ARM Toolchain</h3>
+<h3 id="visual-studio-code">Visual Studio Code</h3>
 <ol>
-<li>
-<p>Pressione <code>Iniciar</code> e digite "Windows PowerShell". Em seguida, clique com o botão direito e selecione <code>Executar como administrador</code>.</p>
-</li>
-<li>
-<p>Instale o WSL (Subsistema do Windows para Linux):
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl<span class="w"> </span>--install
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Após a instalação, reinicie o computador.</p>
-</li>
-<li>
-<p>Depois que o computador tiver reiniciado, ele abrirá automaticamente o terminal WSL (Ubuntu). Caso ele não abra, você deverá abri-lo:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Na primeira vez, será solicitado que você crie um nome de usuário para o Linux e defina uma senha (não necessariamente a mesma do Windows). </p>
-</li>
-<li>
-<p>Atualize a lista de pacotes:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Instale o Make:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>make<span class="w"> </span>
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Verifique a instalação do Make:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>--version
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Instale o toolchain ARM embarcado:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc-arm-none-eabi
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Verifique a instalação do toolchain ARM embarcado:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">WSL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>arm-none-eabi-gcc<span class="w"> </span>--version
-</code></pre></div></td></tr></table></div></p>
-</li>
+<li>Baixe o Visual Studio Code em seu <a href="https://code.visualstudio.com/Download">site oficial</a> e instale ele.</li>
+</ol>
+<h3 id="git">Git</h3>
+<ol>
+<li>Baixe o Git em seu <a href="https://git-scm.com">site oficial</a> e instale ele.</li>
 </ol>
 <h3 id="python">Python</h3>
 <div class="admonition warning">
@@ -1322,14 +1301,14 @@
 </div>
 <ol>
 <li>
-<p>Baixe o Python 3.11.9 em seu <a href="http://www.python.org/downloads/release/python-3119">site oficial</a> (é o arquivo <code>Windows installer (64-bit)</code> localizado lá embaixo em <code>Files</code>) </p>
+<p>Baixe o Python em seu <a href="http://www.python.org/downloads/release/python-3119">site oficial</a> (é o arquivo <code>Windows installer (64-bit)</code> localizado lá embaixo em <code>Files</code>) </p>
 </li>
 <li>
 <p>Instale ele certificando-se de marcar a caixa <code>[✓] Add python.exe to PATH</code>.</p>
 </li>
 <li>
 <p>Verifique a instalação do Python e do PIP (Gerenciador de Pacotes Python) pelo PowerShell:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>--version
 pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
@@ -1339,18 +1318,72 @@ pip<span class="w"> </span>--version
 <ol>
 <li>
 <p>Instale o Crazyflie Client usando o PIP pelo PowerShell:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>cfclient
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>cfclient
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
 <p>Verifique a instalação do Crazyflie Client:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PowerShell</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<h3 id="visual-studio-code">Visual Studio Code</h3>
+<h3 id="arm-toolchain">ARM Toolchain</h3>
 <ol>
-<li>Baixe o Visual Studio Code em seu <a href="https://code.visualstudio.com/Download">site oficial</a> e instale ele.</li>
+<li>
+<p>Instale o WSL (Subsistema do Windows para Linux) pelo PowerShell executando ele como administrador:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl<span class="w"> </span>--install
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Após a instalação, reinicie o computador.</p>
+</li>
+<li>
+<p>Depois que o computador tiver reiniciado, ele abrirá automaticamente o terminal WSL (Ubuntu). Caso ele não abra, você deverá abri-lo:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wsl
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Na primeira vez, será solicitado que você crie um nome de usuário para o Linux e defina uma senha (não necessariamente a mesma do Windows). </p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Os comandos a seguir devem ser executados no terminal WSL (Ubuntu) e não no Windows PowerShell</p>
+</div>
+</li>
+<li>
+<p>Atualize a lista de pacotes:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Instale o Make:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>make<span class="w"> </span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Verifique a instalação do Make:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>--version
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Instale o toolchain ARM embarcado:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc-arm-none-eabi
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Verifique a instalação do toolchain ARM embarcado:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>arm-none-eabi-gcc<span class="w"> </span>--version
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Instale o toolchain GCC:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Verifique a instalação do toolchain GCC:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>gcc<span class="w"> </span>--version
+</code></pre></div></td></tr></table></div></p>
+</li>
 </ol>
 <hr />
 <h2 id="mac">Mac</h2>

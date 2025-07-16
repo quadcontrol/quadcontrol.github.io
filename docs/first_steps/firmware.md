@@ -1,10 +1,12 @@
 # Firmware
 
-Esta secção contém as instruções para clonar, configurar e compilar o firmware do Crazyflie.
+Esta secção contém as instruções para clonar, configurar, compilar e testar o firmware do Crazyflie.
 
 ---
 
 ## Clonando
+
+Vamos criar uma cópia do repositório do firmware para que você possa modificá-lo e compilar localmente.
 
 ### Fork
 
@@ -39,10 +41,9 @@ https://github.com/username/quadcontrol-firmware.git
 git submodule update --init --recursive
 ```
 
-
 ### Organização
 
-O firmware é composto por 2 pastas e 2 arquivos.
+O firmware é composto por 2 pastas e 2 arquivos:
 
 ![Firmware](images/firmware.png){: width="450" style="display: block; margin: auto;" }
 
@@ -53,9 +54,44 @@ Vamos entender cada um deles:
 - `Kbuild` - Arquivo que define o programa que será compilado
 - `radio.config` - Arquivo que define o canal de rádio utilizado para se comunicar com o Crazyflie
 
+A pasta `src` possui apenas um programa, que é o `example_hello_world.c`. Abra esse arquivo e veja um exemplo de programa bem simples:
+
+```c title="example_hello_world.c"
+#include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
+#include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
+#include "debug.h"         // Debug printing functions (e.g., DEBUG_PRINT)
+
+// Main application loop
+void appMain(void *param)
+{
+    // Infinite loop (runs continuously while the quadcopter is powered on)
+    while (true)
+    {
+        // Print message to console
+        DEBUG_PRINT("Hello world!\n");
+
+        // Wait for 100 milliseconds (10 Hz loop)
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+}
+```
+
+Definimos qual o programa que vamos compilar através do arquivo `Kbuild`:
+
+```bash title="Kbuild"
+obj-y += src/example_hello_world.o
+```
+
+Conforme formos desenvolvendo novos programas, não podemos esquecer de atualizar o arquivo `Kbuild` com o nome do programa que queremos compilar. 
+
+!!! warning "Atenção"
+    Note que a extensão do arquivo aqui é `.o` e não `.c`. O importante é o nome do programa estar igual.
+
 ---
 
 ## Configurando
+
+Hora de ajustar as configurações do firmware, como canal de rádio e plataforma de hardware, para preparar o ambiente de compilação.
 
 ### Radio
 
@@ -66,7 +102,7 @@ Vamos entender cada um deles:
 RADIO_CHANNEL=1
 ```
 
-### By-pass
+### Submódulo
 
 1. Navegue até a página `crazyflie-firwmare` > `src` > `modules` > `src` e abra o arquivo `stabilizer.c`.
 
@@ -90,11 +126,11 @@ static void setMotorRatios(const motors_thrust_pwm_t* motorPwm)
 ```
 
 !!! info "Informação"
-    Fazemos isso para bipassar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).
+    Fazemos isso para cortornar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).
 
 ### Plataforma
 
-1. Configure o firmware para a paltaforma do Crazyflie 2.1 Brushless:
+1. Configure o firmware para a paltaforma do Crazyflie 2.1 Brushless rodando o seguinte código no terminal:
 ```bash
 make cf21bl_defconfig
 ```
@@ -102,6 +138,8 @@ make cf21bl_defconfig
 ---
 
 ## Compilando
+
+Agora vamos compilar o firmware e gravá-lo no drone para que ele possa rodar o seu código. Essa etapa é bem simples e deverá ser repetida toda vez que quisermos enviar um novo programa ao Crazyflie.
 
 ### Build
 
@@ -120,3 +158,11 @@ make cload
     !!! warning "Atenção"
         - O Crazyflie 2.1 Brushless precisa estar ligado
         - O Crazyradio PA precisa estar conectado na porta USB
+
+---
+
+## Testando
+
+Por fim, vamos apender a usar o CFClient para conectar ao drone e garantir que tudo está funcionando como esperado.
+
+

@@ -9,9 +9,9 @@ Nesta secção, você irá determinar experimentalmente os coeficientes do motor
 
 O PWM ("pulse width modulation") é uma técnica para controlar a potência de um sinal utilizando uma comutação digital. Ao mudar rapidamente o sinal entre o máximo e zero ("on-off"), e variando a fração de tempo que o sinal está no máximo, pode-se controlar a potência transmitida (isto é, modulando a largura do pulso).
 
-![PWM1](images/pwm1.pdf){: width="450" style="display: block; margin: auto;" }
-![PWM2](images/pwm2.pdf){: width="450" style="display: block; margin: auto;" }
-![PWM3](images/pwm3.pdf){: width="450" style="display: block; margin: auto;" }
+![PWM1](images/pwm1.svg){: width="450" style="display: block; margin: auto;" }
+![PWM2](images/pwm2.svg){: width="450" style="display: block; margin: auto;" }
+![PWM3](images/pwm3.svg){: width="450" style="display: block; margin: auto;" }
 
 Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Já [sabemos](../first_steps/motors.md) que no código é possível definir um valor real entre `0.0` e `1.0` que corresponde ao sinal PWM do motor. 
     
@@ -123,7 +123,7 @@ Para definir qual é melhor para este caso, é necessário se aprofundar na din�
 
 [^1]: Embora o Crazyflie utilize um motor elétrico de corrente contínua sem escovas e não com escovas, a equação matemática de ambos é equivalente.
 
-![Electric Motor](images/electric_motor.pdf){: width="600" style="display: block; margin: auto;" }
+![Electric Motor](images/electric_motor.svg){: width="600" style="display: block; margin: auto;" }
 
 
 Onde:

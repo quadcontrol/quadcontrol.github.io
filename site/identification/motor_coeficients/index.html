@@ -1219,9 +1219,9 @@
 <hr />
 <h2 id="fundamentos-teoricos">Fundamentos teóricos</h2>
 <p>O PWM ("pulse width modulation") é uma técnica para controlar a potência de um sinal utilizando uma comutação digital. Ao mudar rapidamente o sinal entre o máximo e zero ("on-off"), e variando a fração de tempo que o sinal está no máximo, pode-se controlar a potência transmitida (isto é, modulando a largura do pulso).</p>
-<p><img alt="PWM1" src="../images/pwm1.pdf" style="display: block; margin: auto;" width="450" />
-<img alt="PWM2" src="../images/pwm2.pdf" style="display: block; margin: auto;" width="450" />
-<img alt="PWM3" src="../images/pwm3.pdf" style="display: block; margin: auto;" width="450" /></p>
+<p><img alt="PWM1" src="../images/pwm1.svg" style="display: block; margin: auto;" width="450" />
+<img alt="PWM2" src="../images/pwm2.svg" style="display: block; margin: auto;" width="450" />
+<img alt="PWM3" src="../images/pwm3.svg" style="display: block; margin: auto;" width="450" /></p>
 <p>Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Já <a href="../../first_steps/motors/">sabemos</a> que no código é possível definir um valor real entre <code>0.0</code> e <code>1.0</code> que corresponde ao sinal PWM do motor. </p>
 <p>Você irá implementar uma função que, dada uma velocidade angular desejada <span class="arithmatex">\(\omega\)</span>, determine o sinal PWM correspondente. </p>
 <hr />
@@ -1406,7 +1406,7 @@
     \text{PWM} = f(\omega)
 \]</div>
 <p>Para definir qual é melhor para este caso, é necessário se aprofundar na dinâmica do sistema. O esquema eletromecânico de um motor elétrico com uma hélice pode ser visto no diagrama abaixo<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
-<p><img alt="Electric Motor" src="../images/electric_motor.pdf" style="display: block; margin: auto;" width="600" /></p>
+<p><img alt="Electric Motor" src="../images/electric_motor.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Onde:</p>
 <ul>
 <li><span class="arithmatex">\(e_a\)</span> - Tensão de armadura (<span class="arithmatex">\(V\)</span>)</li>

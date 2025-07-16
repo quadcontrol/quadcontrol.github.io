@@ -8,7 +8,7 @@ Nesta secção, você irá determinar experimentalmente a constante de sustenta�
 
 As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já [deduzimos](../basic_concepts/aerodynamics.md) que a força de sustentação de uma hélice $f$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado.
     
-![Lift Force](images/lift_force.pdf){: width="350" style="display: block; margin: auto;" }
+![Lift Force](images/lift_force.svg){: width="350" style="display: block; margin: auto;" }
 
 $$
     \tau = k_l \omega^2

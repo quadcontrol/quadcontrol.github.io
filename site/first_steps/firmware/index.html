@@ -414,9 +414,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#by-pass" class="md-nav__link">
+  <a href="#submodulo" class="md-nav__link">
     <span class="md-ellipsis">
-      By-pass
+      Submódulo
     </span>
   </a>
   
@@ -466,6 +466,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando
+    </span>
+  </a>
   
 </li>
       
@@ -1305,9 +1314,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#by-pass" class="md-nav__link">
+  <a href="#submodulo" class="md-nav__link">
     <span class="md-ellipsis">
-      By-pass
+      Submódulo
     </span>
   </a>
   
@@ -1360,6 +1369,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#testando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1377,9 +1395,10 @@
 
 
 <h1 id="firmware">Firmware</h1>
-<p>Esta secção contém as instruções para clonar, configurar e compilar o firmware do Crazyflie.</p>
+<p>Esta secção contém as instruções para clonar, configurar, compilar e testar o firmware do Crazyflie.</p>
 <hr />
 <h2 id="clonando">Clonando</h2>
+<p>Vamos criar uma cópia do repositório do firmware para que você possa modificá-lo e compilar localmente.</p>
 <h3 id="fork">Fork</h3>
 <ol>
 <li>Crie um <em>fork</em> do repositório que contém o <a href="https://github.com/quadcontrol/quadcontrol-firmware">firmware</a> para a sua conta do GitHub.</li>
@@ -1422,7 +1441,7 @@
 </li>
 </ol>
 <h3 id="organizacao">Organização</h3>
-<p>O firmware é composto por 2 pastas e 2 arquivos.</p>
+<p>O firmware é composto por 2 pastas e 2 arquivos:</p>
 <p><img alt="Firmware" src="../images/firmware.png" style="display: block; margin: auto;" width="450" /></p>
 <p>Vamos entender cada um deles:</p>
 <ul>
@@ -1431,8 +1450,52 @@
 <li><code>Kbuild</code> - Arquivo que define o programa que será compilado</li>
 <li><code>radio.config</code> - Arquivo que define o canal de rádio utilizado para se comunicar com o Crazyflie</li>
 </ul>
+<p>A pasta <code>src</code> possui apenas um programa, que é o <code>example_hello_world.c</code>. Abra esse arquivo e veja um exemplo de programa bem simples:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">example_hello_world.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
+
+<span class="c1">// Main application loop</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Infinite loop (runs continuously while the quadcopter is powered on)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Print message to console</span>
+<span class="w">        </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Hello world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Wait for 100 milliseconds (10 Hz loop)</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Definimos qual o programa que vamos compilar através do arquivo <code>Kbuild</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Kbuild</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>obj-y<span class="w"> </span>+<span class="o">=</span><span class="w"> </span>src/example_hello_world.o
+</code></pre></div></td></tr></table></div>
+<p>Conforme formos desenvolvendo novos programas, não podemos esquecer de atualizar o arquivo <code>Kbuild</code> com o nome do programa que queremos compilar. </p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Note que a extensão do arquivo aqui é <code>.o</code> e não <code>.c</code>. O importante é o nome do programa estar igual.</p>
+</div>
 <hr />
 <h2 id="configurando">Configurando</h2>
+<p>Hora de ajustar as configurações do firmware, como canal de rádio e plataforma de hardware, para preparar o ambiente de compilação.</p>
 <h3 id="radio">Radio</h3>
 <ol>
 <li>
@@ -1444,7 +1507,7 @@
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<h3 id="by-pass">By-pass</h3>
+<h3 id="submodulo">Submódulo</h3>
 <ol>
 <li>
 <p>Navegue até a página <code>crazyflie-firwmare</code> &gt; <code>src</code> &gt; <code>modules</code> &gt; <code>src</code> e abra o arquivo <code>stabilizer.c</code>.</p>
@@ -1477,16 +1540,17 @@
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Informação</p>
-<p>Fazemos isso para bipassar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).</p>
+<p>Fazemos isso para cortornar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).</p>
 </div>
 <h3 id="plataforma">Plataforma</h3>
 <ol>
-<li>Configure o firmware para a paltaforma do Crazyflie 2.1 Brushless:
+<li>Configure o firmware para a paltaforma do Crazyflie 2.1 Brushless rodando o seguinte código no terminal:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>cf21bl_defconfig
 </code></pre></div></td></tr></table></div></li>
 </ol>
 <hr />
 <h2 id="compilando">Compilando</h2>
+<p>Agora vamos compilar o firmware e gravá-lo no drone para que ele possa rodar o seu código. Essa etapa é bem simples e deverá ser repetida toda vez que quisermos enviar um novo programa ao Crazyflie.</p>
 <h3 id="build">Build</h3>
 <ol>
 <li>Compile o firmware:
@@ -1508,6 +1572,9 @@
 </div>
 </li>
 </ol>
+<hr />
+<h2 id="testando">Testando</h2>
+<p>Por fim, vamos apender a usar o CFClient para conectar ao drone e garantir que tudo está funcionando como esperado.</p>
 
 
 

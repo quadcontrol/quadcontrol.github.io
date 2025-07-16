@@ -12,7 +12,7 @@ O modelo matemático de um drone, qualquer que seja seu tipo, contém diversos p
 
 A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar.
 
-![Airfoil1](images/airfoil1.pdf){: width="400" style="display: block; margin: auto;" }
+![Airfoil1](images/airfoil1.svg){: width="400" style="display: block; margin: auto;" }
 
 Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação $f_l$ (perpendicular à velocidade $v$), ele também produz uma força indesejada de arrasto $f_d$ (paralela à velocidade $v$):
 $$
@@ -39,7 +39,7 @@ Os coeficientes de sustentação e arrasto não são constantes, eles variam con
 
 Para aerofólios que se movem a velocidades subsônicas ($<1.000km/h$), apenas o ângulo de ataque $\alpha$, representado na figura abaixo, acaba apresentando uma influência significativa.
 
-![Airfoil2](images/airfoil2.pdf){: width="400" style="display: block; margin: auto;" }
+![Airfoil2](images/airfoil2.svg){: width="400" style="display: block; margin: auto;" }
 
 Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados[^1] pelo gráfico abaixo.
 
@@ -141,7 +141,7 @@ Uma hélice é composta por $n$ pás, onde cada pá pode ser interpretada como u
 
 Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada uma de suas pás, conforme a figura abaixo.
 
-![Propeller1](images/propeller1.pdf){: width=400" style="display: block; margin: auto;" }
+![Propeller1](images/propeller1.svg){: width=400" style="display: block; margin: auto;" }
 
 Onde:
 
@@ -169,7 +169,7 @@ Onde:
 
 As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação e torque de arrasto da hélice, conforme a figura abaixo.
 
-![Propeller2](images/propeller2.pdf){: width="400" style="display: block; margin: auto;" }
+![Propeller2](images/propeller2.svg){: width="400" style="display: block; margin: auto;" }
 
 !!! question "Exercício 3"
     Determine a força de sustentação $f$ e torque de arrasto $\tau$ da hélice
@@ -207,7 +207,7 @@ Onde:
 
 Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice produz, que dependem do quadrado de sua velocidade angular:
 
-![Propeller3](images/propeller3.pdf){: width="350" style="display: block; margin: auto;" }
+![Propeller3](images/propeller3.svg){: width="350" style="display: block; margin: auto;" }
 
 $$
 f = k_l \omega^2 

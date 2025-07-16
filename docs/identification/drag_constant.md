@@ -8,7 +8,7 @@ Nesta secção, você irá determinar experimentalmente a constante de arrasto d
 
 As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já [deduzimos](../basic_concepts/aerodynamics.md) que o torque de arrasto de uma hélice $\tau$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado.
     
-![Drag Torque](images/drag_torque.pdf){: width="350" style="display: block; margin: auto;" }
+![Drag Torque](images/drag_torque.svg){: width="350" style="display: block; margin: auto;" }
 
 $$
     \tau = k_d \omega^2

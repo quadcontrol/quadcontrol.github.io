@@ -139,7 +139,15 @@ python3 -m pip install cfclient
     python3 -m cfclient.gui
     ```
 
-    5. Clique em `Arquivo` > `Salvar` e a
+    5. Clique em `Arquivo` > `Salvar`
+    
+    6. No campo de nome, coloque "Crazyflie Client" e clique em `Concluir`
+
+3. Caso opte por adicionar o Crazyflie Client no PATH (para abrí-lo simplesmente digitando `cfclient` no terminal), faça o seguinte:
+```bash
+echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
 
 
 ### ARM Toolchain

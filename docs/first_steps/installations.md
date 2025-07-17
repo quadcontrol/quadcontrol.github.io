@@ -42,16 +42,13 @@ pip --version
 pip install cfclient
 ```
 
-2. Verifique a instalação do Crazyflie Client:
-```bash
-cfclient
-```
+2. Configure o aplicativo de inicialização do Crazyflie Client
 
-2. Clique com o botão direito na área de trabalho e depois em `Novo` > `Atalho`
+    1. Clique com o botão direito na área de trabalho e depois em `Novo` > `Atalho`
 
-3. No campo de destino, coloque "cfclient" e clique em `Avançar`
+    2. No campo de destino, coloque "cfclient" e clique em `Avançar`
 
-4. No campo de nome, coloque "Crazyflie Client" e clique em `Concluir`
+    3. No campo de nome, coloque "Crazyflie Client" e clique em `Concluir`
 
 ### ARM Toolchain
 
@@ -116,3 +113,43 @@ gcc --version
 
 Caso seu sistema operacional seja Mac, siga o passo a passo abaixo:
 
+
+### Visual Studio Code
+
+1. Baixe o Visual Studio Code em seu [site oficial](https://code.visualstudio.com/Download){target=_blank} e instale ele.
+
+
+### Crazyflie Client
+
+1. Instale o Crazyflie Client pelo Terminal:
+```bash
+python3 -m pip install cfclient
+```
+
+2. Configure o aplicativo de inicialização do Crazyflie Client
+
+    1. Abra o Automator
+
+    2. Clique em `Novo Documento` > `Aplicativo`
+
+    3. No bliblioteca de ações dê duplo clique em `Executar Script de Shell`
+
+    4. No campo de script, cole:
+    ```bash
+    python3 -m cfclient.gui
+    ```
+
+    5. Clique em `Arquivo` > `Salvar` e a
+
+
+### ARM Toolchain
+
+1. Instale o Homebrew pelo terminal:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Instale o toolchain ARM embarcado:
+```bash
+brew Install gcc-arm-embedded
+```

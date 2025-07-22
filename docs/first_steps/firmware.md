@@ -4,6 +4,14 @@ Esta secção contém as instruções para clonar, configurar, compilar e testar
 
 ---
 
+## Visual Studio Code
+
+Vamos utilizar o Visual Studio Code como IDE (Ambiente de Desenvolvimento Integrado), portanto o primeiro passo será instalar ele.
+
+1. Baixe o Visual Studio Code em seu [site oficial](https://code.visualstudio.com/Download){target=_blank} e instale ele.
+
+---
+
 ## Clonando
 
 Vamos criar uma cópia do repositório do firmware para que você possa modificá-lo e compilar localmente.
@@ -91,7 +99,7 @@ Conforme formos desenvolvendo novos programas, não podemos esquecer de atualiza
 
 ## Configurando
 
-Hora de ajustar as configurações do firmware, como canal de rádio e plataforma de hardware, para preparar o ambiente de compilação.
+Vamos agora ajustar as configurações do firmware, como canal de rádio e plataforma de hardware, para preparar o ambiente de compilação.
 
 ### Radio
 
@@ -106,8 +114,8 @@ RADIO_CHANNEL=1
 
 1. Navegue até a página `crazyflie-firwmare` > `src` > `modules` > `src` e abra o arquivo `stabilizer.c`.
 
-2. Comente as linhas 220-223, 323 e 353, conforme abaixo:
-```c title="stabilizer.c" linenums="218"
+2. Comente as linhas 223-226, 326 e 356, conforme abaixo:
+```c title="stabilizer.c" linenums="221"
 static void setMotorRatios(const motors_thrust_pwm_t* motorPwm)
 {
   // motorsSetRatio(MOTOR_M1, motorPwm->motors.m1);
@@ -116,10 +124,10 @@ static void setMotorRatios(const motors_thrust_pwm_t* motorPwm)
   // motorsSetRatio(MOTOR_M4, motorPwm->motors.m4);
 }
 ```
-```c title="stabilizer.c" linenums="323"
+```c title="stabilizer.c" linenums="326"
       //stateEstimator(&state, stabilizerStep);
 ```
-```c title="stabilizer.c" linenums="352"
+```c title="stabilizer.c" linenums="355"
       } else {
         // motorsStop();
       }

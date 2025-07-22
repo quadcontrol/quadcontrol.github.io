@@ -12,18 +12,19 @@ Siga cada passo conforme seu sistema operacional com atenção, para garantir um
 
 Caso seu sistema operacional seja Windows, siga o passo a passo abaixo:
 
-### Visual Studio Code
-
-1. Baixe o Visual Studio Code em seu [site oficial](https://code.visualstudio.com/Download){target=_blank} e instale ele.
-
 ### Git
 
 1. Baixe o Git em seu [site oficial](https://git-scm.com){target=_blank} e instale ele.
 
+2. Verifique a instalação do Git pelo PowerShell:
+```bash
+git --version
+```
+
 ### Python
 
 !!! warning "Atenção"
-    Não pule essa etapa mesmo que você já tenha uma distribuição do Python instalado em seu computador, precisamos instalar uma distribuição especifica (3.11.9) para tudo funcionar. Mas fique tranquilo que qualquer distribuição já instalada continuára funcionando normalmente.
+    Não pule essa etapa mesmo que você já tenha uma distribuição do Python instalado em seu computador, pois você precisa instalar uma distribuição especifica (3.11.9) para tudo funcionar. Mas fique tranquilo que qualquer distribuição já instalada continuára funcionando normalmente.
 
 1. Baixe o Python em seu [site oficial](http://www.python.org/downloads/release/python-3119){target=_blank} e instale ele.
 
@@ -42,13 +43,21 @@ pip --version
 pip install cfclient
 ```
 
-2. Configure o aplicativo de inicialização do Crazyflie Client
+2. Verifique a instalação do Crazyflie Client abrindo ele pelo PowerShell:
+```bash
+cfclient
+```
+
+!!! info "Dica"
+    Caso prefira criar um ícone na área de trabalho para o Crazyflie Client, siga o passo a passo abaixo:
 
     1. Clique com o botão direito na área de trabalho e depois em `Novo` > `Atalho`
 
     2. No campo de destino, coloque "cfclient" e clique em `Avançar`
 
     3. No campo de nome, coloque "Crazyflie Client" e clique em `Concluir`
+
+
 
 ### ARM Toolchain
 
@@ -59,7 +68,7 @@ wsl --install
 
 2. Após a instalação, reinicie o computador.
 
-3. Depois que o computador tiver reiniciado, ele abrirá automaticamente o terminal WSL (Ubuntu). Caso ele não abra, você deverá abri-lo:
+3. Depois que o computador tiver reiniciado, ele abrirá automaticamente o terminal WSL (Ubuntu). Caso ele não abra, você pode abri-lo pelo PowerShell:
 ```bash
 wsl
 ```
@@ -111,13 +120,9 @@ gcc --version
 
 ![Windows](images/mac.svg){: width="100"}
 
-Caso seu sistema operacional seja Mac, siga o passo a passo abaixo:
+Caso seu sistema operacional seja Mac[^1], siga o passo a passo abaixo:
 
-
-### Visual Studio Code
-
-1. Baixe o Visual Studio Code em seu [site oficial](https://code.visualstudio.com/Download){target=_blank} e instale ele.
-
+[^1]: O Mac já vem de fábrica com o Git e o Python instalados, por isso que essas etapas foram omitidas aqui.
 
 ### Crazyflie Client
 
@@ -126,7 +131,19 @@ Caso seu sistema operacional seja Mac, siga o passo a passo abaixo:
 python3 -m pip install cfclient
 ```
 
-2. Configure o aplicativo de inicialização do Crazyflie Client
+2. Verifique a instalação do Crazyflie Client abrindo ele Terminal:
+```bash
+cfclient
+```
+
+!!! warning "Atenção"
+    Caso o comando acima não abra o Crazyflie Client, pode ser que seu endereço não esteja no PATH. Para verificar onde ele foi instalado e colocar ele no PATH, basta rodar o comando abaixo no Terminal:
+    ```bash
+    cfclient_path=$(dirname $(which cfclient)) && echo "export PATH=\"$cfclient_path:\$PATH\"" >> ~/.zshrc
+    ```
+
+!!! info "Dica"
+    Caso prefira criar um ícone na mesa para o Crazyflie Client, siga o passo a passo abaixo:
 
     1. Abra o Automator
 
@@ -143,21 +160,29 @@ python3 -m pip install cfclient
     
     6. No campo de nome, coloque "Crazyflie Client" e clique em `Concluir`
 
-3. Caso opte por adicionar o Crazyflie Client no PATH (para abrí-lo simplesmente digitando `cfclient` no terminal), faça o seguinte:
-```bash
-echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-
 ### ARM Toolchain
 
-1. Instale o Homebrew pelo terminal:
+1. Instale o Homebrew:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 2. Instale o toolchain ARM embarcado:
 ```bash
-brew Install gcc-arm-embedded
+brew install gcc-arm-embedded
+```
+
+9. Verifique a instalação do toolchain ARM embarcado:
+```bash
+arm-none-eabi-gcc --version
+```
+
+3. Instale os utilitários do GNU Core:
+```bash
+brew install coreutils
+```
+
+4. Adicione ao PATH:
+```bash
+echo 'export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.zshrc
 ```

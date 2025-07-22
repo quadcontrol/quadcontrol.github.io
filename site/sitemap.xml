@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://www.quadcontrol.io/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/basic_concepts/aerodynamics/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/basic_concepts/aerodynamics/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/basic_concepts/mixer/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/basic_concepts/mixer/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/first_steps/firmware/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/first_steps/firmware/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/first_steps/installation_chatgpt/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/first_steps/installation_chatgpt/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/first_steps/installations/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/first_steps/installations/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/first_steps/motors/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/first_steps/motors/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/first_steps/sensors/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/first_steps/sensors/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/identification/drag_constant/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/identification/drag_constant/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/identification/lift_constant/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/identification/lift_constant/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/identification/mass_and_moment_of_inertia/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/identification/mass_and_moment_of_inertia/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
     <url>
-         <loc>https://www.quadcontrol.io/identification/motor_coeficients/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://quadcontrol.io/identification/motor_coeficients/</loc>
+         <lastmod>2025-07-22</lastmod>
     </url>
 </urlset>

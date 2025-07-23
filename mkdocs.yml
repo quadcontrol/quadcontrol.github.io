@@ -4,7 +4,7 @@ site_url: https://quadcontrol.io
 theme:
   name: material
   logo: images/logo.png
-  favicon: images/logo.png
+  favicon: images/logo_black.png
   palette:
    - scheme: slate
     #  primary: #65DD18

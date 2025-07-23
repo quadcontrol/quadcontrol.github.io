@@ -75,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#motores" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -327,6 +332,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Motores
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -339,6 +359,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visão geral
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilando
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -459,6 +534,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_concepts/mass_and_moment_of_inertia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Massa e Momento de Inércia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -503,29 +601,6 @@
             Identificação
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../identification/mass_and_moment_of_inertia/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Massa e Momento de Inércia
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -653,7 +728,7 @@
   
   
   <span class="md-ellipsis">
-    Cinemática
+    Visão geral
     
   </span>
   
@@ -676,7 +751,30 @@
   
   
   <span class="md-ellipsis">
-    Cinética
+    2D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../x.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3D
     
   </span>
   
@@ -739,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/architecture/" class="md-nav__link">
         
   
   
@@ -1078,6 +1176,52 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visão geral
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilando
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1093,9 +1237,99 @@
 
 
 
-  <h1>Motores</h1>
+<h1 id="motores">Motores</h1>
+<p>Nesta secção, vamos fazer o drone girar um de seus motores pela primeira vez. Esse é o seu primeiro contato com controle real de hardware, um passo fundamental rumo ao voo autônomo.</p>
+<p>Vamos criar um programa simples que liga o motor 1 com 10% de potência, sempre que o drone estiver armado (ou seja, autorizado a voar).</p>
+<hr />
+<h2 id="visao-geral">Visão geral</h2>
+<p>Antes de começar, é importante entender alguns conceitos:</p>
+<ul>
+<li>Armar o drone significa autorizar o funcionamento dos motores. Isso é feito manualmente pelo operador através do Crazyflie Client e verificado no código com a função <code>supervisorIsArmed()</code>.</li>
+<li>O controle dos motores é feito através da função <code>motorsSetRatio(id, ratio)</code>, onde <code>id</code> corresponde ao motor que vai ser acionado e <code>ratio</code> à sua potência.<ul>
+<li>O Crazyflie possui quatro motores, identificados como <code>MOTOR_M1</code>, <code>MOTOR_M2</code>, <code>MOTOR_M3</code> e <code>MOTOR_M4</code>.</li>
+<li>A potência vai de <code>0</code> (desligado) até <code>UINT16_MAX</code> (potência máxima).</li>
+</ul>
+</li>
+<li>Em FreeRTOS, um delay é realizado através da função <code>vTaskDelay(pdMS_TO_TICKS(xTimeInMs))</code>, que recebe um tempo em milissegundos e o converte para ticks do sistema.</li>
+</ul>
+<hr />
+<h2 id="codigo">Código</h2>
+<p>Crie um arquivo chamado <code>motors.c</code> dentro da pasta <code>src/examples</code> com o seguinte conteúdo:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">motors.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
 
-
+<span class="c1">// Main application loop</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Infinite loop (runs continuously while the drone is powered on)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Check if the drone is armed (i.e., ready to receive motor commands)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">supervisorIsArmed</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// If armed, turn on motor 1 with 10% power</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// If not armed, stop motor 1</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// Wait for 100 milliseconds before checking again (10 Hz loop)</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Você pode simplesmente copiar e colar o código acima. Mas é importante que você leia e entenda o que cada linha está fazendo (o código está bem comentado).</p>
+<hr />
+<h2 id="compilando">Compilando</h2>
+<p>Para que o firmware compile seu novo programa, modifique o arquivo <code>Kbuild</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Kbuild</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">obj</span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">src</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">motors</span><span class="p">.</span><span class="n">o</span>
+</code></pre></div></td></tr></table></div>
+<p>Em seguida, compile e programe o quadricoptero.</p>
+<hr />
+<h2 id="testando">Testando</h2>
+<p>Para testar o funcionamento, siga as etapas abaixo:</p>
+<ol>
+<li>Abra o Crazyflie Client e conecte-se ao drone.</li>
+<li>Clique no botão <code>Arm</code>.</li>
+<li>O motor 1 deve começar a girar com 10% de potência.</li>
+<li>Ao clicar em <code>Disarm</code>, o motor deve parar imediatamente.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>O motor vai girar, mas o drone não vai levantar voo, pois estamos controlando apenas um motor isolado com baixa potência.</p>
+</div>
+<p>Você acaba de escrever seu primeiro programa que interage com o hardware real do drone — controlando motores com segurança. Um passo simples, mas poderoso, no caminho do voo autônomo.</p>
 
 
 

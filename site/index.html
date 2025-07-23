@@ -462,6 +462,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="basic_concepts/mass_and_moment_of_inertia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Massa e Momento de Inércia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -506,29 +529,6 @@
             Identificação
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="identification/mass_and_moment_of_inertia/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Massa e Momento de Inércia
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -656,7 +656,7 @@
   
   
   <span class="md-ellipsis">
-    Cinemática
+    Visão geral
     
   </span>
   
@@ -679,7 +679,30 @@
   
   
   <span class="md-ellipsis">
-    Cinética
+    2D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="x.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3D
     
   </span>
   
@@ -742,7 +765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="x.md" class="md-nav__link">
+      <a href="control/architecture/" class="md-nav__link">
         
   
   
@@ -1099,69 +1122,28 @@
 
 
 <h1 id="bem-vindo">Bem-vindo!</h1>
-<p>Este site contém toda a documentação da eletiva de Drones do Insper.</p>
-<p>Uma espécie de apostila online, cuidadosamente organizada com:</p>
+<p>Este site reúne toda a documentação da eletiva de Drones do Insper — uma espécie de apostila online, cuidadosamente organizada com:</p>
 <ul>
-<li>📚 Textos explicativos</li>
-<li>📐 Fórmulas e fundamentos teóricos</li>
+<li>📚 Explicações teóricas e fórmulas fundamentais</li>
 <li>💻 Códigos em C, Python e MATLAB</li>
-<li>🖼️ Figuras e diagramas</li>
-<li>🎥 Vídeos demonstrativos</li>
-<li>🛸 Aplicações práticas</li>
+<li>🖼️ Figuras, diagramas e vídeos demonstrativos</li>
+<li>🛸 Exemplos de aplicações práticas</li>
 </ul>
-<p>Nosso objetivo é ensinar conceitos de controle, estimação e sistemas embarcados de forma prática e acessível, usando um quadricoptero real em laboratório. Explore os tópicos no menu lateral e boa jornada!</p>
+<p>Nosso objetivo é ensinar conceitos de controle, estimação e sistemas embarcados de forma prática e acessível, usando um quadricoptero real em laboratório. Explore os tópicos no menu lateral — e boa jornada! 🚀</p>
 <hr />
 <h1 id="sobre-a-eletiva">Sobre a eletiva</h1>
-<p>Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero real — o <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/">Bitcraze Crazyflie 2.1 Brushless</a>.</p>
+<p>Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero — o <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/">Bitcraze Crazyflie 2.1 Brushless</a>.</p>
 <p><img alt="Crazyflie" src="images/crazyflie.png" style="display: block; margin: auto;" width="400" /></p>
-<p>A jornada começa com tarefas simples, como fazer os LEDs piscarem, e termina com o drone voando sozinho. Para isso, ao longo do curso, o aluno:</p>
+<p>A jornada começa com os clássicos <code>led_blink.c</code> e <code>hello_world.c</code>, e termina com o drone voando sozinho. Ao longo do curso, o aluno:</p>
 <ul>
-<li>
-<p>Aprende fundamentos de:</p>
-<ul>
-<li>
-<p>Programação embarcada com FreeRTOS</p>
-</li>
-<li>
-<p>Controle de atitude e posição</p>
-</li>
-<li>
-<p>Estimação de estados em tempo real</p>
-</li>
+<li>🧠 Aprende os fundamentos da programação embarcada com FreeRTOS</li>
+<li>📡 Trabalha com sensores como IMU, Lidar e fluxo óptico</li>
+<li>⚙️ Controla motores BLDC via PWM</li>
+<li>💻 Implementa em C algoritmos de controle e estimação de estados</li>
 </ul>
-</li>
-<li>
-<p>Aprende a usar sensores embarcados como:</p>
-<ul>
-<li>
-<p>IMU (acelerômetro e giroscópio)</p>
-</li>
-<li>
-<p>Lidar</p>
-</li>
-<li>
-<p>Fluxo óptico</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Implementa em C algoritmos embarcados como:</p>
-<ul>
-<li>
-<p>Filtros complementares</p>
-</li>
-<li>
-<p>Controladores por realimentação de estados</p>
-</li>
-<li>
-<p>Estratégias de decolagem, voo e pouso autônomos</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>A avaliação é 100% prática: ao final do curso, o drone deve voar até um dos helipontos, cada um com uma nota associada à sua dificuldade - quanto mais longe ou de difícil acesso o heliponto, maior a pontuação.</p>
+<p>A avaliação é 100% prática: ao final do curso, o drone deve voar até um dos helipontos, cada um com uma nota associada à sua dificuldade - quanto mais longe ou de difícil acesso o heliponto, maior sua média final na disciplina.</p>
 <p><img alt="Alvos" src="images/alvos.svg" style="display: block; margin: auto;" width="100%" /></p>
-<p>Quer saber ver um pouco disso na prática? Assista o vídeo abaixo!</p>
+<p>Quer ver um pouco disso na prática? Assista o vídeo abaixo!</p>
 <div align="center">
   <iframe width="560" height="315" 
           src="https://www.youtube.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8" 

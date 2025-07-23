@@ -633,6 +633,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_concepts/mass_and_moment_of_inertia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Massa e Momento de Inércia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -677,29 +700,6 @@
             Identificação
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../identification/mass_and_moment_of_inertia/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Massa e Momento de Inércia
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -827,7 +827,7 @@
   
   
   <span class="md-ellipsis">
-    Cinemática
+    Visão geral
     
   </span>
   
@@ -850,7 +850,30 @@
   
   
   <span class="md-ellipsis">
-    Cinética
+    2D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../x.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3D
     
   </span>
   
@@ -913,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/architecture/" class="md-nav__link">
         
   
   
@@ -1416,9 +1439,9 @@
 <p>Esta secção contém as instruções para clonar, configurar, compilar e testar o firmware do Crazyflie.</p>
 <hr />
 <h2 id="visual-studio-code">Visual Studio Code</h2>
-<p>Vamos utilizar o Visual Studio Code como IDE (Ambiente de Desenvolvimento Integrado), portanto o primeiro passo será instalar ele.</p>
+<p>Vamos utilizar o Visual Studio Code como IDE (Ambiente de Desenvolvimento Integrado).</p>
 <ol>
-<li>Baixe o Visual Studio Code em seu <a href="https://code.visualstudio.com/Download" target="_blank">site oficial</a> e instale ele.</li>
+<li>Baixe o Visual Studio Code em seu <a href="https://code.visualstudio.com/Download" target="_blank">site oficial</a> e instale-o.</li>
 </ol>
 <hr />
 <h2 id="clonando">Clonando</h2>
@@ -1430,7 +1453,7 @@
 <h3 id="clone">Clone</h3>
 <ol>
 <li>
-<p>Abre o Visual Studio Code</p>
+<p>Abra o Visual Studio Code</p>
 </li>
 <li>
 <p>Clique em <code>Clone Git Repository...</code></p>
@@ -1459,7 +1482,7 @@
 </div>
 </li>
 <li>
-<p>Inicialize todos os submódulos pelo terminal:
+<p>Inicialize todos os submódulos<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo terminal:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
 </code></pre></div></td></tr></table></div></p>
 </li>
@@ -1474,8 +1497,11 @@
 <li><code>Kbuild</code> - Arquivo que define o programa que será compilado</li>
 <li><code>radio.config</code> - Arquivo que define o canal de rádio utilizado para se comunicar com o Crazyflie</li>
 </ul>
-<p>A pasta <code>src</code> possui apenas um programa, que é o <code>example_hello_world.c</code>. Abra esse arquivo e veja um exemplo de programa bem simples:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">example_hello_world.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<p>A pasta <code>src</code> possui uma subpasta <code>examples</code> com 2 exemplos de programas: <code>led_blink.c</code> e <code>hello_world.c</code>. Abra esses arquivos para ver alguns exemplos de programa bem simples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Led blink</label><label for="__tabbed_1_2">Hello world</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">led_blink.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -1491,7 +1517,48 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;led.h&quot;</span><span class="c1">           // LED functions (e.g., ledSet)</span>
+
+<span class="c1">// Main application loop</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Infinite loop (runs continuously while the quadcopter is powered on)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Turn on left green led</span>
+<span class="w">        </span><span class="n">ledSet</span><span class="p">(</span><span class="n">LED_GREEN_L</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Wait for 100 milliseconds (2 Hz loop)</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// Turn off left green led</span>
+<span class="w">        </span><span class="n">ledSet</span><span class="p">(</span><span class="n">LED_GREEN_L</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Wait for 100 milliseconds (2 Hz loop)</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello_world.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
 
@@ -1503,14 +1570,16 @@
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Print message to console</span>
 <span class="w">        </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Hello world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Wait for 100 milliseconds (10 Hz loop)</span>
-<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// Wait for 100 milliseconds (2 Hz loop)</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>Definimos qual o programa que vamos compilar através do arquivo <code>Kbuild</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Kbuild</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>obj-y<span class="w"> </span>+<span class="o">=</span><span class="w"> </span>src/example_hello_world.o
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Kbuild</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>obj-y<span class="w"> </span>+<span class="o">=</span><span class="w"> </span>src/examples/led_blink.o
 </code></pre></div></td></tr></table></div>
 <p>Conforme formos desenvolvendo novos programas, não podemos esquecer de atualizar o arquivo <code>Kbuild</code> com o nome do programa que queremos compilar. </p>
 <div class="admonition warning">
@@ -1534,10 +1603,10 @@
 <h3 id="submodulo">Submódulo</h3>
 <ol>
 <li>
-<p>Navegue até a página <code>crazyflie-firwmare</code> &gt; <code>src</code> &gt; <code>modules</code> &gt; <code>src</code> e abra o arquivo <code>stabilizer.c</code>.</p>
+<p>Navegue até a página <code>crazyflie-firmware</code> &gt; <code>src</code> &gt; <code>modules</code> &gt; <code>src</code> e abra o arquivo <code>stabilizer.c</code>.</p>
 </li>
 <li>
-<p>Comente as linhas 223-226, 326 e 356, conforme abaixo:
+<p>Comente as linhas 223-226, 326 e 356, conforme abaixo<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">stabilizer.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">221</span>
 <span class="normal">222</span>
 <span class="normal">223</span>
@@ -1562,13 +1631,9 @@
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<div class="admonition info">
-<p class="admonition-title">Informação</p>
-<p>Fazemos isso para cortornar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).</p>
-</div>
 <h3 id="plataforma">Plataforma</h3>
 <ol>
-<li>Configure o firmware para a paltaforma do Crazyflie 2.1 Brushless rodando o seguinte código no terminal:
+<li>Configure o firmware para a plataforma do Crazyflie 2.1 Brushless rodando o seguinte código no terminal:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>cf21bl_defconfig
 </code></pre></div></td></tr></table></div></li>
 </ol>
@@ -1598,7 +1663,39 @@
 </ol>
 <hr />
 <h2 id="testando">Testando</h2>
-<p>Por fim, vamos apender a usar o CFClient para conectar ao drone e garantir que tudo está funcionando como esperado.</p>
+<p>Por fim, vamos aprender a usar o Crazyflie Client para conectar ao drone e garantir que tudo está funcionando como esperado.</p>
+<ol>
+<li>Abra o Crazyflie Client
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
+</code></pre></div></td></tr></table></div></li>
+<li>
+<p>Clique no botão <code>Scan</code> e selecione o Crazyflie correspondente</p>
+</li>
+<li>
+<p>Clique no botão <code>Connect</code></p>
+</li>
+<li>
+<p>Verifique se o quadricoptero está respondendo (tensão da bateria, estado dos sensores, etc.)</p>
+</li>
+<li>
+<p>Clique em <code>View</code> &gt; <code>Toolboxes</code> &gt; <code>Console</code></p>
+</li>
+<li>
+<p>Verifique se aparecem as mensagens do seu código ("Hello world!")</p>
+</li>
+</ol>
+<p>Caso não apareça, muito provavelmente é por que você está rodando o programa <code>led_blink.c</code> e não <code>hello_world.c</code>. Modifique seu arquivo <code>Kbuild</code> para o programa correto e, em seguida, compile e envie o programa para o quadricoptero.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Submódulos do Git são como "repositórios dentro de repositórios". Esse comando garante que você tenha o código do firmware oficial (<code>crazyflie-firmware</code>) que está referenciado como submódulo.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Fazemos isso para contornar o algoritmo proprietário do controlador do Crazyflie (ele vai continuar rodando em segundo plano, mas vamos ignorar seus comandos para podermos usar os nossos).&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 

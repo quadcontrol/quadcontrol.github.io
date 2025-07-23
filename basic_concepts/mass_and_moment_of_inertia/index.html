@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/identification/drag_constant/">
+        <link rel="canonical" href="https://quadcontrol.io/basic_concepts/mass_and_moment_of_inertia/">
       
       
-        <link rel="prev" href="../lift_constant/">
+        <link rel="prev" href="../mixer/">
       
       
-        <link rel="next" href="../../control/architecture/">
+        <link rel="next" href="../../identification/motor_coeficients/">
       
       
       <link rel="icon" href="../../images/logo.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Constante de Arrasto - QuadControl</title>
+        <title>Massa e Momento de Inércia - QuadControl</title>
       
     
     
@@ -75,11 +75,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#identificacao-da-constante-de-arrasto" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -111,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Constante de Arrasto
+              Massa e Momento de Inércia
             
           </span>
         </div>
@@ -374,18 +369,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -401,7 +398,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Conceitos básicos
@@ -415,7 +412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basic_concepts/aerodynamics/" class="md-nav__link">
+      <a href="../aerodynamics/" class="md-nav__link">
         
   
   
@@ -438,128 +435,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basic_concepts/mixer/" class="md-nav__link">
+      <a href="../mixer/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Mixer
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../basic_concepts/mass_and_moment_of_inertia/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Massa e Momento de Inércia
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Identificação
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Identificação
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../motor_coeficients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Coeficientes do Motor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lift_constant/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Constante de Sustentação
     
   </span>
   
@@ -583,23 +464,123 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
   
   
   <span class="md-ellipsis">
-    Constante de Arrasto
+    Massa e Momento de Inércia
     
   </span>
   
 
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+      </a>
       
-      <a href="./" class="md-nav__link md-nav__link--active">
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificação
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Identificação
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identification/motor_coeficients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Coeficientes do Motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identification/lift_constant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constante de Sustentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identification/drag_constant/" class="md-nav__link">
         
   
   
@@ -610,53 +591,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#fundamentos-teoricos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fundamentos teóricos
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedimento-experimental" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedimento experimental
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#analise-de-dados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Análise de dados
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1167,43 +1101,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#fundamentos-teoricos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fundamentos teóricos
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#procedimento-experimental" class="md-nav__link">
-    <span class="md-ellipsis">
-      Procedimento experimental
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#analise-de-dados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Análise de dados
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1219,101 +1116,9 @@
 
 
 
-<h1 id="identificacao-da-constante-de-arrasto">Identificação da constante de arrasto</h1>
-<p>Nesta secção, você irá determinar experimentalmente a constante de arrasto das hélices <span class="arithmatex">\(k_d\)</span>.</p>
-<hr />
-<h2 id="fundamentos-teoricos">Fundamentos teóricos</h2>
-<p>As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já <a href="../../basic_concepts/aerodynamics/">deduzimos</a> que o torque de arrasto de uma hélice <span class="arithmatex">\(\tau\)</span> é proporcional à velocidade angular da hélice <span class="arithmatex">\(\omega\)</span> ao quadrado.</p>
-<p><img alt="Drag Torque" src="../images/drag_torque.svg" style="display: block; margin: auto;" width="350" /></p>
-<div class="arithmatex">\[
-    \tau = k_d \omega^2
-\]</div>
-<p>Onde:</p>
-<ul>
-<li><span class="arithmatex">\(k_d\)</span> - Constante de arrasto (<span class="arithmatex">\(N.m.s^2\)</span>)   </li>
-</ul>
-<hr />
-<h2 id="procedimento-experimental">Procedimento experimental</h2>
-<p>As etapas para coletar os dados são as seguintes:</p>
-<ol>
-<li>Garanta que a bateria do drone está carregada </li>
-<li>Prenda o drone no dispositivo e posicione um cronômetro ao seu lado</li>
-<li>Arme o drone apertando o botão <code>Arm</code> no CFClient</li>
-<li>Comece a filmar com seu celular no modo câmera lenta</li>
-<li>Ligue os motores com o Command Based Flight Control do CFClient</li>
-<li>Espere o drone dar duas voltas e pare de filmar</li>
-<li>Repita as etapas 3-6 três vezes</li>
-</ol>
-<p>Após o experimento, você deverá coletar dados para preencher a tabela abaixo.</p>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\(\psi \, (^{\circ})\)</span></th>
-<th><span class="arithmatex">\(t_1 \, (s)\)</span></th>
-<th><span class="arithmatex">\(t_2 \, (s)\)</span></th>
-<th><span class="arithmatex">\(t_3 \, (s)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(0\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(90\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(180\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(270\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(360\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(450\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(540\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(630\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(720\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="analise-de-dados">Análise de dados</h2>
-<p><img alt="Drag Torque" src="../images/drag_torque_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
+  <h1>Massa e Momento de Inércia</h1>
+
+
 
 
 

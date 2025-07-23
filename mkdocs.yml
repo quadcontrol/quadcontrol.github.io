@@ -28,16 +28,17 @@ nav:
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
     - Mixer: basic_concepts/mixer.md
+    - Massa e Momento de Inércia: basic_concepts/mass_and_moment_of_inertia.md
   - Identificação:
-    - Massa e Momento de Inércia: identification/mass_and_moment_of_inertia.md
     - Coeficientes do Motor: identification/motor_coeficients.md
     - Constante de Sustentação: identification/lift_constant.md
     - Constante de Arrasto: identification/drag_constant.md
   - Modelagem:
-    - Cinemática: x.md
-    - Cinética: x.md
+    - Visão geral: x.md
+    - 2D: x.md
+    - 3D: x.md
   - Controle: 
-    - Arquitetura: x.md
+    - Arquitetura: control/architecture.md
     - Mixer: x.md
     - Atitude:
       - Estimador de Atitude: x.md
@@ -62,6 +63,8 @@ markdown_extensions:
   - admonition
   - pymdownx.highlight:
       linenums: true           # Mostra números de linha no código
+  - pymdownx.tabbed:
+      alternate_style: true
 
 
 extra_javascript:

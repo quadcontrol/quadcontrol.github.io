@@ -1,6 +1,6 @@
 # Mixer
 
-Esta seção descreve as forças e torques que atuam em um quadricóptero e como elas influenciam o seu comportamento dinâmico.
+O voo de um drone depende diretamente das forças e torques gerados pelos motores. Aqui, você vai entender como esses efeitos se combinam para movimentar o quadricóptero no espaço.
 
 ---
 

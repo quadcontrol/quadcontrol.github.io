@@ -20,23 +20,24 @@ extra_css:
 
 nav:
   - Início: index.md
-  - Primeiros Passos:
-    - Instalações: first_steps/installations.md
+  - Primeiros passos:
+    - Hardware: first_steps/hardware.md
+    - Software: first_steps/software.md
     - Firmware: first_steps/firmware.md
-    - Motores: first_steps/motors.md
-    - Sensores: first_steps/sensors.md
+  - Sensores e atuadores:
+    - Motores: sensors_and_actuators/motors.md
+    - IMU, proximidade e fluxo óptico: sensors_and_actuators/imu_range_flow.md
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
     - Mixer: basic_concepts/mixer.md
-    - Massa e Momento de Inércia: basic_concepts/mass_and_moment_of_inertia.md
+    - Massa e momento de inércia: basic_concepts/mass_and_moment_of_inertia.md
   - Identificação:
-    - Coeficientes do Motor: identification/motor_coeficients.md
-    - Constante de Sustentação: identification/lift_constant.md
-    - Constante de Arrasto: identification/drag_constant.md
+    - Coeficientes do motor: identification/motor_coeficients.md
+    - Constante de sustentação: identification/lift_constant.md
+    - Constante de arrasto: identification/drag_constant.md
   - Modelagem:
-    - Visão geral: x.md
-    - 2D: x.md
-    - 3D: x.md
+    - Modelo 2D: x.md
+    - Modelo 3D: x.md
   - Controle: 
     - Arquitetura: control/architecture.md
     - Mixer: x.md

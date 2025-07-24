@@ -1,6 +1,8 @@
 # Firmware
 
-Esta secção contém as instruções para clonar, configurar, compilar e testar o firmware do Crazyflie.
+Agora que seu ambiente está pronto, é hora de colocar a mão no código do drone.
+
+Aqui, você vai aprender a baixar, configurar e compilar o firmware que roda dentro do Crazyflie — deixando tudo pronto para testar seu próprio código no drone real.
 
 ---
 
@@ -14,7 +16,7 @@ Vamos utilizar o Visual Studio Code como IDE (Ambiente de Desenvolvimento Integr
 
 ## Clonando
 
-Vamos criar uma cópia do repositório do firmware para que você possa modificá-lo e compilar localmente.
+Antes de começar a programar, precisamos trazer o código do firmware para sua máquina. Vamos fazer isso em duas etapas: primeiro, você cria uma cópia (um *fork*) do repositório, e depois clona essa cópia para o seu computador.
 
 ### Fork
 
@@ -125,7 +127,7 @@ Conforme formos desenvolvendo novos programas, não podemos esquecer de atualiza
 
 ## Configurando
 
-Vamos agora ajustar as configurações do firmware, como canal de rádio e plataforma de hardware, para preparar o ambiente de compilação.
+Agora que você já tem o código na sua máquina, vamos ajustar algumas configurações importantes: o canal de rádio que será usado para comunicação e a plataforma de hardware do drone. Esses ajustes garantem que tudo esteja alinhado com o seu Crazyflie antes de compilar o código.
 
 ### Radio
 
@@ -138,7 +140,7 @@ RADIO_CHANNEL=1
 
 ### Submódulo
 
-1. Navegue até a página `crazyflie-firmware` > `src` > `modules` > `src` e abra o arquivo `stabilizer.c`.
+1. Navegue até a página `crazyflie-firmware/src/modules/src` e abra o arquivo `stabilizer.c`.
 
 2. Comente as linhas 223-226, 326 e 356, conforme abaixo[^2]:
 ```c title="stabilizer.c" linenums="221"
@@ -172,7 +174,7 @@ make cf21bl_defconfig
 
 ## Compilando
 
-Agora vamos compilar o firmware e gravá-lo no drone para que ele possa rodar o seu código. Essa etapa é bem simples e deverá ser repetida toda vez que quisermos enviar um novo programa ao Crazyflie.
+Com o código ajustado, é hora de transformar ele em algo que o drone entenda. Vamos compilar o firmware e enviá-lo para o Crazyflie. Esse processo será repetido sempre que você quiser testar uma nova versão do seu programa.
 
 ### Build
 
@@ -196,7 +198,7 @@ make cload
 
 ## Testando
 
-Por fim, vamos aprender a usar o Crazyflie Client para conectar ao drone e garantir que tudo está funcionando como esperado.
+Tudo pronto! Agora vamos conectar no drone com o Crazyflie Client e verificar se ele está rodando o seu código corretamente. Se tudo estiver certo, você verá as mensagens aparecendo no console — e o seu drone estará oficialmente sob seu controle.
 
 1. Abra o Crazyflie Client
 ```bash

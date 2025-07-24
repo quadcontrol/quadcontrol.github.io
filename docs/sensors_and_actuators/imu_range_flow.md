@@ -1,4 +1,4 @@
-# Sensores
+# IMU, proximidade e fluxo óptico
 
 Nesta secção, vamos aprender como ler os dados dos sensores do drone em tempo real. Esses dados são fundamentais para tarefas como estabilização, controle, navegação e autonomia.
 
@@ -6,7 +6,7 @@ Vamos criar um programa que lê e imprime no console os seguintes sensores:
 
 - Acelerômetro ($a_x$, $a_y$ e $a_z$)
 - Giroscópio ($g_x$, $g_y$ e $g_z$)
-- Lidar ($d$)
+- Proximidade ($d$)
 - Fluxo óptico ($p_x$ e $p_y$)
 
 ---
@@ -16,7 +16,7 @@ Vamos criar um programa que lê e imprime no console os seguintes sensores:
 Antes de começar, é importante entender alguns conceitos:
 
 - Os sensores no Crazyflie são processados por um sistema de estimação que envia os dados via uma fila interna. Usamos a função `estimatorDequeue(&m)`, para preencher a estrutura `measurement_t m`, que contém diferentes tipos de leitura, identificados por `m.type`.
-- O sistema coleta dados continuamente em alta frequência, que vêm da IMU (acelerômetro e giroscópio), do lidar e da câmera de fluxo óptico.
+- O sistema coleta dados continuamente em alta frequência, que vêm da IMU (acelerômetro e giroscópio), do lidar (proximidade) e da câmera (fluxo óptico).
 - Usamos `DEBUG_PRINT()` para exibir os valores no console serial.
 
 ---

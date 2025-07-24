@@ -1,8 +1,8 @@
-# Instalações
+# Software
 
-Esta secção contém as instruções para instalar todas as ferramentas e dependências necessárias para o seu ambiente de desenvolvimento. 
+Antes de começar a programar o drone, vamos instalar os programas e componentes que o ambiente de desenvolvimento precisa para funcionar direitinho.
 
-Siga cada passo conforme seu sistema operacional com atenção, para garantir uma configuração correta.
+Siga cada passo com atenção, conforme seu sistema operacional, para garantir que tudo fique pronto e funcionando sem problemas.
 
 ---
 

@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/sensors_and_actuators/imu_range_flow/">
+        <link rel="canonical" href="https://quadcontrol.io/sensors_and_actuators/sensors/">
       
       
         <link rel="prev" href="../motors/">
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#imu-proximidade-e-fluxo-optico" class="md-skip">
+        <a href="#sensores" class="md-skip">
           Skip to content
         </a>
       
@@ -1282,7 +1282,7 @@
 
 
 
-<h1 id="imu-proximidade-e-fluxo-optico">IMU, proximidade e fluxo óptico</h1>
+<h1 id="sensores">Sensores</h1>
 <p>Nesta secção, vamos aprender como ler os dados dos sensores do drone em tempo real. Esses dados são fundamentais para tarefas como estabilização, controle, navegação e autonomia.</p>
 <p>Vamos criar um programa que lê e imprime no console os seguintes sensores:</p>
 <ul>
@@ -1350,7 +1350,9 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">   // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">   // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">       // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1"> // Functions to check flight status (e.g., supervisorIsArmed)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">      // Debug printing functions (e.g., DEBUG_PRINT)</span>
@@ -1386,9 +1388,11 @@
 <span class="w">                </span><span class="k">break</span><span class="p">;</span>
 <span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">MeasurementTypeTOF</span><span class="p">:</span>
 <span class="w">                </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">tof</span><span class="p">.</span><span class="n">distance</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
 <span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">MeasurementTypeFlow</span><span class="p">:</span>
 <span class="w">                </span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">flow</span><span class="p">.</span><span class="n">dpixelx</span><span class="p">;</span>
 <span class="w">                </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">flow</span><span class="p">.</span><span class="n">dpixely</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
 <span class="w">            </span><span class="k">default</span><span class="o">:</span>
 <span class="w">                </span><span class="k">break</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>

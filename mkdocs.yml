@@ -26,11 +26,11 @@ nav:
     - Firmware: first_steps/firmware.md
   - Sensores e atuadores:
     - Motores: sensors_and_actuators/motors.md
-    - IMU, proximidade e fluxo óptico: sensors_and_actuators/sensors.md
+    - Sensores: sensors_and_actuators/sensors.md
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
     - Mixer: basic_concepts/mixer.md
-    - Massa e momento de inércia: basic_concepts/mass_and_moment_of_inertia.md
+    - Inércia: basic_concepts/inertia.md
   - Identificação:
     - Coeficientes do motor: identification/motor_coeficients.md
     - Constante de sustentação: identification/lift_constant.md

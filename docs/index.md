@@ -13,7 +13,7 @@ Nosso objetivo é ensinar conceitos de controle, estimação e sistemas embarcad
 
 # Sobre a eletiva
 
-Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero — o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/).
+Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero — o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank}.
 
 ![Crazyflie](images/crazyflie.png){: width="400" style="display: block; margin: auto;" }
 

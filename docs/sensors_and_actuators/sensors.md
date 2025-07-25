@@ -1,4 +1,4 @@
-# IMU, proximidade e fluxo óptico
+# Sensores
 
 Nesta secção, vamos aprender como ler os dados dos sensores do drone em tempo real. Esses dados são fundamentais para tarefas como estabilização, controle, navegação e autonomia.
 
@@ -62,9 +62,11 @@ void appMain(void *param)
                 break;
             case MeasurementTypeTOF:
                 d = m.data.tof.distance;
+                break;
             case MeasurementTypeFlow:
                 px = m.data.flow.dpixelx;
                 py = m.data.flow.dpixely;
+                break;
             default:
                 break;
             }

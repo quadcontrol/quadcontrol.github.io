@@ -26,7 +26,7 @@ nav:
     - Firmware: first_steps/firmware.md
   - Sensores e atuadores:
     - Motores: sensors_and_actuators/motors.md
-    - IMU, proximidade e fluxo óptico: sensors_and_actuators/imu_range_flow.md
+    - IMU, proximidade e fluxo óptico: sensors_and_actuators/sensors.md
   - Conceitos básicos:
     - Aerodinâmica: basic_concepts/aerodynamics.md
     - Mixer: basic_concepts/mixer.md

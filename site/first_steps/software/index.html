@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/first_steps/installations_old/">
+        <link rel="canonical" href="https://quadcontrol.io/first_steps/software/">
       
       
+        <link rel="prev" href="../hardware/">
+      
+      
+        <link rel="next" href="../firmware/">
       
       
       <link rel="icon" href="../../images/logo_black.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Instalações - QuadControl</title>
+        <title>Software - QuadControl</title>
       
     
     
@@ -72,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#instalacoes" class="md-skip">
+        <a href="#software" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instalações
+              Software
             
           </span>
         </div>
@@ -233,18 +237,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -252,7 +258,7 @@
   
   
   <span class="md-ellipsis">
-    Primeiros Passos
+    Primeiros passos
     
   </span>
   
@@ -260,10 +266,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Primeiros Passos
+            Primeiros passos
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -274,17 +280,118 @@
   
   
     <li class="md-nav__item">
-      <a href="../installations/" class="md-nav__link">
+      <a href="../hardware/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Instalações
+    Hardware
     
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Software
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Software
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#git" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crazyflie-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crazyflie Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arm-toolchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      ARM Toolchain
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -303,52 +410,6 @@
   
   <span class="md-ellipsis">
     Firmware
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../motors/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Motores
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../sensors/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sensores
     
   </span>
   
@@ -389,7 +450,7 @@
   
   
   <span class="md-ellipsis">
-    Conceitos básicos
+    Sensores e atuadores
     
   </span>
   
@@ -399,6 +460,97 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Sensores e atuadores
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensors_and_actuators/motors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sensors_and_actuators/imu_range_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IMU, proximidade e fluxo óptico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conceitos básicos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Conceitos básicos
           </label>
@@ -462,121 +614,7 @@
   
   
   <span class="md-ellipsis">
-    Massa e Momento de Inércia
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Identificação
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Identificação
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../identification/motor_coeficients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Coeficientes do Motor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../identification/lift_constant/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Constante de Sustentação
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../identification/drag_constant/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Constante de Arrasto
+    Massa e momento de inércia
     
   </span>
   
@@ -617,7 +655,7 @@
   
   
   <span class="md-ellipsis">
-    Modelagem
+    Identificação
     
   </span>
   
@@ -628,7 +666,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            Modelagem
+            Identificação
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -639,12 +677,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../identification/motor_coeficients/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Visão geral
+    Coeficientes do motor
     
   </span>
   
@@ -662,12 +700,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../identification/lift_constant/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    2D
+    Constante de sustentação
     
   </span>
   
@@ -685,12 +723,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../identification/drag_constant/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    3D
+    Constante de arrasto
     
   </span>
   
@@ -731,7 +769,7 @@
   
   
   <span class="md-ellipsis">
-    Controle
+    Modelagem
     
   </span>
   
@@ -741,6 +779,97 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Modelagem
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../x.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modelo 2D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../x.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modelo 3D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Controle
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Controle
           </label>
@@ -807,10 +936,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
         
           
-          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
             
   
   
@@ -823,8 +952,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
             <span class="md-nav__icon md-icon"></span>
             Atitude
           </label>
@@ -899,10 +1028,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
         
           
-          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
             
   
   
@@ -915,8 +1044,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
             <span class="md-nav__icon md-icon"></span>
             Vertical
           </label>
@@ -991,10 +1120,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
         
           
-          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
             
   
   
@@ -1007,8 +1136,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
             <span class="md-nav__icon md-icon"></span>
             Horizontal
           </label>
@@ -1102,16 +1231,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#windows" class="md-nav__link">
-    <span class="md-ellipsis">
-      Windows
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Windows">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#git" class="md-nav__link">
     <span class="md-ellipsis">
       Git
@@ -1119,8 +1238,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#python" class="md-nav__link">
     <span class="md-ellipsis">
       Python
@@ -1128,8 +1247,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#crazyflie-client" class="md-nav__link">
     <span class="md-ellipsis">
       Crazyflie Client
@@ -1137,51 +1256,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#arm-toolchain" class="md-nav__link">
     <span class="md-ellipsis">
       ARM Toolchain
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mac" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mac
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Mac">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#crazyflie-client_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Crazyflie Client
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#arm-toolchain_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ARM Toolchain
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1201,14 +1282,14 @@
 
 
 
-<h1 id="instalacoes">Instalações</h1>
-<p>Esta secção contém as instruções para instalar todas as ferramentas e dependências necessárias para o seu ambiente de desenvolvimento. </p>
-<p>Siga cada passo conforme seu sistema operacional com atenção, para garantir uma configuração correta.</p>
+<h1 id="software">Software</h1>
+<p>Antes de começar a programar o drone, vamos instalar os programas e componentes que o ambiente de desenvolvimento precisa para funcionar direitinho.</p>
+<p>Siga cada passo com atenção, conforme seu sistema operacional, para garantir que tudo fique pronto e funcionando sem problemas.</p>
 <hr />
-<h2 id="windows">Windows</h2>
-<p><img alt="Windows" src="../images/windows.svg" width="100" /></p>
-<p>Caso seu sistema operacional seja Windows, siga o passo a passo abaixo:</p>
-<h3 id="git">Git</h3>
+<h2 id="git">Git</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">Mac</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ol>
 <li>
 <p>Baixe o Git em seu <a href="https://git-scm.com" target="_blank">site oficial</a> e instale-o.</p>
@@ -1219,10 +1300,20 @@
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<h3 id="python">Python</h3>
+</div>
+<div class="tabbed-block">
+<p>O Mac já vem de fábrica com o Git instalado.</p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="python">Python</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows</label><label for="__tabbed_2_2">Mac</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>
-<p>Não pule essa etapa mesmo que você já tenha uma distribuição do Python instalado em seu computador, pois precisará instalar uma distribuição específica (3.11.9) para tudo funcionar. Mas fique tranquilo, qualquer distribuição já instalada continuará funcionando normalmente.</p>
+<p>Não pule essa etapa mesmo que você já tenha uma distribuição do Python instalada em seu computador, pois precisará instalar uma distribuição específica (3.11.9) para tudo funcionar. Mas fique tranquilo, qualquer distribuição já instalada continuará funcionando normalmente.</p>
 </div>
 <ol>
 <li>
@@ -1239,7 +1330,17 @@ pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<h3 id="crazyflie-client">Crazyflie Client</h3>
+</div>
+<div class="tabbed-block">
+<p>O Mac já vem de fábrica com o Python instalado.</p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="crazyflie-client">Crazyflie Client</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Windows</label><label for="__tabbed_3_2">Mac</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ol>
 <li>
 <p>Instale o Crazyflie Client usando o PIP pelo PowerShell:
@@ -1267,7 +1368,60 @@ pip<span class="w"> </span>--version
 </li>
 </ol>
 </div>
-<h3 id="arm-toolchain">ARM Toolchain</h3>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>
+<p>Instale o Crazyflie Client pelo Terminal:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cfclient
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Verifique a instalação do Crazyflie Client abrindo ele pelo Terminal:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Caso o comando acima não abra o Crazyflie Client, pode ser que seu endereço não esteja no PATH. Para verificar onde ele foi instalado e colocar ele no PATH, basta rodar o comando abaixo no Terminal<sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">1</a></sup>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">cfclient_path</span><span class="o">=</span><span class="k">$(</span>dirname<span class="w"> </span><span class="k">$(</span>which<span class="w"> </span>cfclient<span class="k">))</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PATH=\&quot;</span><span class="nv">$cfclient_path</span><span class="s2">:\$PATH\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</code></pre></div></td></tr></table></div></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Dica</p>
+<p>Caso prefira criar um ícone na mesa para o Crazyflie Client, siga o passo a passo abaixo:</p>
+<ol>
+<li>
+<p>Abra o Automator</p>
+</li>
+<li>
+<p>Clique em <code>Novo Documento</code> &gt; <code>Aplicativo</code></p>
+</li>
+<li>
+<p>Na biblioteca de ações, dê duplo clique em <code>Executar Script de Shell</code></p>
+</li>
+<li>
+<p>No campo de script, cole:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>cfclient.gui
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Clique em <code>Arquivo</code> &gt; <code>Salvar</code></p>
+</li>
+<li>
+<p>No campo de nome, coloque "Crazyflie Client" e clique em <code>Concluir</code></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="arm-toolchain">ARM Toolchain</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Windows</label><label for="__tabbed_4_2">Mac</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ol>
 <li>
 <p>Instale o WSL (Subsistema do Windows para Linux) pelo PowerShell executando ele como administrador:
@@ -1325,56 +1479,8 @@ pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<hr />
-<h2 id="mac">Mac</h2>
-<p><img alt="Windows" src="../images/mac.svg" width="100" /></p>
-<p>Caso seu sistema operacional seja Mac<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, siga o passo a passo abaixo:</p>
-<h3 id="crazyflie-client_1">Crazyflie Client</h3>
-<ol>
-<li>
-<p>Instale o Crazyflie Client pelo Terminal:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cfclient
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Verifique a instalação do Crazyflie Client abrindo ele pelo Terminal:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
-</code></pre></div></td></tr></table></div></p>
-</li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Atenção</p>
-<p>Caso o comando acima não abra o Crazyflie Client, pode ser que seu endereço não esteja no PATH. Para verificar onde ele foi instalado e colocar ele no PATH, basta rodar o comando abaixo no Terminal<sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">cfclient_path</span><span class="o">=</span><span class="k">$(</span>dirname<span class="w"> </span><span class="k">$(</span>which<span class="w"> </span>cfclient<span class="k">))</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PATH=\&quot;</span><span class="nv">$cfclient_path</span><span class="s2">:\$PATH\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
-</code></pre></div></td></tr></table></div></p>
 </div>
-<div class="admonition info">
-<p class="admonition-title">Dica</p>
-<p>Caso prefira criar um ícone na mesa para o Crazyflie Client, siga o passo a passo abaixo:</p>
-<ol>
-<li>
-<p>Abra o Automator</p>
-</li>
-<li>
-<p>Clique em <code>Novo Documento</code> &gt; <code>Aplicativo</code></p>
-</li>
-<li>
-<p>No biblioteca de ações, dê duplo clique em <code>Executar Script de Shell</code></p>
-</li>
-<li>
-<p>No campo de script, cole:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>cfclient.gui
-</code></pre></div></td></tr></table></div></p>
-</li>
-<li>
-<p>Clique em <code>Arquivo</code> &gt; <code>Salvar</code></p>
-</li>
-<li>
-<p>No campo de nome, coloque "Crazyflie Client" e clique em <code>Concluir</code></p>
-</li>
-</ol>
-</div>
-<h3 id="arm-toolchain_1">ARM Toolchain</h3>
+<div class="tabbed-block">
 <ol>
 <li>
 <p>Instale o Homebrew:
@@ -1392,7 +1498,7 @@ pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
-<p>Adicione-o ao PATH<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:
+<p>Adicione-o ao PATH<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">1</a></sup>:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;/opt/homebrew/bin:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
 </code></pre></div></td></tr></table></div></p>
 </li>
@@ -1407,7 +1513,7 @@ pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
-<p>Adicione-o ao PATH<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:
+<p>Adicione-o ao PATH<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">1</a></sup>:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
 </code></pre></div></td></tr></table></div></p>
 </li>
@@ -1417,24 +1523,14 @@ pip<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div></p>
 </li>
 </ol>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">Mac</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>Conteúdo para Windows...</p>
-</div>
-<div class="tabbed-block">
-<p>Conteúdo para Mac...</p>
 </div>
 </div>
 </div>
 <div class="footnote">
 <hr />
 <ol>
-<li id="fn:1">
-<p>O Mac já vem de fábrica com o Git e o Python instalados, por isso que essas etapas foram omitidas aqui.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
 <li id="fn:2">
-<p>Reinicie o Terminal depois para a alteração fazer efeito.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>Reinicie o Terminal depois para a alteração fazer efeito.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

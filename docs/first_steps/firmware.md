@@ -20,7 +20,7 @@ Antes de começar a programar, precisamos trazer o código do firmware para sua 
 
 ### Fork
 
-1. Crie um *fork* do repositório que contém o [firmware](https://github.com/quadcontrol/quadcontrol-firmware) para a sua conta do GitHub.
+1. Crie um *fork* do repositório que contém o [firmware](https://github.com/quadcontrol/quadcontrol-firmware){target=_blank} para a sua conta do GitHub.
 
 ### Clone
 
@@ -204,14 +204,16 @@ Tudo pronto! Agora vamos conectar no drone com o Crazyflie Client e verificar se
 ```bash
 cfclient
 ```
-2. Clique no botão `Scan` e selecione o Crazyflie correspondente
+2. Clique no botão `Scan` 
 
-3. Clique no botão `Connect`
+2. Selecione o Crazyflie correspondente
 
-4. Verifique se o quadricoptero está respondendo (tensão da bateria, estado dos sensores, etc.)
+4. Clique no botão `Connect`
 
-5. Clique em `View` > `Toolboxes` > `Console`
+5. Verifique se o quadricoptero está respondendo (tensão da bateria, estado dos sensores, etc.)
 
-6. Verifique se aparecem as mensagens do seu código ("Hello world!")
+6. Clique em `View` > `Toolboxes` > `Console`
+
+7. Verifique se aparecem as mensagens do seu código ("Hello world!")
 
 Caso não apareça, muito provavelmente é por que você está rodando o programa `led_blink.c` e não `hello_world.c`. Modifique seu arquivo `Kbuild` para o programa correto e, em seguida, compile e envie o programa para o quadricoptero.

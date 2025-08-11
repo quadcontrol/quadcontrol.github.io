@@ -12,7 +12,7 @@ Se você está matriculado na eletiva, tudo isso será fornecido a você. Mas é
 
 O [Crazyflie 2.1 Brushless](https://store.bitcraze.io/products/crazyflie-2-1-brushless){target=_blank} é o coração do sistema: um minidrone *open-source* com a estrutura baseada numa placa de circuito impresso (PCB). Compacto, robusto e com:
 
-- Processador ARM (Cortex-M4 - 168 MHz)
+- Processador ARM (Cortex-M4 168 MHz)
 - Motores BLDC (08028-10000KV)
 - Controladores dos motores BLDC (5A ESCs)
 - IMU embutida (BMI088)
@@ -25,7 +25,7 @@ A versão brushless foi lançada recentemente (2025) e traz mais potência e dur
 
 ![Crazyradio](images/crazyradio.png){: width="250" style="display: block; margin: auto;" }
 
-O [Crazyradio 2.0](https://store.bitcraze.io/products/crazyradio-2-0){target=_blank} é o rádio que permite comunicação sem fio entre o seu computador e o drone. Com ele, você pode:
+O [Crazyradio 2.0](https://store.bitcraze.io/products/crazyradio-2-0){target=_blank} é um *dongle* que permite comunicação sem fio entre o seu computador e o drone. Com ele, você pode:
 
 - Fazer upload de firmware
 - Enviar comandos em tempo real

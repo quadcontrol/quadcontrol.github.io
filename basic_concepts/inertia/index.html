@@ -1290,6 +1290,56 @@
 <p>Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
 <details class="info">
 <summary>Resposta</summary>
+<p>A bateria possui massa de <span class="arithmatex">\(9,10 \, g\)</span> e dimensões de <span class="arithmatex">\(3,3 \times 2,0 \times 0,8 \, cm\)</span>: </p>
+<div class="arithmatex">\[
+\left\{
+\begin{align*}
+    m_b &amp;= 9,10 \, g\\
+    a &amp;= 3,3 \, cm\\
+    b &amp;= 2,0 \, cm\\
+    c &amp;= 0,8 \, cm\\
+\end{align*}
+\right.
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    I_{b_{xx}} &amp;= \frac{m_b}{12} (b^2 + c^2) &amp; \quad I_{b_{yy}} &amp;= \frac{m_b}{12} (a^2 + c^2) &amp; \quad I_{b_{zz}} &amp;= \frac{m_b}{12} (a^2 + b^2) \\
+    I_{b_{xx}} &amp;= \frac{9,1}{12} (2,0^2 + 0,8^2) &amp; \quad I_{b_{yy}} &amp;= \frac{9,1}{12} (3,3^2 + 0,8^2) &amp; \quad I_{b_{zz}} &amp;= \frac{9,1}{12} (3,3^2 + 2,0^2) \\
+    I_{b_{xx}} &amp;= 3,52 \, g.cm^2 &amp; \quad I_{b_{yy}} &amp;= 8,74 \, g.cm^2 &amp; \quad I_{b_{zz}} &amp;= 12,29 \, g.cm^2 \\
+\end{align*}
+\]</div>
+<p>Os motores (<span class="arithmatex">\(2,30 \, g\)</span>), com hélices (<span class="arithmatex">\(1,34 \, g\)</span>) e suportes (<span class="arithmatex">\(0,33 \, g\)</span>), possuem massa somada de <span class="arithmatex">\(3,97 \, g\)</span> e estão a <span class="arithmatex">\(10 \, cm\)</span> de distância na diagonal: </p>
+<div class="arithmatex">\[
+\left\{
+\begin{align*}
+    m_m &amp;= 3,97 \, g\\
+    l_x &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
+    l_y &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
+    l_z &amp;= 5 \, cm\\
+\end{align*}
+\right.
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    I_{m_{xx}} &amp;= m_m l_x^2 &amp; \quad I_{m_{yy}} &amp;= m_m l_y^2 &amp; \quad I_{m_{zz}} &amp;= m_m l_z^2 \\
+    I_{m_{xx}} &amp;= 3,97 {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{yy}} &amp;= 3,97 {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{zz}} &amp;= 3,97 \cdot 5,0^2 \\
+    I_{m_{xx}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{yy}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{zz}} &amp;= 99,25 \, g.cm^2 \\
+\end{align*}
+\]</div>
+<p>O momento de inércia total é portanto:</p>
+<div class="arithmatex">\[
+\begin{align*}
+    I_{xx} &amp;= I_{b_{xx}} + I_{m_{xx}} &amp; \quad I_{yy} &amp;= I_{b_{yy}} + I_{m_{yy}} &amp; \quad I_{zz} &amp;= I_{b_{zz}} + I_{m_{zz}} \\
+    I_{xx} &amp;= 3,52 + 49,62 &amp; \quad I_{yy} &amp;= 8,74 + 49,62 &amp; \quad I_{m_{zz}} &amp;= 12,29 + 99,25 \\
+    I_{xx} &amp;= 202,02 \, g.cm^2 &amp; \quad I_{yy} &amp;= 207,24 \, g.cm^2 &amp; \quad I_{zz} &amp;= 408,29 \, g.cm^2 \\
+\end{align*}
+\]</div>
+<p>Ou, de forma aproximada, e no S.I. (Sistema Internacional de Unidades):</p>
+<div class="arithmatex">\[
+\begin{align*}
+    I_{xx} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{yy} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{zz} &amp;= 4 \cdot 10^{-5} \, kg.m^2 \\
+\end{align*}
+\]</div>
 </details>
 </div>
 <p>​</p>

@@ -13,8 +13,9 @@ Controlar bem um drone exige compreender essas duas formas de inércia — e com
 
 ## Massa
 
-A massa representa o quanto o drone resiste a acelerar ou desacelerar ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.
+A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.
 
+![Quadcopter1](images/mass.svg){: width="500" style="display: block; margin: auto;" }
 
 !!! question "Exercício 1"
 
@@ -38,13 +39,9 @@ A massa representa o quanto o drone resiste a acelerar ou desacelerar ao longo d
 
 ## Momento de Inércia
 
-O momento de inércia representa o quanto o drone resiste a acelerar ou desacelerar em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.
+O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.
 
-Vamos considerar um modelo simples para estimar os momentos de inércia:
-
-
-
-
+![Quadcopter1](images/moment_of_inertia.svg){: width="500" style="display: block; margin: auto;" }
 
 !!! question "Exercício 2"
 
@@ -58,7 +55,7 @@ Vamos considerar um modelo simples para estimar os momentos de inércia:
     Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).
             
     ??? info "Resposta"
-        A bateria possui massa de $9,10 \, g$ e dimensões de $3,3 \times 2,0 \times 0,8 \, cm$: 
+        A bateria possui $9,10 \, g$ de massa e dimensões $3,3 \times 2,0 \times 0,8 \, cm$: 
         
         $$
         \left\{
@@ -71,6 +68,10 @@ Vamos considerar um modelo simples para estimar os momentos de inércia:
         \right.
         $$
 
+        Dessa forma, usando uma tabela de momentos de inérica:
+
+        ![Quadcopter1](images/parallelepiped.svg){: width="250" style="display: block; margin: auto;" }
+
         $$
         \begin{align*}
             I_{b_{xx}} &= \frac{m_b}{12} (b^2 + c^2) & \quad I_{b_{yy}} &= \frac{m_b}{12} (a^2 + c^2) & \quad I_{b_{zz}} &= \frac{m_b}{12} (a^2 + b^2) \\
@@ -79,7 +80,7 @@ Vamos considerar um modelo simples para estimar os momentos de inércia:
         \end{align*}
         $$
 
-        Os motores ($2,30 \, g$), com hélices ($1,34 \, g$) e suportes ($0,33 \, g$), possuem massa somada de $3,97 \, g$ e estão a $10 \, cm$ de distância na diagonal: 
+        Os motores ($2,30 \, g$), com hélices ($1,34 \, g$) e suportes ($0,33 \, g$), possuem $3,97 \, g$ de massa total e estão a $10 \, cm$ de distância na diagonal: 
         
         $$
         \left\{
@@ -92,6 +93,10 @@ Vamos considerar um modelo simples para estimar os momentos de inércia:
         \right.
         $$
 
+        Assim, usando uma tabela de momentos de inérica:
+
+        ![Quadcopter1](images/point_mass.svg){: width="500" style="display: block; margin: auto;" }
+
         $$
         \begin{align*}
             I_{m_{xx}} &= m_m l_x^2 & \quad I_{m_{yy}} &= m_m l_y^2 & \quad I_{m_{zz}} &= m_m l_z^2 \\
@@ -101,6 +106,8 @@ Vamos considerar um modelo simples para estimar os momentos de inércia:
         $$
 
         O momento de inércia total é portanto:
+
+        
 
         $$
         \begin{align*}

@@ -111,7 +111,7 @@ O momento de inércia representa o quanto o drone resiste a mudanças na velocid
 
         $$
         \begin{align*}
-            I_{xx} &= I_{b_{xx}} + 4 \cdot I_{m_{xx}} & \quad I_{yy} &= I_{b_{yy}} + 4 \cdot I_{m_{yy}} & \quad I_{zz} &= I_{b_{zz}} + 4 \cdot I_{m_{zz}} \\
+            I_{xx} &= I_{b_{xx}} + 4 I_{m_{xx}} & \quad I_{yy} &= I_{b_{yy}} + 4 I_{m_{yy}} & \quad I_{zz} &= I_{b_{zz}} + 4 I_{m_{zz}} \\
             I_{xx} &= 3,52 + 4 \cdot 49,62 & \quad I_{yy} &= 8,74 + 4 \cdot 49,62 & \quad I_{zz} &= 12,29 + 4 \cdot 99,25 \\
             I_{xx} &= 202,02 \, g.cm^2 & \quad I_{yy} &= 207,24 \, g.cm^2 & \quad I_{zz} &= 408,29 \, g.cm^2 \\
         \end{align*}

@@ -15,7 +15,7 @@ Controlar bem um drone exige compreender essas duas formas de inércia — e com
 
 A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.
 
-![Quadcopter1](images/mass.svg){: width="500" style="display: block; margin: auto;" }
+![Mass](images/mass.svg){: width="500" style="display: block; margin: auto;" }
 
 !!! question "Exercício 1"
 
@@ -41,14 +41,14 @@ A massa representa o quanto o drone resiste a mudanças na velocidade ao longo d
 
 O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.
 
-![Quadcopter1](images/moment_of_inertia.svg){: width="500" style="display: block; margin: auto;" }
+![Moment of Inertia](images/moment_of_inertia.svg){: width="500" style="display: block; margin: auto;" }
 
 !!! question "Exercício 2"
 
     Podemos calcular os momentos de inércia do drone considerando um modelo mais simples[^1]:
     
-    - A [bateria](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery){target=_blank} como bloco retangular central
-    - Os [motores](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor){target=_blank} com  [hélices](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green){target=_blank} e [suportes](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards){target=_blank} como massas puntiformes nas extremidades dos braços
+    - A [bateria](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery){target=_blank} como um paralelepípedo
+    - Os [motores](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor){target=_blank} com  [hélices](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green){target=_blank} e [suportes](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards){target=_blank} como massas puntiformes
 
     [^1]: Estamos desprezando a estrutura de PCB do drone, já que sua massa é pequena comparada à da bateria e dos motores, além de estar concentrada próxima ao centro de massa.
 
@@ -68,9 +68,9 @@ O momento de inércia representa o quanto o drone resiste a mudanças na velocid
         \right.
         $$
 
-        Dessa forma, usando uma tabela de momentos de inérica:
+        Assim, usando uma tabela de momentos de inércia de um paralelepípedo temos que:
 
-        ![Quadcopter1](images/parallelepiped.svg){: width="250" style="display: block; margin: auto;" }
+        ![Moment of Inertia Battery](images/moment_of_inertia_battery.svg){: width="500" style="display: block; margin: auto;" }
 
         $$
         \begin{align*}
@@ -93,21 +93,19 @@ O momento de inércia representa o quanto o drone resiste a mudanças na velocid
         \right.
         $$
 
-        Assim, usando uma tabela de momentos de inérica:
+        Assim, considerando eles como massas puntiformes temos que:
 
-        ![Quadcopter1](images/point_mass.svg){: width="500" style="display: block; margin: auto;" }
+        ![Moment of Inertia Motors](images/moment_of_inertia_motors.svg){: width="500" style="display: block; margin: auto;" }
 
         $$
         \begin{align*}
             I_{m_{xx}} &= m_m l_x^2 & \quad I_{m_{yy}} &= m_m l_y^2 & \quad I_{m_{zz}} &= m_m l_z^2 \\
-            I_{m_{xx}} &= 3,97 {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 & \quad I_{m_{yy}} &= 3,97 {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 & \quad I_{m_{zz}} &= 3,97 \cdot 5,0^2 \\
+            I_{m_{xx}} &= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 & \quad I_{m_{yy}} &= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 & \quad I_{m_{zz}} &= 3,97 \cdot 5,0^2 \\
             I_{m_{xx}} &= 49,62 \, g.cm^2 & \quad I_{m_{yy}} &= 49,62 \, g.cm^2 & \quad I_{m_{zz}} &= 99,25 \, g.cm^2 \\
         \end{align*}
         $$
 
-        O momento de inércia total é portanto:
-
-        
+        Dessa forma, os momentos de inércia totais são dados por:
 
         $$
         \begin{align*}

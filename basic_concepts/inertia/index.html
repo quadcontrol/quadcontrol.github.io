@@ -1257,7 +1257,7 @@
 <hr />
 <h2 id="massa">Massa</h2>
 <p>A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.</p>
-<p><img alt="Quadcopter1" src="../images/mass.svg" style="display: block; margin: auto;" width="500" /></p>
+<p><img alt="Mass" src="../images/mass.svg" style="display: block; margin: auto;" width="500" /></p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
 <p>Podemos calcular a massa do drone somando a massa de seus componentes:</p>
@@ -1280,13 +1280,13 @@
 <hr />
 <h2 id="momento-de-inercia">Momento de Inércia</h2>
 <p>O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.</p>
-<p><img alt="Quadcopter1" src="../images/moment_of_inertia.svg" style="display: block; margin: auto;" width="500" /></p>
+<p><img alt="Moment of Inertia" src="../images/moment_of_inertia.svg" style="display: block; margin: auto;" width="500" /></p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
 <p>Podemos calcular os momentos de inércia do drone considerando um modelo mais simples<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
 <ul>
-<li>A <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery" target="_blank">bateria</a> como bloco retangular central</li>
-<li>Os <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor" target="_blank">motores</a> com  <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">hélices</a> e <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards" target="_blank">suportes</a> como massas puntiformes nas extremidades dos braços</li>
+<li>A <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery" target="_blank">bateria</a> como um paralelepípedo</li>
+<li>Os <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor" target="_blank">motores</a> com  <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">hélices</a> e <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards" target="_blank">suportes</a> como massas puntiformes</li>
 </ul>
 <p>Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
 <details class="info">
@@ -1302,8 +1302,8 @@
 \end{align*}
 \right.
 \]</div>
-<p>Dessa forma, usando uma tabela de momentos de inérica:</p>
-<p><img alt="Quadcopter1" src="../images/parallelepiped.svg" style="display: block; margin: auto;" width="250" /></p>
+<p>Assim, usando uma tabela de momentos de inércia de um paralelepípedo temos que:</p>
+<p><img alt="Moment of Inertia Battery" src="../images/moment_of_inertia_battery.svg" style="display: block; margin: auto;" width="500" /></p>
 <div class="arithmatex">\[
 \begin{align*}
     I_{b_{xx}} &amp;= \frac{m_b}{12} (b^2 + c^2) &amp; \quad I_{b_{yy}} &amp;= \frac{m_b}{12} (a^2 + c^2) &amp; \quad I_{b_{zz}} &amp;= \frac{m_b}{12} (a^2 + b^2) \\
@@ -1322,20 +1322,20 @@
 \end{align*}
 \right.
 \]</div>
-<p>Assim, usando uma tabela de momentos de inérica:</p>
-<p><img alt="Quadcopter1" src="../images/point_mass.svg" style="display: block; margin: auto;" width="500" /></p>
+<p>Assim, considerando eles como massas puntiformes temos que:</p>
+<p><img alt="Moment of Inertia Motors" src="../images/moment_of_inertia_motors.svg" style="display: block; margin: auto;" width="500" /></p>
 <div class="arithmatex">\[
 \begin{align*}
     I_{m_{xx}} &amp;= m_m l_x^2 &amp; \quad I_{m_{yy}} &amp;= m_m l_y^2 &amp; \quad I_{m_{zz}} &amp;= m_m l_z^2 \\
-    I_{m_{xx}} &amp;= 3,97 {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{yy}} &amp;= 3,97 {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{zz}} &amp;= 3,97 \cdot 5,0^2 \\
+    I_{m_{xx}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{yy}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{zz}} &amp;= 3,97 \cdot 5,0^2 \\
     I_{m_{xx}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{yy}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{zz}} &amp;= 99,25 \, g.cm^2 \\
 \end{align*}
 \]</div>
-<p>O momento de inércia total é portanto:</p>
+<p>Dessa forma, os momentos de inércia totais são dados por:</p>
 <div class="arithmatex">\[
 \begin{align*}
-    I_{xx} &amp;= I_{b_{xx}} + I_{m_{xx}} &amp; \quad I_{yy} &amp;= I_{b_{yy}} + I_{m_{yy}} &amp; \quad I_{zz} &amp;= I_{b_{zz}} + I_{m_{zz}} \\
-    I_{xx} &amp;= 3,52 + 49,62 &amp; \quad I_{yy} &amp;= 8,74 + 49,62 &amp; \quad I_{m_{zz}} &amp;= 12,29 + 99,25 \\
+    I_{xx} &amp;= I_{b_{xx}} + 4 I_{m_{xx}} &amp; \quad I_{yy} &amp;= I_{b_{yy}} + 4 I_{m_{yy}} &amp; \quad I_{zz} &amp;= I_{b_{zz}} + 4 I_{m_{zz}} \\
+    I_{xx} &amp;= 3,52 + 4 \cdot 49,62 &amp; \quad I_{yy} &amp;= 8,74 + 4 \cdot 49,62 &amp; \quad I_{zz} &amp;= 12,29 + 4 \cdot 99,25 \\
     I_{xx} &amp;= 202,02 \, g.cm^2 &amp; \quad I_{yy} &amp;= 207,24 \, g.cm^2 &amp; \quad I_{zz} &amp;= 408,29 \, g.cm^2 \\
 \end{align*}
 \]</div>

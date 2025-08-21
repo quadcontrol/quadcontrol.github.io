@@ -669,7 +669,7 @@
         <li class="md-nav__item">
   <a href="#analise-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      Análise de Dados
+      Análise de dados
     </span>
   </a>
   
@@ -1251,7 +1251,7 @@
         <li class="md-nav__item">
   <a href="#analise-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      Análise de Dados
+      Análise de dados
     </span>
   </a>
   
@@ -1290,18 +1290,18 @@
 <p><img alt="PWM1" src="../images/pwm1.svg" style="display: block; margin: auto;" width="450" />
 <img alt="PWM2" src="../images/pwm2.svg" style="display: block; margin: auto;" width="450" />
 <img alt="PWM3" src="../images/pwm3.svg" style="display: block; margin: auto;" width="450" /></p>
-<p>Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Já <a href="../first_steps/motors.md">sabemos</a> que no código é possível definir um valor real entre <code>0.0</code> e <code>1.0</code> que corresponde ao sinal PWM do motor. </p>
+<p>Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Já <a href="../../sensors_and_actuators/motors/">sabemos</a> que no código é possível definir um valor real entre <code>0.0</code> e <code>1.0</code> que corresponde ao sinal PWM do motor. </p>
 <p>Você irá implementar uma função que, dada uma velocidade angular desejada <span class="arithmatex">\(\omega\)</span>, determine o sinal PWM correspondente. </p>
 <hr />
 <h2 id="procedimento-experimental">Procedimento experimental</h2>
-<p>Para medir a velocidade angular <span class="arithmatex">\(\omega\)</span> da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro. Para utilizá-lo, você deve fixar um pequeno pedaço de fita refletora em uma das hélices. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. </p>
+<p>Para medir a velocidade angular da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro. Para utilizá-lo, você deve fixar um pequeno pedaço de fita refletora em uma das hélices. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. </p>
 <p><img alt="Reflective Strip" src="../images/reflective_strip.jpg" style="display: block; margin: auto;" width="450" /></p>
 <p>O tacômetro pode detectar quando a tira passa pelo seu feixe de luz, assim, a velocidade de rotação é calculada contando quantas vezes a tira passa em um determinado período de tempo. O tacômetro DT-2234C+ registra a velocidade angular enquanto você pressiona o botão <code>TEST</code> e, uma vez que este botão é liberado, ele armazena os valores mínimo, máximo e médio, que você pode conferir apertando o botão <code>MEM</code>.</p>
 <p><img alt="Tachometer" src="../images/tachometer.png" style="display: block; margin: auto;" width="450" /></p>
 <p>Você deve carregar no drone um programa que ligue apenas o motor cuja hélice está com o pedaço de fita refletora com um determinado valor de sinal PWM. Serão levantados dados de velocidade angular da hélice para 10 valores distintos de sinal PWM (<code>0.1</code> até <code>1.0</code>), e, para cada valor de sinal PWM, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor do PWM com os botões <code>Up</code> e <code>Down</code> do Command Based Flight Control através do CFClient.</p>
 <p><img alt="Commando Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
-<p>O código abaixo possui um exemplo de programa que faz exatamente isso.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lab2_experiment.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<p>Crie um arquivo chamado <code>motor_coeficients.c</code> dentro da pasta <code>src/identification</code> com o seguinte código:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">motor_coeficients.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -1466,7 +1466,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="analise-de-dados">Análise de Dados</h2>
+<h2 id="analise-de-dados">Análise de dados</h2>
 <p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular das hélice <span class="arithmatex">\(\omega\)</span> com o sinal PWM correspondente do motor (note que você precisa converter a velocidade angular de <span class="arithmatex">\(rpm\)</span> para <span class="arithmatex">\(rad/s\)</span>).</p>
 <p><img alt="PWM" src="../images/pwm_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Há diversos tipos de funções de ajuste para esta curva (linear, exponencial, polinomial, etc.):</p>
@@ -1604,15 +1604,15 @@ e_b = K_m \omega
 <div class="arithmatex">\[
     \text{PWM} = \underbrace{\dfrac{R_a k_d}{K_me_s}}_{a_2} \omega^2 + \underbrace{\dfrac{R_a b + K_m^2}{K_me_s}}_{a_1} \omega
 \]</div>
-<p>Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujo termo de ordem zero é nulo:</p>
+<p>Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujo coeficiente de ordem zero é nulo:</p>
 <div class="arithmatex">\[
     \text{PWM} = a_2 \omega^2 + a_1 \omega + \cancelto{0}{a_0}  
 \]</div>
-<p>Dessa forma, ao invés de determinar os valores de cada parâmetro (<span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span> e <span class="arithmatex">\(e_s\)</span>), você irá determinar experimentalmente apenas os valores das constantes <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (dica: utilize o Curve Fitting Toolbox do MATLAB).</p>
+<p>Dessa forma, ao invés de determinar os valores de cada parâmetro (<span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span> e <span class="arithmatex">\(e_s\)</span>), você irá determinar experimentalmente apenas os valores dos coeficientes <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (dica: utilize o Curve Fitting Toolbox do MATLAB).</p>
 <hr />
 <h2 id="validacao-dos-resultados">Validação dos resultados</h2>
-<p>Uma vez determinadas as constantes <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span>, declare os seus valores no código (linhas 10 e 11) e modifique seu programa para que, dada uma velocidade angular <span class="arithmatex">\(\omega\)</span> comandada (linhas 30 e 35), ele determine o sinal PWM correspondente (linha 41) e envie isso ao motor M1 (linha 50).</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lab2_validation.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<p>Uma vez determinados os coeficientes <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span>, declare os seus valores no código (linhas 10 e 11) e modifique seu programa para que, dada uma velocidade angular <span class="arithmatex">\(\omega\)</span> comandada (linhas 30 e 35), ele determine o sinal PWM correspondente (linha 41) e envie isso ao motor M1 (linha 50). Note que estamos imprimindo no console o valor de velocidade angular comandada (linha 38) e, para isso, devemos incluir uma biblioteca adicional (linha 6).</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">motor_coeficients.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -1665,16 +1665,14 @@ e_b = K_m \omega
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;commander.h&quot;</span><span class="c1">     // Access to commanded setpoints (e.g., commanderGetSetpoint)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
 
-<span class="c1">// Motor constants (derived in Lab 2)</span>
-<span class="c1">// These represent coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega</span>
+<span class="c1">// Motor coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 

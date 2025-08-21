@@ -692,7 +692,7 @@
         <li class="md-nav__item">
   <a href="#analise-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      Análise de Dados
+      Análise de dados
     </span>
   </a>
   
@@ -1251,7 +1251,7 @@
         <li class="md-nav__item">
   <a href="#analise-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      Análise de Dados
+      Análise de dados
     </span>
   </a>
   
@@ -1297,12 +1297,14 @@
 </ul>
 <hr />
 <h2 id="procedimento-experimental">Procedimento experimental</h2>
-<p>Para medir a força de de sustentação <span class="arithmatex">\(f\)</span> da hélice, você pode utilizar um suporte e uma balança. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. </p>
-<p>O suporte possui um imã em sua base que deixa ele bem firma na balança. Você pode zerar a balança com o quadcoptero apertando o botão <code>T</code>, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.</p>
+<p>Você vai medir a força de de sustentação <span class="arithmatex">\(f\)</span> das hélices com um suporte<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> que fixa o drone em uma balança através de um imã. </p>
+<p><img alt="Device 1" src="../images/device1.jpeg" style="display: block; margin: auto;" width="60%" /></p>
+<p>Sabendo a leitura da balança, é possível determinar a força de sustentação das hélices. Você pode zerar a balança com o quadcoptero apertando o botão <code>T</code>, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.</p>
+<p><img alt="Device 1 (Readings)" src="../images/device1.jpeg" style="display: block; margin: auto;" width="60%" /></p>
 <p>Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular <span class="arithmatex">\(\omega\)</span>. Serão levantados dados de peso na balança para 10 valores distintos de <span class="arithmatex">\(omega\)</span> (<span class="arithmatex">\(200rad/s\)</span> até <span class="arithmatex">\(2.000rad/s\)</span>), e, para cada valor de <span class="arithmatex">\(\omega\)</span>, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor de <span class="arithmatex">\(\omega\)</span> com os botões <code>Up</code> e <code>Down</code> do Command Based Flight Control através do CFClient.</p>
 <p><img alt="Commando Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
-<p>O código abaixo possui um exemplo de programa que faz exatamente isso.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lab3_experiment.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<p>Crie um arquivo chamado <code>lift_constant.c</code> dentro da pasta <code>src/identification</code> com o seguinte código:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">lift_constant.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -1358,18 +1360,16 @@
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;commander.h&quot;</span><span class="c1">     // Access to commanded setpoints (e.g., commanderGetSetpoint)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
 
-<span class="c1">// Motor constants (derived in Lab 2)</span>
-<span class="c1">// These represent coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.18e-8</span><span class="p">;</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.34e-4</span><span class="p">;</span>
+<span class="c1">// Motor coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 
 <span class="c1">// Global variables to store the desired setpoint, the current state (not used here), </span>
 <span class="c1">// the computed PWM value, and the desired angular velocity (omega)</span>
@@ -1418,6 +1418,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<p>Não esqueça de atualizar os valores dos coeficientes dos motores <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (linhas 8-9) estimados <a href="../identifications/motor_coeficientes.md">anteriormente</a>).</p>
 <p>As etapas para coletar os dados são as seguintes:</p>
 <ol>
 <li>Garanta que a bateria do drone está carregada </li>
@@ -1495,7 +1496,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="analise-de-dados">Análise de Dados</h2>
+<h2 id="analise-de-dados">Análise de dados</h2>
 <p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular <span class="arithmatex">\(\omega\)</span> com a força de sustentação <span class="arithmatex">\(f\)</span> da hélice (note que você precisa converter a a leitura da balança de <span class="arithmatex">\(g\)</span> para <span class="arithmatex">\(N\)</span> e dividir por 4, dado que estamos interessados na força de uma única hélice).</p>
 <p><img alt="Lift Force" src="../images/lift_force_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Você já sabe que o melhor ajuste para esta curva é uma função polinomial de 2º grau cujos termos de ordem um e zero são nulos:</p>
@@ -1506,6 +1507,14 @@
 <hr />
 <h2 id="validacao-dos-resultados">Validação dos resultados</h2>
 <p>Compare o resultado obtido com o <a href="../../basic_concepts/aerodynamics/">estimado anteriormente</a>. É esperado que a constante de sustentação <span class="arithmatex">\(k_l\)</span> seja da ordem de grandeza de <span class="arithmatex">\(10^{-8}N.s^2\)</span>. </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
 
 

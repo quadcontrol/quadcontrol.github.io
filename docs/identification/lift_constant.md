@@ -22,18 +22,23 @@ Onde:
 
 ## Procedimento experimental
 
-Para medir a força de de sustentação $f$ da hélice, você pode utilizar um suporte e uma balança. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
+Você vai medir a força de de sustentação $f$ das hélices com um suporte[^1] que fixa o drone em uma balança através de um imã. 
 
+[^1]: Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
 
-O suporte possui um imã em sua base que deixa ele bem firma na balança. Você pode zerar a balança com o quadcoptero apertando o botão `T`, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.
+![Device 1](images/device1.jpeg){: width=60% style="display: block; margin: auto;" }
+
+Sabendo a leitura da balança, é possível determinar a força de sustentação das hélices. Você pode zerar a balança com o quadcoptero apertando o botão `T`, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.
+
+![Device 1 (Readings)](images/device1.jpeg){: width=60% style="display: block; margin: auto;" }
 
 Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular $\omega$. Serão levantados dados de peso na balança para 10 valores distintos de $omega$ ($200rad/s$ até $2.000rad/s$), e, para cada valor de $\omega$, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor de $\omega$ com os botões `Up` e `Down` do Command Based Flight Control através do CFClient.
 
 ![Commando Based Flight Control](images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
 
-O código abaixo possui um exemplo de programa que faz exatamente isso.
+Crie um arquivo chamado `lift_constant.c` dentro da pasta `src/identification` com o seguinte código:
 
-```c title="lab3_experiment.c"
+```c title="lift_constant.c"
 #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
 #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
 #include "supervisor.h"    // Functions to check flight status (e.g., supervisorIsArmed)
@@ -41,10 +46,9 @@ O código abaixo possui um exemplo de programa que faz exatamente isso.
 #include "motors.h"        // Low-level motor control interface (e.g., motorsSetRatio)
 #include "debug.h"         // Debug printing functions (e.g., DEBUG_PRINT)
 
-// Motor constants (derived in Lab 2)
-// These represent coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega
-const float a_2 = 6.18e-8;
-const float a_1 = 2.34e-4;
+// Motor coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega
+const float a_2 = 0.0f;
+const float a_1 = 0.0f;
 
 // Global variables to store the desired setpoint, the current state (not used here), 
 // the computed PWM value, and the desired angular velocity (omega)
@@ -94,6 +98,8 @@ void appMain(void *param)
 }
 ```
 
+Não esqueça de atualizar os valores dos coeficientes dos motores $a_2$ e $a_1$ (linhas 8-9) estimados [anteriormente](../identifications/motor_coeficientes.md)).
+
 As etapas para coletar os dados são as seguintes:
 
 1. Garanta que a bateria do drone está carregada 
@@ -119,7 +125,7 @@ Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 
 ---
 
-## Análise de Dados
+## Análise de dados
 
 Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular $\omega$ com a força de sustentação $f$ da hélice (note que você precisa converter a a leitura da balança de $g$ para $N$ e dividir por 4, dado que estamos interessados na força de uma única hélice).
 

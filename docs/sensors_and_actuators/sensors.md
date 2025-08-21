@@ -23,7 +23,7 @@ Antes de começar, é importante entender alguns conceitos:
 
 ## Código
 
-Crie um arquivo chamado `sensors.c` dentro da pasta `src/examples` com o seguinte conteúdo:
+Crie um arquivo chamado `sensors.c` dentro da pasta `src/examples` com o seguinte código:
 
 ```c title="sensors.c"
 #include "FreeRTOS.h"   // FreeRTOS core definitions (needed for task handling and timing)
@@ -72,7 +72,7 @@ void appMain(void *param)
             }
         }
         // Print sensor data to console
-        DEBUG_PRINT("Acc: %4.2f %4.2f %4.2f | Gyr: %6.2f %6.2f %6.2f | Dis: %4.2f | Flow: %2.0f %2.0f %6.4f\n",(double)ax,(double)ay,(double)az,(double)gx,(double)gy,(double)gz,(double)d,(double)px,(double)py);
+        DEBUG_PRINT("Acc: %4.2f %4.2f %4.2f | Gyr: %6.2f %6.2f %6.2f | Dis: %4.2f | Flow: %2.0f %2.0f\n",(double)ax,(double)ay,(double)az,(double)gx,(double)gy,(double)gz,(double)d,(double)px,(double)py);
         // Wait for 100 milliseconds before checking again (10 Hz loop)
         vTaskDelay(pdMS_TO_TICKS(100));
     }

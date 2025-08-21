@@ -13,7 +13,7 @@ O PWM ("pulse width modulation") é uma técnica para controlar a potência de u
 ![PWM2](images/pwm2.svg){: width="450" style="display: block; margin: auto;" }
 ![PWM3](images/pwm3.svg){: width="450" style="display: block; margin: auto;" }
 
-Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Já [sabemos](../first_steps/motors.md) que no código é possível definir um valor real entre `0.0` e `1.0` que corresponde ao sinal PWM do motor. 
+Este é o mecanismo utilizado pelo Crazyflie para acionar seus motores. Já [sabemos](../sensors_and_actuators/motors.md) que no código é possível definir um valor real entre `0.0` e `1.0` que corresponde ao sinal PWM do motor. 
     
 Você irá implementar uma função que, dada uma velocidade angular desejada $\omega$, determine o sinal PWM correspondente. 
 
@@ -21,7 +21,7 @@ Você irá implementar uma função que, dada uma velocidade angular desejada $\
 
 ## Procedimento experimental
 
-Para medir a velocidade angular $\omega$ da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro. Para utilizá-lo, você deve fixar um pequeno pedaço de fita refletora em uma das hélices. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. 
+Para medir a velocidade angular da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro. Para utilizá-lo, você deve fixar um pequeno pedaço de fita refletora em uma das hélices. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. 
 
 ![Reflective Strip](images/reflective_strip.jpg){: width="450" style="display: block; margin: auto;" }
 
@@ -33,9 +33,9 @@ Você deve carregar no drone um programa que ligue apenas o motor cuja hélice e
 
 ![Commando Based Flight Control](images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
 
-O código abaixo possui um exemplo de programa que faz exatamente isso.
+Crie um arquivo chamado `motor_coeficients.c` dentro da pasta `src/identification` com o seguinte código:
 
-```c title="lab2_experiment.c"
+```c title="motor_coeficients.c"
 #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
 #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
 #include "supervisor.h"    // Functions to check flight status (e.g., supervisorIsArmed)
@@ -107,7 +107,7 @@ Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
 
 ---
 
-## Análise de Dados
+## Análise de dados
 
 Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular das hélice $\omega$ com o sinal PWM correspondente do motor (note que você precisa converter a velocidade angular de $rpm$ para $rad/s$).
 
@@ -249,21 +249,21 @@ $$
     \text{PWM} = \underbrace{\dfrac{R_a k_d}{K_me_s}}_{a_2} \omega^2 + \underbrace{\dfrac{R_a b + K_m^2}{K_me_s}}_{a_1} \omega
 $$
 
-Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujo termo de ordem zero é nulo:
+Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujo coeficiente de ordem zero é nulo:
 
 $$
     \text{PWM} = a_2 \omega^2 + a_1 \omega + \cancelto{0}{a_0}	
 $$
 
-Dessa forma, ao invés de determinar os valores de cada parâmetro ($R_a$, $k_d$, $b$, $K_m$ e $e_s$), você irá determinar experimentalmente apenas os valores das constantes $a_2$ e $a_1$ (dica: utilize o Curve Fitting Toolbox do MATLAB).
+Dessa forma, ao invés de determinar os valores de cada parâmetro ($R_a$, $k_d$, $b$, $K_m$ e $e_s$), você irá determinar experimentalmente apenas os valores dos coeficientes $a_2$ e $a_1$ (dica: utilize o Curve Fitting Toolbox do MATLAB).
 
 ---
 
 ## Validação dos resultados
 
-Uma vez determinadas as constantes $a_2$ e $a_1$, declare os seus valores no código (linhas 10 e 11) e modifique seu programa para que, dada uma velocidade angular $\omega$ comandada (linhas 30 e 35), ele determine o sinal PWM correspondente (linha 41) e envie isso ao motor M1 (linha 50).
+Uma vez determinados os coeficientes $a_2$ e $a_1$, declare os seus valores no código (linhas 10 e 11) e modifique seu programa para que, dada uma velocidade angular $\omega$ comandada (linhas 30 e 35), ele determine o sinal PWM correspondente (linha 41) e envie isso ao motor M1 (linha 50). Note que estamos imprimindo no console o valor de velocidade angular comandada (linha 38) e, para isso, devemos incluir uma biblioteca adicional (linha 6).
 
-```c title="lab2_validation.c"
+```c title="motor_coeficients.c"
 #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
 #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
 #include "supervisor.h"    // Functions to check flight status (e.g., supervisorIsArmed)
@@ -271,8 +271,7 @@ Uma vez determinadas as constantes $a_2$ e $a_1$, declare os seus valores no có
 #include "motors.h"        // Low-level motor control interface (e.g., motorsSetRatio)
 #include "debug.h"         // Debug printing functions (e.g., DEBUG_PRINT)
 
-// Motor constants (derived in Lab 2)
-// These represent coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega
+// Motor coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega
 const float a_2 = 0.0f;
 const float a_1 = 0.0f;
 

@@ -20,7 +20,7 @@ Antes de começar, é importante entender alguns conceitos:
 
 ## Código
 
-Crie um arquivo chamado `motors.c` dentro da pasta `src/examples` com o seguinte conteúdo:
+Crie um arquivo chamado `motors.c` dentro da pasta `src/examples` com o seguinte código:
 
 ```c title="motors.c"
 #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)

@@ -62,10 +62,11 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - admonition
-  - pymdownx.highlight:
-      linenums: true           # Mostra números de linha no código
+  # - pymdownx.highlight:
+  #     linenums: true           # Mostra números de linha no código
   - pymdownx.tabbed:
       alternate_style: true
+  - md_in_html
 
 
 extra_javascript:

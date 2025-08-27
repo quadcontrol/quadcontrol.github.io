@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#arquitetura" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -803,6 +808,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -815,6 +835,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-das-variaveis-globais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura das variáveis globais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop-principal-de-controle-200-hz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loop principal de controle (200 Hz)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-vamos-avancar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como vamos avançar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1144,6 +1210,43 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-das-variaveis-globais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura das variáveis globais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop-principal-de-controle-200-hz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loop principal de controle (200 Hz)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-vamos-avancar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como vamos avançar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1159,9 +1262,73 @@
 
 
 
-  <h1>Arquitetura</h1>
+<h1 id="arquitetura">Arquitetura</h1>
+<p>Para controlar um drone de forma estável, precisamos de uma arquitetura clara de processamento de sinais e comandos. Essa arquitetura define como as informações dos sensores percorrem o sistema, são processadas por estimadores e controladores e, por fim, viram comandos dos motores.</p>
+<p>O diagrama abaixo resume essa sequência em blocos:</p>
+<p><img alt="Architecture" src="../images/architecture_horizontal_controller.svg" style="display: block; margin: auto;" width="100%" /></p>
+<p>No diagrama:</p>
+<ul>
+<li>Os blocos representam funções que serão chamadas no loop principal.</li>
+<li>As setas representam as variáveis (sinais) que fluem de um bloco para outro.</li>
+</ul>
+<p class="annotate">A passagem desses sinais entre as funções será feita por variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.</p>
+<ol>
+<li>Sabemos que variáveis globais não são a melhor prática em programação. No entanto, como estamos programando tudo em C e cada função precisaria receber e retornar múltiplos parâmetros, essa prática acaba sendo mais simples do que utilizar ponteiros, semáforos etc. Como o foco aqui é mais na teoria de controle do que em engenharia de software, seguiremos dessa forma.</li>
+</ol>
+<hr />
+<h2 id="estrutura-das-variaveis-globais">Estrutura das variáveis globais</h2>
+<p>Logo no início do código, declararemos as variáveis que representam atuadores, sensores, entradas, estados e referências — espelhando o diagrama e deixando claro “quem fala com quem” no controle.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Motors</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// PWM</span>
 
+<span class="c1">// Sensors</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">ax</span><span class="p">,</span><span class="w"> </span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="n">az</span><span class="p">;</span><span class="w">             </span><span class="c1">// Accelerometer [m/s^2]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">gx</span><span class="p">,</span><span class="w"> </span><span class="n">gy</span><span class="p">,</span><span class="w"> </span><span class="n">gz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Gyroscope [rad/s]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Range [m]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">px</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="p">;</span><span class="w">                 </span><span class="c1">// Optical flow [pixels]</span>
 
+<span class="c1">// System inputs</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">ft</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Thrust force [N]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Torques [N.m]</span>
+
+<span class="c1">// System states</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">;</span><span class="w">        </span><span class="c1">// Euler angles [rad]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">wx</span><span class="p">,</span><span class="w"> </span><span class="n">wy</span><span class="p">,</span><span class="w"> </span><span class="n">wz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Angular velocity [rad/s]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">                </span><span class="c1">// Position [m]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Velocity [m/s]</span>
+
+<span class="c1">// System references</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">phi_r</span><span class="p">,</span><span class="w"> </span><span class="n">theta_r</span><span class="p">,</span><span class="w"> </span><span class="n">psi_r</span><span class="p">;</span><span class="w"> </span><span class="c1">// Euler angles [rad]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">x_r</span><span class="p">,</span><span class="w"> </span><span class="n">y_r</span><span class="p">,</span><span class="w"> </span><span class="n">z_r</span><span class="p">;</span><span class="w">         </span><span class="c1">// Position [m]</span>
+</code></pre></div>
+<hr />
+<h2 id="loop-principal-de-controle-200-hz">Loop principal de controle (200 Hz)</h2>
+<p>Toda a lógica do sistema será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Esse ciclo rápido é necessário porque drones são sistemas dinâmicos muito instáveis: se o controle atrasar, o drone não consegue se equilibrar.</p>
+<p>Dentro do loop, chamamos as funções na ordem do diagrama: primeiro coletamos leituras, depois estimamos estados, então calculamos os sinais de controle e, por fim, aplicamos os comandos aos motores.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Main application task</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Infinite loop (runs at 200Hz)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">reference</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Get reference setpoints from commander module</span>
+<span class="w">        </span><span class="n">sensors</span><span class="p">();</span><span class="w">                    </span><span class="c1">// Get sensor readings from estimator module</span>
+<span class="w">        </span><span class="n">attitudeEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate orientation from IMU sensor</span>
+<span class="w">        </span><span class="n">verticalEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate vertical position/velocity from range sensor</span>
+<span class="w">        </span><span class="n">horizontalEstimator</span><span class="p">();</span><span class="w">        </span><span class="c1">// Estimate horizontal position/velocity from optical flow sensor</span>
+<span class="w">        </span><span class="n">horizontalController</span><span class="p">();</span><span class="w">       </span><span class="c1">// Compute desired roll/pitch angles</span>
+<span class="w">        </span><span class="n">verticalController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired total thrust</span>
+<span class="w">        </span><span class="n">attitudeController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired torques</span>
+<span class="w">        </span><span class="n">mixer</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Compute motor commands</span>
+<span class="w">        </span><span class="n">motors</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Apply motor commands</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// Wait 5 ms</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="como-vamos-avancar">Como vamos avançar</h2>
+<p>No fim desse percurso, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones, entendendo tanto o papel de cada função quanto o caminho que cada variável percorre pelo sistema.</p>
+<p>Nos vamos implementar uma função por vez para que você possa ir entendendo cada passo.</p>
 
 
 

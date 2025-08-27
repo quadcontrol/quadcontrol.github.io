@@ -1506,8 +1506,8 @@
 </li>
 <li>
 <p>Coloque o endereço do repositório <em>forkado</em> para sua conta do GitHub:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>https://github.com/username/quadcontrol-firmware.git
-</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><pre><span></span><code>https://github.com/username/quadcontrol-firmware.git
+</code></pre></div></p>
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>
 <p>Você deve substituir <code>username</code> pelo seu nome de usuário do GitHub</p>
@@ -1529,8 +1529,8 @@
 </li>
 <li>
 <p>Inicialize todos os submódulos<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo terminal:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
-</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+</code></pre></div></p>
 </li>
 </ol>
 <h3 id="organizacao">Organização</h3>
@@ -1547,26 +1547,7 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Led blink</label><label for="__tabbed_1_2">Hello world</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">led_blink.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<div class="highlight"><span class="filename">led_blink.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;led.h&quot;</span><span class="c1">           // LED functions (e.g., ledSet)</span>
 
@@ -1586,25 +1567,10 @@
 <span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello_world.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<div class="highlight"><span class="filename">hello_world.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
 
@@ -1620,13 +1586,13 @@
 <span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 </div>
 </div>
 </div>
 <p>Definimos qual o programa que vamos compilar através do arquivo <code>Kbuild</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Kbuild</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>obj-y<span class="w"> </span>+<span class="o">=</span><span class="w"> </span>src/examples/led_blink.o
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Kbuild</span><pre><span></span><code>obj-y<span class="w"> </span>+<span class="o">=</span><span class="w"> </span>src/examples/led_blink.o
+</code></pre></div>
 <p>Conforme formos desenvolvendo novos programas, não podemos esquecer de atualizar o arquivo <code>Kbuild</code> com o nome do programa que queremos compilar. </p>
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>
@@ -1642,8 +1608,8 @@
 </li>
 <li>
 <p>Altere o canal do rádio conforme a numeração do seu Crazyflie. 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">radio.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">RADIO_CHANNEL</span><span class="o">=</span><span class="mi">1</span>
-</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><span class="filename">radio.config</span><pre><span></span><code><span class="n">RADIO_CHANNEL</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></p>
 </li>
 </ol>
 <h3 id="submodulo">Submódulo</h3>
@@ -1680,8 +1646,8 @@
 <h3 id="plataforma">Plataforma</h3>
 <ol>
 <li>Configure o firmware para a plataforma do Crazyflie 2.1 Brushless rodando o seguinte código no terminal:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>cf21bl_defconfig
-</code></pre></div></td></tr></table></div></li>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>cf21bl_defconfig
+</code></pre></div></li>
 </ol>
 <hr />
 <h2 id="compilando">Compilando</h2>
@@ -1689,15 +1655,15 @@
 <h3 id="build">Build</h3>
 <ol>
 <li>Compile o firmware:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make
-</code></pre></div></td></tr></table></div></li>
+<div class="highlight"><pre><span></span><code>make
+</code></pre></div></li>
 </ol>
 <h3 id="flash">Flash</h3>
 <ol>
 <li>
 <p>Programe o firmware no Crazyflie:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>cload
-</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>cload
+</code></pre></div></p>
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>
 <ul>
@@ -1712,8 +1678,8 @@
 <p>Tudo pronto! Agora vamos conectar no drone com o Crazyflie Client e verificar se ele está rodando o seu código corretamente. Se tudo estiver certo, você verá as mensagens aparecendo no console — e o seu drone estará oficialmente sob seu controle.</p>
 <ol>
 <li>Abra o Crazyflie Client
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cfclient
-</code></pre></div></td></tr></table></div></li>
+<div class="highlight"><pre><span></span><code>cfclient
+</code></pre></div></li>
 <li>
 <p>Clique no botão <code>Scan</code> </p>
 </li>

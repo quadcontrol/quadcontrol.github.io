@@ -23,7 +23,7 @@ Você irá implementar uma função que, dada uma velocidade angular desejada $\
 
 Para medir a velocidade angular da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro. Para utilizá-lo, você deve fixar um pequeno pedaço de fita refletora em uma das hélices. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. 
 
-![Reflective Strip](images/reflective_strip.jpg){: width="450" style="display: block; margin: auto;" }
+![Reflective Strip](images/reflective_strip.jpeg){: width="450" style="display: block; margin: auto;" }
 
 O tacômetro pode detectar quando a tira passa pelo seu feixe de luz, assim, a velocidade de rotação é calculada contando quantas vezes a tira passa em um determinado período de tempo. O tacômetro DT-2234C+ registra a velocidade angular enquanto você pressiona o botão `TEST` e, uma vez que este botão é liberado, ele armazena os valores mínimo, máximo e médio, que você pode conferir apertando o botão `MEM`.
     

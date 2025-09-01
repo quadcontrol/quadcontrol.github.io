@@ -14,6 +14,8 @@
         <link rel="prev" href="../../identification/drag_constant/">
       
       
+        <link rel="next" href="../mixer/">
+      
       
       <link rel="icon" href="../../images/logo_black.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
@@ -861,9 +863,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#loop-principal-de-controle-200-hz" class="md-nav__link">
+  <a href="#loop-principal-de-controle" class="md-nav__link">
     <span class="md-ellipsis">
-      Loop principal de controle (200 Hz)
+      Loop principal de controle
     </span>
   </a>
   
@@ -894,7 +896,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../mixer/" class="md-nav__link">
         
   
   
@@ -955,12 +957,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../attitude_estimator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Estimador de Atitude
+    Estimador de atitude
     
   </span>
   
@@ -978,12 +980,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../attitude_controller/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Controlador de Atitude
+    Controlador de atitude
     
   </span>
   
@@ -1047,12 +1049,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../vertical_estimator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Estimador Vertical
+    Estimador vertical
     
   </span>
   
@@ -1070,12 +1072,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../vertical_controller/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Controlador Vertical
+    Controlador vertical
     
   </span>
   
@@ -1139,12 +1141,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../horizontal_estimator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Estimador Horizontal
+    Estimador horizontal
     
   </span>
   
@@ -1162,12 +1164,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../horizontal_controller/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Controlador Horizontal
+    Controlador horizontal
     
   </span>
   
@@ -1229,9 +1231,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#loop-principal-de-controle-200-hz" class="md-nav__link">
+  <a href="#loop-principal-de-controle" class="md-nav__link">
     <span class="md-ellipsis">
-      Loop principal de controle (200 Hz)
+      Loop principal de controle
     </span>
   </a>
   
@@ -1263,21 +1265,21 @@
 
 
 <h1 id="arquitetura">Arquitetura</h1>
-<p>Para controlar um drone de forma estável, precisamos de uma arquitetura clara de processamento de sinais e comandos. Essa arquitetura define como as informações dos sensores percorrem o sistema, são processadas por estimadores e controladores e, por fim, viram comandos dos motores.</p>
+<p>Para controlar um drone, precisamos de uma arquitetura clara. Essa arquitetura define como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos motores.</p>
 <p>O diagrama abaixo resume essa sequência em blocos:</p>
 <p><img alt="Architecture" src="../images/architecture_horizontal_controller.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>No diagrama:</p>
 <ul>
-<li>Os blocos representam funções que serão chamadas no loop principal.</li>
-<li>As setas representam as variáveis (sinais) que fluem de um bloco para outro.</li>
+<li>Os blocos representam as funções que serão chamadas no loop principal.</li>
+<li>As setas representam as variáveis que fluem de um bloco para outro.</li>
 </ul>
-<p class="annotate">A passagem desses sinais entre as funções será feita por variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.</p>
+<p class="annotate">A passagem dessas informações entre as funções será feita através de variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.</p>
 <ol>
 <li>Sabemos que variáveis globais não são a melhor prática em programação. No entanto, como estamos programando tudo em C e cada função precisaria receber e retornar múltiplos parâmetros, essa prática acaba sendo mais simples do que utilizar ponteiros, semáforos etc. Como o foco aqui é mais na teoria de controle do que em engenharia de software, seguiremos dessa forma.</li>
 </ol>
 <hr />
 <h2 id="estrutura-das-variaveis-globais">Estrutura das variáveis globais</h2>
-<p>Logo no início do código, declararemos as variáveis que representam atuadores, sensores, entradas, estados e referências — espelhando o diagrama e deixando claro “quem fala com quem” no controle.</p>
+<p>Logo no início do código, declararemos as variáveis que representam os atuadores, sensores, entradas, estados e referências — espelhando o diagrama.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Motors</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// PWM</span>
 
@@ -1302,9 +1304,8 @@
 <span class="kt">float</span><span class="w"> </span><span class="n">x_r</span><span class="p">,</span><span class="w"> </span><span class="n">y_r</span><span class="p">,</span><span class="w"> </span><span class="n">z_r</span><span class="p">;</span><span class="w">         </span><span class="c1">// Position [m]</span>
 </code></pre></div>
 <hr />
-<h2 id="loop-principal-de-controle-200-hz">Loop principal de controle (200 Hz)</h2>
-<p>Toda a lógica do sistema será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Esse ciclo rápido é necessário porque drones são sistemas dinâmicos muito instáveis: se o controle atrasar, o drone não consegue se equilibrar.</p>
-<p>Dentro do loop, chamamos as funções na ordem do diagrama: primeiro coletamos leituras, depois estimamos estados, então calculamos os sinais de controle e, por fim, aplicamos os comandos aos motores.</p>
+<h2 id="loop-principal-de-controle">Loop principal de controle</h2>
+<p>Toda a lógica de controle será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Dentro desse loop, chamamos as funções na ordem do diagrama: primeiro os sensores, depois os estimadores, então os controladores e, por fim, os atuadores.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Main application task</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1327,8 +1328,8 @@
 </code></pre></div>
 <hr />
 <h2 id="como-vamos-avancar">Como vamos avançar</h2>
-<p>No fim desse percurso, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones, entendendo tanto o papel de cada função quanto o caminho que cada variável percorre pelo sistema.</p>
-<p>Nos vamos implementar uma função por vez para que você possa ir entendendo cada passo.</p>
+<p>A implementação será feita passo a passo, uma função por vez. Dessa forma, você poderá entender o papel de cada bloco isoladamente antes de ver o sistema completo em ação.</p>
+<p>Nos próximos capítulos, vamos começar pelo mixer, depois evoluir para os estimadores e controladores. Ao final, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones.</p>
 
 
 

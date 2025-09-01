@@ -905,7 +905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/mixer/" class="md-nav__link">
         
   
   
@@ -966,12 +966,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/attitude_estimator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Estimador de Atitude
+    Estimador de atitude
     
   </span>
   
@@ -989,12 +989,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/attitude_controller/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Controlador de Atitude
+    Controlador de atitude
     
   </span>
   
@@ -1058,12 +1058,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/vertical_estimator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Estimador Vertical
+    Estimador vertical
     
   </span>
   
@@ -1081,12 +1081,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/vertical_controller/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Controlador Vertical
+    Controlador vertical
     
   </span>
   
@@ -1150,12 +1150,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/horizontal_estimator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Estimador Horizontal
+    Estimador horizontal
     
   </span>
   
@@ -1173,12 +1173,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../x.md" class="md-nav__link">
+      <a href="../../control/horizontal_controller/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Controlador Horizontal
+    Controlador horizontal
     
   </span>
   
@@ -1295,7 +1295,7 @@
 <hr />
 <h2 id="procedimento-experimental">Procedimento experimental</h2>
 <p>Para medir a velocidade angular da hélice, você pode utilizar um instrumento de medição do número de rotações chamado tacômetro. Para utilizá-lo, você deve fixar um pequeno pedaço de fita refletora em uma das hélices. Certifique-se de usar apenas um pequeno pedaço de fita e aplicar suavemente na hélice, caso contrário você interferirá no fluxo de ar e obterá dados ruins. </p>
-<p><img alt="Reflective Strip" src="../images/reflective_strip.jpg" style="display: block; margin: auto;" width="450" /></p>
+<p><img alt="Reflective Strip" src="../images/reflective_strip.jpeg" style="display: block; margin: auto;" width="450" /></p>
 <p>O tacômetro pode detectar quando a tira passa pelo seu feixe de luz, assim, a velocidade de rotação é calculada contando quantas vezes a tira passa em um determinado período de tempo. O tacômetro DT-2234C+ registra a velocidade angular enquanto você pressiona o botão <code>TEST</code> e, uma vez que este botão é liberado, ele armazena os valores mínimo, máximo e médio, que você pode conferir apertando o botão <code>MEM</code>.</p>
 <p><img alt="Tachometer" src="../images/tachometer.png" style="display: block; margin: auto;" width="450" /></p>
 <p>Você deve carregar no drone um programa que ligue apenas o motor cuja hélice está com o pedaço de fita refletora com um determinado valor de sinal PWM. Serão levantados dados de velocidade angular da hélice para 10 valores distintos de sinal PWM (<code>0.1</code> até <code>1.0</code>), e, para cada valor de sinal PWM, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor do PWM com os botões <code>Up</code> e <code>Down</code> do Command Based Flight Control através do CFClient.</p>

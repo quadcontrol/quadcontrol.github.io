@@ -1,6 +1,6 @@
 # Arquitetura
 
-Para controlar um drone de forma estável, precisamos de uma arquitetura clara de processamento de sinais e comandos. Essa arquitetura define como as informações dos sensores percorrem o sistema, são processadas por estimadores e controladores e, por fim, viram comandos dos motores.
+Para controlar um drone, precisamos de uma arquitetura clara. Essa arquitetura define como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos motores.
 
 O diagrama abaixo resume essa sequência em blocos:
 
@@ -8,10 +8,10 @@ O diagrama abaixo resume essa sequência em blocos:
 
 No diagrama:
 
-- Os blocos representam funções que serão chamadas no loop principal.
-- As setas representam as variáveis (sinais) que fluem de um bloco para outro.
+- Os blocos representam as funções que serão chamadas no loop principal.
+- As setas representam as variáveis que fluem de um bloco para outro.
 
-A passagem desses sinais entre as funções será feita por variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.
+A passagem dessas informações entre as funções será feita através de variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.
 { .annotate }
 
 1. Sabemos que variáveis globais não são a melhor prática em programação. No entanto, como estamos programando tudo em C e cada função precisaria receber e retornar múltiplos parâmetros, essa prática acaba sendo mais simples do que utilizar ponteiros, semáforos etc. Como o foco aqui é mais na teoria de controle do que em engenharia de software, seguiremos dessa forma.
@@ -20,7 +20,7 @@ A passagem desses sinais entre as funções será feita por variáveis globais(1
 
 ## Estrutura das variáveis globais
 
-Logo no início do código, declararemos as variáveis que representam atuadores, sensores, entradas, estados e referências — espelhando o diagrama e deixando claro “quem fala com quem” no controle.
+Logo no início do código, declararemos as variáveis que representam os atuadores, sensores, entradas, estados e referências — espelhando o diagrama.
 
 ```c
 // Motors
@@ -51,9 +51,7 @@ float x_r, y_r, z_r;         // Position [m]
 
 ## Loop principal de controle
 
-Toda a lógica do sistema será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Esse ciclo rápido é necessário porque drones são sistemas dinâmicos muito instáveis: se o controle atrasar, o drone não consegue se equilibrar.
-
-Dentro do loop, chamamos as funções na ordem do diagrama: primeiro coletamos leituras, depois estimamos estados, então calculamos os sinais de controle e, por fim, aplicamos os comandos aos motores.
+Toda a lógica de controle será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Dentro desse loop, chamamos as funções na ordem do diagrama: primeiro os sensores, depois os estimadores, então os controladores e, por fim, os atuadores.
 
 ```c
 // Main application task
@@ -81,9 +79,6 @@ void appMain(void *param)
 
 ## Como vamos avançar
 
-A implementação será feita passo a passo, uma função de cada vez. Dessa forma, você poderá entender a função de cada bloco isoladamente antes de ver o sistema completo em ação.
-Nos próximos capítulos, vamos começar pelo mixer, depois evoluir para os estimadores e controladores, até chegar ao mixer e aos motores. Ao final, você terá construído — linha por linha — uma arquitetura de controle completa para drones.
+A implementação será feita passo a passo, uma função por vez. Dessa forma, você poderá entender o papel de cada bloco isoladamente antes de ver o sistema completo em ação.
 
-No fim desse percurso, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones, entendendo tanto o papel de cada função quanto o caminho que cada variável percorre pelo sistema.
-
-Nos vamos implementar uma função por vez para que você possa ir entendendo cada passo.
+Nos próximos capítulos, vamos começar pelo mixer, depois evoluir para os estimadores e controladores. Ao final, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones.

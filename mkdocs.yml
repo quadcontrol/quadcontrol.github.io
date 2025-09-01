@@ -40,16 +40,16 @@ nav:
     - Modelo 3D: x.md
   - Controle: 
     - Arquitetura: control/architecture.md
-    - Mixer: x.md
+    - Mixer: control/mixer.md
     - Atitude:
-      - Estimador de Atitude: x.md
-      - Controlador de Atitude: x.md
+      - Estimador de atitude: control/attitude_estimator.md
+      - Controlador de atitude: control/attitude_controller.md
     - Vertical:
-      - Estimador Vertical: x.md
-      - Controlador Vertical: x.md
+      - Estimador vertical: control/vertical_estimator.md
+      - Controlador vertical: control/vertical_controller.md
     - Horizontal:
-      - Estimador Horizontal: x.md
-      - Controlador Horizontal: x.md
+      - Estimador horizontal: control/horizontal_estimator.md
+      - Controlador horizontal: control/horizontal_controller.md
 
 markdown_extensions:
   - footnotes

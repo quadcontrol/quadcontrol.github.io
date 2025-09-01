@@ -22,21 +22,25 @@ Onde:
 
 ## Procedimento experimental
 
-Você vai medir a força de de sustentação $f$ das hélices com um suporte[^1] que fixa o drone em uma balança através de um imã. 
+Você vai medir a força de de sustentação $f$ das hélices com um suporte(1) que fixa o drone em uma balança através de um imã. 
+{ .annotate }
 
-[^1]: Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
+1. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
 
 ![Device 1](images/device1.jpeg){: width=60% style="display: block; margin: auto;" }
 
-Sabendo a leitura da balança, é possível determinar a força de sustentação das hélices. Você pode zerar a balança com o quadcoptero apertando o botão `T`, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.
+Sabendo a leitura da balança, é possível determinar a força de sustentação das hélices. Você pode zerar a balança com o quadcoptero apertando o botão `TARE`, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.
 
 ![Device 1 (Readings)](images/device1.jpeg){: width=60% style="display: block; margin: auto;" }
 
-Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular $\omega$. Serão levantados dados de peso na balança para 10 valores distintos de $omega$ ($200rad/s$ até $2.000rad/s$), e, para cada valor de $\omega$, você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor de $\omega$ com os botões `Up` e `Down` do Command Based Flight Control através do CFClient.
+Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular. Serão levantados dados de peso na balança para 10 valores distintos, e, para cada valor de, você deverá realizar o experimento três vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor da velocidade angular com os botões `Up` e `Down` do Command Based Flight Control através do CFClient.
 
 ![Commando Based Flight Control](images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
 
-Crie um arquivo chamado `lift_constant.c` dentro da pasta `src/identification` com o seguinte código:
+Crie um arquivo chamado `lift_constant.c` dentro da pasta `src/identification` com o seguinte código(1):
+{ .annotate }
+
+1. Não esqueça de atualizar os valores dos coeficientes dos motores $a_2$ e $a_1$ (linhas 8-9) estimados [anteriormente](../identifications/motor_coeficientes.md).
 
 ```c title="lift_constant.c"
 #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
@@ -98,7 +102,7 @@ void appMain(void *param)
 }
 ```
 
-Não esqueça de atualizar os valores dos coeficientes dos motores $a_2$ e $a_1$ (linhas 8-9) estimados [anteriormente](../identifications/motor_coeficientes.md)).
+
 
 As etapas para coletar os dados são as seguintes:
 
@@ -132,11 +136,13 @@ Utilizando os dados coletados, você deverá ajustar uma curva que correlacione 
 ![Lift Force](images/lift_force_graph.svg){: width=100% style="display: block; margin: auto;" }
 
 
-Você já sabe que o melhor ajuste para esta curva é uma função polinomial de 2º grau cujos termos de ordem um e zero são nulos:
+Você já sabe que a força de sustentação de uma hélice $f$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado:
     
 $$
     f = k_l \omega^2
 $$
+
+Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujos coeficientes de ordem zero e um são nulos. 
 
 Determine o valor de $k_l$ fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.
 

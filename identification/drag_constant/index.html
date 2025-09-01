@@ -1297,13 +1297,19 @@
 </ul>
 <hr />
 <h2 id="procedimento-experimental">Procedimento experimental</h2>
-<p>Você vai medir o torque de arrasto <span class="arithmatex">\(\tau\)</span> das hélices com um suporte<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> que restringe todos os graus de liberdade do drone deixando apenas o ângulo de guinagem <span class="arithmatex">\(\psi\)</span> livre.  </p>
+<p class="annotate">Você vai medir o torque de arrasto <span class="arithmatex">\(\tau\)</span> das hélices com um suporte(1) que restringe todos os graus de liberdade do drone deixando apenas o ângulo de guinagem <span class="arithmatex">\(\psi\)</span> livre.<br /></p>
+<ol>
+<li>Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. </li>
+</ol>
 <p><img alt="Device 2" src="../images/device2.jpeg" style="display: block; margin: auto;" width="60%" /></p>
-<p>Sabendo o momento de inércia do drone <span class="arithmatex">\(I_{zz}\)</span> e o ângulo de guinagem ao longo do tempo <span class="arithmatex">\(\psi\)</span>, é possível determinar o torque de arrasto total das hélices <span class="arithmatex">\(\tau_x\)</span> através de uma análise dinâmica. Para realizar a leitura do ângulo de guinagem ao longo do tempo, você deve filmar o procedimento no modo câmera lenta de seu celular com um cronômetro no campo de visão</p>
+<p>Sabendo o momento de inércia do drone <span class="arithmatex">\(I_{zz}\)</span> e o ângulo de guinagem ao longo do tempo <span class="arithmatex">\(\psi\)</span>, é possível determinar o torque de arrasto total das hélices <span class="arithmatex">\(\tau_z\)</span> através de uma análise dinâmica. Para realizar a leitura do ângulo de guinagem ao longo do tempo, você deve filmar o procedimento no modo câmera lenta de seu celular com um cronômetro no campo de visão.</p>
 <p><img alt="Device 2 (Readings)" src="../images/device2_readings.jpeg" style="display: block; margin: auto;" width="60%" /></p>
-<p>Você deve carregar no drone um programa que faz com que as hélices <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(3\)</span> rotacionem com velocidade angular de <span class="arithmatex">\(1.000\text{rad/s}\)</span> e as hélices <span class="arithmatex">\(2\)</span> e <span class="arithmatex">\(4\)</span> com <span class="arithmatex">\(2.000\text{rad/s}\)</span>. Como as hélices <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(3\)</span> giram no sentido horário e as hélices <span class="arithmatex">\(2\)</span> e <span class="arithmatex">\(4\)</span> no anti-horário, haverá um torque resultante que fará com que o drone rotacione no sentido anti-horário. Para cada quarto de volta (<span class="arithmatex">\(\frac{\pi}{2}\text{rad}\)</span>), você deverá anotar o tempo decorrido. Você deverá realizar o experimento 3 vezes e tirar uma média. Para facilitar o experimento, você pode ligar/desligar as hélices com os botões <code>Take off</code> e <code>Land</code> do Command Based Flight Control através do CFClient.</p>
+<p>Você deve carregar no drone um programa que faz com que as hélices <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(3\)</span> rotacionem com velocidade angular de <span class="arithmatex">\(1.000\,\text{rad/s}\)</span> e as hélices <span class="arithmatex">\(2\)</span> e <span class="arithmatex">\(4\)</span> com <span class="arithmatex">\(2.000\,\text{rad/s}\)</span>. Como as hélices <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(3\)</span> giram no sentido horário e as hélices <span class="arithmatex">\(2\)</span> e <span class="arithmatex">\(4\)</span> no anti-horário, haverá um torque resultante que fará com que o drone rotacione no sentido anti-horário. Para cada quarto de volta (<span class="arithmatex">\(90^{\circ}\)</span>), você deverá anotar o tempo decorrido. Você deverá realizar o experimento três vezes e tirar uma média. Para facilitar o experimento, você pode ligar/desligar as hélices com os botões <code>Take off</code> e <code>Land</code> do Command Based Flight Control através do CFClient.</p>
 <p><img alt="Commando Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
-<p>Crie um arquivo chamado <code>drag_constant.c</code> dentro da pasta <code>src/identification</code> com o seguinte código:</p>
+<p class="annotate">Crie um arquivo chamado <code>drag_constant.c</code> dentro da pasta <code>src/identification</code> com o seguinte código(1):</p>
+<ol>
+<li>Não esqueça de atualizar os valores dos coeficientes dos motores <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (linhas 8-9) estimados <a href="../identifications/motor_coeficientes.md">anteriormente</a>.</li>
+</ol>
 <div class="highlight"><span class="filename">drag_constant.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
@@ -1372,7 +1378,6 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Não esqueça de atualizar os valores dos coeficientes dos motores <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (linhas 8-9) estimados <a href="../identifications/motor_coeficientes.md">anteriormente</a>).</p>
 <p>As etapas para coletar os dados são as seguintes:</p>
 <ol>
 <li>Garanta que a bateria do drone está carregada </li>
@@ -1381,7 +1386,6 @@
 <li>Comece a filmar com seu celular no modo câmera lenta</li>
 <li>Ligue os motores com o Command Based Flight Control do CFClient</li>
 <li>Espere o drone dar duas voltas e pare de filmar</li>
-<li>Repita as etapas 3-6 três vezes</li>
 </ol>
 <p>Após o experimento, você deverá coletar dados para preencher a tabela abaixo.</p>
 <table>
@@ -1454,22 +1458,29 @@
 <h2 id="analise-de-dados">Análise de dados</h2>
 <p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione o ângulo de guinagem <span class="arithmatex">\(\psi\)</span> com o tempo <span class="arithmatex">\(t\)</span> da hélice (note que você precisa converter o ângulo de guinagem de <span class="arithmatex">\(^{\circ}\)</span> para <span class="arithmatex">\(rad\)</span>).</p>
 <p><img alt="Drag Torque" src="../images/drag_torque_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
-<p>Você já sabe que o melhor ajuste para esta curva é uma função polinomial de 2º grau cujos termos de ordem um e zero são nulos:</p>
+<p>Aplicando um torque constante, o deslocamento angular em função do tempo é dado por:</p>
 <div class="arithmatex">\[
     \psi = \frac{\tau_z}{I_{zz}} t^2
 \]</div>
-<p>Determine o valor de <span class="arithmatex">\(k_l\)</span> fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.</p>
+<p>Já <a href="../../basic_concepts/mixer/">deduzimos</a> que esse torque é dado pela soma dos torques de arrasto de cada hélice <span class="arithmatex">\(\tau_i\)</span>, que por sua vez são proporcionais às velocidades angulares das hélices <span class="arithmatex">\(\omega_i\)</span> ao quadrado:</p>
+<div class="arithmatex">\[
+    \tau_z = -k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2
+\]</div>
+<p>Como <span class="arithmatex">\(\omega_1 = \omega_3 = 1.000 \, rad/s\)</span>, <span class="arithmatex">\(\omega_2 = \omega_4 = 2.000 \, rad/s\)</span> e <span class="arithmatex">\(I_{zz} = 4\times10^{-5} \, kg.m^2\)</span>. substituindo na equação anterior:</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \psi &amp;= \frac{\tau_z}{I_{zz}} t^2 \\
+    \psi &amp;= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{I_{zz}} t^2 \\
+    \psi &amp;= k_d \frac{- 2\omega_1^2 + 2 \omega_2^2}{I_{zz}} t^2 \\
+    \psi &amp;= k_d \frac{- 2 \cdot 1000^2 + 2 \cdot 2000^2}{4 \times 10^{-4}} t^2 \\
+    \psi &amp;= \left( 150 \times 10^{9} \right) k_d t^2 \\
+\end{align*}
+\]</div>
+<p>Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujos coeficientes de ordem zero e um são nulos.</p>
+<p>Determine o valor de <span class="arithmatex">\(k_d\)</span> fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.</p>
 <hr />
 <h2 id="validacao-dos-resultados">Validação dos resultados</h2>
-<p>Compare o resultado obtido com o <a href="../../basic_concepts/aerodynamics/">estimado anteriormente</a>. É esperado que a constante de sustentação <span class="arithmatex">\(k_l\)</span> seja da ordem de grandeza de <span class="arithmatex">\(10^{-8}N.s^2\)</span>. </p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+<p>Compare o resultado obtido com o <a href="../../basic_concepts/aerodynamics/">estimado anteriormente</a>. É esperado que a constante de sustentação <span class="arithmatex">\(k_d\)</span> seja da ordem de grandeza de <span class="arithmatex">\(10^{-10}N.s^2\)</span>. </p>
 
 
 

@@ -21,6 +21,34 @@
          <lastmod>2025-09-01</lastmod>
     </url>
     <url>
+         <loc>https://quadcontrol.io/control/attitude_controller/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/attitude_estimator/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/horizontal_controller/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/horizontal_estimator/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/mixer/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/vertical_controller/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/vertical_estimator/</loc>
+         <lastmod>2025-09-01</lastmod>
+    </url>
+    <url>
          <loc>https://quadcontrol.io/first_steps/firmware/</loc>
          <lastmod>2025-09-01</lastmod>
     </url>

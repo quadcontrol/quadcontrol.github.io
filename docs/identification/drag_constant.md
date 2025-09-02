@@ -148,24 +148,24 @@ Utilizando os dados coletados, você deverá ajustar uma curva que correlacione 
 Aplicando um torque constante, o deslocamento angular em função do tempo é dado por:
     
 $$
-    \psi = \frac{\tau_z}{I_{zz}} t^2
+    \psi = \frac{\tau_z}{2 I_{zz}} t^2
 $$
-
 Já [deduzimos](../basic_concepts/mixer.md) que esse torque é dado pela soma dos torques de arrasto de cada hélice $\tau_i$, que por sua vez são proporcionais às velocidades angulares das hélices $\omega_i$ ao quadrado:
 
 $$
     \tau_z = -k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2
 $$
 
-Como $\omega_1 = \omega_3 = 1.000 \, rad/s$, $\omega_2 = \omega_4 = 2.000 \, rad/s$ e $I_{zz} = 4\times10^{-5} \, kg.m^2$. substituindo na equação anterior:
+Como $\omega_1 = \omega_3 = 1.000 \, rad/s$, $\omega_2 = \omega_4 = 2.000 \, rad/s$ e $I_{zz} = 4 \cdot 10^{-5} \, kg.m^2$. substituindo na equação anterior:
 
 $$
 \begin{align*}
-    \psi &= \frac{\tau_z}{I_{zz}} t^2 \\
-    \psi &= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{I_{zz}} t^2 \\
-    \psi &= k_d \frac{- 2\omega_1^2 + 2 \omega_2^2}{I_{zz}} t^2 \\
-    \psi &= k_d \frac{- 2 \cdot 1000^2 + 2 \cdot 2000^2}{4 \times 10^{-4}} t^2 \\
-    \psi &= \left( 150 \times 10^{9} \right) k_d t^2 \\
+    \psi &= \frac{\tau_z}{2I_{zz}} t^2 \\
+    \psi &= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{2I_{zz}} t^2 \\
+    \psi &= \frac{\left(-\omega_1^2 + \omega_2^2 - \omega_3^2 + \omega_4^2\right)k_d}{2I_{zz}} t^2 \\
+    \psi &= \frac{- \cancel{2}\omega_1^2 + \cancel{2} \omega_2^2}{\cancel{2}I_{zz}} k_d t^2 \\
+    \psi &= \frac{- 1000^2 + 2000^2}{4 \cdot 10^{-5}} k_d t^2 \\
+    \psi &= \left( 75 \times 10^{9} \right) k_d t^2 \\
 \end{align*}
 $$
 

@@ -914,11 +914,53 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#variaveis-globais_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variáveis globais
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#funcoes" class="md-nav__link">
     <span class="md-ellipsis">
       Funções
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Funções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referência
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#motores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1301,11 +1343,53 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#variaveis-globais_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variáveis globais
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#funcoes" class="md-nav__link">
     <span class="md-ellipsis">
       Funções
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Funções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referência
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#motores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1359,11 +1443,41 @@
 </ul>
 <hr />
 <h2 id="fundamentos">Fundamentos</h2>
+<p>Já <a href="../../basic_concepts/mixer/">deduzimos</a> a matriz <span class="arithmatex">\(M^{-1}\)</span> que converte as força e torques totais <span class="arithmatex">\(f_t\)</span>, <span class="arithmatex">\(\tau_x\)</span>, <span class="arithmatex">\(\tau_y\)</span> e <span class="arithmatex">\(\tau_z\)</span> produzidos pelas hélices no quadrado das velocidades angulares <span class="arithmatex">\(\omega_1\)</span>, <span class="arithmatex">\(\omega_2\)</span>, <span class="arithmatex">\(\omega_3\)</span> e <span class="arithmatex">\(\omega_4\)</span> dos motores:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+    \omega_1^2 \\
+    \omega_2^2 \\
+    \omega_3^2 \\
+    \omega_4^2
+\end{bmatrix}
+= 
+\underbrace{
+\begin{bmatrix} 
+    \frac{1}{4 k_l} &amp; - \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_d}  \\ 
+    \frac{1}{4 k_l} &amp; - \frac{1}{4 k_l l} &amp; \frac{1}{4 k_l l} &amp; \frac{1}{4 k_d} \\ 
+    \frac{1}{4 k_l} &amp; \frac{1}{4 k_l l} &amp; \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_d} \\ 
+    \frac{1}{4 k_l} &amp; \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_l l} &amp; \frac{1}{4 k_d} 
+\end{bmatrix}
+}_{M^{-1}}
+\begin{bmatrix}
+    f_t \\
+    \tau_x \\
+    \tau_y \\
+    \tau_z
+\end{bmatrix}
+\]</div>
+<p>Além disso, também já <a href="../../identification/motor_coeficients/">determinanos</a> os coeficientes do motor <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> que convertem a velocidade angular <span class="arithmatex">\(\omega\)</span> do motor no sinal PWM correspondente:</p>
+<div class="arithmatex">\[
+    PWM = a_2 \omega^2 + a_1 \omega
+\]</div>
+<p>Se justarmos essas duas funções, temos a lógica do mixer:</p>
 <p><img alt="Mixer" src="../images/mixer.svg" style="display: block; margin: auto;" width="50%" /></p>
 <hr />
 <h2 id="algoritmo">Algoritmo</h2>
 <p>Crie um arquivo chamado <code>mixer.c</code> dentro da pasta <code>src/control</code>.</p>
 <h3 id="bibliotecas-necessarias">Bibliotecas necessárias</h3>
+<p>Logo no início desse arquivo, importe todas as bibliotecas que serão utilizadas.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;math.h&quot;</span><span class="c1">       // Math functions (e.g., sqrtf, roundf, powf)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">   // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">       // FreeRTOS task functions (e.g., vTaskDelay)</span>
@@ -1375,14 +1489,33 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;log.h&quot;</span><span class="c1">        // Logging utilities to send data to the CFClient</span>
 </code></pre></div>
 <h3 id="variaveis-globais">Variáveis globais</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// Motors</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// PWM</span>
+<p class="annotate">Na sequência, declare(1) algumas constantes físicas e parâmetros do quadricoptero que serão bastante utilizados.</p>
+<ol>
+<li>Usamos <code>const</code> para garantir que o valor não muda em tempo de execução. Já o <code>static</code> limita a visibilidade da variável ao arquivo atual, evitando conflitos de nomes em outros arquivos. Assim, <code>static const</code> cria constantes imutáveis e restritas ao arquivo.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Physical constants</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1416f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Mathematical constant</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.81f</span><span class="p">;</span><span class="w">    </span><span class="c1">// Gravitational acceleration [m/s^2]</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.005f</span><span class="p">;</span><span class="w">  </span><span class="c1">// Loop time step [s] (5 ms -&gt; 200 Hz)</span>
 
-<span class="c1">// System inputs</span>
+<span class="c1">// Quadcopter parameters</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">35.0e-3f</span><span class="p">;</span><span class="w">   </span><span class="c1">// Distance from motor to quadcopter center of mass [m]</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">37.0e-3f</span><span class="p">;</span><span class="w">   </span><span class="c1">// Mass [kg]</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Ixx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20.0e-6f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Moment of inertia around x-axis [kg.m^2]</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Iyy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20.0e-6f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Moment of inertia around y-axis [kg.m^2]</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Izz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">40.0e-6f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Moment of inertia around z-axis [kg.m^2]</span>
+</code></pre></div>
+<h3 id="variaveis-globais_1">Variáveis globais</h3>
+<p>Em seguida, declare as variáveis globais que serão utilizadas no Mixer.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// System inputs</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">ft</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Thrust force [N]</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Torques [N.m]</span>
+
+<span class="c1">// Motors</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// PWM</span>
 </code></pre></div>
 <h3 id="funcoes">Funções</h3>
+<h4 id="referencia">Referência</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">// Get reference setpoints from commander module</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1403,6 +1536,7 @@
 <span class="w">    </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Ft (N): %.2f | Tx (N.m): %.3f | Ty (N.m): %.3f  | Tz (N.m): %.3f </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ft</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">tz</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="mixer_1">Mixer</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute motor commands</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">mixer</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1432,6 +1566,7 @@
 <span class="w">    </span><span class="n">pwm4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="motores">Motores</h4>
 <div class="highlight"><pre><span></span><code><span class="c1">// Apply motor commands</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">motors</span><span class="p">()</span>
 <span class="p">{</span>

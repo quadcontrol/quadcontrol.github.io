@@ -1,6 +1,6 @@
 # Arquitetura
 
-Para controlar um drone, precisamos de uma arquitetura clara. Essa arquitetura define como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos motores.
+Para controlar um drone, precisamos de uma arquitetura bem definida. Essa arquitetura estabelece como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos motores.
 
 O diagrama abaixo resume essa sequência em blocos:
 
@@ -11,10 +11,10 @@ No diagrama:
 - Os blocos representam as funções que serão chamadas no loop principal.
 - As setas representam as variáveis que fluem de um bloco para outro.
 
-A passagem dessas informações entre as funções será feita através de variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.
+A passagem dessas informações entre as funções será feita por meio de variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.
 { .annotate }
 
-1. Sabemos que variáveis globais não são a melhor prática em programação. No entanto, como estamos programando tudo em C e cada função precisaria receber e retornar múltiplos parâmetros, essa prática acaba sendo mais simples do que utilizar ponteiros, semáforos etc. Como o foco aqui é mais na teoria de controle do que em engenharia de software, seguiremos dessa forma.
+1. Embora variáveis globais não sejam a melhor prática em programação, aqui adotamos essa solução para manter o código em C mais direto, evitando o excesso de ponteiros e semáforos. Como o foco do curso está na teoria de controle — e não em engenharia de software — essa escolha facilita a compreensão sem comprometer o aprendizado.
 
 ---
 

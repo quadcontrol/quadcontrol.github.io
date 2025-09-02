@@ -1459,21 +1459,22 @@
 <p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione o ângulo de guinagem <span class="arithmatex">\(\psi\)</span> com o tempo <span class="arithmatex">\(t\)</span> da hélice (note que você precisa converter o ângulo de guinagem de <span class="arithmatex">\(^{\circ}\)</span> para <span class="arithmatex">\(rad\)</span>).</p>
 <p><img alt="Drag Torque" src="../images/drag_torque_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Aplicando um torque constante, o deslocamento angular em função do tempo é dado por:</p>
-<div class="arithmatex">\[
-    \psi = \frac{\tau_z}{I_{zz}} t^2
-\]</div>
-<p>Já <a href="../../basic_concepts/mixer/">deduzimos</a> que esse torque é dado pela soma dos torques de arrasto de cada hélice <span class="arithmatex">\(\tau_i\)</span>, que por sua vez são proporcionais às velocidades angulares das hélices <span class="arithmatex">\(\omega_i\)</span> ao quadrado:</p>
+<p>$$
+    \psi = \frac{\tau_z}{2 I_{zz}} t^2
+$$
+Já <a href="../../basic_concepts/mixer/">deduzimos</a> que esse torque é dado pela soma dos torques de arrasto de cada hélice <span class="arithmatex">\(\tau_i\)</span>, que por sua vez são proporcionais às velocidades angulares das hélices <span class="arithmatex">\(\omega_i\)</span> ao quadrado:</p>
 <div class="arithmatex">\[
     \tau_z = -k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2
 \]</div>
-<p>Como <span class="arithmatex">\(\omega_1 = \omega_3 = 1.000 \, rad/s\)</span>, <span class="arithmatex">\(\omega_2 = \omega_4 = 2.000 \, rad/s\)</span> e <span class="arithmatex">\(I_{zz} = 4\times10^{-5} \, kg.m^2\)</span>. substituindo na equação anterior:</p>
+<p>Como <span class="arithmatex">\(\omega_1 = \omega_3 = 1.000 \, rad/s\)</span>, <span class="arithmatex">\(\omega_2 = \omega_4 = 2.000 \, rad/s\)</span> e <span class="arithmatex">\(I_{zz} = 4 \cdot 10^{-5} \, kg.m^2\)</span>. substituindo na equação anterior:</p>
 <div class="arithmatex">\[
 \begin{align*}
-    \psi &amp;= \frac{\tau_z}{I_{zz}} t^2 \\
-    \psi &amp;= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{I_{zz}} t^2 \\
-    \psi &amp;= k_d \frac{- 2\omega_1^2 + 2 \omega_2^2}{I_{zz}} t^2 \\
-    \psi &amp;= k_d \frac{- 2 \cdot 1000^2 + 2 \cdot 2000^2}{4 \times 10^{-4}} t^2 \\
-    \psi &amp;= \left( 150 \times 10^{9} \right) k_d t^2 \\
+    \psi &amp;= \frac{\tau_z}{2I_{zz}} t^2 \\
+    \psi &amp;= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{2I_{zz}} t^2 \\
+    \psi &amp;= \frac{\left(-\omega_1^2 + \omega_2^2 - \omega_3^2 + \omega_4^2\right)k_d}{2I_{zz}} t^2 \\
+    \psi &amp;= \frac{- \cancel{2}\omega_1^2 + \cancel{2} \omega_2^2}{\cancel{2}I_{zz}} k_d t^2 \\
+    \psi &amp;= \frac{- 1000^2 + 2000^2}{4 \cdot 10^{-5}} k_d t^2 \\
+    \psi &amp;= \left( 75 \times 10^{9} \right) k_d t^2 \\
 \end{align*}
 \]</div>
 <p>Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujos coeficientes de ordem zero e um são nulos.</p>

@@ -18,7 +18,7 @@ Crie um arquivo chamado `mixer.c` dentro da pasta `src/control`.
 
 ### Bibliotecas necessárias
 
-Logo no início desse arquivo, importe todas as bibliotecas que serão utilizadas.
+Logo no início desse arquivo, importe todas as bibliotecas que serão necessárias:
 
 ```c
 #include "math.h"       // Math functions (e.g., sqrtf, roundf, powf)
@@ -34,7 +34,7 @@ Logo no início desse arquivo, importe todas as bibliotecas que serão utilizada
 
 ### Parâmetros e constantes
 
-Na sequência, declare(1) algumas constantes físicas e parâmetros do quadricoptero que serão bastante utilizados.
+Na sequência, declare(1) algumas constantes físicas e parâmetros do quadricoptero que serão bastante utilizados:
 { .annotate }
 
 1. Usamos `const` para garantir que o valor não muda em tempo de execução. Já o `static` limita a visibilidade da variável ao arquivo atual, evitando conflitos de nomes em outros arquivos. Assim, `static const` cria constantes imutáveis e restritas ao arquivo.
@@ -70,13 +70,21 @@ float tx, ty, tz;             // Roll, pitch and yaw torques [N.m]
 
 Inicialmente, as forças e torques serão comandados pelo Command Based Flight Control do Crazyflie Client.
 
-- Os botões `↑` e `↓` alteram a variável `setpoint.position.x` em incrementos de $0,5$
-- Os botões `→` e `←` alteram a variável `setpoint.position.y` em incrementos de $0,5$
-- Os botões `Up` e `Down` alteram a variável `setpoint.position.z` em incrementos de $0,5$
-
 ![Commando Based Flight Control](../identification/images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
 
-Abaixo temos um exemplo da função `reference()` que pega pega esses valores e utiliza eles para comandar a força total $f_t$ em incrementos de $0,01\,N$ e os torques de rolagem $\tau_x$ e inclinação $\tau_y$ em incrementos de $0,001\,N.m$.
+- Os botões `↑` e `↓` alteram a variável `setpoint.position.x` em incrementos de $0,5$
+- Os botões `←` e `→` alteram a variável `setpoint.position.y` em incrementos de $0,5$
+- Os botões `Up` e `Down` alteram a variável `setpoint.position.z` em incrementos de $0,5$
+
+Vamos utilizar essas variáveis para comandar a força total $f_t$ em incrementos de $0,01\,N$ e os torques de rolagem $\tau_x$ e inclinação $\tau_y$ em incrementos de $0,001\,N.m$, portanto precisamos ajustar as escalas da seguinte forma:
+
+![Reference](images/reference.svg){: style="display: block; margin: auto;" }
+
+Abaixo temos um exemplo de função `reference()` que faz isso(1):
+{ .annotate }
+
+1. Note que os valores comandados também estão sendo *printados* no console.
+
 
 ```c
 // Get reference setpoints from commander module
@@ -99,8 +107,6 @@ void reference()
     DEBUG_PRINT("Ft (N): %.2f | Tx (N.m): %.3f | Ty (N.m): %.3f  | Tz (N.m): %.3f \n", (double)ft, (double)tx, (double)ty, (double)tz);
 }
 ```
-
-Note que os valores comandados também estão sendo *printados* no console.
 
 ### Mixer
 
@@ -138,9 +144,12 @@ $$
 
 Se justarmos essas duas funções, temos a lógica do mixer:
 
-![Mixer](images/mixer.svg){: width=50% style="display: block; margin: auto;" }
+![Mixer](images/mixer.svg){: style="display: block; margin: auto;" }
 
-Você deve implementar essa lógica na função `mixer()`. Não se esqueça de declarar os parâmetros do quadcóptero previamente identificados.
+Você deve implementar essa lógica na função `mixer()`(1): 
+{.annotate}
+
+1. Declarares os parâmetros do quadcóptero previamente identificados como variáveis locais.
 
 ```c
 // Compute motor commands
@@ -178,7 +187,11 @@ void mixer()
 
 ### Atuadores
 
-A função `actuators()` pega os valores dos sinais PWM calculados e aplica eles nos motores. No entanto, ela faz isso apenas quando o drone é armado pelo Crazyflie Client com o botão `Arm`.
+A função `actuators()` apenas envia os valores dos sinais PWM calculados aos motores: 
+
+![Actuators](images/actuators.svg){: style="display: block; margin: auto;" }
+
+No entanto, ela faz isso apenas quando o drone é armado pelo Crazyflie Client com o botão `Arm`, conforme exemplo abaixo:
 
 ```c
 // Apply motor commands
@@ -224,12 +237,21 @@ void appMain(void *param)
 
 ## Validação
 
-Para validar sua implementação você pode fazer os seguintes teste:
+Para validar sua implementação você deve realizar alguns teste simples.
 
-### Teste 1
+!!! warning "Atenção"
+    Muitos alunos pulam um teste ou outro e só vão descobrir o problema lá na frente, ao passarem horas tentando entender por que o drone deles não voa. Não seja essa pessoa.
 
-### Teste 2
+### Força de empuxo $f_t$
 
-### Teste 3
+Arme o drone a altere o valor da força de empuxo $f_t$ com os botões `Up` e `Down`. Verifique se todas os quatro motores aumentam e diminuem suas velocidades angulares conforme você faz isso.
 
-### Teste 4
+### Torque de rolagem $\tau_x$
+
+Arme o drone a altere o valor do torque de rolagem $\tau_x$ com os botões `←` e `→`. Verifique se apenas os motores 3 e 4 ligam com valores positivos e os motores 1 e 2 com valores negativos.
+
+### Torque de inclinação $\tau_y$
+
+Arme o drone a altere o valor do torque de rolagem $\tau_y$ com os botões `↑` e `↓`. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.
+
+### Torque de guinagem $\tau_z$

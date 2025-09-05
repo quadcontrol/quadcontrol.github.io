@@ -965,36 +965,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#teste-1" class="md-nav__link">
+  <a href="#forca-de-empuxo-f_t" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 1
+      Força de empuxo \(f_t\)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#teste-2" class="md-nav__link">
+  <a href="#torque-de-rolagem-tau_x" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 2
+      Torque de rolagem \(\tau_x\)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#teste-3" class="md-nav__link">
+  <a href="#torque-de-inclinacao-tau_y" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 3
+      Torque de inclinação \(\tau_y\)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#teste-4" class="md-nav__link">
+  <a href="#torque-de-guinagem-tau_z" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 4
+      Torque de guinagem \(\tau_z\)
     </span>
   </a>
   
@@ -1412,36 +1412,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#teste-1" class="md-nav__link">
+  <a href="#forca-de-empuxo-f_t" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 1
+      Força de empuxo \(f_t\)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#teste-2" class="md-nav__link">
+  <a href="#torque-de-rolagem-tau_x" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 2
+      Torque de rolagem \(\tau_x\)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#teste-3" class="md-nav__link">
+  <a href="#torque-de-inclinacao-tau_y" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 3
+      Torque de inclinação \(\tau_y\)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#teste-4" class="md-nav__link">
+  <a href="#torque-de-guinagem-tau_z" class="md-nav__link">
     <span class="md-ellipsis">
-      Teste 4
+      Torque de guinagem \(\tau_z\)
     </span>
   </a>
   
@@ -1481,7 +1481,7 @@
 <h2 id="implementacao">Implementação</h2>
 <p>Crie um arquivo chamado <code>mixer.c</code> dentro da pasta <code>src/control</code>.</p>
 <h3 id="bibliotecas-necessarias">Bibliotecas necessárias</h3>
-<p>Logo no início desse arquivo, importe todas as bibliotecas que serão utilizadas.</p>
+<p>Logo no início desse arquivo, importe todas as bibliotecas que serão necessárias:</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;math.h&quot;</span><span class="c1">       // Math functions (e.g., sqrtf, roundf, powf)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">   // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">       // FreeRTOS task functions (e.g., vTaskDelay)</span>
@@ -1493,7 +1493,7 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;log.h&quot;</span><span class="c1">        // Logging utilities to send data to the CFClient</span>
 </code></pre></div>
 <h3 id="parametros-e-constantes">Parâmetros e constantes</h3>
-<p class="annotate">Na sequência, declare(1) algumas constantes físicas e parâmetros do quadricoptero que serão bastante utilizados.</p>
+<p class="annotate">Na sequência, declare(1) algumas constantes físicas e parâmetros do quadricoptero que serão bastante utilizados:</p>
 <ol>
 <li>Usamos <code>const</code> para garantir que o valor não muda em tempo de execução. Já o <code>static</code> limita a visibilidade da variável ao arquivo atual, evitando conflitos de nomes em outros arquivos. Assim, <code>static const</code> cria constantes imutáveis e restritas ao arquivo.</li>
 </ol>
@@ -1520,13 +1520,18 @@
 </code></pre></div>
 <h3 id="referencia">Referência</h3>
 <p>Inicialmente, as forças e torques serão comandados pelo Command Based Flight Control do Crazyflie Client.</p>
+<p><img alt="Commando Based Flight Control" src="../../identification/images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
 <ul>
 <li>Os botões <code>↑</code> e <code>↓</code> alteram a variável <code>setpoint.position.x</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
-<li>Os botões <code>→</code> e <code>←</code> alteram a variável <code>setpoint.position.y</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
+<li>Os botões <code>←</code> e <code>→</code> alteram a variável <code>setpoint.position.y</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
 <li>Os botões <code>Up</code> e <code>Down</code> alteram a variável <code>setpoint.position.z</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
 </ul>
-<p><img alt="Commando Based Flight Control" src="../../identification/images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
-<p>Abaixo temos um exemplo da função <code>reference()</code> que pega pega esses valores e utiliza eles para comandar a força total <span class="arithmatex">\(f_t\)</span> em incrementos de <span class="arithmatex">\(0,01\,N\)</span> e os torques de rolagem <span class="arithmatex">\(\tau_x\)</span> e inclinação <span class="arithmatex">\(\tau_y\)</span> em incrementos de <span class="arithmatex">\(0,001\,N.m\)</span>.</p>
+<p>Vamos utilizar essas variáveis para comandar a força total <span class="arithmatex">\(f_t\)</span> em incrementos de <span class="arithmatex">\(0,01\,N\)</span> e os torques de rolagem <span class="arithmatex">\(\tau_x\)</span> e inclinação <span class="arithmatex">\(\tau_y\)</span> em incrementos de <span class="arithmatex">\(0,001\,N.m\)</span>, portanto precisamos ajustar as escalas da seguinte forma:</p>
+<p><img alt="Reference" src="../images/reference.svg" style="display: block; margin: auto;" /></p>
+<p class="annotate">Abaixo temos um exemplo de função <code>reference()</code> que faz isso(1):</p>
+<ol>
+<li>Note que os valores comandados também estão sendo <em>printados</em> no console.</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Get reference setpoints from commander module</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1547,7 +1552,6 @@
 <span class="w">    </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Ft (N): %.2f | Tx (N.m): %.3f | Ty (N.m): %.3f  | Tz (N.m): %.3f </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ft</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">tz</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Note que os valores comandados também estão sendo <em>printados</em> no console.</p>
 <h3 id="mixer_1">Mixer</h3>
 <p>Já <a href="../../basic_concepts/mixer/">deduzimos</a> a matriz <span class="arithmatex">\(M^{-1}\)</span> que converte as força e torques totais produzidos pelas hélices <span class="arithmatex">\(f_t\)</span>, <span class="arithmatex">\(\tau_x\)</span>, <span class="arithmatex">\(\tau_y\)</span> e <span class="arithmatex">\(\tau_z\)</span>  no quadrado das velocidades angulares dos motores <span class="arithmatex">\(\omega_1\)</span>, <span class="arithmatex">\(\omega_2\)</span>, <span class="arithmatex">\(\omega_3\)</span> e <span class="arithmatex">\(\omega_4\)</span> :</p>
 <div class="arithmatex">\[
@@ -1578,8 +1582,11 @@
     PWM = a_2 \omega^2 + a_1 \omega
 \]</div>
 <p>Se justarmos essas duas funções, temos a lógica do mixer:</p>
-<p><img alt="Mixer" src="../images/mixer.svg" style="display: block; margin: auto;" width="50%" /></p>
-<p>Você deve implementar essa lógica na função <code>mixer()</code>. Não se esqueça de declarar os parâmetros do quadcóptero previamente identificados.</p>
+<p><img alt="Mixer" src="../images/mixer.svg" style="display: block; margin: auto;" /></p>
+<p class="annotate">Você deve implementar essa lógica na função <code>mixer()</code>(1): </p>
+<ol>
+<li>Declarares os parâmetros do quadcóptero previamente identificados como variáveis locais.</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute motor commands</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">mixer</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1613,7 +1620,9 @@
 <p>Cuidado ao tirar a raiz quadrada de números negativos! Você deve checar o sinal de <span class="arithmatex">\(\omega^2\)</span>, e só tirar a raiz quadrada se ele for positivo.</p>
 </div>
 <h3 id="atuadores">Atuadores</h3>
-<p>A função <code>actuators()</code> pega os valores dos sinais PWM calculados e aplica eles nos motores. No entanto, ela faz isso apenas quando o drone é armado pelo Crazyflie Client com o botão <code>Arm</code>.</p>
+<p>A função <code>actuators()</code> apenas envia os valores dos sinais PWM calculados aos motores: </p>
+<p><img alt="Actuators" src="../images/actuators.svg" style="display: block; margin: auto;" /></p>
+<p>No entanto, ela faz isso apenas quando o drone é armado pelo Crazyflie Client com o botão <code>Arm</code>, conforme exemplo abaixo:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Apply motor commands</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">actuators</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1650,11 +1659,18 @@
 </code></pre></div>
 <hr />
 <h2 id="validacao">Validação</h2>
-<p>Para validar sua implementação você pode fazer os seguintes teste:</p>
-<h3 id="teste-1">Teste 1</h3>
-<h3 id="teste-2">Teste 2</h3>
-<h3 id="teste-3">Teste 3</h3>
-<h3 id="teste-4">Teste 4</h3>
+<p>Para validar sua implementação você deve realizar alguns teste simples.</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Muitos alunos pulam um teste ou outro e só vão descobrir o problema lá na frente, ao passarem horas tentando entender por que o drone deles não voa. Não seja essa pessoa.</p>
+</div>
+<h3 id="forca-de-empuxo-f_t">Força de empuxo <span class="arithmatex">\(f_t\)</span></h3>
+<p>Arme o drone a altere o valor da força de empuxo <span class="arithmatex">\(f_t\)</span> com os botões <code>Up</code> e <code>Down</code>. Verifique se todas os quatro motores aumentam e diminuem suas velocidades angulares conforme você faz isso.</p>
+<h3 id="torque-de-rolagem-tau_x">Torque de rolagem <span class="arithmatex">\(\tau_x\)</span></h3>
+<p>Arme o drone a altere o valor do torque de rolagem <span class="arithmatex">\(\tau_x\)</span> com os botões <code>←</code> e <code>→</code>. Verifique se apenas os motores 3 e 4 ligam com valores positivos e os motores 1 e 2 com valores negativos.</p>
+<h3 id="torque-de-inclinacao-tau_y">Torque de inclinação <span class="arithmatex">\(\tau_y\)</span></h3>
+<p>Arme o drone a altere o valor do torque de rolagem <span class="arithmatex">\(\tau_y\)</span> com os botões <code>↑</code> e <code>↓</code>. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.</p>
+<h3 id="torque-de-guinagem-tau_z">Torque de guinagem <span class="arithmatex">\(\tau_z\)</span></h3>
 
 
 

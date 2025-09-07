@@ -16,7 +16,7 @@ A figura abaixo mostra a secção transversal de um aerofólio, um corpo teóric
 
 Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação $f_l$ (perpendicular à velocidade $v$), ele também produz uma força indesejada de arrasto $f_d$ (paralela à velocidade $v$):
 $$
-    f_l = \frac{1}{2} \rho A C_l v^2 
+    {\color{lightgreen}f_l} = \frac{1}{2} \rho A C_l v^2 
     \qquad
     f_d = \frac{1}{2} \rho A C_d v^2 
 $$

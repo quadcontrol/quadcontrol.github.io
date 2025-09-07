@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/basic_concepts/inertia/">
+        <link rel="canonical" href="https://quadcontrol.io/modeling/2d_model/">
       
       
-        <link rel="prev" href="../mixer/">
+        <link rel="prev" href="../coordinate_system/">
       
       
-        <link rel="next" href="../../identification/motor_coeficients/">
+        <link rel="next" href="../3d_model/">
       
       
       <link rel="icon" href="../../images/logo_black.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Inércia - QuadControl</title>
+        <title>Modelo 2D - QuadControl</title>
       
     
     
@@ -75,11 +75,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#inercia" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -111,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inércia
+              Modelo 2D
             
           </span>
         </div>
@@ -442,20 +437,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -471,7 +464,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Conceitos básicos
@@ -485,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aerodynamics/" class="md-nav__link">
+      <a href="../../basic_concepts/aerodynamics/" class="md-nav__link">
         
   
   
@@ -508,7 +501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mixer/" class="md-nav__link">
+      <a href="../../basic_concepts/mixer/" class="md-nav__link">
         
   
   
@@ -528,32 +521,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Inércia
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../basic_concepts/inertia/" class="md-nav__link">
         
   
   
@@ -564,44 +535,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#massa" class="md-nav__link">
-    <span class="md-ellipsis">
-      Massa
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#momento-de-inercia" class="md-nav__link">
-    <span class="md-ellipsis">
-      Momento de Inércia
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -732,18 +665,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -759,7 +694,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Modelagem
@@ -773,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/coordinate_system/" class="md-nav__link">
+      <a href="../coordinate_system/" class="md-nav__link">
         
   
   
@@ -793,10 +728,17 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../modeling/2d_model/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -807,6 +749,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -819,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/3d_model/" class="md-nav__link">
+      <a href="../3d_model/" class="md-nav__link">
         
   
   
@@ -1226,34 +1169,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#massa" class="md-nav__link">
-    <span class="md-ellipsis">
-      Massa
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#momento-de-inercia" class="md-nav__link">
-    <span class="md-ellipsis">
-      Momento de Inércia
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1269,116 +1184,9 @@
 
 
 
-<h1 id="inercia">Inércia</h1>
-<p>Todo corpo resiste a mudanças em seu estado de movimento — essa resistência é o que chamamos de inércia.</p>
-<p>No caso de um drone, que está livre para se mover e girar no espaço, a inércia se manifesta de duas formas principais, e ambas são fundamentais para entender como ele responde aos comandos de controle:</p>
-<ul>
-<li>Massa — representa a resistência a movimentos lineares (como subir/descer, avançar/recuar ou deslocar-se lateralmente). É a chamada inércia translacional.</li>
-<li>Momento de inércia — representa a resistência a movimentos angulares (como rolar, inclinar ou guinar). É a chamada inércia rotacional.</li>
-</ul>
-<p>Controlar bem um drone exige compreender essas duas formas de inércia — e como elas influenciam as acelerações que conseguimos impor a ele.</p>
-<hr />
-<h2 id="massa">Massa</h2>
-<p>A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.</p>
-<p><img alt="Mass" src="../images/mass.svg" style="display: block; margin: auto;" width="500" /></p>
-<div class="admonition question">
-<p class="admonition-title">Exercício 1</p>
-<p>Podemos calcular a massa do drone somando a massa de seus componentes:</p>
-<ul>
-<li>O <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">drone</a> que já considera bateria, PCB, motores, hélices, etc.</li>
-<li>O <a href="https://www.bitcraze.io/products/flow-deck-v2/" target="_blank">módulo de expansão</a> que é acoplado embaixo</li>
-</ul>
-<p>Determine a massa total do drone somando a massa de seus componentes. Elas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
-<details class="info">
-<summary>Resposta</summary>
-<div class="arithmatex">\[
-\begin{align*}
-    m &amp;= m_{cf} + m_{fd} \\
-    m &amp;= 37 + 1,6 \\
-    m &amp;= 38,6 g
-\end{align*}
-\]</div>
-</details>
-</div>
-<hr />
-<h2 id="momento-de-inercia">Momento de Inércia</h2>
-<p>O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.</p>
-<p><img alt="Moment of Inertia" src="../images/moment_of_inertia.svg" style="display: block; margin: auto;" width="500" /></p>
-<div class="admonition question">
-<p class="admonition-title">Exercício 2</p>
-<p>Podemos calcular os momentos de inércia do drone considerando um modelo mais simples<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
-<ul>
-<li>A <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery" target="_blank">bateria</a> como um paralelepípedo</li>
-<li>Os <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor" target="_blank">motores</a> com  <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">hélices</a> e <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards" target="_blank">suportes</a> como massas puntiformes</li>
-</ul>
-<p>Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
-<details class="info">
-<summary>Resposta</summary>
-<p>A bateria possui <span class="arithmatex">\(9,10 \, g\)</span> de massa e dimensões <span class="arithmatex">\(3,3 \times 2,0 \times 0,8 \, cm\)</span>: </p>
-<div class="arithmatex">\[
-\left\{
-\begin{align*}
-    m_b &amp;= 9,10 \, g\\
-    a &amp;= 3,3 \, cm\\
-    b &amp;= 2,0 \, cm\\
-    c &amp;= 0,8 \, cm\\
-\end{align*}
-\right.
-\]</div>
-<p>Assim, usando uma tabela de momentos de inércia de um paralelepípedo temos que:</p>
-<p><img alt="Moment of Inertia Battery" src="../images/moment_of_inertia_battery.svg" style="display: block; margin: auto;" width="500" /></p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{b_{xx}} &amp;= \frac{m_b}{12} (b^2 + c^2) &amp; \quad I_{b_{yy}} &amp;= \frac{m_b}{12} (a^2 + c^2) &amp; \quad I_{b_{zz}} &amp;= \frac{m_b}{12} (a^2 + b^2) \\
-    I_{b_{xx}} &amp;= \frac{9,1}{12} (2,0^2 + 0,8^2) &amp; \quad I_{b_{yy}} &amp;= \frac{9,1}{12} (3,3^2 + 0,8^2) &amp; \quad I_{b_{zz}} &amp;= \frac{9,1}{12} (3,3^2 + 2,0^2) \\
-    I_{b_{xx}} &amp;= 3,52 \, g.cm^2 &amp; \quad I_{b_{yy}} &amp;= 8,74 \, g.cm^2 &amp; \quad I_{b_{zz}} &amp;= 12,29 \, g.cm^2 \\
-\end{align*}
-\]</div>
-<p>Os motores (<span class="arithmatex">\(2,30 \, g\)</span>), com hélices (<span class="arithmatex">\(1,34 \, g\)</span>) e suportes (<span class="arithmatex">\(0,33 \, g\)</span>), possuem <span class="arithmatex">\(3,97 \, g\)</span> de massa total e estão a <span class="arithmatex">\(10 \, cm\)</span> de distância na diagonal: </p>
-<div class="arithmatex">\[
-\left\{
-\begin{align*}
-    m_m &amp;= 3,97 \, g\\
-    l_x &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
-    l_y &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
-    l_z &amp;= 5 \, cm\\
-\end{align*}
-\right.
-\]</div>
-<p>Assim, considerando eles como massas puntiformes temos que:</p>
-<p><img alt="Moment of Inertia Motors" src="../images/moment_of_inertia_motors.svg" style="display: block; margin: auto;" width="500" /></p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{m_{xx}} &amp;= m_m l_x^2 &amp; \quad I_{m_{yy}} &amp;= m_m l_y^2 &amp; \quad I_{m_{zz}} &amp;= m_m l_z^2 \\
-    I_{m_{xx}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{yy}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{zz}} &amp;= 3,97 \cdot 5,0^2 \\
-    I_{m_{xx}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{yy}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{zz}} &amp;= 99,25 \, g.cm^2 \\
-\end{align*}
-\]</div>
-<p>Dessa forma, os momentos de inércia totais são dados por:</p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{xx} &amp;= I_{b_{xx}} + 4 I_{m_{xx}} &amp; \quad I_{yy} &amp;= I_{b_{yy}} + 4 I_{m_{yy}} &amp; \quad I_{zz} &amp;= I_{b_{zz}} + 4 I_{m_{zz}} \\
-    I_{xx} &amp;= 3,52 + 4 \cdot 49,62 &amp; \quad I_{yy} &amp;= 8,74 + 4 \cdot 49,62 &amp; \quad I_{zz} &amp;= 12,29 + 4 \cdot 99,25 \\
-    I_{xx} &amp;= 202,02 \, g.cm^2 &amp; \quad I_{yy} &amp;= 207,24 \, g.cm^2 &amp; \quad I_{zz} &amp;= 408,29 \, g.cm^2 \\
-\end{align*}
-\]</div>
-<p>Ou, de forma aproximada, e no S.I. (Sistema Internacional de Unidades):</p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{xx} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{yy} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{zz} &amp;= 4 \cdot 10^{-5} \, kg.m^2 \\
-\end{align*}
-\]</div>
-</details>
-</div>
-<p>​</p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Estamos desprezando a estrutura de PCB do drone, já que sua massa é pequena comparada à da bateria e dos motores, além de estar concentrada próxima ao centro de massa.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+  <h1>Modelo 2D</h1>
+
+
 
 
 

@@ -36,8 +36,9 @@ nav:
     - Constante de sustentação: identification/lift_constant.md
     - Constante de arrasto: identification/drag_constant.md
   - Modelagem:
-    - Modelo 2D: x.md
-    - Modelo 3D: x.md
+    - Sistema de coordendas: modeling/coordinate_system.md
+    - Modelo 2D: modeling/2d_model.md
+    - Modelo 3D: modeling/3d_model.md
   - Controle: 
     - Arquitetura: control/architecture.md
     - Mixer: control/mixer.md

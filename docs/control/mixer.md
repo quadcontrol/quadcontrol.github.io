@@ -1,6 +1,6 @@
 # Mixer
 
-Nesta secção você irá implementar o mixer, que converte as força e torques totais produzidos pelas hélices $f_t$, $\tau_x$, $\tau_y$ e $\tau_z$ nos sinais PWM correspondentes dos motores.
+Nesta secção você irá implementar o mixer, que converte as forças e torques totais produzidos pelas hélices $f_t$, $\tau_x$, $\tau_y$ e $\tau_z$ nos sinais PWM correspondentes dos motores.
 
 ![Architecture - Mixer](images/architecture_mixer.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -14,11 +14,14 @@ Para isto, serão implementadas três funções:
 
 ## Implementação
 
-Crie um arquivo chamado `mixer.c` dentro da pasta `src/control`.
+Para começar, crie um arquivo chamado `mixer.c` dentro da pasta `src/control`.
 
 ### Bibliotecas necessárias
 
-Logo no início desse arquivo, importe todas as bibliotecas que serão necessárias:
+Logo no início desse arquivo, importe todas(1) as bibliotecas que serão utilizadas:
+{.annotate}
+
+1. Algumas dessas bibliotecas não são estritamente necessárias para o mixer, mas já as incluímos agora para evitar preocupações futuras ao integrar os próximos módulos.
 
 ```c
 #include "math.h"       // Math functions (e.g., sqrtf, roundf, powf)
@@ -76,9 +79,9 @@ Inicialmente, as forças e torques serão comandados pelo Command Based Flight C
 - Os botões `←` e `→` alteram a variável `setpoint.position.y` em incrementos de $0,5$
 - Os botões `Up` e `Down` alteram a variável `setpoint.position.z` em incrementos de $0,5$
 
-Vamos utilizar essas variáveis para comandar a força total $f_t$ em incrementos de $0,01\,N$ e os torques de rolagem $\tau_x$ e inclinação $\tau_y$ em incrementos de $0,001\,N.m$, portanto precisamos ajustar as escalas da seguinte forma:
+Vamos utilizar essas variáveis para comandar a força total $f_t$ em incrementos de $0,01\,N$ e os torques de rolagem $\tau_x$ e inclinação $\tau_y$ em incrementos de $0,001\,N.m$. Portanto, precisamos ajustar as escalas da seguinte forma:
 
-![Reference](images/reference.svg){: style="display: block; margin: auto;" }
+![](images/reference_mixer.svg){: style="display: block; margin: auto;" }
 
 Abaixo temos um exemplo de função `reference()` que faz isso(1):
 { .annotate }
@@ -136,28 +139,28 @@ $$
 \end{bmatrix}
 $$
 
-Além disso, também já [determinanos](../identification/motor_coeficients.md) os coeficientes do motor $a_2$ e $a_1$ que convertem a velocidade angular $\omega$ do motor no sinal PWM correspondente:
+Além disso, também já [determinanos](../identification/motor_coeficients.md) os coeficientes dos motores $a_2$ e $a_1$ que convertem a velocidade angular $\omega$ do motor no sinal PWM correspondente:
 
 $$
     PWM = a_2 \omega^2 + a_1 \omega
 $$
 
-Se justarmos essas duas funções, temos a lógica do mixer:
+Se unirmos essas duas funções, temos a lógica do mixer:
 
 ![Mixer](images/mixer.svg){: style="display: block; margin: auto;" }
 
 Você deve implementar essa lógica na função `mixer()`(1): 
 {.annotate}
 
-1. Declarares os parâmetros do quadcóptero previamente identificados como variáveis locais.
+1. Declarare os parâmetros do quadcóptero previamente identificados como variáveis locais.
 
 ```c
 // Compute motor commands
 void mixer()
 {
     // Quadcopter parameters
-    static const float a2 = 0.0f;  // Quadratic motor model gain [s^2/rad^2]
-    static const float a1 = 0.0f;  // Linear motor model gain [s/rad]
+    static const float a2 = 0.0f; // Quadratic motor model gain [s^2/rad^2]
+    static const float a1 = 0.0f; // Linear motor model gain [s/rad]
     static const float kl = 0.0f; // Lift constant [N.s^2]
     static const float kd = 0.0f; // Drag constant [N.m.s^2]
 
@@ -167,7 +170,7 @@ void mixer()
     float omega3 = 0.0f;
     float omega4 = 0.0f;
 
-    // Clamp to non-negative and take square root
+    // Clamp to non-negative and take square root (omega)
     omega1 = 0.0f;
     omega2 = 0.0f;
     omega3 = 0.0f;
@@ -237,14 +240,17 @@ void appMain(void *param)
 
 ## Validação
 
-Para validar sua implementação você deve realizar alguns teste simples.
+Para validar sua implementação você deve realizar alguns teste simples, que consistem apenas em verificar se os motores corretos estão aumentando ou diminuindo suas velocidades angulares.
+
+![](images/mixer_tests.svg){: width="500" style="display: block; margin: auto;" }
+
 
 !!! warning "Atenção"
     Muitos alunos pulam um teste ou outro e só vão descobrir o problema lá na frente, ao passarem horas tentando entender por que o drone deles não voa. Não seja essa pessoa.
 
 ### Força de empuxo $f_t$
 
-Arme o drone a altere o valor da força de empuxo $f_t$ com os botões `Up` e `Down`. Verifique se todas os quatro motores aumentam e diminuem suas velocidades angulares conforme você faz isso.
+Arme o drone a altere o valor da força de empuxo $f_t$ com os botões `Up` e `Down`. Verifique se todos os quatro motores aumentam e diminuem suas velocidades angulares conforme você faz isso.
 
 ### Torque de rolagem $\tau_x$
 
@@ -252,6 +258,12 @@ Arme o drone a altere o valor do torque de rolagem $\tau_x$ com os botões `←`
 
 ### Torque de inclinação $\tau_y$
 
-Arme o drone a altere o valor do torque de rolagem $\tau_y$ com os botões `↑` e `↓`. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.
+Arme o drone a altere o valor do torque de inclinação $\tau_y$ com os botões `↑` e `↓`. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.
 
 ### Torque de guinagem $\tau_z$
+
+Modifique a função de referência, para que os botões `←` e `→` alterem o valor do torque de guinagem $\tau_z$ e não mais de rolagem $\tau_x$:
+
+![](images/reference_mixer2.svg){: style="display: block; margin: auto;" }
+
+Arme o drone a altere o valor do torque de guinagem $\tau_z$ com os botões `←` e `→`. Verifique se apenas os motores 2 e 4 ligam com valores positivos e os motores 1 e 3 com valores negativos.

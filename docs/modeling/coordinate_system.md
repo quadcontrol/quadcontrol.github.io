@@ -1,32 +1,32 @@
 # Sistema de coordenadas
 
-No controle de drones, sistemas de coordenadas são utilizados com bastante frequência para descrever a posição e orientação relativa: posição do drone em relação ao chão, orientação da câmera em relação ao drone, velocidade do drone em relação ao vento, etc.
-    
-Muitos cálculos são muito mais simples se realizados no sistema de coordenada adequado: forças e torques aerodinâmicos em um sistema de coordenadas fixo no drone, aceleração da gravidade em um sistema de coordenadas fixo na terra, etc.
+No controle de drones, o uso de sistemas de coordenadas é fundamental para descrever posições e orientações relativas. Alguns exemplos comuns são: a posição do drone em relação ao solo, a orientação da câmera em relação ao drone e a velocidade do drone em relação ao vento.
+
+A escolha do sistema de coordenadas adequado torna muitos cálculos mais simples. Por exemplo, forças e torques aerodinâmicos são mais naturalmente descritos em um sistema de coordenadas móvel (fixo no drone), enquanto a aceleração da gravidade é melhor representada em um sistema de coordenadas inercial (fixo na Terra).
 
 ---
 
 ## Matriz de rotação
 
-Ao lidar com diferentes sistemas de coordenadas, torna-se necessário descrever em linguagem matemática a orientação entre eles. Isso é feito através de matrizes de rotação, que podem ser usadas tanto no plano (2D) como no espaço (3D).
+Quando trabalhamos com diferentes sistemas de coordenadas, precisamos de uma forma matemática para descrever a orientação relativa entre eles. Essa função é cumprida pelas matrizes de rotação, que permitem representar rotações tanto no plano (2D) quanto no espaço tridimensional (3D).
 
 ### 2D
 
-Ao especificar a posição de um drone, torna-se necessário definir uma referência. Um método geral para definir uma referência é utilizar um sistema de coordenadas inercial ${\color{magenta}yz}$ (1).
+Ao descrever a posição de um drone, precisamos definir uma referência. Um método geral é utilizar um sistema de coordenadas inercial ${\color{magenta}yz}$ (1).
 {.annotate}
 
-1. Fixo na terra, que não acelera nem rotaciona.
+1. Fixo na Terra, que não acelera nem rotaciona.
 
 ![](images/2d_position.svg){: width="600" style="display: block; margin: auto;" }
 
-Ao especificar a atitude (orientação) de um drone, apenas um sistema de coordenadas não é suficiente. Torna-se necessário utilizar um outro sistema de coordenadas móvel ${\color{cyan}y'z'}$ (1).
+Já para descrever a atitude (orientação) do drone, apenas esse sistema não é suficiente. É necessário introduzir também um sistema de coordenadas móvel ${\color{cyan}y'z'}$ (1).
 {.annotate}
     
 1. Fixo no drone, que acelera e rotaciona com ele.
 
 ![](images/2d_position_attitude.svg){: width="600" style="display: block; margin: auto;" }
 
-Dessa forma, a atitude do drone é dada pela atitude relativa do sistema de coordenadas móvel ${\color{cyan}y'z'}$ em relação ao sistema de coordenadas inercial ${\color{magenta}yz}$. Matematicamente, essa atitude é dada por uma matrix $2 \times 2$ chamada de matrix de rotação $R$:
+A atitude do drone é dada, portanto, pela orientação relativa do sistema móvel ${\color{cyan}y'z'}$ em relação ao sistema inercial ${\color{magenta}yz}$. Essa orientação pode ser representada matematicamente por uma matriz $2 \times 2$ chamada de matrix de rotação $R$:
 
 $$
 {\color{cyan}
@@ -50,7 +50,7 @@ $$
 }
 $$
 
-Apesar de possuir $4$ elementos, a matriz de rotação pode ser descrita em função de $1$ único parâmetro, o ângulo de rotação $\phi$:
+Apesar de possuir quatro elementos, essa matriz pode ser descrita em função de um único parâmetro: o ângulo de rotação $\phi$:
 
 $$
 R(\phi)=
@@ -62,11 +62,11 @@ $$
 
 !!! question "Exercício 1"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}y'z'}$ está rotacionado de um ângulo $\phi$ em relação o sistema de coordenadas inercial ${\color{magenta}yz}$.
+    Considere que o sistema de coordenadas móvel ${\color{cyan}y'z'}$ está rotacionado de um ângulo $\phi$ em relação ao sistema de coordenadas inercial ${\color{magenta}yz}$.
 
     ![](images/2d_rotation_x.svg){: width="200" style="display: block; margin: auto;" }
     
-    ??? info "a) Determine a matriz de rotação em função do ângulo de rotação $\phi$" 
+    ??? info "a) Escreva a matriz de rotação em função do ângulo $\phi$." 
         $$
         R(\phi) = 
         \begin{bmatrix} 
@@ -75,30 +75,30 @@ $$
         \end{bmatrix}
         $$
     
-    ??? info "b) Determine a matriz de rotação quando $\phi = \frac{\pi}{2} \, \text{rad}$ e verifique se o resultado faz sentido."
+    ??? info "b) Calcule $R(\phi)$ para $\phi = \frac{\pi}{2} \, \text{rad}$ e interprete o resultado."
         $$
         R\left(\frac{\pi}{2}\right) 
         = 
         \begin{bmatrix} 
             \cos{\frac{\pi}{2}} & \sin{\frac{\pi}{2}} \\ 
             -\sin{\frac{\pi}{2}} & \cos{\frac{\pi}{2}} 
-        \end{bmatrix} \\
-        = 
+        \end{bmatrix} 
+        =
         \begin{bmatrix} 
             0 & 1 \\ 
             -1 & 0
         \end{bmatrix}
         $$
 
-        Faz sentido, pois ao rotacionar $90^{\circ}$, o eixo ${\color{cyan}y'}$ fica no mesmo sentido de ${\color{magenta}z}$, enquanto o eixo ${\color{cyan}z'}$ fica no sentido contrário de ${\color{magenta}y}$.
+        O resultado faz sentido: ao rotacionar $90^{\circ}$, o eixo ${\color{cyan}y'}$ passa a coincidir com ${\color{magenta}z}$, enquanto o eixo ${\color{cyan}z'}$ fica no sentido oposto de ${\color{magenta}y}$.
  
-    ??? info "c) Determine o ângulo de rotação $\phi$ correspondente à matriz de rotação <br> $R = \begin{bmatrix} \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix}$"
+    ??? info "c) Determine o ângulo $\phi$ correspondente à matriz <br> $R (\phi)= \begin{bmatrix} \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix}$."
     
         $$
         \begin{align*}
             \cos \phi &= \frac{\sqrt{2}}{2} \\
-            \phi &= \cos^{-1} \left( \frac{\sqrt{2}}{2} \right) \\
-            \phi &= \frac{\pi}{4} \text{rad}
+            \phi &= \cos^{-1}\!\left(\frac{\sqrt{2}}{2}\right) \\
+            \phi &= \frac{\pi}{4} \;\text{rad} \;\; (45^\circ)
         \end{align*}
         $$
 
@@ -110,7 +110,7 @@ Assim como no plano, no espaço a atitude do drone também é dada pela atitude 
 
 ![](images/3d_position_attitude.svg){: width="600" style="display: block; margin: auto;" }
 
-No entanto, como agora estamos lidando com $3$ dimensões, a matriz de rotação $R$ passa a possuir dimensão $3 \times 3$:
+No entanto, como agora estamos lidando com três dimensões, a matriz de rotação $R$ passa a possuir dimensão $3 \times 3$:
 
 $$
 {\color{cyan}
@@ -135,10 +135,11 @@ $$
 }
 $$
 
-De acordo com Leonard Euler, qualquer atitude no espaço pode ser descrita através de três rotações sucessivas em torno de eixos pré-definidos e linearmente independentes.
-        
-Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em função de 3 parâmetros, os ângulos de Euler $\phi$, $\theta$ e $\psi$:
+De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita através de três rotações sucessivas em torno de eixos pré-definidos e mutuamente ortogonais(1). Dessa forma, os nove elementos da matriz de rotação podem ser expressos em função de três parâmetros: os ângulos de Euler $\phi$, $\theta$ e $\psi$:
+{.annotate}
 
+1. Formam um ângulo de $90^{\circ}$ entre si.
+    
 \begin{equation*}
         R({\phi},{\theta},{\psi})
         =
@@ -151,11 +152,11 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
 
 !!! question "Exercício 2"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\phi$ em relação o sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}x}$.
+    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\phi$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}x}$.
 
     ![](images/3d_rotation_x.svg){: width="200" style="display: block; margin: auto;" }
     
-    ??? info "a) Determine a matriz de rotação em função do ângulo de rotação $\phi$" 
+    ??? info "a) Escreva a matriz de rotação em função do ângulo $\phi$."
         $$
         R_x(\phi) = 
         \begin{bmatrix} 
@@ -165,7 +166,7 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
         \end{bmatrix}
         $$
     
-    ??? info "b) Determine a matriz de rotação quando $\phi = \pi \, \text{rad}$ e verifique se o resultado faz sentido."
+    ??? info "b) Calcule $R_x(\phi)$ para $\phi=\pi \, \text{rad}$ e interprete o resultado."
         $$
         \begin{align*}
             R_x\left(\pi\right) 
@@ -184,15 +185,15 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
         \end{align*}
         $$
 
-        Faz sentido, pois ao rotacionar $180^{\circ}$, o eixo ${\color{cyan}y'}$ fica no sentido contrário de ${\color{magenta}y}$, enquanto o eixo ${\color{cyan}z'}$ fica no sentido contrário de ${\color{magenta}z}$.
+        O resultado faz sentido: uma rotação de $180^\circ$ em torno de ${\color{magenta}x}$ inverte os eixos ${\color{magenta}y}$ e ${\color{magenta}z}$, de modo que ${\color{cyan}y'}$ e ${\color{cyan}z'}$ ficam em sentidos opostos a ${\color{magenta}y}$ e ${\color{magenta}z}$, enquanto ${\color{cyan}x'}$ permance alinhado com ${\color{magenta}x}$.
 
 !!! question "Exercício 3"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\theta$ em relação o sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}y}$.
+    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\theta$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}y}$.
 
     ![](images/3d_rotation_y.svg){: width="200" style="display: block; margin: auto;" }
     
-    ??? info "a) Determine a matriz de rotação em função do ângulo de rotação $\theta$" 
+    ??? info "a) Escreva a matriz de rotação em função do ângulo $\theta$."
         $$
         R_y(\theta) = 
         \begin{bmatrix} 
@@ -202,10 +203,10 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
         \end{bmatrix}
         $$
     
-    ??? info "b) Determine a matriz de rotação quando $\theta = \frac{\pi}{2} \, \text{rad}$ e verifique se o resultado faz sentido."
+    ??? info "b) Calcule $R_y(\theta)$ para $\theta=\tfrac{\pi}{2} \, \text{rad}$ e interprete o resultado."
         $$
         \begin{align*}
-            R_x\left(\pi\right) 
+            R_y\left(\frac{\pi}{2}\right) 
             = 
             \begin{bmatrix} 
                 \cos\frac{\pi}{2} & 0 & -\sin\frac{\pi}{2} \\ 
@@ -221,15 +222,15 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
         \end{align*}
         $$
 
-        Faz sentido, pois ao rotacionar $90^{\circ}$, o eixo ${\color{cyan}x'}$ fica no sentido contrário de ${\color{magenta}z}$, enquanto o eixo ${\color{cyan}z'}$ fica no mesmo sentido de ${\color{magenta}x}$.
+        O resultado faz sentido: ao rotacionar $90^\circ$ em torno de ${\color{magenta}y}$, o eixo ${\color{cyan}x'}$ passa a apontar para o sentido oposto de ${\color{magenta}z}$ e o eixo ${\color{cyan}z'}$ passa a coincidir com ${\color{magenta}x}$, enquanto o eixo ${\color{cyan}y'}$ permance alinhado com ${\color{magenta}y}$.
 
 !!! question "Exercício 4"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\psi$ em relação o sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}z}$.
+    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\psi$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}z}$.
 
     ![](images/3d_rotation_z.svg){: width="200" style="display: block; margin: auto;" }
     
-    ??? info "a) Determine a matriz de rotação em função do ângulo de rotação $\psi$" 
+    ??? info "a) Escreva a matriz de rotação em função do ângulo $\psi$."
         $$
         R_z(\psi) = 
         \begin{bmatrix} 
@@ -239,10 +240,10 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
         \end{bmatrix}
         $$
     
-    ??? info "b) Determine a matriz de rotação quando $\psi = 2 \pi \, \text{rad}$ e verifique se o resultado faz sentido."
+    ??? info "b) Calcule $R_z(\psi)$ para $\psi=2\pi \, \text{rad}$ e interprete o resultado."
         $$
         \begin{align*}
-            R_x\left(\pi\right) 
+            R_z\left(2\pi\right) 
             = 
             \begin{bmatrix}  
                 \cos 2\pi & \sin 2\pi & 0 \\ 
@@ -258,20 +259,22 @@ Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em funç�
         \end{align*}
         $$
 
-        Faz sentido, pois ao rotacionar $360^{\circ}$, o eixo ${\color{cyan}x'}$ fica no mesmo sentido de ${\color{magenta}x}$, enquanto o eixo ${\color{cyan}y'}$ fica no mesmo sentido contrário de ${\color{magenta}y}$.
+        O resultado faz sentido: uma rotação completa de $360^\circ$ em torno de ${\color{magenta}z}$ devolve ${\color{cyan}x'y'z'}$ exatamente a ${\color{magenta}xyz}$, ou seja, todos os eixos voltam a coincidir.
 
 ### Propriedades
 
-Matrizes de rotação possuem algumas propriedades interessantes:
-       
-- Linhas e colunas tem módulo unitário
-- Linhas e colunas são perpendiculares entre si (produto escalar entre elas é zero)
-- São matrizes ortonormais (sua inversa é igual à sua transposta), isto é, $R^{-1} = R^T$
-- Possuem determinante unitária, isto é, $\det (R) = 1$
+### Propriedades
+
+Matrizes de rotação possuem algumas propriedades fundamentais:
+
+- Cada linha e cada coluna tem norma unitária (comprimento igual a 1).
+- Linhas e colunas são ortogonais entre si (o produto escalar entre elas é zero).
+- São matrizes ortonormais (sua inversa é igual à transposta), isto é, $R^{-1} = R^T$.
+- Possuem determinante unitário, isto é, $\det (R) = 1$.
 
 !!! question "Exercício 5"
 
-    Dada a matriz de rotação abaixo, que relaciona o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ com o sistema de coordenadas inercial ${\color{magenta}xyz}$:
+    Considere a matriz de rotação $R$ que relaciona o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ com o sistema de coordenadas inercial ${\color{magenta}xyz}$:
 
     $$
     R = 
@@ -282,7 +285,7 @@ Matrizes de rotação possuem algumas propriedades interessantes:
     \end{bmatrix}	
     $$
     
-    Determine a matriz de rotação inversa $R^{-1}$, isto é, que relaciona o sistema de coordenadas inercial ${\color{magenta}xyz}$ com o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$.
+    Calcule a matriz de rotação inversa $R^{-1}$, isto é, que relaciona o sistema inercial ${\color{magenta}xyz}$ com o sistema móvel ${\color{cyan}x'y'z'}$.
     
     ??? info "Resposta" 
         $$
@@ -299,14 +302,17 @@ Matrizes de rotação possuem algumas propriedades interessantes:
 
 ## Ângulos de Euler
 
-Os ângulos de Euler são um conjunto de três transformações lineares consecutivas, cada uma sobre um eixo distinto e com um ângulo distinto, que podem levar um sistema de coordenadas inercial ${\color{magenta}xyz}$ a um sistema de coordenadas móvel ${\color{cyan}x'y'z'}$.
+Os ângulos de Euler são um conjunto de três rotações sucessivas em torno de eixos distintos, que permitem levar o sistema de coordenadas inercial ${\color{magenta}xyz}$ até o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$.  
 
 ![](images/euler_angles.svg){: width="800" style="display: block; margin: auto;" }
 
-A matriz de rotação total nada mais é do que a composição das matrizes de rotação individuais(1).
-{.annotate}
+De acordo com a convenção adotada aqui, usamos:
 
-1. Note que a matriz associada a primeira rotação $R_z(\psi)$ está mais a direita, enquanto que a matriz associada a última rotação $R_x(\phi)$ está mais a esquerda. Isso ocorre pois operações matriciais são realizadas da direita para à esquerda.
+- $\psi$: rotação em torno do eixo ${\color{magenta}z'}$ (*yaw* - guinagem)  
+- $\theta$: rotação em torno do eixo ${\color{magenta}y'}$ (*pitch* - inclinação)  
+- $\phi$: rotação em torno do eixo ${\color{magenta}x'}$ (*roll* - rolagem)  
+
+A matriz de rotação total é obtida pela composição das três matrizes individuais.  
     
 $$
 R(\phi,\theta,\psi) = 
@@ -334,6 +340,8 @@ R(\phi,\theta,\psi) =
 $$
     
 
+!!! note
+    Observe que a primeira rotação aplicada, $R_z(\psi)$, aparece mais à direita, enquanto a última rotação, $R_x(\phi)$, aparece mais à esquerda. Isso ocorre porque a multiplicação de matrizes segue a ordem inversa da aplicação das transformações.
 
 !!! question "Exercício 6"
 
@@ -354,7 +362,7 @@ $$
 
 Singularidades são pontos nos quais uma variável matemática torna-se indefinida. No caso dos ângulos de Euler, é uma orientação na qual há mais de uma única sequência de rotações possíveis. 
 
-Quando a segunda rotação é igual a $\theta = \pm \frac{\pi}{2}$ rad, a direção dos eixos da primeira (${\color{cyan}z'}$) e terceira (${\color{cyan}x'}$) rotação coincidem, tornando-se impossível discernir os valores de $\psi$ e $\phi$.
+Quando a segunda rotação é igual a $\theta = \frac{\pi}{2}$ rad, a direção dos eixos da primeira (${\color{cyan}z'}$) e terceira (${\color{cyan}x'}$) rotação coincidem, tornando-se impossível discernir os valores de $\psi$ e $\phi$.
 
 Não há acordo sobre a notação (sequência de rotações) utilizada pelos ângulos de Euler. Existe um total de 12 combinações, pois a rotação seguinte deve sempre ocorrer em um eixo distinto da anterior, conforme a tabela abaixo:
 
@@ -447,10 +455,12 @@ Não há acordo sobre a notação (sequência de rotações) utilizada pelos ân
 
 Note que todas as combinações possuem singularidades; a única diferença é o ângulo no qual elas ocorrem:
 
-- Quando o eixo da primeira e terceira rotação são iguais, as singularidades ocorrem quando a segunda rotação é igual a $0$ rad.
-- Quando o eixo da primeira e terceira rotação são distintos, as singularidades ocorrem quando a segunda rotação é igual a $\frac{\pi}{2}$ rad. 
+- Quando o eixo da primeira e terceira rotação são iguais (Ângulos de Euler), as singularidades ocorrem quando a segunda rotação é igual a $0 \, \text{rad}$.
+{.annotate}
+- Quando o eixo da primeira e terceira rotação são distintos (Ângulos de Tait–Bryan), as singularidades ocorrem quando a segunda rotação é igual a $\frac{\pi}{2} \, \text{rad}$. 
+{.annotate}
 
-Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a $0$ rad, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos ($z-y-x$), também conhecido por *yaw*, *pitch* e *roll*(1).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).
+Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a $0 \, \text{rad}$, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos ($z-y-x$), também conhecido por *yaw*, *pitch* e *roll*(1).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).
 {.annotate}
 
 1. Guinagem ($\psi$ no eixo $z$), inclinação ($\theta$ no eixo $y$) e rolagem ($\phi$ no eixo $x$)

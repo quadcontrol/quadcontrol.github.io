@@ -1,6 +1,6 @@
 # Arquitetura
 
-Para controlar um drone, precisamos de uma arquitetura bem definida. Essa arquitetura estabelece como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos motores.
+Para controlar um drone, precisamos de uma arquitetura bem definida. Essa arquitetura estabelece como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos atuadores.
 
 O diagrama abaixo resume essa sequência em blocos:
 
@@ -9,7 +9,7 @@ O diagrama abaixo resume essa sequência em blocos:
 No diagrama:
 
 - Os blocos representam as funções que serão chamadas no loop principal.
-- As setas representam as variáveis que fluem de um bloco para outro.
+- As setas representam as variáveis que fluem de um bloco a outro.
 
 A passagem dessas informações entre as funções será feita por meio de variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.
 { .annotate }
@@ -18,13 +18,13 @@ A passagem dessas informações entre as funções será feita por meio de vari�
 
 ---
 
-## Estrutura das variáveis globais
+## Variáveis globais
 
 Logo no início do código, declararemos as variáveis que representam os atuadores, sensores, entradas, estados e referências — espelhando o diagrama.
 
 ```c
-// Motors
-float pwm1, pwm2, pwm3, pwm4; // PWM
+// Actuators
+float pwm1, pwm2, pwm3, pwm4; // Motors PWM
 
 // Sensors
 float ax, ay, az;             // Accelerometer [m/s^2]
@@ -34,24 +34,24 @@ float px, py;                 // Optical flow [pixels]
 
 // System inputs
 float ft;                     // Thrust force [N]
-float tx, ty, tz;             // Torques [N.m]
+float tx, ty, tz;             // Roll, pitch and yaw torques [N.m]
 
 // System states
 float phi, theta, psi;        // Euler angles [rad]
-float wx, wy, wz;             // Angular velocity [rad/s]
-float x, y, z;                // Position [m]
-float vx, vy, vz;             // Velocity [m/s]
+float wx, wy, wz;             // Angular velocities [rad/s]
+float x, y, z;                // Positions [m]
+float vx, vy, vz;             // Velocities [m/s]
 
 // System references
-float phi_r, theta_r, psi_r; // Euler angles [rad]
-float x_r, y_r, z_r;         // Position [m]
+float phi_r, theta_r, psi_r; // Euler angles reference [rad]
+float x_r, y_r, z_r;         // Positions reference [m]
 ```
 
 ---
 
-## Loop principal de controle
+## Loop principal
 
-Toda a lógica de controle será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Dentro desse loop, chamamos as funções na ordem do diagrama: primeiro os sensores, depois os estimadores, então os controladores e, por fim, os atuadores.
+Toda a lógica de controle será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Dentro desse loop, chamamos as funções na sequência do diagrama: referências → sensores → estimadores → controladores → atuadores.
 
 ```c
 // Main application task
@@ -60,27 +60,27 @@ void appMain(void *param)
     // Infinite loop (runs at 200Hz)
     while (true)
     {
-        reference();                  // Get reference setpoints from commander module
-        sensors();                    // Get sensor readings from estimator module
-        attitudeEstimator();          // Estimate orientation from IMU sensor
+        reference();                  // Read reference setpoints (from Crazyflie Client)
+        sensors();                    // Read raw sensor measurements
+        attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
         verticalEstimator();          // Estimate vertical position/velocity from range sensor
-        horizontalEstimator();        // Estimate horizontal position/velocity from optical flow sensor
+        horizontalEstimator();        // Estimate horizontal positions/velocities from optical flow sensor
         horizontalController();       // Compute desired roll/pitch angles
-        verticalController();         // Compute desired total thrust
-        attitudeController();         // Compute desired torques
-        mixer();                      // Compute motor commands
-        motors();                     // Apply motor commands
-        vTaskDelay(pdMS_TO_TICKS(5)); // Wait 5 ms
+        verticalController();         // Compute desired thrust force
+        attitudeController();         // Compute desired roll/pitch/yaw torques
+        mixer();                      // Convert desired force/torques into motor PWM
+        motors();                     // Send commands to motors
+        vTaskDelay(pdMS_TO_TICKS(5)); // Loop delay (5 ms)
     }
 }
 ```
 
 ---
 
-## Como vamos avançar
+## Implementação
 
 A implementação será feita passo a passo, uma função por vez. Dessa forma, você poderá entender o papel de cada bloco isoladamente antes de ver o sistema completo em ação.
 
 ![Architecture](images/architecture.gif){: width=100% style="display: block; margin: auto;" }
 
-Nos próximos capítulos, vamos começar pelo mixer, depois evoluir para os estimadores e controladores. Ao final, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones.
+Nos próximos capítulos, começaremos pelo mixer e, em seguida, avançaremos para os blocos de estimadores e controladores. Cada subsistema será estudado em pares — estimador e controlador de atitude, vertical (altura) e horizontal (posição no plano). Ao final, você terá construído, passo a passo, a arquitetura de controle completa de um drone.

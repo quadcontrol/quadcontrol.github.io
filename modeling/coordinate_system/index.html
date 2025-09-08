@@ -799,6 +799,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#propriedades_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propriedades
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1320,6 +1329,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#propriedades_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propriedades
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1366,23 +1384,23 @@
 
 
 <h1 id="sistema-de-coordenadas">Sistema de coordenadas</h1>
-<p>No controle de drones, sistemas de coordenadas são utilizados com bastante frequência para descrever a posição e orientação relativa: posição do drone em relação ao chão, orientação da câmera em relação ao drone, velocidade do drone em relação ao vento, etc.</p>
-<p>Muitos cálculos são muito mais simples se realizados no sistema de coordenada adequado: forças e torques aerodinâmicos em um sistema de coordenadas fixo no drone, aceleração da gravidade em um sistema de coordenadas fixo na terra, etc.</p>
+<p>No controle de drones, o uso de sistemas de coordenadas é fundamental para descrever posições e orientações relativas. Alguns exemplos comuns são: a posição do drone em relação ao solo, a orientação da câmera em relação ao drone e a velocidade do drone em relação ao vento.</p>
+<p>A escolha do sistema de coordenadas adequado torna muitos cálculos mais simples. Por exemplo, forças e torques aerodinâmicos são mais naturalmente descritos em um sistema de coordenadas móvel (fixo no drone), enquanto a aceleração da gravidade é melhor representada em um sistema de coordenadas inercial (fixo na Terra).</p>
 <hr />
 <h2 id="matriz-de-rotacao">Matriz de rotação</h2>
-<p>Ao lidar com diferentes sistemas de coordenadas, torna-se necessário descrever em linguagem matemática a orientação entre eles. Isso é feito através de matrizes de rotação, que podem ser usadas tanto no plano (2D) como no espaço (3D).</p>
+<p>Quando trabalhamos com diferentes sistemas de coordenadas, precisamos de uma forma matemática para descrever a orientação relativa entre eles. Essa função é cumprida pelas matrizes de rotação, que permitem representar rotações tanto no plano (2D) quanto no espaço tridimensional (3D).</p>
 <h3 id="2d">2D</h3>
-<p class="annotate">Ao especificar a posição de um drone, torna-se necessário definir uma referência. Um método geral para definir uma referência é utilizar um sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span> (1).</p>
+<p class="annotate">Ao descrever a posição de um drone, precisamos definir uma referência. Um método geral é utilizar um sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span> (1).</p>
 <ol>
-<li>Fixo na terra, que não acelera nem rotaciona.</li>
+<li>Fixo na Terra, que não acelera nem rotaciona.</li>
 </ol>
 <p><img alt="" src="../images/2d_position.svg" style="display: block; margin: auto;" width="600" /></p>
-<p class="annotate">Ao especificar a atitude (orientação) de um drone, apenas um sistema de coordenadas não é suficiente. Torna-se necessário utilizar um outro sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> (1).</p>
+<p class="annotate">Já para descrever a atitude (orientação) do drone, apenas esse sistema não é suficiente. É necessário introduzir também um sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> (1).</p>
 <ol>
 <li>Fixo no drone, que acelera e rotaciona com ele.</li>
 </ol>
 <p><img alt="" src="../images/2d_position_attitude.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Dessa forma, a atitude do drone é dada pela atitude relativa do sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span>. Matematicamente, essa atitude é dada por uma matrix <span class="arithmatex">\(2 \times 2\)</span> chamada de matrix de rotação <span class="arithmatex">\(R\)</span>:</p>
+<p>A atitude do drone é dada, portanto, pela orientação relativa do sistema móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> em relação ao sistema inercial <span class="arithmatex">\({\color{magenta}yz}\)</span>. Essa orientação pode ser representada matematicamente por uma matriz <span class="arithmatex">\(2 \times 2\)</span> chamada de matrix de rotação <span class="arithmatex">\(R\)</span>:</p>
 <div class="arithmatex">\[
 {\color{cyan}
 \begin{bmatrix}
@@ -1404,7 +1422,7 @@
 \end{bmatrix}
 }
 \]</div>
-<p>Apesar de possuir <span class="arithmatex">\(4\)</span> elementos, a matriz de rotação pode ser descrita em função de <span class="arithmatex">\(1\)</span> único parâmetro, o ângulo de rotação <span class="arithmatex">\(\phi\)</span>:</p>
+<p>Apesar de possuir quatro elementos, essa matriz pode ser descrita em função de um único parâmetro: o ângulo de rotação <span class="arithmatex">\(\phi\)</span>:</p>
 <div class="arithmatex">\[
 R(\phi)=
 \begin{bmatrix}
@@ -1414,10 +1432,10 @@ R(\phi)=
 \]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
-<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\phi\)</span> em relação o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span>.</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\phi\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span>.</p>
 <p><img alt="" src="../images/2d_rotation_x.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
-<summary>a) Determine a matriz de rotação em função do ângulo de rotação <span class="arithmatex">\(\phi\)</span></summary>
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\phi\)</span>.</summary>
 <div class="arithmatex">\[
 R(\phi) = 
 \begin{bmatrix} 
@@ -1427,29 +1445,29 @@ R(\phi) =
 \]</div>
 </details>
 <details class="info">
-<summary>b) Determine a matriz de rotação quando <span class="arithmatex">\(\phi = \frac{\pi}{2} \, \text{rad}\)</span> e verifique se o resultado faz sentido.</summary>
+<summary>b) Calcule <span class="arithmatex">\(R(\phi)\)</span> para <span class="arithmatex">\(\phi = \frac{\pi}{2} \, \text{rad}\)</span> e interprete o resultado.</summary>
 <div class="arithmatex">\[
 R\left(\frac{\pi}{2}\right) 
 = 
 \begin{bmatrix} 
     \cos{\frac{\pi}{2}} &amp; \sin{\frac{\pi}{2}} \\ 
     -\sin{\frac{\pi}{2}} &amp; \cos{\frac{\pi}{2}} 
-\end{bmatrix} \\
-= 
+\end{bmatrix} 
+=
 \begin{bmatrix} 
     0 &amp; 1 \\ 
     -1 &amp; 0
 \end{bmatrix}
 \]</div>
-<p>Faz sentido, pois ao rotacionar <span class="arithmatex">\(90^{\circ}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> fica no mesmo sentido de <span class="arithmatex">\({\color{magenta}z}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> fica no sentido contrário de <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
+<p>O resultado faz sentido: ao rotacionar <span class="arithmatex">\(90^{\circ}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> passa a coincidir com <span class="arithmatex">\({\color{magenta}z}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> fica no sentido oposto de <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
 </details>
 <details class="info">
-<summary>c) Determine o ângulo de rotação <span class="arithmatex">\(\phi\)</span> correspondente à matriz de rotação <br> <span class="arithmatex">\(R = \begin{bmatrix} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \end{bmatrix}\)</span></summary>
+<summary>c) Determine o ângulo <span class="arithmatex">\(\phi\)</span> correspondente à matriz <br> <span class="arithmatex">\(R (\phi)= \begin{bmatrix} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \end{bmatrix}\)</span>.</summary>
 <div class="arithmatex">\[
 \begin{align*}
     \cos \phi &amp;= \frac{\sqrt{2}}{2} \\
-    \phi &amp;= \cos^{-1} \left( \frac{\sqrt{2}}{2} \right) \\
-    \phi &amp;= \frac{\pi}{4} \text{rad}
+    \phi &amp;= \cos^{-1}\!\left(\frac{\sqrt{2}}{2}\right) \\
+    \phi &amp;= \frac{\pi}{4} \;\text{rad} \;\; (45^\circ)
 \end{align*}
 \]</div>
 </details>
@@ -1458,7 +1476,7 @@ R\left(\frac{\pi}{2}\right)
 <h3 id="3d">3D</h3>
 <p>Assim como no plano, no espaço a atitude do drone também é dada pela atitude relativa do sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span>.</p>
 <p><img alt="" src="../images/3d_position_attitude.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>No entanto, como agora estamos lidando com <span class="arithmatex">\(3\)</span> dimensões, a matriz de rotação <span class="arithmatex">\(R\)</span> passa a possuir dimensão <span class="arithmatex">\(3 \times 3\)</span>:</p>
+<p>No entanto, como agora estamos lidando com três dimensões, a matriz de rotação <span class="arithmatex">\(R\)</span> passa a possuir dimensão <span class="arithmatex">\(3 \times 3\)</span>:</p>
 <div class="arithmatex">\[
 {\color{cyan}
 \begin{bmatrix}
@@ -1481,8 +1499,10 @@ R\left(\frac{\pi}{2}\right)
 \end{bmatrix}
 }
 \]</div>
-<p>De acordo com Leonard Euler, qualquer atitude no espaço pode ser descrita através de três rotações sucessivas em torno de eixos pré-definidos e linearmente independentes.</p>
-<p>Dessa forma, os 9 elementos da matriz de rotação podem ser descritos em função de 3 parâmetros, os ângulos de Euler <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span>:</p>
+<p class="annotate">De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita através de três rotações sucessivas em torno de eixos pré-definidos e mutuamente ortogonais(1). Dessa forma, os nove elementos da matriz de rotação podem ser expressos em função de três parâmetros: os ângulos de Euler <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span>:</p>
+<ol>
+<li>Formam um ângulo de <span class="arithmatex">\(90^{\circ}\)</span> entre si.</li>
+</ol>
 <div class="arithmatex">\[\begin{equation*}
         R({\phi},{\theta},{\psi})
         =
@@ -1494,10 +1514,10 @@ R\left(\frac{\pi}{2}\right)
 \end{equation*}\]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
-<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\phi\)</span> em relação o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}x}\)</span>.</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\phi\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}x}\)</span>.</p>
 <p><img alt="" src="../images/3d_rotation_x.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
-<summary>a) Determine a matriz de rotação em função do ângulo de rotação <span class="arithmatex">\(\phi\)</span></summary>
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\phi\)</span>.</summary>
 <div class="arithmatex">\[
 R_x(\phi) = 
 \begin{bmatrix} 
@@ -1508,7 +1528,7 @@ R_x(\phi) =
 \]</div>
 </details>
 <details class="info">
-<summary>b) Determine a matriz de rotação quando <span class="arithmatex">\(\phi = \pi \, \text{rad}\)</span> e verifique se o resultado faz sentido.</summary>
+<summary>b) Calcule <span class="arithmatex">\(R_x(\phi)\)</span> para <span class="arithmatex">\(\phi=\pi \, \text{rad}\)</span> e interprete o resultado.</summary>
 <div class="arithmatex">\[
 \begin{align*}
     R_x\left(\pi\right) 
@@ -1526,15 +1546,15 @@ R_x(\phi) =
     \end{bmatrix}
 \end{align*}
 \]</div>
-<p>Faz sentido, pois ao rotacionar <span class="arithmatex">\(180^{\circ}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> fica no sentido contrário de <span class="arithmatex">\({\color{magenta}y}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> fica no sentido contrário de <span class="arithmatex">\({\color{magenta}z}\)</span>.</p>
+<p>O resultado faz sentido: uma rotação de <span class="arithmatex">\(180^\circ\)</span> em torno de <span class="arithmatex">\({\color{magenta}x}\)</span> inverte os eixos <span class="arithmatex">\({\color{magenta}y}\)</span> e <span class="arithmatex">\({\color{magenta}z}\)</span>, de modo que <span class="arithmatex">\({\color{cyan}y'}\)</span> e <span class="arithmatex">\({\color{cyan}z'}\)</span> ficam em sentidos opostos a <span class="arithmatex">\({\color{magenta}y}\)</span> e <span class="arithmatex">\({\color{magenta}z}\)</span>, enquanto <span class="arithmatex">\({\color{cyan}x'}\)</span> permance alinhado com <span class="arithmatex">\({\color{magenta}x}\)</span>.</p>
 </details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 3</p>
-<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\theta\)</span> em relação o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\theta\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
 <p><img alt="" src="../images/3d_rotation_y.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
-<summary>a) Determine a matriz de rotação em função do ângulo de rotação <span class="arithmatex">\(\theta\)</span></summary>
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\theta\)</span>.</summary>
 <div class="arithmatex">\[
 R_y(\theta) = 
 \begin{bmatrix} 
@@ -1545,10 +1565,10 @@ R_y(\theta) =
 \]</div>
 </details>
 <details class="info">
-<summary>b) Determine a matriz de rotação quando <span class="arithmatex">\(\theta = \frac{\pi}{2} \, \text{rad}\)</span> e verifique se o resultado faz sentido.</summary>
+<summary>b) Calcule <span class="arithmatex">\(R_y(\theta)\)</span> para <span class="arithmatex">\(\theta=\tfrac{\pi}{2} \, \text{rad}\)</span> e interprete o resultado.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    R_x\left(\pi\right) 
+    R_y\left(\frac{\pi}{2}\right) 
     = 
     \begin{bmatrix} 
         \cos\frac{\pi}{2} &amp; 0 &amp; -\sin\frac{\pi}{2} \\ 
@@ -1563,15 +1583,15 @@ R_y(\theta) =
     \end{bmatrix}
 \end{align*}
 \]</div>
-<p>Faz sentido, pois ao rotacionar <span class="arithmatex">\(90^{\circ}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}x'}\)</span> fica no sentido contrário de <span class="arithmatex">\({\color{magenta}z}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> fica no mesmo sentido de <span class="arithmatex">\({\color{magenta}x}\)</span>.</p>
+<p>O resultado faz sentido: ao rotacionar <span class="arithmatex">\(90^\circ\)</span> em torno de <span class="arithmatex">\({\color{magenta}y}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}x'}\)</span> passa a apontar para o sentido oposto de <span class="arithmatex">\({\color{magenta}z}\)</span> e o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> passa a coincidir com <span class="arithmatex">\({\color{magenta}x}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> permance alinhado com <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
 </details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 4</p>
-<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\psi\)</span> em relação o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}z}\)</span>.</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\psi\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}z}\)</span>.</p>
 <p><img alt="" src="../images/3d_rotation_z.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
-<summary>a) Determine a matriz de rotação em função do ângulo de rotação <span class="arithmatex">\(\psi\)</span></summary>
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\psi\)</span>.</summary>
 <div class="arithmatex">\[
 R_z(\psi) = 
 \begin{bmatrix} 
@@ -1582,10 +1602,10 @@ R_z(\psi) =
 \]</div>
 </details>
 <details class="info">
-<summary>b) Determine a matriz de rotação quando <span class="arithmatex">\(\psi = 2 \pi \, \text{rad}\)</span> e verifique se o resultado faz sentido.</summary>
+<summary>b) Calcule <span class="arithmatex">\(R_z(\psi)\)</span> para <span class="arithmatex">\(\psi=2\pi \, \text{rad}\)</span> e interprete o resultado.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    R_x\left(\pi\right) 
+    R_z\left(2\pi\right) 
     = 
     \begin{bmatrix}  
         \cos 2\pi &amp; \sin 2\pi &amp; 0 \\ 
@@ -1600,20 +1620,21 @@ R_z(\psi) =
     \end{bmatrix}
 \end{align*}
 \]</div>
-<p>Faz sentido, pois ao rotacionar <span class="arithmatex">\(360^{\circ}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}x'}\)</span> fica no mesmo sentido de <span class="arithmatex">\({\color{magenta}x}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> fica no mesmo sentido contrário de <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
+<p>O resultado faz sentido: uma rotação completa de <span class="arithmatex">\(360^\circ\)</span> em torno de <span class="arithmatex">\({\color{magenta}z}\)</span> devolve <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> exatamente a <span class="arithmatex">\({\color{magenta}xyz}\)</span>, ou seja, todos os eixos voltam a coincidir.</p>
 </details>
 </div>
 <h3 id="propriedades">Propriedades</h3>
-<p>Matrizes de rotação possuem algumas propriedades interessantes:</p>
+<h3 id="propriedades_1">Propriedades</h3>
+<p>Matrizes de rotação possuem algumas propriedades fundamentais:</p>
 <ul>
-<li>Linhas e colunas tem módulo unitário</li>
-<li>Linhas e colunas são perpendiculares entre si (produto escalar entre elas é zero)</li>
-<li>São matrizes ortonormais (sua inversa é igual à sua transposta), isto é, <span class="arithmatex">\(R^{-1} = R^T\)</span></li>
-<li>Possuem determinante unitária, isto é, <span class="arithmatex">\(\det (R) = 1\)</span></li>
+<li>Cada linha e cada coluna tem norma unitária (comprimento igual a 1).</li>
+<li>Linhas e colunas são ortogonais entre si (o produto escalar entre elas é zero).</li>
+<li>São matrizes ortonormais (sua inversa é igual à transposta), isto é, <span class="arithmatex">\(R^{-1} = R^T\)</span>.</li>
+<li>Possuem determinante unitário, isto é, <span class="arithmatex">\(\det (R) = 1\)</span>.</li>
 </ul>
 <div class="admonition question">
 <p class="admonition-title">Exercício 5</p>
-<p>Dada a matriz de rotação abaixo, que relaciona o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> com o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span>:</p>
+<p>Considere a matriz de rotação <span class="arithmatex">\(R\)</span> que relaciona o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> com o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span>:</p>
 <div class="arithmatex">\[
 R = 
 \begin{bmatrix} 
@@ -1622,7 +1643,7 @@ R =
     0 &amp; 0 &amp; 1 
 \end{bmatrix}   
 \]</div>
-<p>Determine a matriz de rotação inversa <span class="arithmatex">\(R^{-1}\)</span>, isto é, que relaciona o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> com o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span>.</p>
+<p>Calcule a matriz de rotação inversa <span class="arithmatex">\(R^{-1}\)</span>, isto é, que relaciona o sistema inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> com o sistema móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span>.</p>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
@@ -1638,12 +1659,15 @@ R^{T} =
 </div>
 <hr />
 <h2 id="angulos-de-euler">Ângulos de Euler</h2>
-<p>Os ângulos de Euler são um conjunto de três transformações lineares consecutivas, cada uma sobre um eixo distinto e com um ângulo distinto, que podem levar um sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> a um sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span>.</p>
+<p>Os ângulos de Euler são um conjunto de três rotações sucessivas em torno de eixos distintos, que permitem levar o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> até o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span>.  </p>
 <p><img alt="" src="../images/euler_angles.svg" style="display: block; margin: auto;" width="800" /></p>
-<p class="annotate">A matriz de rotação total nada mais é do que a composição das matrizes de rotação individuais(1).</p>
-<ol>
-<li>Note que a matriz associada a primeira rotação <span class="arithmatex">\(R_z(\psi)\)</span> está mais a direita, enquanto que a matriz associada a última rotação <span class="arithmatex">\(R_x(\phi)\)</span> está mais a esquerda. Isso ocorre pois operações matriciais são realizadas da direita para à esquerda.</li>
-</ol>
+<p>De acordo com a convenção adotada aqui, usamos:</p>
+<ul>
+<li><span class="arithmatex">\(\psi\)</span>: rotação em torno do eixo <span class="arithmatex">\({\color{magenta}z'}\)</span> (<em>yaw</em> - guinagem)  </li>
+<li><span class="arithmatex">\(\theta\)</span>: rotação em torno do eixo <span class="arithmatex">\({\color{magenta}y'}\)</span> (<em>pitch</em> - inclinação)  </li>
+<li><span class="arithmatex">\(\phi\)</span>: rotação em torno do eixo <span class="arithmatex">\({\color{magenta}x'}\)</span> (<em>roll</em> - rolagem)  </li>
+</ul>
+<p>A matriz de rotação total é obtida pela composição das três matrizes individuais.  </p>
 <div class="arithmatex">\[
 R(\phi,\theta,\psi) = 
 \underbrace{
@@ -1668,6 +1692,10 @@ R(\phi,\theta,\psi) =
 \end{bmatrix}   
 }_{R_z(\psi)}
 \]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Observe que a primeira rotação aplicada, <span class="arithmatex">\(R_z(\psi)\)</span>, aparece mais à direita, enquanto a última rotação, <span class="arithmatex">\(R_x(\phi)\)</span>, aparece mais à esquerda. Isso ocorre porque a multiplicação de matrizes segue a ordem inversa da aplicação das transformações.</p>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 6</p>
 <p>Determine a matriz de rotação total <span class="arithmatex">\(R(\phi,\theta,\psi)\)</span> que relaciona o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> com o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> em função dos ângulos de Euler <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span>.</p>
@@ -1685,7 +1713,7 @@ R (\phi,\theta,\psi) =
 </div>
 <h3 id="singularidades">Singularidades</h3>
 <p>Singularidades são pontos nos quais uma variável matemática torna-se indefinida. No caso dos ângulos de Euler, é uma orientação na qual há mais de uma única sequência de rotações possíveis. </p>
-<p>Quando a segunda rotação é igual a <span class="arithmatex">\(\theta = \pm \frac{\pi}{2}\)</span> rad, a direção dos eixos da primeira (<span class="arithmatex">\({\color{cyan}z'}\)</span>) e terceira (<span class="arithmatex">\({\color{cyan}x'}\)</span>) rotação coincidem, tornando-se impossível discernir os valores de <span class="arithmatex">\(\psi\)</span> e <span class="arithmatex">\(\phi\)</span>.</p>
+<p>Quando a segunda rotação é igual a <span class="arithmatex">\(\theta = \frac{\pi}{2}\)</span> rad, a direção dos eixos da primeira (<span class="arithmatex">\({\color{cyan}z'}\)</span>) e terceira (<span class="arithmatex">\({\color{cyan}x'}\)</span>) rotação coincidem, tornando-se impossível discernir os valores de <span class="arithmatex">\(\psi\)</span> e <span class="arithmatex">\(\phi\)</span>.</p>
 <p>Não há acordo sobre a notação (sequência de rotações) utilizada pelos ângulos de Euler. Existe um total de 12 combinações, pois a rotação seguinte deve sempre ocorrer em um eixo distinto da anterior, conforme a tabela abaixo:</p>
 <style>
   /* Tabela com visual do tema e centralização */
@@ -1776,10 +1804,10 @@ R (\phi,\theta,\psi) =
 
 <p>Note que todas as combinações possuem singularidades; a única diferença é o ângulo no qual elas ocorrem:</p>
 <ul>
-<li>Quando o eixo da primeira e terceira rotação são iguais, as singularidades ocorrem quando a segunda rotação é igual a <span class="arithmatex">\(0\)</span> rad.</li>
-<li>Quando o eixo da primeira e terceira rotação são distintos, as singularidades ocorrem quando a segunda rotação é igual a <span class="arithmatex">\(\frac{\pi}{2}\)</span> rad. </li>
+<li class="annotate">Quando o eixo da primeira e terceira rotação são iguais (Ângulos de Euler), as singularidades ocorrem quando a segunda rotação é igual a <span class="arithmatex">\(0 \, \text{rad}\)</span>.</li>
+<li class="annotate">Quando o eixo da primeira e terceira rotação são distintos (Ângulos de Tait–Bryan), as singularidades ocorrem quando a segunda rotação é igual a <span class="arithmatex">\(\frac{\pi}{2} \, \text{rad}\)</span>. </li>
 </ul>
-<p class="annotate">Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a <span class="arithmatex">\(0\)</span> rad, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos (<span class="arithmatex">\(z-y-x\)</span>), também conhecido por <em>yaw</em>, <em>pitch</em> e <em>roll</em>(1).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).</p>
+<p class="annotate">Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a <span class="arithmatex">\(0 \, \text{rad}\)</span>, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos (<span class="arithmatex">\(z-y-x\)</span>), também conhecido por <em>yaw</em>, <em>pitch</em> e <em>roll</em>(1).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).</p>
 <ol>
 <li>Guinagem (<span class="arithmatex">\(\psi\)</span> no eixo <span class="arithmatex">\(z\)</span>), inclinação (<span class="arithmatex">\(\theta\)</span> no eixo <span class="arithmatex">\(y\)</span>) e rolagem (<span class="arithmatex">\(\phi\)</span> no eixo <span class="arithmatex">\(x\)</span>)</li>
 </ol>

@@ -1492,7 +1492,7 @@
 
 
 <h1 id="mixer">Mixer</h1>
-<p>Nesta secção você irá implementar o mixer, que converte as força e torques totais produzidos pelas hélices <span class="arithmatex">\(f_t\)</span>, <span class="arithmatex">\(\tau_x\)</span>, <span class="arithmatex">\(\tau_y\)</span> e <span class="arithmatex">\(\tau_z\)</span> nos sinais PWM correspondentes dos motores.</p>
+<p>Nesta secção você irá implementar o mixer, que converte as forças e torques totais produzidos pelas hélices <span class="arithmatex">\(f_t\)</span>, <span class="arithmatex">\(\tau_x\)</span>, <span class="arithmatex">\(\tau_y\)</span> e <span class="arithmatex">\(\tau_z\)</span> nos sinais PWM correspondentes dos motores.</p>
 <p><img alt="Architecture - Mixer" src="../images/architecture_mixer.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Para isto, serão implementadas três funções:</p>
 <ul>
@@ -1502,9 +1502,12 @@
 </ul>
 <hr />
 <h2 id="implementacao">Implementação</h2>
-<p>Crie um arquivo chamado <code>mixer.c</code> dentro da pasta <code>src/control</code>.</p>
+<p>Para começar, crie um arquivo chamado <code>mixer.c</code> dentro da pasta <code>src/control</code>.</p>
 <h3 id="bibliotecas-necessarias">Bibliotecas necessárias</h3>
-<p>Logo no início desse arquivo, importe todas as bibliotecas que serão necessárias:</p>
+<p class="annotate">Logo no início desse arquivo, importe todas(1) as bibliotecas que serão utilizadas:</p>
+<ol>
+<li>Algumas dessas bibliotecas não são estritamente necessárias para o mixer, mas já as incluímos agora para evitar preocupações futuras ao integrar os próximos módulos.</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;math.h&quot;</span><span class="c1">       // Math functions (e.g., sqrtf, roundf, powf)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">   // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">       // FreeRTOS task functions (e.g., vTaskDelay)</span>
@@ -1549,8 +1552,8 @@
 <li>Os botões <code>←</code> e <code>→</code> alteram a variável <code>setpoint.position.y</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
 <li>Os botões <code>Up</code> e <code>Down</code> alteram a variável <code>setpoint.position.z</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
 </ul>
-<p>Vamos utilizar essas variáveis para comandar a força total <span class="arithmatex">\(f_t\)</span> em incrementos de <span class="arithmatex">\(0,01\,N\)</span> e os torques de rolagem <span class="arithmatex">\(\tau_x\)</span> e inclinação <span class="arithmatex">\(\tau_y\)</span> em incrementos de <span class="arithmatex">\(0,001\,N.m\)</span>, portanto precisamos ajustar as escalas da seguinte forma:</p>
-<p><img alt="Reference" src="../images/reference.svg" style="display: block; margin: auto;" /></p>
+<p>Vamos utilizar essas variáveis para comandar a força total <span class="arithmatex">\(f_t\)</span> em incrementos de <span class="arithmatex">\(0,01\,N\)</span> e os torques de rolagem <span class="arithmatex">\(\tau_x\)</span> e inclinação <span class="arithmatex">\(\tau_y\)</span> em incrementos de <span class="arithmatex">\(0,001\,N.m\)</span>. Portanto, precisamos ajustar as escalas da seguinte forma:</p>
+<p><img alt="" src="../images/reference_mixer.svg" style="display: block; margin: auto;" /></p>
 <p class="annotate">Abaixo temos um exemplo de função <code>reference()</code> que faz isso(1):</p>
 <ol>
 <li>Note que os valores comandados também estão sendo <em>printados</em> no console.</li>
@@ -1600,22 +1603,22 @@
     \tau_z
 \end{bmatrix}
 \]</div>
-<p>Além disso, também já <a href="../../identification/motor_coeficients/">determinanos</a> os coeficientes do motor <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> que convertem a velocidade angular <span class="arithmatex">\(\omega\)</span> do motor no sinal PWM correspondente:</p>
+<p>Além disso, também já <a href="../../identification/motor_coeficients/">determinanos</a> os coeficientes dos motores <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> que convertem a velocidade angular <span class="arithmatex">\(\omega\)</span> do motor no sinal PWM correspondente:</p>
 <div class="arithmatex">\[
     PWM = a_2 \omega^2 + a_1 \omega
 \]</div>
-<p>Se justarmos essas duas funções, temos a lógica do mixer:</p>
+<p>Se unirmos essas duas funções, temos a lógica do mixer:</p>
 <p><img alt="Mixer" src="../images/mixer.svg" style="display: block; margin: auto;" /></p>
 <p class="annotate">Você deve implementar essa lógica na função <code>mixer()</code>(1): </p>
 <ol>
-<li>Declarares os parâmetros do quadcóptero previamente identificados como variáveis locais.</li>
+<li>Declarare os parâmetros do quadcóptero previamente identificados como variáveis locais.</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute motor commands</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">mixer</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Quadcopter parameters</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">  </span><span class="c1">// Quadratic motor model gain [s^2/rad^2]</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">  </span><span class="c1">// Linear motor model gain [s/rad]</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Quadratic motor model gain [s^2/rad^2]</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Linear motor model gain [s/rad]</span>
 <span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Lift constant [N.s^2]</span>
 <span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Drag constant [N.m.s^2]</span>
 
@@ -1625,7 +1628,7 @@
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// Clamp to non-negative and take square root</span>
+<span class="w">    </span><span class="c1">// Clamp to non-negative and take square root (omega)</span>
 <span class="w">    </span><span class="n">omega1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 <span class="w">    </span><span class="n">omega2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 <span class="w">    </span><span class="n">omega3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
@@ -1682,18 +1685,22 @@
 </code></pre></div>
 <hr />
 <h2 id="validacao">Validação</h2>
-<p>Para validar sua implementação você deve realizar alguns teste simples.</p>
+<p>Para validar sua implementação você deve realizar alguns teste simples, que consistem apenas em verificar se os motores corretos estão aumentando ou diminuindo suas velocidades angulares.</p>
+<p><img alt="" src="../images/mixer_tests.svg" style="display: block; margin: auto;" width="500" /></p>
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>
 <p>Muitos alunos pulam um teste ou outro e só vão descobrir o problema lá na frente, ao passarem horas tentando entender por que o drone deles não voa. Não seja essa pessoa.</p>
 </div>
 <h3 id="forca-de-empuxo-f_t">Força de empuxo <span class="arithmatex">\(f_t\)</span></h3>
-<p>Arme o drone a altere o valor da força de empuxo <span class="arithmatex">\(f_t\)</span> com os botões <code>Up</code> e <code>Down</code>. Verifique se todas os quatro motores aumentam e diminuem suas velocidades angulares conforme você faz isso.</p>
+<p>Arme o drone a altere o valor da força de empuxo <span class="arithmatex">\(f_t\)</span> com os botões <code>Up</code> e <code>Down</code>. Verifique se todos os quatro motores aumentam e diminuem suas velocidades angulares conforme você faz isso.</p>
 <h3 id="torque-de-rolagem-tau_x">Torque de rolagem <span class="arithmatex">\(\tau_x\)</span></h3>
 <p>Arme o drone a altere o valor do torque de rolagem <span class="arithmatex">\(\tau_x\)</span> com os botões <code>←</code> e <code>→</code>. Verifique se apenas os motores 3 e 4 ligam com valores positivos e os motores 1 e 2 com valores negativos.</p>
 <h3 id="torque-de-inclinacao-tau_y">Torque de inclinação <span class="arithmatex">\(\tau_y\)</span></h3>
-<p>Arme o drone a altere o valor do torque de rolagem <span class="arithmatex">\(\tau_y\)</span> com os botões <code>↑</code> e <code>↓</code>. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.</p>
+<p>Arme o drone a altere o valor do torque de inclinação <span class="arithmatex">\(\tau_y\)</span> com os botões <code>↑</code> e <code>↓</code>. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.</p>
 <h3 id="torque-de-guinagem-tau_z">Torque de guinagem <span class="arithmatex">\(\tau_z\)</span></h3>
+<p>Modifique a função de referência, para que os botões <code>←</code> e <code>→</code> alterem o valor do torque de guinagem <span class="arithmatex">\(\tau_z\)</span> e não mais de rolagem <span class="arithmatex">\(\tau_x\)</span>:</p>
+<p><img alt="" src="../images/reference_mixer2.svg" style="display: block; margin: auto;" /></p>
+<p>Arme o drone a altere o valor do torque de guinagem <span class="arithmatex">\(\tau_z\)</span> com os botões <code>←</code> e <code>→</code>. Verifique se apenas os motores 2 e 4 ligam com valores positivos e os motores 1 e 3 com valores negativos.</p>
 
 
 

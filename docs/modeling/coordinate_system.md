@@ -301,7 +301,12 @@ Matrizes de rotação possuem algumas propriedades interessantes:
 
 Os ângulos de Euler são um conjunto de três transformações lineares consecutivas, cada uma sobre um eixo distinto e com um ângulo distinto, que podem levar um sistema de coordenadas inercial ${\color{magenta}xyz}$ a um sistema de coordenadas móvel ${\color{cyan}x'y'z'}$.
 
-A matriz de rotação total nada mais é do que a composição das matrizes de rotação individuais
+![](images/euler_angles.svg){: width="800" style="display: block; margin: auto;" }
+
+A matriz de rotação total nada mais é do que a composição das matrizes de rotação individuais(1).
+{.annotate}
+
+1. Note que a matriz associada a primeira rotação $R_z(\psi)$ está mais a direita, enquanto que a matriz associada a última rotação $R_x(\phi)$ está mais a esquerda. Isso ocorre pois operações matriciais são realizadas da direita para à esquerda.
     
 $$
 R(\phi,\theta,\psi) = 
@@ -328,7 +333,7 @@ R(\phi,\theta,\psi) =
 }_{R_z(\psi)}
 $$
     
-Note que a matriz associada a primeira rotação $R_z(\psi)$ está mais a direita, enquanto que a matriz associada a última rotação $R_x(\phi)$ está mais a esquerda. Isso ocorre pois operações matriciais são realizadas da direita para à esquerda.
+
 
 !!! question "Exercício 6"
 
@@ -349,26 +354,25 @@ Note que a matriz associada a primeira rotação $R_z(\psi)$ está mais a direit
 
 Singularidades são pontos nos quais uma variável matemática torna-se indefinida. No caso dos ângulos de Euler, é uma orientação na qual há mais de uma única sequência de rotações possíveis. 
 
-Quando a segunda rotação é igual a $\theta = \frac{\pi}{2}$ rad, o sentido dos eixos da primeira ($z'$) e terceira ($x'$) rotação coincidem, tornando-se impossível discernir os valores de $\psi$ e $\phi$.
+Quando a segunda rotação é igual a $\theta = \pm \frac{\pi}{2}$ rad, a direção dos eixos da primeira (${\color{cyan}z'}$) e terceira (${\color{cyan}x'}$) rotação coincidem, tornando-se impossível discernir os valores de $\psi$ e $\phi$.
 
 Não há acordo sobre a notação (sequência de rotações) utilizada pelos ângulos de Euler. Existe um total de 12 combinações, pois a rotação seguinte deve sempre ocorrer em um eixo distinto da anterior, conforme a tabela abaixo:
 
 <style>
-  /* Opcional: coloque isso no topo da página ou no extra.css */
+  /* Tabela com visual do tema e centralização */
   table.rotacoes {
     width: 100%;
     border-collapse: collapse;
-    margin: 0.75rem 0;
+    margin: .75rem 0;
   }
   table.rotacoes th, table.rotacoes td {
     border: 1px solid var(--md-typeset-table-color, rgba(0,0,0,.12));
     padding: .4rem .6rem;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: middle; /* centraliza verticalmente com rowspan */
   }
-  .axis-x { color: #d32f2f; } /* vermelho */
-  .axis-y { color: #1976d2; } /* azul (se quiser manter cores distintas) */
-  .axis-z { color: #388e3c; } /* verde */
+  /* Cor ciano apenas para os eixos */
+  .axis { color: #00BCD4; }
 </style>
 
 <table class="rotacoes">
@@ -382,61 +386,61 @@ Não há acordo sobre a notação (sequência de rotações) utilizada pelos ân
   </thead>
   <tbody>
     <tr>
-      <td>x-y-x</td>
-      <td rowspan="4"><span class="axis-x">x&#8242;</span></td>
-      <td rowspan="2"><span class="axis-y">y&#8242;</span></td>
-      <td><span class="axis-x">x&#8242;</span></td>
+      <td><span class="arithmatex">\( x\!-\!y\!-\!x \)</span></td>
+      <td rowspan="4"><span class="arithmatex axis">\( x' \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( y' \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
     </tr>
     <tr>
-      <td>x-y-z</td>
-      <td><span class="axis-z">z&#8242;</span></td>
+      <td><span class="arithmatex">\( x\!-\!y\!-\!z \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
     </tr>
     <tr>
-      <td>x-z-x</td>
-      <td rowspan="2"><span class="axis-z">z&#8242;</span></td>
-      <td><span class="axis-x">x&#8242;</span></td>
+      <td><span class="arithmatex">\( x\!-\!z\!-\!x \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( z' \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
     </tr>
     <tr>
-      <td>x-z-y</td>
-      <td><span class="axis-y">y&#8242;</span></td>
+      <td><span class="arithmatex">\( x\!-\!z\!-\!y \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
     </tr>
     <tr>
-      <td>y-x-y</td>
-      <td rowspan="4"><span class="axis-y">y&#8242;</span></td>
-      <td rowspan="2"><span class="axis-x">x&#8242;</span></td>
-      <td><span class="axis-y">y&#8242;</span></td>
+      <td><span class="arithmatex">\( y\!-\!x\!-\!y \)</span></td>
+      <td rowspan="4"><span class="arithmatex axis">\( y' \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( x' \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
     </tr>
     <tr>
-      <td>y-x-z</td>
-      <td><span class="axis-z">z&#8242;</span></td>
+      <td><span class="arithmatex">\( y\!-\!x\!-\!z \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
     </tr>
     <tr>
-      <td>y-z-y</td>
-      <td rowspan="2"><span class="axis-z">z&#8242;</span></td>
-      <td><span class="axis-y">y&#8242;</span></td>
+      <td><span class="arithmatex">\( y\!-\!z\!-\!y \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( z' \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
     </tr>
     <tr>
-      <td>y-z-x</td>
-      <td><span class="axis-x">x&#8242;</span></td>
+      <td><span class="arithmatex">\( y\!-\!z\!-\!x \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
     </tr>
     <tr>
-      <td>z-x-z</td>
-      <td rowspan="4"><span class="axis-z">z&#8242;</span></td>
-      <td rowspan="2"><span class="axis-x">x&#8242;</span></td>
-      <td><span class="axis-z">z&#8242;</span></td>
+      <td><span class="arithmatex">\( z\!-\!x\!-\!z \)</span></td>
+      <td rowspan="4"><span class="arithmatex axis">\( z' \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( x' \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
     </tr>
     <tr>
-      <td>z-x-y</td>
-      <td><span class="axis-y">y&#8242;</span></td>
+      <td><span class="arithmatex">\( z\!-\!x\!-\!y \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
     </tr>
     <tr>
-      <td>z-y-z</td>
-      <td rowspan="2"><span class="axis-y">y&#8242;</span></td>
-      <td><span class="axis-z">z&#8242;</span></td>
+      <td><span class="arithmatex">\( z\!-\!y\!-\!z \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( y' \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
     </tr>
     <tr>
-      <td>z-y-x</td>
-      <td><span class="axis-x">x&#8242;</span></td>
+      <td><span class="arithmatex">\( z\!-\!y\!-\!x \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
     </tr>
   </tbody>
 </table>
@@ -446,6 +450,9 @@ Note que todas as combinações possuem singularidades; a única diferença é o
 - Quando o eixo da primeira e terceira rotação são iguais, as singularidades ocorrem quando a segunda rotação é igual a $0$ rad.
 - Quando o eixo da primeira e terceira rotação são distintos, as singularidades ocorrem quando a segunda rotação é igual a $\frac{\pi}{2}$ rad. 
 
-Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a $0$ rad, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos ($z-y-x$).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).
+Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a $0$ rad, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos ($z-y-x$), também conhecido por *yaw*, *pitch* e *roll*(1).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).
+{.annotate}
+
+1. Guinagem ($\psi$ no eixo $z$), inclinação ($\theta$ no eixo $y$) e rolagem ($\phi$ no eixo $x$)
 
 Uma alternativa aos ângulos de Euler, que não possuem singularidades, são os quatérnios.

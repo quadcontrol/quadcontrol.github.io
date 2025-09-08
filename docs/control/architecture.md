@@ -81,4 +81,6 @@ void appMain(void *param)
 
 A implementação será feita passo a passo, uma função por vez. Dessa forma, você poderá entender o papel de cada bloco isoladamente antes de ver o sistema completo em ação.
 
+![Architecture](images/architecture.gif){: width=100% style="display: block; margin: auto;" }
+
 Nos próximos capítulos, vamos começar pelo mixer, depois evoluir para os estimadores e controladores. Ao final, você terá construído — bloco a bloco — uma arquitetura de controle completa para drones.

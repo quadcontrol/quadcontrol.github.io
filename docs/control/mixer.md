@@ -79,14 +79,17 @@ Inicialmente, as forças e torques serão comandados pelo Command Based Flight C
 - Os botões `←` e `→` alteram a variável `setpoint.position.y` em incrementos de $0,5$
 - Os botões `Up` e `Down` alteram a variável `setpoint.position.z` em incrementos de $0,5$
 
-Vamos utilizar essas variáveis para comandar a força total $f_t$ em incrementos de $0,01\,N$ e os torques de rolagem $\tau_x$ e inclinação $\tau_y$ em incrementos de $0,001\,N.m$. Portanto, precisamos ajustar as escalas da seguinte forma:
+Vamos utilizar essas variáveis para comandar a força total $f_t$ em incrementos de $0,01\,N$ e os torques de rolagem $\tau_x$ e inclinação $\tau_y$ em incrementos de $0,001\,N.m$. Portanto, precisamos ajustar as escalas da seguinte forma(1):
+{ .annotate }
+
+1. O torque $\tau_x$ possui uma inversão de sinal pois o eixo $y$, que é comandado pelos botões `←` e `→`, está no sentido contrário do torque.
 
 ![](images/reference_mixer.svg){: style="display: block; margin: auto;" }
 
 Abaixo temos um exemplo de função `reference()` que faz isso(1):
 { .annotate }
 
-1. Note que os valores comandados também estão sendo *printados* no console.
+1. Multiplicamos por $2$, arredondamos e depois dividmos por $100$ (ou $1000$) para garantir um arredondamento com $2$ (ou $3$) casas decimais.
 
 
 ```c
@@ -105,9 +108,6 @@ void reference()
     tx = -roundf((setpoint.position.y) * 2.0f) / 1000.0f;   // Roll torque command [N.m] (maps 0.5m -> 0.001N.m)
     ty =  roundf((setpoint.position.x) * 2.0f) / 1000.0f;   // Pitch torque command [N.m] (maps 0.5m -> 0.001N.m)
     tz = 0.0f;                                              // Yaw torque command [N.m]
-
-    // Print debug info for the control efforts
-    DEBUG_PRINT("Ft (N): %.2f | Tx (N.m): %.3f | Ty (N.m): %.3f  | Tz (N.m): %.3f \n", (double)ft, (double)tx, (double)ty, (double)tz);
 }
 ```
 
@@ -228,10 +228,10 @@ void appMain(void *param)
     // Infinite loop (runs at 200Hz)
     while (true)
     {
-        reference();                  // Get reference setpoints from commander module
-        mixer();                      // Compute motor commands
-        motors();                     // Apply motor commands
-        vTaskDelay(pdMS_TO_TICKS(5)); // Wait 5 ms
+        reference();                  // Read reference setpoints (from Crazyflie Client)
+        mixer();                      // Convert desired force/torques into motor PWM
+        motors();                     // Send commands to motors
+        vTaskDelay(pdMS_TO_TICKS(5)); // Loop delay (5 ms)
     }
 }
 ```
@@ -262,7 +262,10 @@ Arme o drone a altere o valor do torque de inclinação $\tau_y$ com os botões 
 
 ### Torque de guinagem $\tau_z$
 
-Modifique a função de referência, para que os botões `←` e `→` alterem o valor do torque de guinagem $\tau_z$ e não mais de rolagem $\tau_x$:
+Modifique a função de referência, para que os botões `←` e `→` alterem o valor do torque de guinagem $\tau_z$ em incrementos de $0,0001\,N.m$(1):
+{.annotate}
+
+1. Note que é uma casa decimal a mais.
 
 ![](images/reference_mixer2.svg){: style="display: block; margin: auto;" }
 

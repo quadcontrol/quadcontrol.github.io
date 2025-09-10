@@ -1552,11 +1552,14 @@
 <li>Os botões <code>←</code> e <code>→</code> alteram a variável <code>setpoint.position.y</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
 <li>Os botões <code>Up</code> e <code>Down</code> alteram a variável <code>setpoint.position.z</code> em incrementos de <span class="arithmatex">\(0,5\)</span></li>
 </ul>
-<p>Vamos utilizar essas variáveis para comandar a força total <span class="arithmatex">\(f_t\)</span> em incrementos de <span class="arithmatex">\(0,01\,N\)</span> e os torques de rolagem <span class="arithmatex">\(\tau_x\)</span> e inclinação <span class="arithmatex">\(\tau_y\)</span> em incrementos de <span class="arithmatex">\(0,001\,N.m\)</span>. Portanto, precisamos ajustar as escalas da seguinte forma:</p>
+<p class="annotate">Vamos utilizar essas variáveis para comandar a força total <span class="arithmatex">\(f_t\)</span> em incrementos de <span class="arithmatex">\(0,01\,N\)</span> e os torques de rolagem <span class="arithmatex">\(\tau_x\)</span> e inclinação <span class="arithmatex">\(\tau_y\)</span> em incrementos de <span class="arithmatex">\(0,001\,N.m\)</span>. Portanto, precisamos ajustar as escalas da seguinte forma(1):</p>
+<ol>
+<li>O torque <span class="arithmatex">\(\tau_x\)</span> possui uma inversão de sinal pois o eixo <span class="arithmatex">\(y\)</span>, que é comandado pelos botões <code>←</code> e <code>→</code>, está no sentido contrário do torque.</li>
+</ol>
 <p><img alt="" src="../images/reference_mixer.svg" style="display: block; margin: auto;" /></p>
 <p class="annotate">Abaixo temos um exemplo de função <code>reference()</code> que faz isso(1):</p>
 <ol>
-<li>Note que os valores comandados também estão sendo <em>printados</em> no console.</li>
+<li>Multiplicamos por <span class="arithmatex">\(2\)</span>, arredondamos e depois dividmos por <span class="arithmatex">\(100\)</span> (ou <span class="arithmatex">\(1000\)</span>) para garantir um arredondamento com <span class="arithmatex">\(2\)</span> (ou <span class="arithmatex">\(3\)</span>) casas decimais.</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Get reference setpoints from commander module</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span>
@@ -1573,9 +1576,6 @@
 <span class="w">    </span><span class="n">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">roundf</span><span class="p">((</span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000.0f</span><span class="p">;</span><span class="w">   </span><span class="c1">// Roll torque command [N.m] (maps 0.5m -&gt; 0.001N.m)</span>
 <span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">roundf</span><span class="p">((</span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000.0f</span><span class="p">;</span><span class="w">   </span><span class="c1">// Pitch torque command [N.m] (maps 0.5m -&gt; 0.001N.m)</span>
 <span class="w">    </span><span class="n">tz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                                              </span><span class="c1">// Yaw torque command [N.m]</span>
-
-<span class="w">    </span><span class="c1">// Print debug info for the control efforts</span>
-<span class="w">    </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Ft (N): %.2f | Tx (N.m): %.3f | Ty (N.m): %.3f  | Tz (N.m): %.3f </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ft</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">tz</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="mixer_1">Mixer</h3>
@@ -1676,10 +1676,10 @@
 <span class="w">    </span><span class="c1">// Infinite loop (runs at 200Hz)</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">reference</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Get reference setpoints from commander module</span>
-<span class="w">        </span><span class="n">mixer</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Compute motor commands</span>
-<span class="w">        </span><span class="n">motors</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Apply motor commands</span>
-<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// Wait 5 ms</span>
+<span class="w">        </span><span class="n">reference</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Read reference setpoints (from Crazyflie Client)</span>
+<span class="w">        </span><span class="n">mixer</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Convert desired force/torques into motor PWM</span>
+<span class="w">        </span><span class="n">motors</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Send commands to motors</span>
+<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// Loop delay (5 ms)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1698,7 +1698,10 @@
 <h3 id="torque-de-inclinacao-tau_y">Torque de inclinação <span class="arithmatex">\(\tau_y\)</span></h3>
 <p>Arme o drone a altere o valor do torque de inclinação <span class="arithmatex">\(\tau_y\)</span> com os botões <code>↑</code> e <code>↓</code>. Verifique se apenas os motores 2 e 3 ligam com valores positivos e os motores 1 e 4 com valores negativos.</p>
 <h3 id="torque-de-guinagem-tau_z">Torque de guinagem <span class="arithmatex">\(\tau_z\)</span></h3>
-<p>Modifique a função de referência, para que os botões <code>←</code> e <code>→</code> alterem o valor do torque de guinagem <span class="arithmatex">\(\tau_z\)</span> e não mais de rolagem <span class="arithmatex">\(\tau_x\)</span>:</p>
+<p class="annotate">Modifique a função de referência, para que os botões <code>←</code> e <code>→</code> alterem o valor do torque de guinagem <span class="arithmatex">\(\tau_z\)</span> em incrementos de <span class="arithmatex">\(0,0001\,N.m\)</span>(1):</p>
+<ol>
+<li>Note que é uma casa decimal a mais.</li>
+</ol>
 <p><img alt="" src="../images/reference_mixer2.svg" style="display: block; margin: auto;" /></p>
 <p>Arme o drone a altere o valor do torque de guinagem <span class="arithmatex">\(\tau_z\)</span> com os botões <code>←</code> e <code>→</code>. Verifique se apenas os motores 2 e 4 ligam com valores positivos e os motores 1 e 3 com valores negativos.</p>
 

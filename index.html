@@ -1203,12 +1203,24 @@
 <p>Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero — o <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">Bitcraze Crazyflie 2.1 Brushless</a>.</p>
 <p><img alt="Crazyflie" src="images/crazyflie.png" style="display: block; margin: auto;" width="400" /></p>
 <p>A jornada começa com os clássicos <code>led_blink.c</code> e <code>hello_world.c</code>, e termina com o drone voando sozinho. Ao longo do curso, o aluno:</p>
+<div class="annotate">
 <ul>
-<li>🧠 Programa um microcontrolador ARM<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> usando FreeRTOS<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
-<li>📡 Trabalha com sensores embarcados (IMU<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>, proximidade e fluxo óptico) via I²C<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> e SPI<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
-<li>🔧 Controla motores BLDC<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> por meio de ESCs<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup></li>
-<li>💻 Implementa em C<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup> algoritmos de estimação e controle</li>
+<li>🧠 Programa um microcontrolador ARM(1) usando FreeRTOS(2)</li>
+<li>📡 Trabalha com sensores embarcados (IMU(3), proximidade e fluxo óptico) via I²C(4) e SPI(5)</li>
+<li>🔧 Controla motores BLDC(6) por meio de ESCs(7)</li>
+<li>💻 Implementa em C(8) algoritmos de estimação e controle</li>
 </ul>
+</div>
+<ol>
+<li>Chips compactos e eficientes, usados como "cérebro" de muitos dispositivos embarcados, como drones, celulares e eletrodomésticos.</li>
+<li>Sistema operacional leve e em tempo real (Real-Time Operating System), que permite rodar várias tarefas no microcontrolador de forma organizada e com alta precisão de tempo.</li>
+<li>Unidade de Medição Inercial (Inertial Measurement Unit), composta por acelerômetros e giroscópios, usada para medir a orientação.</li>
+<li>Protocolo de comunicação digital simples, que conecta sensores ao microcontrolador usando apenas dois fios.</li>
+<li>Protocolo de comunicação digital mais rápido que o I²C, usado quando há necessidade de maior desempenho mas necessitando de quatro fios.</li>
+<li>Motores elétrico sem escovas (Brushless DC Motor), mais eficientes e duráveis.</li>
+<li>Controlador Eletrônico de Velocidade (Electronic Speed Controller), que regula a potência enviada aos motores e faz a comutação eletrônica na frequência correta.</li>
+<li>Linguagem de programação de baixo nível, muito utilizada em sistemas embarcados.</li>
+</ol>
 <p>A avaliação é 100% prática: ao final do curso, o drone deve voar até um dos helipontos, cada um com uma nota associada à sua dificuldade - quanto mais longe ou de difícil acesso o heliponto, maior sua média final na disciplina.</p>
 <p><img alt="Alvos" src="images/alvos.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Quer ver um pouco disso na prática? Assista o vídeo abaixo!</p>
@@ -1218,36 +1230,6 @@
           frameborder="0" 
           allowfullscreen>
   </iframe>
-</div>
-
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>ARM - Microcontroladores da família ARM são chips compactos e eficientes, usados como "cérebro" de muitos dispositivos embarcados, como drones, celulares e eletrodomésticos.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>FreeRTOS - Um sistema operacional leve e em tempo real (Real-Time Operating System) que permite rodar várias tarefas no microcontrolador de forma organizada e com alta precisão de tempo.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:3">
-<p>IMU - Unidade de Medição Inercial (Inertial Measurement Unit), composta por acelerômetros e giroscópios, usada para medir a orientação.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-<li id="fn:4">
-<p>I²C - Um protocolo de comunicação digital simples, que conecta sensores ao microcontrolador usando apenas dois fios.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
-</li>
-<li id="fn:5">
-<p>SPI - Um protocolo de comunicação digital mais rápido que o I²C, usado quando há necessidade de maior desempenho mas necessitando de quatro fios.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
-</li>
-<li id="fn:6">
-<p>BLDC - Motores elétrico sem escovas (Brushless DC Motor), mais eficientes e duráveis.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
-</li>
-<li id="fn:7">
-<p>ESC - Controlador Eletrônico de Velocidade (Electronic Speed Controller), que regula a potência enviada aos motores e faz a comutação eletrônica na frequência correta.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
-</li>
-<li id="fn:8">
-<p>C - Linguagem de programação de baixo nível, muito utilizada em sistemas embarcados.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
-</li>
-</ol>
 </div>
 
 

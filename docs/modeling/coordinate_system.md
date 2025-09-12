@@ -102,8 +102,6 @@ $$
         \end{align*}
         $$
 
----
-
 ### 3D
 
 Assim como no plano, no espaço a atitude do drone também é dada pela atitude relativa do sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$.
@@ -260,8 +258,6 @@ De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita atra
         $$
 
         O resultado faz sentido: uma rotação completa de $360^\circ$ em torno de ${\color{magenta}z}$ devolve ${\color{cyan}x'y'z'}$ exatamente a ${\color{magenta}xyz}$, ou seja, todos os eixos voltam a coincidir.
-
-### Propriedades
 
 ### Propriedades
 

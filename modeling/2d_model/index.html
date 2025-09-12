@@ -1384,16 +1384,293 @@
 
 
 <h1 id="modelo-2d">Modelo 2D</h1>
-<p>Inicialmente, vamos deduzir as equações diferenciais que descrevem a dinâmica 2D de um quadricóptero. Partiremos de um caso simplificado em duas dimensões, o que reduz a complexidade matemática e facilita a compreensão intuitiva da relação entre empuxo, torque e movimento. Esse modelo funciona como um primeiro passo essencial para visualizar como as duas entradas de controle (empuxo e torque) se traduzem em três saídas (posição e orientação no plano).</p>
+<p>Inicialmente, vamos deduzir as equações diferenciais que descrevem a dinâmica 2D de um quadricóptero. Partiremos de um caso simplificado em duas dimensões, o que cyanuz a complexidade matemática e facilita a compreensão intuitiva da relação entre empuxo, torque e movimento. Esse modelo funciona como um primeiro passo essencial para visualizar como as duas entradas de controle (empuxo e torque) se traduzem em três saídas (posição e orientação no plano).</p>
 <hr />
 <h2 id="introducao">Introdução</h2>
+<p>A dinâmica 2D possui 3 graus de liberdade (2 de translação e 1 de rotação) e, portanto, devemos obter 6 equações diferenciais (2 para cada grau de liberdade).</p>
+<p><img alt="" src="../images/2d_drone.svg" style="display: block; margin: auto;" width="600" /></p>
+<p class="annotate">Vamos modelar esse sistema sob quatro perspectivas diferentes(1), na seguinte ordem:</p>
+<ol>
+<li>Para facilitar o entendimento, utilizaremos uma cor para os <span style="color:magenta">estados no sistemas de coordenadas inercial</span>, outra para os <span style="color:cyan">estados no sistema de coordenadas móvel</span> e uma terceira para as <span style="color:lightgreen">entradas</span> .</li>
+</ol>
 <hr />
 <h2 id="notacao-escalar">Notação escalar</h2>
+<p>A 2ª lei de Newton para translação e rotação utilizando a notação escalar é dada por:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+        \sum f = m a \\ 
+        \sum \tau = I \alpha
+\end{array}
+\right.
+\]</div>
+<p>Ela deverá ser aplicada individualmente para cada grau de liberdade.</p>
 <h3 id="sistema-de-coordenadas-fixo">Sistema de coordenadas fixo</h3>
+<p>Inicialmente, a ideia é que tanto as posições como as velocidades sejam descritas no sistema de coordenadas inercial, de modo que os estados do sistema sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>. </p>
+<div class="admonition question">
+<p class="admonition-title">Exercício 1</p>
+<p>Determine as as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span> e <span class="arithmatex">\({\color{magenta}\phi}\)</span>) em função dos estados do sistema.</p>
+<details class="info">
+<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{y}}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+{\color{magenta}\dot{y}} = {\color{magenta}v_y}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{z}}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+{\color{magenta}\dot{z}} = {\color{magenta}v_z}
+\]</div>
+</details>
+<details class="info">
+<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\phi}}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+{\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x}
+\]</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 2</p>
+<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>) em função dos estados do sistema.</p>
+<p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas fixo.</p>
+<details class="info">
+<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_y}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum  {\color{magenta}f_y} &amp;= m {\color{magenta}a_y} \\
+    - {\color{#65DD18}f_t} \sin {\color{magenta}\phi} &amp;= m {\color{magenta}\dot{v}_y} \\
+    {\color{magenta}\dot{v}_y} &amp;= - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t}
+\end{align*}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_z}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum {\color{magenta}f_z} &amp;= m {\color{magenta}a_z} \\
+    {\color{#65DD18}f_t} \cos {\color{magenta}\phi} - mg &amp;= m {\color{magenta}\dot{v}_z} \\
+        {\color{magenta}\dot{v}_z} &amp;= -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t}
+\end{align*}
+\]</div>
+</details>
+<details class="info">
+<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\omega}_x}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum {\color{magenta}\tau_x} &amp;= I_{xx} {\color{magenta}\alpha_x} \\
+    {\color{#65DD18}\tau_\phi} &amp;= I_{xx} {\color{magenta}\dot{\omega}_x} \\
+    {\color{magenta}\dot{\omega}_x} &amp;= \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+\end{align*}
+\]</div>
+</details>
+</div>
+<p>Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema. Você deve ter chegado a:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    {\color{magenta}\dot{y}} = {\color{magenta}v_y} \\ 
+    {\color{magenta}\dot{z}} = {\color{magenta}v_z} \\
+    {\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x} \\ 
+    {\color{magenta}\dot{v}_y} = - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
+    {\color{magenta}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
+    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+\end{array}
+\right.
+\]</div>
 <h3 id="sistema-de-coordenadas-movel">Sistema de coordenadas móvel</h3>
+<p>Outra forma de abordar esse problema é descrevendo as posições no sistema de coordenadas inercial mas as velocidades no sistema de coordenadas móvel, de modo que os estados agora sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{cyan}v_y\,'}\)</span>, <span class="arithmatex">\({\color{cyan}v_z\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\omega_x\,'}\)</span>. Isso normalmente é feito pois faz muito mais sentido descrever as velocidades no sistema de coordenadas móvel, além de que a maiorias dos sensores (acelerômetro, giroscópio, proximidade, fluxo óptico, etc.) estão presos no drone e alinhados com esse sistema de coordenadas. No entanto, conforme veremos, as equações agora ficam um pouco mais complexas e menos intuitivas.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercício 1</p>
+<p>Determine as as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span> e <span class="arithmatex">\({\color{magenta}\phi}\)</span>) em função dos estados do sistema.</p>
+<p>Dica: lembre-se das matrizes de rotação <a href="../coordinate_system">vistas</a> anteriormente e que os eixos <span class="arithmatex">\({\color{magenta}x}\)</span> e <span class="arithmatex">\({\color{cyan}x\,'}\)</span> estão alinhados.</p>
+<details class="info">
+<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{y}}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{bmatrix}
+    {\color{cyan}v_y\,'} \\
+    {\color{cyan}v_z\,'}
+    \end{bmatrix}
+    =
+    \underbrace{
+    \begin{bmatrix} 
+    \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\ 
+    -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+\end{bmatrix}
+    }_{R}
+    \begin{bmatrix}
+    {\color{magenta}\dot{y}} \\
+    {\color{magenta}\dot{z}}
+\end{bmatrix}
+\qquad \longrightarrow \qquad
+    \begin{bmatrix}
+    {\color{magenta}\dot{y}} \\
+    {\color{magenta}\dot{z}}
+    \end{bmatrix}
+    =
+    \underbrace{
+    \begin{bmatrix} 
+    \cos{\color{magenta}\phi} &amp; -\sin{\color{magenta}\phi} \\ 
+    \sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+\end{bmatrix}
+    }_{R^{-1}}
+    \begin{bmatrix}
+    {\color{cyan}v_y\,'} \\
+    {\color{cyan}v_z\,'}
+\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+{\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \cos {\color{magenta}\phi} -  {\color{cyan}v_z\,'} \sin {\color{magenta}\phi}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{z}}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{bmatrix}
+    {\color{cyan}v_y\,'} \\
+    {\color{cyan}v_z\,'}
+    \end{bmatrix}
+    =
+    \underbrace{
+    \begin{bmatrix} 
+    \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\ 
+    -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+\end{bmatrix}
+    }_{R}
+    \begin{bmatrix}
+    {\color{magenta}\dot{y}} \\
+    {\color{magenta}\dot{z}}
+\end{bmatrix}
+\qquad \longrightarrow \qquad
+    \begin{bmatrix}
+    {\color{magenta}\dot{y}} \\
+    {\color{magenta}\dot{z}}
+    \end{bmatrix}
+    =
+    \underbrace{
+    \begin{bmatrix} 
+    \cos{\color{magenta}\phi} &amp; -\sin{\color{magenta}\phi} \\ 
+    \sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+\end{bmatrix}
+    }_{R^{-1}}
+    \begin{bmatrix}
+    {\color{cyan}v_y\,'} \\
+    {\color{cyan}v_z\,'}
+\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+{\color{magenta}\dot{z}} =  {\color{cyan}v_y\,'} \sin {\color{magenta}\phi} +  {\color{cyan}v_z\,'} \cos {\color{magenta}\phi}
+\]</div>
+</details>
+<details class="info">
+<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\phi}}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+{\color{magenta}\dot{\phi}} = {\color{cyan}\omega_x'}
+\]</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 2</p>
+<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>) em função dos estados do sistema.</p>
+<p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas fixo.</p>
+<details class="info">
+<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_y}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum {\color{cyan}f_y\,'} &amp;= m {\color{cyan}a_y\,'} \\
+    - m g \sin {\color{magenta}\phi} &amp;= m \left( {\color{cyan}\dot{v}_y\,'} - {\color{cyan}v_z\,' \omega_x\,'} \right) \\
+    {\color{cyan}\dot{v}_y\,'} &amp;= {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi}
+\end{align*}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_z}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum {\color{cyan}f_z\,'} &amp;= m {\color{cyan}a_z\,'} \\
+    {\color{#65DD18}f_t} - m g {\color{magenta}\cos \phi} &amp;= m \left( {\color{cyan}\dot{v}_z\,'} + {\color{cyan}v_y\,' \omega_x\,'} \right) \\
+    {\color{cyan}\dot{v}_z\,'} &amp;= - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t}
+\end{align*}
+\]</div>
+</details>
+<details class="info">
+<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\omega}_x}\)</span> em função dos estados do sistema.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    \sum {\color{cyan}\tau_x\,'} &amp;= I_{xx} {\color{cyan}\alpha_x\,'} \\
+    {\color{#65DD18}\tau_\phi} &amp;= I_{xx} {\color{cyan}\dot{\omega}_x\,'} \\
+    {\color{cyan}\dot{\omega}_x\,'} &amp;= \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+\end{align*}
+\]</div>
+</details>
+</div>
+<p>Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema. Você deve ter chegado a:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \cos {\color{magenta}\phi} -  {\color{cyan}v_z\,'} \sin {\color{magenta}\phi} \\ 
+    {\color{magenta}\dot{z}} =  {\color{cyan}v_y\,'} \sin {\color{magenta}\phi} +  {\color{cyan}v_z\,'} \cos {\color{magenta}\phi} \\
+    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
+    {\color{cyan}\dot{v}_y\,'} = {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi} \\ 
+    {\color{cyan}\dot{v}_z\,'} = - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
+    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+\end{array}
+\right.
+\]</div>
 <hr />
 <h2 id="notacao-vetorial">Notação vetorial</h2>
+<p>A 2ª lei de Newton para translação e rotação utilizando notação vetorial é dada por:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+        \sum \vec{f} = \frac{d}{dt} \vec{p} \\ 
+        \sum \vec{\tau} = \frac{d}{dt} \vec{h}
+\end{array}
+\right.
+\]</div>
+<p>Onde <span class="arithmatex">\(\vec{p}\)</span> e <span class="arithmatex">\(\vec{h}\)</span> são, respectivamente, os vetores de momentos lineares e angulares:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+        \vec{p} = m \vec{v} \\ 
+        \vec{h} = I \vec{\omega}
+\end{array}
+\right.
+\]</div>
+<p>Apesar de <span class="arithmatex">\(m\)</span> continuar sendo um escalar que representa a massa do corpo, <span class="arithmatex">\(I\)</span> agora é uma matriz que representa os momentos de inércia em torno dos 3 eixos de rotação:</p>
+<div class="arithmatex">\[
+I = 
+\begin{bmatrix}
+    I_{xx} &amp; 0 &amp; 0 \\
+    0 &amp; I_{yy} &amp; 0 \\
+    0 &amp; 0 &amp; I_{zz}
+\end{bmatrix}
+\]</div>
+<p>Como estamos trabalhando agora com vetores, estas equações podem ser aplicadas de uma única vez para todos os graus de liberdade.</p>
 <h3 id="sistema-de-coordenadas-fixo_1">Sistema de coordenadas fixo</h3>
+<p>Inicialmente, vamos definir o vetor aceleração da gravidade <span class="arithmatex">\({\color{magenta}\vec{g}}\)</span> no sistema de coordenadas inercial e os vetores de forças <span class="arithmatex">\({\color{cyan}\vec{f}_d\,'}\)</span> e torques <span class="arithmatex">\({\color{cyan}\vec{\tau}_d\,'}\)</span> do drone no sistema de coordenadas móvel:</p>
+<div class="arithmatex">\[
+{\color{magenta}\vec{g}} = 
+\begin{bmatrix}
+    0 \\
+    0 \\
+    g
+\end{bmatrix}
+\qquad
+{\color{cyan}\vec{f_d}\,'} = 
+\begin{bmatrix}
+    0 \\
+    0 \\
+    {\color{#65DD18}f_t} 
+\end{bmatrix}
+\qquad
+{\color{cyan}\vec{\tau_d}\,'} = 
+\begin{bmatrix}
+    {\color{#65DD18}\tau_\phi} \\
+    0 \\
+    0
+\end{bmatrix}
+\]</div>
+<p>Fazemos isso pois eles estão alinhados com estes sistemas de coordenadas e portanto é muito mais fácil descrevê-los assim.</p>
 <h3 id="sistema-de-coordenadas-movel_1">Sistema de coordenadas móvel</h3>
 
 

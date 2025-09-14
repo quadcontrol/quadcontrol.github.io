@@ -805,18 +805,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-fixo" class="md-nav__link">
+  <a href="#sistema-inercial" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas fixo
+      Sistema inercial
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-movel" class="md-nav__link">
+  <a href="#sistema-movel" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas móvel
+      Sistema móvel
     </span>
   </a>
   
@@ -838,18 +838,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-fixo_1" class="md-nav__link">
+  <a href="#sistema-inercial_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas fixo
+      Sistema inercial
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-movel_1" class="md-nav__link">
+  <a href="#sistema-movel_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas móvel
+      Sistema móvel
     </span>
   </a>
   
@@ -857,6 +857,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linearizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linearização
+    </span>
+  </a>
   
 </li>
       
@@ -1312,18 +1321,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-fixo" class="md-nav__link">
+  <a href="#sistema-inercial" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas fixo
+      Sistema inercial
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-movel" class="md-nav__link">
+  <a href="#sistema-movel" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas móvel
+      Sistema móvel
     </span>
   </a>
   
@@ -1345,18 +1354,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-fixo_1" class="md-nav__link">
+  <a href="#sistema-inercial_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas fixo
+      Sistema inercial
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sistema-de-coordenadas-movel_1" class="md-nav__link">
+  <a href="#sistema-movel_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistema de coordenadas móvel
+      Sistema móvel
     </span>
   </a>
   
@@ -1364,6 +1373,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linearizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linearização
+    </span>
+  </a>
   
 </li>
       
@@ -1384,18 +1402,78 @@
 
 
 <h1 id="modelo-2d">Modelo 2D</h1>
-<p>Inicialmente, vamos deduzir as equações diferenciais que descrevem a dinâmica 2D de um quadricóptero. Partiremos de um caso simplificado em duas dimensões, o que cyanuz a complexidade matemática e facilita a compreensão intuitiva da relação entre empuxo, torque e movimento. Esse modelo funciona como um primeiro passo essencial para visualizar como as duas entradas de controle (empuxo e torque) se traduzem em três saídas (posição e orientação no plano).</p>
+<p>Inicialmente, vamos deduzir as equações diferenciais que descrevem a dinâmica 2D de um quadricóptero. Partiremos de um caso simplificado em duas dimensões, o que reduz a complexidade matemática e facilita uma compreensão mais intuitiva. Esse modelo funciona como um primeiro passo essencial para visualizar como as entradas influenciam as saídas.</p>
 <hr />
 <h2 id="introducao">Introdução</h2>
-<p>A dinâmica 2D possui 3 graus de liberdade (2 de translação e 1 de rotação) e, portanto, devemos obter 6 equações diferenciais (2 para cada grau de liberdade).</p>
-<p><img alt="" src="../images/2d_drone.svg" style="display: block; margin: auto;" width="600" /></p>
-<p class="annotate">Vamos modelar esse sistema sob quatro perspectivas diferentes(1), na seguinte ordem:</p>
+<p class="annotate">A dinâmica 2D possui 3 graus de liberdade (2 de translação e 1 de rotação) e, portanto, devemos obter 6 equações diferenciais (2 para cada grau de liberdade)(1).</p>
 <ol>
-<li>Para facilitar o entendimento, utilizaremos uma cor para os <span style="color:magenta">estados no sistemas de coordenadas inercial</span>, outra para os <span style="color:cyan">estados no sistema de coordenadas móvel</span> e uma terceira para as <span style="color:lightgreen">entradas</span> .</li>
+<li>Para facilitar o entendimento, utilizaremos as seguintes cores e notações:<ul>
+<li><span class="arithmatex">\({\color{magenta} x}\)</span> - Estados (sistema de coordenadas inercial)</li>
+<li><span class="arithmatex">\({\color{cyan} x\,'}\)</span> - Estados (sistema de coordenadas móvel)</li>
+<li><span class="arithmatex">\({\color{#65DD18} u}\)</span> - Entradas</li>
+<li><span class="arithmatex">\(m\)</span> - Constantes</li>
+</ul>
+</li>
 </ol>
+<p><img alt="" src="../images/2d_drone.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>Vamos modelar esse sistema sob quatro perspectivas diferentes, na seguinte ordem:</p>
+<style>
+  /* Tabela com visual do tema e centralização */
+  table.rotacoes {
+    width: 100%;
+    border-collapse: collapse;
+    margin: .75rem 0;
+  }
+  table.rotacoes th, table.rotacoes td {
+    border: 1px solid var(--md-typeset-table-color, rgba(0,0,0,.12));
+    padding: .4rem .6rem;
+    text-align: center;
+    vertical-align: middle; /* centraliza verticalmente com rowspan */
+  }
+  /* Cor ciano apenas para os eixos */
+  .axis { color: #00BCD4; }
+  .axis_inertial { color: #FF00FF; }
+</style>
+
+<table class="rotacoes">
+  <thead>
+    <tr>
+      <th>Ordem</th>
+      <th>Notação</th>
+      <th>Posições</th>
+      <th>Velocidades</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td rowspan="2">Escalar</td>
+      <td><span class="arithmatex axis_inertial">\( y \quad z \quad \phi \)</span></td>
+      <td><span class="arithmatex axis_inertial">\( v_y \quad v_z \quad \omega_x \)</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><span class="arithmatex axis_inertial">\( y \quad z \quad \phi \)</span></td>
+      <td><span class="arithmatex axis">\( v^{'}_y \quad v^{'}_z \quad \omega^{'}_x \)</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td rowspan="2">Vetorial</td>
+      <td><span class="arithmatex axis_inertial">\( y \quad z \quad \phi \)</span></td>
+      <td><span class="arithmatex axis_inertial">\( v_y \quad v_z \quad \omega_x \)</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><span class="arithmatex axis_inertial">\( y \quad z \quad \phi \)</span></td>
+      <td><span class="arithmatex axis">\( v^{'}_y \quad v^{'}_z \quad \omega^{'}_x \)</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Apesar de ir ficando cada vez mais complicado, quando passarmos para a dinâmica 3D, a quarta (e última) perspectiva acaba sendo a mais simples.</p>
 <hr />
 <h2 id="notacao-escalar">Notação escalar</h2>
-<p>A 2ª lei de Newton para translação e rotação utilizando a notação escalar é dada por:</p>
+<p>A 2ª lei de Newton para translação e rotação, utilizando a notação escalar, é dada por:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -1405,7 +1483,7 @@
 \right.
 \]</div>
 <p>Ela deverá ser aplicada individualmente para cada grau de liberdade.</p>
-<h3 id="sistema-de-coordenadas-fixo">Sistema de coordenadas fixo</h3>
+<h3 id="sistema-inercial">Sistema inercial</h3>
 <p>Inicialmente, a ideia é que tanto as posições como as velocidades sejam descritas no sistema de coordenadas inercial, de modo que os estados do sistema sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>. </p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
@@ -1432,7 +1510,7 @@
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
 <p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>) em função dos estados do sistema.</p>
-<p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas fixo.</p>
+<p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas inercial.</p>
 <details class="info">
 <summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_y}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
@@ -1464,7 +1542,7 @@
 \]</div>
 </details>
 </div>
-<p>Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema. Você deve ter chegado a:</p>
+<p>Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -1477,8 +1555,9 @@
 \end{array}
 \right.
 \]</div>
-<h3 id="sistema-de-coordenadas-movel">Sistema de coordenadas móvel</h3>
-<p>Outra forma de abordar esse problema é descrevendo as posições no sistema de coordenadas inercial mas as velocidades no sistema de coordenadas móvel, de modo que os estados agora sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{cyan}v_y\,'}\)</span>, <span class="arithmatex">\({\color{cyan}v_z\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\omega_x\,'}\)</span>. Isso normalmente é feito pois faz muito mais sentido descrever as velocidades no sistema de coordenadas móvel, além de que a maiorias dos sensores (acelerômetro, giroscópio, proximidade, fluxo óptico, etc.) estão presos no drone e alinhados com esse sistema de coordenadas. No entanto, conforme veremos, as equações agora ficam um pouco mais complexas e menos intuitivas.</p>
+<h3 id="sistema-movel">Sistema móvel</h3>
+<p>Outra forma de abordar esse problema é descrevendo as posições no sistema de coordenadas inercial mas as velocidades no sistema de coordenadas móvel, de modo que os estados agora sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{cyan}v_y\,'}\)</span>, <span class="arithmatex">\({\color{cyan}v_z\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\omega_x\,'}\)</span>. </p>
+<p>Isso normalmente é feito pois faz muito mais sentido descrever as velocidades no sistema de coordenadas fixo no drone, além de que a maiorias dos sensores (acelerômetro, giroscópio, proximidade, fluxo óptico, etc.) estão presos nele e alinhados com esse sistema de coordenadas. No entanto, conforme veremos, as equações agora ficam um pouco mais complexas e menos intuitivas.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
 <p>Determine as as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span> e <span class="arithmatex">\({\color{magenta}\phi}\)</span>) em função dos estados do sistema.</p>
@@ -1570,10 +1649,10 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
-<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>) em função dos estados do sistema.</p>
-<p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas fixo.</p>
+<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{cyan}v_y\,'}\)</span>, <span class="arithmatex">\({\color{cyan}v_z\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\omega_x\,'}\)</span>) em função dos estados do sistema.</p>
+<p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas inercial.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_y}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{cyan}\dot{v}_y\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
     \sum {\color{cyan}f_y\,'} &amp;= m {\color{cyan}a_y\,'} \\
@@ -1583,7 +1662,7 @@
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_z}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{cyan}\dot{v}_z\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
     \sum {\color{cyan}f_z\,'} &amp;= m {\color{cyan}a_z\,'} \\
@@ -1593,7 +1672,7 @@
 \]</div>
 </details>
 <details class="info">
-<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\omega}_x}\)</span> em função dos estados do sistema.</summary>
+<summary>c) Escreva <span class="arithmatex">\({\color{cyan}\dot{\omega}_x\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
     \sum {\color{cyan}\tau_x\,'} &amp;= I_{xx} {\color{cyan}\alpha_x\,'} \\
@@ -1603,7 +1682,7 @@
 \]</div>
 </details>
 </div>
-<p>Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema. Você deve ter chegado a:</p>
+<p>Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -1616,6 +1695,7 @@
 \end{array}
 \right.
 \]</div>
+<p>Os termos <span class="arithmatex">\({\color{cyan}v_z\,' \omega_x\,'}\)</span> e <span class="arithmatex">\({\color{cyan}v_y\,' \omega_x\,'}\)</span> correspondem às pseudo-acelerações centrífugas, que surgem ao descrever o movimento no referencial não inercial do drone (sistema de coordenadas móvel).</p>
 <hr />
 <h2 id="notacao-vetorial">Notação vetorial</h2>
 <p>A 2ª lei de Newton para translação e rotação utilizando notação vetorial é dada por:</p>
@@ -1646,7 +1726,7 @@ I =
 \end{bmatrix}
 \]</div>
 <p>Como estamos trabalhando agora com vetores, estas equações podem ser aplicadas de uma única vez para todos os graus de liberdade.</p>
-<h3 id="sistema-de-coordenadas-fixo_1">Sistema de coordenadas fixo</h3>
+<h3 id="sistema-inercial_1">Sistema inercial</h3>
 <p>Inicialmente, vamos definir o vetor aceleração da gravidade <span class="arithmatex">\({\color{magenta}\vec{g}}\)</span> no sistema de coordenadas inercial e os vetores de forças <span class="arithmatex">\({\color{cyan}\vec{f}_d\,'}\)</span> e torques <span class="arithmatex">\({\color{cyan}\vec{\tau}_d\,'}\)</span> do drone no sistema de coordenadas móvel:</p>
 <div class="arithmatex">\[
 {\color{magenta}\vec{g}} = 
@@ -1671,7 +1751,10 @@ I =
 \end{bmatrix}
 \]</div>
 <p>Fazemos isso pois eles estão alinhados com estes sistemas de coordenadas e portanto é muito mais fácil descrevê-los assim.</p>
-<h3 id="sistema-de-coordenadas-movel_1">Sistema de coordenadas móvel</h3>
+<h3 id="sistema-movel_1">Sistema móvel</h3>
+<hr />
+<h2 id="linearizacao">Linearização</h2>
+<p><img alt="" src="../images/2d_plant.svg" style="display: block; margin: auto;" width="100%" /></p>
 
 
 

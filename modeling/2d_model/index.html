@@ -1926,7 +1926,120 @@ I =
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 9</p>
-<p>Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (<span class="arithmatex">\({\color{cyan}\dot{\vec{v}}\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\dot{\vec{\omega}}\,'}\)</span>) em função das somatórias de forças e torques.</p>
+<p class="annotate">Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (<span class="arithmatex">\({\color{cyan}\dot{\vec{v}}\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\dot{\vec{\omega}}\,'}\)</span>) em função das somatórias de forças e torques(1).</p>
+<ol>
+<li>
+<p>O produto vetorial <span class="arithmatex">\({\color{cyan}\vec{\omega}\,'} \times\)</span>:</p>
+<div class="arithmatex">\[
+\begin{align}
+    {\color{cyan}\vec{\omega}\,'} \times \vec{v} &amp;= 
+    \begin{bmatrix}
+    {\color{cyan}\omega_x\,'} \\
+    0 \\
+    0
+    \end{bmatrix} 
+    \times
+    \begin{bmatrix}
+    v_1 \\
+    v_2 \\
+    v_3
+    \end{bmatrix} \\
+    {\color{cyan}\vec{\omega}\,'} \times \vec{v} &amp;= 
+    \begin{bmatrix}
+    0 \\
+    - {\color{cyan}\omega_x\,'} v_3 \\
+    {\color{cyan}\omega_x\,'} v_2 
+    \end{bmatrix}
+\end{align}
+\]</div>
+<p>Também pode ser representado pelo produto de uma matriz anti-simétrica <span class="arithmatex">\({\color{cyan}\tilde{\omega}\,'}\)</span>:</p>
+<div class="arithmatex">\[
+\begin{align}
+    {\color{cyan}\tilde{\omega}\,'} \vec{v} &amp;= 
+    \begin{bmatrix}
+        0 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; -{\color{cyan}\omega_x\,'} \\
+        0 &amp; {\color{cyan}\omega_x\,'} &amp; 0
+    \end{bmatrix}  
+    \begin{bmatrix}
+    v_1 \\
+    v_2 \\
+    v_3
+    \end{bmatrix} \\
+    {\color{cyan}\tilde{\omega}\,'} \vec{v} &amp;= 
+    \begin{bmatrix}
+    0 \\
+    - {\color{cyan}\omega_x\,'} v_3 \\
+    {\color{cyan}\omega_x\,'} v_2 
+    \end{bmatrix}
+\end{align}
+\]</div>
+<p>Se expandirmos o termo <span class="arithmatex">\(R \dot{R}^T\)</span>:</p>
+<div class="arithmatex">\[
+\begin{align}
+    R \dot{R}^T &amp;= 
+    \begin{bmatrix}
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
+        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+    \end{bmatrix}   
+    {
+    \left(
+    \frac{d}{dt}
+    \begin{bmatrix}
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
+        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+    \end{bmatrix} 
+    \right)
+    }^{T} \\
+    R \dot{R}^T &amp;= 
+    \begin{bmatrix}
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
+        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+    \end{bmatrix}   
+    {
+    \begin{bmatrix}
+        0 &amp; 0 &amp; 0 \\
+        0 &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; \cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} \\
+        0 &amp; -\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}
+    \end{bmatrix} 
+    }^{T} \\
+    R \dot{R}^T &amp;= 
+    \begin{bmatrix}
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
+        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+    \end{bmatrix}   
+    \begin{bmatrix}
+        0 &amp; 0 &amp; 0 \\
+        0 &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; -\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} \\
+        0 &amp; \cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}
+    \end{bmatrix} \\
+    R \dot{R}^T &amp;= 
+    \begin{bmatrix}
+        0 &amp; 0 &amp; 0 \\
+        0 &amp; -\cancel{\cos{\color{magenta}\phi}\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}} + \cancel{\sin{\color{magenta}\phi}\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'}} &amp; -\cos^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'} -\sin^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'}\\
+        0 &amp; \sin^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'} + \cos^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; \cancel{\sin{\color{magenta}\phi}\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'}} - \cancel{\cos{\color{magenta}\phi}\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}}
+    \end{bmatrix}  \\
+    R \dot{R}^T &amp;= 
+    \begin{bmatrix}
+        0 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; -{\color{cyan}\omega_x\,'} \cancelto{1}{\left(\cos^2{\color{magenta}\phi} + \sin^2{\color{magenta}\phi} \right)} \\
+        0 &amp; {\color{cyan}\omega_x\,'} \cancelto{1}{\left(\sin^2{\color{magenta}\phi} + \cos^2{\color{magenta}\phi} \right)} &amp; 0
+    \end{bmatrix} \\
+    R \dot{R}^T &amp;= 
+    \begin{bmatrix}
+        0 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; -{\color{cyan}\omega_x\,'} \\
+        0 &amp; {\color{cyan}\omega_x\,'} &amp; 0
+    \end{bmatrix} 
+\end{align}
+\]</div>
+<p>Concluimos que <span class="arithmatex">\(R \dot{R}^T = {\color{cyan}\vec{\omega}\,'} \times\)</span>.</p>
+</li>
+</ol>
 <details class="info">
 <summary>a) Escreva <span class="arithmatex">\({\color{cyan}\dot{\vec{v}}\,'}\)</span> em função de <span class="arithmatex">\(\sum{\color{cyan}\vec{f}\,'}\)</span>.</summary>
 <div class="arithmatex">\[
@@ -2139,7 +2252,7 @@ I =
 <p>Note que as equações acima são exatamente iguais às obtidas utilizando a notação escalar. </p>
 <hr />
 <h2 id="linearizacao">Linearização</h2>
-<p class="annotate">O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproximações quando os estados estão bem próximos de suas posições de equilíbrio. Neste caso, as funções trigonométricas podem ser aproximadas (ex: <span class="arithmatex">\(\cos{\color{magenta}\phi} \approx 1\)</span> e <span class="arithmatex">\(\sin{\color{magenta}\phi} \approx {\color{magenta}\phi}\)</span>) (1), assim como o produto entre os estados (ex: <span class="arithmatex">\({\color{cyan}v_z\,' \omega_x\,'} \approx 0\)</span>).</p>
+<p class="annotate">O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproximações quando os estados estão bem próximos de suas posições de equilíbrio. Neste caso, funções trigonométricas podem ser aproximadas (ex: <span class="arithmatex">\(\cos{\color{magenta}\phi} \approx 1\)</span> e <span class="arithmatex">\(\sin{\color{magenta}\phi} \approx {\color{magenta}\phi}\)</span>) (1), assim como o produto entre dois estados (ex: <span class="arithmatex">\({\color{cyan}v_z\,' \omega_x\,'} \approx 0\)</span>).</p>
 <ol>
 <li>Essas aproximações valem apenas para ângulos em radianos menores que <span class="arithmatex">\(10^{\circ}\)</span>.</li>
 </ol>

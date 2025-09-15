@@ -142,8 +142,8 @@ Inicialmente, a ideia é que tanto as posições como as velocidades sejam descr
         $$
         \begin{align*}
             \sum {\color{magenta}\tau_x} &= I_{xx} {\color{magenta}\alpha_x} \\
-            {\color{#65DD18}\tau_\phi} &= I_{xx} {\color{magenta}\dot{\omega}_x} \\
-            {\color{magenta}\dot{\omega}_x} &= \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+            {\color{#65DD18}\tau_x} &= I_{xx} {\color{magenta}\dot{\omega}_x} \\
+            {\color{magenta}\dot{\omega}_x} &= \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
         \end{align*}
         $$
 
@@ -158,7 +158,7 @@ $$
     {\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x} \\ 
     {\color{magenta}\dot{v}_y} = - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
     {\color{magenta}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
-    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
 \end{array}
 \right.
 $$
@@ -286,8 +286,8 @@ Isso normalmente é feito pois faz muito mais sentido descrever as velocidades n
         $$
         \begin{align*}
             \sum {\color{cyan}\tau_x\,'} &= I_{xx} {\color{cyan}\alpha_x\,'} \\
-            {\color{#65DD18}\tau_\phi} &= I_{xx} {\color{cyan}\dot{\omega}_x\,'} \\
-            {\color{cyan}\dot{\omega}_x\,'} &= \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+            {\color{#65DD18}\tau_x} &= I_{xx} {\color{cyan}\dot{\omega}_x\,'} \\
+            {\color{cyan}\dot{\omega}_x\,'} &= \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
         \end{align*}
         $$
 
@@ -301,7 +301,7 @@ $$
     {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
     {\color{cyan}\dot{v}_y\,'} = {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi} \\ 
     {\color{cyan}\dot{v}_z\,'} = - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
 \end{array}
 \right.
 $$
@@ -368,7 +368,7 @@ $$
 \qquad
 {\color{cyan}\vec{\tau_d}\,'} = 
 \begin{bmatrix}
-    {\color{#65DD18}\tau_\phi} \\
+    {\color{#65DD18}\tau_x} \\
     0 \\
     0
 \end{bmatrix}
@@ -481,7 +481,7 @@ Essas equações são genéricas, ou seja, valem pro movimento de translação e
                 0 & 0 & I_{zz}
             \end{bmatrix}^{-1}
             \begin{bmatrix}
-                {\color{#65DD18}\tau_\phi} \\
+                {\color{#65DD18}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix} \\
@@ -497,7 +497,7 @@ Essas equações são genéricas, ou seja, valem pro movimento de translação e
                 0 & 0 & \frac{1}{I_{zz}}
             \end{bmatrix}
             \begin{bmatrix}
-                {\color{#65DD18}\tau_\phi} \\
+                {\color{#65DD18}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix} \\
@@ -508,7 +508,7 @@ Essas equações são genéricas, ou seja, valem pro movimento de translação e
             \end{bmatrix}
             &= 
             \begin{bmatrix}
-                \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi} \\
+                \frac{1}{I_{xx}} {\color{#65DD18}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix}
@@ -525,7 +525,7 @@ $$
     {\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x} \\ 
     {\color{magenta}\dot{v}_y} = - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
     {\color{magenta}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
-    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
 \end{array}
 \right.
 $$
@@ -818,7 +818,7 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
                 0 & 0 & I_{zz}
             \end{bmatrix}^{-1}
             \begin{bmatrix}
-                {\color{#65DD18}\tau_\phi} \\
+                {\color{#65DD18}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix} \\
@@ -853,7 +853,7 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
                 0 & 0 & \frac{1}{I_{zz}}
             \end{bmatrix}
             \begin{bmatrix}
-                {\color{#65DD18}\tau_\phi} \\
+                {\color{#65DD18}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix} \\
@@ -864,7 +864,7 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
             \end{bmatrix}
             &= 
             \begin{bmatrix}
-                \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi} \\
+                \frac{1}{I_{xx}} {\color{#65DD18}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix}
@@ -881,7 +881,7 @@ $$
     {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
     {\color{cyan}\dot{v}_y\,'} = {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi} \\ 
     {\color{cyan}\dot{v}_z\,'} = - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
 \end{array}
 \right.
 $$
@@ -910,7 +910,7 @@ O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproxima
             {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
             {\color{cyan}\dot{v}_y\,'} = \cancelto{0}{\color{cyan}v_z\,' \omega_x\,'} - g \cancelto{{\color{magenta}\phi}}{\sin {\color{magenta}\phi}} \\ 
             {\color{cyan}\dot{v}_z\,'} = - \cancelto{0}{\color{cyan}v_y\,' \omega_x\,'} - g \cancelto{1}{\cos {\color{magenta}\phi}} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-            {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+            {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
         \end{array}
         \right.
         \qquad \longrightarrow \qquad
@@ -921,7 +921,7 @@ O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproxima
             {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
             {\color{cyan}\dot{v}_y\,'} = - g {\color{magenta}\phi} \\ 
             {\color{cyan}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-            {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+            {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
         \end{array}
         \right.
         \qquad \longrightarrow \qquad
@@ -932,7 +932,7 @@ O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproxima
             {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
             {\color{cyan}\dot{v}_y\,'} = - g {\color{magenta}\phi} \\ 
             {\color{cyan}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-            {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+            {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
         \end{array}
         \right.
         $$
@@ -947,7 +947,7 @@ $$
     {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
     {\color{cyan}\dot{v}_y\,'} = - g {\color{magenta}\phi} \\ 
     {\color{cyan}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_\phi}
+    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
 \end{array}
 \right.    
 $$
@@ -961,6 +961,6 @@ Isso fica evidente ao representarmos as equações diferenciais em um diagrama d
 Observe o seguinte:
 
 - A força ${\color{#65DD18}f_t}$ integra duas vezes até a posição ${\color{magenta}z}$ (2ª lei de Newton para translação), atuando de forma desacoplada na dinâmica de posição vertical.
-- O torque ${\color{#65DD18}\tau_\phi}$ integra duas vezes até o ângulo ${\color{magenta}\phi}$ (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição ${\color{magenta}y}$. 
-- Portanto, de ${\color{#65DD18}\tau_\phi}$ a ${\color{magenta}y}$ há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. 
-- O sinal negativo em $- g$ decorre da convenção de eixos adotada (uma rotação positiva de ${\color{magenta}\phi}$ implica em um deslocamento negativo ao longo de ${\color{magenta}y}$).
+- O torque ${\color{#65DD18}\tau_x}$ integra duas vezes até o ângulo ${\color{magenta}\phi}$ (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição ${\color{magenta}y}$. 
+- Portanto, de ${\color{#65DD18}\tau_x}$ a ${\color{magenta}y}$ há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. 
+- O sinal negativo em $- g$ decorre da convenção de eixos adotada (uma rotação positiva em torqno de ${\color{magenta}x}$ implica em um deslocamento negativo ao longo de ${\color{magenta}y}$).

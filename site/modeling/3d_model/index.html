@@ -1403,9 +1403,11 @@
 
 <h1 id="modelo-3d">Modelo 3D</h1>
 <p>Agora, vamos deduzir as equações diferenciais que descrevem a dinâmica 3D de um quadricóptero. Neste modelo completo, o drone pode se mover e girar livremente no espaço, o que traz toda a riqueza — e também a dificuldade — do problema. Para representá-lo, será necessário recorrer à álgebra vetorial e às matrizes de rotação, que permitem descrever posições, velocidades e orientações em três dimensões.</p>
-<p>Nesse caso, as entradas de controle passam a ser quatro: o empuxo total e os torques aplicados nos eixos x, y e z. Essas entradas determinam seis variáveis de saída: três posições (x, y, z) e três ângulos de orientação (rolagem, arfagem e guinada).</p>
 <hr />
 <h2 id="introducao">Introdução</h2>
+<p>A dinâmica 3D possui 6 graus de liberdade (3 de translação e 3 de rotação) e, portanto, devemos obter 12 equações diferenciais (2 para cada grau de liberdade).</p>
+<p><img alt="" src="../images/3d_drone.svg" style="display: block; margin: auto;" width="800" /></p>
+<p>É muito mais fácil trabalhar com a notação vetorial e aplicar as equações de Newton-Euler 2 vezes (uma para translação e outra para rotação) do que 6 vezes com a notação escalar (uma para cada grau de liberdade).</p>
 <hr />
 <h2 id="cinetica">Cinética</h2>
 <h3 id="translacao">Translação</h3>
@@ -1416,6 +1418,7 @@
 <h3 id="rotacao_1">Rotação</h3>
 <hr />
 <h2 id="linearizacao">Linearização</h2>
+<p><img alt="" src="../images/3d_plant.svg" style="display: block; margin: auto;" width="100%" /></p>
 
 
 

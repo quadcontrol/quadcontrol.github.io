@@ -53,15 +53,188 @@ $$
 
 ## Cinemática
 
+Já deduzimos a matriz de rotação utilizando os ângulos de Euler:
+
+$$
+\begin{bmatrix}
+    {\color{magenta}x} \\
+    {\color{magenta}y} \\
+    {\color{magenta}z} \\
+\end{bmatrix}
+=
+\underbrace{
+\begin{bmatrix}
+    \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} & \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} & -\sin{\color{magenta}\theta} \\ 
+    - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\ 
+    \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} & - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} 
+\end{bmatrix}
+}_{R}
+\begin{bmatrix}
+    {\color{cyan}x\,'} \\
+    {\color{cyan}y\,'} \\
+    {\color{cyan}z\,'} \\
+\end{bmatrix}
+$$
+
 ### Translação
 
+!!! question "Exercício 1"
+
+    Determine ${\color{magenta}\dot{\vec{r}}}$ em função dos estados do sistema.
+    
+    ??? info "Resposta"
+
+        $$
+        \begin{align*}
+            {\color{magenta}\dot{\vec{r}}} &= R {\color{cyan}{\vec{v}}\,'} \\
+            \begin{bmatrix}
+                {\color{magenta}\dot{x}} \\
+                {\color{magenta}\dot{y}} \\
+                {\color{magenta}\dot{z}} \\
+            \end{bmatrix}
+            &=
+            \begin{bmatrix}
+                \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} & \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} & -\sin{\color{magenta}\theta} \\ 
+                - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\ 
+                \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} & - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} 
+            \end{bmatrix}
+            \begin{bmatrix}
+                {\color{cyan}v_x\,'} \\
+                {\color{cyan}v_y\,'} \\
+                {\color{cyan}v_z\,'} \\
+            \end{bmatrix} \\
+            \begin{bmatrix}
+                {\color{magenta}\dot{x}} \\
+                {\color{magenta}\dot{y}} \\
+                {\color{magenta}\dot{z}} \\
+            \end{bmatrix}
+            &=
+            \begin{bmatrix}
+                {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} + {\color{cyan}v_y\,'} \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} - {\color{cyan}v_z\,'} \sin{\color{magenta}\theta} \\
+                {\color{cyan}v_x\,'} \left( - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_y\,'} \left( \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
+                {\color{cyan}v_x\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_y\,'} \left( - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
+            \end{bmatrix}
+        \end{align*}
+        $$
+
+
 ### Rotação
+
+!!! question "Exercício 2"
+
+    Determine ${\color{magenta}\dot{\vec{\delta}}}$ em função dos estados do sistema.
+    
+    ??? info "Resposta"
+
+        Suponhamos que o referencial móvel esteja em movimento rotacional em torno da origem, cujo vetor velocidade angular ${\color{cyan}\vec{\omega}\,'}$ é dado por:
+        
+        $$
+        {\color{cyan}\vec{\omega}\,'} = 
+        \begin{bmatrix}
+            {\color{cyan}\omega_x\,'} \\
+            {\color{cyan}\omega_y\,'} \\
+            {\color{cyan}\omega_z\,'}
+        \end{bmatrix}
+        $$
+
+        Como o vetor ${\color{magenta}\vec{r}}$ é fixo no sistema de coordenadas inercial, sua derivada temporal, vista pelo sistema inercial, é nula:
+        
+        $$
+            {\color{magenta}\dot{\vec{r}}} = \vec{0}
+        $$
+
+        Por outro lado, sua derivada temporal, vista pelo sistema fixo ao corpo, depende do vetor velocidade angular do sistema fixo ao corpo(1):
+        {.annotate}
+
+        1. O sinal negativo aparece porque, se o sistema de coordenadas do corpo gira em uma direção, o vetor será visto pelo sistema fixo ao corpo como girando na direção oposta.
+                
+        $$
+            {\color{cyan}\dot{\vec{r}}\,'} = -{\color{cyan}\vec{\omega}\,'}\times{\color{cyan}\vec{r}\,'}
+        $$
+    
+        Outra forma de representar essa equação é:
+        
+        $$
+            {\color{cyan}\dot{\vec{r}}\,'} = -{\color{cyan}\tilde{\omega}\,'}{\color{cyan}\vec{r}\,'}
+        $$
+
+        Onde $\tilde{\omega},'$ é a velocidade angular representada como uma matriz antissimétrica correspondente ao seu produto vetorial:
+        
+        $$
+            {\color{cyan}\tilde{\omega}\,'} = {\color{cyan}\vec{\omega}\,'} \times =
+            \begin{bmatrix}
+                0 & -{\color{cyan}\omega_z\,'} & {\color{cyan}\omega_y\,'} \\
+                {\color{cyan}\omega_z\,'} & 0 & -{\color{cyan}\omega_x\,'} \\
+                -{\color{cyan}\omega_y\,'} & {\color{cyan}\omega_x\,'} & 0
+            \end{bmatrix}
+        $$
+
+        Diferenciando a equação anterior e utilizando essa propriedade, obtém-se:
+        
+        \begin{align}
+            {\color{cyan}\dot{\vec{r}}\,'} &= \frac{d}{dt} \left( {\color{cyan}\vec{r}\,'} \right) \nonumber \\
+            {\color{cyan}\dot{\vec{r}}\,'} &= \frac{d}{dt} \left( R {\color{magenta}\vec{r}} \right) \nonumber \\ 
+            {\color{cyan}\dot{\vec{r}}\,'} &= \dot{R}{\color{magenta}\vec{r}} + R \cancelto{\vec{0}}{{\color{magenta}\dot{\vec{r}}}} \nonumber \\ 
+            {\color{cyan}\dot{\vec{r}}\,'} &= \dot{R} \left(R^T {\color{cyan}\vec{r}\,'}\right) \nonumber \\ 
+            {\color{cyan}\dot{\vec{r}}\,'} &= \dot{R}R^T {\color{cyan}\vec{r}\,'}
+        \end{align}
+
+        Comparando essa equação com a anterior, é possível obter a matriz antissimétrica da velocidade angular em termos da matriz de rotação e sua derivada temporal:
+        
+        $$ 
+            {\color{cyan}\tilde{\omega}\,'} = -\dot{R}R^T 
+        $$
+        
+        Os ângulos de Euler não são um vetor e não podem ser facilmente isolados. Entretanto, substituindo $R$ e $\dot{R}$, as velocidades angulares podem ser escritas em função dos ângulos de Euler e de suas derivadas temporais em notação matricial:
+        
+        $$
+            \begin{bmatrix}
+                {\color{cyan}\omega_x\,'} \\
+                {\color{cyan}\omega_y\,'} \\
+                {\color{cyan}\omega_z\,'}
+            \end{bmatrix}
+            = 
+            \begin{bmatrix}
+                0 & \sin{\color{magenta}\phi} & -\cos{\color{magenta}\phi}\sin{\color{magenta}\theta} \\
+                0 & \cos{\color{magenta}\phi} & \sin{\color{magenta}\phi}\sin{\color{magenta}\theta} \\
+                1 & 0 & \cos{\color{magenta}\theta}
+            \end{bmatrix}
+            \begin{bmatrix}
+                {\color{magenta}\dot{\phi}} \\
+                {\color{magenta}\dot{\theta}} \\
+                {\color{magenta}\dot{\psi}}
+            \end{bmatrix}
+        $$
+        
+        Invertendo a matriz acima, as derivadas temporais dos ângulos de Euler podem ser escritas em função deles próprios e das velocidades angulares:
+        
+        $$
+            \begin{bmatrix}
+                {\color{magenta}\dot{\phi}} \\
+                {\color{magenta}\dot{\theta}} \\
+                {\color{magenta}\dot{\psi}}
+            \end{bmatrix}
+            = 
+            \frac{1}{\sin{\color{magenta}\theta}}
+            \begin{bmatrix}
+                \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} & -\sin{\color{magenta}\phi}\cos{\color{magenta}\theta} & \sin{\color{magenta}\theta} \\
+                \sin{\color{magenta}\phi}\sin{\color{magenta}\theta} & \cos{\color{magenta}\phi}\sin{\color{magenta}\theta} & 0 \\
+                -\cos{\color{magenta}\phi} & \sin{\color{magenta}\phi} & 0
+            \end{bmatrix}
+            \begin{bmatrix}
+                {\color{cyan}\omega_x\,'} \\
+                {\color{cyan}\omega_y\,'} \\
+                {\color{cyan}\omega_z\,'}
+            \end{bmatrix}
+        $$
+
+        Esta última equação é a equação cinemática de um corpo rígido utilizando ângulos de Euler com a sequência de rotações $z-y-z$. Ela evidencia a singularidade que ocorre quando $\theta = 90^{\circ}$.
 
 ---
 
 ## Cinética
 
-As equações de Newton-Euler deduzidas para a dinâmica 2D eram genéricas e, portanto, também podem ser aplicadas à dinâmica 3D:
+Já deduzimos as equações de Newton-Euler:
         
 $$
 \left\{
@@ -87,15 +260,17 @@ $$
 
 !!! question "Exercício 3"
 
-    Substitua as somatórias de forças $\sum {\color{cyan}\vec{f}\,'}$ na equação de Newton-Euler de translação e determine ${\color{cyan}\dot{\vec{v}}\,'}$ em função dos estados do sistema.
+    Determine ${\color{cyan}\dot{\vec{v}}\,'}$ em função dos estados do sistema.
+
+    Dics: substitua as somatórias de forças $\sum {\color{cyan}\vec{f}\,'}$ na equação de Newton-Euler de translação.
     
     ??? info "Resposta"
 
         $$
         \begin{align*}
             {\color{cyan}\dot{\vec{v}}\,'} &= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \sum {\color{cyan}\vec{f}\,'} \\ 
-            {\color{cyan}\dot{\vec{v}}\,'} &= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \left( - m {\color{cyan}\vec{g}\,'} + {\color{cyan}\vec{f}\,'} \right) \\
-            {\color{cyan}\dot{\vec{v}}\,'} &= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} - R {\color{magenta}\vec{g}} + \frac{1}{m} {\color{cyan}\vec{f}\,'} \\ 
+            {\color{cyan}\dot{\vec{v}}\,'} &= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \left( - m {\color{cyan}\vec{g}\,'} + {\color{cyan}\vec{f}_d\,'} \right) \\
+            {\color{cyan}\dot{\vec{v}}\,'} &= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} - R {\color{magenta}\vec{g}} + \frac{1}{m} {\color{cyan}\vec{f}_d\,'} \\ 
             \begin{bmatrix}
                 {\color{cyan}\dot{v}_x\,'} \\
                 {\color{cyan}\dot{v}_y\,'} \\
@@ -159,14 +334,16 @@ $$
 
 !!! question "Exercício 4"
 
-    Substitua as somatórias de torques $\sum {\color{cyan}\vec{\tau}\,'}$ na equação de Newton-Euler de rotação e determine ${\color{cyan}\dot{\vec{\omega}}\,'}$ em função dos estados do sistema.
+    Determine ${\color{cyan}\dot{\vec{\omega}}\,'}$ em função dos estados do sistema.
+
+    Dics: substitua as somatórias de torques $\sum {\color{cyan}\vec{\tau}\,'}$ na equação de Newton-Euler de rotação.
     
     ??? info "Resposta"
 
         $$
         \begin{align*}
             {\color{cyan}\dot{\vec{\omega}}\,'} &= - I^{-1} \left( {\color{cyan}\omega\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{cyan}\vec{\tau}\,'} \\ 
-            {\color{cyan}\dot{\vec{\omega}}\,'} &= - I^{-1} \left( {\color{cyan}\omega\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} {\color{cyan}\vec{\tau}_x\,'} \\ 
+            {\color{cyan}\dot{\vec{\omega}}\,'} &= - I^{-1} \left( {\color{cyan}\omega\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} {\color{cyan}\vec{\tau}_d\,'} \\ 
             \begin{bmatrix}
                 {\color{cyan}\dot{\omega}_x\,'} \\
                 {\color{cyan}\dot{\omega}_y\,'} \\
@@ -204,8 +381,8 @@ $$
             \end{bmatrix}^{-1}
             \begin{bmatrix}
                 {\color{#65DD18}\tau_x} \\
-                0 \\
-                0
+                {\color{#65DD18}\tau_y} \\
+                {\color{#65DD18}\tau_z}
             \end{bmatrix} \\
             \begin{bmatrix}
                 {\color{cyan}\dot{\omega}_x\,'} \\

@@ -58,7 +58,7 @@ static const float Izz = 40.0e-6f; // Moment of inertia around z-axis [kg.m^2]
 
 ### Variáveis globais
 
-Em seguida, declare as variáveis globais que serão utilizadas pelas funções.
+Em seguida, declare como variáveis globais as variáveis que entram e saem da função do mixer.
 
 ```c
 // Actuators
@@ -216,6 +216,8 @@ void actuators()
     }
 }
 ```
+
+Você pode simplesmente copiar e colar o código acima. Se quiser entender ele melhor, volte na secção dos [motores](../sensors_and_actuators/motors.md).
 
 ### Loop principal
 

@@ -43,7 +43,7 @@ nav:
     - Arquitetura: control/architecture.md
     - Mixer: control/mixer.md
     - Atitude:
-      - Estimador de atitude: control/attitude_estimator.md
+      - Estimador de atitude: control/attitude/estimator/attitude_estimator.md
       - Controlador de atitude: control/attitude_controller.md
     - Vertical:
       - Estimador vertical: control/vertical_estimator.md

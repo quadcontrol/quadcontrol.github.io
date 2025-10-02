@@ -142,18 +142,62 @@ Ao montarmos três acelerômetros perpendiculares entre si, ou seja, um alinhado
 
 ### Trigonometria
 
-O acelerômetro está fixo no sistema de coordenadas móvel drone. Como há sempre a aceleração da gravidade apontando para baixo no sistema de coordenadas inercial, com um pouco de trigonometria é possível obter o deslocamento angular(1).
+O acelerômetro está fixo no sistema de coordenadas móvel do drone. Como há sempre a aceleração da gravidade apontando para baixo no sistema de coordenadas inercial, as acelerações $a_y$ e $a_z$ em função da gravidade $g$ e do ângulo $\phi$ são dadas por:
 {.annotate}
 
-1. O subescrito $_a$ quer dizer que esse valor foi obtido a partir das leituras do acelerômetro. Além disso, os sinais negativos não foram cortados pois você deverá utilizar a função `atan2f` em seu código, para saber em qual quadrante está o seu ângulo. 
 
 [Figura]
 
 $$
-\phi_a = \tan^{-1} \left( \frac{- a_y}{- a_z} \right) \\
+\begin{align}
+    \begin{bmatrix}
+        a_y \\
+        a_z 
+    \end{bmatrix} &= R \vec{g} \\
+    \begin{bmatrix}
+        a_y \\
+        a_z 
+    \end{bmatrix}
+    &=
+    \begin{bmatrix} 
+        \cos \phi & \sin \phi \\
+        -\sin \phi & \cos \phi
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 \\
+        -g
+    \end{bmatrix} \\
+    \begin{bmatrix}
+        a_y \\
+        a_z 
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+        -g\sin\phi	\\
+        -g\cos\phi
+    \end{bmatrix}
+\end{align}
 $$
 
-Inclua na função `attitudeEstimator()` uma variável local $\phi_a$, que corresponde ao ângulo medido a partir das leituras do acelerômetro $a_y$ e $a_z$ e, em seguida, atribua ela ao ângulo estimado $\phi$.
+Dividindo uma equação pela outra, podemos medir o ângulo $\phi_a$(1) em função das leituras do acelerômetro $a_y$ e $a_z$(2).
+{.annotate}
+
+1. O subescrito $_a$ quer dizer que esse valor foi obtido a partir das leituras do acelerômetro. 
+2. Os sinais negativos não foram cortados pois você deverá utilizar a função `atan2f` em seu código, para saber em qual quadrante está o seu ângulo. 
+
+$$
+\begin{align}
+    \frac{a_y}{a_z} &= \frac{-\cancel{g}\sin\phi_a}{-\cancel{g}\cos\phi_a} \\
+    \frac{-a_y}{-a_z} &= \tan\phi_a \\
+    \phi_a &= \tan^{-1} \left( \dfrac{-a_y}{-a_z} \right)
+\end{align}
+$$
+
+Vamos começar implementando um estimador de atitude bem simples, cujo ângulo estimado $\phi$ é dado simplesmente pelo ângulo medido $\phi_a$ a partir das leituras do acelerômetro $a_y$ e $a_z$, conforme o diagrama de blocos abaixo.
+
+![](images/accelerometer.svg){: width=600 style="display: block; margin: auto;" }
+
+Inclua na função `attitudeEstimator()` uma variável local $\phi_a$, que corresponde ao ângulo medido a partir das leituras do acelerômetro $a_y$ e $a_z$ e, em seguida, atribua ela ao ângulo estimado $\phi$. Também vamos armazenar o valor dessa estimativa numa variável de registro, para que seja possível visualizá-la no Crazyflie Client.
 
 
 ```c hl_lines="4-11"
@@ -191,7 +235,7 @@ $$
     \frac{\phi(s)}{\phi_a(s)} &= \frac{\omega_c}{s+\omega_c} \\
     \left( s + \omega_c \right) \phi(s) &= \omega_c\phi_a(s) \\
     s\phi(s) + \omega_c\phi(s) &= \omega_c\phi_a(s) \\
-    &\downarrow \mathcal{L}^{-1} \\
+    &\Downarrow ^\text{Transformada inversa}_\text{de Laplace} \\
     \frac{d}{dt}{\phi}(t) + \omega_c\phi(t) &= \omega_c\phi_a(t)
 \end{align*}
 $$
@@ -199,21 +243,23 @@ $$
 Em seguida, vamos discretizar a equação diferencial, utilizando o método de Euler implícito(1).
 {.annotate}
 
-1. O método de Euler explícito ("pra frente") utiliza a aproximação $\frac{d}{dt}x(t) \approx \frac{x(t+\Delta t)-x(t)}{\Delta t}$, equanto que o método de Euler implícito ("pra trás") utiliza a aproximação $\frac{d}{dt}x(t) \approx \frac{x(t)-x(t-\Delta t)}{\Delta t}$}
+1. O método de Euler explícito ("pra frente") utiliza a aproximação $\frac{d}{dt}x(t) \approx \frac{x(t+\Delta t)-x(t)}{\Delta t}$, equanto que o método de Euler implícito ("pra trás") utiliza a aproximação $\frac{d}{dt}x(t) \approx \frac{x(t)-x[k-1]}{\Delta t}$}
     
 $$
 \begin{align*}
-    \frac{\phi(t)-\phi(t-\Delta t)}{\Delta t} + \omega_c\phi(t) &= \omega_c\phi_{a}(t) \\
-    \phi(t)-\phi(t-\Delta t) + \omega_c\Delta t\phi(t) &= \omega_c\Delta t\phi_{a}(t) \\
-    \left( 1+\omega_c\Delta \right) \phi(t) &= \phi(t-\Delta t) + \omega_c\Delta t\phi_{a}(t) \\
-    \phi(t) &= \underbrace{\frac{1}{1+\omega_c\Delta t}}_{\left(1-\alpha\right)} \phi(t-\Delta t) + \underbrace{\frac{\omega_c\Delta t}{1+\omega_c\Delta t}}_{\alpha} \phi_{a}(t) \\
-    \phi(t) &= \left( 1-\alpha \right)\phi(t-\Delta t)+\alpha\phi_{a}(t)
+    \frac{d}{dt}{\phi}(t) + \omega_c\phi(t) &= \omega_c\phi_a(t) \\
+    &\Downarrow ^\text{Euler}_\text{implícito} \\
+    \frac{\phi[k]-\phi[k-1]}{\Delta t} + \omega_c\phi[k] &= \omega_c\phi_a[k] \\
+    \phi[k]-\phi[k-1] + \omega_c\Delta t\phi[k] &= \omega_c\Delta t\phi_a[k] \\
+    \left( 1+\omega_c\Delta t\right) \phi[k] &= \phi[k-1] + \omega_c\Delta t\phi_a[k] \\
+    \phi[k] &= \underbrace{\frac{1}{1+\omega_c\Delta t}}_{\left(1-\alpha\right)} \phi[k-1] + \underbrace{\frac{\omega_c\Delta t}{1+\omega_c\Delta t}}_{\alpha} \phi_a[k] \\
+    \phi[k] &= \left( 1-\alpha \right)\phi[k-1]+\alpha\phi_a[k]
 \end{align*}
 $$
         
-Note que um filtro passa-baixas discretizado nada mais é do que uma média ponderada entre o valor antigo e o valor medido, e a variável $\alpha$ é exatamente esse fator de ponderação. O mesmo pode ser representado pelo seguinte diagrama de blocos:
+Note que um filtro passa-baixas discretizado nada mais é do que uma média ponderada entre o valor antigo e o valor medido, e a variável $\alpha$ é exatamente esse fator de ponderação. O mesmo pode ser representado pelo diagrama de blocos abaixo.
 
-[Figura]
+![](images/accelerometer_low_pass_filter.svg){: width=600 style="display: block; margin: auto;" }
         
 A variável $\alpha$ é chamada de fator de suavização, ela depende da frequência de corte $\omega_c$ e do intervalo de tempo $\Delta t$ entre medições:
         
@@ -253,9 +299,7 @@ void attitudeEstimator()
 Experimente valores de 1rad/s, 10rad/s e 100rad/s para a frequência de corte $\omega_c$ e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.
 
 !!! example "Resultado esperado"    
-    Você deve notar que, mesmo no melhor dos casos, o estimador implementado não é adequado para condições dinâmicas (altas frequências).  
-
- Vamos agora esquecer o acelerômetro por um instante e utilizar apenas o giroscópio para estimação de atitude. Não delete o código que você escreveu até agora, apenas comente ele (o mesmo será útil adiante).  
+    Você deve notar que, mesmo no melhor dos casos, o estimador implementado não é adequado para condições dinâmicas (altas frequências). Vamos agora esquecer o acelerômetro por um instante e utilizar apenas o giroscópio para estimação de atitude. Não delete o código que você escreveu até agora, apenas comente ele (o mesmo será útil adiante).  
 
 ---
 
@@ -281,7 +325,7 @@ O giroscópio está fixo no sistema de coordenadas móvel drone, portanto o desl
 [Figura]
 
 $$
-\phi_g = \int g_x dt \\
+\phi_g(t) = \int g_x(t) dt \\
 $$
 
 No domínio da frequência, isso pode ser representado pelo seguinte diagrama de blocos.
@@ -290,13 +334,11 @@ No domínio da frequência, isso pode ser representado pelo seguinte diagrama de
 
 Novamente, para determinar o correspondente discreto, primeiro obtemos a equação diferencial correspondente:
 
-Novamente, para determinar o correspondente discreto, primeiro obtemos a equação diferencial correspondente:
-
 $$    
 \begin{align*}
     \frac{\phi_g(s)}{g_x(s)} &= \frac{1}{s} \\
     s \phi_g(s) &= g_x(s) \\
-    &\downarrow \mathcal{L}^{-1} \\
+    &\Downarrow ^\text{Transformada inversa}_\text{de Laplace} \\
     \frac{d}{dt} \phi_g(t) &= g_x(t)
 \end{align*}
 $$
@@ -305,15 +347,17 @@ E em seguida discretizamos a equação diferencial:
 
 $$
 \begin{align*}
-    \frac{\phi_g(t)-\phi_g(t-\Delta t)}{\Delta t} &= g_x(t) \\
-    \phi_g(t)-\phi_g(t-\Delta t) &= g_x(t) \Delta t \\ 
-    \phi_g(t) &= \phi_g(t-\Delta t) + g_x(t) \Delta t 
+    \frac{d}{dt} \phi_g(t) &= g_x(t) \\
+    &\Downarrow ^\text{Euler}_\text{implícito} \\
+    \frac{\phi_g[k]-\phi_g[k-1]}{\Delta t} &= g_x[k] \\
+    \phi_g[k]-\phi_g[k-1] &= g_x[k] \Delta t \\ 
+    \phi_g[k] &= \phi_g[k-1] + g_x[k] \Delta t 
 \end{align*}
 $$
 
-Dessa forma, podemos representar um integrador pelo seguinte diagrama de blocos.
+Vamos implementar agora um estimador de atitude cujo o ângulo estimado $\phi$ é dado pelo ângulo medido a partir das leituras do giroscópio $\phi_g$, que por sua vez é dado pela integração da leitura do giroscópio $g_x$, conforme o diagrama de blocos abaixo.
 
-[Figura]
+![](images/gyroscope.svg){: width=600 style="display: block; margin: auto;" }
 
 Inclua na função `attitudeEstimator()` uma variável local $\phi_g$, que corresponde ao ângulo medido a partir da integração da leitura do giroscópio $g_x$ e, em seguida, atribua ela ao ângulo estimado $\phi$.
         
@@ -332,7 +376,57 @@ void attitudeEstimator()
 }
 ```   
 
+Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.
+
+!!! example "Resultado esperado"        
+    Você deve notar que o estimador implementado é adequado somente para condições dinâmicas (altas frequências). Isso se deve ao fato de que, em condições estáticas (baixas frequências), o giroscópio possui erros sistemáticos constantes (*"bias"*), que, mesmo pequenos, acabam sendo integrados e fazendo com que a atitude do drone divirja ao longo do tempo. É o problema inverso do acelerômetro, e uma forma de removê-lo é através de um filtro passa-altas.
+
 ### Filtro passa-altas
+
+Um filtro passa-altas é um filtro que atenua sinais inferiores a uma determinada frequência de corte $\omega_c$. Ou seja, ele faz o inverso de um filtro passa-baixas.
+        
+Para se obter o ângulo estimado $\phi$, basta passar o ângulo medido $\phi_g$ por um filtro passa-altas. No domínio da frequência, isso pode ser representado pelo seguinte diagrama de blocos.
+
+[Figura]
+
+Note que, como a velocidade angular está sendo integrada antes de passar pelo filtro, o diagrama de blocos pode ser reduzido(1).
+{.annotate}
+
+1. Podemos cortar o $s$ do denominador de uma função de transferência com o do numerador da outra.
+
+[Figura]
+
+Novamente, primeiro obtemos a equação diferencial:
+        
+$$
+\begin{align}
+    \frac{\phi(s)}{g_x(s)} &= \frac{1}{s+\omega_c} \\
+    s\phi(s) + \omega_c\phi(s) &= g_x(s) \\
+    &\Downarrow ^\text{Transformada inversa}_\text{de Laplace} \\
+    \frac{d}{dt}{\phi}(t) + \omega_c\phi(t) &= g_x(t)
+\end{align}
+$$
+
+\newpage
+E, em seguida, realizamos a discretização:
+
+$$
+\begin{align}
+    \frac{d}{dt}{\phi}(t) + \omega_c\phi(t) &= g_x(t) \\
+    &\Downarrow ^\text{Euler}_\text{implícito} \\
+    \frac{\phi[k]-\phi[k-1]}{\Delta t} + \omega_c\phi[k] &= g_x[k] \\
+    \phi[k]-\phi[k-1] - \omega_c\Delta t\phi[k] &= g_x[k]\Delta t \\
+    \left( 1+\omega_c\Delta t \right) \phi[k] &= \phi[k-1] + g_x[k]\Delta t \\
+    \phi[k] &= \underbrace{\frac{1}{1+\omega_c\Delta t}}_{\left(1-\alpha\right)} \underbrace{\left(\phi[k-1] + g_x[k]\Delta t\right)}_{\phi_g[k]} \\
+    \phi[k] &= \left(1-\alpha\right) \phi_g[k]
+\end{align}
+$$
+
+Dessa forma, a integração do giroscópio com um filtro passa-altas pode ser representado pelo diagrama de blocos abaixo.
+
+![](images/gyroscope_high_pass_filter.svg){: width=600 style="display: block; margin: auto;" }
+
+Modifique a sua função `attitudeEstimator()` de modo que agora o ângulo estimado $\phi$ possua um filtro passa-altas.
 
 ```c hl_lines="4-6 11-12"
 // Estimate orientation from IMU sensor
@@ -353,11 +447,49 @@ void attitudeEstimator()
 }
 ```  
 
+Experimente valores de 1rad/s, 10rad/s e 100rad/s para a frequência de corte $\omega_c$ e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.
+
+!!! example "Resultado esperado"   
+    Você deve notar que a atitude do drone sempre converge para zero, o que é bom pois não estamos mais integrando os erros sistemáticos, mas ruim quando o drone fica parado em uma atitude que não seja zero.
+
 ---
 
 ## Acelerômetro + Giroscópio
 
+Conforme vimos, o acelerômetro nos fornece boas estimativas de atitude para condições estáticas (baixas frequências). Já o giroscópio é o contrário, ele nos fornece boas estimativas para condições dinâmicas (altas frequências). Por que não combinar os dois para ter boas estimativas durante condições estáticas e dinâmicas? Essa é a ideia por trás de um filtro complementar!
+
 ### Filtro complementar
+
+O ângulo dado pelo acelerômetro é passado por um filtro passa-baixas, já a velocidade angular do giroscópio é integrada e passada por um filtro passa-altas, conforme a o diagrama de blocos abaixo.
+
+[Figura]
+
+A soma desses dois filtros da um ganho unitário, por isso que eles são chamados de filtros complementares:
+        
+$$
+    \underbrace{\frac{\omega_c}{s+\omega_c}}_{\begin{array}{c} \text{ Filtro} \\ \text{passa-baixas} \end{array}} + \underbrace{\frac{s}{s+\omega_c}}_{\begin{array}{c} \text{Filtro} \\ \text{passa-altas} \end{array}} = 1
+$$
+
+Como a velocidade angular está sendo integrada antes de passar pelo filtro passa-altas e, tanto o filtro passa-baixas como o filtro passa-altas possuem o mesmo denominador da função de transferência, o diagrama de blocos pode ser simplificado.
+
+[Figura]
+
+Note que agora nós só temos uma única função de transferência, que é a função de transferência de um filtro passa-baixas. Como já deduzimos o correspondente discreto deste filtro, tem-se que:
+
+$$
+\begin{align}
+    \phi[k] &= \left( 1-\alpha \right)\phi[k-1]+\alpha \left( \frac{1}{\omega_c} g_x[k] + \phi_a[k] \right) \\
+    \phi[k] &= \left( 1-\alpha \right)\phi[k-1]+ \underbrace{\alpha\frac{1}{\omega_c}}_{(1-\alpha)\Delta t} g_x[k] + \alpha \phi_a[k]  \\
+    \phi[k] &= \left( 1-\alpha \right)\phi[k-1]+ (1-\alpha) g_x[k]\Delta t + \alpha \phi_a[k]  \\
+    \phi[k] &= \left( 1-\alpha \right)\underbrace{\left(\phi[k-1]+g_x[k] \Delta t \right)}_{\phi_g[k]} + \alpha \phi_a[k] \\
+    \phi[k] &= \left( 1-\alpha \right)\phi_g[k] + \alpha \phi_a[k] 
+\end{align}
+$$
+
+Ou seja, um filtro complementar discretizado nada mais é do que uma média ponderada entre o ângulo medido pelo giroscópio $\phi_g$ e o ângulo medido pelo acelerômetro $\phi_a$, conforme o diagrama de blocos abaixo.
+
+![](images/accelerometer_gyroscope_complementary_filter.svg){: width=600 style="display: block; margin: auto;" }
+
 
 ```c hl_lines="8-9 14-15"
 // Estimate orientation from IMU sensor
@@ -382,3 +514,135 @@ void attitudeEstimator()
 ```  
 
 ---
+
+## Attitude 3D
+
+Por fim, você deve replicar o estimador de atitude desenvolvido para todos os demais ângulos de Euler e também velocidades angulares:
+    
+$$
+\left\{
+\begin{array}{l}
+    \omega_x = g_x \\ 
+    \omega_y = g_y \\
+    \omega_z = g_z 
+\end{array}
+\right.
+\qquad \qquad \qquad
+\left\{
+\begin{array}{l}
+    \phi =  \left( 1 - \alpha \right) \phi_g + \alpha \phi_a \\ 
+    \theta = \left( 1 - \alpha \right) \theta_g + \alpha \theta_a  \\
+    \psi = \psi_g 
+\end{array}
+\right.
+$$
+
+
+Note que não conseguimos estimar o ângulo de guinagem $\psi$ a partir das leituras do acelerômetro, portanto, neste caso, utilizaremos apenas o giroscópio. Ou seja, é esperado que o ângulo de guinagem $\psi$ divirja com o tempo, mas esse ângulo não é essencial para garantir a estabilidade do drone(1).
+{.annotate}
+
+1. Sistemas de referência de atitude e direção (AHRS) utilizam um magnetômetro para complementar a estimativa de guinagem $\psi$ do giroscópio, dessa forma evitando que esse ângulo também divirja.
+
+### Acelerômetro
+
+No caso 3D, as acelerações $a_x$, $a_y$ e $a_z$ em função da gravidade $g$ e dos ângulo $\phi$ e $\theta$ são dadas por:
+
+$$
+\begin{align}
+    \begin{bmatrix}
+        a_x \\
+        a_y \\
+        a_z \\
+    \end{bmatrix} &= R \vec{g} \\
+    \begin{bmatrix}
+        a_x \\
+        a_y \\
+        a_z \\
+    \end{bmatrix}
+    &=
+    \begin{bmatrix} 
+        \cos\theta\cos\psi & \cos\theta\sin\psi & -\sin\theta \\ 
+        - \cos\phi\sin\psi + \sin\phi\sin\theta\cos\psi  & \cos\phi\cos\psi + \sin\phi\sin\theta\sin\psi & \sin\phi\cos\theta \\ 
+        \sin\phi\sin\psi + \cos\phi\sin\theta\cos\psi & - \sin\phi\cos\psi + \cos\phi\sin\theta\sin\psi  & \cos\phi\cos\theta 
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        -g \\
+    \end{bmatrix} \\
+    \begin{bmatrix}
+        a_x \\
+        a_y \\
+        a_z \\
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+        g\sin\theta	\\
+        -g\sin\phi\cos\theta \\
+        -g\cos\phi\cos\theta
+    \end{bmatrix}
+\end{align}
+$$
+
+Dividindo a segunda equação pela terceira, podemos medir o ângulo $\phi_a$ em função das leituras do acelerômetro $a_y$ e $a_z$:
+
+$$
+\begin{align}
+    \frac{a_y}{a_z} &= \frac{-\cancel{g}\sin\phi_a\cancel{\cos\theta}}{-\cancel{g}\cos\phi_a\cancel{\cos\theta}} \\
+    \frac{-a_y}{-a_z} &= \tan\phi_a \\
+    \phi_a &= \tan^{-1} \left( \dfrac{-a_y}{-a_z} \right)
+\end{align}
+$$
+
+Já a medição do ângulo $\theta_a$ depende das leituras do acelerômetro $a_x$, $a_y$ e $a_z$, e a dedução é um pouco mais complexa:
+
+$$
+\begin{align}
+    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{(g\sin\theta_a)^2}{(-g\sin\phi_a\cos\theta_a)^2+(-g\cos\phi_a\cos\theta_a)^2} \\
+    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{g^2\sin^2\theta_a}{g^2\sin^2\phi_a\cos^2\theta_a+g^2\cos^2\phi_a\cos^2\theta_a} \\
+    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{\cancel{g^2}\sin^2\theta_a}{\cancel{g^2}\cos^2\cancelto{1}{(\sin^2\phi_a+\cos^2\phi_a)}} \\
+    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{\sin^2\theta_a}{\cos^2\theta_a} \\
+    \frac{a_x^2}{a_y^2+a_z^2} &= \tan^2\theta_a \\
+    \sqrt{\frac{a_x^2}{a_y^2+a_z^2}} &= \tan\theta_a \\
+    \frac{a_x}{\sqrt{a_y^2+a_z^2}} &= \tan\theta_a \\
+    \theta_a &= \tan^{-1} \left( \frac{a_x}{\sqrt{a_y^2+a_z^2}} \right)
+\end{align}
+$$
+
+### Giroscópio
+
+XXX
+
+```c
+// Estimate orientation from IMU sensor
+void attitudeEstimator()
+{
+    // Estimator parameters
+    static const float wc = 1.0f;                    // Cutoff frequency of filter [rad/s]
+    static const float alpha = (wc*dt)/(1.0f+wc*dt); // Weighting factor of filter
+
+    // Angular velocity estimation
+    wx = gx;
+    wy = gy;
+    wz = gz;
+
+    // Measured angles from accelerometer
+    float phi_a = atan2f(-ay, -az);
+    float theta_a = atan2f(ax, sqrt(ay * ay + az * az));
+
+    // Measured angles from gyroscope
+    float phi_g = phi + (wx + wy * sinf(phi) * tanf(theta) + wz * cosf(phi) * tanf(theta)) * dt;
+    float theta_g = theta + (wy * cosf(phi) - wz * sinf(phi)) * dt;
+    float psi_g = psi + (wy * sinf(phi) / cosf(theta) + wz * cosf(phi) / cosf(theta)) * dt;
+
+    // Angle estimation (complementary filter: blend high frequency gyroscope with low frequency accelometer)
+    phi = (1.0f - alpha) * phi_g + alpha * phi_a;
+    theta = (1.0f - alpha) * theta_g + alpha * theta_a;
+    psi = psi_g; // No absolute reference for yaw
+
+    // Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)
+    log_phi = phi * 180.0f / pi;
+    log_theta = -theta * 180.0f / pi;
+    log_psi = psi * 180.0f / pi;
+}
+```  

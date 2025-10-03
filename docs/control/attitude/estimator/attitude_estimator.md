@@ -257,7 +257,7 @@ $$
 \end{align*}
 $$
         
-Note que um filtro passa-baixas discretizado nada mais é do que uma média ponderada entre o valor antigo e o valor medido, e a variável $\alpha$ é exatamente esse fator de ponderação. O mesmo pode ser representado pelo diagrama de blocos abaixo.
+Note que um filtro passa-baixas discretizado nada mais é do que uma média ponderada entre o valor antigo de $\phi$ e o valor medido $\phi_a$, e a variável $\alpha$ é exatamente esse fator de ponderação. O mesmo pode ser representado pelo diagrama de blocos abaixo.
 
 ![](images/accelerometer_low_pass_filter.svg){: width=600 style="display: block; margin: auto;" }
         
@@ -389,10 +389,7 @@ Para se obter o ângulo estimado $\phi$, basta passar o ângulo medido $\phi_g$ 
 
 [Figura]
 
-Note que, como a velocidade angular está sendo integrada antes de passar pelo filtro, o diagrama de blocos pode ser reduzido(1).
-{.annotate}
-
-1. Podemos cortar o $s$ do denominador de uma função de transferência com o do numerador da outra.
+Note que, como a velocidade angular está sendo integrada antes de passar pelo filtro, o diagrama de blocos pode ser reduzido.
 
 [Figura]
 
@@ -407,7 +404,6 @@ $$
 \end{align}
 $$
 
-\newpage
 E, em seguida, realizamos a discretização:
 
 $$
@@ -460,11 +456,11 @@ Conforme vimos, o acelerômetro nos fornece boas estimativas de atitude para con
 
 ### Filtro complementar
 
-O ângulo dado pelo acelerômetro é passado por um filtro passa-baixas, já a velocidade angular do giroscópio é integrada e passada por um filtro passa-altas, conforme a o diagrama de blocos abaixo.
+O ângulo medido pelo acelerômetro é passado por um filtro passa-baixas, já a velocidade angular do giroscópio é integrada e passada por um filtro passa-altas, conforme a o diagrama de blocos abaixo.
 
 [Figura]
 
-A soma desses dois filtros da um ganho unitário, por isso que eles são chamados de filtros complementares:
+A soma desses dois filtros gera um ganho unitário, por isso que eles são chamados de filtros complementares:
         
 $$
     \underbrace{\frac{\omega_c}{s+\omega_c}}_{\begin{array}{c} \text{ Filtro} \\ \text{passa-baixas} \end{array}} + \underbrace{\frac{s}{s+\omega_c}}_{\begin{array}{c} \text{Filtro} \\ \text{passa-altas} \end{array}} = 1
@@ -490,6 +486,7 @@ Ou seja, um filtro complementar discretizado nada mais é do que uma média pond
 
 ![](images/accelerometer_gyroscope_complementary_filter.svg){: width=600 style="display: block; margin: auto;" }
 
+Modifique a sua função `attitudeEstimator()` de modo que agora o ângulo estimado $\phi$ possua um filtro passa-altas.
 
 ```c hl_lines="8-9 14-15"
 // Estimate orientation from IMU sensor
@@ -512,6 +509,11 @@ void attitudeEstimator()
     log_phi = phi * 180.0f / pi;
 }
 ```  
+
+Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte $\omega_c$ e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.
+
+!!! example "Resultado esperado"   
+    Você deve notar que a atitude do drone sempre converge para zero, o que é bom pois não estamos mais integrando os erros sistemáticos, mas ruim quando o drone fica parado em uma atitude que não seja zero.
 
 ---
 
@@ -537,7 +539,6 @@ $$
 \right.
 $$
 
-
 Note que não conseguimos estimar o ângulo de guinagem $\psi$ a partir das leituras do acelerômetro, portanto, neste caso, utilizaremos apenas o giroscópio. Ou seja, é esperado que o ângulo de guinagem $\psi$ divirja com o tempo, mas esse ângulo não é essencial para garantir a estabilidade do drone(1).
 {.annotate}
 
@@ -545,73 +546,187 @@ Note que não conseguimos estimar o ângulo de guinagem $\psi$ a partir das leit
 
 ### Acelerômetro
 
-No caso 3D, as acelerações $a_x$, $a_y$ e $a_z$ em função da gravidade $g$ e dos ângulo $\phi$ e $\theta$ são dadas por:
+Os ângulos de Euler $\phi_a$ e $\theta_a$ medidos a partir das leituras do acelerômetro $a_x$, $a_y$ e $a_z$ são dados por:
 
 $$
-\begin{align}
-    \begin{bmatrix}
-        a_x \\
-        a_y \\
-        a_z \\
-    \end{bmatrix} &= R \vec{g} \\
-    \begin{bmatrix}
-        a_x \\
-        a_y \\
-        a_z \\
-    \end{bmatrix}
-    &=
-    \begin{bmatrix} 
-        \cos\theta\cos\psi & \cos\theta\sin\psi & -\sin\theta \\ 
-        - \cos\phi\sin\psi + \sin\phi\sin\theta\cos\psi  & \cos\phi\cos\psi + \sin\phi\sin\theta\sin\psi & \sin\phi\cos\theta \\ 
-        \sin\phi\sin\psi + \cos\phi\sin\theta\cos\psi & - \sin\phi\cos\psi + \cos\phi\sin\theta\sin\psi  & \cos\phi\cos\theta 
-    \end{bmatrix}
-    \begin{bmatrix}
-        0 \\
-        0 \\
-        -g \\
-    \end{bmatrix} \\
-    \begin{bmatrix}
-        a_x \\
-        a_y \\
-        a_z \\
-    \end{bmatrix}
-    &=
-    \begin{bmatrix}
-        g\sin\theta	\\
-        -g\sin\phi\cos\theta \\
-        -g\cos\phi\cos\theta
-    \end{bmatrix}
-\end{align}
+\left\{
+\begin{array}{l}
+    \phi_a = \tan^{-1} \left( \dfrac{-a_y}{-a_z} \right) \\
+    \theta_a = \tan^{-1} \left( \dfrac{a_x}{\sqrt{a_y^2+a_z^2}} \right)
+\end{array}
+\right.
 $$
 
-Dividindo a segunda equação pela terceira, podemos medir o ângulo $\phi_a$ em função das leituras do acelerômetro $a_y$ e $a_z$:
+??? question "Dedução"
 
-$$
-\begin{align}
-    \frac{a_y}{a_z} &= \frac{-\cancel{g}\sin\phi_a\cancel{\cos\theta}}{-\cancel{g}\cos\phi_a\cancel{\cos\theta}} \\
-    \frac{-a_y}{-a_z} &= \tan\phi_a \\
-    \phi_a &= \tan^{-1} \left( \dfrac{-a_y}{-a_z} \right)
-\end{align}
-$$
+    As acelerações $a_x$, $a_y$ e $a_z$ em função da gravidade $g$ e dos ângulo $\phi$ e $\theta$ são dadas por:
+            
+    $$
+    \begin{align}
+        \begin{bmatrix}
+            a_x \\
+            a_y \\
+            a_z \\
+        \end{bmatrix} &= R \vec{g} \\
+        \begin{bmatrix}
+            a_x \\
+            a_y \\
+            a_z \\
+        \end{bmatrix}
+        &=
+        \begin{bmatrix} 
+            \cos\theta\cos\psi & \cos\theta\sin\psi & -\sin\theta \\ 
+            - \cos\phi\sin\psi + \sin\phi\sin\theta\cos\psi  & \cos\phi\cos\psi + \sin\phi\sin\theta\sin\psi & \sin\phi\cos\theta \\ 
+            \sin\phi\sin\psi + \cos\phi\sin\theta\cos\psi & - \sin\phi\cos\psi + \cos\phi\sin\theta\sin\psi  & \cos\phi\cos\theta 
+        \end{bmatrix}
+        \begin{bmatrix}
+            0 \\
+            0 \\
+            -g \\
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            a_x \\
+            a_y \\
+            a_z \\
+        \end{bmatrix}
+        &=
+        \begin{bmatrix}
+            g\sin\theta	\\
+            -g\sin\phi\cos\theta \\
+            -g\cos\phi\cos\theta
+        \end{bmatrix}
+    \end{align}
+    $$
 
-Já a medição do ângulo $\theta_a$ depende das leituras do acelerômetro $a_x$, $a_y$ e $a_z$, e a dedução é um pouco mais complexa:
+    Dividindo a segunda equação pela terceira, podemos medir o ângulo $\phi_a$ em função das leituras do acelerômetro $a_y$ e $a_z$:
 
-$$
-\begin{align}
-    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{(g\sin\theta_a)^2}{(-g\sin\phi_a\cos\theta_a)^2+(-g\cos\phi_a\cos\theta_a)^2} \\
-    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{g^2\sin^2\theta_a}{g^2\sin^2\phi_a\cos^2\theta_a+g^2\cos^2\phi_a\cos^2\theta_a} \\
-    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{\cancel{g^2}\sin^2\theta_a}{\cancel{g^2}\cos^2\cancelto{1}{(\sin^2\phi_a+\cos^2\phi_a)}} \\
-    \frac{a_x^2}{a_y^2+a_z^2} &= \frac{\sin^2\theta_a}{\cos^2\theta_a} \\
-    \frac{a_x^2}{a_y^2+a_z^2} &= \tan^2\theta_a \\
-    \sqrt{\frac{a_x^2}{a_y^2+a_z^2}} &= \tan\theta_a \\
-    \frac{a_x}{\sqrt{a_y^2+a_z^2}} &= \tan\theta_a \\
-    \theta_a &= \tan^{-1} \left( \frac{a_x}{\sqrt{a_y^2+a_z^2}} \right)
-\end{align}
-$$
+    $$
+    \begin{align}
+        \frac{a_y}{a_z} &= \frac{-\cancel{g}\sin\phi_a\cancel{\cos\theta}}{-\cancel{g}\cos\phi_a\cancel{\cos\theta}} \\
+        \frac{-a_y}{-a_z} &= \tan\phi_a \\
+        \phi_a &= \tan^{-1} \left( \dfrac{-a_y}{-a_z} \right)
+    \end{align}
+    $$
+
+    Já a medição do ângulo $\theta_a$ depende das leituras do acelerômetro $a_x$, $a_y$ e $a_z$, e a dedução é um pouco mais complexa:
+
+    $$
+    \begin{align}
+        \frac{a_x^2}{a_y^2+a_z^2} &= \frac{(g\sin\theta_a)^2}{(-g\sin\phi_a\cos\theta_a)^2+(-g\cos\phi_a\cos\theta_a)^2} \\
+        \frac{a_x^2}{a_y^2+a_z^2} &= \frac{g^2\sin^2\theta_a}{g^2\sin^2\phi_a\cos^2\theta_a+g^2\cos^2\phi_a\cos^2\theta_a} \\
+        \frac{a_x^2}{a_y^2+a_z^2} &= \frac{\cancel{g^2}\sin^2\theta_a}{\cancel{g^2}\cos^2\cancelto{1}{(\sin^2\phi_a+\cos^2\phi_a)}} \\
+        \frac{a_x^2}{a_y^2+a_z^2} &= \frac{\sin^2\theta_a}{\cos^2\theta_a} \\
+        \frac{a_x^2}{a_y^2+a_z^2} &= \tan^2\theta_a \\
+        \sqrt{\frac{a_x^2}{a_y^2+a_z^2}} &= \tan\theta_a \\
+        \frac{a_x}{\sqrt{a_y^2+a_z^2}} &= \tan\theta_a \\
+        \theta_a &= \tan^{-1} \left( \frac{a_x}{\sqrt{a_y^2+a_z^2}} \right)
+    \end{align}
+    $$
 
 ### Giroscópio
 
-XXX
+Os ângulos de Euler $\phi_g$, $\theta_g$ e $\psi_g$ medidos a partir das leituras do giroscópio $g_x$, $g_y$ e $g_z$ são dados por:
+
+$$
+\left\{
+\begin{array}{l}
+    \phi_g = \phi + \left( g_x + g_y \sin\phi\tan\theta + g_z \cos\phi\tan\theta \right) \Delta t \\
+    \theta_g = \theta + \left( g_y \cos\phi - g_z \sin\phi \right) \Delta t \\
+    \psi_g = \psi + \left( g_y \sin\phi\sec\theta + g_z \cos\phi\sec\theta \right) \Delta t
+\end{array}
+\right.
+$$
+
+??? question "Dedução"
+
+    As derivadas dos ângulos de Euler em função das velocidades angulares são dadas pela equação cinemática de rotação:
+
+    $$
+    \begin{bmatrix}
+        \dot{\phi} \\
+        \dot{\theta} \\
+        \dot{\psi}
+    \end{bmatrix}
+    = 
+    \begin{bmatrix} 
+        1 & \sin\phi\tan\theta & \cos\phi\tan\theta \\
+        0 & \cos\phi & - \sin\phi\\
+        0 & \sin\phi\sec\theta & \cos\phi\sec\theta 
+    \end{bmatrix}
+    \begin{bmatrix}
+        \omega_x \\
+        \omega_z \\
+        \omega_y
+    \end{bmatrix}
+    $$
+
+    Como:
+
+    $$
+    \begin{bmatrix}
+        g_x \\
+        g_z \\
+        g_y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \omega_x \\
+        \omega_z \\
+        \omega_y
+    \end{bmatrix}
+    $$
+
+    Logo, substituindo e integrando ao longo do tempo:
+
+    $$
+    \begin{align*}
+        \begin{bmatrix}
+            \phi_g \\
+            \theta_g \\
+            \psi_g
+        \end{bmatrix}
+        &=
+        \begin{bmatrix}
+            \phi \\
+            \theta \\
+            \psi
+        \end{bmatrix}
+        +
+        \begin{bmatrix}
+            \dot{\phi}  \\
+            \dot{\theta} \\
+            \dot{\psi}
+        \end{bmatrix} \Delta t \\
+        \begin{bmatrix}
+            \phi_g  \\
+            \theta_g  \\
+            \psi_g 
+        \end{bmatrix}
+        &=
+        \begin{bmatrix}
+            \phi \\
+            \theta \\
+            \psi
+        \end{bmatrix}
+        +
+        \begin{bmatrix}
+            1 & \sin\phi\tan\theta & \cos\phi\tan\theta \\
+            0 & \cos\phi & -\sin\phi \\
+            0 & \sin\phi\sec\theta & \cos\phi\sec\theta
+        \end{bmatrix}
+        \begin{bmatrix}
+            g_x  \\
+            g_y  \\
+            g_z 
+        \end{bmatrix} \Delta t
+    \end{align*} 
+    $$
+
+
+
+### Implementação
+
+Modifique a sua função `attitudeEstimator()` de modo que agora os ângulos estimados $\phi$, $\theta$ e $\psi$ sejam dados por um filtro complementar entre as medições do acelerômetro e giroscópio.
 
 ```c
 // Estimate orientation from IMU sensor
@@ -646,3 +761,5 @@ void attitudeEstimator()
     log_psi = psi * 180.0f / pi;
 }
 ```  
+
+Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte $\omega_c$ e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.

@@ -65,8 +65,8 @@ $$
 \underbrace{
 \begin{bmatrix}
     \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} & \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} & -\sin{\color{magenta}\theta} \\ 
-    - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\ 
-    \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} & - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} 
+    \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} & \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\ 
+    \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} & \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} 
 \end{bmatrix}
 }_{R}
 \begin{bmatrix}
@@ -86,7 +86,7 @@ $$
 
         $$
         \begin{align*}
-            {\color{magenta}\dot{\vec{r}}} &= R {\color{cyan}{\vec{v}}\,'} \\
+            {\color{magenta}\dot{\vec{r}}} &= R^T {\color{cyan}{\vec{v}}\,'} \\
             \begin{bmatrix}
                 {\color{magenta}\dot{x}} \\
                 {\color{magenta}\dot{y}} \\
@@ -94,9 +94,9 @@ $$
             \end{bmatrix}
             &=
             \begin{bmatrix}
-                \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} & \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} & -\sin{\color{magenta}\theta} \\ 
-                - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\ 
-                \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} & - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi}  & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} 
+                \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} & \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} & \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} \\
+                \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} & \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} & \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} \\
+                -\sin{\color{magenta}\theta} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta}
             \end{bmatrix}
             \begin{bmatrix}
                 {\color{cyan}v_x\,'} \\
@@ -110,9 +110,9 @@ $$
             \end{bmatrix}
             &=
             \begin{bmatrix}
-                {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} + {\color{cyan}v_y\,'} \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} - {\color{cyan}v_z\,'} \sin{\color{magenta}\theta} \\
-                {\color{cyan}v_x\,'} \left( - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_y\,'} \left( \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
-                {\color{cyan}v_x\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_y\,'} \left( - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
+                {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} + {\color{cyan}v_y\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \left( \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} \right) \\
+                {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} + {\color{cyan}v_y\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \left( \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} \right) \\
+                - {\color{cyan}v_x\,'} \sin{\color{magenta}\theta} + {\color{cyan}v_y\,'}  \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} + {\color{cyan}v_z\,'}  \cos{\color{magenta}\phi}\cos{\color{magenta}\theta}
             \end{bmatrix}
         \end{align*}
         $$
@@ -149,24 +149,24 @@ $$
         1. O sinal negativo aparece porque, se o sistema de coordenadas do corpo gira em uma direção, o vetor será visto pelo sistema fixo ao corpo como girando na direção oposta.
                 
         $$
-            {\color{cyan}\dot{\vec{r}}\,'} = -{\color{cyan}\vec{\omega}\,'}\times{\color{cyan}\vec{r}\,'}
+        {\color{cyan}\dot{\vec{r}}\,'} = -{\color{cyan}\vec{\omega}\,'}\times{\color{cyan}\vec{r}\,'}
         $$
     
         Outra forma de representar essa equação é:
         
         $$
-            {\color{cyan}\dot{\vec{r}}\,'} = -{\color{cyan}\tilde{\omega}\,'}{\color{cyan}\vec{r}\,'}
+        {\color{cyan}\dot{\vec{r}}\,'} = -{\color{cyan}\tilde{\omega}\,'}{\color{cyan}\vec{r}\,'}
         $$
 
         Onde $\tilde{\omega},'$ é a velocidade angular representada como uma matriz antissimétrica correspondente ao seu produto vetorial:
         
         $$
-            {\color{cyan}\tilde{\omega}\,'} = {\color{cyan}\vec{\omega}\,'} \times =
-            \begin{bmatrix}
-                0 & -{\color{cyan}\omega_z\,'} & {\color{cyan}\omega_y\,'} \\
-                {\color{cyan}\omega_z\,'} & 0 & -{\color{cyan}\omega_x\,'} \\
-                -{\color{cyan}\omega_y\,'} & {\color{cyan}\omega_x\,'} & 0
-            \end{bmatrix}
+        {\color{cyan}\tilde{\omega}\,'} = {\color{cyan}\vec{\omega}\,'} \times =
+        \begin{bmatrix}
+            0 & -{\color{cyan}\omega_z\,'} & {\color{cyan}\omega_y\,'} \\
+            {\color{cyan}\omega_z\,'} & 0 & -{\color{cyan}\omega_x\,'} \\
+            -{\color{cyan}\omega_y\,'} & {\color{cyan}\omega_x\,'} & 0
+        \end{bmatrix}
         $$
 
         Diferenciando a equação anterior e utilizando essa propriedade, obtém-se:
@@ -182,53 +182,76 @@ $$
         Comparando essa equação com a anterior, é possível obter a matriz antissimétrica da velocidade angular em termos da matriz de rotação e sua derivada temporal:
         
         $$ 
-            {\color{cyan}\tilde{\omega}\,'} = -\dot{R}R^T 
+        {\color{cyan}\tilde{\omega}\,'} = -\dot{R}R^T 
         $$
         
         Os ângulos de Euler não são um vetor e não podem ser facilmente isolados. Entretanto, substituindo $R$ e $\dot{R}$, as velocidades angulares podem ser escritas em função dos ângulos de Euler e de suas derivadas temporais em notação matricial:
         
         $$
-            \begin{bmatrix}
-                {\color{cyan}\omega_x\,'} \\
-                {\color{cyan}\omega_y\,'} \\
-                {\color{cyan}\omega_z\,'}
-            \end{bmatrix}
-            = 
-            \begin{bmatrix}
-                0 & \sin{\color{magenta}\phi} & -\cos{\color{magenta}\phi}\sin{\color{magenta}\theta} \\
-                0 & \cos{\color{magenta}\phi} & \sin{\color{magenta}\phi}\sin{\color{magenta}\theta} \\
-                1 & 0 & \cos{\color{magenta}\theta}
-            \end{bmatrix}
-            \begin{bmatrix}
-                {\color{magenta}\dot{\phi}} \\
-                {\color{magenta}\dot{\theta}} \\
-                {\color{magenta}\dot{\psi}}
-            \end{bmatrix}
+        \begin{bmatrix}
+            {\color{cyan}\omega_x\,'} \\
+            {\color{cyan}\omega_y\,'} \\
+            {\color{cyan}\omega_z\,'}
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+            1 & 0 & - \sin{\color{magenta}\theta} \\
+            0 & \cos{\color{magenta}\phi} & \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
+            0 & -\sin{\color{magenta}\phi} & \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
+        \end{bmatrix}
+        \begin{bmatrix}
+            {\color{magenta}\dot{\phi}} \\
+            {\color{magenta}\dot{\theta}} \\
+            {\color{magenta}\dot{\psi}}
+        \end{bmatrix}
         $$
         
         Invertendo a matriz acima, as derivadas temporais dos ângulos de Euler podem ser escritas em função deles próprios e das velocidades angulares:
         
         $$
-            \begin{bmatrix}
-                {\color{magenta}\dot{\phi}} \\
-                {\color{magenta}\dot{\theta}} \\
-                {\color{magenta}\dot{\psi}}
-            \end{bmatrix}
-            = 
-            \frac{1}{\sin{\color{magenta}\theta}}
-            \begin{bmatrix}
-                \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} & -\sin{\color{magenta}\phi}\cos{\color{magenta}\theta} & \sin{\color{magenta}\theta} \\
-                \sin{\color{magenta}\phi}\sin{\color{magenta}\theta} & \cos{\color{magenta}\phi}\sin{\color{magenta}\theta} & 0 \\
-                -\cos{\color{magenta}\phi} & \sin{\color{magenta}\phi} & 0
-            \end{bmatrix}
-            \begin{bmatrix}
-                {\color{cyan}\omega_x\,'} \\
-                {\color{cyan}\omega_y\,'} \\
-                {\color{cyan}\omega_z\,'}
-            \end{bmatrix}
+        \begin{bmatrix}
+            {\color{magenta}\dot{\phi}} \\
+            {\color{magenta}\dot{\theta}} \\
+            {\color{magenta}\dot{\psi}}
+        \end{bmatrix}
+        = 
+        \begin{bmatrix} 
+            1 & \sin{\color{magenta}\phi}\tan{\color{magenta}\theta} & \cos{\color{magenta}\phi}\tan{\color{magenta}\theta} \\
+            0 & \cos{\color{magenta}\phi} & - \sin{\color{magenta}\phi}\\
+            0 & \sin{\color{magenta}\phi}\sec{\color{magenta}\theta} & \cos{\color{magenta}\phi}\sec{\color{magenta}\theta} 
+        \end{bmatrix}
+        \begin{bmatrix}
+            {\color{cyan}\omega_x\,'} \\
+            {\color{cyan}\omega_y\,'} \\
+            {\color{cyan}\omega_z\,'}
+        \end{bmatrix}
         $$
 
-        Esta última equação é a equação cinemática de um corpo rígido utilizando ângulos de Euler com a sequência de rotações $z-y-z$. Ela evidencia a singularidade que ocorre quando $\theta = 90^{\circ}$.
+        Esta última equação é a equação cinemática de um corpo rígido utilizando ângulos de Euler com a sequência de rotações $z-y-z$. 
+
+        Como temos alguns termos $\tan{\color{magenta}\theta}$ e $\sec{\color{magenta}\theta}$, podemos colocar o $\frac{1}{\cos{\color{magenta}\theta}}$ em evidência:
+
+        $$
+        \begin{bmatrix}
+            {\color{magenta}\dot{\phi}} \\
+            {\color{magenta}\dot{\theta}} \\
+            {\color{magenta}\dot{\psi}}
+        \end{bmatrix}
+        = 
+        \frac{1}{\cos{\color{magenta}\theta}}
+        \begin{bmatrix} 
+            \cos{\color{magenta}\theta} & \sin{\color{magenta}\phi}\sin{\color{magenta}\theta} & \cos{\color{magenta}\phi}\sin{\color{magenta}\theta} \\
+            0 & \cos{\color{magenta}\phi} \cos{\color{magenta}\theta} & - \sin{\color{magenta}\phi} \cos{\color{magenta}\theta} \\
+            0 & \sin{\color{magenta}\phi} & \cos{\color{magenta}\phi}
+        \end{bmatrix}
+        \begin{bmatrix}
+            {\color{cyan}\omega_x\,'} \\
+            {\color{cyan}\omega_y\,'} \\
+            {\color{cyan}\omega_z\,'}
+        \end{bmatrix}
+        $$
+        
+        Isso evidencia a singularidade que ocorre quando $\theta = \pm 90^{\circ}$.
 
 ---
 
@@ -442,9 +465,9 @@ Se juntarmos as equações cinemática e cinéticas, obtemos a dinâmica complet
 $$
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{x}} = {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} + {\color{cyan}v_y\,'} \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} - {\color{cyan}v_z\,'} \sin{\color{magenta}\theta} \\
-    {\color{magenta}\dot{y}} = {\color{cyan}v_x\,'} \left( - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_y\,'} \left( \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
-    {\color{magenta}\dot{z}} = {\color{cyan}v_x\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_y\,'} \left( - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} + \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
+    {\color{magenta}\dot{x}} = {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\cos{\color{magenta}\psi} + {\color{cyan}v_y\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} - \cos{\color{magenta}\phi}\sin{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \left( \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\cos{\color{magenta}\psi} + \sin{\color{magenta}\phi}\sin{\color{magenta}\psi} \right) \\
+    {\color{magenta}\dot{y}} = {\color{cyan}v_x\,'} \cos{\color{magenta}\theta}\sin{\color{magenta}\psi} + {\color{cyan}v_y\,'} \left( \sin{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} + \cos{\color{magenta}\phi}\cos{\color{magenta}\psi} \right) + {\color{cyan}v_z\,'} \left( \cos{\color{magenta}\phi}\sin{\color{magenta}\theta}\sin{\color{magenta}\psi} - \sin{\color{magenta}\phi}\cos{\color{magenta}\psi} \right) \\
+    {\color{magenta}\dot{z}} = - {\color{cyan}v_x\,'} \sin{\color{magenta}\theta} + {\color{cyan}v_y\,'}  \sin{\color{magenta}\phi}\cos{\color{magenta}\theta} + {\color{cyan}v_z\,'}  \cos{\color{magenta}\phi}\cos{\color{magenta}\theta} \\
     {\color{magenta}\dot{\phi}} = {\color{cyan}\omega_x\,'} + {\color{cyan}\omega_y\,'} \sin{\color{magenta}\phi} \tan{\color{magenta}\theta} + {\color{cyan}\omega_z\,'} \cos{\color{magenta}\phi} \tan{\color{magenta}\theta} \\
     {\color{magenta}\dot{\theta}} = {\color{cyan}\omega_y\,'} \cos{\color{magenta}\phi} - {\color{cyan}\omega_z\,'} \sin{\color{magenta}\phi} \\
     {\color{magenta}\dot{\psi}} = {\color{cyan}\omega_y\,'} \sin{\color{magenta}\phi} \sec{\color{magenta}\theta} + {\color{cyan}\omega_z\,'} \cos{\color{magenta}\phi} \sec{\color{magenta}\theta} \\
@@ -473,9 +496,9 @@ Para linearizar o sistema, podemos considerar aproximações quando os estados e
         $$
         \left\{
         \begin{array}{l}
-            {\color{magenta}\dot{x}} = {\color{cyan}v_x\,'} \cancelto{1}{\cos{\color{magenta}\theta}}\cancelto{1}{\cos{\color{magenta}\psi}} + {\color{cyan}v_y\,'} \cancelto{1}{\cos{\color{magenta}\theta}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} - {\color{cyan}v_z\,'} \cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}} \\
-            {\color{magenta}\dot{y}} = {\color{cyan}v_x\,'} \left( - \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} + \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{1}{\cos{\color{magenta}\psi}} \right) + {\color{cyan}v_y\,'} \left( \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\psi}} + \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} \right) + {\color{cyan}v_z\,'} \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\theta}} \\
-            {\color{magenta}\dot{z}} = {\color{cyan}v_x\,'} \left( \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} + \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{1}{\cos{\color{magenta}\psi}} \right) + {\color{cyan}v_y\,'} \left( - \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\psi}} + \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} \right) + {\color{cyan}v_z\,'} \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\theta}} \\
+            {\color{magenta}\dot{x}} = {\color{cyan}v_x\,'} \cancelto{1}{\cos{\color{magenta}\theta}}\cancelto{1}{\cos{\color{magenta}\psi}} + {\color{cyan}v_y\,'}  \left(\cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{1}{\cos{\color{magenta}\psi}} - \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}}\right) + {\color{cyan}v_z\,'} \left( \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{1}{\cos{\color{magenta}\psi}} + \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}}\right) \\
+            {\color{magenta}\dot{y}} = {\color{cyan}v_x\,'} \cancelto{1}{\cos{\color{magenta}\theta}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} + {\color{cyan}v_y\,'} \left( \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} + \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\psi}} \right) + {\color{cyan}v_z\,'} \left( \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}}\cancelto{{\color{magenta}\psi}}{\sin{\color{magenta}\psi}} - \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\psi}} \right) \\
+            {\color{magenta}\dot{z}} = - {\color{cyan}v_x\,'} \cancelto{{\color{magenta}\theta}}{\sin{\color{magenta}\theta}} + {\color{cyan}v_y\,'} \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\theta}} + {\color{cyan}v_z\,'} \cancelto{1}{\cos{\color{magenta}\phi}}\cancelto{1}{\cos{\color{magenta}\theta}} \\
             {\color{magenta}\dot{\phi}} = {\color{cyan}\omega_x\,'} + {\color{cyan}\omega_y\,'} \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}} \cancelto{{\color{magenta}\theta}}{\tan{\color{magenta}\theta}} + {\color{cyan}\omega_z\,'} \cancelto{1}{\cos{\color{magenta}\phi}} \cancelto{{\color{magenta}\theta}}{\tan{\color{magenta}\theta}} \\
             {\color{magenta}\dot{\theta}} = {\color{cyan}\omega_y\,'} \cancelto{1}{\cos{\color{magenta}\phi}} - {\color{cyan}\omega_z\,'} \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}} \\
             {\color{magenta}\dot{\psi}} = {\color{cyan}\omega_y\,'} \cancelto{{\color{magenta}\phi}}{\sin{\color{magenta}\phi}} \cancelto{1}{\sec{\color{magenta}\theta}} + {\color{cyan}\omega_z\,'} \cancelto{1}{\cos{\color{magenta}\phi}} \cancelto{1}{\sec{\color{magenta}\theta}} \\
@@ -490,9 +513,9 @@ Para linearizar o sistema, podemos considerar aproximações quando os estados e
         \qquad \longrightarrow \qquad
         \left\{
         \begin{array}{l}
-            {\color{magenta}\dot{x}} =  {\color{cyan}v_x\,'} + \cancelto{0}{{\color{cyan}v_y\,'}{\color{magenta}\psi}} + \cancelto{0}{{\color{cyan}v_z\,'}{\color{magenta}\theta}} \\
-            {\color{magenta}\dot{y}} =   \cancelto{0}{{\color{cyan}v_x\,'} \left( - {\color{magenta}\psi} + {\color{magenta}\phi\theta} \right)} + {\color{cyan}v_y\,'} \left( 1 + \cancelto{0}{{\color{magenta}\phi\theta\psi}} \right) + \cancelto{0}{{\color{cyan}v_z\,'}{\color{magenta}\phi}} \\
-            {\color{magenta}\dot{z}} =  \cancelto{0}{{\color{cyan}v_x\,'} \left( {\color{magenta}\phi\psi} + {\color{magenta}\theta} \right)} + \cancelto{0}{{\color{cyan}v_y\,'} \left( - {\color{magenta}\phi} + {\color{magenta}\theta\psi} \right)} + {\color{cyan}v_z\,'} \\
+            {\color{magenta}\dot{x}} =  {\color{cyan}v_x\,'} + \cancelto{0}{{\color{cyan}v_y\,'} \left( {\color{magenta}\phi\theta} - {\color{magenta}\psi} \right)} + \cancelto{0}{{\color{cyan}v_z\,'} \left( {\color{magenta}\theta} + {\color{magenta}\phi\psi} \right)} \\
+            {\color{magenta}\dot{y}} =  \cancelto{0}{{\color{cyan}v_x\,'}{\color{magenta}\psi}}  + {\color{cyan}v_y\,'} \left( \cancelto{0}{{\color{magenta}\phi\theta\psi}} + 1 \right) +  \cancelto{0}{{\color{cyan}v_z\,'} \left( {\color{magenta}\theta\psi} - {\color{magenta}\phi} \right)} \\
+            {\color{magenta}\dot{z}} =  \cancelto{0}{{\color{cyan}v_x\,'}{\color{magenta}\theta}} + \cancelto{0}{{\color{cyan}v_y\,'}{\color{magenta}\phi}} + {\color{cyan}v_z\,'} \\
             {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} +  \cancelto{0}{{\color{cyan}\omega_y\,'}{\color{magenta}\phi\theta}} +  \cancelto{0}{{\color{cyan}\omega_z\,'}{\color{magenta}\theta}} \\ 
             {\color{magenta}\dot{\theta}} =  {\color{cyan}\omega_y\,'} -  \cancelto{0}{{\color{cyan}\omega_z\,'}{\color{magenta}\phi}} \\ 
             {\color{magenta}\dot{\psi}} =  \cancelto{0}{{\color{cyan}\omega_y\,'}{\color{magenta}\phi}} + {\color{cyan}\omega_z\,'} \\ 

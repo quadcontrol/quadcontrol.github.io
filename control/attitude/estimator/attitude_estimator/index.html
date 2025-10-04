@@ -1632,23 +1632,16 @@
 <p>Para começar, copie e cole o arquivo <code>mixer.c</code> e renomeie ele para <code>attitude_estimator.c</code>.</p>
 <h3 id="variaveis-globais">Variáveis globais</h3>
 <p>Declare mais algumas variáveis globais, que são as variáveis que entram e saem da função do estimador de atitude.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Actuators</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// Motors PWM</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// Sensors</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">ax</span><span class="p">,</span><span class="w"> </span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="n">az</span><span class="p">;</span><span class="w">             </span><span class="c1">// Accelerometer [m/s^2]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">gx</span><span class="p">,</span><span class="w"> </span><span class="n">gy</span><span class="p">,</span><span class="w"> </span><span class="n">gz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Gyroscope [rad/s]</span>
 
-<span class="hll"><span class="c1">// Sensors</span>
-</span><span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">ax</span><span class="p">,</span><span class="w"> </span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="n">az</span><span class="p">;</span><span class="w">             </span><span class="c1">// Accelerometer [m/s^2]</span>
-</span><span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">gx</span><span class="p">,</span><span class="w"> </span><span class="n">gy</span><span class="p">,</span><span class="w"> </span><span class="n">gz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Gyroscope [rad/s]</span>
-</span>
-<span class="c1">// System inputs</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">ft</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Thrust force [N]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Roll, pitch and yaw torques [N.m]</span>
-
-<span class="hll"><span class="c1">// System states</span>
-</span><span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">;</span><span class="w">        </span><span class="c1">// Euler angles [rad]</span>
-</span><span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">wx</span><span class="p">,</span><span class="w"> </span><span class="n">wy</span><span class="p">,</span><span class="w"> </span><span class="n">wz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Angular velocities [rad/s]</span>
-</span></code></pre></div>
+<span class="c1">// System states</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">;</span><span class="w">        </span><span class="c1">// Euler angles [rad]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">wx</span><span class="p">,</span><span class="w"> </span><span class="n">wy</span><span class="p">,</span><span class="w"> </span><span class="n">wz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Angular velocities [rad/s]</span>
+</code></pre></div>
 <h3 id="variaveis-de-registro">Variáveis de registro</h3>
-<p class="annotate">Logo abaixo no código, declare também algumas variáveis que serão utilizados para registrar os valores dos ângulos de Euler e enviar eles ao Crazyflie Client, para que seja possível visualizar nossa estimativa em tempo real(1).</p>
+<p class="annotate">Declare também algumas variáveis que serão utilizados para registrar os valores dos ângulos de Euler e enviar eles ao Crazyflie Client, para que seja possível visualizar nossa estimativa em tempo real(1).</p>
 <ol>
 <li>Nós não utilizamos as próprias variáveis declaradas anteriormente pois o Crazyflie Client trabalha com ângulos em graus e não em radianos.</li>
 </ol>
@@ -1721,14 +1714,14 @@
 </code></pre></div>
 <hr />
 <h2 id="acelerometro">Acelerômetro</h2>
-<p>Acelerômetros inerciais são sensores que medem aceleração linear. Eles são compostos por um corpo de prova conectada a um invólucro através de uma mola e um amortecedor.</p>
+<p>Acelerômetros inerciais são sensores que medem aceleração linear. Eles são compostos por um corpo de prova conectada a um invólucro através de uma mola e um amortecedor:</p>
 <p><img alt="" src="../images/sensor_accelerometer.svg" style="display: block; margin: auto;" width="300" /></p>
 <p>Quando o invólucro sofre uma aceleração <span class="arithmatex">\({\color{magenta}\ddot{x}}\)</span>, o corpo dentro do invólucro sofre um deslocamento <span class="arithmatex">\({\color{cyan}x'}\)</span>. Medindo o deslocamento do corpo <span class="arithmatex">\({\color{cyan}x'}\)</span>, é possível inferir a aceleração sofrida pelo invólucro <span class="arithmatex">\({\color{magenta}\ddot{x}}\)</span>. </p>
 <p><img alt="" src="../images/sensor_accelerometer_3axis.svg" style="display: block; margin: auto;" width="300" /></p>
 <p>Ao montarmos três acelerômetros perpendiculares entre si, ou seja, um alinhado com cada eixo, temos o que é chamado de acelerômetro de 3 eixos, que consegue medir a aceleração linear em todas as direções.</p>
 <h3 id="trigonometria">Trigonometria</h3>
 <p class="annotate">O acelerômetro está fixo no sistema de coordenadas móvel do drone. Como há sempre a aceleração da gravidade apontando para baixo no sistema de coordenadas inercial, as acelerações <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span> em função da gravidade <span class="arithmatex">\(g\)</span> e do ângulo <span class="arithmatex">\(\phi\)</span> são dadas por:</p>
-<p>[Figura]</p>
+<p><img alt="" src="../images/readings_accelerometer_2d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
 \begin{align}
     \begin{bmatrix}
@@ -1759,7 +1752,7 @@
     \end{bmatrix}
 \end{align}
 \]</div>
-<p class="annotate">Dividindo uma equação pela outra, podemos medir o ângulo <span class="arithmatex">\(\phi_a\)</span>(1) em função das leituras do acelerômetro <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span>(2).</p>
+<p class="annotate">Dividindo uma equação pela outra, podemos medir o ângulo <span class="arithmatex">\(\phi_a\)</span>(1) em função das leituras do acelerômetro <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span>(2):</p>
 <ol>
 <li>O subescrito <span class="arithmatex">\(_a\)</span> quer dizer que esse valor foi obtido a partir das leituras do acelerômetro. </li>
 <li>Os sinais negativos não foram cortados pois você deverá utilizar a função <code>atan2f</code> em seu código, para saber em qual quadrante está o seu ângulo. </li>
@@ -1771,21 +1764,21 @@
     \phi_a &amp;= \tan^{-1} \left( \dfrac{-a_y}{-a_z} \right)
 \end{align}
 \]</div>
-<p>Vamos começar implementando um estimador de atitude bem simples, cujo ângulo estimado <span class="arithmatex">\(\phi\)</span> é dado simplesmente pelo ângulo medido <span class="arithmatex">\(\phi_a\)</span> a partir das leituras do acelerômetro <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span>, conforme o diagrama de blocos abaixo.</p>
-<p><img alt="" src="../images/accelerometer.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>Vamos começar implementando um estimador de atitude bem simples, cujo ângulo estimado <span class="arithmatex">\(\phi\)</span> é dado simplesmente pelo ângulo <span class="arithmatex">\(\phi_a\)</span> medido a partir das leituras do acelerômetro <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span>, conforme o diagrama de blocos abaixo:</p>
+<p><img alt="" src="../images/estimator_accelerometer.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Inclua na função <code>attitudeEstimator()</code> uma variável local <span class="arithmatex">\(\phi_a\)</span>, que corresponde ao ângulo medido a partir das leituras do acelerômetro <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span> e, em seguida, atribua ela ao ângulo estimado <span class="arithmatex">\(\phi\)</span>. Também vamos armazenar o valor dessa estimativa numa variável de registro, para que seja possível visualizá-la no Crazyflie Client.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="c1">// Measured angle from accelerometer</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atan2f</span><span class="p">(</span><span class="o">-</span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">az</span><span class="p">);</span>
-</span><span class="hll">
-</span><span class="hll"><span class="w">    </span><span class="c1">// Estimated angle is given purely from accelerometer measurement</span>
-</span><span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi_a</span><span class="p">;</span>
-</span><span class="hll">
-</span><span class="hll"><span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
-</span><span class="hll"><span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
-</span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Measured angle from accelerometer</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated angle (accelerometer)</span>
+<span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
+<span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
 <div class="admonition example">
@@ -1794,9 +1787,9 @@
 </div>
 <h3 id="filtro-passa-baixas">Filtro passa-baixas</h3>
 <p>Um filtro passa-baixas é um filtro que atenua sinais superiores a uma determinada frequência de corte <span class="arithmatex">\(\omega_c\)</span>. Ele é muito utilizado para filtrar ruídos, dado que os mesmos geralmente possuem uma frequência superior ao sinal que está sendo medido. </p>
-<p>Dessa forma, para obtermos um ângulo estimado <span class="arithmatex">\(\phi\)</span> sem ruídos, vamos passar o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span> por um filtro passa-baixas. No domínino da frequência, isso pode ser representado pelo seguinte diagrama de blocos.</p>
-<p>[Figura]</p>
-<p>Dado que vamos implementar este filtro em um microcontrolador, torna-se necessário determinar o correspondente discreto do mesmo. Primeiro, vamos obter a equação diferencial correspondente, utilizando a transformada inversa de Laplace.</p>
+<p>Dessa forma, para obtermos um ângulo estimado <span class="arithmatex">\(\phi\)</span> sem ruídos, vamos passar o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span> por um filtro passa-baixas. No domínino da frequência, isso pode ser representado pelo seguinte diagrama de blocos:</p>
+<p><img alt="" src="../images/low_pass_filter.svg" style="display: block; margin: auto;" width="350" /></p>
+<p>Dado que vamos implementar este filtro em um microcontrolador, torna-se necessário determinar o correspondente discreto do mesmo. Primeiro, vamos obter a equação diferencial correspondente, utilizando a transformada inversa de Laplace:</p>
 <div class="arithmatex">\[
 \begin{align*}
     \frac{\phi(s)}{\phi_a(s)} &amp;= \frac{\omega_c}{s+\omega_c} \\
@@ -1806,7 +1799,7 @@
     \frac{d}{dt}{\phi}(t) + \omega_c\phi(t) &amp;= \omega_c\phi_a(t)
 \end{align*}
 \]</div>
-<p class="annotate">Em seguida, vamos discretizar a equação diferencial, utilizando o método de Euler implícito(1).</p>
+<p class="annotate">Em seguida, vamos discretizar a equação diferencial, utilizando o método de Euler implícito(1):</p>
 <ol>
 <li>O método de Euler explícito ("pra frente") utiliza a aproximação <span class="arithmatex">\(\frac{d}{dt}x(t) \approx \frac{x(t+\Delta t)-x(t)}{\Delta t}\)</span>, equanto que o método de Euler implícito ("pra trás") utiliza a aproximação <span class="arithmatex">\(\frac{d}{dt}x(t) \approx \frac{x(t)-x[k-1]}{\Delta t}\)</span>}</li>
 </ol>
@@ -1821,8 +1814,8 @@
     \phi[k] &amp;= \left( 1-\alpha \right)\phi[k-1]+\alpha\phi_a[k]
 \end{align*}
 \]</div>
-<p>Note que um filtro passa-baixas discretizado nada mais é do que uma média ponderada entre o valor antigo de <span class="arithmatex">\(\phi\)</span> e o valor medido <span class="arithmatex">\(\phi_a\)</span>, e a variável <span class="arithmatex">\(\alpha\)</span> é exatamente esse fator de ponderação. O mesmo pode ser representado pelo diagrama de blocos abaixo.</p>
-<p><img alt="" src="../images/accelerometer_low_pass_filter.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>Note que um filtro passa-baixas discretizado nada mais é do que uma média ponderada entre o valor antigo de <span class="arithmatex">\(\phi\)</span> e o valor medido <span class="arithmatex">\(\phi_a\)</span>, e a variável <span class="arithmatex">\(\alpha\)</span> é exatamente esse fator de ponderação. O mesmo pode ser representado pelo seguinte diagrama de blocos:</p>
+<p><img alt="" src="../images/estimator_accelerometer_low_pass_filter.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>A variável <span class="arithmatex">\(\alpha\)</span> é chamada de fator de suavização, ela depende da frequência de corte <span class="arithmatex">\(\omega_c\)</span> e do intervalo de tempo <span class="arithmatex">\(\Delta t\)</span> entre medições:</p>
 <div class="arithmatex">\[
 \alpha = \frac{\omega_c\Delta t}{1+\omega_c\Delta t}
@@ -1832,20 +1825,21 @@
 <li>Quanto menor for a frequência de corte <span class="arithmatex">\(\omega_c\)</span>, mais próximo de 0 estará o fator de suavização <span class="arithmatex">\(\alpha\)</span> e, consequentemente, mais peso será dado aos valores antigos. Isso é vantajoso pois deixa passar menos ruído, no entanto, faz com que o sinal estimado convirja mais devagar.</li>
 </ul>
 <p>Determinar a frequência de corte <span class="arithmatex">\(\omega_c\)</span> ideal, que garante um bom compromisso entre redução de ruído e atraso, é o maior desafio na implementação de um filtro passa-baixas.</p>
-<p>[Figura]</p>
-<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> possua um filtro passa-baixas.</p>
+<!-- [Figura] -->
+
+<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> seja dado por um filtro passa-baixas da medida do acelerômetro <span class="arithmatex">\(\phi_a\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="c1">// Estimator parameters</span>
-</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Cutoff frequency of filter [rad/s]</span>
-</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0f</span><span class="o">+</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">);</span><span class="w"> </span><span class="c1">// Weighting factor of filter</span>
+<span class="w">    </span><span class="c1">// Estimator parameters</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
 <span class="w">    </span><span class="c1">// Measured angle from accelerometer</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atan2f</span><span class="p">(</span><span class="o">-</span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">az</span><span class="p">);</span>
-
-<span class="hll"><span class="w">    </span><span class="c1">// Low-pass filter accelerometer estimation</span>
-</span><span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi_a</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated angle (accelerometer with low pass filter)</span>
+<span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
 <span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
 <span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
@@ -1854,26 +1848,26 @@
 <p>Experimente valores de 1rad/s, 10rad/s e 100rad/s para a frequência de corte <span class="arithmatex">\(\omega_c\)</span> e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
-<p>Você deve notar que, mesmo no melhor dos casos, o estimador implementado não é adequado para condições dinâmicas (altas frequências). Vamos agora esquecer o acelerômetro por um instante e utilizar apenas o giroscópio para estimação de atitude. Não delete o código que você escreveu até agora, apenas comente ele (o mesmo será útil adiante).  </p>
+<p>Você deve notar que, mesmo no melhor dos casos, o estimador implementado não é adequado para condições dinâmicas (altas frequências). Vamos agora esquecer o acelerômetro por um instante e utilizar apenas o giroscópio para estimação de atitude.</p>
 </div>
 <hr />
 <h2 id="giroscopio">Giroscópio</h2>
-<p>Giroscópios inericiais são sensores que medem velocidade angular. Eles são compostos por um corpo de prova conectada a um invólucro através de duas mola e dois amortecedores. </p>
+<p>Giroscópios inericiais são sensores que medem velocidade angular. Eles são compostos por um corpo de prova conectada a um invólucro através de duas molas e dois amortecedores:</p>
 <p><img alt="" src="../images/sensor_gyroscope.svg" style="display: block; margin: auto;" width="300" /></p>
 <p>No eixo <span class="arithmatex">\({\color{cyan}x'}\)</span> é forçada uma vibração <span class="arithmatex">\({\color{#65DD18}f}=f_0\sin(\omega_0t)\)</span>. Quando o invólucro possui uma velocidade angular <span class="arithmatex">\({\color{magenta}\dot{\theta}}\)</span>, devido à aceleração de Coriolis, é induzida uma vibração no eixo <span class="arithmatex">\({\color{cyan}y'}\)</span>. Medindo a amplitude da vibração em <span class="arithmatex">\({\color{cyan}y'}\)</span> é possível inferir a velocidade angular do invólucro <span class="arithmatex">\({\color{magenta}\dot{\theta}}\)</span>.</p>
 <p><img alt="" src="../images/sensor_gyroscope_3axis.svg" style="display: block; margin: auto;" width="300" /></p>
 <p>Ao montarmos três giroscópios perpendiculares entre si, ou seja, um alinhado com cada eixo, temos o que é chamado de giroscópio de 3 eixos, que consegue medir a velocidade angular em todas as direções.</p>
 <h3 id="integracao">Integração</h3>
-<p class="annotate">O giroscópio está fixo no sistema de coordenadas móvel drone, portanto o deslocamento angular pode ser obtido integrando esse valor (1).</p>
+<p class="annotate">O giroscópio está fixo no sistema de coordenadas móvel drone e mede a velocidade angular, portanto o deslocamento angular pode ser obtido simplesmente integrando sua leitura(1):</p>
 <ol>
 <li>O subescrito <span class="arithmatex">\(_g\)</span> quer dizer que esse valor foi obtido a partir das leituras do giroscópio.</li>
 </ol>
-<p>[Figura]</p>
+<p><img alt="" src="../images/readings_gyroscope_2d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
 \phi_g(t) = \int g_x(t) dt \\
 \]</div>
-<p>No domínio da frequência, isso pode ser representado pelo seguinte diagrama de blocos.</p>
-<p>[Figura]</p>
+<p>No domínio da frequência, isso pode ser representado pelo seguinte diagrama de blocos:</p>
+<p><img alt="" src="../images/integrator.svg" style="display: block; margin: auto;" width="300" /></p>
 <p>Novamente, para determinar o correspondente discreto, primeiro obtemos a equação diferencial correspondente:</p>
 <div class="arithmatex">\[    
 \begin{align*}
@@ -1893,17 +1887,17 @@
     \phi_g[k] &amp;= \phi_g[k-1] + g_x[k] \Delta t 
 \end{align*}
 \]</div>
-<p>Vamos implementar agora um estimador de atitude cujo o ângulo estimado <span class="arithmatex">\(\phi\)</span> é dado pelo ângulo medido a partir das leituras do giroscópio <span class="arithmatex">\(\phi_g\)</span>, que por sua vez é dado pela integração da leitura do giroscópio <span class="arithmatex">\(g_x\)</span>, conforme o diagrama de blocos abaixo.</p>
-<p><img alt="" src="../images/gyroscope.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>Vamos implementar agora um estimador de atitude cujo o ângulo estimado <span class="arithmatex">\(\phi\)</span> é dado pelo ângulo medido a partir das leituras do giroscópio <span class="arithmatex">\(\phi_g\)</span>, que por sua vez é dado pela integração da leitura do giroscópio <span class="arithmatex">\(g_x\)</span>, conforme o diagrama de blocos abaixo:</p>
+<p><img alt="" src="../images/estimator_gyroscope.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Inclua na função <code>attitudeEstimator()</code> uma variável local <span class="arithmatex">\(\phi_g\)</span>, que corresponde ao ângulo medido a partir da integração da leitura do giroscópio <span class="arithmatex">\(g_x\)</span> e, em seguida, atribua ela ao ângulo estimado <span class="arithmatex">\(\phi\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="c1">// Measured angle from gyroscope</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
-</span><span class="hll">
-</span><span class="hll"><span class="w">    </span><span class="c1">// Estimated angle is given purely from gyroscope measurement</span>
-</span><span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi_g</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Measured angle from gyroscope</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated angle (gyroscope)</span>
+<span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span>
 </span>
 <span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
 <span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
@@ -1912,14 +1906,14 @@
 <p>Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
-<p>Você deve notar que o estimador implementado é adequado somente para condições dinâmicas (altas frequências). Isso se deve ao fato de que, em condições estáticas (baixas frequências), o giroscópio possui erros sistemáticos constantes (<em>"bias"</em>), que, mesmo pequenos, acabam sendo integrados e fazendo com que a atitude do drone divirja ao longo do tempo. É o problema inverso do acelerômetro, e uma forma de removê-lo é através de um filtro passa-altas.</p>
+<p>Você deve notar que o estimador implementado é adequado somente para condições dinâmicas (altas frequências). Isso se deve ao fato de que, em condições estáticas (baixas frequências), o giroscópio possui erros sistemáticos constantes (<em>"bias"</em>), que, mesmo pequenos, acabam sendo integrados e fazendo com que a atitude divirja ao longo do tempo. É o problema inverso do acelerômetro, e uma forma de removê-lo é através de um filtro passa-altas.</p>
 </div>
 <h3 id="filtro-passa-altas">Filtro passa-altas</h3>
 <p>Um filtro passa-altas é um filtro que atenua sinais inferiores a uma determinada frequência de corte <span class="arithmatex">\(\omega_c\)</span>. Ou seja, ele faz o inverso de um filtro passa-baixas.</p>
-<p>Para se obter o ângulo estimado <span class="arithmatex">\(\phi\)</span>, basta passar o ângulo medido <span class="arithmatex">\(\phi_g\)</span> por um filtro passa-altas. No domínio da frequência, isso pode ser representado pelo seguinte diagrama de blocos.</p>
-<p>[Figura]</p>
-<p>Note que, como a velocidade angular está sendo integrada antes de passar pelo filtro, o diagrama de blocos pode ser reduzido.</p>
-<p>[Figura]</p>
+<p>Para se obter o ângulo estimado <span class="arithmatex">\(\phi\)</span>, basta passar o ângulo medido <span class="arithmatex">\(\phi_g\)</span> por um filtro passa-altas. No domínio da frequência, isso pode ser representado pelo seguinte diagrama de blocos:</p>
+<p><img alt="" src="../images/integrator_high_pass_filter.svg" style="display: block; margin: auto;" width="450" /></p>
+<p>Note que, como a velocidade angular está sendo integrada antes de passar pelo filtro, o diagrama de blocos pode ser reduzido:</p>
+<p><img alt="" src="../images/integrator_high_pass_filter_reduced.svg" style="display: block; margin: auto;" width="350" /></p>
 <p>Novamente, primeiro obtemos a equação diferencial:</p>
 <div class="arithmatex">\[
 \begin{align}
@@ -1941,21 +1935,21 @@
     \phi[k] &amp;= \left(1-\alpha\right) \phi_g[k]
 \end{align}
 \]</div>
-<p>Dessa forma, a integração do giroscópio com um filtro passa-altas pode ser representado pelo diagrama de blocos abaixo.</p>
-<p><img alt="" src="../images/gyroscope_high_pass_filter.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> possua um filtro passa-altas.</p>
+<p>Dessa forma, a integração do giroscópio com um filtro passa-altas pode ser representado pelo diagrama de blocos abaixo:</p>
+<p><img alt="" src="../images/estimator_gyroscope_high_pass_filter.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> seja dado por filtro passa-altas da medida do giroscópio <span class="arithmatex">\(\phi_g\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="c1">// Estimator parameters</span>
-</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Cutoff frequency of filter [rad/s]</span>
-</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0f</span><span class="o">+</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">);</span><span class="w"> </span><span class="c1">// Weighting factor of filter</span>
+<span class="w">    </span><span class="c1">// Estimator parameters</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
 <span class="w">    </span><span class="c1">// Measured angle from gyroscope</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
-
-<span class="hll"><span class="w">    </span><span class="c1">// High-pass filter gyroscope estimation</span>
-</span><span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi_g</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated angle (gyroscope with high pass filter)</span>
+<span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
 <span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
 <span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
@@ -1970,14 +1964,14 @@
 <h2 id="acelerometro-giroscopio">Acelerômetro + Giroscópio</h2>
 <p>Conforme vimos, o acelerômetro nos fornece boas estimativas de atitude para condições estáticas (baixas frequências). Já o giroscópio é o contrário, ele nos fornece boas estimativas para condições dinâmicas (altas frequências). Por que não combinar os dois para ter boas estimativas durante condições estáticas e dinâmicas? Essa é a ideia por trás de um filtro complementar!</p>
 <h3 id="filtro-complementar">Filtro complementar</h3>
-<p>O ângulo medido pelo acelerômetro é passado por um filtro passa-baixas, já a velocidade angular do giroscópio é integrada e passada por um filtro passa-altas, conforme a o diagrama de blocos abaixo.</p>
-<p>[Figura]</p>
+<p>O ângulo medido pelo acelerômetro é passado por um filtro passa-baixas, já a velocidade angular do giroscópio é integrada e passada por um filtro passa-altas, conforme a o diagrama de blocos abaixo:</p>
+<p><img alt="" src="../images/complementary_filter.svg" style="display: block; margin: auto;" width="500" /></p>
 <p>A soma desses dois filtros gera um ganho unitário, por isso que eles são chamados de filtros complementares:</p>
 <div class="arithmatex">\[
     \underbrace{\frac{\omega_c}{s+\omega_c}}_{\begin{array}{c} \text{ Filtro} \\ \text{passa-baixas} \end{array}} + \underbrace{\frac{s}{s+\omega_c}}_{\begin{array}{c} \text{Filtro} \\ \text{passa-altas} \end{array}} = 1
 \]</div>
-<p>Como a velocidade angular está sendo integrada antes de passar pelo filtro passa-altas e, tanto o filtro passa-baixas como o filtro passa-altas possuem o mesmo denominador da função de transferência, o diagrama de blocos pode ser simplificado.</p>
-<p>[Figura]</p>
+<p>Como a velocidade angular está sendo integrada antes de passar pelo filtro passa-altas e, tanto o filtro passa-baixas como o filtro passa-altas possuem o mesmo denominador da função de transferência, o diagrama de blocos pode ser reduzido:</p>
+<p><img alt="" src="../images/complementary_filter_reduced.svg" style="display: block; margin: auto;" width="500" /></p>
 <p>Note que agora nós só temos uma única função de transferência, que é a função de transferência de um filtro passa-baixas. Como já deduzimos o correspondente discreto deste filtro, tem-se que:</p>
 <div class="arithmatex">\[
 \begin{align}
@@ -1988,24 +1982,24 @@
     \phi[k] &amp;= \left( 1-\alpha \right)\phi_g[k] + \alpha \phi_a[k] 
 \end{align}
 \]</div>
-<p>Ou seja, um filtro complementar discretizado nada mais é do que uma média ponderada entre o ângulo medido pelo giroscópio <span class="arithmatex">\(\phi_g\)</span> e o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span>, conforme o diagrama de blocos abaixo.</p>
-<p><img alt="" src="../images/accelerometer_gyroscope_complementary_filter.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> possua um filtro passa-altas.</p>
+<p>Ou seja, um filtro complementar discretizado nada mais é do que uma média ponderada entre o ângulo medido pelo giroscópio <span class="arithmatex">\(\phi_g\)</span> e o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span>! Isso pode ser representando pelo seguinte diagrama de blocos:</p>
+<p><img alt="" src="../images/estimator_accelerometer_gyroscope_complementary_filter.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> possua um filtro complementar das medidas do acelerômetro <span class="arithmatex">\(\phi_a\)</span> e giroscópio <span class="arithmatex">\(\phi_g\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Estimator parameters</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Cutoff frequency of filter [rad/s]</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0f</span><span class="o">+</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">);</span><span class="w"> </span><span class="c1">// Weighting factor of filter</span>
-
-<span class="hll"><span class="w">    </span><span class="c1">// Measured angle from accelerometer</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atan2f</span><span class="p">(</span><span class="o">-</span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">az</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Measured angle from accelerometer</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
 <span class="w">    </span><span class="c1">// Measured angle from gyroscope</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
-
-<span class="hll"><span class="w">    </span><span class="c1">// Complementary filter of gyroscope and accelerometer estimations</span>
-</span><span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi_a</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated angle (accelerometer and gyroscope with complementary filter)</span>
+<span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
 <span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
 <span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
@@ -2014,7 +2008,7 @@
 <p>Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte <span class="arithmatex">\(\omega_c\)</span> e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
-<p>Você deve notar que a atitude do drone sempre converge para zero, o que é bom pois não estamos mais integrando os erros sistemáticos, mas ruim quando o drone fica parado em uma atitude que não seja zero.</p>
+<p>Agora sim a estimativa ficou legal!</p>
 </div>
 <hr />
 <h2 id="attitude-3d">Attitude 3D</h2>
@@ -2022,17 +2016,17 @@
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \omega_x = g_x \\ 
-    \omega_y = g_y \\
-    \omega_z = g_z 
+    \phi =  \left( 1 - \alpha \right) \phi_g + \alpha \phi_a \\ 
+    \theta = \left( 1 - \alpha \right) \theta_g + \alpha \theta_a  \\
+    \psi = \psi_g 
 \end{array}
 \right.
 \qquad \qquad \qquad
 \left\{
 \begin{array}{l}
-    \phi =  \left( 1 - \alpha \right) \phi_g + \alpha \phi_a \\ 
-    \theta = \left( 1 - \alpha \right) \theta_g + \alpha \theta_a  \\
-    \psi = \psi_g 
+    \omega_x = g_x \\ 
+    \omega_y = g_y \\
+    \omega_z = g_z 
 \end{array}
 \right.
 \]</div>
@@ -2042,6 +2036,7 @@
 </ol>
 <h3 id="acelerometro_1">Acelerômetro</h3>
 <p>Os ângulos de Euler <span class="arithmatex">\(\phi_a\)</span> e <span class="arithmatex">\(\theta_a\)</span> medidos a partir das leituras do acelerômetro <span class="arithmatex">\(a_x\)</span>, <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span> são dados por:</p>
+<p><img alt="" src="../images/readings_accelerometer_3d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -2113,6 +2108,7 @@
 </details>
 <h3 id="giroscopio_1">Giroscópio</h3>
 <p>Os ângulos de Euler <span class="arithmatex">\(\phi_g\)</span>, <span class="arithmatex">\(\theta_g\)</span> e <span class="arithmatex">\(\psi_g\)</span> medidos a partir das leituras do giroscópio <span class="arithmatex">\(g_x\)</span>, <span class="arithmatex">\(g_y\)</span> e <span class="arithmatex">\(g_z\)</span> são dados por:</p>
+<p><img alt="" src="../images/readings_gyroscope_3d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -2203,33 +2199,33 @@
 \]</div>
 </details>
 <h3 id="implementacao_1">Implementação</h3>
-<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora os ângulos estimados <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span> sejam dados por um filtro complementar entre as medições do acelerômetro e giroscópio.</p>
+<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora os ângulos estimados <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span> sejam dados por um filtro complementar entre as medidas do acelerômetro <span class="arithmatex">\(\phi_a\)</span> e <span class="arithmatex">\(\theta_a\)</span> e giroscópio <span class="arithmatex">\(\phi_g\)</span>, <span class="arithmatex">\(\theta_g\)</span> e <span class="arithmatex">\(\psi_g\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Estimator parameters</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Cutoff frequency of filter [rad/s]</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0f</span><span class="o">+</span><span class="n">wc</span><span class="o">*</span><span class="n">dt</span><span class="p">);</span><span class="w"> </span><span class="c1">// Weighting factor of filter</span>
-
-<span class="w">    </span><span class="c1">// Angular velocity estimation</span>
-<span class="w">    </span><span class="n">wx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gx</span><span class="p">;</span>
-<span class="w">    </span><span class="n">wy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gy</span><span class="p">;</span>
-<span class="w">    </span><span class="n">wz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gz</span><span class="p">;</span>
-
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
 <span class="w">    </span><span class="c1">// Measured angles from accelerometer</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atan2f</span><span class="p">(</span><span class="o">-</span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">az</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atan2f</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">ay</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ay</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">az</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">az</span><span class="p">));</span>
-
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
 <span class="w">    </span><span class="c1">// Measured angles from gyroscope</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">wx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sinf</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tanf</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cosf</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tanf</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">wy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cosf</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">wz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sinf</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">psi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">psi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">wy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sinf</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">cosf</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cosf</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">cosf</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Angle estimation (complementary filter: blend high frequency gyroscope with low frequency accelometer)</span>
-<span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phi_a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta_g</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta_a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">psi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">psi_g</span><span class="p">;</span><span class="w"> </span><span class="c1">// No absolute reference for yaw</span>
-
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">psi_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated angles (accelerometer and gyroscope with complementary filter)</span>
+<span class="hll"><span class="w">    </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">psi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Angular velocities estimation (gyroscope)</span>
+<span class="hll"><span class="w">    </span><span class="n">wx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">wy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">wz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
 <span class="w">    </span><span class="c1">// Auxiliary variables for logging Euler angles (CFClient uses degrees and not radians)</span>
 <span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
 <span class="w">    </span><span class="n">log_theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">theta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>

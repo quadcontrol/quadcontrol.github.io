@@ -1707,7 +1707,7 @@
 <span class="hll"><span class="w">        </span><span class="n">sensors</span><span class="p">();</span><span class="w">                    </span><span class="c1">// Read raw sensor measurements</span>
 </span><span class="hll"><span class="w">        </span><span class="n">attitudeEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate orientation (roll/pitch/yaw) from IMU sensor</span>
 </span><span class="w">        </span><span class="n">mixer</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Convert desired force/torques into motor PWM</span>
-<span class="w">        </span><span class="n">motors</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Send commands to motors</span>
+<span class="w">        </span><span class="n">actuators</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Send commands to motors</span>
 <span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// Loop delay (5 ms)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1754,7 +1754,7 @@
 \]</div>
 <p class="annotate">Dividindo uma equação pela outra, podemos medir o ângulo <span class="arithmatex">\(\phi_a\)</span>(1) em função das leituras do acelerômetro <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span>(2):</p>
 <ol>
-<li>O subescrito <span class="arithmatex">\(_a\)</span> quer dizer que esse valor foi obtido a partir das leituras do acelerômetro. </li>
+<li>Usamos o subescrito <span class="arithmatex">\(_a\)</span> para deixar claro que esse ângulo foi medido a partir das leituras do acelerômetro. </li>
 <li>Os sinais negativos não foram cortados pois você deverá utilizar a função <code>atan2f</code> em seu código, para saber em qual quadrante está o seu ângulo. </li>
 </ol>
 <div class="arithmatex">\[
@@ -1789,7 +1789,7 @@
 <p>Um filtro passa-baixas é um filtro que atenua sinais superiores a uma determinada frequência de corte <span class="arithmatex">\(\omega_c\)</span>. Ele é muito utilizado para filtrar ruídos, dado que os mesmos geralmente possuem uma frequência superior ao sinal que está sendo medido. </p>
 <p>Dessa forma, para obtermos um ângulo estimado <span class="arithmatex">\(\phi\)</span> sem ruídos, vamos passar o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span> por um filtro passa-baixas. No domínino da frequência, isso pode ser representado pelo seguinte diagrama de blocos:</p>
 <p><img alt="" src="../images/low_pass_filter.svg" style="display: block; margin: auto;" width="350" /></p>
-<p>Dado que vamos implementar este filtro em um microcontrolador, torna-se necessário determinar o correspondente discreto do mesmo. Primeiro, vamos obter a equação diferencial correspondente, utilizando a transformada inversa de Laplace:</p>
+<p>Dado que vamos implementar este filtro em um microcontrolador, torna-se necessário determinar o equivalente discreto do mesmo. Primeiro, vamos obter a equação diferencial correspondente, utilizando a transformada inversa de Laplace:</p>
 <div class="arithmatex">\[
 \begin{align*}
     \frac{\phi(s)}{\phi_a(s)} &amp;= \frac{\omega_c}{s+\omega_c} \\
@@ -1801,7 +1801,7 @@
 \]</div>
 <p class="annotate">Em seguida, vamos discretizar a equação diferencial, utilizando o método de Euler implícito(1):</p>
 <ol>
-<li>O método de Euler explícito ("pra frente") utiliza a aproximação <span class="arithmatex">\(\frac{d}{dt}x(t) \approx \frac{x(t+\Delta t)-x(t)}{\Delta t}\)</span>, equanto que o método de Euler implícito ("pra trás") utiliza a aproximação <span class="arithmatex">\(\frac{d}{dt}x(t) \approx \frac{x(t)-x[k-1]}{\Delta t}\)</span>}</li>
+<li>O método de Euler explícito ("pra frente") utiliza a aproximação <span class="arithmatex">\(\frac{d}{dt}x(t) \approx \frac{x(t+\Delta t)-x(t)}{\Delta t}\)</span>, equanto que o método de Euler implícito ("pra trás") utiliza a aproximação <span class="arithmatex">\(\frac{d}{dt}x(t) \approx \frac{x(t)-x(t-\Delta t)}{\Delta t}\)</span></li>
 </ol>
 <div class="arithmatex">\[
 \begin{align*}
@@ -1860,7 +1860,7 @@
 <h3 id="integracao">Integração</h3>
 <p class="annotate">O giroscópio está fixo no sistema de coordenadas móvel drone e mede a velocidade angular, portanto o deslocamento angular pode ser obtido simplesmente integrando sua leitura(1):</p>
 <ol>
-<li>O subescrito <span class="arithmatex">\(_g\)</span> quer dizer que esse valor foi obtido a partir das leituras do giroscópio.</li>
+<li>Usamos o subescrito <span class="arithmatex">\(_g\)</span> para deixar claro que esse ângulo foi medido a partir das leituras do giroscópio. </li>
 </ol>
 <p><img alt="" src="../images/readings_gyroscope_2d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
@@ -1887,7 +1887,7 @@
     \phi_g[k] &amp;= \phi_g[k-1] + g_x[k] \Delta t 
 \end{align*}
 \]</div>
-<p>Vamos implementar agora um estimador de atitude cujo o ângulo estimado <span class="arithmatex">\(\phi\)</span> é dado pelo ângulo medido a partir das leituras do giroscópio <span class="arithmatex">\(\phi_g\)</span>, que por sua vez é dado pela integração da leitura do giroscópio <span class="arithmatex">\(g_x\)</span>, conforme o diagrama de blocos abaixo:</p>
+<p>Vamos implementar agora um estimador de atitude cujo ângulo estimado <span class="arithmatex">\(\phi\)</span> é dado pelo ângulo medido a partir das leituras do giroscópio <span class="arithmatex">\(\phi_g\)</span>, que por sua vez é dado pela integração da leitura do giroscópio <span class="arithmatex">\(g_x\)</span>, conforme o diagrama de blocos abaixo:</p>
 <p><img alt="" src="../images/estimator_gyroscope.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Inclua na função <code>attitudeEstimator()</code> uma variável local <span class="arithmatex">\(\phi_g\)</span>, que corresponde ao ângulo medido a partir da integração da leitura do giroscópio <span class="arithmatex">\(g_x\)</span> e, em seguida, atribua ela ao ângulo estimado <span class="arithmatex">\(\phi\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
@@ -1937,7 +1937,7 @@
 \]</div>
 <p>Dessa forma, a integração do giroscópio com um filtro passa-altas pode ser representado pelo diagrama de blocos abaixo:</p>
 <p><img alt="" src="../images/estimator_gyroscope_high_pass_filter.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> seja dado por filtro passa-altas da medida do giroscópio <span class="arithmatex">\(\phi_g\)</span>.</p>
+<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> seja dado por um filtro passa-altas da medida do giroscópio <span class="arithmatex">\(\phi_g\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1955,22 +1955,25 @@
 <span class="w">    </span><span class="n">log_phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Experimente valores de 1rad/s, 10rad/s e 100rad/s para a frequência de corte <span class="arithmatex">\(\omega_c\)</span> e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
+<p>Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte <span class="arithmatex">\(\omega_c\)</span> e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
 <p>Você deve notar que a atitude do drone sempre converge para zero, o que é bom pois não estamos mais integrando os erros sistemáticos, mas ruim quando o drone fica parado em uma atitude que não seja zero.</p>
 </div>
 <hr />
 <h2 id="acelerometro-giroscopio">Acelerômetro + Giroscópio</h2>
-<p>Conforme vimos, o acelerômetro nos fornece boas estimativas de atitude para condições estáticas (baixas frequências). Já o giroscópio é o contrário, ele nos fornece boas estimativas para condições dinâmicas (altas frequências). Por que não combinar os dois para ter boas estimativas durante condições estáticas e dinâmicas? Essa é a ideia por trás de um filtro complementar!</p>
+<p>Conforme vimos, o acelerômetro nos fornece boas estimativas para condições estáticas (baixas frequências), enquanto o giroscópio nos fornece boas estimativas para condições dinâmicas (altas frequências). Um tem sucesso exatamente onde o outro falha. Por que então não combinar os dois para ter boas estimativas durante condições estáticas e dinâmicas? Essa é a ideia por trás de um filtro complementar!</p>
 <h3 id="filtro-complementar">Filtro complementar</h3>
-<p>O ângulo medido pelo acelerômetro é passado por um filtro passa-baixas, já a velocidade angular do giroscópio é integrada e passada por um filtro passa-altas, conforme a o diagrama de blocos abaixo:</p>
+<p>A ideia desse filtro é passar o ângulo medido pelo acelerômetro por um filtro passa-baixas e o ângulo medido pelo giroscópio por um filtro passa-altas, conforme a o diagrama de blocos abaixo:</p>
 <p><img alt="" src="../images/complementary_filter.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>A soma desses dois filtros gera um ganho unitário, por isso que eles são chamados de filtros complementares:</p>
+<p class="annotate">Como a somatória desses dois filtros gera um ganho unitário, eles podem simplesmente ser somados(1):</p>
+<ol>
+<li>É daí que vem o nome "complementar"</li>
+</ol>
 <div class="arithmatex">\[
     \underbrace{\frac{\omega_c}{s+\omega_c}}_{\begin{array}{c} \text{ Filtro} \\ \text{passa-baixas} \end{array}} + \underbrace{\frac{s}{s+\omega_c}}_{\begin{array}{c} \text{Filtro} \\ \text{passa-altas} \end{array}} = 1
 \]</div>
-<p>Como a velocidade angular está sendo integrada antes de passar pelo filtro passa-altas e, tanto o filtro passa-baixas como o filtro passa-altas possuem o mesmo denominador da função de transferência, o diagrama de blocos pode ser reduzido:</p>
+<p>Dado que a velocidade angular está sendo integrada antes de passar pelo filtro passa-altas e, tanto o filtro passa-baixas como o filtro passa-altas possuem o mesmo denominador da função de transferência, o diagrama de blocos pode ser reduzido:</p>
 <p><img alt="" src="../images/complementary_filter_reduced.svg" style="display: block; margin: auto;" width="500" /></p>
 <p>Note que agora nós só temos uma única função de transferência, que é a função de transferência de um filtro passa-baixas. Como já deduzimos o correspondente discreto deste filtro, tem-se que:</p>
 <div class="arithmatex">\[
@@ -1982,9 +1985,9 @@
     \phi[k] &amp;= \left( 1-\alpha \right)\phi_g[k] + \alpha \phi_a[k] 
 \end{align}
 \]</div>
-<p>Ou seja, um filtro complementar discretizado nada mais é do que uma média ponderada entre o ângulo medido pelo giroscópio <span class="arithmatex">\(\phi_g\)</span> e o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span>! Isso pode ser representando pelo seguinte diagrama de blocos:</p>
+<p>Ou seja, um filtro complementar discretizado nada mais é do que uma média ponderada entre o ângulo medido pelo giroscópio <span class="arithmatex">\(\phi_g\)</span> e o ângulo medido pelo acelerômetro <span class="arithmatex">\(\phi_a\)</span>. Isso pode ser representando pelo seguinte diagrama de blocos:</p>
 <p><img alt="" src="../images/estimator_accelerometer_gyroscope_complementary_filter.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> possua um filtro complementar das medidas do acelerômetro <span class="arithmatex">\(\phi_a\)</span> e giroscópio <span class="arithmatex">\(\phi_g\)</span>.</p>
+<p>Modifique a sua função <code>attitudeEstimator()</code> de modo que agora o ângulo estimado <span class="arithmatex">\(\phi\)</span> seja dado por um filtro complementar das medidas do acelerômetro <span class="arithmatex">\(\phi_a\)</span> e giroscópio <span class="arithmatex">\(\phi_g\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -2012,7 +2015,7 @@
 </div>
 <hr />
 <h2 id="attitude-3d">Attitude 3D</h2>
-<p>Por fim, você deve replicar o estimador de atitude desenvolvido para todos os demais ângulos de Euler e também velocidades angulares:</p>
+<p>Por fim, você deve replicar o estimador de atitude desenvolvido para os demais ângulos de Euler e também velocidades angulares:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -2045,7 +2048,7 @@
 \end{array}
 \right.
 \]</div>
-<details class="question">
+<details class="info">
 <summary>Dedução</summary>
 <p>As acelerações <span class="arithmatex">\(a_x\)</span>, <span class="arithmatex">\(a_y\)</span> e <span class="arithmatex">\(a_z\)</span> em função da gravidade <span class="arithmatex">\(g\)</span> e dos ângulo <span class="arithmatex">\(\phi\)</span> e <span class="arithmatex">\(\theta\)</span> são dadas por:</p>
 <div class="arithmatex">\[
@@ -2118,7 +2121,7 @@
 \end{array}
 \right.
 \]</div>
-<details class="question">
+<details class="info">
 <summary>Dedução</summary>
 <p>As derivadas dos ângulos de Euler em função das velocidades angulares são dadas pela equação cinemática de rotação:</p>
 <div class="arithmatex">\[
@@ -2232,7 +2235,7 @@
 <span class="w">    </span><span class="n">log_psi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">psi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">180.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte <span class="arithmatex">\(\omega_c\)</span> e verifique como isso influencia na sua estimativa. Para isso, carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
+<p>Carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado de um estimador de atitude completo!</p>
 
 
 

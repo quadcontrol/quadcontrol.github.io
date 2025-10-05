@@ -1617,29 +1617,29 @@
 <span class="kt">void</span><span class="w"> </span><span class="nf">mixer</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Quadcopter parameters</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Quadratic motor model gain [s^2/rad^2]</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Linear motor model gain [s/rad]</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Lift constant [N.s^2]</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Drag constant [N.m.s^2]</span>
-
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
 <span class="w">    </span><span class="c1">// Compute required motor angular velocities squared (omega^2)</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega1</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega3</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">omega4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
 <span class="w">    </span><span class="c1">// Clamp to non-negative and take square root (omega)</span>
-<span class="w">    </span><span class="n">omega1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">omega2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">omega3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">omega4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-
+<span class="hll"><span class="w">    </span><span class="n">omega1</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">omega2</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">omega3</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">omega4</span><span class="w"> </span><span class="o">=</span>
+</span>
 <span class="w">    </span><span class="c1">// Compute motor PWM using motor model</span>
-<span class="w">    </span><span class="n">pwm1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">pwm2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">pwm3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">pwm4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="hll"><span class="w">    </span><span class="n">pwm1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">pwm2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">pwm3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">pwm4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Atenção</p>

@@ -154,33 +154,33 @@ Você deve implementar essa lógica na função `mixer()`(1):
 
 1. Declarare os parâmetros do quadcóptero previamente identificados como variáveis locais.
 
-```c
+```c hl_lines="5-8 11-14 17-20 23-26"
 // Compute motor commands
 void mixer()
 {
     // Quadcopter parameters
-    static const float a2 = 0.0f; // Quadratic motor model gain [s^2/rad^2]
-    static const float a1 = 0.0f; // Linear motor model gain [s/rad]
-    static const float kl = 0.0f; // Lift constant [N.s^2]
-    static const float kd = 0.0f; // Drag constant [N.m.s^2]
+    static const float a2 = 
+    static const float a1 = 
+    static const float kl = 
+    static const float kd = 
 
     // Compute required motor angular velocities squared (omega^2)
-    float omega1 = 0.0f;
-    float omega2 = 0.0f;
-    float omega3 = 0.0f;
-    float omega4 = 0.0f;
+    float omega1 =
+    float omega2 = 
+    float omega3 =
+    float omega4 = 
 
     // Clamp to non-negative and take square root (omega)
-    omega1 = 0.0f;
-    omega2 = 0.0f;
-    omega3 = 0.0f;
-    omega4 = 0.0f;
+    omega1 =
+    omega2 =
+    omega3 =
+    omega4 =
 
     // Compute motor PWM using motor model
-    pwm1 = 0.0f;
-    pwm2 = 0.0f;
-    pwm3 = 0.0f;
-    pwm4 = 0.0f;
+    pwm1 = 
+    pwm2 = 
+    pwm3 = 
+    pwm4 = 
 }
 ```
 

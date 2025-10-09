@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/control/architecture/">
+        <link rel="canonical" href="https://quadcontrol.io/control/horizontal/estimator/horizontal_estimator/">
       
       
-        <link rel="prev" href="../../modeling/3d_model/">
+        <link rel="prev" href="../../../vertical/controller/vertical_controller/">
       
       
-        <link rel="next" href="../mixer/">
+        <link rel="next" href="../../controller/horizontal_controller/">
       
       
-      <link rel="icon" href="../../images/logo_black.png">
+      <link rel="icon" href="../../../../images/logo_black.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Arquitetura - QuadControl</title>
+        <title>Estimador horizontal - QuadControl</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../styles/extra.css">
+      <link rel="stylesheet" href="../../../../styles/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#arquitetura" class="md-skip">
+        <a href="#estimador-horizontal" class="md-skip">
           Skip to content
         </a>
       
@@ -92,9 +92,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
+    <a href="../../../.." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="../../images/logo.png" alt="logo">
+  <img src="../../../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Arquitetura
+              Estimador horizontal
             
           </span>
         </div>
@@ -201,9 +201,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
+    <a href="../../../.." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="../../images/logo.png" alt="logo">
+  <img src="../../../../images/logo.png" alt="logo">
 
     </a>
     QuadControl
@@ -218,7 +218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -278,7 +278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../first_steps/hardware/" class="md-nav__link">
+      <a href="../../../../first_steps/hardware/" class="md-nav__link">
         
   
   
@@ -301,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../first_steps/software/" class="md-nav__link">
+      <a href="../../../../first_steps/software/" class="md-nav__link">
         
   
   
@@ -324,7 +324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../first_steps/firmware/" class="md-nav__link">
+      <a href="../../../../first_steps/firmware/" class="md-nav__link">
         
   
   
@@ -392,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sensors_and_actuators/motors/" class="md-nav__link">
+      <a href="../../../../sensors_and_actuators/motors/" class="md-nav__link">
         
   
   
@@ -415,7 +415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sensors_and_actuators/sensors/" class="md-nav__link">
+      <a href="../../../../sensors_and_actuators/sensors/" class="md-nav__link">
         
   
   
@@ -483,7 +483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basic_concepts/aerodynamics/" class="md-nav__link">
+      <a href="../../../../basic_concepts/aerodynamics/" class="md-nav__link">
         
   
   
@@ -506,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basic_concepts/mixer/" class="md-nav__link">
+      <a href="../../../../basic_concepts/mixer/" class="md-nav__link">
         
   
   
@@ -529,7 +529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basic_concepts/inertia/" class="md-nav__link">
+      <a href="../../../../basic_concepts/inertia/" class="md-nav__link">
         
   
   
@@ -597,7 +597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/motor_coeficients/" class="md-nav__link">
+      <a href="../../../../identification/motor_coeficients/" class="md-nav__link">
         
   
   
@@ -620,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/lift_constant/" class="md-nav__link">
+      <a href="../../../../identification/lift_constant/" class="md-nav__link">
         
   
   
@@ -643,7 +643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/drag_constant/" class="md-nav__link">
+      <a href="../../../../identification/drag_constant/" class="md-nav__link">
         
   
   
@@ -711,7 +711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/coordinate_system/" class="md-nav__link">
+      <a href="../../../../modeling/coordinate_system/" class="md-nav__link">
         
   
   
@@ -734,7 +734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/2d_model/" class="md-nav__link">
+      <a href="../../../../modeling/2d_model/" class="md-nav__link">
         
   
   
@@ -757,7 +757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/3d_model/" class="md-nav__link">
+      <a href="../../../../modeling/3d_model/" class="md-nav__link">
         
   
   
@@ -824,32 +824,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Arquitetura
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../architecture/architecture/" class="md-nav__link">
         
   
   
@@ -860,53 +838,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#variaveis-globais" class="md-nav__link">
-    <span class="md-ellipsis">
-      Variáveis globais
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#loop-principal" class="md-nav__link">
-    <span class="md-ellipsis">
-      Loop principal
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementacao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementação
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -919,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mixer/" class="md-nav__link">
+      <a href="../../../mixer/mixer/" class="md-nav__link">
         
   
   
@@ -980,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../attitude/estimator/attitude_estimator/" class="md-nav__link">
+      <a href="../../../attitude/estimator/attitude_estimator/" class="md-nav__link">
         
   
   
@@ -1003,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../attitude_controller/" class="md-nav__link">
+      <a href="../../../attitude/controller/attitude_controller/" class="md-nav__link">
         
   
   
@@ -1072,7 +1003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vertical_estimator/" class="md-nav__link">
+      <a href="../../../vertical/estimator/vertical_estimator/" class="md-nav__link">
         
   
   
@@ -1095,7 +1026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vertical_controller/" class="md-nav__link">
+      <a href="../../../vertical/controller/vertical_controller/" class="md-nav__link">
         
   
   
@@ -1123,18 +1054,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" checked>
         
           
           <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
@@ -1150,7 +1083,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7_5">
             <span class="md-nav__icon md-icon"></span>
             Horizontal
@@ -1161,10 +1094,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../horizontal_estimator/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1175,6 +1117,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1187,7 +1130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../horizontal_controller/" class="md-nav__link">
+      <a href="../../controller/horizontal_controller/" class="md-nav__link">
         
   
   
@@ -1238,41 +1181,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#variaveis-globais" class="md-nav__link">
-    <span class="md-ellipsis">
-      Variáveis globais
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#loop-principal" class="md-nav__link">
-    <span class="md-ellipsis">
-      Loop principal
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementacao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementação
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1287,73 +1195,8 @@
 
 
 
-<h1 id="arquitetura">Arquitetura</h1>
-<p>Para controlar um drone, precisamos de uma arquitetura bem definida. Essa arquitetura estabelece como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos atuadores.</p>
-<p>O diagrama abaixo resume essa sequência em blocos:</p>
-<p><img alt="Architecture" src="../images/architecture_horizontal_controller.svg" style="display: block; margin: auto;" width="100%" /></p>
-<p>No diagrama:</p>
-<ul>
-<li>Os blocos representam as funções que serão chamadas no loop principal.</li>
-<li>As setas representam as variáveis que fluem de um bloco a outro.</li>
-</ul>
-<p class="annotate">A passagem dessas informações entre as funções será feita por meio de variáveis globais(1), que atuarão como o “fio” que conecta os módulos do sistema.</p>
-<ol>
-<li>Embora variáveis globais não sejam a melhor prática em programação, aqui adotamos essa solução para manter o código em C mais direto, evitando o excesso de ponteiros e semáforos. Como o foco do curso está na teoria de controle — e não em engenharia de software — essa escolha facilita a compreensão sem comprometer o aprendizado.</li>
-</ol>
-<hr />
-<h2 id="variaveis-globais">Variáveis globais</h2>
-<p>Logo no início do código, declararemos as variáveis que representam os atuadores, sensores, entradas, estados e referências — espelhando o diagrama.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Actuators</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// Motors PWM</span>
-
-<span class="c1">// Sensors</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">ax</span><span class="p">,</span><span class="w"> </span><span class="n">ay</span><span class="p">,</span><span class="w"> </span><span class="n">az</span><span class="p">;</span><span class="w">             </span><span class="c1">// Accelerometer [m/s^2]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">gx</span><span class="p">,</span><span class="w"> </span><span class="n">gy</span><span class="p">,</span><span class="w"> </span><span class="n">gz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Gyroscope [rad/s]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Range [m]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">px</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="p">;</span><span class="w">                 </span><span class="c1">// Optical flow [pixels]</span>
-
-<span class="c1">// System inputs</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">ft</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Thrust force [N]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Roll, pitch and yaw torques [N.m]</span>
-
-<span class="c1">// System states</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">;</span><span class="w">        </span><span class="c1">// Euler angles [rad]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">wx</span><span class="p">,</span><span class="w"> </span><span class="n">wy</span><span class="p">,</span><span class="w"> </span><span class="n">wz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Angular velocities [rad/s]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">                </span><span class="c1">// Positions [m]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Velocities [m/s]</span>
-
-<span class="c1">// System references</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">phi_r</span><span class="p">,</span><span class="w"> </span><span class="n">theta_r</span><span class="p">,</span><span class="w"> </span><span class="n">psi_r</span><span class="p">;</span><span class="w"> </span><span class="c1">// Euler angles reference [rad]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">x_r</span><span class="p">,</span><span class="w"> </span><span class="n">y_r</span><span class="p">,</span><span class="w"> </span><span class="n">z_r</span><span class="p">;</span><span class="w">         </span><span class="c1">// Positions reference [m]</span>
-</code></pre></div>
-<hr />
-<h2 id="loop-principal">Loop principal</h2>
-<p>Toda a lógica de controle será implementada dentro de um loop que roda a 200 Hz (ou seja, a cada 5 ms). Dentro desse loop, chamamos as funções na sequência do diagrama: referências → sensores → estimadores → controladores → atuadores.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Main application task</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Infinite loop (runs at 200Hz)</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">reference</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Read reference setpoints (from Crazyflie Client)</span>
-<span class="w">        </span><span class="n">sensors</span><span class="p">();</span><span class="w">                    </span><span class="c1">// Read raw sensor measurements</span>
-<span class="w">        </span><span class="n">attitudeEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate orientation (roll/pitch/yaw) from IMU sensor</span>
-<span class="w">        </span><span class="n">verticalEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate vertical position/velocity from range sensor</span>
-<span class="w">        </span><span class="n">horizontalEstimator</span><span class="p">();</span><span class="w">        </span><span class="c1">// Estimate horizontal positions/velocities from optical flow sensor</span>
-<span class="w">        </span><span class="n">horizontalController</span><span class="p">();</span><span class="w">       </span><span class="c1">// Compute desired roll/pitch angles</span>
-<span class="w">        </span><span class="n">verticalController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired thrust force</span>
-<span class="w">        </span><span class="n">attitudeController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired roll/pitch/yaw torques</span>
-<span class="w">        </span><span class="n">mixer</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Convert desired force/torques into motor PWM</span>
-<span class="w">        </span><span class="n">motors</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Send commands to motors</span>
-<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// Loop delay (5 ms)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<hr />
-<h2 id="implementacao">Implementação</h2>
-<p>A implementação será feita passo a passo, uma função por vez. Dessa forma, você poderá entender o papel de cada bloco isoladamente antes de ver o sistema completo em ação.</p>
-<p><img alt="Architecture" src="../images/architecture.gif" style="display: block; margin: auto;" width="100%" /></p>
-<p>Nos próximos capítulos, começaremos pelo mixer e, em seguida, avançaremos para os blocos de estimadores e controladores. Cada subsistema será estudado em pares — estimador e controlador de atitude, vertical (altura) e horizontal (posição no plano). Ao final, você terá construído, passo a passo, a arquitetura de controle completa de um drone.</p>
+<h1 id="estimador-horizontal">Estimador horizontal</h1>
+<p><img alt="Architecture - Horizontal Estimator" src="../../../architecture/images/architecture_horizontal_estimator.svg" style="display: block; margin: auto;" width="100%" /></p>
 
 
 
@@ -1402,16 +1245,16 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.code.title"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.title"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../../../../javascripts/mathjax.js"></script>
       
     
   </body>

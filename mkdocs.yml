@@ -40,17 +40,17 @@ nav:
     - Modelo 2D: modeling/2d_model.md
     - Modelo 3D: modeling/3d_model.md
   - Controle: 
-    - Arquitetura: control/architecture.md
-    - Mixer: control/mixer.md
+    - Arquitetura: control/architecture/architecture.md
+    - Mixer: control/mixer/mixer.md
     - Atitude:
       - Estimador de atitude: control/attitude/estimator/attitude_estimator.md
-      - Controlador de atitude: control/attitude_controller.md
+      - Controlador de atitude: control/attitude/controller/attitude_controller.md
     - Vertical:
-      - Estimador vertical: control/vertical_estimator.md
-      - Controlador vertical: control/vertical_controller.md
+      - Estimador vertical: control/vertical/estimator/vertical_estimator.md
+      - Controlador vertical: control/vertical/controller/vertical_controller.md
     - Horizontal:
-      - Estimador horizontal: control/horizontal_estimator.md
-      - Controlador horizontal: control/horizontal_controller.md
+      - Estimador horizontal: control/horizontal/estimator/horizontal_estimator.md
+      - Controlador horizontal: control/horizontal/controller/horizontal_controller.md
 
 markdown_extensions:
   - footnotes

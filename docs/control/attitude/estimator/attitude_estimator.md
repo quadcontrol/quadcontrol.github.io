@@ -2,7 +2,7 @@
 
 Nesta secção você irá implementar o estimador de atitude, que estima os ângulos de Euler $\phi$, $\theta$ e $\psi$ e velocidades angulares $\omega_x$, $\omega_y$ e $\omega_z$ a partir das leituras do acelerômetro $a_x$, $a_y$ e $a_z$ e do giroscópio $g_x$, $g_y$ e $g_z$.
 
-![Architecture - Attitude Estimator](../../images/architecture_attitude_estimator.svg){: width=100% style="display: block; margin: auto;" }
+![Architecture - Attitude Estimator](../../architecture/images/architecture_attitude_estimator.svg){: width=100% style="display: block; margin: auto;" }
 
 Para isto, serão implementadas duas novas funções:
 
@@ -15,7 +15,9 @@ Para isto, serão implementadas duas novas funções:
 
 Para começar, copie e cole o arquivo `mixer.c` e renomeie ele para `attitude_estimator.c`.
 
-### Variáveis globais
+### Definições
+
+#### Variáveis globais
 
 Declare mais algumas variáveis globais, que são as variáveis que entram e saem da função do estimador de atitude.
 
@@ -29,7 +31,7 @@ float phi, theta, psi;        // Euler angles [rad]
 float wx, wy, wz;             // Angular velocities [rad/s]
 ```
 
-### Variáveis de registro
+#### Variáveis de registro
 
 Declare também algumas variáveis que serão utilizados para registrar os valores dos ângulos de Euler e enviar eles ao Crazyflie Client, para que seja possível visualizar nossa estimativa em tempo real(1).
 {.annotate}
@@ -48,7 +50,33 @@ LOG_ADD_CORE(LOG_FLOAT, yaw, &log_psi)
 LOG_GROUP_STOP(stateEstimate)
 ```
 
-### Sensores
+### Loop principal
+
+Inclua no seu loop principal a chamada das funções `sensors()` e `attitudeEstimator()`(1).
+{.annotate}
+
+1. Apesar dessas funções serem detalhadas a seguir, no código elas devem ser implementadas antes do loop principal.
+
+```c hl_lines="8 9"
+// Main application task
+void appMain(void *param)
+{
+    // Infinite loop (runs at 200Hz)
+    while (true)
+    {
+        reference();                  // Read reference setpoints (from Crazyflie Client)
+        sensors();                    // Read raw sensor measurements
+        attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
+        mixer();                      // Convert desired force/torques into motor PWM
+        actuators();                  // Send commands to motors
+        vTaskDelay(pdMS_TO_TICKS(5)); // Loop delay (5 ms)
+    }
+}
+```
+
+### Funções
+
+#### Sensores
 
 A função `sensors()` pega as leituras do acelerômetro e giroscópio e armazena elas nas variáveis globais previamente declaradas.
 
@@ -85,7 +113,7 @@ void sensors()
 
 Você pode simplesmente copiar e colar o código acima. Se quiser entender ele melhor, volte na secção dos [sensores](../../../sensors_and_actuators/sensors.md).
 
-### Estimador de atitude
+#### Estimador de atitude
 
 Já a função `attitudeEstimator()`, é quem estima os ângulos de Euler e velocidades angulares a partir das leituras do acelerômetro e do giroscópio.
 
@@ -96,32 +124,9 @@ void attitudeEstimator()
 }
 ```
 
-Ela está em branco pois será implementada em etapas a seguir. Inicialmente, você irá considerar apenas a dinâmica 2D e estimar um único ângulo de Euler e velocidade angular. Você começará implementando um estimador que utiliza só o acelerômetro e em seguida um que utiliza só o giroscópio. Após terem sido verificado os prós e contras de cada sensor, ambos serão utilizados em conjunto de uma maneira inteligente. Por fim, você irá considerar a dinâmica 3D e estimar todos os ângulos de Euler e velocidades angulares.
+Ela está em branco pois será implementada em etapas a seguir. Inicialmente, você irá considerar apenas a dinâmica 2D e estimar um único ângulo de Euler. Você começará implementando um estimador que utiliza só o acelerômetro e em seguida um que utiliza só o giroscópio. Após terem sido verificado os prós e contras de cada sensor, ambos serão utilizados em conjunto de uma maneira inteligente. Por fim, você irá considerar a dinâmica 3D e estimar todos os ângulos de Euler e velocidades angulares.
 
-### Loop principal
-
-Inclua no seu loop principal a chamada das funções `sensors()` e `attitudeEstimator()`.
-
-```c hl_lines="8 9"
-// Main application task
-void appMain(void *param)
-{
-    // Infinite loop (runs at 200Hz)
-    while (true)
-    {
-        reference();                  // Read reference setpoints (from Crazyflie Client)
-        sensors();                    // Read raw sensor measurements
-        attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
-        mixer();                      // Convert desired force/torques into motor PWM
-        actuators();                  // Send commands to motors
-        vTaskDelay(pdMS_TO_TICKS(5)); // Loop delay (5 ms)
-    }
-}
-```
-
----
-
-## Acelerômetro
+##### Acelerômetro
 
 Acelerômetros inerciais são sensores que medem aceleração linear. Eles são compostos por um corpo de prova conectada a um invólucro através de uma mola e um amortecedor:
 
@@ -133,7 +138,7 @@ Quando o invólucro sofre uma aceleração ${\color{magenta}\ddot{x}}$, o corpo 
 
 Ao montarmos três acelerômetros perpendiculares entre si, ou seja, um alinhado com cada eixo, temos o que é chamado de acelerômetro de 3 eixos, que consegue medir a aceleração linear em todas as direções.
 
-### Trigonometria
+###### Trigonometria
 
 O acelerômetro está fixo no sistema de coordenadas móvel do drone. Como há sempre a aceleração da gravidade apontando para baixo no sistema de coordenadas inercial, as acelerações $a_y$ e $a_z$ em função da gravidade $g$ e do ângulo $\phi$ são dadas por:
 {.annotate}
@@ -212,7 +217,7 @@ Verifique como está sua estimativa, para isso carregue esse programa no drone e
 !!! example "Resultado esperado"        
     Você deve notar que o estimador implementado é adequado somente para condições estáticas (baixas frequências). Isso se deve ao fato de que, ao movimentar o drone, surgem outras acelerações além da aceleração da gravidade. Essas acelerações acabam sendo um ruído para o nosso estimador, e uma forma de removê-las é através de um filtro passa-baixas.
 
-### Filtro passa-baixas
+###### Filtro passa-baixas
 
 Um filtro passa-baixas é um filtro que atenua sinais superiores a uma determinada frequência de corte $\omega_c$. Ele é muito utilizado para filtrar ruídos, dado que os mesmos geralmente possuem uma frequência superior ao sinal que está sendo medido. 
         
@@ -293,9 +298,7 @@ Experimente valores de 1rad/s, 10rad/s e 100rad/s para a frequência de corte $\
 !!! example "Resultado esperado"    
     Você deve notar que, mesmo no melhor dos casos, o estimador implementado não é adequado para condições dinâmicas (altas frequências). Vamos agora esquecer o acelerômetro por um instante e utilizar apenas o giroscópio para estimação de atitude.
 
----
-
-## Giroscópio
+##### Giroscópio
 
 Giroscópios inericiais são sensores que medem velocidade angular. Eles são compostos por um corpo de prova conectada a um invólucro através de duas molas e dois amortecedores:
 
@@ -307,7 +310,7 @@ No eixo ${\color{cyan}x'}$ é forçada uma vibração ${\color{#65DD18}f}=f_0\si
 
 Ao montarmos três giroscópios perpendiculares entre si, ou seja, um alinhado com cada eixo, temos o que é chamado de giroscópio de 3 eixos, que consegue medir a velocidade angular em todas as direções.
 
-### Integração
+###### Integração
 
 O giroscópio está fixo no sistema de coordenadas móvel drone e mede a velocidade angular, portanto o deslocamento angular pode ser obtido simplesmente integrando sua leitura(1):
 {.annotate}
@@ -373,7 +376,7 @@ Verifique como está sua estimativa, para isso carregue esse programa no drone e
 !!! example "Resultado esperado"        
     Você deve notar que o estimador implementado é adequado somente para condições dinâmicas (altas frequências). Isso se deve ao fato de que, em condições estáticas (baixas frequências), o giroscópio possui erros sistemáticos constantes (*"bias"*), que, mesmo pequenos, acabam sendo integrados e fazendo com que a atitude divirja ao longo do tempo. É o problema inverso do acelerômetro, e uma forma de removê-lo é através de um filtro passa-altas.
 
-### Filtro passa-altas
+###### Filtro passa-altas
 
 Um filtro passa-altas é um filtro que atenua sinais inferiores a uma determinada frequência de corte $\omega_c$. Ou seja, ele faz o inverso de um filtro passa-baixas.
         
@@ -440,13 +443,11 @@ Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte $\
 !!! example "Resultado esperado"   
     Você deve notar que a atitude do drone sempre converge para zero, o que é bom pois não estamos mais integrando os erros sistemáticos, mas ruim quando o drone fica parado em uma atitude que não seja zero.
 
----
-
-## Acelerômetro + Giroscópio
+##### Acelerômetro + Giroscópio
 
 Conforme vimos, o acelerômetro nos fornece boas estimativas para condições estáticas (baixas frequências), enquanto o giroscópio nos fornece boas estimativas para condições dinâmicas (altas frequências). Um tem sucesso exatamente onde o outro falha. Por que então não combinar os dois para ter boas estimativas durante condições estáticas e dinâmicas? Essa é a ideia por trás de um filtro complementar!
 
-### Filtro complementar
+###### Filtro complementar
 
 A ideia desse filtro é passar o ângulo medido pelo acelerômetro por um filtro passa-baixas e o ângulo medido pelo giroscópio por um filtro passa-altas, conforme a o diagrama de blocos abaixo:
 
@@ -511,9 +512,7 @@ Experimente valores de 0,1rad/s, 1rad/s e 10rad/s para a frequência de corte $\
 !!! example "Resultado esperado"   
     Agora sim a estimativa ficou legal!
 
----
-
-## Attitude 3D
+###### Dinâmica completa
 
 Por fim, você deve replicar o estimador de atitude desenvolvido para os demais ângulos de Euler e também velocidades angulares:
     
@@ -539,8 +538,6 @@ Note que não conseguimos estimar o ângulo de guinagem $\psi$ a partir das leit
 {.annotate}
 
 1. Sistemas de referência de atitude e direção (AHRS) utilizam um magnetômetro para complementar a estimativa de guinagem $\psi$ do giroscópio, dessa forma evitando que esse ângulo também divirja.
-
-### Acelerômetro
 
 Os ângulos de Euler $\phi_a$ e $\theta_a$ medidos a partir das leituras do acelerômetro $a_x$, $a_y$ e $a_z$ são dados por:
 
@@ -620,8 +617,6 @@ $$
         \theta_a &= \tan^{-1} \left( \frac{a_x}{\sqrt{a_y^2+a_z^2}} \right)
     \end{align}
     $$
-
-### Giroscópio
 
 Os ângulos de Euler $\phi_g$, $\theta_g$ e $\psi_g$ medidos a partir das leituras do giroscópio $g_x$, $g_y$ e $g_z$ são dados por:
 
@@ -722,10 +717,6 @@ $$
     \end{align*} 
     $$
 
-
-
-### Implementação
-
 Modifique a sua função `attitudeEstimator()` de modo que agora os ângulos estimados $\phi$, $\theta$ e $\psi$ sejam dados por um filtro complementar entre as medidas do acelerômetro $\phi_a$ e $\theta_a$ e giroscópio $\phi_g$, $\theta_g$ e $\psi_g$.
 
 ```c hl_lines="5 6 9 10 13-15 18-20 23-25"
@@ -763,3 +754,7 @@ void attitudeEstimator()
 ```  
 
 Carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado de um estimador de atitude completo!
+
+---
+
+## Validação

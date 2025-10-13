@@ -67,7 +67,7 @@ Conforme vimos anteriormente:
 
 Vamos continuar utilizando os botões `Up` / `Down` para comandar a força total $f_t$ em incrementos de $0,01\,N$, mas agora os botões `↑` / `↓` e `←` / `→` vão comandar, respectivamente, os ângulos de Euler de referência $\theta_r$ e $\phi_r$ em incrementos de $\frac{\pi}{4} \text{rad}$ ($45^{\circ}$). Para tal, precisamos ajustar as escalas da seguinte forma:
 
-[Figura]
+![](images/reference_attitude_controller.svg){: width=60% style="display: block; margin: auto;" }
 
 Abaixo temos um exemplo de função `reference()` que faz isso:
 
@@ -101,32 +101,144 @@ void attitudeController()
 }
 ```
 
-Assim como fizemos para o estimador de atitude, você começará implementando um controlador para apenas um ângulo e depois replicará o raciocínio para os demais. Já vimos que a dinâmica linearizada de um quadricóptero pode ser representada pelo diagrama de blocos abaixo:
+Para projetar um controlador, precisamos de um modelo da planta que será controlada. Já [vimos](../../../modeling/3d_model.md) que a dinâmica linearizada de um quadricóptero pode ser representada pelo diagrama de blocos abaixo:
     
 ![Commando Based Flight Control](../../../modeling/images/3d_plant.svg){: width=100% style="display: block; margin: auto;" }
 
-Como a dinâmica de atitude de cada eixo está desacoplada, é possível controlar cada uma delas individualmente com um controlador SISO (``Single-Input Single-Output''). Toda a técnica de controle explorada aqui será realizada para um único eixo, mas a mesma pode ser replicada para os demais eixos.
+Como a dinâmica de atitude de cada ângulo está desacoplada, é possível controlar cada um deles individualmente. Toda a técnica de controle explorada aqui será realizada para o ângulo de inclinação $\theta$, e a mesma será replicada depois para os ângulos de rolagem $\phi$ e guinagem $\psi$.
     
-A dinâmica de atitude em torno do eixo $x$ pode ser representada pelas funções de transferência abaixo:
+A dinâmica de inclinação pode ser representada pelo diagrama de blocos abaixo:
 
 ![](images/plant.svg){: width=55% style="display: block; margin: auto;" }
 
-
-Podemos cancelar o momento de inércia da planta de modo que a variável de controle seja a aceleração angular e não mais o torque, conforme abaixo:
+Podemos cancelar o momento de inércia da planta de modo que a variável de controle seja a aceleração angular, conforme abaixo:
 
 ![](images/plant_cancelation.svg){: width=67.5% style="display: block; margin: auto;" }
+
 Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar três possíveis controladores para um sistema como esse, ficando a seu critério qual utilizar.
 
 === "Controlador PD"
 
     O controlador PD combina ações proporcional e derivativa para reagir tanto ao erro quanto à sua variação, oferecendo boa resposta e bom amortecimento. É simples de implementar e eficaz para o integrador duplo, mas sua sensibilidade ao ruído na derivada pode limitar o desempenho.
 
-
     ![](images/controller_proportional_derivative.svg){: width=100% style="display: block; margin: auto;" }
 
-    XXX
+    ??? question "Definição dos ganhos $k_p$ e $k_d$"
 
-    ![](images/controller_proportional_derivative_grouped.svg){: width=95% style="display: block; margin: auto;" }
+        O diagrama de blocos acima pode ser representado por uma função de transferência do controlador $C(s)$ e outra da planta $G(s)$:
+
+        ![](images/controller_proportional_derivative_grouped.svg){: width=95% style="display: block; margin: auto;" }
+
+        ??? info "a) Escreva as funções de transferência do controlador $C(s)$ e da planta $G(s)"
+            $$
+            C(s) = I_{yy} \left( k_p + k_d s \right)
+            \qquad \qquad
+            G(s) = \dfrac{1}{I_{yy}s^2}
+            $$
+
+        ??? info "b) Determine a função de transferência em malha fechada $T(s)$"
+            $$
+            \begin{align}
+                T(s) &= \dfrac{G(s)C(s)}{1+G(s)C(s)} \\
+                T(s) &= \dfrac{\frac{1}{\cancel{I_{yy}}s^2} \cancel{I_{yy}} \left( k_p + k_d s \right)}{1+ \frac{1}{\cancel{I_{yy}}s^2} \cancel{I_{yy}} \left( k_p + k_d s \right)} \\ 
+                T(s) &= \dfrac{\frac{k_p + k_d s}{s^2}}{\frac{s^2}{s^2}+\frac{k_p + k_d s}{s^2}} \\  
+                T(s) &= \dfrac{\frac{k_p + k_d s}{\cancel{s^2}}}{\frac{s^2 + k_p + k_d s}{\cancel{s^2}}} \\    
+                T(s) &= \dfrac{k_d s + k_p}{s^2 + k_d s + k_p}
+            \end{align}
+            $$
+
+        ??? info "c) Escreva os ganhos $k_p$ e $k_d$ em função da frequência natural $\omega_n$ e do fator de amortecimento $\zeta$ do sistema em malha fechada"
+            $$
+            T(s) = k \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n s + \omega_n^2}
+            \quad \longrightarrow \quad
+            \left\{
+            \begin{array}{l}
+                    k_p = \omega_n^2 \\
+                    k_d = 2 \zeta \omega_n 
+            \end{array}
+            \right.
+            $$
+
+        ??? info "d) Calcule os ganhos $k_p$ e $k_d$ para que a dinâmica de atitude do quadricóptero tenha um tempo de acomodação de $0,3s$ e uma ultrapassagem percentual de $0,5\%$"
+            $$
+            \begin{align}
+                \zeta &= \dfrac{|\ln(OS)|}{\sqrt{\ln^2(OS)+\pi^2}} \\
+                \zeta &= \dfrac{|\ln(0,005)|}{\sqrt{\ln^2(0,005)+\pi^2}} \\
+                \zeta &= 0,86
+            \end{align} 
+            $$
+
+            $$
+            \begin{align}
+                k_p &= \omega_n^2 \\
+                k_p &= 15,50^2 \\
+                k_p &= 240,28
+            \end{align}
+            $$
+
+            $$
+            \begin{align}
+                \omega_n &= \dfrac{4}{\zeta T_s} \\
+                \omega_n &= \dfrac{4}{0,86 \cdot 0,3} \\
+                \omega_n &= 15,50 \text{rad/s}
+            \end{align} 
+            $$
+
+            $$
+            \begin{align}
+                k_d &= 2 \zeta \omega_n \\
+                k_d &= 2 \cdot 0,86 \cdot 15,50 \\
+                k_d &= 26,67
+            \end{align}
+            $$
+
+        O controlador proporcional derivativo insere um zero no sistema, assim um dos polos da origem vai até o zero e o outro até menos infinito, conforme o diagrama de lugar das raízes abaixo:
+
+        ![](images/controller_proportional_derivative_root_locus.svg){: width=40% style="display: block; margin: auto;" }  
+
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+
+    ![](images/controller_proportional_derivative_implementation.svg){: width=65% style="display: block; margin: auto;" }
+
+    Que se traduz nas equações abaixo:
+
+    $$
+    \left\{
+    \begin{array}{l}
+        \theta_e = \theta_r - \theta \\
+        \dot{\theta}_e = \dfrac{\theta_e - \theta_{e_{last}}}{\Delta t} \\
+        \ddot{\theta}_r = k_p \theta_e + k_d \dot{\theta}_e \\
+        \tau_y = I_{yy} \ddot{\theta}_r \\
+    \end{array}
+    \right.
+    $$
+
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado $\tau_y$ seguindo as equações acima.
+
+    ```c hl_lines="5 6 12-15 21"
+    // Compute desired torques
+    void attitudeController()
+    {
+        // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
+        static const float kp = 
+        static const float kd = 
+
+        // Last error (static to retain value amoung function calls)
+        static float theta_e_last;
+
+        // Compute angular aceleration reference
+        float theta_e = 
+        float theta_dot_e =
+        float theta_ddot_r =
+        float tau_x =
+        
+        // Update last error for next call
+        theta_e_last = theta_e;
+
+        // Compute desired torque
+        ty = 
+    }
+    ```
 
 === "Controlador P em cascata"
 
@@ -134,9 +246,164 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
 
     ![](images/controller_proportional_cascade.svg){: width=100% style="display: block; margin: auto;" }
 
-    XXX
+    ??? question "Definição dos ganhos $k_p$ e $k_d$"
 
-    ![](images/controller_proportional_cascade_grouped.svg){: width=95% style="display: block; margin: auto;" }
+        O diagrama de blocos acima pode ser representado por duas funções de transferência do controlador $C_1(s)$ e $C_2(s)$ e outras duas da planta $G_1(s)$ e $G_2(s)$:
+
+        ![](images/controller_proportional_cascade_grouped.svg){: width=95% style="display: block; margin: auto;" }
+
+        ??? info "a) Escreva as funções de transferência do controlador $C_1(s)$ e $C_2(s)$ e da planta $G_1(s)$ e $G_2(s)$"
+            $$                       
+            C_1(s) = I_{yy} k_d
+            \qquad \qquad
+            C_2(s) = k_p
+            \qquad \qquad
+            G_1(s) = \dfrac{1}{I_{yy}s}
+            \qquad \qquad
+            G_2(s) = \dfrac{1}{s}
+            $$
+
+        ??? info "b) Determine a função de transferência em malha fechada $T_1(s)$"
+            $$
+            \begin{align}
+                T_1(s) &= \dfrac{G_1(s)C_1(s)}{1+G_1(s)C_1(s)} \\
+                T_1(s) &= \dfrac{\frac{1}{\cancel{I_{yy}}s} \cancel{I_{yy}}k_d }{1+\frac{1}{\cancel{I_{yy}}s} \cancel{I_{yy}}k_d} \\ 
+                T_1(s) &= \dfrac{\frac{k_d}{s}}{\frac{s}{s}+\frac{k_d}{s}} \\ 
+                T_1(s) &= \dfrac{\frac{k_d}{\cancel{s}}}{\frac{s + k_d}{\cancel{s}}} \\ 
+                T_1(s) &= \dfrac{k_d}{s + k_d}
+            \end{align}
+            $$
+
+        ??? info "c) Determine a função de transferência em malha fechada $T_2(s)$"
+            $$
+            \begin{align}
+                T_2(s) &= \dfrac{G_2(s)T_1(s)C_2(s)}{1+G_2(s)T_1(s)C_2(s)} \\
+                T_2(s) &= \dfrac{\frac{1}{s}\frac{k_d}{s + k_d}k_p}{1+\frac{1}{s}\frac{k_d}{s + k_d}k_p} \\ 
+                T_2(s) &= \dfrac{\frac{k_d k_p}{s^2 + k_ds}}{\frac{s^2 + k_ds}{s^2 + k_ds}+\frac{k_d k_p}{s^2 + k_ds}} \\ 
+                T_2(s) &= \dfrac{\frac{k_d k_p}{\cancel{s^2 + k_ds}}}{\frac{s^2 + k_ds + k_d k_p}{\cancel{s^2 + k_ds}}} \\ 
+                T_2(s) &= \dfrac{k_d k_p}{s^2 + k_d s + k_d k_p}
+            \end{align}
+            $$
+
+        ??? info "d) Escreva os ganhos $k_p$ e $k_d$ em função da frequência natural $\omega_n$ e do fator de amortecimento $\zeta$ do sistema em malha fechada"
+            $$
+            T(s) = k \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n s + \omega_n^2}
+            \quad \longrightarrow \quad
+            \left\{
+            \begin{array}{l}
+                    k_p = \dfrac{\omega_n}{2\zeta} \\
+                    k_d = 2 \zeta \omega_n 
+            \end{array}
+            \right.
+            $$
+
+        ??? info "e) Calcule os ganhos $k_p$ e $k_d$ para que a dinâmica de atitude do quadricóptero tenha um tempo de acomodação de $0,3s$ e uma ultrapassagem percentual de $0,5\%$"
+            $$
+            \begin{align}
+                \zeta &= \dfrac{|\ln(OS)|}{\sqrt{\ln^2(OS)+\pi^2}} \\
+                \zeta &= \dfrac{|\ln(0,005)|}{\sqrt{\ln^2(0,005)+\pi^2}} \\
+                \zeta &= 0,86
+            \end{align} 
+            $$
+
+            $$
+            \begin{align}
+                k_p &= \frac{\omega_n}{2\zeta} \\
+                k_p &= \frac{15,50}{2\cdot0,86} \\
+                k_p &= 9,01
+            \end{align}
+            $$
+
+            $$
+            \begin{align}
+                \omega_n &= \dfrac{4}{\zeta T_s} \\
+                \omega_n &= \dfrac{4}{0,86 \cdot 0,3} \\
+                \omega_n &= 15,50 \text{rad/s}
+            \end{align} 
+            $$
+
+            $$
+            \begin{align}
+                k_d &= 2 \zeta \omega_n \\
+                k_d &= 2 \cdot 0,86 \cdot 15,50 \\
+                k_d &= 26,67
+            \end{align}
+            $$
+
+        O ganho $k_d$ determina a localização do polo da malha de controle interna:
+
+        ![](images/controller_proportional_cascade_root_locus_1.svg){: width=32% style="display: block; margin: auto;" }
+        
+        Já o ganho $k_p$ determina a localização dos polos da malha de controle externa:
+
+        ![](images/controller_proportional_cascade_root_locus_2.svg){: width=40% style="display: block; margin: auto;" }
+
+        Caso o ganho $k_d$ seja suficientemente maior ($>5\times$) que o ganho $k_p$ , o polo em $-k_d$ é desprezível e a malha de controle externa se comporta como um sistema de 1ª ordem cuja constante de tempo é dada apenas pelo polo em $-k_p$:
+
+        ![](images/controller_proportional_cascade_root_locus_3.svg){: width=45% style="display: block; margin: auto;" }
+
+        A ideia de um controlador em cascata é projetar malhas de controle sucessivamente mais lentas de modo que as malhas internas possam ser aproximadas a um ganho unitário constante. No entanto, é preciso tomar cuidado. Se o ganho da malha de controle interna for muito alto, isso pode gerar saturação dos atuadores.
+
+        ??? info "f) Calcule os ganhos $k_p$ e $k_d$ para que o a dinâmica de atitude do quadricóptero tenha um tempo de acomodação de $0,3s$ e que o polo mais rápido seja desprezível"
+
+            $$
+            \begin{align}
+                \tau &= \dfrac{T_s}{4} \\
+                \tau &= \dfrac{0,3}{4} \\
+                \tau &= 0,075
+            \end{align}
+            $$
+
+            $$
+            \begin{align}
+                k_p &= \dfrac{1}{\tau} \\
+                k_p &= \dfrac{1}{0,075} \\
+                k_p &= 13,33
+            \end{align}
+            $$
+
+            $$
+            \begin{align}
+                k_d &= 5 k_p \\
+                k_d &= 5 \cdot 13,33 \\
+                k_d &= 66,65
+            \end{align} 
+            $$
+
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+
+    ![](images/controller_proportional_cascade_implementation.svg){: width=65% style="display: block; margin: auto;" }
+
+    Que se traduz nas equações abaixo:
+
+    $$
+    \left\{
+    \begin{array}{l}
+        \dot{\theta}_r = k_p ( \theta_r - \theta ) \\
+        \ddot{\theta}_r = k_d ( \dot{\theta}_r - \dot{\theta} ) \\
+        \tau_y = I_{yy} \ddot{\theta}_r
+    \end{array}
+    \right.
+    $$
+
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado $\tau_y$ seguindo as equações acima.
+
+    ```c hl_lines="5 6 9 10 13"
+    // Compute desired torques
+    void attitudeController()
+    {
+        // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
+        static const float kp = 
+        static const float kd = 
+
+        // Compute angular aceleration reference
+        float theta_dot_r = 
+        float theta_ddot_r =
+
+        // Compute desired torque
+        ty = 
+    }
+    ```
 
 === "Regulador de estados"
 
@@ -145,104 +412,107 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
 
     ![](images/controller_state_regulator.svg){: width=100% style="display: block; margin: auto;" }
 
-    A dinâmica de atitude pode ser representada pelo seguinte sistema de equações diferenciais:
+    ??? question "Definição dos ganhos $k_p$ e $k_d$"
 
-    $$
-    \left\{
-    \begin{array}{l}
+        A dinâmica de atitude pode ser representada pelo seguinte sistema de equações diferenciais:
+
+        $$
+        \left\{
+        \begin{array}{l}
+            \begin{bmatrix}
+            \dot{\theta} \\
+            \ddot{\theta}
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0 & 1 \\
+                0 & 0 
+            \end{bmatrix}
+            \begin{bmatrix}
+                \theta \\
+                \dot{\theta}
+            \end{bmatrix}
+            +
+            \begin{bmatrix}
+                0 \\
+                \frac{1}{I_{yy}}
+            \end{bmatrix}
+            \tau_{\theta} \\ \\
+            \theta = 
+            \begin{bmatrix}
+                1 & 0
+            \end{bmatrix}
+            \begin{bmatrix}
+                \theta \\
+                \dot{\theta}
+            \end{bmatrix}
+        \end{array}
+        \right.
+        $$
+
+        Ou através da representação no espaço dos estados:
+        
+        ![](images/controller_state_regulator_grouped.svg){: width=90% style="display: block; margin: auto;" }
+    
+        Onde: 
+        
+        $$
+        u = \tau_{\theta}
+        \qquad
+        x = 
         \begin{bmatrix}
-        \dot{\phi} \\
-        \ddot{\phi}
+            \theta \\
+            \dot{\theta}
         \end{bmatrix}
-        =
+        \qquad
+        y = \theta
+        \qquad
+        A = 
         \begin{bmatrix}
             0 & 1 \\
             0 & 0 
         \end{bmatrix}
-        \begin{bmatrix}
-            \phi \\
-            \dot{\phi}
-        \end{bmatrix}
-        +
+        \qquad
+        B = 
         \begin{bmatrix}
             0 \\
-            \frac{1}{I_{xx}}
+            \frac{1}{I_{yy}}
         \end{bmatrix}
-        \tau_{\phi} \\ \\
-        \phi = 
+        \qquad
+        C = 
         \begin{bmatrix}
-            1 & 0
+            1 & 0 
         \end{bmatrix}
+        $$
+
+        Um regulador de estados consiste em realimentar todos os estados do sistema simultaneamente ao invés de apenas a saída(1), conforme o diagrama de blocos abaixo:
+        {.annotate}
+
+        1. Para fazer uma analogia entre controle por realimentação do estados (controle moderno) e controle por realimentação da saída (controle clássico), vamos considerar um médico tratando um doente com febre alta:
+        
+            - Se o médico tratar o doente segundo os conceitos de controle clássico, ele vai medir a temperatura do paciente e vai dar um remédio para abaixar a febre quando ela estiver alta e não fazer nada quando a febre estiver baixa.
+            - Se o médico tratar o doente segundo os conceitos de controle moderno, ele vai examinar o paciente, identificar a causa da febre e dar um remédio para a doença e não para a febre (ou seja, o médico vai tratar a doença eliminando a causa da febre e não somente o sintoma da doença).
+
+            O grande problema do controle por realimentação dos estados é exigir que os estados do sistema estejam disponíveis para serem realimentados, ou seja, é necessário medir todos os estados do sistema ou pelo menos estimá-los.
+
+        ![](images/controller_state_regulator_grouped.svg){: width=90% style="display: block; margin: auto;" }
+
+        Onde:
+
+        $$
+        x_r = 
         \begin{bmatrix}
-            \phi \\
-            \dot{\phi}
+            \theta_r \\
+            \dot{\theta}_r
         \end{bmatrix}
-    \end{array}
-    \right.
-    $$
+        \qquad
+        K = I_{yy}
+        \begin{bmatrix}
+            k_p & k_d 
+        \end{bmatrix}
+        $$
 
-    Ou através da representação no espaço dos estados:
-    
-    ![](images/controller_state_regulator_grouped.svg){: width=90% style="display: block; margin: auto;" }
-   
-    Onde: 
-    
-    $$
-    u = \tau_{\phi}
-    \qquad
-    x = 
-    \begin{bmatrix}
-        \phi \\
-        \dot{\phi}
-    \end{bmatrix}
-    \qquad
-    y = \phi
-    \qquad
-    A = 
-    \begin{bmatrix}
-        0 & 1 \\
-        0 & 0 
-    \end{bmatrix}
-    \qquad
-    B = 
-    \begin{bmatrix}
-        0 \\
-        \frac{1}{I_{xx}}
-    \end{bmatrix}
-    \qquad
-    C = 
-    \begin{bmatrix}
-        1 & 0 
-    \end{bmatrix}
-    $$
-
-    Um regulador de estados consiste em realimentar todos os estados do sistema simultaneamente (ao invés de apenas a saída), conforme o diagrama de blocos abaixo:
-
-    ![](images/controller_state_regulator_grouped.svg){: width=90% style="display: block; margin: auto;" }
-
-    Onde:
-
-    $$
-    x_r = 
-    \begin{bmatrix}
-        \phi_r \\
-        \dot{\phi}_r
-    \end{bmatrix}
-    \qquad
-    K = I_{xx}
-    \begin{bmatrix}
-        k_p & k_d 
-    \end{bmatrix}
-    $$
-
-    Para fazer uma analogia entre controle por realimentação do estados (controle moderno) e controle por realimentação da saída (controle clássico), vamos considerar um médico tratando um doente com febre alta:
-       
-    - Se o médico tratar o doente segundo os conceitos de controle clássico, ele vai medir a temperatura do paciente e vai dar um remédio para abaixar a febre quando ela estiver alta e não fazer nada quando a febre estiver baixa.
-    - Se o médico tratar o doente segundo os conceitos de controle moderno, ele vai examinar o paciente, identificar a causa da febre e dar um remédio para a doença e não para a febre (ou seja, o médico vai tratar a doença eliminando a causa da febre e não somente o sintoma da doença).
-
-    O grande problema do controle por realimentação dos estados é exigir que os estados do sistema estejam disponíveis para serem realimentados, ou seja, é necessário medir todos os estados do sistema ou pelo menos estimá-los (observador de estados).
-
-    !!! question "Exercício 1"
+        
 
         Como estamos aplicando um realimentação de estados do tipo:
 
@@ -260,7 +530,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
         \end{align}
         $$
             
-        ??? info "a) Determine a matriz de transmissão dos estados em malha fechada $A_{mf}$."
+        ??? info "a) Determine a matriz de transmissão dos estados em malha fechada $A_{mf}$"
             $$
             \begin{align}
                 A_{mf} &= A - BK \\
@@ -272,9 +542,9 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
                 - 
                 \begin{bmatrix}
                     0 \\
-                    \frac{1}{\cancel{I_{xx}}}
+                    \frac{1}{\cancel{I_{yy}}}
                 \end{bmatrix}
-                \cancel{I_{xx}}
+                \cancel{I_{yy}}
                 \begin{bmatrix}
                     k_p & k_d
                 \end{bmatrix} \\
@@ -296,7 +566,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
             \end{align} 
             $$
 
-        ??? info "b) Determine o polinômio característica do sistema em malha fechada $p(s) = \det \left( sI - A_{mf} \right)$."
+        ??? info "b) Determine o polinômio característica do sistema em malha fechada $p(s) = \det \left( sI - A_{mf} \right)$"
             $$
             \begin{align}
                 p(s) &= \det \left( sI - A_{mf} \right) \\
@@ -321,19 +591,19 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
             \end{align} 
             $$
 
-        ??? info "c) Escreva os ganhos $k_p$ e $k_d$ em função da frequência natural $\omega_n$ e do fator de amortecimento $\zeta$ do sistema em malha fechada."
+        ??? info "c) Escreva os ganhos $k_p$ e $k_d$ em função da frequência natural $\omega_n$ e do fator de amortecimento $\zeta$ do sistema em malha fechada"
             $$
             p(s) = s^2 + 2 \zeta \omega_n s + \omega_n^2 
             \quad \longrightarrow \quad
             \left\{
             \begin{array}{l}
-                    k_p = \omega_n^2 \\ \\
+                    k_p = \omega_n^2 \\
                     k_d = 2 \zeta \omega_n 
             \end{array}
             \right.
             $$
 
-        ??? info "d) Calcule os ganhos $k_p$ e $k_d$ de um controlador proporcional derivativo para que a dinâmica de atitude do quadricóptero tenha um tempo de acomodação de $0,3$s e uma ultrapassagem percentual de $0,5\%$"
+        ??? info "d) Calcule os ganhos $k_p$ e $k_d$ para que a dinâmica de atitude do quadricóptero tenha um tempo de acomodação de $0,3s$ e uma ultrapassagem percentual de $0,5\%$"
             $$
             \begin{align}
                 \zeta &= \dfrac{|\ln(OS)|}{\sqrt{\ln^2(OS)+\pi^2}} \\
@@ -366,34 +636,86 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
             \end{align}
             $$
             
-    XXX
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+
+    ![](images/controller_state_regulator_implementation.svg){: width=65% style="display: block; margin: auto;" }
+
+    Que se traduz nas equações abaixo:
 
     $$
     \left\{
     \begin{array}{l}
-        \ddot{\phi}_r = I_xx \left( k_p ( \phi_r - \phi ) + k_d ( \dot{\phi}_r - \dot{\phi} ) \right)
+        \ddot{\theta}_r = k_p ( \theta_r - \theta ) + k_d ( \dot{\theta}_r - \dot{\theta} ) \\
+        \tau_y = I_{yy} \ddot{\theta}_r
     \end{array}
     \right.
     $$
 
-    XXX
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado $\tau_y$ seguindo as equações acima(1).
+    {.annotate}
 
-    ```c hl_lines="5 6 9"
+    1. Como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência pode ser assumida como sendo zero.
+
+    ```c hl_lines="5 6 9 12"
     // Compute desired torques
     void attitudeController()
     {
         // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
-        float kp = 
-        float kd = 
+        static const float kp = 
+        static const float kd = 
 
-        // Compute torques required
+        // Compute angular aceleration reference
+        float theta_ddot_r =
+
+        // Compute desired torque
         ty = 
     }
-    ```
+    ```  
 
-        
+Note que, ao invés de realimentar os ângulos e velocidades angulares reais, você está realimentando os ângulos e velocidades angulares estimados. Ou seja, você está supondo que o estimador de atitude desenvolvido [anteriormente](../estimator/attitude_estimator.md) é perfeito. Isso é chamado de "observed-based control" e é um método muito típico para estruturar sistemas de controle.      
 
 ---
 
 ## Validação
+
+Para validar o seu controlador você irá realizar dois experimentos.
+
+### Controle de um grau de liberdade
+
+O primeiro experimento consiste em controlar o drone em apenas um grau de liberdade. Você irá utilizar um dispositivo criado especificamente para isso, que restringe todos os graus de liberdade do drone deixando apenas o ângulo de inclinação $\theta$ livre.
+
+[Figura]
+
+Para testar o controlador você pode aplicar distúrbios no quadricóptero (dando um "tapinha" na parta inferior de seus motores) e verificar se o mesmo retorna ao ângulo de referência $\theta_r$. Outro teste consiste em alterar o ângulo de referência $\theta_r$ através do Crazyflie Client e ver se o quadricoptero se inclina sozinho.
+
+### Controle de três graus de liberdade
+
+O outro experimento consiste em controlar o drone em três graus de liberdade. No entanto, como os módulos dos controladores vertical e horizontal ainda não foram implementados, você irá realizar isso através de uma queda livre controlada. 
+        
+Altere a função `attitudeController()` de modo que ela comande não só o torque $\tau_y$ como também os torques $\tau_x$ e $\tau_z$(1).
+{.annotate}
+
+1. Por conta da simetria do drone, você deve utilizar os mesmos ganhos $k_p$ e $k_d$ para o ângulo de rolagem $\phi$ e inclinação $\theta$. No entanto, para o ângulo de guinagem $\psi$, recomenda-se utilizar um ganho $k_p$ 4x menor e um ganho $k_d$ 2x menor, que corresponde à mesma ultrapassagem percentual de $0,5\%$ mas a um tempo de acomodação 2x maior ($0,3s \rightarrow 0,6s$). 
+
+```c hl_lines="9 11 14 16"
+// Compute desired torques
+void attitudeController()
+{
+    // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
+    static const float kp = 
+    static const float kd = 
+
+    // Compute angular acelerations references
+    float phi_ddot_r =
+    float theta_ddot_r =
+    float psi_ddot_r =
+
+    // Compute desired torques
+    tx = 
+    ty = 
+    tz = 
+}
+```  
+
+Segure o quadricóptero a uma distância de aproximadamente $50\text{cm}$ do chão e, assim que os motores começarem a girar, solte ele. Ele deverá cair devagar (comparado a uma queda livre) e sem rotacionar em torno de nenhum eixo.
 

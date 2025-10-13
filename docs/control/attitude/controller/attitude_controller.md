@@ -678,15 +678,15 @@ Note que, ao invés de realimentar os ângulos e velocidades angulares reais, vo
 
 ## Validação
 
-Para validar o seu controlador você irá realizar dois experimentos.
+Para validar o seu controlador você irá realizar dois experimentos. Em ambos os experimentos você deve colocar um pequeno valor de força de empuxo $f_t$.
 
 ### Controle de um grau de liberdade
 
 O primeiro experimento consiste em controlar o drone em apenas um grau de liberdade. Você irá utilizar um dispositivo criado especificamente para isso, que restringe todos os graus de liberdade do drone deixando apenas o ângulo de inclinação $\theta$ livre.
 
-[Figura]
+![](images/device3.jpg){: width=60% style="display: block; margin: auto;" }
 
-Para testar o controlador você pode aplicar distúrbios no quadricóptero (dando um "tapinha" na parta inferior de seus motores) e verificar se o mesmo retorna ao ângulo de referência $\theta_r$. Outro teste consiste em alterar o ângulo de referência $\theta_r$ através do Crazyflie Client e ver se o quadricoptero se inclina sozinho.
+Para testar o controlador você pode aplicar distúrbios no quadricóptero (dando um "tapinha" na parta inferior de seus motores) e verificar se o mesmo retorna ao ângulo de referência $\theta_r=0^{\circ}$. Você pode também alterar o ângulo de referência para, por exemplo, $\theta_r=45^{\circ}$, através do Crazyflie Client, e ver se o quadricoptero se inclina sozinho.
 
 ### Controle de três graus de liberdade
 

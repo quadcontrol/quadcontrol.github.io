@@ -2058,11 +2058,11 @@ p(s) = s^2 + 2 \zeta \omega_n s + \omega_n^2
 <p>Note que, ao invés de realimentar os ângulos e velocidades angulares reais, você está realimentando os ângulos e velocidades angulares estimados. Ou seja, você está supondo que o estimador de atitude desenvolvido <a href="../../estimator/attitude_estimator/">anteriormente</a> é perfeito. Isso é chamado de "observed-based control" e é um método muito típico para estruturar sistemas de controle.      </p>
 <hr />
 <h2 id="validacao">Validação</h2>
-<p>Para validar o seu controlador você irá realizar dois experimentos.</p>
+<p>Para validar o seu controlador você irá realizar dois experimentos. Em ambos os experimentos você deve colocar um pequeno valor de força de empuxo <span class="arithmatex">\(f_t\)</span>.</p>
 <h3 id="controle-de-um-grau-de-liberdade">Controle de um grau de liberdade</h3>
 <p>O primeiro experimento consiste em controlar o drone em apenas um grau de liberdade. Você irá utilizar um dispositivo criado especificamente para isso, que restringe todos os graus de liberdade do drone deixando apenas o ângulo de inclinação <span class="arithmatex">\(\theta\)</span> livre.</p>
-<p>[Figura]</p>
-<p>Para testar o controlador você pode aplicar distúrbios no quadricóptero (dando um "tapinha" na parta inferior de seus motores) e verificar se o mesmo retorna ao ângulo de referência <span class="arithmatex">\(\theta_r\)</span>. Outro teste consiste em alterar o ângulo de referência <span class="arithmatex">\(\theta_r\)</span> através do Crazyflie Client e ver se o quadricoptero se inclina sozinho.</p>
+<p><img alt="" src="../images/device3.jpg" style="display: block; margin: auto;" width="60%" /></p>
+<p>Para testar o controlador você pode aplicar distúrbios no quadricóptero (dando um "tapinha" na parta inferior de seus motores) e verificar se o mesmo retorna ao ângulo de referência <span class="arithmatex">\(\theta_r=0^{\circ}\)</span>. Você pode também alterar o ângulo de referência para, por exemplo, <span class="arithmatex">\(\theta_r=45^{\circ}\)</span>, através do Crazyflie Client, e ver se o quadricoptero se inclina sozinho.</p>
 <h3 id="controle-de-tres-graus-de-liberdade">Controle de três graus de liberdade</h3>
 <p>O outro experimento consiste em controlar o drone em três graus de liberdade. No entanto, como os módulos dos controladores vertical e horizontal ainda não foram implementados, você irá realizar isso através de uma queda livre controlada. </p>
 <p class="annotate">Altere a função <code>attitudeController()</code> de modo que ela comande não só o torque <span class="arithmatex">\(\tau_y\)</span> como também os torques <span class="arithmatex">\(\tau_x\)</span> e <span class="arithmatex">\(\tau_z\)</span>(1).</p>

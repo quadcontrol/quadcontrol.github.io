@@ -92,7 +92,7 @@ void reference()
 
 #### Controlador de atitude
 
-A função `attitudeController()`, é quem comanda os torques a partir da diferença entre os ângulos de Euler de referência e estimados.
+A função `attitudeController()` é quem comanda os torques a partir da diferença entre os ângulos de Euler de referência e estimados.
 
 ```c
 // Compute desired torques

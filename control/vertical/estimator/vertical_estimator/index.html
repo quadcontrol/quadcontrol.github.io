@@ -1136,6 +1136,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#valor-medido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valor medido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#observador-de-estados" class="md-nav__link">
     <span class="md-ellipsis">
       Observador de estados
@@ -1448,6 +1457,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#valor-medido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valor medido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#observador-de-estados" class="md-nav__link">
     <span class="md-ellipsis">
       Observador de estados
@@ -1630,10 +1648,118 @@
 <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>O sensor de proximidade utilizado é o <a href="https://www.st.com/en/imaging-and-photonics-solutions/vl53l1x.html" target="_blank">VL53L1X</a>, da STMicroelectronics, localizado no Flow Deck v2.</p>
+<p><img alt="" src="../images/vl53l1x.png" style="display: block; margin: auto;" width="30%" /></p>
+<p>Esse sensor utiliza tecnologia VCSEL (<em>"Vertical Cavity Surface Emitting Laser"</em>), que mede a distância de um objeto com base no tempo de voo -  ToF (<em>"Time of Flight"</em>) - dos fótons emitidos. Ele possui um alcance de aproximadamente 4 cm a 4 m e uma taxa de amostragem máxima de 50 Hz.</p>
+<p>Sensores de proximidade são dispositivos capazes de medir a distância de um objeto sem contato físico, geralmente por meio da emissão e recepção de ondas refletidas. O princípio é sempre o mesmo — emite-se uma onda, analisa-se o retorno — variando apenas o tipo de onda e a propriedade medida (tempo de retorno, intensidade ou diferença de fase).</p>
+<p>Eles podem ser classificados em três categorias principais:</p>
+<ul>
+<li>Radar (<em>"Radio Detection and Ranging"</em>) — utilizam ondas eletromagnéticas de rádio</li>
+<li>Sonar (<em>"Sound Navigation and Ranging"</em>) — utilizam ondas sonoras (ultrassônicas)</li>
+<li>Lidar (<em>"Light Detection and Ranging"</em>) — utilizam ondas eletromagnéticas de luz (infravermelha ou laser)</li>
+</ul>
+<p>Sensores VCSEL, como o VL53L1X, são portanto um tipo específico de Lidar, operando no espectro infravermelho próximo e com alta precisão em curtas distâncias.</p>
+<h5 id="valor-medido">Valor medido</h5>
+<p>O sensor de proximidade mede a distância vertical no sistema de coordenadas móvel. No entanto, como o objetivo é medir a posição vertical no sistema de coordenadas inercial, torna-se necessário levar em consideração a orientação do drone.</p>
+<div class="admonition question">
+<p class="admonition-title">2D</p>
+<p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e do ângulo de rolagem <span class="arithmatex">\(\phi\)</span>.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align}
+    \cos\phi &amp;= \dfrac{z_m}{d} \\
+    z_m &amp;= d \cos\phi \\
+\end{align}
+\]</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">3D</p>
+<p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e dos ângulos de rolagem <span class="arithmatex">\(\phi\)</span> e inclinação <span class="arithmatex">\(\theta\)</span>.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+\begin{align}
+    \cos\theta &amp;= \dfrac{z_m}{d'} \\
+    z_m &amp;= d' \cos\theta
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+    \cos\phi &amp;= \dfrac{d'}{d} \\
+    d' &amp;= d \cos\phi
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+    z_m &amp;= d \cos\phi \cos \theta 
+\end{align}
+\]</div>
+</details>
+</div>
+<p>Inclua na função <code>verticalEstimator()</code> uma variável local <span class="arithmatex">\(z_m\)</span>, que corresponde ao valor medido a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e dos ângulos de rolagem <span class="arithmatex">\(\phi\)</span> e inclinação <span class="arithmatex">\(\theta\)</span> e, em seguida, atribua ela a distância vertical estimada <span class="arithmatex">\(z\)</span>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Estimate vertical position/velocity from range sensor</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalEstimator</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Measured distante from range sensor</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Estimated distance</span>
+<span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
+</code></pre></div>
+<p>Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
+<div class="admonition example">
+<p class="admonition-title">Resultado esperado</p>
+<p>Você deve notar que estamos compensando corretamente alterações na orientação do drone. No entanto, a estimativa possui muito ruído. Ao invés de utilizarmos um filtro passa-baixas para remover esse ruído, como no estimador de atitude, vamos utilizar agora um observador de estados.</p>
+</div>
 <h5 id="observador-de-estados">Observador de estados</h5>
+<p>Um observador de estados é uma cópia de um sistema que, a partir dos valores de entrada e saída do sistema real (planta), nos fornece estimativas dos estados dessa planta.</p>
+<p>No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total <span class="arithmatex">\(f_t\)</span> e a posição vertical medida <span class="arithmatex">\(z_m\)</span>, e as saídas são a posição e velocidade verticais estimadas <span class="arithmatex">\(z\)</span> e <span class="arithmatex">\(v_z\)</span>, conforme diagrama de blocos abaixo:</p>
+<p>[Figura]</p>
+<p>Vamos começar projetando um observador de estados bem simples, de ordem 1 e que não leva em consideração a entrada da planta. Em seguida, vamos projetar um observador de ordem 2. Por fim, vamos considerar a entrada da planta no nosso observador.</p>
 <h6 id="observador-de-ordem-1">Observador de ordem 1</h6>
+<p>Vamos começar assumindo que o drone está parado, ou seja, sua posição vertical permanece constante:</p>
+<div class="arithmatex">\[
+z = \text{cte}
+\]</div>
+<p>Chamamos esse caso de observador de ordem 1, pois o modelo da planta é descrito por uma equação diferencial de primeira ordem:</p>
+<div class="arithmatex">\[
+\dot{z} = 0
+\]</div>
 <h6 id="observador-de-ordem-2">Observador de ordem 2</h6>
+<p>Agora, vamos considerar que o drone está em movimento, mas com velocidade constante:</p>
+<div class="arithmatex">\[
+\dot{z} = \text{cte}
+\]</div>
+<p>Nesse caso, temos um observador de ordem 2, já que a planta é representada por uma equação diferencial de segunda ordem, ou seja, duas equações de primeira ordem encadeadas:</p>
+<div class="arithmatex">\[
+\ddot{z} = 0 
+\qquad
+\longrightarrow
+\qquad
+\left\{
+\begin{array}{l}
+    \dot{v}_z = 0 \\
+    \dot{z} = v_z
+\end{array}{}
+\right.
+\]</div>
 <h6 id="observador-de-ordem-2-com-entrada">Observador de ordem 2 (com entrada)</h6>
+<p>Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, passa a depender das forças atuantes — o peso e o empuxo gerado pelos motores:</p>
+<div class="arithmatex">\[
+\ddot{z} = - g + \frac{f_t}{m}
+\]</div>
+<p>Nosso observador continua sendo de ordem 2, mas agora a dinâmica modelada é uma cópia fiel da planta, incluindo a entrada de controle:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    \dot{v}_z =  - g + \frac{f_t}{m} \\
+    \dot{z} = v_z
+\end{array}{}
+\right.
+\]</div>
 <hr />
 <h2 id="validacao">Validação</h2>
 

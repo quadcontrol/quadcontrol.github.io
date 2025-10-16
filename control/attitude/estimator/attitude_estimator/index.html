@@ -1734,13 +1734,17 @@
 </code></pre></div>
 <p>Você pode simplesmente copiar e colar o código acima. Se quiser entender ele melhor, volte na secção dos <a href="../../../../sensors_and_actuators/sensors/">sensores</a>.</p>
 <h4 id="estimador-de-atitude_1">Estimador de atitude</h4>
-<p>Já a função <code>attitudeEstimator()</code>, é quem estima os ângulos de Euler e velocidades angulares a partir das leituras do acelerômetro e do giroscópio.</p>
+<p>A função <code>attitudeEstimator()</code> é quem estima os ângulos de Euler e velocidades angulares a partir das leituras do acelerômetro e do giroscópio.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span><span class="w"> </span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Ela está em branco pois será implementada em etapas a seguir. Inicialmente, você irá considerar apenas a dinâmica 2D e estimar um único ângulo de Euler. Você começará implementando um estimador que utiliza só o acelerômetro e em seguida um que utiliza só o giroscópio. Após terem sido verificado os prós e contras de cada sensor, ambos serão utilizados em conjunto de uma maneira inteligente. Por fim, você irá considerar a dinâmica 3D e estimar todos os ângulos de Euler e velocidades angulares.</p>
+<p>Ela está em branco pois será implementada em etapas a seguir. Inicialmente, você irá considerar apenas a dinâmica 2D e estimar um único ângulo de Euler. Só no final você irá considerar a dinâmica 3D e estimar todos os ângulos de Euler e velocidades angulares.</p>
+<p>A IMU (<em>"Inertial Measurement Unit"</em>) do Crazyflie 2.1 Brushless é a <a href="https://www.bosch-sensortec.com/products/motion-sensors/imus/bmi088.html" target="_blank">BMI088</a> da Bosch. Ela fica localizada na parte superior do drone, escondida embaixo da bateria.</p>
+<p><img alt="" src="../images/bmi088.png" style="display: block; margin: auto;" width="30%" /></p>
+<p>Esse sensor utiliza tecnologia MEMS (<em>``Micro-Electro-Mechanical Systems''</em>), que permite medir aceleração linear e velocidade angular através do movimento de minúsculos elementos mecânicos integrados ao chip. Essas medições são obtidas de forma totalmente eletrônica e com alta taxa de amostragem, possibilitando estimar o movimento e a orientação do drone em tempo real.</p>
+<p>Você começará implementando um estimador baseado apenas no acelerômetro, seguido de outro que utiliza apenas o giroscópio. Após compreender as vantagens e limitações de cada sensor isoladamente, ambos serão combinados de forma inteligente — resultando em um estimador mais robusto e preciso, que explorará o melhor dos dois mundos.</p>
 <h5 id="acelerometro">Acelerômetro</h5>
 <p>Acelerômetros inerciais são sensores que medem aceleração linear. Eles são compostos por um corpo de prova conectada a um invólucro através de uma mola e um amortecedor:</p>
 <p><img alt="" src="../images/sensor_accelerometer.svg" style="display: block; margin: auto;" width="300" /></p>

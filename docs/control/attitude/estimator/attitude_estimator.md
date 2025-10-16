@@ -115,7 +115,7 @@ Você pode simplesmente copiar e colar o código acima. Se quiser entender ele m
 
 #### Estimador de atitude
 
-Já a função `attitudeEstimator()`, é quem estima os ângulos de Euler e velocidades angulares a partir das leituras do acelerômetro e do giroscópio.
+A função `attitudeEstimator()` é quem estima os ângulos de Euler e velocidades angulares a partir das leituras do acelerômetro e do giroscópio.
 
 ```c
 // Estimate orientation from IMU sensor
@@ -124,7 +124,15 @@ void attitudeEstimator()
 }
 ```
 
-Ela está em branco pois será implementada em etapas a seguir. Inicialmente, você irá considerar apenas a dinâmica 2D e estimar um único ângulo de Euler. Você começará implementando um estimador que utiliza só o acelerômetro e em seguida um que utiliza só o giroscópio. Após terem sido verificado os prós e contras de cada sensor, ambos serão utilizados em conjunto de uma maneira inteligente. Por fim, você irá considerar a dinâmica 3D e estimar todos os ângulos de Euler e velocidades angulares.
+Ela está em branco pois será implementada em etapas a seguir. Inicialmente, você irá considerar apenas a dinâmica 2D e estimar um único ângulo de Euler. Só no final você irá considerar a dinâmica 3D e estimar todos os ângulos de Euler e velocidades angulares.
+
+A IMU (*"Inertial Measurement Unit"*) do Crazyflie 2.1 Brushless é a [BMI088](https://www.bosch-sensortec.com/products/motion-sensors/imus/bmi088.html){target=_blank} da Bosch. Ela fica localizada na parte superior do drone, escondida embaixo da bateria.
+
+![](images/bmi088.png){: width=30% style="display: block; margin: auto;" }
+
+Esse sensor utiliza tecnologia MEMS (*``Micro-Electro-Mechanical Systems''*), que permite medir aceleração linear e velocidade angular através do movimento de minúsculos elementos mecânicos integrados ao chip. Essas medições são obtidas de forma totalmente eletrônica e com alta taxa de amostragem, possibilitando estimar o movimento e a orientação do drone em tempo real.
+
+Você começará implementando um estimador baseado apenas no acelerômetro, seguido de outro que utiliza apenas o giroscópio. Após compreender as vantagens e limitações de cada sensor isoladamente, ambos serão combinados de forma inteligente — resultando em um estimador mais robusto e preciso, que explorará o melhor dos dois mundos.
 
 ##### Acelerômetro
 

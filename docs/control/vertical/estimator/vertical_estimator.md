@@ -151,11 +151,11 @@ Embora o sensor de proximidade meça a distância ao solo no referencial do dron
     
     Determine a posição vertical medida $z_m$ a partir da leitura do sensor de proximidade $d$ e do ângulo de rolagem $\phi$.
 
-    [Figura]
+    ![](images/readings_range_2d.svg){: width=60% style="display: block; margin: auto;" }
 
     ??? info "Resposta"
 
-        [Figura]
+        ![](images/readings_range_2d_geometry.svg){: width=20% style="display: block; margin: auto;" }
 
         $$
         \begin{align}
@@ -169,11 +169,11 @@ Embora o sensor de proximidade meça a distância ao solo no referencial do dron
     
     Determine a posição vertical medida $z_m$ a partir da leitura do sensor de proximidade $d$ e dos ângulos de rolagem $\phi$ e inclinação $\theta$.
 
-    [Figura]
+    ![](images/readings_range_3d.svg){: width=80% style="display: block; margin: auto;" }
 
     ??? info "Resposta"
 
-        [Figura]
+        ![](images/readings_range_3d_geometry.svg){: width=20% style="display: block; margin: auto;" }
         
         $$
         \begin{align}
@@ -220,7 +220,7 @@ Um observador de estados é um modelo que, a partir das entradas e saídas do si
     
 No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total $f_t$ e a posição vertical medida $z_m$, e as saídas são a posição e velocidade verticais estimadas $z$ e $v_z$, conforme diagrama de blocos abaixo:
 
-[Figura]
+![](images/state_observer.svg){: width=70% style="display: block; margin: auto;" }
 
 Vamos projetar três observadores de estados na sequência um do outro. O primeiro será bem simples, de ordem 1. Em seguida, vamos torná-lo mais sofisticado, de ordem 2. Por fim, vamos considerar a entrada da planta em nosso observador.
 
@@ -244,7 +244,7 @@ $$
 \dot{z} = 0 + l \left( z_m - z \right)
 $$
 
-[Figura]
+![](images/state_observer_order_1.svg){: width=70% style="display: block; margin: auto;" }
 
 Esse diagrama de blocos pode ser resumido em uma única função de transferência:
 
@@ -287,9 +287,6 @@ $$
     z[k+1] &= \left(1-l\Delta t\right) z[k] + l\Delta t z_m[k] 
 \end{align*}
 $$
-    
-        
-
 
 A equação discretizada pode ser reescrita de modo a evidenciar suas duas partes - uma de predição e outra de correção:
 
@@ -371,7 +368,7 @@ $$
 \right.
 $$
 
-[Figura]
+![](images/state_observer_order_2.svg){: width=70% style="display: block; margin: auto;" }
 
 Esse diagrama de blocos pode ser resumido em uma única função de transferência:
 
@@ -485,7 +482,7 @@ $$
 
 Isso significa que agora sua dinâmica é uma cópia fiel da planta, conforme pode ser verificado no diagrama de blocos abaixo:
 
-[Figura] 
+![](images/state_observer_order_2_input.svg){: width=70% style="display: block; margin: auto;" }
 
 As 
 

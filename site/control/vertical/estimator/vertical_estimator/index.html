@@ -1664,10 +1664,10 @@
 <div class="admonition question">
 <p class="admonition-title">2D</p>
 <p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e do ângulo de rolagem <span class="arithmatex">\(\phi\)</span>.</p>
-<p>[Figura]</p>
+<p><img alt="" src="../images/readings_range_2d.svg" style="display: block; margin: auto;" width="60%" /></p>
 <details class="info">
 <summary>Resposta</summary>
-<p>[Figura]</p>
+<p><img alt="" src="../images/readings_range_2d_geometry.svg" style="display: block; margin: auto;" width="20%" /></p>
 <div class="arithmatex">\[
 \begin{align}
     \cos\phi &amp;= \dfrac{z_m}{d} \\
@@ -1679,10 +1679,10 @@
 <div class="admonition question">
 <p class="admonition-title">3D</p>
 <p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e dos ângulos de rolagem <span class="arithmatex">\(\phi\)</span> e inclinação <span class="arithmatex">\(\theta\)</span>.</p>
-<p>[Figura]</p>
+<p><img alt="" src="../images/readings_range_3d.svg" style="display: block; margin: auto;" width="80%" /></p>
 <details class="info">
 <summary>Resposta</summary>
-<p>[Figura]</p>
+<p><img alt="" src="../images/readings_range_3d_geometry.svg" style="display: block; margin: auto;" width="20%" /></p>
 <div class="arithmatex">\[
 \begin{align}
     \cos\theta &amp;= \dfrac{z_m}{d'} \\
@@ -1721,7 +1721,7 @@
 <h5 id="observador-de-estados">Observador de estados</h5>
 <p>Um observador de estados é um modelo que, a partir das entradas e saídas do sistema real (planta), estima internamente os seus estados.</p>
 <p>No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total <span class="arithmatex">\(f_t\)</span> e a posição vertical medida <span class="arithmatex">\(z_m\)</span>, e as saídas são a posição e velocidade verticais estimadas <span class="arithmatex">\(z\)</span> e <span class="arithmatex">\(v_z\)</span>, conforme diagrama de blocos abaixo:</p>
-<p>[Figura]</p>
+<p><img alt="" src="../images/state_observer.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Vamos projetar três observadores de estados na sequência um do outro. O primeiro será bem simples, de ordem 1. Em seguida, vamos torná-lo mais sofisticado, de ordem 2. Por fim, vamos considerar a entrada da planta em nosso observador.</p>
 <h6 id="observador-de-ordem-1">Observador de ordem 1</h6>
 <p>Vamos começar assumindo que o drone está parado, ou seja, sua posição vertical permanece constante:</p>
@@ -1736,7 +1736,7 @@ z = \text{cte}
 <div class="arithmatex">\[
 \dot{z} = 0 + l \left( z_m - z \right)
 \]</div>
-<p>[Figura]</p>
+<p><img alt="" src="../images/state_observer_order_1.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
 <p>[Figura]</p>
 <p>Note que esse observador de estados é análogo a um regulador de estados, em que a referência é o estado medido e a saída é o estado estimado. Além disso, essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho <span class="arithmatex">\(l\)</span> desempenhando o papel da frequência de corte <span class="arithmatex">\(\omega_c\)</span>:</p>
@@ -1837,7 +1837,7 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 \end{array}{}
 \right.
 \]</div>
-<p>[Figura]</p>
+<p><img alt="" src="../images/state_observer_order_2.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
 <p>[Figura]</p>
 <p>Novamente, fica evidente que um observador de estado é análogo a um regulador de estados, onde a referência é o estado medido e a saída o estado estimado. Porém, agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos <span class="arithmatex">\(l_1\)</span> e <span class="arithmatex">\(l_2\)</span> dependem da frequência de corte <span class="arithmatex">\(\omega_c\)</span> mas também do fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
@@ -1927,7 +1927,7 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 \right.
 \]</div>
 <p>Isso significa que agora sua dinâmica é uma cópia fiel da planta, conforme pode ser verificado no diagrama de blocos abaixo:</p>
-<p>[Figura] </p>
+<p><img alt="" src="../images/state_observer_order_2_input.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>As </p>
 <div class="arithmatex">\[
 \begin{align}

@@ -1716,13 +1716,13 @@
 <p>Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
-<p>Você deve notar que estamos compensando corretamente alterações na orientação do drone. No entanto, a estimativa possui muito ruído. Ao invés de utilizarmos um filtro passa-baixas para remover esse ruído, como no estimador de atitude, vamos utilizar agora um observador de estados.</p>
+<p>Você deve notar que estamos compensando corretamente alterações na orientação do drone. No entanto, a estimativa possui muito ruído. Ao invés de utilizarmos um filtro passa-baixas (como no estimador de atitude) para remover esse ruído, vamos utilizar agora um observador de estados.</p>
 </div>
 <h5 id="observador-de-estados">Observador de estados</h5>
 <p>Um observador de estados é um modelo que, a partir das entradas e saídas do sistema real (planta), estima internamente os seus estados.</p>
 <p>No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total <span class="arithmatex">\(f_t\)</span> e a posição vertical medida <span class="arithmatex">\(z_m\)</span>, e as saídas são a posição e velocidade verticais estimadas <span class="arithmatex">\(z\)</span> e <span class="arithmatex">\(v_z\)</span>, conforme diagrama de blocos abaixo:</p>
 <p>[Figura]</p>
-<p>Nosso primeiro observador de estados será bem simples, de ordem 1. Em seguida, vamos torná-lo mais sofisticado, de ordem 2. Por fim, vamos considerar a entrada da planta no nosso observador.</p>
+<p>Vamos projetar três observadores de estados na sequência um do outro. O primeiro será bem simples, de ordem 1. Em seguida, vamos torná-lo mais sofisticado, de ordem 2. Por fim, vamos considerar a entrada da planta em nosso observador.</p>
 <h6 id="observador-de-ordem-1">Observador de ordem 1</h6>
 <p>Vamos começar assumindo que o drone está parado, ou seja, sua posição vertical permanece constante:</p>
 <div class="arithmatex">\[
@@ -1737,38 +1737,44 @@ z = \text{cte}
 \dot{z} = 0 + l \left( z_m - z \right)
 \]</div>
 <p>[Figura]</p>
-<p>A função de transferência correspondente é:</p>
-<div class="arithmatex">\[
-\frac{y(s)}{y_m(s)} = \frac{l}{s+l}
-\]</div>
+<p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
+<p>[Figura]</p>
 <p>Note que esse observador de estados é análogo a um regulador de estados, em que a referência é o estado medido e a saída é o estado estimado. Além disso, essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho <span class="arithmatex">\(l\)</span> desempenhando o papel da frequência de corte <span class="arithmatex">\(\omega_c\)</span>:</p>
 <div class="arithmatex">\[
 l = \omega_c
 \]</div>
-<p>Em outras palavras, um observador de ordem 1 é exatamente equivalente a um filtro passa-baixas. Ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.</p>
-<p>Como o observador será implementado em um microcontrolador, precisamos encontrar sua forma discreta. Você já fez isso anteriormente para um filtro passa-baixas usando o método de Euler implícito. Desta vez, vamos aplicar o método de Euler explícito, por ser mais simples de deduzir:</p>
+<p>Em outras palavras, um observador de ordem 1 é equivalente exato a um filtro passa-baixas: ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.</p>
+<p class="annotate">Como o observador será implementado em um microcontrolador, precisamos encontrar sua forma discreta. Você já fez isso anteriormente para um filtro passa-baixas usando o método de Euler implícito. Desta vez, vamos aplicar o método de Euler explícito(1):</p>
+<ol>
+<li>
+<p>A expressão derivada é idêntica à que você já viu antes:</p>
+<div class="arithmatex">\[
+z[k+1] = \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} z[k] + \underbrace{l\Delta t}_{\alpha} z_m[k] 
+\]</div>
+<p>No entanto, o valor de <span class="arithmatex">\(\alpha\)</span> agora é dado por:</p>
+<div class="arithmatex">\[
+\alpha = l \Delta t
+\]</div>
+<p>Isso significa que ele pode ultrapassar 1 se <span class="arithmatex">\(l\)</span> for muito alto — o que torna o sistema instável. Essa é a desvantagem do método explícito em relação ao implícito. No entanto, basta garantir que:</p>
+<div class="arithmatex">\[
+l &lt; \frac{1}{\Delta t}
+\]</div>
+</li>
+</ol>
 <div class="arithmatex">\[
 \begin{align*}
     \frac{z[k+1]-z[k]}{\Delta t} + lz[k] &amp;= l z_m[k] \\
     z[k+1]-z[k] + l\Delta tz[k] &amp;= l\Delta t z_m[k] \\
     z[k+1] - \left( 1 - l\Delta t \right) z[k] &amp;= l\Delta t z_m[k] \\
-    z[k+1] &amp;= \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} z[k] + \underbrace{l\Delta t}_{\alpha} z_m[k] 
+    z[k+1] &amp;= \left(1-l\Delta t\right) z[k] + l\Delta t z_m[k] 
 \end{align*}
-\]</div>
-<p>Essa expressão é idêntica à que você já viu antes. No entanto, como o método é explícito, o valor de <span class="arithmatex">\(\alpha\)</span> agora é dado por:</p>
-<div class="arithmatex">\[
-\alpha = l \Delta t
-\]</div>
-<p>Isso significa que ele pode ultrapassar 1 se <span class="arithmatex">\(l\)</span> for muito alto — o que torna o sistema instável. Portanto, é necessário garantir que:</p>
-<div class="arithmatex">\[
-l &lt; \frac{1}{\Delta t}
 \]</div>
 <p>A equação discretizada pode ser reescrita de modo a evidenciar suas duas partes - uma de predição e outra de correção:</p>
 <div class="arithmatex">\[
 z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
 \]</div>
 <ul>
-<li>A parte de predição "prevê" o valor com base no modelo (neste caso, de que a posição vertical é sempre constante)</li>
+<li>A parte de predição "prevê" o valor com base no modelo (neste caso, de que a posição vertical permanece constante)</li>
 <li>A parte de correção "corrige" o valor com base na medição (neste caso, a diferença entre a posição medida e prevista)</li>
 </ul>
 <p class="annotate">De forma equivalente, podemos representar o processo em duas etapas sequenciais, como será implementado no código(1):</p>
@@ -1781,22 +1787,31 @@ z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \
     \text{Correção:} &amp;\quad z[k+1] = z[k+1] + l \Delta t \left(z_m[k] - z[k+1]\right)
 \end{align}
 \]</div>
-<p>Modifique sua função <code>verticalEstimator()</code> para que a distância vertical estimada <span class="arithmatex">\(z\)</span> seja dada por um observador de ordem 1 com as etapas de predição e correção.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Estimate vertical position/velocity from range sensor</span>
+<p>Modifique sua função <code>verticalEstimator()</code> para que a distância vertical <span class="arithmatex">\(z\)</span> seja estimada por um observador de ordem 1 com as etapas de predição e correção.</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1">// Estimate vertical position/velocity from range sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">verticalEstimator</span><span class="p">()</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="c1">// Estimator parameters</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w">               </span><span class="c1">// Cutoff frequency of filter [rad/s]</span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w">                </span><span class="c1">// Observer gain</span>
+</span>
 <span class="w">    </span><span class="c1">// Measured distante from range sensor</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 
-<span class="hll"><span class="w">    </span><span class="c1">// Prediction step (model)</span>
-</span><span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// Prediction step (model)</span>
+<span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="hll"><span class="w">    </span><span class="c1">// Correction step (measurement)</span>
-</span><span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// Correction step (measurement)</span>
+<span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="p">}</span>
 </code></pre></div>
+Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)</span>rad/s e verifique como isso influencia na sua estimativa.</p>
+<div class="admonition example">
+<p class="admonition-title">Resultado esperado</p>
+<p>XXX</p>
+</div>
 <h6 id="observador-de-ordem-2">Observador de ordem 2</h6>
-<p>Agora, vamos considerar que o drone está em movimento, mas com velocidade constante:</p>
+<p>Agora, vamos considerar que o drone está em movimento mas com velocidade constante:</p>
 <div class="arithmatex">\[
 \dot{z} = \text{cte}
 \]</div>
@@ -1808,25 +1823,155 @@ z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \
 \qquad
 \left\{
 \begin{array}{l}
-    \dot{v}_z = 0 \\
-    \dot{z} = v_z
+    \dot{z} = v_z \\
+    \dot{v}_z = 0
 \end{array}{}
 \right.
 \]</div>
-<h6 id="observador-de-ordem-2-com-entrada">Observador de ordem 2 (com entrada)</h6>
-<p>Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, passa a depender das forças atuantes — o peso e o empuxo gerado pelos motores:</p>
-<div class="arithmatex">\[
-\ddot{z} = - g + \frac{f_t}{m}
-\]</div>
-<p>O observador permanece de ordem 2, mas agora sua dinâmica é uma cópia fiel da planta, incluindo a entrada de controle:</p>
+<p>Agora, se realimentarmos a diferença entre a posição vertical medida <span class="arithmatex">\(z_m\)</span> e a estimada <span class="arithmatex">\(z\)</span> em ambas as equações diferenciais, obtemos um sistema cuja estimativa converge exponencialmente para a medida, desde que os ganhos do observador <span class="arithmatex">\(l_1\)</span> e <span class="arithmatex">\(l_2\)</span> sejam positivos:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \dot{v}_z =  - g + \frac{f_t}{m} \\
-    \dot{z} = v_z
+    \dot{z} = v_z + l_1 \left( z_m - z \right) \\
+    \dot{v}_z = 0 + l_2 \left( z_m - z \right)
 \end{array}{}
 \right.
 \]</div>
+<p>[Figura]</p>
+<p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
+<p>[Figura]</p>
+<p>Novamente, fica evidente que um observador de estado é análogo a um regulador de estados, onde a referência é o estado medido e a saída o estado estimado. Porém, agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos <span class="arithmatex">\(l_1\)</span> e <span class="arithmatex">\(l_2\)</span> dependem da frequência de corte <span class="arithmatex">\(\omega_c\)</span> mas também do fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+        l_1 = 2 \zeta \omega_c \\
+        l_2 = \omega_c^2
+\end{array}
+\right.
+\]</div>
+<p>Sinais com frequências inferiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem dois do que de ordem um, devido a possibilidade de ajustar o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
+<p>[Figura]</p>
+<p>Quanto menor for o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>, mais acentuada será esta transição. No entanto, quando <span class="arithmatex">\(\zeta &lt; \frac{\sqrt{2}}{2}\)</span>, começa a haver um aumento do ganho para frequências próximas à frequência de corte, fenômeno conhecido como ``ressonância'':</p>
+<p>[Figura]</p>
+<p>Queremos que a curva seja o mais acentuada possível porém sem gerar ressonância. É comum fixarmos o valor de <span class="arithmatex">\(\zeta\)</span> em <span class="arithmatex">\(\frac{\sqrt{2}}{2}\)</span>, que nos garante isso.</p>
+<p>Aplicando novamente o método de Euler, chegamos nas seguintes equações discretizadas:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{rll}
+    z[k+1] =&amp; \overbrace{z[k] + v_z[k] \Delta t}^{\text{Predição}} &amp;+  \quad \overbrace{l_1 \Delta t \left[ z_m[k] - z[k] \right]}^{\text{Correção}} \\
+    v_z[k+1] =&amp; \underbrace{v_z[k]\qquad\qquad}_{\text{Predição}} &amp;+  \quad \underbrace{l_2 \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
+\end{array}
+\right.
+\]</div>
+<p>Que podem ser divididas em duas etapas, uma de predição e outra de correção:</p>
+<div class="arithmatex">\[
+\begin{align}
+    \text{Predição:} &amp;\quad 
+    \left\{
+    \begin{array}{l}
+        z[k+1] = z[k] + v_z[k] \Delta t \\
+        v_z[k+1] = v_z[k]
+    \end{array}
+    \right.  \\ \\
+    \text{Correção:} &amp;\quad 
+    \left\{
+    \begin{array}{l}
+        z[k+1] = z[k+1] + l_1 \Delta t \left(z_m[k] - z[k+1]\right) \\
+        v_z[k+1] = v_z[k+1] + l_2 \Delta t \left(z_m[k] - z[k+1]\right)
+    \end{array}
+    \right.
+\end{align}
+\]</div>
+<p class="annotate">Modifique sua função <code>verticalEstimator()</code> para que a distância vertical <span class="arithmatex">\(z\)</span> e velocidade vertical <span class="arithmatex">\(v_z\)</span> sejam estimados por um observador de ordem 2 com as etapas de predição e correção(1).</p>
+<ol>
+<li>Na etapa de correção, primeiro nós corrigimos o valor de <span class="arithmatex">\(v_z\)</span> e depois de <span class="arithmatex">\(z\)</span> para garantir que o valor utilizado de <span class="arithmatex">\(z\)</span> no cáculo da correção seja o mesmo em ambas as equações.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Estimate vertical position/velocity from range sensor</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalEstimator</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Estimator parameters</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">zeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Measured distante from range sensor</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// Prediction step (model)</span>
+<span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="n">vz</span><span class="w"> </span><span class="o">=</span>
+</span>
+<span class="w">    </span><span class="c1">// Correction step (measurement)</span>
+<span class="hll"><span class="w">    </span><span class="n">vz</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
+</code></pre></div>
+<p>Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)</span>rad/s e verifique como isso influencia na sua estimativa.</p>
+<div class="admonition example">
+<p class="admonition-title">Resultado esperado</p>
+<p>XXX</p>
+</div>
+<h6 id="observador-de-ordem-2-com-entrada">Observador de ordem 2 (com entrada)</h6>
+<p>Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, depende das forças atuantes — o peso e o empuxo gerado pelos motores:</p>
+<div class="arithmatex">\[
+\ddot{z} = - g + \frac{f_t}{m}
+\]</div>
+<p>O observador permanece de ordem 2, mas inclui a entrada de controle:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    \dot{z} = v_z \\
+    \dot{v}_z =  - g + \dfrac{f_t}{m}
+\end{array}{}
+\right.
+\]</div>
+<p>Isso significa que agora sua dinâmica é uma cópia fiel da planta, conforme pode ser verificado no diagrama de blocos abaixo:</p>
+<p>[Figura] </p>
+<p>As </p>
+<div class="arithmatex">\[
+\begin{align}
+    \text{Predição:} &amp;\quad 
+    \left\{
+    \begin{array}{l}
+        z[k+1] = z[k] + v_z[k] \Delta t \\
+        v_z[k+1] = v_z[k] + \left( - g + \dfrac{f_t[k]}{m} \right)  \Delta t
+    \end{array}
+    \right.  \\ \\
+    \text{Correção:} &amp;\quad 
+    \left\{
+    \begin{array}{l}
+        z[k+1] = z[k+1] + l_1 \Delta t \left(z_m[k] - z[k+1]\right) \\
+        v_z[k+1] = v_z[k+1] + l_2 \Delta t \left(z_m[k] - z[k+1]\right)
+    \end{array}
+    \right.
+\end{align}
+\]</div>
+<p>Modifique a etapa de predição de <span class="arithmatex">\(v_z\)</span> na sua função <code>verticalEstimator()</code> para que ela leve em consideração também as entradas do sistema.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Estimate vertical position/velocity from range sensor</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalEstimator</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Estimator parameters</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">zeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// Measured distante from range sensor</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// Prediction step (model)</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="hll"><span class="w">    </span><span class="n">vz</span><span class="w"> </span><span class="o">=</span>
+</span>
+<span class="w">    </span><span class="c1">// Correction step (measurement)</span>
+<span class="w">    </span><span class="n">vz</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Não é possível testar essa última versão segurando o drone com a mão, pois a força normal exercida ao segurá-lo não está contemplada no modelo e resultaria em respostas inconsistentes. </p>
+<p>Ainda assim, se o seu observador de estados de ordem 2 sem entrada apresentou bons resultados, é esperado que este, com entradas, também funcione corretamente.</p>
+<p>Guarde essa modificação — ela será essencial quando implementarmos o controlador vertical e finalmente colocarmos o drone para voar de forma autônoma.</p>
 <hr />
 <h2 id="validacao">Validação</h2>
 

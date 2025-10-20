@@ -79,7 +79,7 @@ void appMain(void *param)
 
 #### Sensores
 
-Inclue na função `sensors()` um código adicional que pega a leitura do sensor de proximidade e armazena ela na variável global previamente declarada.
+Inclua na função `sensors()` um código adicional que pega a leitura do sensor de proximidade e armazena ela na variável global previamente declarada.
 
 ```c hl_lines="24-27"
 // Get sensor readings from estimator module
@@ -145,7 +145,7 @@ Sensores VCSEL, como o VL53L1X, são portanto um tipo específico de Lidar, oper
 
 ##### Valor medido
 
-Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao mundo (sistema inercial). Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.
+Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao sistema inercial. Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.
 
 !!! question "2D"    
     
@@ -248,15 +248,15 @@ $$
 
 Esse diagrama de blocos pode ser resumido em uma única função de transferência:
 
-[Figura]
+![](images/state_observer_order_1_tf.svg){: width=40% style="display: block; margin: auto;" }
 
-Note que esse observador de estados é análogo a um regulador de estados, em que a referência é o estado medido e a saída é o estado estimado. Além disso, essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho $l$ desempenhando o papel da frequência de corte $\omega_c$:
+Note que essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho $l$ desempenhando o papel da frequência de corte $\omega_c$:
 
 $$
 l = \omega_c
 $$
 
-Em outras palavras, um observador de ordem 1 é equivalente exato a um filtro passa-baixas: ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.
+Em outras palavras, um observador de ordem 1 é equivalente a um filtro passa-baixas: ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.
         
 Como o observador será implementado em um microcontrolador, precisamos encontrar sua forma discreta. Você já fez isso anteriormente para um filtro passa-baixas usando o método de Euler implícito. Desta vez, vamos aplicar o método de Euler explícito(1):
 {.annotate}
@@ -316,8 +316,8 @@ Modifique sua função `verticalEstimator()` para que a distância vertical $z$ 
 void verticalEstimator()
 {
     // Estimator parameters
-    static const float wc =               // Cutoff frequency of filter [rad/s]
-    static const float l =                // Observer gain
+    static const float wc =              
+    static const float l =               
 
     // Measured distante from range sensor
     float z_m = 
@@ -332,7 +332,7 @@ void verticalEstimator()
 Experimente uma frequência de corte $\omega_c = 10$rad/s e verifique como isso influencia na sua estimativa.
 
 !!! example "Resultado esperado"        
-    XXX
+    Apesar da estimativa possuir bem menos ruído agora, ela está lenta quando movimentamos o drone. Isso ocorre pois nosso modelo assume que o drone está sempre parado, o que nem sempre é verdade. Para corrigir isso, vamos sofisticar um pouco nosso observador de estados.
 
 ###### Observador de ordem 2
 
@@ -372,9 +372,9 @@ $$
 
 Esse diagrama de blocos pode ser resumido em uma única função de transferência:
 
-[Figura]
+![](images/state_observer_order_2_tf.svg){: width=40% style="display: block; margin: auto;" }
 
-Novamente, fica evidente que um observador de estado é análogo a um regulador de estados, onde a referência é o estado medido e a saída o estado estimado. Porém, agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos $l_1$ e $l_2$ dependem da frequência de corte $\omega_c$ mas também do fator de amortecimento $\zeta$:
+Agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos $l_1$ e $l_2$ dependem da frequência de corte $\omega_c$ mas também do fator de amortecimento $\zeta$:
         
 $$
 \left\{
@@ -385,13 +385,13 @@ $$
 \right.
 $$
         
-Sinais com frequências inferiores à frequência de corte $\omega_c$ possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte $\omega_c$ possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem dois do que de ordem um, devido a possibilidade de ajustar o fator de amortecimento $\zeta$:
+Sinais com frequências inferiores à frequência de corte $\omega_c$ possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte $\omega_c$ possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem 2 do que de ordem 1, devido a possibilidade de ajustar o fator de amortecimento $\zeta$:
 
-[Figura]
+![](images/bode_plot_1.svg){: width=70% style="display: block; margin: auto;" }
 
 Quanto menor for o fator de amortecimento $\zeta$, mais acentuada será esta transição. No entanto, quando $\zeta < \frac{\sqrt{2}}{2}$, começa a haver um aumento do ganho para frequências próximas à frequência de corte, fenômeno conhecido como ``ressonância'':
 
-[Figura]
+![](images/bode_plot_2.svg){: width=70% style="display: block; margin: auto;" }
 
 Queremos que a curva seja o mais acentuada possível porém sem gerar ressonância. É comum fixarmos o valor de $\zeta$ em $\frac{\sqrt{2}}{2}$, que nos garante isso.
 
@@ -456,10 +456,10 @@ void verticalEstimator()
 }
 ```
 
-Experimente uma frequência de corte $\omega_c = 10$rad/s e verifique como isso influencia na sua estimativa.
+Carregue esse programa no drone e utilize o Crazyflie Client para verificar como está sua nova estimativa.
 
 !!! example "Resultado esperado"        
-    XXX
+    Sua estimativa deve estar muito melhor, filtrando ruídos e respondendo mais rápido a variações na velocidade. Além disso, agora estamos estimando também a velocidade vertical, que será essencial ao controlador a ser implementado.
 
 ###### Observador de ordem 2 (com entrada)
 
@@ -484,7 +484,7 @@ Isso significa que agora sua dinâmica é uma cópia fiel da planta, conforme po
 
 ![](images/state_observer_order_2_input.svg){: width=70% style="display: block; margin: auto;" }
 
-As 
+As etapas depredição e e correção são quase idênticas, com uma leve alteração (apenas na predição da velocidade):
 
 $$
 \begin{align}
@@ -532,7 +532,7 @@ void verticalEstimator()
 
 Não é possível testar essa última versão segurando o drone com a mão, pois a força normal exercida ao segurá-lo não está contemplada no modelo e resultaria em respostas inconsistentes. 
 
-Ainda assim, se o seu observador de estados de ordem 2 sem entrada apresentou bons resultados, é esperado que este, com entradas, também funcione corretamente.
+Ainda assim, se o seu observador de estados de ordem 2 sem entradas apresentou bons resultados, é esperado que este, com entradas, também funcione corretamente.
 
 Guarde essa modificação — ela será essencial quando implementarmos o controlador vertical e finalmente colocarmos o drone para voar de forma autônoma.
 

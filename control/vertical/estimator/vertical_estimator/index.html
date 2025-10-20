@@ -1660,7 +1660,7 @@
 </ul>
 <p>Sensores VCSEL, como o VL53L1X, são portanto um tipo específico de Lidar, operando no espectro infravermelho próximo e com alta precisão em curtas distâncias.</p>
 <h5 id="valor-medido">Valor medido</h5>
-<p>Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao mundo (sistema inercial). Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.</p>
+<p>Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao sistema inercial. Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.</p>
 <div class="admonition question">
 <p class="admonition-title">2D</p>
 <p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e do ângulo de rolagem <span class="arithmatex">\(\phi\)</span>.</p>
@@ -1743,7 +1743,7 @@ z = \text{cte}
 <div class="arithmatex">\[
 l = \omega_c
 \]</div>
-<p>Em outras palavras, um observador de ordem 1 é equivalente exato a um filtro passa-baixas: ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.</p>
+<p>Em outras palavras, um observador de ordem 1 é equivalente a um filtro passa-baixas: ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.</p>
 <p class="annotate">Como o observador será implementado em um microcontrolador, precisamos encontrar sua forma discreta. Você já fez isso anteriormente para um filtro passa-baixas usando o método de Euler implícito. Desta vez, vamos aplicar o método de Euler explícito(1):</p>
 <ol>
 <li>
@@ -1792,8 +1792,8 @@ z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \
 <span class="kt">void</span><span class="w"> </span><span class="nf">verticalEstimator</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Estimator parameters</span>
-<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w">               </span><span class="c1">// Cutoff frequency of filter [rad/s]</span>
-</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w">                </span><span class="c1">// Observer gain</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w">              </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w">               </span>
 </span>
 <span class="w">    </span><span class="c1">// Measured distante from range sensor</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
@@ -1808,7 +1808,7 @@ z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \
 Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)</span>rad/s e verifique como isso influencia na sua estimativa.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
-<p>XXX</p>
+<p>Apesar da estimativa possuir bem menos ruído agora, ela está lenta quando movimentamos o drone. Isso ocorre pois nosso modelo assume que o drone está sempre parado, o que nem sempre é verdade. Para corrigir isso, vamos sofisticar um pouco nosso observador de estados.</p>
 </div>
 <h6 id="observador-de-ordem-2">Observador de ordem 2</h6>
 <p>Agora, vamos considerar que o drone está em movimento mas com velocidade constante:</p>
@@ -1849,7 +1849,7 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 \end{array}
 \right.
 \]</div>
-<p>Sinais com frequências inferiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem dois do que de ordem um, devido a possibilidade de ajustar o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
+<p>Sinais com frequências inferiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem 2 do que de ordem 1, devido a possibilidade de ajustar o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
 <p>[Figura]</p>
 <p>Quanto menor for o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>, mais acentuada será esta transição. No entanto, quando <span class="arithmatex">\(\zeta &lt; \frac{\sqrt{2}}{2}\)</span>, começa a haver um aumento do ganho para frequências próximas à frequência de corte, fenômeno conhecido como ``ressonância'':</p>
 <p>[Figura]</p>
@@ -1907,10 +1907,10 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 </span><span class="hll"><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="p">}</span>
 </code></pre></div>
-<p>Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)</span>rad/s e verifique como isso influencia na sua estimativa.</p>
+<p>Carregue esse programa no drone e utilize o Crazyflie Client para verificar como está sua nova estimativa.</p>
 <div class="admonition example">
 <p class="admonition-title">Resultado esperado</p>
-<p>XXX</p>
+<p>Sua estimativa deve estar muito melhor, filtrando ruídos e respondendo mais rápido a variações na velocidade. Além disso, agora estamos estimando também a velocidade vertical, que será essencial ao controlador a ser implementado.</p>
 </div>
 <h6 id="observador-de-ordem-2-com-entrada">Observador de ordem 2 (com entrada)</h6>
 <p>Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, depende das forças atuantes — o peso e o empuxo gerado pelos motores:</p>
@@ -1928,7 +1928,7 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 \]</div>
 <p>Isso significa que agora sua dinâmica é uma cópia fiel da planta, conforme pode ser verificado no diagrama de blocos abaixo:</p>
 <p><img alt="" src="../images/state_observer_order_2_input.svg" style="display: block; margin: auto;" width="70%" /></p>
-<p>As </p>
+<p>As etapas depredição e e correção são quase idênticas, com uma leve alteração (apenas na predição da velocidade):</p>
 <div class="arithmatex">\[
 \begin{align}
     \text{Predição:} &amp;\quad 
@@ -1970,7 +1970,7 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 <span class="p">}</span>
 </code></pre></div>
 <p>Não é possível testar essa última versão segurando o drone com a mão, pois a força normal exercida ao segurá-lo não está contemplada no modelo e resultaria em respostas inconsistentes. </p>
-<p>Ainda assim, se o seu observador de estados de ordem 2 sem entrada apresentou bons resultados, é esperado que este, com entradas, também funcione corretamente.</p>
+<p>Ainda assim, se o seu observador de estados de ordem 2 sem entradas apresentou bons resultados, é esperado que este, com entradas, também funcione corretamente.</p>
 <p>Guarde essa modificação — ela será essencial quando implementarmos o controlador vertical e finalmente colocarmos o drone para voar de forma autônoma.</p>
 <hr />
 <h2 id="validacao">Validação</h2>

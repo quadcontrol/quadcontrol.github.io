@@ -1607,7 +1607,7 @@
 </code></pre></div>
 <h3 id="funcoes">Funções</h3>
 <h4 id="sensores">Sensores</h4>
-<p>Inclue na função <code>sensors()</code> um código adicional que pega a leitura do sensor de proximidade e armazena ela na variável global previamente declarada.</p>
+<p>Inclua na função <code>sensors()</code> um código adicional que pega a leitura do sensor de proximidade e armazena ela na variável global previamente declarada.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Get sensor readings from estimator module</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">sensors</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1738,8 +1738,8 @@ z = \text{cte}
 \]</div>
 <p><img alt="" src="../images/state_observer_order_1.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
-<p>[Figura]</p>
-<p>Note que esse observador de estados é análogo a um regulador de estados, em que a referência é o estado medido e a saída é o estado estimado. Além disso, essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho <span class="arithmatex">\(l\)</span> desempenhando o papel da frequência de corte <span class="arithmatex">\(\omega_c\)</span>:</p>
+<p><img alt="" src="../images/state_observer_order_1_tf.svg" style="display: block; margin: auto;" width="40%" /></p>
+<p>Note que essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho <span class="arithmatex">\(l\)</span> desempenhando o papel da frequência de corte <span class="arithmatex">\(\omega_c\)</span>:</p>
 <div class="arithmatex">\[
 l = \omega_c
 \]</div>
@@ -1839,8 +1839,8 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 \]</div>
 <p><img alt="" src="../images/state_observer_order_2.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
-<p>[Figura]</p>
-<p>Novamente, fica evidente que um observador de estado é análogo a um regulador de estados, onde a referência é o estado medido e a saída o estado estimado. Porém, agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos <span class="arithmatex">\(l_1\)</span> e <span class="arithmatex">\(l_2\)</span> dependem da frequência de corte <span class="arithmatex">\(\omega_c\)</span> mas também do fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
+<p><img alt="" src="../images/state_observer_order_2_tf.svg" style="display: block; margin: auto;" width="40%" /></p>
+<p>Agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos <span class="arithmatex">\(l_1\)</span> e <span class="arithmatex">\(l_2\)</span> dependem da frequência de corte <span class="arithmatex">\(\omega_c\)</span> mas também do fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -1850,9 +1850,9 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 \right.
 \]</div>
 <p>Sinais com frequências inferiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte <span class="arithmatex">\(\omega_c\)</span> possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem 2 do que de ordem 1, devido a possibilidade de ajustar o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>:</p>
-<p>[Figura]</p>
+<p><img alt="" src="../images/bode_plot_1.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Quanto menor for o fator de amortecimento <span class="arithmatex">\(\zeta\)</span>, mais acentuada será esta transição. No entanto, quando <span class="arithmatex">\(\zeta &lt; \frac{\sqrt{2}}{2}\)</span>, começa a haver um aumento do ganho para frequências próximas à frequência de corte, fenômeno conhecido como ``ressonância'':</p>
-<p>[Figura]</p>
+<p><img alt="" src="../images/bode_plot_2.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Queremos que a curva seja o mais acentuada possível porém sem gerar ressonância. É comum fixarmos o valor de <span class="arithmatex">\(\zeta\)</span> em <span class="arithmatex">\(\frac{\sqrt{2}}{2}\)</span>, que nos garante isso.</p>
 <p>Aplicando novamente o método de Euler, chegamos nas seguintes equações discretizadas:</p>
 <div class="arithmatex">\[

@@ -69,6 +69,29 @@
   color: var(--c2) !important;
 }
 
+/* === WARNING (Teal) === */
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning,
+[data-md-color-scheme="slate"] .md-typeset details.warning {
+  background-color: var(--c0) !important;
+  border-color: var(--c3) !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning > .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset details.warning > summary {
+  background-color: color-mix(in srgb, var(--c3) 20%, transparent) !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning > .admonition-title::before,
+[data-md-color-scheme="slate"] .md-typeset details.warning > summary::before {
+  background-color: var(--c3) !important;
+  color: var(--c3) !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset details.warning > summary::after {
+  background-color: var(--c3) !important;
+  color: var(--c3) !important;
+}
+
 
 /* Link ativo na barra lateral */
 [data-md-color-scheme="slate"] .md-nav__item .md-nav__link--active {

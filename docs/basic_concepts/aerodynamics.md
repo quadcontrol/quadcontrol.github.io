@@ -14,11 +14,11 @@ A figura abaixo mostra a secção transversal de um aerofólio, um corpo teóric
 
 ![Airfoil1](images/airfoil1.svg){: width="400" style="display: block; margin: auto;" }
 
-Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação $f_l$ (perpendicular à velocidade $v$), ele também produz uma força indesejada de arrasto $f_d$ (paralela à velocidade $v$):
+Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação ${\color{var(--c2)}f_l}$ (perpendicular à velocidade ${\color{var(--c1)}v}$), ele também produz uma força indesejada de arrasto ${\color{var(--c2)}f_d}$ (paralela à velocidade ${\color{var(--c1)}v}$):
 $$
-    {\color{lightgreen}f_l} = \frac{1}{2} \rho A C_l v^2 
+    {\color{var(--c2)}f_l} = \frac{1}{2} \rho A C_l {\color{var(--c1)}v}^2 
     \qquad
-    f_d = \frac{1}{2} \rho A C_d v^2 
+    {\color{var(--c2)}f_d} = \frac{1}{2} \rho A C_d {\color{var(--c1)}v}^2 
 $$
 
 Onde:
@@ -27,7 +27,7 @@ Onde:
 - $A$ - Área de superfície ($m^2$)
 - $C_l$ - Coeficiente de sustentação (adimensional)
 - $C_d$ - Coeficiente de arrasto (adimensional)
-- $v$ - Velocidade linear do aerofólio ($m/s$)
+- ${\color{var(--c1)}v}$ - Velocidade linear do aerofólio ($m/s$)
 
 ### Coeficientes aerodinâmicos
 
@@ -35,15 +35,16 @@ Os coeficientes de sustentação e arrasto não são constantes, eles variam con
 
 - Ângulo de ataque ($\alpha$), que é o ângulo que a linha média do aerofólio (também chamada de ``corda'') faz com o vetor velocidade
 - Número de Reynolds ($\frac{\rho v D}{\mu}$), que é uma medida adimensional e define o regime de escoamento do ar (laminar ou turbulento)
-- Número Mach ($\frac{v}{v_s}$), que é a razão entre a velocidade e a velocidade do som e define o regime de velocidade (subsônica, supersônica e hipersônica)
+- Número Mach ($\frac{\color{var(--c1)}v}{v_s}$), que é a razão entre a velocidade e a velocidade do som e define o regime de velocidade (subsônica, supersônica e hipersônica)
 
-Para aerofólios que se movem a velocidades subsônicas ($<1.000km/h$), apenas o ângulo de ataque $\alpha$, representado na figura abaixo, acaba apresentando uma influência significativa.
+Para aerofólios que se movem a velocidades subsônicas (${\color{var(--c1)}v}<1.000km/h$), apenas o ângulo de ataque $\alpha$, representado na figura abaixo, acaba apresentando uma influência significativa.
 
 ![Airfoil2](images/airfoil2.svg){: width="400" style="display: block; margin: auto;" }
 
-Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados[^1] pelo gráfico abaixo.
+Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados(1) pelo gráfico abaixo.
+{.annotate}
 
-[^1]: Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.
+1. Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.
 
 ![ClarkY](images/clarky.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -51,14 +52,13 @@ Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coefici
 
 !!! question "Exercício 1"
 
-    Para consolidar esses conceitos, considere um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características[^2]:
-    
-    [^2]: Considere $g = 9,81\text{m/s}^2$ e $\rho = 1,225\text{kg/m}^3$
+    Para consolidar esses conceitos, considere um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características:
     
     - Massa de $40g$ e comprimento de $10cm$
     - Asas perfil Clark Y com $10cm$ de envergadura
     - Propulsores com $60\%$ de eficiência 
     - Bateria de $3,7V$ e $350mAh$
+    - Adote $g = 9,81\text{m/s}^2$ e $\rho = 1,225\text{kg/m}^3$
         
     ??? info "a) Desenhe o diagrama de corpo livre das forças que atuam nesse drone"
 
@@ -146,10 +146,10 @@ Quando a hélice rotaciona, surgem forças de sustentação e arrasto em cada um
 Onde:
 
 - $d$ - Distância do centro de pressão ao eixo de rotação ($m$)
-- $\omega$ - Velocidade angular da hélice ($rad/s$)
+- ${\color{var(--c1)}\omega}$ - Velocidade angular da hélice ($rad/s$)
 
 !!! question "Exercício 2"
-    Determine as forças de sustentação $f_l$ e arrasto $f_d$ nas pás da hélice em função de sua velocidade angular
+    Determine as forças de sustentação ${\color{var(--c2)}f_l}$ e arrasto ${\color{var(--c2)}f_d}$ nas pás da hélice em função de sua velocidade angular ${\color{var(--c1)}\omega}$
     ??? info "Resposta"
         $$
         \begin{align*}
@@ -172,7 +172,7 @@ As forças de sustentação e arrasto em cada uma das pás podem ser representad
 ![Propeller2](images/propeller2.svg){: width="400" style="display: block; margin: auto;" }
 
 !!! question "Exercício 3"
-    Determine a força de sustentação $f$ e torque de arrasto $\tau$ da hélice
+    Determine a força de sustentação ${\color{var(--c2)}f}$ e torque de arrasto ${\color{var(--c2)}\tau}$ da hélice
     ??? info "Resposta"
         $$
         \begin{align*}
@@ -190,12 +190,12 @@ As forças de sustentação e arrasto em cada uma das pás podem ser representad
         \end{align*}
         $$
 
-Como todos os parâmetros são constantes e apenas a velocidade angular $\omega$ varia, a força de sustentação e torque de arrasto de uma hélice podem ser simplificados por:
+Como todos os parâmetros são constantes e apenas a velocidade angular ${\color{var(--c1)}\omega}$ varia, a força de sustentação e torque de arrasto de uma hélice podem ser simplificados por:
 
 $$
-f = \underbrace{\rho A C_l d^2}_{k_l} \omega^2 
+{\color{var(--c2)}f} = \underbrace{\rho A C_l d^2}_{k_l} {\color{var(--c1)}\omega}^2 
 \qquad
-\tau = \underbrace{\rho A C_d d^3}_{k_d} \omega^2 
+{\color{var(--c2)}\tau} = \underbrace{\rho A C_d d^3}_{k_d} {\color{var(--c1)}\omega}^2 
 $$
 
 Onde:
@@ -210,16 +210,17 @@ Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice pro
 ![Propeller3](images/propeller3.svg){: width="350" style="display: block; margin: auto;" }
 
 $$
-f = k_l \omega^2 
+{\color{var(--c2)}f} = k_l {\color{var(--c1)}\omega}^2 
 \qquad
-\tau = k_d \omega^2 
+{\color{var(--c2)}\tau} = k_d {\color{var(--c1)}\omega}^2 
 $$
 
 !!! question "Exercício 4"
-    Com o auxílio de uma régua, estime[^3] as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque $\alpha = 5^\circ$, sendo a constante de sustentação igual, porém a constante de arrasto 10x maior[^4]. 
+    Com o auxílio de uma régua, estime(1) as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque $\alpha = 5^\circ$, sendo a constante de sustentação igual, porém a constante de arrasto 10x maior(2).
+    {.annotate} 
 
-    [^3]: Estamos preocupados apenas com a ordem de grandeza dos resultados.
-    [^4]: Devido à turbulência gerada pela hélice.
+    1. Estamos preocupados apenas com a ordem de grandeza dos resultados.
+    2. Devido à turbulência gerada pela hélice.
 
     ??? info "Resposta"
         $$
@@ -254,12 +255,13 @@ Esses dois parâmetros serão determinados experimentalmente ([$k_l$](../identif
 
 !!! question "Exercício 5"
 
-    Para consolidar esses conceitos, considere um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características[^2]:
+    Para consolidar esses conceitos, considere um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características:
         
     - Massa de $40g$
     - Hélices com constante de sustentação de $2,0\times10^{-8} \text{N}.\text{s}^2/\text{rad}^2$ e constante de arrasto de $2,0\times10^{-10} \text{N}.\text{m}.\text{s}^2\text{/rad}^2$
     - Motores elétricos com $90\%$ de eficiência 
     - Bateria de $3,7V$ e $350mAh$
+    - Adote $g = 9,81\text{m/s}^2$ e $\rho = 1,225\text{kg/m}^3$
         
     ??? info "a) Desenhe o diagrama de corpo livre das forças que atuam nesse drone"
 

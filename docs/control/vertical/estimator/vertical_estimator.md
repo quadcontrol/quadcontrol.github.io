@@ -294,6 +294,13 @@ $$
 z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
 $$
 
+$$
+{\color{var(--c1)}z[k+1]} = \underbrace{{\color{var(--c1)}z[k]}}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
+$$
+
+
+
+
 - A parte de predição "prevê" o valor com base no modelo (neste caso, de que a posição vertical permanece constante)
 - A parte de correção "corrige" o valor com base na medição (neste caso, a diferença entre a posição medida e prevista)
 

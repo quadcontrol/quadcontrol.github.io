@@ -1373,11 +1373,11 @@
 <h3 id="forcas-aerodinamicas">Forças aerodinâmicas</h3>
 <p>A figura abaixo mostra a secção transversal de um aerofólio, um corpo teórico moldado para produzir sustentação quando colocado em um fluxo de ar.</p>
 <p><img alt="Airfoil1" src="../images/airfoil1.svg" style="display: block; margin: auto;" width="400" /></p>
-<p>Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação <span class="arithmatex">\(f_l\)</span> (perpendicular à velocidade <span class="arithmatex">\(v\)</span>), ele também produz uma força indesejada de arrasto <span class="arithmatex">\(f_d\)</span> (paralela à velocidade <span class="arithmatex">\(v\)</span>):
+<p>Apesar de um aerofólio ser projetado para produzir uma força desejada de sustentação <span class="arithmatex">\({\color{var(--c2)}f_l}\)</span> (perpendicular à velocidade <span class="arithmatex">\({\color{var(--c1)}v}\)</span>), ele também produz uma força indesejada de arrasto <span class="arithmatex">\({\color{var(--c2)}f_d}\)</span> (paralela à velocidade <span class="arithmatex">\({\color{var(--c1)}v}\)</span>):
 $$
-    {\color{lightgreen}f_l} = \frac{1}{2} \rho A C_l v^2 
+    {\color{var(--c2)}f_l} = \frac{1}{2} \rho A C_l {\color{var(--c1)}v}^2 
     \qquad
-    f_d = \frac{1}{2} \rho A C_d v^2 
+    {\color{var(--c2)}f_d} = \frac{1}{2} \rho A C_d {\color{var(--c1)}v}^2 
 $$</p>
 <p>Onde:</p>
 <ul>
@@ -1385,28 +1385,32 @@ $$</p>
 <li><span class="arithmatex">\(A\)</span> - Área de superfície (<span class="arithmatex">\(m^2\)</span>)</li>
 <li><span class="arithmatex">\(C_l\)</span> - Coeficiente de sustentação (adimensional)</li>
 <li><span class="arithmatex">\(C_d\)</span> - Coeficiente de arrasto (adimensional)</li>
-<li><span class="arithmatex">\(v\)</span> - Velocidade linear do aerofólio (<span class="arithmatex">\(m/s\)</span>)</li>
+<li><span class="arithmatex">\({\color{var(--c1)}v}\)</span> - Velocidade linear do aerofólio (<span class="arithmatex">\(m/s\)</span>)</li>
 </ul>
 <h3 id="coeficientes-aerodinamicos">Coeficientes aerodinâmicos</h3>
 <p>Os coeficientes de sustentação e arrasto não são constantes, eles variam conforme as seguintes condições aerodinâmicas:</p>
 <ul>
 <li>Ângulo de ataque (<span class="arithmatex">\(\alpha\)</span>), que é o ângulo que a linha média do aerofólio (também chamada de ``corda'') faz com o vetor velocidade</li>
 <li>Número de Reynolds (<span class="arithmatex">\(\frac{\rho v D}{\mu}\)</span>), que é uma medida adimensional e define o regime de escoamento do ar (laminar ou turbulento)</li>
-<li>Número Mach (<span class="arithmatex">\(\frac{v}{v_s}\)</span>), que é a razão entre a velocidade e a velocidade do som e define o regime de velocidade (subsônica, supersônica e hipersônica)</li>
+<li>Número Mach (<span class="arithmatex">\(\frac{\color{var(--c1)}v}{v_s}\)</span>), que é a razão entre a velocidade e a velocidade do som e define o regime de velocidade (subsônica, supersônica e hipersônica)</li>
 </ul>
-<p>Para aerofólios que se movem a velocidades subsônicas (<span class="arithmatex">\(&lt;1.000km/h\)</span>), apenas o ângulo de ataque <span class="arithmatex">\(\alpha\)</span>, representado na figura abaixo, acaba apresentando uma influência significativa.</p>
+<p>Para aerofólios que se movem a velocidades subsônicas (<span class="arithmatex">\({\color{var(--c1)}v}&lt;1.000km/h\)</span>), apenas o ângulo de ataque <span class="arithmatex">\(\alpha\)</span>, representado na figura abaixo, acaba apresentando uma influência significativa.</p>
 <p><img alt="Airfoil2" src="../images/airfoil2.svg" style="display: block; margin: auto;" width="400" /></p>
-<p>Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> pelo gráfico abaixo.</p>
+<p class="annotate">Há diversos perfils diferentes para um aerfofólio. Um bastante conhecido e utilizado é o perfil Clark Y, cujos coeficientes de arrasto e sustentação em função do ângulo de ataque são bem conhecidos e dados(1) pelo gráfico abaixo.</p>
+<ol>
+<li>Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.</li>
+</ol>
 <p><img alt="ClarkY" src="../images/clarky.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coeficiente de sustentação tem um ponto máximo (<span class="arithmatex">\(\alpha=18^{\circ}\)</span>). Esse ponto é conhecido como "estol" ou simplesmente "perda de sustentação", e ele ocorre quando o fluxo de ar descola da asa (deixa de seguir o contorno superior da asa gerando uma turbulência). Note que o coeficiente de sustentação é nulo com uma leve inclinação negativa (<span class="arithmatex">\(\alpha=-5^{\circ}\)</span>), e negativo abaixo disso.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
-<p>Para consolidar esses conceitos, considere um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<p>Para consolidar esses conceitos, considere um drone de asas fixas (asa voadora) em cruzeiro, isto é, voando no plano com velocidade constante e as seguintes características:</p>
 <ul>
 <li>Massa de <span class="arithmatex">\(40g\)</span> e comprimento de <span class="arithmatex">\(10cm\)</span></li>
 <li>Asas perfil Clark Y com <span class="arithmatex">\(10cm\)</span> de envergadura</li>
 <li>Propulsores com <span class="arithmatex">\(60\%\)</span> de eficiência </li>
 <li>Bateria de <span class="arithmatex">\(3,7V\)</span> e <span class="arithmatex">\(350mAh\)</span></li>
+<li>Adote <span class="arithmatex">\(g = 9,81\text{m/s}^2\)</span> e <span class="arithmatex">\(\rho = 1,225\text{kg/m}^3\)</span></li>
 </ul>
 <details class="info">
 <summary>a) Desenhe o diagrama de corpo livre das forças que atuam nesse drone</summary>
@@ -1495,11 +1499,11 @@ $$</p>
 <p>Onde:</p>
 <ul>
 <li><span class="arithmatex">\(d\)</span> - Distância do centro de pressão ao eixo de rotação (<span class="arithmatex">\(m\)</span>)</li>
-<li><span class="arithmatex">\(\omega\)</span> - Velocidade angular da hélice (<span class="arithmatex">\(rad/s\)</span>)</li>
+<li><span class="arithmatex">\({\color{var(--c1)}\omega}\)</span> - Velocidade angular da hélice (<span class="arithmatex">\(rad/s\)</span>)</li>
 </ul>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
-<p>Determine as forças de sustentação <span class="arithmatex">\(f_l\)</span> e arrasto <span class="arithmatex">\(f_d\)</span> nas pás da hélice em função de sua velocidade angular</p>
+<p>Determine as forças de sustentação <span class="arithmatex">\({\color{var(--c2)}f_l}\)</span> e arrasto <span class="arithmatex">\({\color{var(--c2)}f_d}\)</span> nas pás da hélice em função de sua velocidade angular <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span></p>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
@@ -1522,7 +1526,7 @@ $$</p>
 <p><img alt="Propeller2" src="../images/propeller2.svg" style="display: block; margin: auto;" width="400" /></p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 3</p>
-<p>Determine a força de sustentação <span class="arithmatex">\(f\)</span> e torque de arrasto <span class="arithmatex">\(\tau\)</span> da hélice</p>
+<p>Determine a força de sustentação <span class="arithmatex">\({\color{var(--c2)}f}\)</span> e torque de arrasto <span class="arithmatex">\({\color{var(--c2)}\tau}\)</span> da hélice</p>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
@@ -1541,11 +1545,11 @@ $$</p>
 \]</div>
 </details>
 </div>
-<p>Como todos os parâmetros são constantes e apenas a velocidade angular <span class="arithmatex">\(\omega\)</span> varia, a força de sustentação e torque de arrasto de uma hélice podem ser simplificados por:</p>
+<p>Como todos os parâmetros são constantes e apenas a velocidade angular <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span> varia, a força de sustentação e torque de arrasto de uma hélice podem ser simplificados por:</p>
 <div class="arithmatex">\[
-f = \underbrace{\rho A C_l d^2}_{k_l} \omega^2 
+{\color{var(--c2)}f} = \underbrace{\rho A C_l d^2}_{k_l} {\color{var(--c1)}\omega}^2 
 \qquad
-\tau = \underbrace{\rho A C_d d^3}_{k_d} \omega^2 
+{\color{var(--c2)}\tau} = \underbrace{\rho A C_d d^3}_{k_d} {\color{var(--c1)}\omega}^2 
 \]</div>
 <p>Onde:</p>
 <ul>
@@ -1556,13 +1560,17 @@ f = \underbrace{\rho A C_l d^2}_{k_l} \omega^2
 <p>Ou seja, apenas dois parâmetros definem a força e o torque que uma hélice produz, que dependem do quadrado de sua velocidade angular:</p>
 <p><img alt="Propeller3" src="../images/propeller3.svg" style="display: block; margin: auto;" width="350" /></p>
 <div class="arithmatex">\[
-f = k_l \omega^2 
+{\color{var(--c2)}f} = k_l {\color{var(--c1)}\omega}^2 
 \qquad
-\tau = k_d \omega^2 
+{\color{var(--c2)}\tau} = k_d {\color{var(--c1)}\omega}^2 
 \]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 4</p>
-<p>Com o auxílio de uma régua, estime<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque <span class="arithmatex">\(\alpha = 5^\circ\)</span>, sendo a constante de sustentação igual, porém a constante de arrasto 10x maior<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. </p>
+<p class="annotate">Com o auxílio de uma régua, estime(1) as constantes aerodinâmicas das hélices do Bitcraze Crazyflie e anote elas abaixo. Assuma que a hélice pode ser aproximada a um perfil Clark Y com ângulo de ataque <span class="arithmatex">\(\alpha = 5^\circ\)</span>, sendo a constante de sustentação igual, porém a constante de arrasto 10x maior(2).</p>
+<ol>
+<li>Estamos preocupados apenas com a ordem de grandeza dos resultados.</li>
+<li>Devido à turbulência gerada pela hélice.</li>
+</ol>
 <details class="info">
 <summary>Resposta</summary>
 <div class="arithmatex">\[
@@ -1595,12 +1603,13 @@ f = k_l \omega^2
 <p>Esses dois parâmetros serão determinados experimentalmente (<a href="../../identification/lift_constant/"><span class="arithmatex">\(k_l\)</span></a> e <a href="../../identification/drag_constant/"><span class="arithmatex">\(k_d\)</span></a>), e você verá que a chegará em valores muito próximos aos estimados acima.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 5</p>
-<p>Para consolidar esses conceitos, considere um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<p>Para consolidar esses conceitos, considere um drone multi-rotor (quadricoptero) pairando no ar, isto é, parado no espaço com as seguintes características:</p>
 <ul>
 <li>Massa de <span class="arithmatex">\(40g\)</span></li>
 <li>Hélices com constante de sustentação de <span class="arithmatex">\(2,0\times10^{-8} \text{N}.\text{s}^2/\text{rad}^2\)</span> e constante de arrasto de <span class="arithmatex">\(2,0\times10^{-10} \text{N}.\text{m}.\text{s}^2\text{/rad}^2\)</span></li>
 <li>Motores elétricos com <span class="arithmatex">\(90\%\)</span> de eficiência </li>
 <li>Bateria de <span class="arithmatex">\(3,7V\)</span> e <span class="arithmatex">\(350mAh\)</span></li>
+<li>Adote <span class="arithmatex">\(g = 9,81\text{m/s}^2\)</span> e <span class="arithmatex">\(\rho = 1,225\text{kg/m}^3\)</span></li>
 </ul>
 <details class="info">
 <summary>a) Desenhe o diagrama de corpo livre das forças que atuam nesse drone</summary>
@@ -1663,23 +1672,6 @@ f = k_l \omega^2
 </details>
 </div>
 <p>Compare este resultado, do drone multi rotor, com o anterior, do drone de asas fixa. Note como o drone de asa fixa consegue permanecer muito mais tempo no ar (&gt;10x), com a desvatagem de não conseguir permanecer parado e nem decolar/pousar na vertical como um drone multi-rotor.</p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Assumindo que o número de Reynolds e o número Mach permaneçam dentro de uma determinada faixa de valores.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>Considere <span class="arithmatex">\(g = 9,81\text{m/s}^2\)</span> e <span class="arithmatex">\(\rho = 1,225\text{kg/m}^3\)</span>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:3">
-<p>Estamos preocupados apenas com a ordem de grandeza dos resultados.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-<li id="fn:4">
-<p>Devido à turbulência gerada pela hélice.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
 
 
 

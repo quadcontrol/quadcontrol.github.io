@@ -1273,9 +1273,9 @@
 <p>O voo de um drone depende diretamente das forças e torques gerados pelos motores. Aqui, você vai entender como esses efeitos se combinam para movimentar o quadricóptero no espaço.</p>
 <hr />
 <h2 id="movimentos-basicos-de-um-quadricoptero">Movimentos básicos de um quadricóptero</h2>
-<p>Um quadricóptero possui 4 hélices que, uma vez em movimento com velocidades angulares <span class="arithmatex">\(\omega_1\)</span>, <span class="arithmatex">\(\omega_2\)</span>, <span class="arithmatex">\(\omega_3\)</span> e <span class="arithmatex">\(\omega_4\)</span>, produzem 4 forças de sustentação <span class="arithmatex">\(f_1\)</span>, <span class="arithmatex">\(f_2\)</span>, <span class="arithmatex">\(f_3\)</span> e <span class="arithmatex">\(f_4\)</span> e 4 torques de arrasto <span class="arithmatex">\(\tau_1\)</span>, <span class="arithmatex">\(\tau_2\)</span>, <span class="arithmatex">\(\tau_3\)</span> e <span class="arithmatex">\(\tau_4\)</span>, conforme a figura abaixo.</p>
+<p>Um quadricóptero possui quatro hélices que, uma vez em movimento com velocidades angulares <span class="arithmatex">\({\color{var(--c1)}\omega_1}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_2}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_3}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\omega_4}\)</span>, produzem quatro forças de sustentação <span class="arithmatex">\({\color{var(--c2)}f_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_3}\)</span> e <span class="arithmatex">\({\color{var(--c2)}f_4}\)</span> e quatro torques de arrasto <span class="arithmatex">\({\color{var(--c2)}\tau_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_3}\)</span> e <span class="arithmatex">\({\color{var(--c2)}\tau_4}\)</span>, conforme a figura abaixo.</p>
 <p><img alt="Quadcopter1" src="../images/quadcopter1.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>Para um quadricóptero se movimentar verticalmente, basta variar as velocidades angulares das 4 hélices simultaneamente, conforme a figura abaixo.</p>
+<p>Para um quadricóptero se movimentar verticalmente, basta variar as velocidades angulares das quatro hélices simultaneamente, conforme a figura abaixo.</p>
 <p>Enquanto que, para um quadricóptero rotacionar em torno de seus eixos, basta variar as velocidades angulares de 2 hélices simultaneamente, conforme a figura abaixo.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
@@ -1299,31 +1299,31 @@
 </div>
 <hr />
 <h2 id="transformacao-de-entradas">Transformação de entradas</h2>
-<p>As 4 forças <span class="arithmatex">\(f_i\)</span> e 4 torques <span class="arithmatex">\(\tau_i\)</span> das hélices podem ser representadas por 1 única força de propulsão total <span class="arithmatex">\(f_t\)</span> e 3 torques <span class="arithmatex">\(\tau_x\)</span>, <span class="arithmatex">\(\tau_y\)</span> e <span class="arithmatex">\(\tau_z\)</span>, um em torno de cada eixo do quadricóptero, conforme a figura abaixo.</p>
+<p>As quatro forças e quatro torques de cada uma das hélices podem ser representadas por uma única força de propulsão total <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> e três torques <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span> e <span class="arithmatex">\({\color{var(--c2)}\tau_z}\)</span>, um em torno de cada eixo do quadricóptero, conforme a figura abaixo.</p>
 <p><img alt="Quadcopter2" src="../images/quadcopter2.svg" style="display: block; margin: auto;" width="500" /></p>
 <p>Na secção de <a href="../aerodynamics/">aerodinâmica</a> verificamos que as forças e torques das hélices são proporcionais ao quadrado de suas velocidades angulares:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    f_i = k_l \omega_i^2 \\
-    \tau_i = k_d \omega_i^2 \\
+    {\color{var(--c2)}f_i} = k_l {\color{var(--c1)}\omega_i}^2 \\
+   {\color{var(--c2)}\tau_i} = k_d {\color{var(--c1)}\omega_i}^2 \\
 \end{array}
 \right.
 \]</div>
-<p>Isso significa que as 4 equações determinadas anteriormente podem ser escritas no formato matricial:</p>
+<p>Isso significa que as quatro equações determinadas anteriormente podem ser escritas no formato matricial:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
-    f_t \\
-    \tau_x \\
-    \tau_y \\
-    \tau_z
+    {\color{var(--c2)}f_t} \\
+    {\color{var(--c2)}\tau_x} \\
+    {\color{var(--c2)}\tau_y} \\
+    {\color{var(--c2)}\tau_z}
 \end{bmatrix}
 = M 
 \begin{bmatrix}
-    \omega_1^2 \\
-    \omega_2^2 \\
-    \omega_3^2 \\
-    \omega_4^2
+    {\color{var(--c1)}\omega_1}^2 \\
+    {\color{var(--c1)}\omega_2}^2 \\
+    {\color{var(--c1)}\omega_3}^2 \\
+    {\color{var(--c1)}\omega_4}^2
 \end{bmatrix}
 \]</div>
 <p>Onde <span class="arithmatex">\(M\)</span> é uma matriz <span class="arithmatex">\(4\times4\)</span> que transforma as velocidades angulares das hélices na força total e nos torques de um quadricóptero.</p>
@@ -1346,17 +1346,17 @@ M =
 <p>Para obter as velocidades angulares das hélices em função da força total e dos torques, basta multiplicar a equação anterior pela matriz inversa <span class="arithmatex">\(M^{-1}\)</span>:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
-    \omega_1^2 \\
-    \omega_2^2 \\
-    \omega_3^2 \\
-    \omega_4^2
+    {\color{var(--c1)}\omega_1}^2 \\
+    {\color{var(--c1)}\omega_2}^2 \\
+    {\color{var(--c1)}\omega_3}^2 \\
+    {\color{var(--c1)}\omega_4}^2
 \end{bmatrix}
 = M^{-1} 
 \begin{bmatrix}
-    f_t \\
-    \tau_x \\
-    \tau_y \\
-    \tau_z
+    {\color{var(--c2)}f_t} \\
+    {\color{var(--c2)}\tau_x} \\
+    {\color{var(--c2)}\tau_y} \\
+    {\color{var(--c2)}\tau_z}
 \end{bmatrix}
 \]</div>
 <div class="admonition question">

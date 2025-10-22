@@ -1663,46 +1663,46 @@
 <p>Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao sistema inercial. Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.</p>
 <div class="admonition question">
 <p class="admonition-title">2D</p>
-<p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e do ângulo de rolagem <span class="arithmatex">\(\phi\)</span>.</p>
+<p>Determine a posição vertical medida <span class="arithmatex">\({\color{var(--c3)}z_m}\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\({\color{var(--c3)}d}\)</span> e do ângulo de rolagem <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>.</p>
 <p><img alt="" src="../images/readings_range_2d.svg" style="display: block; margin: auto;" width="60%" /></p>
 <details class="info">
 <summary>Resposta</summary>
 <p><img alt="" src="../images/readings_range_2d_geometry.svg" style="display: block; margin: auto;" width="20%" /></p>
 <div class="arithmatex">\[
 \begin{align}
-    \cos\phi &amp;= \dfrac{z_m}{d} \\
-    z_m &amp;= d \cos\phi \\
+    \cos{\color{var(--c1)}\phi} &amp;= \dfrac{{\color{var(--c3)}z_m}}{{\color{var(--c3)}d}} \\
+    {\color{var(--c3)}z_m} &amp;= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi} \\
 \end{align}
 \]</div>
 </details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">3D</p>
-<p>Determine a posição vertical medida <span class="arithmatex">\(z_m\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e dos ângulos de rolagem <span class="arithmatex">\(\phi\)</span> e inclinação <span class="arithmatex">\(\theta\)</span>.</p>
+<p>Determine a posição vertical medida <span class="arithmatex">\({\color{var(--c3)}z_m}\)</span> a partir da leitura do sensor de proximidade <span class="arithmatex">\({\color{var(--c3)}d}\)</span> e dos ângulos de rolagem <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> e inclinação <span class="arithmatex">\({\color{var(--c1)}\theta}\)</span>.</p>
 <p><img alt="" src="../images/readings_range_3d.svg" style="display: block; margin: auto;" width="80%" /></p>
 <details class="info">
 <summary>Resposta</summary>
 <p><img alt="" src="../images/readings_range_3d_geometry.svg" style="display: block; margin: auto;" width="20%" /></p>
 <div class="arithmatex">\[
 \begin{align}
-    \cos\theta &amp;= \dfrac{z_m}{d'} \\
-    z_m &amp;= d' \cos\theta
+    \cos{\color{var(--c1)}\theta} &amp;= \dfrac{{\color{var(--c3)}z_m}}{d'} \\
+    {\color{var(--c3)}z_m} &amp;= d' \cos{\color{var(--c1)}\theta}
 \end{align}
 \]</div>
 <div class="arithmatex">\[
 \begin{align}
-    \cos\phi &amp;= \dfrac{d'}{d} \\
-    d' &amp;= d \cos\phi
+    \cos{\color{var(--c1)}\phi} &amp;= \dfrac{d'}{{\color{var(--c3)}d}} \\
+    d' &amp;= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi}
 \end{align}
 \]</div>
 <div class="arithmatex">\[
 \begin{align}
-    z_m &amp;= d \cos\phi \cos \theta 
+    {\color{var(--c3)}z_m} &amp;= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi} \cos {\color{var(--c1)}\theta} 
 \end{align}
 \]</div>
 </details>
 </div>
-<p>Inclua na função <code>verticalEstimator()</code> uma variável local <span class="arithmatex">\(z_m\)</span>, que corresponde ao valor medido a partir da leitura do sensor de proximidade <span class="arithmatex">\(d\)</span> e dos ângulos de rolagem <span class="arithmatex">\(\phi\)</span> e inclinação <span class="arithmatex">\(\theta\)</span> e, em seguida, atribua ela a distância vertical estimada <span class="arithmatex">\(z\)</span>.</p>
+<p>Inclua na função <code>verticalEstimator()</code> uma variável local <span class="arithmatex">\({\color{var(--c3)}z_m}\)</span>, que corresponde ao valor medido a partir da leitura do sensor de proximidade <span class="arithmatex">\({\color{var(--c3)}d}\)</span> e dos ângulos de rolagem <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> e inclinação <span class="arithmatex">\({\color{var(--c1)}\theta}\)</span> e, em seguida, atribua ela a distância vertical estimada <span class="arithmatex">\(z\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate vertical position/velocity from range sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">verticalEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1714,27 +1714,27 @@
 </span><span class="p">}</span>
 </code></pre></div>
 <p>Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.</p>
-<div class="admonition example">
+<div class="admonition info">
 <p class="admonition-title">Resultado esperado</p>
 <p>Você deve notar que estamos compensando corretamente alterações na orientação do drone. No entanto, a estimativa possui muito ruído. Ao invés de utilizarmos um filtro passa-baixas (como no estimador de atitude) para remover esse ruído, vamos utilizar agora um observador de estados.</p>
 </div>
 <h5 id="observador-de-estados">Observador de estados</h5>
 <p>Um observador de estados é um modelo que, a partir das entradas e saídas do sistema real (planta), estima internamente os seus estados.</p>
-<p>No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total <span class="arithmatex">\(f_t\)</span> e a posição vertical medida <span class="arithmatex">\(z_m\)</span>, e as saídas são a posição e velocidade verticais estimadas <span class="arithmatex">\(z\)</span> e <span class="arithmatex">\(v_z\)</span>, conforme diagrama de blocos abaixo:</p>
+<p>No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> e a posição vertical medida <span class="arithmatex">\({\color{var(--c3)}z_m}\)</span>, e as saídas são a posição e velocidade verticais estimadas <span class="arithmatex">\({\color{var(--c1)}z}\)</span> e <span class="arithmatex">\({\color{var(--c1)}v_z}\)</span>, conforme diagrama de blocos abaixo:</p>
 <p><img alt="" src="../images/state_observer.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Vamos projetar três observadores de estados na sequência um do outro. O primeiro será bem simples, de ordem 1. Em seguida, vamos torná-lo mais sofisticado, de ordem 2. Por fim, vamos considerar a entrada da planta em nosso observador.</p>
 <h6 id="observador-de-ordem-1">Observador de ordem 1</h6>
 <p>Vamos começar assumindo que o drone está parado, ou seja, sua posição vertical permanece constante:</p>
 <div class="arithmatex">\[
-z = \text{cte}
+{\color{var(--c1)}z} = \text{cte}
 \]</div>
 <p>Chamamos esse caso de observador de ordem 1, pois o modelo da planta é descrito por uma equação diferencial de primeira ordem:</p>
 <div class="arithmatex">\[
-\dot{z} = 0
+{\color{var(--c1)}\dot{z}} = 0
 \]</div>
 <p>Agora, se realimentarmos a diferença entre a posição vertical medida <span class="arithmatex">\(z_m\)</span> e a estimada <span class="arithmatex">\(z\)</span>, obtemos um sistema cuja estimativa converge exponencialmente para a medida, desde que o ganho do observador <span class="arithmatex">\(l\)</span> seja positivo:</p>
 <div class="arithmatex">\[
-\dot{z} = 0 + l \left( z_m - z \right)
+{\color{var(--c1)}\dot{z}}  = 0 + l \left( {\color{var(--c3)}z_m}  - {\color{var(--c1)}z}  \right)
 \]</div>
 <p><img alt="" src="../images/state_observer_order_1.svg" style="display: block; margin: auto;" width="70%" /></p>
 <p>Esse diagrama de blocos pode ser resumido em uma única função de transferência:</p>
@@ -1749,7 +1749,7 @@ l = \omega_c
 <li>
 <p>A expressão derivada é idêntica à que você já viu antes:</p>
 <div class="arithmatex">\[
-z[k+1] = \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} z[k] + \underbrace{l\Delta t}_{\alpha} z_m[k] 
+{\color{var(--c1)}z[k+1]} = \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} {\color{var(--c1)}z[k]} + \underbrace{l\Delta t}_{\alpha} {\color{var(--c3)}z_m[k]} 
 \]</div>
 <p>No entanto, o valor de <span class="arithmatex">\(\alpha\)</span> agora é dado por:</p>
 <div class="arithmatex">\[
@@ -1763,16 +1763,13 @@ l &lt; \frac{1}{\Delta t}
 </ol>
 <div class="arithmatex">\[
 \begin{align*}
-    \frac{z[k+1]-z[k]}{\Delta t} + lz[k] &amp;= l z_m[k] \\
-    z[k+1]-z[k] + l\Delta tz[k] &amp;= l\Delta t z_m[k] \\
-    z[k+1] - \left( 1 - l\Delta t \right) z[k] &amp;= l\Delta t z_m[k] \\
-    z[k+1] &amp;= \left(1-l\Delta t\right) z[k] + l\Delta t z_m[k] 
+    \frac{{\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]}}{\Delta t} + l{\color{var(--c1)}z[k]} &amp;= l {\color{var(--c3)}z_m[k]} \\
+    {\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]} + l\Delta t{\color{var(--c1)}z[k]} &amp;= l\Delta t {\color{var(--c3)}z_m[k]} \\
+    {\color{var(--c1)}z[k+1]} - \left( 1 - l\Delta t \right) {\color{var(--c1)}z[k]} &amp;= l\Delta t {\color{var(--c3)}z_m[k]} \\
+    {\color{var(--c1)}z[k+1]} &amp;= \left(1-l\Delta t\right) {\color{var(--c1)}z[k]} + l\Delta t {\color{var(--c3)}z_m[k]} 
 \end{align*}
 \]</div>
 <p>A equação discretizada pode ser reescrita de modo a evidenciar suas duas partes - uma de predição e outra de correção:</p>
-<div class="arithmatex">\[
-z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
-\]</div>
 <div class="arithmatex">\[
 {\color{var(--c1)}z[k+1]} = \underbrace{{\color{var(--c1)}z[k]}}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
 \]</div>
@@ -1786,8 +1783,8 @@ z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \
 </ol>
 <div class="arithmatex">\[
 \begin{align}
-    \text{Predição:} &amp;\quad z[k+1] = z[k] \\ \\
-    \text{Correção:} &amp;\quad z[k+1] = z[k+1] + l \Delta t \left(z_m[k] - z[k+1]\right)
+    \text{Predição:} &amp;\quad {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} \\ \\
+    \text{Correção:} &amp;\quad {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
 \end{align}
 \]</div>
 <p>Modifique sua função <code>verticalEstimator()</code> para que a distância vertical <span class="arithmatex">\(z\)</span> seja estimada por um observador de ordem 1 com as etapas de predição e correção.</p>
@@ -1809,25 +1806,25 @@ z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \
 </span><span class="p">}</span>
 </code></pre></div>
 Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)</span>rad/s e verifique como isso influencia na sua estimativa.</p>
-<div class="admonition example">
+<div class="admonition info">
 <p class="admonition-title">Resultado esperado</p>
 <p>Apesar da estimativa possuir bem menos ruído agora, ela está lenta quando movimentamos o drone. Isso ocorre pois nosso modelo assume que o drone está sempre parado, o que nem sempre é verdade. Para corrigir isso, vamos sofisticar um pouco nosso observador de estados.</p>
 </div>
 <h6 id="observador-de-ordem-2">Observador de ordem 2</h6>
 <p>Agora, vamos considerar que o drone está em movimento mas com velocidade constante:</p>
 <div class="arithmatex">\[
-\dot{z} = \text{cte}
+{\color{var(--c1)}\dot{z}} = \text{cte}
 \]</div>
 <p>Nesse caso, temos um observador de ordem 2, já que a planta é representada por uma equação diferencial de segunda ordem, ou seja, duas equações de primeira ordem encadeadas:</p>
 <div class="arithmatex">\[
-\ddot{z} = 0 
+{\color{var(--c1)}\ddot{z}} = 0 
 \qquad
 \longrightarrow
 \qquad
 \left\{
 \begin{array}{l}
-    \dot{z} = v_z \\
-    \dot{v}_z = 0
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+    {\color{var(--c1)}\dot{v}_z} = 0
 \end{array}{}
 \right.
 \]</div>
@@ -1835,8 +1832,8 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \dot{z} = v_z + l_1 \left( z_m - z \right) \\
-    \dot{v}_z = 0 + l_2 \left( z_m - z \right)
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} + l_1 \left( {\color{var(--c3)}z_m} - {\color{var(--c1)}z} \right) \\
+    {\color{var(--c1)}\dot{v}_z} = 0 + l_2 \left( {\color{var(--c3)}z_m} - {\color{var(--c1)}z} \right)
 \end{array}{}
 \right.
 \]</div>
@@ -1861,8 +1858,8 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 <div class="arithmatex">\[
 \left\{
 \begin{array}{rll}
-    z[k+1] =&amp; \overbrace{z[k] + v_z[k] \Delta t}^{\text{Predição}} &amp;+  \quad \overbrace{l_1 \Delta t \left[ z_m[k] - z[k] \right]}^{\text{Correção}} \\
-    v_z[k+1] =&amp; \underbrace{v_z[k]\qquad\qquad}_{\text{Predição}} &amp;+  \quad \underbrace{l_2 \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
+    {\color{var(--c1)}z[k+1]} =&amp; \overbrace{{\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t}^{\text{Predição}} &amp;+  \quad \overbrace{l_1 \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}^{\text{Correção}} \\
+    {\color{var(--c1)}v_z[k+1]} =&amp; \underbrace{{\color{var(--c1)}v_z[k]}\qquad\qquad}_{\text{Predição}} &amp;+  \quad \underbrace{l_2 \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
 \end{array}
 \right.
 \]</div>
@@ -1872,15 +1869,15 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
     \text{Predição:} &amp;\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k] + v_z[k] \Delta t \\
-        v_z[k+1] = v_z[k]
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k]}
     \end{array}
     \right.  \\ \\
     \text{Correção:} &amp;\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k+1] + l_1 \Delta t \left(z_m[k] - z[k+1]\right) \\
-        v_z[k+1] = v_z[k+1] + l_2 \Delta t \left(z_m[k] - z[k+1]\right)
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l_1 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right) \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k+1]} + l_2 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
     \end{array}
     \right.
 \end{align}
@@ -1911,21 +1908,21 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
 </span><span class="p">}</span>
 </code></pre></div>
 <p>Carregue esse programa no drone e utilize o Crazyflie Client para verificar como está sua nova estimativa.</p>
-<div class="admonition example">
+<div class="admonition info">
 <p class="admonition-title">Resultado esperado</p>
 <p>Sua estimativa deve estar muito melhor, filtrando ruídos e respondendo mais rápido a variações na velocidade. Além disso, agora estamos estimando também a velocidade vertical, que será essencial ao controlador a ser implementado.</p>
 </div>
 <h6 id="observador-de-ordem-2-com-entrada">Observador de ordem 2 (com entrada)</h6>
 <p>Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, depende das forças atuantes — o peso e o empuxo gerado pelos motores:</p>
 <div class="arithmatex">\[
-\ddot{z} = - g + \frac{f_t}{m}
+{\color{var(--c1)}\ddot{z}} = - g + \frac{{\color{var(--c2)}f_t}}{m}
 \]</div>
 <p>O observador permanece de ordem 2, mas inclui a entrada de controle:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \dot{z} = v_z \\
-    \dot{v}_z =  - g + \dfrac{f_t}{m}
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+    {\color{var(--c1)}\dot{v}_z} =  - g + \dfrac{{\color{var(--c2)}f_t}}{m}
 \end{array}{}
 \right.
 \]</div>
@@ -1937,15 +1934,15 @@ Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 10\)<
     \text{Predição:} &amp;\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k] + v_z[k] \Delta t \\
-        v_z[k+1] = v_z[k] + \left( - g + \dfrac{f_t[k]}{m} \right)  \Delta t
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k]} + \left( - g + \dfrac{{\color{var(--c2)}f_t[k]}}{m} \right)  \Delta t
     \end{array}
     \right.  \\ \\
     \text{Correção:} &amp;\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k+1] + l_1 \Delta t \left(z_m[k] - z[k+1]\right) \\
-        v_z[k+1] = v_z[k+1] + l_2 \Delta t \left(z_m[k] - z[k+1]\right)
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l_1 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right) \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k+1]} + l_2 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
     \end{array}
     \right.
 \end{align}

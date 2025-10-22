@@ -149,7 +149,7 @@ Embora o sensor de proximidade meça a distância ao solo no referencial do dron
 
 !!! question "2D"    
     
-    Determine a posição vertical medida $z_m$ a partir da leitura do sensor de proximidade $d$ e do ângulo de rolagem $\phi$.
+    Determine a posição vertical medida ${\color{var(--c3)}z_m}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$ e do ângulo de rolagem ${\color{var(--c1)}\phi}$.
 
     ![](images/readings_range_2d.svg){: width=60% style="display: block; margin: auto;" }
 
@@ -159,15 +159,15 @@ Embora o sensor de proximidade meça a distância ao solo no referencial do dron
 
         $$
         \begin{align}
-            \cos\phi &= \dfrac{z_m}{d} \\
-            z_m &= d \cos\phi \\
+            \cos{\color{var(--c1)}\phi} &= \dfrac{{\color{var(--c3)}z_m}}{{\color{var(--c3)}d}} \\
+            {\color{var(--c3)}z_m} &= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi} \\
         \end{align}
         $$
         
 
 !!! question "3D"    
     
-    Determine a posição vertical medida $z_m$ a partir da leitura do sensor de proximidade $d$ e dos ângulos de rolagem $\phi$ e inclinação $\theta$.
+    Determine a posição vertical medida ${\color{var(--c3)}z_m}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$ e dos ângulos de rolagem ${\color{var(--c1)}\phi}$ e inclinação ${\color{var(--c1)}\theta}$.
 
     ![](images/readings_range_3d.svg){: width=80% style="display: block; margin: auto;" }
 
@@ -177,25 +177,25 @@ Embora o sensor de proximidade meça a distância ao solo no referencial do dron
         
         $$
         \begin{align}
-            \cos\theta &= \dfrac{z_m}{d'} \\
-            z_m &= d' \cos\theta
+            \cos{\color{var(--c1)}\theta} &= \dfrac{{\color{var(--c3)}z_m}}{d'} \\
+            {\color{var(--c3)}z_m} &= d' \cos{\color{var(--c1)}\theta}
         \end{align}
         $$
 
         $$
         \begin{align}
-            \cos\phi &= \dfrac{d'}{d} \\
-            d' &= d \cos\phi
+            \cos{\color{var(--c1)}\phi} &= \dfrac{d'}{{\color{var(--c3)}d}} \\
+            d' &= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi}
         \end{align}
         $$
 
         $$
         \begin{align}
-            z_m &= d \cos\phi \cos \theta 
+            {\color{var(--c3)}z_m} &= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi} \cos {\color{var(--c1)}\theta} 
         \end{align}
         $$
         
-Inclua na função `verticalEstimator()` uma variável local $z_m$, que corresponde ao valor medido a partir da leitura do sensor de proximidade $d$ e dos ângulos de rolagem $\phi$ e inclinação $\theta$ e, em seguida, atribua ela a distância vertical estimada $z$.
+Inclua na função `verticalEstimator()` uma variável local ${\color{var(--c3)}z_m}$, que corresponde ao valor medido a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$ e dos ângulos de rolagem ${\color{var(--c1)}\phi}$ e inclinação ${\color{var(--c1)}\theta}$ e, em seguida, atribua ela a distância vertical estimada $z$.
 
 ```c hl_lines="5 8"
 // Estimate vertical position/velocity from range sensor
@@ -211,14 +211,14 @@ void verticalEstimator()
 
 Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.
 
-!!! example "Resultado esperado"        
+!!! info "Resultado esperado"        
     Você deve notar que estamos compensando corretamente alterações na orientação do drone. No entanto, a estimativa possui muito ruído. Ao invés de utilizarmos um filtro passa-baixas (como no estimador de atitude) para remover esse ruído, vamos utilizar agora um observador de estados.
 
 ##### Observador de estados
 
 Um observador de estados é um modelo que, a partir das entradas e saídas do sistema real (planta), estima internamente os seus estados.
     
-No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total $f_t$ e a posição vertical medida $z_m$, e as saídas são a posição e velocidade verticais estimadas $z$ e $v_z$, conforme diagrama de blocos abaixo:
+No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total ${\color{var(--c2)}f_t}$ e a posição vertical medida ${\color{var(--c3)}z_m}$, e as saídas são a posição e velocidade verticais estimadas ${\color{var(--c1)}z}$ e ${\color{var(--c1)}v_z}$, conforme diagrama de blocos abaixo:
 
 ![](images/state_observer.svg){: width=70% style="display: block; margin: auto;" }
 
@@ -229,19 +229,19 @@ Vamos projetar três observadores de estados na sequência um do outro. O primei
 Vamos começar assumindo que o drone está parado, ou seja, sua posição vertical permanece constante:
 
 $$
-z = \text{cte}
+{\color{var(--c1)}z} = \text{cte}
 $$
 
 Chamamos esse caso de observador de ordem 1, pois o modelo da planta é descrito por uma equação diferencial de primeira ordem:
 
 $$
-\dot{z} = 0
+{\color{var(--c1)}\dot{z}} = 0
 $$
 
 Agora, se realimentarmos a diferença entre a posição vertical medida $z_m$ e a estimada $z$, obtemos um sistema cuja estimativa converge exponencialmente para a medida, desde que o ganho do observador $l$ seja positivo:
         
 $$
-\dot{z} = 0 + l \left( z_m - z \right)
+{\color{var(--c1)}\dot{z}}  = 0 + l \left( {\color{var(--c3)}z_m}  - {\color{var(--c1)}z}  \right)
 $$
 
 ![](images/state_observer_order_1.svg){: width=70% style="display: block; margin: auto;" }
@@ -264,7 +264,7 @@ Como o observador será implementado em um microcontrolador, precisamos encontra
 1. A expressão derivada é idêntica à que você já viu antes:
 
     $$
-    z[k+1] = \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} z[k] + \underbrace{l\Delta t}_{\alpha} z_m[k] 
+    {\color{var(--c1)}z[k+1]} = \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} {\color{var(--c1)}z[k]} + \underbrace{l\Delta t}_{\alpha} {\color{var(--c3)}z_m[k]} 
     $$
  
     No entanto, o valor de $\alpha$ agora é dado por:
@@ -281,18 +281,14 @@ Como o observador será implementado em um microcontrolador, precisamos encontra
 
 $$
 \begin{align*}
-    \frac{z[k+1]-z[k]}{\Delta t} + lz[k] &= l z_m[k] \\
-    z[k+1]-z[k] + l\Delta tz[k] &= l\Delta t z_m[k] \\
-    z[k+1] - \left( 1 - l\Delta t \right) z[k] &= l\Delta t z_m[k] \\
-    z[k+1] &= \left(1-l\Delta t\right) z[k] + l\Delta t z_m[k] 
+    \frac{{\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]}}{\Delta t} + l{\color{var(--c1)}z[k]} &= l {\color{var(--c3)}z_m[k]} \\
+    {\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]} + l\Delta t{\color{var(--c1)}z[k]} &= l\Delta t {\color{var(--c3)}z_m[k]} \\
+    {\color{var(--c1)}z[k+1]} - \left( 1 - l\Delta t \right) {\color{var(--c1)}z[k]} &= l\Delta t {\color{var(--c3)}z_m[k]} \\
+    {\color{var(--c1)}z[k+1]} &= \left(1-l\Delta t\right) {\color{var(--c1)}z[k]} + l\Delta t {\color{var(--c3)}z_m[k]} 
 \end{align*}
 $$
 
 A equação discretizada pode ser reescrita de modo a evidenciar suas duas partes - uma de predição e outra de correção:
-
-$$
-z[k+1] = \underbrace{z[k]}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
-$$
 
 $$
 {\color{var(--c1)}z[k+1]} = \underbrace{{\color{var(--c1)}z[k]}}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
@@ -311,8 +307,8 @@ De forma equivalente, podemos representar o processo em duas etapas sequenciais,
 
 $$
 \begin{align}
-    \text{Predição:} &\quad z[k+1] = z[k] \\ \\
-    \text{Correção:} &\quad z[k+1] = z[k+1] + l \Delta t \left(z_m[k] - z[k+1]\right)
+    \text{Predição:} &\quad {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} \\ \\
+    \text{Correção:} &\quad {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
 \end{align}
 $$
 
@@ -338,7 +334,7 @@ void verticalEstimator()
 ```
 Experimente uma frequência de corte $\omega_c = 10$rad/s e verifique como isso influencia na sua estimativa.
 
-!!! example "Resultado esperado"        
+!!! info "Resultado esperado"        
     Apesar da estimativa possuir bem menos ruído agora, ela está lenta quando movimentamos o drone. Isso ocorre pois nosso modelo assume que o drone está sempre parado, o que nem sempre é verdade. Para corrigir isso, vamos sofisticar um pouco nosso observador de estados.
 
 ###### Observador de ordem 2
@@ -346,20 +342,20 @@ Experimente uma frequência de corte $\omega_c = 10$rad/s e verifique como isso 
 Agora, vamos considerar que o drone está em movimento mas com velocidade constante:
      
 $$
-\dot{z} = \text{cte}
+{\color{var(--c1)}\dot{z}} = \text{cte}
 $$
 
 Nesse caso, temos um observador de ordem 2, já que a planta é representada por uma equação diferencial de segunda ordem, ou seja, duas equações de primeira ordem encadeadas:
 
 $$
-\ddot{z} = 0 
+{\color{var(--c1)}\ddot{z}} = 0 
 \qquad
 \longrightarrow
 \qquad
 \left\{
 \begin{array}{l}
-    \dot{z} = v_z \\
-    \dot{v}_z = 0
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+    {\color{var(--c1)}\dot{v}_z} = 0
 \end{array}{}
 \right.
 $$
@@ -369,8 +365,8 @@ Agora, se realimentarmos a diferença entre a posição vertical medida $z_m$ e 
 $$
 \left\{
 \begin{array}{l}
-    \dot{z} = v_z + l_1 \left( z_m - z \right) \\
-    \dot{v}_z = 0 + l_2 \left( z_m - z \right)
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} + l_1 \left( {\color{var(--c3)}z_m} - {\color{var(--c1)}z} \right) \\
+    {\color{var(--c1)}\dot{v}_z} = 0 + l_2 \left( {\color{var(--c3)}z_m} - {\color{var(--c1)}z} \right)
 \end{array}{}
 \right.
 $$
@@ -407,8 +403,8 @@ Aplicando novamente o método de Euler, chegamos nas seguintes equações discre
 $$
 \left\{
 \begin{array}{rll}
-    z[k+1] =& \overbrace{z[k] + v_z[k] \Delta t}^{\text{Predição}} &+  \quad \overbrace{l_1 \Delta t \left[ z_m[k] - z[k] \right]}^{\text{Correção}} \\
-    v_z[k+1] =& \underbrace{v_z[k]\qquad\qquad}_{\text{Predição}} &+  \quad \underbrace{l_2 \Delta t \left[ z_m[k] - z[k] \right]}_{\text{Correção}}
+    {\color{var(--c1)}z[k+1]} =& \overbrace{{\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t}^{\text{Predição}} &+  \quad \overbrace{l_1 \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}^{\text{Correção}} \\
+    {\color{var(--c1)}v_z[k+1]} =& \underbrace{{\color{var(--c1)}v_z[k]}\qquad\qquad}_{\text{Predição}} &+  \quad \underbrace{l_2 \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
 \end{array}
 \right.
 $$
@@ -420,15 +416,15 @@ $$
     \text{Predição:} &\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k] + v_z[k] \Delta t \\
-        v_z[k+1] = v_z[k]
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k]}
     \end{array}
     \right.  \\ \\
     \text{Correção:} &\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k+1] + l_1 \Delta t \left(z_m[k] - z[k+1]\right) \\
-        v_z[k+1] = v_z[k+1] + l_2 \Delta t \left(z_m[k] - z[k+1]\right)
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l_1 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right) \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k+1]} + l_2 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
     \end{array}
     \right.
 \end{align}
@@ -465,7 +461,7 @@ void verticalEstimator()
 
 Carregue esse programa no drone e utilize o Crazyflie Client para verificar como está sua nova estimativa.
 
-!!! example "Resultado esperado"        
+!!! info "Resultado esperado"        
     Sua estimativa deve estar muito melhor, filtrando ruídos e respondendo mais rápido a variações na velocidade. Além disso, agora estamos estimando também a velocidade vertical, que será essencial ao controlador a ser implementado.
 
 ###### Observador de ordem 2 (com entrada)
@@ -473,7 +469,7 @@ Carregue esse programa no drone e utilize o Crazyflie Client para verificar como
 Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, depende das forças atuantes — o peso e o empuxo gerado pelos motores:
 
 $$
-\ddot{z} = - g + \frac{f_t}{m}
+{\color{var(--c1)}\ddot{z}} = - g + \frac{{\color{var(--c2)}f_t}}{m}
 $$
 
 O observador permanece de ordem 2, mas inclui a entrada de controle:
@@ -481,8 +477,8 @@ O observador permanece de ordem 2, mas inclui a entrada de controle:
 $$
 \left\{
 \begin{array}{l}
-    \dot{z} = v_z \\
-    \dot{v}_z =  - g + \dfrac{f_t}{m}
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+    {\color{var(--c1)}\dot{v}_z} =  - g + \dfrac{{\color{var(--c2)}f_t}}{m}
 \end{array}{}
 \right.
 $$
@@ -498,15 +494,15 @@ $$
     \text{Predição:} &\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k] + v_z[k] \Delta t \\
-        v_z[k+1] = v_z[k] + \left( - g + \dfrac{f_t[k]}{m} \right)  \Delta t
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k]} + \left( - g + \dfrac{{\color{var(--c2)}f_t[k]}}{m} \right)  \Delta t
     \end{array}
     \right.  \\ \\
     \text{Correção:} &\quad 
     \left\{
     \begin{array}{l}
-        z[k+1] = z[k+1] + l_1 \Delta t \left(z_m[k] - z[k+1]\right) \\
-        v_z[k+1] = v_z[k+1] + l_2 \Delta t \left(z_m[k] - z[k+1]\right)
+        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l_1 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right) \\
+        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k+1]} + l_2 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
     \end{array}
     \right.
 \end{align}

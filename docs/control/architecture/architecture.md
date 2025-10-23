@@ -1,3 +1,7 @@
+---
+icon: material/sitemap-outline
+---
+
 # Arquitetura
 
 Para controlar um drone, precisamos de uma arquitetura bem definida. Essa arquitetura estabelece como as informações dos sensores são processadas por estimadores, comparadas com as referências pelos controladores e, por fim, enviadas como comandos aos atuadores.

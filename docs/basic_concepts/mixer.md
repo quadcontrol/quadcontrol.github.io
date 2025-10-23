@@ -1,5 +1,4 @@
 ---
-title: Mixer
 icon: material/equalizer
 ---
 

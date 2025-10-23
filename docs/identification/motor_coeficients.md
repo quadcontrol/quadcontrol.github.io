@@ -1,3 +1,7 @@
+---
+icon: material/turbine
+---
+
 # Identificação dos coeficientes do motor
 
 Nesta secção, você irá determinar experimentalmente os coeficientes do motor elétrico.

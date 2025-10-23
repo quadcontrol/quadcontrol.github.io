@@ -8,6 +8,9 @@
     "Identificação",
     "Modelagem",
     "Controle",
+    "Atitude",
+    "Vertical",
+    "Horizontal",
     // "Início", // só adicione se quiser bloquear também
   ]);
 

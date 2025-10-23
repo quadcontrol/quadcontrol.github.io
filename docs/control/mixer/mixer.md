@@ -1,3 +1,7 @@
+---
+icon: material/equalizer
+---
+
 # Mixer
 
 Nesta secção você irá implementar o mixer, que converte as forças e torques totais produzidos pelas hélices $f_t$, $\tau_x$, $\tau_y$ e $\tau_z$ nos sinais PWM correspondentes dos motores.

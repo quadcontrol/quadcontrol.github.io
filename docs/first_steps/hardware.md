@@ -1,6 +1,6 @@
 ---
 title: Hardware
-icon: material/memory
+icon: material/quadcopter
 ---
 
 # Hardware

@@ -1,6 +1,5 @@
 ---
-title: Inércia
-icon: material/axis-arrow
+icon: material/axis-z-rotate-counterclockwise
 ---
 
 # Inércia

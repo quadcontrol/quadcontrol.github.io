@@ -1,6 +1,6 @@
 ---
 title: Firmware
-icon: material/chip
+icon: material/memory
 ---
 
 # Firmware

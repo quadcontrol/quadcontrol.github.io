@@ -1,3 +1,7 @@
+---
+icon: material/compass-outline
+---
+
 # Estimador vertical
 
 Nesta secção você irá implementar o estimador vertical, que estima a posição ${\color{var(--c1)}z}$ e velocidade ${\color{var(--c1)}v_z}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$.

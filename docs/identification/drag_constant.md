@@ -1,3 +1,7 @@
+---
+icon: material/arrow-left-bold-hexagon-outline
+---
+
 # Identificação da constante de arrasto
 
 Nesta secção, você irá determinar experimentalmente a constante de arrasto das hélices $k_d$.

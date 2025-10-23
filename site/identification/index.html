@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/control/horizontal/estimator/horizontal_estimator/">
+        <link rel="canonical" href="https://quadcontrol.io/identification/">
       
       
-        <link rel="prev" href="../../../vertical/controller/vertical_controller/">
+        <link rel="prev" href="../basic_concepts/inertia/">
       
       
-        <link rel="next" href="../../controller/horizontal_controller/">
+        <link rel="next" href="motor_coeficients/">
       
       
-      <link rel="icon" href="../../../../images/logo_black.png">
+      <link rel="icon" href="../images/logo_black.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Estimador horizontal - QuadControl</title>
+        <title>Modelagem - QuadControl</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/css/configure-colors.css">
+      <link rel="stylesheet" href="../assets/css/configure-colors.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -75,11 +75,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#estimador-horizontal" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -92,9 +87,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
+    <a href=".." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="../../../../images/logo.png" alt="logo">
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Estimador horizontal
+              Modelagem
             
           </span>
         </div>
@@ -201,9 +196,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
+    <a href=".." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="../../../../images/logo.png" alt="logo">
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     QuadControl
@@ -218,7 +213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -266,7 +261,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../first_steps/" class="md-nav__link ">
+            <a href="../first_steps/" class="md-nav__link ">
               
   
   
@@ -303,7 +298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../first_steps/hardware/" class="md-nav__link">
+      <a href="../first_steps/hardware/" class="md-nav__link">
         
   
   
@@ -328,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../first_steps/software/" class="md-nav__link">
+      <a href="../first_steps/software/" class="md-nav__link">
         
   
   
@@ -353,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../first_steps/firmware/" class="md-nav__link">
+      <a href="../first_steps/firmware/" class="md-nav__link">
         
   
   
@@ -407,7 +402,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../sensors_and_actuators/" class="md-nav__link ">
+            <a href="../sensors_and_actuators/" class="md-nav__link ">
               
   
   
@@ -444,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../sensors_and_actuators/motors/" class="md-nav__link">
+      <a href="../sensors_and_actuators/motors/" class="md-nav__link">
         
   
   
@@ -469,7 +464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../sensors_and_actuators/sensors/" class="md-nav__link">
+      <a href="../sensors_and_actuators/sensors/" class="md-nav__link">
         
   
   
@@ -525,7 +520,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../basic_concepts/" class="md-nav__link ">
+            <a href="../basic_concepts/" class="md-nav__link ">
               
   
   
@@ -562,7 +557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../basic_concepts/aerodynamics/" class="md-nav__link">
+      <a href="../basic_concepts/aerodynamics/" class="md-nav__link">
         
   
   
@@ -587,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../basic_concepts/mixer/" class="md-nav__link">
+      <a href="../basic_concepts/mixer/" class="md-nav__link">
         
   
   
@@ -612,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../basic_concepts/inertia/" class="md-nav__link">
+      <a href="../basic_concepts/inertia/" class="md-nav__link">
         
   
   
@@ -641,6 +636,8 @@
       
   
   
+    
+  
   
   
     
@@ -660,15 +657,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../identification/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
@@ -683,13 +680,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_5" id="__nav_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Identificação
@@ -705,7 +702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../identification/motor_coeficients/" class="md-nav__link">
+      <a href="motor_coeficients/" class="md-nav__link">
         
   
   
@@ -728,7 +725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../identification/lift_constant/" class="md-nav__link">
+      <a href="lift_constant/" class="md-nav__link">
         
   
   
@@ -751,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../identification/drag_constant/" class="md-nav__link">
+      <a href="drag_constant/" class="md-nav__link">
         
   
   
@@ -805,7 +802,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../modeling/" class="md-nav__link ">
+            <a href="../modeling/" class="md-nav__link ">
               
   
   
@@ -842,7 +839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../modeling/coordinate_system/" class="md-nav__link">
+      <a href="../modeling/coordinate_system/" class="md-nav__link">
         
   
   
@@ -865,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../modeling/2d_model/" class="md-nav__link">
+      <a href="../modeling/2d_model/" class="md-nav__link">
         
   
   
@@ -888,7 +885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../modeling/3d_model/" class="md-nav__link">
+      <a href="../modeling/3d_model/" class="md-nav__link">
         
   
   
@@ -915,8 +912,6 @@
       
   
   
-    
-  
   
   
     
@@ -940,15 +935,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../control/" class="md-nav__link ">
               
   
   
@@ -969,7 +964,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Controle
@@ -985,7 +980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/architecture/" class="md-nav__link">
+      <a href="../control/architecture/architecture/" class="md-nav__link">
         
   
   
@@ -1008,7 +1003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mixer/mixer/" class="md-nav__link">
+      <a href="../control/mixer/mixer/" class="md-nav__link">
         
   
   
@@ -1075,7 +1070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../attitude/estimator/attitude_estimator/" class="md-nav__link">
+      <a href="../control/attitude/estimator/attitude_estimator/" class="md-nav__link">
         
   
   
@@ -1098,7 +1093,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../attitude/controller/attitude_controller/" class="md-nav__link">
+      <a href="../control/attitude/controller/attitude_controller/" class="md-nav__link">
         
   
   
@@ -1173,7 +1168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vertical/estimator/vertical_estimator/" class="md-nav__link">
+      <a href="../control/vertical/estimator/vertical_estimator/" class="md-nav__link">
         
   
   
@@ -1196,7 +1191,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vertical/controller/vertical_controller/" class="md-nav__link">
+      <a href="../control/vertical/controller/vertical_controller/" class="md-nav__link">
         
   
   
@@ -1224,10 +1219,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1239,11 +1232,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
         
           
           <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
@@ -1259,7 +1252,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_6">
             <span class="md-nav__icon md-icon"></span>
             Horizontal
@@ -1270,19 +1263,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../control/horizontal/estimator/horizontal_estimator/" class="md-nav__link">
         
   
   
@@ -1293,7 +1277,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1306,7 +1289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../controller/horizontal_controller/" class="md-nav__link">
+      <a href="../control/horizontal/controller/horizontal_controller/" class="md-nav__link">
         
   
   
@@ -1354,8 +1337,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -1371,14 +1352,18 @@
 
 
 
-<h1 id="estimador-horizontal">Estimador horizontal</h1>
-<p><img alt="Architecture - Horizontal Estimator" src="../../../architecture/images/architecture_horizontal_estimator.svg" style="display: block; margin: auto;" width="100%" /></p>
+  <h1>Modelagem</h1>
 
 
 
 
 
 
+
+
+
+  
+  
 
 
 
@@ -1421,18 +1406,18 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.title", "navigation.indexes", "navigation.instant"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.title", "navigation.indexes", "navigation.instant"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="../../../../javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
-        <script src="../../../../assets/js/disable-parent-click.js"></script>
+        <script src="../assets/js/disable-parent-click.js"></script>
       
     
   </body>

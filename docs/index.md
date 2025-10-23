@@ -1,3 +1,8 @@
+---
+title: Início
+icon: material/home-outline
+---
+
 # Bem-vindo!
 
 Este site reúne toda a documentação da eletiva de Drones do Insper — uma espécie de apostila online, cuidadosamente organizada com:

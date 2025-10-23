@@ -1,3 +1,8 @@
+---
+title: Inércia
+icon: material/axis-arrow
+---
+
 # Inércia
 
 Todo corpo resiste a mudanças em seu estado de movimento — essa resistência é o que chamamos de inércia.

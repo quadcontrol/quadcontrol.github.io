@@ -1,6 +1,6 @@
 # Estimador vertical
 
-Nesta secção você irá implementar o estimador vertical, que estima a posição $z$ e velocidade $v_z$ a partir da leitura do sensor de proximidade $d$.
+Nesta secção você irá implementar o estimador vertical, que estima a posição ${\color{var(--c1)}z}$ e velocidade ${\color{var(--c1)}v_z}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$.
 
 ![Architecture - Vertical Estimator](../../architecture/images/architecture_vertical_estimator.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -24,18 +24,29 @@ Para começar, copie e cole o arquivo `attitude_controller.c` e renomeie ele par
 
 Declare mais algumas variáveis globais, que são as variáveis que entram e saem da função do estimador vertical.
 
-```c hl_lines="4 9 10"
+```c hl_lines="7 16 17"
+// Actuators
+float pwm1, pwm2, pwm3, pwm4; // Motors PWM
+
 // Sensors
 float ax, ay, az;             // Accelerometer [m/s^2]
 float gx, gy, gz;             // Gyroscope [rad/s]
 float d;                      // Range [m]
+
+// System inputs
+float ft;                     // Thrust force [N]
+float tx, ty, tz;             // Roll, pitch and yaw torques [N.m]
 
 // System states
 float phi, theta, psi;        // Euler angles [rad]
 float wx, wy, wz;             // Angular velocities [rad/s]
 float z;                      // Vertical position [m]
 float vz;                     // Vertical velocity [m/s]
+
+// System references
+float phi_r, theta_r, psi_r; // Euler angles reference [rad]
 ```
+
 
 #### Variáveis de registro
 

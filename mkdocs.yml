@@ -6,71 +6,84 @@ theme:
   logo: images/logo.png
   favicon: images/logo_black.png
   palette:
-   - scheme: slate
-    #  primary: #65DD18
-    #  accent: #65DD18
+    - scheme: slate
+      # primary: "#65DD18"
+      # accent: "#65DD18"
   features:
-    - content.code.copy # Habilita botão de copiar no código
-    - content.code.title
+    - content.code.copy          # Botão "copiar código"
+    - content.code.title         # Título nos blocos de código
+    - navigation.indexes         # Usa index.md como página da seção
+    - navigation.instant         # Navegação instantânea
   open_in_new_tab: true
 
 extra_css:
-  # - styles/colors.css
-  - styles/extra.css
-
-nav:
-  - Início: index.md
-  - Primeiros passos:
-    - Hardware: first_steps/hardware.md
-    - Software: first_steps/software.md
-    - Firmware: first_steps/firmware.md
-  - Sensores e atuadores:
-    - Motores: sensors_and_actuators/motors.md
-    - Sensores: sensors_and_actuators/sensors.md
-  - Conceitos básicos:
-    - Aerodinâmica: basic_concepts/aerodynamics.md
-    - Mixer: basic_concepts/mixer.md
-    - Inércia: basic_concepts/inertia.md
-  - Identificação:
-    - Coeficientes do motor: identification/motor_coeficients.md
-    - Constante de sustentação: identification/lift_constant.md
-    - Constante de arrasto: identification/drag_constant.md
-  - Modelagem:
-    - Sistema de coordendas: modeling/coordinate_system.md
-    - Modelo 2D: modeling/2d_model.md
-    - Modelo 3D: modeling/3d_model.md
-  - Controle: 
-    - Arquitetura: control/architecture/architecture.md
-    - Mixer: control/mixer/mixer.md
-    - Atitude:
-      - Estimador de atitude: control/attitude/estimator/attitude_estimator.md
-      - Controlador de atitude: control/attitude/controller/attitude_controller.md
-    - Vertical:
-      - Estimador vertical: control/vertical/estimator/vertical_estimator.md
-      - Controlador vertical: control/vertical/controller/vertical_controller.md
-    - Horizontal:
-      - Estimador horizontal: control/horizontal/estimator/horizontal_estimator.md
-      - Controlador horizontal: control/horizontal/controller/horizontal_controller.md
-
-markdown_extensions:
-  - footnotes
-  - pymdownx.tasklist
-  - attr_list
-  - def_list
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tabbed
-  - pymdownx.arithmatex:
-      generic: true
-  - admonition
-  # - pymdownx.highlight:
-  #     linenums: true           # Mostra números de linha no código
-  - pymdownx.tabbed:
-      alternate_style: true
-  - md_in_html
-
+  - assets/css/configure-colors.css
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/mathjax.js
+  - assets/js/disable-parent-click.js
+
+markdown_extensions:
+  - footnotes
+  - def_list
+  - attr_list
+  - admonition
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.keys
+  # - pymdownx.highlight:
+  #     linenums: true           # Mostra números de linha no código
+
+nav:
+  - Início: index.md
+
+  - Primeiros passos:
+      - first_steps/index.md
+      - Hardware: first_steps/hardware.md
+      - Software: first_steps/software.md
+      - Firmware: first_steps/firmware.md
+
+  - Atuadores e sensores:
+      - sensors_and_actuators/index.md
+      - Atuadores: sensors_and_actuators/motors.md
+      - Sensores: sensors_and_actuators/sensors.md
+
+  - Conceitos básicos:
+      - basic_concepts/index.md
+      - Aerodinâmica: basic_concepts/aerodynamics.md
+      - Mixer: basic_concepts/mixer.md
+      - Inércia: basic_concepts/inertia.md
+
+  - Identificação:
+      - identification/index.md
+      - Coeficientes do motor: identification/motor_coeficients.md
+      - Constante de sustentação: identification/lift_constant.md
+      - Constante de arrasto: identification/drag_constant.md
+
+  - Modelagem:
+      - modeling/index.md
+      - Sistema de coordendas: modeling/coordinate_system.md
+      - Modelo 2D: modeling/2d_model.md
+      - Modelo 3D: modeling/3d_model.md
+
+  - Controle:
+      - control/index.md
+      - Arquitetura: control/architecture/architecture.md
+      - Mixer: control/mixer/mixer.md
+      - Atitude:
+          - Estimador de atitude: control/attitude/estimator/attitude_estimator.md
+          - Controlador de atitude: control/attitude/controller/attitude_controller.md
+      - Vertical:
+          - Estimador vertical: control/vertical/estimator/vertical_estimator.md
+          - Controlador vertical: control/vertical/controller/vertical_controller.md
+      - Horizontal:
+          - Estimador horizontal: control/horizontal/estimator/horizontal_estimator.md
+          - Controlador horizontal: control/horizontal/controller/horizontal_controller.md

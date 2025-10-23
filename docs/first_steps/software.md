@@ -1,3 +1,8 @@
+---
+title: Software
+icon: material/laptop
+---
+
 # Software
 
 Antes de começar a programar o drone, vamos instalar os programas e componentes que o ambiente de desenvolvimento precisa para funcionar direitinho.

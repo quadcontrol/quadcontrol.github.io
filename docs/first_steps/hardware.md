@@ -1,3 +1,8 @@
+---
+title: Hardware
+icon: material/memory
+---
+
 # Hardware
 
 Neste curso, você vai programar um drone real e ver ele voar com os algoritmos que você mesmo desenvolveu. Mas, pra isso, você precisa de um conjunto específico de equipamentos — compactos, mas poderosos.

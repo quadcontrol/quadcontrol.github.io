@@ -61,9 +61,9 @@ Os ângulos de Euler de referência $\phi_r$ e $\theta_r$ serão comandados pelo
 
 Conforme vimos anteriormente: 
 
-- Os botões `Up` / `Down` alteram a variável `setpoint.position.z` em incrementos de $0,5$
-- Os botões `←` / `→` alteram a variável `setpoint.position.y` em incrementos de $0,5$
-- Os botões `↑` / `↓` alteram a variável `setpoint.position.x` em incrementos de $0,5$
+- Os botões ++"Up"++ e ++"Down"++ alteram a variável `setpoint.position.z` em incrementos de $0,5$
+- Os botões ++"←"++ e ++"→"++ alteram a variável `setpoint.position.y` em incrementos de $0,5$
+- Os botões ++"↑"++ e ++"↓"++ alteram a variável `setpoint.position.x` em incrementos de $0,5$
 
 Vamos continuar utilizando os botões `Up` / `Down` para comandar a força total $f_t$ em incrementos de $0,01\,N$, mas agora os botões `↑` / `↓` e `←` / `→` vão comandar, respectivamente, os ângulos de Euler de referência $\theta_r$ e $\phi_r$ em incrementos de $\frac{\pi}{4} \text{rad}$ ($45^{\circ}$). Para tal, precisamos ajustar as escalas da seguinte forma:
 

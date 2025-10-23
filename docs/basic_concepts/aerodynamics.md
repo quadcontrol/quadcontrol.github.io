@@ -1,3 +1,8 @@
+---
+title: Aerodinâmica
+icon: material/airplane
+---
+
 # Aerodinâmica
 
 Para conseguir controlar um drone, é essencial primeiro entender a física por trás dele. Aqui, você vai aprender os conceitos básicos de aerodinâmica que explicam como o drone se mantém no ar.

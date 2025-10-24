@@ -2,9 +2,9 @@
 (function () {
   // Edite a lista abaixo com os “pais” que NÃO devem navegar:
   const BLOCK = new Set([
-    "Primeiros passos",
-    "Atuadores e sensores",
-    "Conceitos básicos",
+    "Pré-requisitos",
+    "Interface",
+    "Fundamentos",
     "Identificação",
     "Modelagem",
     "Controle",

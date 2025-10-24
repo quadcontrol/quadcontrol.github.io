@@ -1,92 +1,82 @@
-site_name: QuadControl
-site_url: https://quadcontrol.io
+site_name: QuadControl                 # Nome exibido no header e usado em meta tags
+site_url: https://quadcontrol.io       # Ajuda a gerar URLs absolutas (sitemap, feeds, etc.)
 
 theme:
   name: material
-  logo: images/logo.png
-  favicon: images/logo_black.png
+  logo: images/logo.png                # Logo no topo (ideal em PNG/SVG com fundo transparente)
+  favicon: images/logo_black.png       # Ícone da aba (ideal 32×32 ou SVG quadrado)
   palette:
-    - scheme: slate
-      # primary: "#65DD18"
-      # accent: "#65DD18"
+    - scheme: slate                    # Tema escuro pronto do Material
   features:
-    - content.code.copy          # Botão "copiar código"
-    - content.code.title         # Título nos blocos de código
-    - navigation.indexes         # Usa index.md como página da seção
-    # - navigation.instant         # Navegação instantânea
-    - content.icon   
-  open_in_new_tab: true                 
+    - content.code.copy                # Botão “copiar” nos blocos de código
+    - content.code.title               # Título nos blocos de código (```python title="..."```)
+    - navigation.indexes               # Usa index.md como landing de cada seção
 
 markdown_extensions:
-  - footnotes
-  - def_list
-  - attr_list
-  - admonition
-  - md_in_html
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tasklist
+  - footnotes                          # Notas de rodapé com [^1]
+  - def_list                           # Listas de definição (termo : definição)
+  - attr_list                          # Atributos em imagens/links: {: width=...}
+  - admonition                         # !!! note / warning / tip...
+  - md_in_html                         # Permite Markdown dentro de blocos HTML
+  - pymdownx.details                   # Admonitions recolhíveis com "???"
+  - pymdownx.superfences               # Cercas de código aninhadas / tabs de código
+  - pymdownx.tasklist                  # [ ] checklists (pode habilitar checkboxes bonitos)
   - pymdownx.tabbed:
-      alternate_style: true
+      alternate_style: true            # Tabs com estilo alternativo (combina com Material)
   - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.keys
-  # - pymdownx.highlight:
-  #     linenums: true           # Mostra números de linha no código
+      generic: true                    # Gera spans para MathJax v3 (boa prática com Material)
+  - pymdownx.keys                      # Render de teclas ⌘K com ++cmd+k++
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra_css:
-  - assets/css/configure-colors.css
+  - assets/css/configure-colors.css    # Sobrescritos de cor (bom p/ palette custom)
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6 
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - assets/js/disable-parent-click.js  
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js   # MathJax v3
+  - assets/js/disable-parent-click.js  # Script custom (evitar cliques no pai, etc.)
 
 nav:
   - Início: index.md
-
   - Pré-requisitos:
-      - first_steps/index.md
-      - Hardware: first_steps/hardware.md
-      - Software: first_steps/software.md
-      - Firmware: first_steps/firmware.md
-
+      - pages/setup/index.md
+      - Hardware: pages/setup/hardware.md
+      - Software: pages/setup/software.md
+      - Firmware: pages/setup/firmware.md
   - Interface:
-      - sensors_and_actuators/index.md
-      - Atuadores: sensors_and_actuators/motors.md
-      - Sensores: sensors_and_actuators/sensors.md
-
+      - pages/interface/index.md
+      - Atuadores: pages/interface/motors.md
+      - Sensores: pages/interface/sensors.md
   - Fundamentos:
-      - basic_concepts/index.md
-      - Aerodinâmica: basic_concepts/aerodynamics.md
-      - Mixer: basic_concepts/mixer.md
-      - Inércia: basic_concepts/inertia.md
-
+      - pages/fundamentals/index.md
+      - Aerodinâmica: pages/fundamentals/aerodynamics.md
+      - Mixer: pages/fundamentals/mixer.md
+      - Inércia: pages/fundamentals/inertia.md
   - Identificação:
-      - identification/index.md
-      - Coeficientes do motor: identification/motor_coeficients.md
-      - Constante de sustentação: identification/lift_constant.md
-      - Constante de arrasto: identification/drag_constant.md
-
+      - pages/identification/index.md
+      - Coeficientes do motor: pages/identification/motor_coefficients.md  
+      - Constante de sustentação: pages/identification/lift_constant.md
+      - Constante de arrasto: pages/identification/drag_constant.md
   - Modelagem:
-      - modeling/index.md
-      - Sistema de coordendas: modeling/coordinate_system.md
-      - Modelo 2D: modeling/2d_model.md
-      - Modelo 3D: modeling/3d_model.md
-
+      - pages/modeling/index.md
+      - Sistema de coordenadas: pages/modeling/coordinate_system.md        
+      - Modelo 2D: pages/modeling/2d_model.md
+      - Modelo 3D: pages/modeling/3d_model.md
   - Controle:
-      - control/index.md
-      - Arquitetura: control/architecture/architecture.md
-      - Mixer: control/mixer/mixer.md
+      - pages/control/index.md
+      - Arquitetura: pages/control/architecture/architecture.md
+      - Mixer: pages/control/mixer/mixer.md
       - Atitude:
-          - control/attitude/index.md
-          - Estimador: control/attitude/estimator/attitude_estimator.md
-          - Controlador: control/attitude/controller/attitude_controller.md
+          - pages/control/attitude/index.md
+          - Estimador: pages/control/attitude/estimator/attitude_estimator.md
+          - Controlador: pages/control/attitude/controller/attitude_controller.md
       - Vertical:
-          - control/vertical/index.md
-          - Estimador: control/vertical/estimator/vertical_estimator.md
-          - Controlador: control/vertical/controller/vertical_controller.md
+          - pages/control/vertical/index.md
+          - Estimador: pages/control/vertical/estimator/vertical_estimator.md
+          - Controlador: pages/control/vertical/controller/vertical_controller.md
       - Horizontal:
-          - control/horizontal/index.md
-          - Estimador: control/horizontal/estimator/horizontal_estimator.md
-          - Controlador: control/horizontal/controller/horizontal_controller.md
+          - pages/control/horizontal/index.md
+          - Estimador: pages/control/horizontal/estimator/horizontal_estimator.md
+          - Controlador: pages/control/horizontal/controller/horizontal_controller.md

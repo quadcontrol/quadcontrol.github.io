@@ -5,127 +5,127 @@
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/basic_concepts/</loc>
+         <loc>https://quadcontrol.io/pages/control/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/basic_concepts/aerodynamics/</loc>
+         <loc>https://quadcontrol.io/pages/control/architecture/architecture/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/basic_concepts/inertia/</loc>
+         <loc>https://quadcontrol.io/pages/control/attitude/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/basic_concepts/mixer/</loc>
+         <loc>https://quadcontrol.io/pages/control/attitude/controller/attitude_controller/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/</loc>
+         <loc>https://quadcontrol.io/pages/control/attitude/estimator/attitude_estimator/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/architecture/architecture/</loc>
+         <loc>https://quadcontrol.io/pages/control/horizontal/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/attitude/</loc>
+         <loc>https://quadcontrol.io/pages/control/horizontal/controller/horizontal_controller/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/attitude/controller/attitude_controller/</loc>
+         <loc>https://quadcontrol.io/pages/control/horizontal/estimator/horizontal_estimator/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/attitude/estimator/attitude_estimator/</loc>
+         <loc>https://quadcontrol.io/pages/control/mixer/mixer/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/horizontal/</loc>
+         <loc>https://quadcontrol.io/pages/control/vertical/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/horizontal/controller/horizontal_controller/</loc>
+         <loc>https://quadcontrol.io/pages/control/vertical/controller/vertical_controller/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/horizontal/estimator/horizontal_estimator/</loc>
+         <loc>https://quadcontrol.io/pages/control/vertical/estimator/vertical_estimator/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/mixer/mixer/</loc>
+         <loc>https://quadcontrol.io/pages/fundamentals/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/vertical/</loc>
+         <loc>https://quadcontrol.io/pages/fundamentals/aerodynamics/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/vertical/controller/vertical_controller/</loc>
+         <loc>https://quadcontrol.io/pages/fundamentals/inertia/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/vertical/estimator/vertical_estimator/</loc>
+         <loc>https://quadcontrol.io/pages/fundamentals/mixer/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/first_steps/</loc>
+         <loc>https://quadcontrol.io/pages/identification/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/first_steps/firmware/</loc>
+         <loc>https://quadcontrol.io/pages/identification/drag_constant/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/first_steps/hardware/</loc>
+         <loc>https://quadcontrol.io/pages/identification/lift_constant/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/first_steps/software/</loc>
+         <loc>https://quadcontrol.io/pages/identification/motor_coefficients/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/identification/</loc>
+         <loc>https://quadcontrol.io/pages/interface/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/identification/drag_constant/</loc>
+         <loc>https://quadcontrol.io/pages/interface/motors/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/identification/lift_constant/</loc>
+         <loc>https://quadcontrol.io/pages/interface/sensors/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/identification/motor_coeficients/</loc>
+         <loc>https://quadcontrol.io/pages/modeling/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/modeling/</loc>
+         <loc>https://quadcontrol.io/pages/modeling/2d_model/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/modeling/2d_model/</loc>
+         <loc>https://quadcontrol.io/pages/modeling/3d_model/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/modeling/3d_model/</loc>
+         <loc>https://quadcontrol.io/pages/modeling/coordinate_system/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/modeling/coordinate_system/</loc>
+         <loc>https://quadcontrol.io/pages/setup/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/sensors_and_actuators/</loc>
+         <loc>https://quadcontrol.io/pages/setup/firmware/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/sensors_and_actuators/motors/</loc>
+         <loc>https://quadcontrol.io/pages/setup/hardware/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/sensors_and_actuators/sensors/</loc>
+         <loc>https://quadcontrol.io/pages/setup/software/</loc>
          <lastmod>2025-10-24</lastmod>
     </url>
 </urlset>

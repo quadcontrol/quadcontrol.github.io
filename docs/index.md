@@ -58,37 +58,40 @@ Quer ver um pouco disso na prática? Assista o vídeo abaixo!
 
 <div class="grid cards" markdown>
 
--   :material-clock-fast:{ .lg .middle } __Set up in 5 minutes__
+-   :material-cog:{ .lg .middle } **Pré-requisitos**
 
     ---
 
-    Install [`mkdocs-material`](#) with [`pip`](#) and get up
-    and running in minutes
+    Hardware, software e firmware necessários.
 
-    [:octicons-arrow-right-24: Getting started](#)
-
--   :fontawesome-brands-markdown:{ .lg .middle } __It's just Markdown__
+-   :material-power:{ .lg .middle } **Interface**
 
     ---
 
-    Focus on your content and generate a responsive and searchable static site
+    Atuadores e sensores.
 
-    [:octicons-arrow-right-24: Reference](#)
-
--   :material-format-font:{ .lg .middle } __Made to measure__
+-   :material-school-outline:{ .lg .middle } **Fundamentos**
 
     ---
 
-    Change the colors, fonts, language, icons, logo and more with a few lines
+    Conceitos teóricos fundamentais.
 
-    [:octicons-arrow-right-24: Customization](#)
-
--   :material-scale-balance:{ .lg .middle } __Open Source, MIT__
+-   :material-magnify-scan:{ .lg .middle } **Identificação**
 
     ---
 
-    Material for MkDocs is licensed under MIT and available on [GitHub]
+    Experimentos para identificação de parâmetros do sistema.
 
-    [:octicons-arrow-right-24: License](#)
+-   :material-cube-outline:{ .lg .middle } **Modelagem**
+
+    ---
+
+    Modelagem matemática do sistema.
+
+-   :material-tune-variant:{ .lg .middle } **Controle**
+
+    ---
+
+    Arquitetura de estimação e controle.
 
 </div>

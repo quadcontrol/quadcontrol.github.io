@@ -13,18 +13,9 @@ theme:
     - content.code.copy          # Botão "copiar código"
     - content.code.title         # Título nos blocos de código
     - navigation.indexes         # Usa index.md como página da seção
-    - navigation.instant         # Navegação instantânea
+    # - navigation.instant         # Navegação instantânea
     - content.icon   
-  open_in_new_tab: true
-
-extra_css:
-  - assets/css/configure-colors.css
-
-extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/mathjax.js
-  - assets/js/disable-parent-click.js
+  open_in_new_tab: true                 
 
 markdown_extensions:
   - footnotes
@@ -43,16 +34,24 @@ markdown_extensions:
   # - pymdownx.highlight:
   #     linenums: true           # Mostra números de linha no código
 
+extra_css:
+  - assets/css/configure-colors.css
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6 
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - assets/js/disable-parent-click.js  
+
 nav:
   - Início: index.md
 
-  - Primeiros passos:
+  - Pré-requisitos:
       - first_steps/index.md
       - Hardware: first_steps/hardware.md
       - Software: first_steps/software.md
       - Firmware: first_steps/firmware.md
 
-  - Atuadores e sensores:
+  - Interface:
       - sensors_and_actuators/index.md
       - Atuadores: sensors_and_actuators/motors.md
       - Sensores: sensors_and_actuators/sensors.md

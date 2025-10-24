@@ -1,4 +1,4 @@
 ---
 title: Primeiros passos
-icon: material/walk
+icon: material/cog-outline
 ---

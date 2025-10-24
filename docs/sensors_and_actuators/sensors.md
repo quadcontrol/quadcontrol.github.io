@@ -1,6 +1,6 @@
 ---
 title: Sensores
-icon: material/radar
+icon: material/compass-outline
 ---
 
 # Sensores

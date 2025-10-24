@@ -1,5 +1,5 @@
 ---
-icon: material/compass-outline
+icon: material/radar
 ---
 
 # Estimador de atitude

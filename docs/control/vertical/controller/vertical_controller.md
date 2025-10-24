@@ -1,5 +1,5 @@
 ---
-icon: material/camera-control
+icon: material/gamepad-circle-outline
 ---
 
 # Controlador vertical

@@ -121,9 +121,9 @@ Podemos cancelar o momento de inércia da planta de modo que a variável de cont
 
 Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar três possíveis controladores para um sistema como esse, ficando a seu critério qual utilizar.
 
-=== "Controlador PD"
+=== "PD"
 
-    O controlador PD combina ações proporcional e derivativa para reagir tanto ao erro quanto à sua variação, oferecendo boa resposta e bom amortecimento. É simples de implementar e eficaz para o integrador duplo, mas sua sensibilidade ao ruído na derivada pode limitar o desempenho.
+    O controlador proporcional derivativo (PD) combina ações proporcional e derivativa para reagir tanto ao erro quanto à sua variação, oferecendo boa resposta e bom amortecimento. É simples de implementar e eficaz para o integrador duplo, mas sua sensibilidade ao ruído na derivada pode limitar o desempenho.
 
     ![](images/controller_proportional_derivative.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -241,9 +241,9 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
     }
     ```
 
-=== "Controlador P em cascata"
+=== "P-P"
 
-    O controlador P em cascata utiliza duas malhas hierárquicas — uma interna e outra externa — o que melhora a estabilidade e o tempo de resposta. É intuitivo e robusto, mas requer ajuste cuidadoso entre as duas malhas para evitar oscilações.
+    O controlador proporcional em cascata (P-P) utiliza duas malhas hierárquicas — uma interna e outra externa — o que melhora a estabilidade e o tempo de resposta. É intuitivo e robusto, mas requer ajuste cuidadoso entre as duas malhas para evitar oscilações.
 
     ![](images/controller_proportional_cascade.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -399,9 +399,9 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
     }
     ```
 
-=== "Regulador de estados"
+=== "LQR"
 
-    O regulador de estados realimenta todas as variáveis do sistema e permite posicionar os polos em locais desejados do plano complexo, atendendo diretamente aos requisitos dinâmicos de desempenho. É o mais simples e preciso dos três em termos de sintonia e resposta, mas exige domínio do formalismo de espaço de estados.
+    O regulador quadrático linear (LQR) realimenta todas as variáveis do sistema e permite posicionar os polos em locais desejados do plano complexo, atendendo diretamente aos requisitos dinâmicos de desempenho. É o mais simples e preciso dos três em termos de sintonia e resposta, mas exige domínio do formalismo de espaço de estados.
 
 
     ![](images/controller_state_regulator.svg){: width=100% style="display: block; margin: auto;" }

@@ -130,9 +130,9 @@ Podemos cancelar a massa e aceleração da gravidade de modo que a variável de 
 
 Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fizemos com o controlador de atitude. No entanto, agora temos um problema adicional: como estamos somando o termo da aceleração da gravidade (diferentemente da massa que está sendo multiplicada), caso ele seja um pouco diferente do real, não acontecerá um cancelamento exato e o sistema possuirá erro em regime permanente. Para resolver esse problema, podemos incluir um integrador no controlador.
 
-=== "Controlador PID"
+=== "PID"
 
-    O controlador PID adiciona à estrutura PD um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.
+    O controlador proporcional integral derivativo (PID) adiciona à estrutura proporcional derivativo um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.
 
     ![](images/controller_proportional_derivative.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -179,9 +179,9 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
     }
     ```
 
-=== "Controlador P-PI em cascata"
+=== "PI-P"
 
-    O controlador em cascata com ação integral na malha externa combina uma malha interna proporcional com uma malha externa proporcional com ação integral. A malha interna garante resposta rápida e amortecida, enquanto o termo integral na malha externa elimina o erro estacionário de posição. Essa configuração equilibra desempenho e simplicidade, oferecendo boa robustez sem exigir integrações redundantes, mas requer sintonia coordenada entre as duas malhas.
+    O controlador proporcional em cascata com ação integral (PI-P) na malha externa combina uma malha interna proporcional com uma malha externa proporcional com ação integral. A malha interna garante resposta rápida e amortecida, enquanto o termo integral na malha externa elimina o erro estacionário de posição. Essa configuração equilibra desempenho e simplicidade, oferecendo boa robustez sem exigir integrações redundantes, mas requer sintonia coordenada entre as duas malhas.
 
     ![](images/controller_proportional_cascade.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -220,7 +220,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
     }
     ```
 
-=== "Regulador de estados com ação integral"
+=== "LQI"
 
     O regulador de estados com ação integral estende o regulador de estados tradicional adicionando uma variável que integra o erro de saída ao vetor de estados. Isso permite eliminar o erro estacionário sem perder as vantagens do controle por realimentação completa. A estrutura resultante combina desempenho dinâmico ajustável — por meio do posicionamento dos polos — com precisão em regime permanente. É uma solução elegante e sistemática, mas requer modelagem ampliada e cálculo de ganhos por métodos de espaço de estados, como o posicionamento de polos ou o LQI.
 

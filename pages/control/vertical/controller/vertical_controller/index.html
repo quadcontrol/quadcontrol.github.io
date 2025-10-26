@@ -1365,6 +1365,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#controlador-vertical_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlador vertical
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1604,6 +1613,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#controlador-vertical_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlador vertical
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1646,7 +1664,7 @@
 <p>Para começar, copie e cole o arquivo <code>vertical_estimator.c</code> e renomeie ele para <code>vertical_controller.c</code>.</p>
 <h3 id="definicoes">Definições</h3>
 <h4 id="variaveis-globais">Variáveis globais</h4>
-<p>Declare mais uma variável global, que é a referência que entra na função do controlador vertical.</p>
+<p>Declare mais uma variável global, que corresponde à posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Actuators</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">pwm1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="p">;</span><span class="w"> </span><span class="c1">// Motors PWM</span>
 
@@ -1656,21 +1674,21 @@
 <span class="kt">float</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Range [m]</span>
 
 <span class="c1">// System inputs</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">ft</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Thrust force [N]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Roll, pitch and yaw torques [N.m]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">ft</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Thrust force [N]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="n">ty</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="p">;</span><span class="w">            </span><span class="c1">// Roll, pitch and yaw torques [N.m]</span>
 
 <span class="c1">// System states</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">;</span><span class="w">        </span><span class="c1">// Euler angles [rad]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">wx</span><span class="p">,</span><span class="w"> </span><span class="n">wy</span><span class="p">,</span><span class="w"> </span><span class="n">wz</span><span class="p">;</span><span class="w">             </span><span class="c1">// Angular velocities [rad/s]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Vertical position [m]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">vz</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Vertical velocity [m/s]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">;</span><span class="w">       </span><span class="c1">// Euler angles [rad]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">wx</span><span class="p">,</span><span class="w"> </span><span class="n">wy</span><span class="p">,</span><span class="w"> </span><span class="n">wz</span><span class="p">;</span><span class="w">            </span><span class="c1">// Angular velocities [rad/s]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Vertical position [m]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">vz</span><span class="p">;</span><span class="w">                    </span><span class="c1">// Vertical velocity [m/s]</span>
 
 <span class="c1">// System references</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">phi_r</span><span class="p">,</span><span class="w"> </span><span class="n">theta_r</span><span class="p">,</span><span class="w"> </span><span class="n">psi_r</span><span class="p">;</span><span class="w"> </span><span class="c1">// Euler angles reference [rad]</span>
-<span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">z_r</span>
+<span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">z_r</span><span class="w">                    </span><span class="c1">// Vertical position reference [m]</span>
 </span></code></pre></div>
 <h3 id="loop-principal">Loop principal</h3>
-<p>Inclua no seu loop principal a chamada da função <code>verticalController()</code> entre as funções <code>verticalEstimator()</code> e <code>attitudeController()</code>.</p>
+<p>Inclua a chamada da função <code>verticalController()</code> no loop principal.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Main application task</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1692,7 +1710,6 @@
 <h3 id="funcoes">Funções</h3>
 <h4 id="referencia">Referência</h4>
 <p>A posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> será comandada pelo Command Based Flight Control do Crazyflie Client utilizando os botões <span class="keys"><kbd>Up</kbd></span> e <span class="keys"><kbd>Down</kbd></span>.</p>
-<p><img alt="Commando Based Flight Control" src="../../../../identification/images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
 <p><img alt="" src="images/reference_attitude_controller.svg" style="display: block; margin: auto;" width="60%" /></p>
 <p>Modifique a função <code>reference()</code> para que a posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> seja definida pela variável <code>setpoint.position.z</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Get reference setpoints from commander module</span>
@@ -1712,6 +1729,142 @@
 <span class="w">    </span><span class="n">psi_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                                     </span><span class="c1">// Yaw reference command [rad]</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="controlador-vertical_1">Controlador vertical</h4>
+<p>A função <code>verticalController()</code> é quem comanda a força de empuxo <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> a partir da diferença entre a posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> e estimada <span class="arithmatex">\({\color{var(--c1)}z}\)</span>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Já <a href="../../../../modeling/3d_model/">vimos</a> que a dinâmica linearizada de um quadricóptero pode ser representada pelo diagrama de blocos abaixo:</p>
+<p><img alt="Commando Based Flight Control" src="../../../../modeling/images/3d_plant.svg" style="display: block; margin: auto;" width="100%" /></p>
+<p>A dinâmica de posição vertical é dada pelo seguinte trecho do diagrama de blocos:</p>
+<p><img alt="" src="images/plant.svg" style="display: block; margin: auto;" width="55%" /></p>
+<p>Podemos cancelar a massa e aceleração da gravidade de modo que a variável de controle seja a aceleração vertical:</p>
+<p><img alt="" src="images/plant_cancelation.svg" style="display: block; margin: auto;" width="67.5%" /></p>
+<p>Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fizemos com o controlador de atitude. No entanto, agora temos um problema adicional: como estamos somando o termo da aceleração da gravidade (diferentemente da massa que está sendo multiplicada), caso ele seja um pouco diferente do real, não acontecerá um cancelamento exato e o sistema possuirá erro em regime permanente. Para resolver esse problema, podemos incluir um integrador no controlador.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Controlador PID</label><label for="__tabbed_1_2">Controlador P-PI em cascata</label><label for="__tabbed_1_3">Regulador de estados com ação integral</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>O controlador PID adiciona à estrutura PD um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.</p>
+<p><img alt="" src="images/controller_proportional_derivative.svg" style="display: block; margin: auto;" width="100%" /></p>
+<p>Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:</p>
+<p><img alt="" src="images/controller_proportional_derivative_implementation.svg" style="display: block; margin: auto;" width="65%" /></p>
+<p>Que se traduz nas equações abaixo:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
+    \ddot{z}_r = k_p z_e + k_d \frac{d z_e}{dt}  + k_i \int z_e dt \\
+    {\color{var(--c2)}f_t} = m ( g + \ddot{z}_r ) \\
+\end{array}
+\right.
+\]</div>
+<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Last error (static to retain value amoung function calls)</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e_last</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_dot_e</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">tau_x</span><span class="w"> </span><span class="o">=</span>
+</span>
+<span class="w">    </span><span class="c1">// Update last error for next call</span>
+<span class="w">    </span><span class="n">theta_e_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_e</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Compute desired torque</span>
+<span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>O controlador em cascata com ação integral na malha externa combina uma malha interna proporcional com uma malha externa proporcional com ação integral. A malha interna garante resposta rápida e amortecida, enquanto o termo integral na malha externa elimina o erro estacionário de posição. Essa configuração equilibra desempenho e simplicidade, oferecendo boa robustez sem exigir integrações redundantes, mas requer sintonia coordenada entre as duas malhas.</p>
+<p><img alt="" src="images/controller_proportional_cascade.svg" style="display: block; margin: auto;" width="100%" /></p>
+<p>Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:</p>
+<p><img alt="" src="images/controller_proportional_cascade_implementation.svg" style="display: block; margin: auto;" width="65%" /></p>
+<p>Que se traduz nas equações abaixo:</p>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    \dot{z}_r = k_p ( {\color{var(--c3)}z_r} - {\color{var(--c1)}z} ) \\
+    \ddot{z}_r = k_d ( \dot{z}_r - {\color{var(--c1)}\dot{z}} ) \\
+    {\color{var(--c2)}f_t} = m ( g + \ddot{z}_r )
+\end{array}
+\right.
+\]</div>
+<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_dot_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
+</span>
+<span class="w">    </span><span class="c1">// Compute desired torque</span>
+<span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>O regulador de estados com ação integral estende o regulador de estados tradicional adicionando uma variável que integra o erro de saída ao vetor de estados. Isso permite eliminar o erro estacionário sem perder as vantagens do controle por realimentação completa. A estrutura resultante combina desempenho dinâmico ajustável — por meio do posicionamento dos polos — com precisão em regime permanente. É uma solução elegante e sistemática, mas requer modelagem ampliada e cálculo de ganhos por métodos de espaço de estados, como o posicionamento de polos ou o LQI.</p>
+<p><img alt="" src="images/controller_state_regulator.svg" style="display: block; margin: auto;" width="100%" /></p>
+<p>Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:</p>
+<p><img alt="" src="images/controller_state_regulator_implementation.svg" style="display: block; margin: auto;" width="65%" /></p>
+<p class="annotate">Que se traduz na equação abaixo(1):</p>
+<ol>
+<li>
+<p>No sistema linearizado temos que <span class="arithmatex">\({\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z}\)</span>. Além disso, como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência <span class="arithmatex">\({\color{var(--c3)}\dot{z}_r}\)</span> pode ser assumida como sendo zero, o que reduz o segundo termo:</p>
+<div class="arithmatex">\[
+k_d \left( \cancelto{0}{{\color{var(--c3)}\dot{z}_r}} - {\color{var(--c1)}\dot{z}} \right) = - k_d  {\color{var(--c1)}v_z}
+\]</div>
+</li>
+</ol>
+<div class="arithmatex">\[
+\left\{
+\begin{array}{l}
+    z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
+    {\color{var(--c2)}f_t} = m \left( g + k_p \left( {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \right) - k_d  {\color{var(--c1)}v_z} + k_i \int z_e dt \right) 
+\end{array}
+\right.
+\]</div>
+<p class="annotate">Inclua na função <code>verticalController()</code> três variáveis locais <span class="arithmatex">\(k_p\)</span>, <span class="arithmatex">\(k_d\)</span> e <span class="arithmatex">\(k_i\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule a força comandada <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span>(1).</p>
+<ol>
+<li>O termo integral <span class="arithmatex">\(z_i = \int z_e dt\)</span> pode ser calculado com uma variável auxiliar conforme exemplo abaixo.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Compute angle error</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Calculate integral term (static to retain value amoung function calls)</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">z_i</span><span class="p">;</span>
+<span class="w">    </span><span class="n">z_i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">z_e</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Compute desired force</span>
+<span class="hll"><span class="w">    </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 
 
 

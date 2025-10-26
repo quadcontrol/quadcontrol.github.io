@@ -1879,14 +1879,15 @@ T(s) = k \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n s + \omega_n^2}
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \theta_e = \theta_r - \theta \\
-    \dot{\theta}_e = \dfrac{\theta_e - \theta_{e_{last}}}{\Delta t} \\
-    \ddot{\theta}_r = k_p \theta_e + k_d \dot{\theta}_e \\
-    \tau_y = I_{yy} \ddot{\theta}_r \\
+    \theta_e = {\color{var(--c3)}\theta_r} -{\color{var(--c1)}\theta} \\
+    {\color{var(--c2)}\tau_y} = I_{yy} \left( k_p \theta_e + k_d \dfrac{d \theta_e}{dt} \right) \\
 \end{array}
 \right.
 \]</div>
-<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\(\tau_y\)</span> seguindo as equações acima.</p>
+<p class="annotate">Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span>(1).</p>
+<ol>
+<li>O termo derivativo <span class="arithmatex">\(z_d = \dfrac{d \theta_e}{dt}\)</span> pode ser calculado com uma variável auxiliar conforme exemplo abaixo.</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
 <span class="p">{</span>
@@ -1894,17 +1895,13 @@ T(s) = k \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n s + \omega_n^2}
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Last error (static to retain value amoung function calls)</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e_last</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
+<span class="w">    </span><span class="c1">// Compute angle error</span>
 <span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_dot_e</span><span class="w"> </span><span class="o">=</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">tau_x</span><span class="w"> </span><span class="o">=</span>
 </span>
-<span class="w">    </span><span class="c1">// Update last error for next call</span>
-<span class="w">    </span><span class="n">theta_e_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_e</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Calculate derivative term with auxiliary variable of previous error (static to retain value amoung function calls)</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e_prev</span><span class="p">;</span>
+<span class="w">    </span><span class="n">theta_d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">theta_e</span><span class="o">-</span><span class="n">theta_e_prev</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">theta_e_prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_e</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// Compute desired torque</span>
 <span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
@@ -2032,27 +2029,20 @@ T(s) = k \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n s + \omega_n^2}
 </details>
 <p>Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:</p>
 <p><img alt="" src="../images/controller_proportional_cascade_implementation.svg" style="display: block; margin: auto;" width="65%" /></p>
-<p>Que se traduz nas equações abaixo:</p>
+<p class="annotate">Que se traduz na equação abaixo(1):</p>
+<ol>
+<li>No sistema linearizado temos que <span class="arithmatex">\({\color{var(--c1)}\dot{\theta}} = {\color{var(--c1)}\omega_y}\)</span></li>
+</ol>
 <div class="arithmatex">\[
-\left\{
-\begin{array}{l}
-    \dot{\theta}_r = k_p ( \theta_r - \theta ) \\
-    \ddot{\theta}_r = k_d ( \dot{\theta}_r - \dot{\theta} ) \\
-    \tau_y = I_{yy} \ddot{\theta}_r
-\end{array}
-\right.
+{\color{var(--c2)}\tau_y} = I_{yy} \left( k_d \left( k_p \left( {\color{var(--c3)}\theta_r} - {\color{var(--c1)}\theta} \right)  - {\color{var(--c1)}\omega_y} \right)  \right) 
 \]</div>
-<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\(\tau_y\)</span> seguindo as equações acima.</p>
+<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span>
-<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
-<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_dot_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
 </span>
 <span class="w">    </span><span class="c1">// Compute desired torque</span>
 <span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
@@ -2276,28 +2266,25 @@ p(s) = s^2 + 2 \zeta \omega_n s + \omega_n^2
 </details>
 <p>Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:</p>
 <p><img alt="" src="../images/controller_state_regulator_implementation.svg" style="display: block; margin: auto;" width="65%" /></p>
-<p>Que se traduz nas equações abaixo:</p>
-<div class="arithmatex">\[
-\left\{
-\begin{array}{l}
-    \ddot{\theta}_r = k_p ( \theta_r - \theta ) + k_d ( \dot{\theta}_r - \dot{\theta} ) \\
-    \tau_y = I_{yy} \ddot{\theta}_r
-\end{array}
-\right.
-\]</div>
-<p class="annotate">Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\(\tau_y\)</span> seguindo as equações acima(1).</p>
+<p class="annotate">Que se traduz na equação abaixo(1):</p>
 <ol>
-<li>Como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência pode ser assumida como sendo zero.</li>
+<li>
+<p>No sistema linearizado temos que <span class="arithmatex">\({\color{var(--c1)}\dot{\theta}} = {\color{var(--c1)}\omega_y}\)</span>. Além disso, como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência <span class="arithmatex">\({\color{var(--c3)}\dot{\theta}_r}\)</span> pode ser assumida como sendo zero, o que reduz o segundo termo:</p>
+<div class="arithmatex">\[
+k_d \left( \cancelto{0}{{\color{var(--c3)}\dot{\theta}_r}} - {\color{var(--c1)}\dot{\theta}} \right) = - k_d  {\color{var(--c1)}\omega_y}
+\]</div>
+</li>
 </ol>
+<div class="arithmatex">\[
+{\color{var(--c2)}\tau_y} = I_{yy} \left( k_p \left( {\color{var(--c3)}\theta_r} - {\color{var(--c1)}\theta} \right) - k_d  {\color{var(--c1)}\omega_y} \right) 
+\]</div>
+<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span>
-<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
-<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
 </span>
 <span class="w">    </span><span class="c1">// Compute desired torque</span>
 <span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
@@ -2327,11 +2314,6 @@ p(s) = s^2 + 2 \zeta \omega_n s + \omega_n^2
 <span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 <span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 
-<span class="w">    </span><span class="c1">// Compute angular acelerations references</span>
-<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_ddot_r</span><span class="w"> </span><span class="o">=</span>
-</span><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
-<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">psi_ddot_r</span><span class="w"> </span><span class="o">=</span>
-</span>
 <span class="w">    </span><span class="c1">// Compute desired torques</span>
 <span class="hll"><span class="w">    </span><span class="n">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>

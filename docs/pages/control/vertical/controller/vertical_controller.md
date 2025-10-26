@@ -26,7 +26,7 @@ Para começar, copie e cole o arquivo `vertical_estimator.c` e renomeie ele para
 
 #### Variáveis globais
 
-Declare mais uma variável global, que é a referência que entra na função do controlador vertical.
+Declare mais uma variável global, que corresponde à posição vertical de referência ${\color{var(--c3)}z_r}$.
 
 ```c hl_lines="21"
 // Actuators
@@ -38,23 +38,23 @@ float gx, gy, gz;             // Gyroscope [rad/s]
 float d;                      // Range [m]
 
 // System inputs
-float ft;                     // Thrust force [N]
-float tx, ty, tz;             // Roll, pitch and yaw torques [N.m]
+float ft;                    // Thrust force [N]
+float tx, ty, tz;            // Roll, pitch and yaw torques [N.m]
 
 // System states
-float phi, theta, psi;        // Euler angles [rad]
-float wx, wy, wz;             // Angular velocities [rad/s]
-float z;                      // Vertical position [m]
-float vz;                     // Vertical velocity [m/s]
+float phi, theta, psi;       // Euler angles [rad]
+float wx, wy, wz;            // Angular velocities [rad/s]
+float z;                     // Vertical position [m]
+float vz;                    // Vertical velocity [m/s]
 
 // System references
 float phi_r, theta_r, psi_r; // Euler angles reference [rad]
-float z_r
+float z_r                    // Vertical position reference [m]
 ```
 
 ### Loop principal
 
-Inclua no seu loop principal a chamada da função `verticalController()` entre as funções `verticalEstimator()` e `attitudeController()`.
+Inclua a chamada da função `verticalController()` no loop principal.
 
 ```c hl_lines="11"
 // Main application task
@@ -82,8 +82,6 @@ void appMain(void *param)
 
 A posição vertical de referência ${\color{var(--c3)}z_r}$ será comandada pelo Command Based Flight Control do Crazyflie Client utilizando os botões ++"Up"++ e ++"Down"++.
 
-![Commando Based Flight Control](../../../identification/images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
-
 ![](images/reference_attitude_controller.svg){: width=60% style="display: block; margin: auto;" }
 
 Modifique a função `reference()` para que a posição vertical de referência ${\color{var(--c3)}z_r}$ seja definida pela variável `setpoint.position.z`.
@@ -106,3 +104,172 @@ void reference()
     psi_r = 0.0f;                                     // Yaw reference command [rad]
 }
 ```
+
+#### Controlador vertical
+
+A função `verticalController()` é quem comanda a força de empuxo ${\color{var(--c2)}f_t}$ a partir da diferença entre a posição vertical de referência ${\color{var(--c3)}z_r}$ e estimada ${\color{var(--c1)}z}$.
+
+```c
+// Compute desired thrust force
+void verticalController()
+{ 
+}
+```
+
+Já [vimos](../../../modeling/3d_model.md) que a dinâmica linearizada de um quadricóptero pode ser representada pelo diagrama de blocos abaixo:
+    
+![Commando Based Flight Control](../../../modeling/images/3d_plant.svg){: width=100% style="display: block; margin: auto;" }
+    
+A dinâmica de posição vertical é dada pelo seguinte trecho do diagrama de blocos:
+
+![](images/plant.svg){: width=55% style="display: block; margin: auto;" }
+
+Podemos cancelar a massa e aceleração da gravidade de modo que a variável de controle seja a aceleração vertical:
+
+![](images/plant_cancelation.svg){: width=67.5% style="display: block; margin: auto;" }
+
+Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fizemos com o controlador de atitude. No entanto, agora temos um problema adicional: como estamos somando o termo da aceleração da gravidade (diferentemente da massa que está sendo multiplicada), caso ele seja um pouco diferente do real, não acontecerá um cancelamento exato e o sistema possuirá erro em regime permanente. Para resolver esse problema, podemos incluir um integrador no controlador.
+
+=== "Controlador PID"
+
+    O controlador PID adiciona à estrutura PD um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.
+
+    ![](images/controller_proportional_derivative.svg){: width=100% style="display: block; margin: auto;" }
+
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+
+    ![](images/controller_proportional_derivative_implementation.svg){: width=65% style="display: block; margin: auto;" }
+
+    Que se traduz nas equações abaixo:
+
+    $$
+    \left\{
+    \begin{array}{l}
+        z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
+        \ddot{z}_r = k_p z_e + k_d \frac{d z_e}{dt}  + k_i \int z_e dt \\
+        {\color{var(--c2)}f_t} = m ( g + \ddot{z}_r ) \\
+    \end{array}
+    \right.
+    $$
+
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado ${\color{var(--c2)}f_t}$ seguindo as equações acima.
+
+    ```c hl_lines="5 6 12-15 21"
+    // Compute desired torques
+    void attitudeController()
+    {
+        // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
+        static const float kp = 
+        static const float kd = 
+
+        // Last error (static to retain value amoung function calls)
+        static float theta_e_last;
+
+        // Compute angular aceleration reference
+        float theta_e = 
+        float theta_dot_e =
+        float theta_ddot_r =
+        float tau_x =
+        
+        // Update last error for next call
+        theta_e_last = theta_e;
+
+        // Compute desired torque
+        ty = 
+    }
+    ```
+
+=== "Controlador P-PI em cascata"
+
+    O controlador em cascata com ação integral na malha externa combina uma malha interna proporcional com uma malha externa proporcional com ação integral. A malha interna garante resposta rápida e amortecida, enquanto o termo integral na malha externa elimina o erro estacionário de posição. Essa configuração equilibra desempenho e simplicidade, oferecendo boa robustez sem exigir integrações redundantes, mas requer sintonia coordenada entre as duas malhas.
+
+    ![](images/controller_proportional_cascade.svg){: width=100% style="display: block; margin: auto;" }
+
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+
+    ![](images/controller_proportional_cascade_implementation.svg){: width=65% style="display: block; margin: auto;" }
+
+    Que se traduz nas equações abaixo:
+
+    $$
+    \left\{
+    \begin{array}{l}
+        \dot{z}_r = k_p ( {\color{var(--c3)}z_r} - {\color{var(--c1)}z} ) \\
+        \ddot{z}_r = k_d ( \dot{z}_r - {\color{var(--c1)}\dot{z}} ) \\
+        {\color{var(--c2)}f_t} = m ( g + \ddot{z}_r )
+    \end{array}
+    \right.
+    $$
+
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado ${\color{var(--c2)}f_t}$ seguindo as equações acima.
+
+    ```c hl_lines="5 6 9 10 13"
+    // Compute desired torques
+    void attitudeController()
+    {
+        // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
+        static const float kp = 
+        static const float kd = 
+
+        // Compute angular aceleration reference
+        float theta_dot_r = 
+        float theta_ddot_r =
+
+        // Compute desired torque
+        ty = 
+    }
+    ```
+
+=== "Regulador de estados com ação integral"
+
+    O regulador de estados com ação integral estende o regulador de estados tradicional adicionando uma variável que integra o erro de saída ao vetor de estados. Isso permite eliminar o erro estacionário sem perder as vantagens do controle por realimentação completa. A estrutura resultante combina desempenho dinâmico ajustável — por meio do posicionamento dos polos — com precisão em regime permanente. É uma solução elegante e sistemática, mas requer modelagem ampliada e cálculo de ganhos por métodos de espaço de estados, como o posicionamento de polos ou o LQI.
+
+    ![](images/controller_state_regulator.svg){: width=100% style="display: block; margin: auto;" }
+
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+
+    ![](images/controller_state_regulator_implementation.svg){: width=65% style="display: block; margin: auto;" }
+
+    Que se traduz na equação abaixo(1):
+    {.annotate}
+
+    1. No sistema linearizado temos que ${\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z}$. Além disso, como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência ${\color{var(--c3)}\dot{z}_r}$ pode ser assumida como sendo zero, o que reduz o segundo termo:
+
+        $$
+        k_d \left( \cancelto{0}{{\color{var(--c3)}\dot{z}_r}} - {\color{var(--c1)}\dot{z}} \right) = - k_d  {\color{var(--c1)}v_z}
+        $$
+
+    $$
+    \left\{
+    \begin{array}{l}
+        z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
+        {\color{var(--c2)}f_t} = m \left( g + k_p \left( {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \right) - k_d  {\color{var(--c1)}v_z} + k_i \int z_e dt \right) 
+    \end{array}
+    \right.
+    $$
+
+    Inclua na função `verticalController()` três variáveis locais $k_p$, $k_d$ e $k_i$, que correspondem aos ganhos do controlador, e, em seguida, calcule a força comandada ${\color{var(--c2)}f_t}$(1).
+    {.annotate}
+
+    1. O termo integral $z_i = \int z_e dt$ pode ser calculado com uma variável auxiliar conforme exemplo abaixo.
+
+    ```c hl_lines="5-7 10 17"
+    // Compute desired thrust force
+    void verticalController()
+    {
+        // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
+        static const float kp = 
+        static const float kd = 
+        static const float ki = 
+
+        // Compute angle error
+        float z_e = 
+
+        // Calculate integral term (static to retain value amoung function calls)
+        static float z_i;
+        z_i += z_e*dt;
+
+        // Compute desired force
+        ft = 
+    }
+    ``` 

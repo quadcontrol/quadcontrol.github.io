@@ -209,17 +209,18 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
     $$
     \left\{
     \begin{array}{l}
-        \theta_e = \theta_r - \theta \\
-        \dot{\theta}_e = \dfrac{\theta_e - \theta_{e_{last}}}{\Delta t} \\
-        \ddot{\theta}_r = k_p \theta_e + k_d \dot{\theta}_e \\
-        \tau_y = I_{yy} \ddot{\theta}_r \\
+        \theta_e = {\color{var(--c3)}\theta_r} -{\color{var(--c1)}\theta} \\
+        {\color{var(--c2)}\tau_y} = I_{yy} \left( k_p \theta_e + k_d \dfrac{d \theta_e}{dt} \right) \\
     \end{array}
     \right.
     $$
 
-    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado $\tau_y$ seguindo as equações acima.
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado ${\color{var(--c2)}\tau_y}$(1).
+    {.annotate}
 
-    ```c hl_lines="5 6 12-15 21"
+    1. O termo derivativo $z_d = \dfrac{d \theta_e}{dt}$ pode ser calculado com uma variável auxiliar conforme exemplo abaixo.
+
+    ```c hl_lines="5 6 9 17"
     // Compute desired torques
     void attitudeController()
     {
@@ -227,18 +228,14 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
         static const float kp = 
         static const float kd = 
 
-        // Last error (static to retain value amoung function calls)
-        static float theta_e_last;
-
-        // Compute angular aceleration reference
+        // Compute angle error
         float theta_e = 
-        float theta_dot_e =
-        float theta_ddot_r =
-        float tau_x =
-        
-        // Update last error for next call
-        theta_e_last = theta_e;
 
+        // Calculate derivative term with auxiliary variable of previous error (static to retain value amoung function calls)
+        static float theta_e_prev;
+        theta_d = (theta_e-theta_e_prev)/dt;
+        theta_e_prev = theta_e;
+        
         // Compute desired torque
         ty = 
     }
@@ -378,31 +375,24 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
 
     ![](images/controller_proportional_cascade_implementation.svg){: width=65% style="display: block; margin: auto;" }
 
-    Que se traduz nas equações abaixo:
+    Que se traduz na equação abaixo(1):
+    {.annotate}
+
+    1. No sistema linearizado temos que ${\color{var(--c1)}\dot{\theta}} = {\color{var(--c1)}\omega_y}$
 
     $$
-    \left\{
-    \begin{array}{l}
-        \dot{\theta}_r = k_p ( \theta_r - \theta ) \\
-        \ddot{\theta}_r = k_d ( \dot{\theta}_r - \dot{\theta} ) \\
-        \tau_y = I_{yy} \ddot{\theta}_r
-    \end{array}
-    \right.
+    {\color{var(--c2)}\tau_y} = I_{yy} \left( k_d \left( k_p \left( {\color{var(--c3)}\theta_r} - {\color{var(--c1)}\theta} \right)  - {\color{var(--c1)}\omega_y} \right)  \right) 
     $$
 
-    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado $\tau_y$ seguindo as equações acima.
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado ${\color{var(--c2)}\tau_y}$.
 
-    ```c hl_lines="5 6 9 10 13"
+    ```c hl_lines="5 6 9"
     // Compute desired torques
     void attitudeController()
     {
         // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
         static const float kp = 
         static const float kd = 
-
-        // Compute angular aceleration reference
-        float theta_dot_r = 
-        float theta_ddot_r =
 
         // Compute desired torque
         ty = 
@@ -515,8 +505,6 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
             k_p & k_d 
         \end{bmatrix}
         $$
-
-        
 
         Como estamos aplicando um realimentação de estados do tipo:
 
@@ -644,32 +632,28 @@ Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar trê
 
     ![](images/controller_state_regulator_implementation.svg){: width=65% style="display: block; margin: auto;" }
 
-    Que se traduz nas equações abaixo:
-
-    $$
-    \left\{
-    \begin{array}{l}
-        \ddot{\theta}_r = k_p ( \theta_r - \theta ) + k_d ( \dot{\theta}_r - \dot{\theta} ) \\
-        \tau_y = I_{yy} \ddot{\theta}_r
-    \end{array}
-    \right.
-    $$
-
-    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado $\tau_y$ seguindo as equações acima(1).
+    Que se traduz na equação abaixo(1):
     {.annotate}
 
-    1. Como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência pode ser assumida como sendo zero.
+    1. No sistema linearizado temos que ${\color{var(--c1)}\dot{\theta}} = {\color{var(--c1)}\omega_y}$. Além disso, como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência ${\color{var(--c3)}\dot{\theta}_r}$ pode ser assumida como sendo zero, o que reduz o segundo termo:
 
-    ```c hl_lines="5 6 9 12"
+        $$
+        k_d \left( \cancelto{0}{{\color{var(--c3)}\dot{\theta}_r}} - {\color{var(--c1)}\dot{\theta}} \right) = - k_d  {\color{var(--c1)}\omega_y}
+        $$
+
+    $$
+    {\color{var(--c2)}\tau_y} = I_{yy} \left( k_p \left( {\color{var(--c3)}\theta_r} - {\color{var(--c1)}\theta} \right) - k_d  {\color{var(--c1)}\omega_y} \right) 
+    $$
+
+    Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado ${\color{var(--c2)}\tau_y}$.
+
+    ```c hl_lines="5 6 9"
     // Compute desired torques
     void attitudeController()
     {
         // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
         static const float kp = 
         static const float kd = 
-
-        // Compute angular aceleration reference
-        float theta_ddot_r =
 
         // Compute desired torque
         ty = 
@@ -701,18 +685,13 @@ Altere a função `attitudeController()` de modo que ela comande não só o torq
 
 1. Por conta da simetria do drone, você deve utilizar os mesmos ganhos $k_p$ e $k_d$ para o ângulo de rolagem $\phi$ e inclinação $\theta$. No entanto, para o ângulo de guinagem $\psi$, recomenda-se utilizar um ganho $k_p$ 4x menor e um ganho $k_d$ 2x menor, que corresponde à mesma ultrapassagem percentual de $0,5\%$ mas a um tempo de acomodação 2x maior ($0,3s \rightarrow 0,6s$). 
 
-```c hl_lines="9 11 14 16"
+```c hl_lines="9 11"
 // Compute desired torques
 void attitudeController()
 {
     // Controller parameters (settling time of 0.3s and overshoot of 0,05%)
     static const float kp = 
     static const float kd = 
-
-    // Compute angular acelerations references
-    float phi_ddot_r =
-    float theta_ddot_r =
-    float psi_ddot_r =
 
     // Compute desired torques
     tx = 

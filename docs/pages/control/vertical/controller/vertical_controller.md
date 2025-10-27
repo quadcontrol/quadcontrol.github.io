@@ -120,13 +120,13 @@ Já [vimos](../../../modeling/3d_model.md) que a dinâmica linearizada de um qua
     
 ![Commando Based Flight Control](../../../modeling/images/3d_plant.svg){: width=100% style="display: block; margin: auto;" }
     
-A dinâmica de posição vertical é dada pelo seguinte trecho do diagrama de blocos:
+A dinâmica de posição vertical é descrita pela seguinte parte:
 
-![](images/plant.svg){: width=55% style="display: block; margin: auto;" }
+![](images/plant.svg){: width=65% style="display: block; margin: auto;" }
 
-Podemos cancelar a massa e aceleração da gravidade de modo que a variável de controle seja a aceleração vertical:
+Podemos cancelar a massa e a aceleração da gravidade de modo que a variável de controle seja a aceleração vertical:
 
-![](images/plant_cancelation.svg){: width=67.5% style="display: block; margin: auto;" }
+![](images/plant_cancelation.svg){: width=85% style="display: block; margin: auto;" }
 
 Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fizemos com o controlador de atitude. No entanto, agora temos um problema adicional: como estamos somando o termo da aceleração da gravidade (diferentemente da massa que está sendo multiplicada), caso ele seja um pouco diferente do real, não acontecerá um cancelamento exato e o sistema possuirá erro em regime permanente. Para resolver esse problema, podemos incluir um integrador no controlador.
 
@@ -134,11 +134,11 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
 
     O controlador proporcional integral derivativo (PID) adiciona à estrutura proporcional derivativo um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.
 
-    ![](images/controller_proportional_derivative.svg){: width=100% style="display: block; margin: auto;" }
+    ![](images/controller_pid_plant.svg){: width=100% style="display: block; margin: auto;" }
 
     Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
 
-    ![](images/controller_proportional_derivative_implementation.svg){: width=65% style="display: block; margin: auto;" }
+    ![](images/controller_pid.svg){: width=65% style="display: block; margin: auto;" }
 
     Que se traduz nas equações abaixo:
 
@@ -146,11 +146,11 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
     \left\{
     \begin{array}{l}
         z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
-        \ddot{z}_r = k_p z_e + k_d \frac{d z_e}{dt}  + k_i \int z_e dt \\
-        {\color{var(--c2)}f_t} = m ( g + \ddot{z}_r ) \\
+        {\color{var(--c2)}f_t} = m \left( g + \left( k_p z_e + k_d \dfrac{d z_e}{dt}  + k_i \displaystyle\int z_e dt \right) \right)
     \end{array}
     \right.
     $$
+
 
     Inclua na função `attitudeController()` duas variáveis locais $k_p$ e $k_d$, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado ${\color{var(--c2)}f_t}$ seguindo as equações acima.
 
@@ -183,11 +183,11 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
 
     O controlador proporcional em cascata com ação integral (PI-P) na malha externa combina uma malha interna proporcional com uma malha externa proporcional com ação integral. A malha interna garante resposta rápida e amortecida, enquanto o termo integral na malha externa elimina o erro estacionário de posição. Essa configuração equilibra desempenho e simplicidade, oferecendo boa robustez sem exigir integrações redundantes, mas requer sintonia coordenada entre as duas malhas.
 
-    ![](images/controller_proportional_cascade.svg){: width=100% style="display: block; margin: auto;" }
+    ![](images/controller_pip_plant.svg){: width=100% style="display: block; margin: auto;" }
 
     Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
 
-    ![](images/controller_proportional_cascade_implementation.svg){: width=65% style="display: block; margin: auto;" }
+    ![](images/controller_pip.svg){: width=65% style="display: block; margin: auto;" }
 
     Que se traduz nas equações abaixo:
 
@@ -224,26 +224,29 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
 
     O regulador de estados com ação integral estende o regulador de estados tradicional adicionando uma variável que integra o erro de saída ao vetor de estados. Isso permite eliminar o erro estacionário sem perder as vantagens do controle por realimentação completa. A estrutura resultante combina desempenho dinâmico ajustável — por meio do posicionamento dos polos — com precisão em regime permanente. É uma solução elegante e sistemática, mas requer modelagem ampliada e cálculo de ganhos por métodos de espaço de estados, como o posicionamento de polos ou o LQI.
 
-    ![](images/controller_state_regulator.svg){: width=100% style="display: block; margin: auto;" }
+    ![](images/controller_lqi_plant.svg){: width=100% style="display: block; margin: auto;" }
 
-    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:
+    Olhando o controlador isoladamente, temos o seguinte diagrama de blocos(1):
+    {.annotate}
 
-    ![](images/controller_state_regulator_implementation.svg){: width=65% style="display: block; margin: auto;" }
+    1. No sistema linearizado temos que ${\color{var(--c3)}\dot{z}_r} = {\color{var(--c3)}v_{z_r}}$ e ${\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z}$.
+
+    ![](images/controller_lqi.svg){: width=65% style="display: block; margin: auto;" }
 
     Que se traduz na equação abaixo(1):
     {.annotate}
 
-    1. No sistema linearizado temos que ${\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z}$. Além disso, como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência ${\color{var(--c3)}\dot{z}_r}$ pode ser assumida como sendo zero, o que reduz o segundo termo:
+    1. Como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência ${\color{var(--c3)}v_{z_r}}$ pode ser assumida como sendo zero, o que reduz um dos termos:
 
         $$
-        k_d \left( \cancelto{0}{{\color{var(--c3)}\dot{z}_r}} - {\color{var(--c1)}\dot{z}} \right) = - k_d  {\color{var(--c1)}v_z}
+        k_d \left( \cancelto{0}{{\color{var(--c3)}v_{z_r}}} - {\color{var(--c1)}\dot{z}} \right) = - k_d  {\color{var(--c1)}v_z}
         $$
 
     $$
     \left\{
     \begin{array}{l}
         z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
-        {\color{var(--c2)}f_t} = m \left( g + k_p \left( {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \right) - k_d  {\color{var(--c1)}v_z} + k_i \int z_e dt \right) 
+        {\color{var(--c2)}f_t} = m \left( g + \left( k_p z_e + k_i \displaystyle\int z_e dt - k_d {\color{var(--c1)}v_z} \right) \right)
     \end{array}
     \right.
     $$
@@ -251,7 +254,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
     Inclua na função `verticalController()` três variáveis locais $k_p$, $k_d$ e $k_i$, que correspondem aos ganhos do controlador, e, em seguida, calcule a força comandada ${\color{var(--c2)}f_t}$(1).
     {.annotate}
 
-    1. O termo integral $z_i = \int z_e dt$ pode ser calculado com uma variável auxiliar conforme exemplo abaixo.
+    1. A termo integral do erro $z_{e_{int}} = \displaystyle\int z_e dt$ pode ser calculado com uma variável auxiliar conforme exemplo abaixo.
 
     ```c hl_lines="5-7 10 17"
     // Compute desired thrust force
@@ -266,8 +269,8 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
         float z_e = 
 
         // Calculate integral term (static to retain value amoung function calls)
-        static float z_i;
-        z_i += z_e*dt;
+        static float z_e_int;
+        z_e_int += z_e*dt;
 
         // Compute desired force
         ft = 

@@ -1738,7 +1738,7 @@
 </code></pre></div>
 <p>Já <a href="../../../../modeling/3d_model/">vimos</a> que a dinâmica linearizada de um quadricóptero pode ser representada pelo diagrama de blocos abaixo:</p>
 <p><img alt="Commando Based Flight Control" src="../../../../modeling/images/3d_plant.svg" style="display: block; margin: auto;" width="100%" /></p>
-<p>A dinâmica de posição vertical é descrita pela seguinte parte:</p>
+<p>A dinâmica de posição vertical é descrita pelo seguinte trecho:</p>
 <p><img alt="" src="../images/plant.svg" style="display: block; margin: auto;" width="65%" /></p>
 <p>Podemos cancelar a massa e a aceleração da gravidade de modo que a variável de controle seja a aceleração vertical:</p>
 <p><img alt="" src="../images/plant_cancelation.svg" style="display: block; margin: auto;" width="85%" /></p>
@@ -1746,7 +1746,7 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PID</label><label for="__tabbed_1_2">PI-P</label><label for="__tabbed_1_3">LQI</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>O controlador proporcional integral derivativo (PID) adiciona à estrutura proporcional derivativo um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.</p>
+<p>O controlador proporcional-integral-derivativo (PID) adiciona à estrutura anterior um termo integral que acumula o erro ao longo do tempo, eliminando o erro estacionário. A ação proporcional e derivativa garantem resposta rápida e amortecida, enquanto a integral corrige desvios persistentes. É versátil e eficaz para o integrador duplo, mas o termo integral exige cuidado para evitar oscilações de baixa frequência (windup) e lentidão na resposta.</p>
 <p><img alt="" src="../images/controller_pid_plant.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Olhando o controlador isoladamente, temos o seguinte diagrama de blocos:</p>
 <p><img alt="" src="../images/controller_pid.svg" style="display: block; margin: auto;" width="65%" /></p>
@@ -1755,32 +1755,39 @@
 \left\{
 \begin{array}{l}
     z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
-    {\color{var(--c2)}f_t} = m \left( g + \left( k_p z_e + k_d \dfrac{d z_e}{dt}  + k_i \displaystyle\int z_e dt \right) \right)
+    {\color{var(--c2)}f_t} = m \left( g + \left( k_p z_e + k_i \displaystyle\int z_e dt + k_d \dfrac{d z_e}{dt} \right) \right)
 \end{array}
 \right.
 \]</div>
-<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
+<p class="annotate">Inclua na função <code>attitudeController()</code> três variáveis locais <span class="arithmatex">\(k_p\)</span>, <span class="arithmatex">\(k_i\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima(1).</p>
+<ol>
+<li>
+<p>A integral do erro <span class="arithmatex">\(\displaystyle\int z_e dt\)</span> pode ser calculada com um termo auxiliar utilizando a seguinte lógica:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute integral term (static to retain value amoung function calls)</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e_integral</span><span class="p">;</span>
+<span class="n">z_e_integral</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">z_e</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
+</code></pre></div>
+<p>A derivada do erro <span class="arithmatex">\(\dfrac{dz_e}{dt}\)</span> pode ser calculada com um termo auxiliar utilizando a seguinte lógica:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute derivative term with auxiliary variable for previous error (static to retain value amoung function calls)</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e_previous</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">z_e_derivative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">z_e</span><span class="o">-</span><span class="n">z_e_previous</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">;</span>
+<span class="n">z_e_previous</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z_e</span><span class="p">;</span>
+</code></pre></div>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
+<span class="w">    </span><span class="c1">// Controller parameters (settling time of 2.0s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Last error (static to retain value amoung function calls)</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e_last</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
-<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_dot_e</span><span class="w"> </span><span class="o">=</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">tau_x</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="c1">// Compute vertical position error</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Update last error for next call</span>
-<span class="w">    </span><span class="n">theta_e_last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theta_e</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Compute desired torque</span>
-<span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// Compute desired thrust force</span>
+<span class="hll"><span class="w">    </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="p">}</span>
 </code></pre></div>
 </div>
@@ -1793,26 +1800,34 @@
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \dot{z}_r = k_p ( {\color{var(--c3)}z_r} - {\color{var(--c1)}z} ) \\
-    \ddot{z}_r = k_d ( \dot{z}_r - {\color{var(--c1)}\dot{z}} ) \\
-    {\color{var(--c2)}f_t} = m ( g + \ddot{z}_r )
+    z_e = {\color{var(--c3)}z_r} - {\color{var(--c1)}z} \\
+    {\color{var(--c2)}f_t} = m \left( g + \left( k_d \left( \left( k_p z_e + k_i \displaystyle\int z_e dt \right) - {\color{var(--c1)}v_z} \right) \right) \right)
 \end{array}
 \right.
 \]</div>
-<p>Inclua na função <code>attitudeController()</code> duas variáveis locais <span class="arithmatex">\(k_p\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired torques</span>
+<p class="annotate">Inclua na função <code>attitudeController()</code> três variáveis locais <span class="arithmatex">\(k_p\)</span>, <span class="arithmatex">\(k_i\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima(1).</p>
+<ol>
+<li>
+<p>A integral do erro <span class="arithmatex">\(\displaystyle\int z_e dt\)</span> pode ser calculada com um termo auxiliar utilizando a seguinte lógica:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute integral term (static to retain value amoung function calls)</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e_integral</span><span class="p">;</span>
+<span class="n">z_e_integral</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">z_e</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
+</code></pre></div>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
+<span class="w">    </span><span class="c1">// Controller parameters (settling time of 2.0s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Compute angular aceleration reference</span>
-<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_dot_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span><span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">theta_ddot_r</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="c1">// Compute vertical position error</span>
+<span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Compute desired torque</span>
-<span class="hll"><span class="w">    </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// Compute desired thrust force</span>
+<span class="hll"><span class="w">    </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="p">}</span>
 </code></pre></div>
 </div>
@@ -1829,7 +1844,7 @@
 <li>
 <p>Como o objetivo é deixar o quadricóptero estacionário, a velocidade angular de referência <span class="arithmatex">\({\color{var(--c3)}v_{z_r}}\)</span> pode ser assumida como sendo zero, o que reduz um dos termos:</p>
 <div class="arithmatex">\[
-k_d \left( \cancelto{0}{{\color{var(--c3)}v_{z_r}}} - {\color{var(--c1)}\dot{z}} \right) = - k_d  {\color{var(--c1)}v_z}
+k_d \left( \cancelto{0}{{\color{var(--c3)}v_{z_r}}} - {\color{var(--c1)}v_z} \right) = - k_d  {\color{var(--c1)}v_z}
 \]</div>
 </li>
 </ol>
@@ -1841,32 +1856,203 @@ k_d \left( \cancelto{0}{{\color{var(--c3)}v_{z_r}}} - {\color{var(--c1)}\dot{z}}
 \end{array}
 \right.
 \]</div>
-<p class="annotate">Inclua na função <code>verticalController()</code> três variáveis locais <span class="arithmatex">\(k_p\)</span>, <span class="arithmatex">\(k_d\)</span> e <span class="arithmatex">\(k_i\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule a força comandada <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span>(1).</p>
+<p class="annotate">Inclua na função <code>attitudeController()</code> três variáveis locais <span class="arithmatex">\(k_p\)</span>, <span class="arithmatex">\(k_i\)</span> e <span class="arithmatex">\(k_d\)</span>, que correspondem aos ganhos do controlador, e, em seguida, calcule o torque comandado <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> seguindo as equações acima(1).</p>
 <ol>
-<li>A termo integral do erro <span class="arithmatex">\(z_{e_{int}} = \displaystyle\int z_e dt\)</span> pode ser calculado com uma variável auxiliar conforme exemplo abaixo.</li>
+<li>
+<p>A integral do erro <span class="arithmatex">\(\displaystyle\int z_e dt\)</span> pode ser calculada com um termo auxiliar utilizando a seguinte lógica:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute integral term (static to retain value amoung function calls)</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e_integral</span><span class="p">;</span>
+<span class="n">z_e_integral</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">z_e</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
+</code></pre></div>
+</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Controller parameters (settling time of 0.3s and overshoot of 0,05%)</span>
+<span class="w">    </span><span class="c1">// Controller parameters (settling time of 2.0s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Compute angle error</span>
+<span class="w">    </span><span class="c1">// Compute vertical position error</span>
 <span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span>
-<span class="w">    </span><span class="c1">// Calculate integral term (static to retain value amoung function calls)</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">z_e_int</span><span class="p">;</span>
-<span class="w">    </span><span class="n">z_e_int</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">z_e</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Compute desired force</span>
+<span class="w">    </span><span class="c1">// Compute desired thrust force</span>
 <span class="hll"><span class="w">    </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
 </span><span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
 </div>
+<!-- PID — Planta × Controlador (m,g distintos); dt=0.005s, T=10s, z_r=1m; fmax=0.5N -->
+<div id="pid-mg-mismatch" style="max-width:980px;margin:1rem auto;">
+
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end;margin-bottom:8px;color:white;">
+    <label>Kp
+      <input id="kp" type="range" min="0" max="10" step="0.01" value="5.4">
+      <div><code id="kpv">5.40</code></div>
+    </label>
+    <label>Ki
+      <input id="ki" type="range" min="0" max="10" step="0.01" value="0">
+      <div><code id="kiv">0.00</code></div>
+    </label>
+    <label>Kd
+      <input id="kd" type="range" min="0" max="10" step="0.01" value="4">
+      <div><code id="kdv">4.00</code></div>
+    </label>
+  </div>
+
+  <fieldset style="border:1px solid #444;border-radius:12px;padding:10px;margin-bottom:10px;color:white;">
+    <legend style="padding:0 6px;">Planta</legend>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
+      <label>m<sub>p</sub> (g)
+        <input id="m_p" type="range" min="30" max="50" step="0.1" value="38.6">
+        <div><code id="m_pv">38.6</code></div>
+      </label>
+      <label>g<sub>p</sub> (m/s²)
+        <input id="g_p" type="range" min="9" max="10" step="0.001" value="9.81">
+        <div><code id="g_pv">9.810</code></div>
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset style="border:1px solid #444;border-radius:12px;padding:10px;margin-bottom:12px;color:white;">
+    <legend style="padding:0 6px;">Controlador</legend>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
+      <label>m<sub>c</sub> (g)
+        <input id="m_c" type="range" min="30" max="50" step="0.1" value="38.6">
+        <div><code id="m_cv">38.6</code></div>
+      </label>
+      <label>g<sub>c</sub> (m/s²)
+        <input id="g_c" type="range" min="9" max="10" step="0.001" value="9.81">
+        <div><code id="g_cv">9.810</code></div>
+      </label>
+    </div>
+  </fieldset>
+
+  <div style="display:flex;gap:10px;align-items:center;margin:6px 0 10px;">
+    <button id="reset" style="padding:8px 14px;border-radius:10px;border:none;background:#03dac5;color:black;font-weight:600;cursor:pointer;">
+      Reset
+    </button>
+  </div>
+
+  <div id="plot" style="height:380px;"></div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const el = {
+    kp:$('kp'), ki:$('ki'), kd:$('kd'),
+    kpv:$('kpv'), kiv:$('kiv'), kdv:$('kdv'),
+    m_p:$('m_p'), m_pv:$('m_pv'),
+    g_p:$('g_p'), g_pv:$('g_pv'),
+    m_c:$('m_c'), m_cv:$('m_cv'),
+    g_c:$('g_c'), g_cv:$('g_cv'),
+    reset:$('reset'), plot:$('plot')
+  };
+
+  const dt = 0.005, T = 10.0, r = 1.0;
+  const FMAX = 0.5;
+  const Z_COLOR  = "#03dac5";
+  const ZR_COLOR = "#ffd54f";
+  const FT_COLOR = "#bb86fc";
+
+  const upd = () => {
+    el.kpv.textContent = (+el.kp.value).toFixed(2);
+    el.kiv.textContent = (+el.ki.value).toFixed(2);
+    el.kdv.textContent = (+el.kd.value).toFixed(2);
+    el.m_pv.textContent= (+el.m_p.value).toFixed(1);
+    el.g_pv.textContent= (+el.g_p.value).toFixed(3);
+    el.m_cv.textContent= (+el.m_c.value).toFixed(1);
+    el.g_cv.textContent= (+el.g_c.value).toFixed(3);
+  };
+
+  function simulate(){
+    const Kp=+el.kp.value, Ki=+el.ki.value, Kd=+el.kd.value;
+    const mp=+el.m_p.value/1000.0, gp=+el.g_p.value;
+    const mc=+el.m_c.value/1000.0, gc=+el.g_c.value;
+
+    let z=0, v=0, xi=0;
+    const n = Math.max(1, Math.floor(T/dt));
+    const t=[], y=[], u=[], u_cap=new Array(n).fill(FMAX);
+
+    for(let k=0;k<n;k++){
+      const e = r - z;
+      const a_cmd = Kp*e + Ki*xi + Kd*(0 - v);
+      let ft_cmd = mc*(a_cmd + gc);
+      let ft_sat = Math.max(0, Math.min(FMAX, ft_cmd));
+      xi += e*dt;
+      const zdd = (ft_sat/mp) - gp;
+      z += v*dt;
+      v += zdd*dt;
+      const time = k*dt;
+      t.push(time); y.push(z); u.push(ft_sat);
+    }
+
+    const data = [
+      {x:t, y:new Array(n).fill(r), name:"z_r", mode:"lines",
+        line:{color:ZR_COLOR, dash:"dot", width:2}, yaxis:"y1", hoverinfo:"none"},
+      {x:t, y:y, name:"z", mode:"lines",
+        line:{color:Z_COLOR, width:2}, yaxis:"y1", hoverinfo:"none"},
+      {x:t, y:u, name:"f_t", mode:"lines",
+        line:{color:FT_COLOR, width:2}, yaxis:"y2", hoverinfo:"none"},
+      {x:t, y:u_cap, name:"f_t_max", mode:"lines",
+        line:{color:FT_COLOR, dash:"dot", width:2}, yaxis:"y2", hoverinfo:"none"}
+    ];
+
+    const layout = {
+      paper_bgcolor:"rgba(0,0,0,0)",
+      plot_bgcolor:"rgba(0,0,0,0)",
+      margin:{l:55,r:55,t:10,b:40},
+      xaxis:{
+        title:"t (s)", color:"white", showgrid:false,
+        range:[0,10], fixedrange:true,
+        showline:true, linecolor:"white", linewidth:1
+      },
+      yaxis:{
+        title:"z (m)", showgrid:false,
+        range:[0,1.5], fixedrange:true,
+        titlefont:{color:Z_COLOR}, tickfont:{color:Z_COLOR},
+        showline:true, linecolor:Z_COLOR, linewidth:1
+      },
+      yaxis2:{
+        title:"f_t (N)", showgrid:false,
+        range:[0,0.6], fixedrange:true,
+        overlaying:"y", side:"right",
+        titlefont:{color:FT_COLOR}, tickfont:{color:FT_COLOR},
+        showline:true, linecolor:FT_COLOR, linewidth:1
+      },
+      legend:{
+        orientation:"v",
+        x:0.98, y:0.05, xanchor:"right", yanchor:"bottom",
+        bgcolor:"rgba(0,0,0,0.4)",
+        bordercolor:"rgba(255,255,255,0.2)",
+        font:{color:"white"}
+      },
+      hovermode:false
+    };
+
+    Plotly.react(el.plot, data, layout, {displayModeBar:false, responsive:true});
+  }
+
+  ['input','change'].forEach(evt=>{
+    ['kp','ki','kd','m_p','g_p','m_c','g_c'].forEach(id=>{
+      $(id).addEventListener(evt,()=>{upd();simulate();});
+    });
+  });
+
+  el.reset.addEventListener('click', ()=>{
+    el.kp.value=5.4; el.ki.value=0; el.kd.value=4.0;
+    el.m_p.value=38.6; el.g_p.value=9.81;
+    el.m_c.value=38.6; el.g_c.value=9.81;
+    upd(); simulate();
+  });
+
+  upd(); simulate();
+})();
+</script>
 
 
 

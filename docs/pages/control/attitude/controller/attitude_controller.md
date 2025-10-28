@@ -119,7 +119,11 @@ Podemos cancelar o momento de inércia da planta de modo que a variável de cont
 
 ![](images/plant_cancelation.svg){: width=67.5% style="display: block; margin: auto;" }
 
-Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar três possíveis controladores para um sistema como esse, ficando a seu critério qual utilizar.
+Isso reduz o sistema a ser controlado a um integrador duplo. Vamos detalhar três possíveis controladores para um sistema como esse, ficando a seu critério qual utilizar:
+
+- Controlador proporcional derivativo (PD)
+- Controlador proporcional em cascata (P-P)
+- Regulador quadrático linear (LQR)
 
 === "PD"
 

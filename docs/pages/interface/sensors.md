@@ -3,7 +3,7 @@ title: Sensores
 icon: material/compass-outline
 ---
 
-# Sensores
+# :material-compass-outline: Sensores
 
 Nesta secção, vamos aprender como ler os dados dos sensores do drone em tempo real. Esses dados são fundamentais para tarefas como estabilização, controle, navegação e autonomia.
 

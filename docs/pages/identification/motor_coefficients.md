@@ -1,8 +1,9 @@
 ---
+title: Coeficientes do motor 
 icon: material/alpha-m-box-outline
 ---
 
-# Identificação dos coeficientes do motor
+# :material-alpha-m-box-outline: Coeficientes do motor
 
 Nesta secção, você irá determinar experimentalmente os coeficientes do motor elétrico.
 

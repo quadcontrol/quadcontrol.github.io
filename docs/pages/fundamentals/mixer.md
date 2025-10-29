@@ -1,8 +1,9 @@
 ---
+title: Mixer
 icon: material/equalizer
 ---
 
-# Mixer
+# :material-equalizer: Mixer
 
 O voo de um drone depende diretamente das forças e torques gerados pelos motores. Aqui, você vai entender como esses efeitos se combinam para movimentar o quadricóptero no espaço.
 

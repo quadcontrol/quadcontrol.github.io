@@ -3,7 +3,7 @@ title: Firmware
 icon: material/memory
 ---
 
-# Firmware
+# :material-memory: Firmware
 
 Agora que seu ambiente está pronto, é hora de colocar a mão no código do drone.
 

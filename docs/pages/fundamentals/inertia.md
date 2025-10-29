@@ -1,8 +1,9 @@
 ---
+title: Inércia
 icon: material/axis-z-rotate-counterclockwise
 ---
 
-# Inércia
+# :material-axis-z-rotate-counterclockwise: Inércia
 
 Todo corpo resiste a mudanças em seu estado de movimento — essa resistência é o que chamamos de inércia.
 

@@ -1,8 +1,9 @@
 ---
+title: Constante de arrasto
 icon: material/alpha-d-box-outline
 ---
 
-# Identificação da constante de arrasto
+# :material-alpha-d-box-outline: Constante de arrasto
 
 Nesta secção, você irá determinar experimentalmente a constante de arrasto das hélices $k_d$.
 

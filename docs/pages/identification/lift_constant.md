@@ -1,8 +1,9 @@
 ---
+title: Constante de sustentação
 icon: material/alpha-l-box-outline
 ---
 
-# Identificação da constante de sustentação
+# :material-alpha-l-box-outline: Constante de sustentação
 
 Nesta secção, você irá determinar experimentalmente a constante de sustentação das hélices $k_l$.
 

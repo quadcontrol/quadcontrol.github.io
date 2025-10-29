@@ -3,7 +3,7 @@ title: Atuadores
 icon: material/engine-outline
 ---
 
-# Atuadores
+# :material-engine-outline: Atuadores
 
 Nesta secção, vamos fazer o drone girar um de seus motores pela primeira vez. Esse é o seu primeiro contato com controle real de hardware, um passo fundamental rumo ao voo autônomo.
 

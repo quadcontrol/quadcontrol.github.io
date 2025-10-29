@@ -22,7 +22,7 @@
     
     
       
-        <title>Controlador - QuadControl</title>
+        <title>Controlador vertical - QuadControl</title>
       
     
     
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Controlador
+              Controlador vertical
             
           </span>
         </div>
@@ -1666,7 +1666,7 @@
 
 
 
-<h1 id="controlador-vertical">Controlador vertical</h1>
+<h1 id="controlador-vertical"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.5 8 7h8zm0 7.5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m-4 7 4 4.5 4-4.5z"/></svg></span> Controlador vertical</h1>
 <p>Nesta secção você irá implementar o controlador vertical, que comanda a força de empuxo <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> a partir da diferença entre a posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> e estimada <span class="arithmatex">\({\color{var(--c1)}z}\)</span>.</p>
 <p><img alt="Architecture - Vertical Controller" src="../../../architecture/images/architecture_vertical_controller.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Para isto, será implementada uma nova função:</p>
@@ -1797,7 +1797,7 @@
 </li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Controller parameters (settling time of 2.0s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
@@ -1840,7 +1840,7 @@
 </li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Controller parameters (settling time of 2.0s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
@@ -1894,7 +1894,7 @@ k_d \left( \cancelto{0}{{\color{var(--c3)}v_{z_r}}} - {\color{var(--c1)}v_z} \ri
 </li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">attitudeController</span><span class="p">()</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Controller parameters (settling time of 2.0s and overshoot of 0,05%)</span>
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>

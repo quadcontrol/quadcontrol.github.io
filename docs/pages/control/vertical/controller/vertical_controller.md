@@ -1,8 +1,9 @@
 ---
+title: Controlador vertical
 icon: material/gamepad-circle-outline
 ---
 
-# Controlador vertical
+# :material-pan-vertical: Controlador vertical
 
 Nesta secção você irá implementar o controlador vertical, que comanda a força de empuxo ${\color{var(--c2)}f_t}$ a partir da diferença entre a posição vertical de referência ${\color{var(--c3)}z_r}$ e estimada ${\color{var(--c1)}z}$.
 
@@ -175,7 +176,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
 
     ```c hl_lines="5-7 10 13"
     // Compute desired thrust force
-    void attitudeController()
+    void verticalController()
     {
         // Controller parameters (settling time of 2.0s and overshoot of 0,05%)
         static const float kp = 
@@ -226,7 +227,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
 
     ```c hl_lines="5-7 10 13"
     // Compute desired thrust force
-    void attitudeController()
+    void verticalController()
     {
         // Controller parameters (settling time of 2.0s and overshoot of 0,05%)
         static const float kp = 
@@ -287,7 +288,7 @@ Isso reduz o sistema a ser controlado a um integrador duplo, exatamente como fiz
 
     ```c hl_lines="5-7 10 13"
     // Compute desired thrust force
-    void attitudeController()
+    void verticalController()
     {
         // Controller parameters (settling time of 2.0s and overshoot of 0,05%)
         static const float kp = 

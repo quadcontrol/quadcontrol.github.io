@@ -1,8 +1,9 @@
 ---
+title: Sistema de coordenadas
 icon: material/axis-arrow
 ---
 
-# Sistema de coordenadas
+# :material-axis-arrow: Sistema de coordenadas
 
 No controle de drones, o uso de sistemas de coordenadas é fundamental para descrever posições e orientações relativas. Alguns exemplos comuns são: a posição do drone em relação ao solo, a orientação da câmera em relação ao drone e a velocidade do drone em relação ao vento.
 

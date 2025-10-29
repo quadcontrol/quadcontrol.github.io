@@ -1,8 +1,9 @@
 ---
+title: Controlador de atitude
 icon: material/gamepad-circle-outline
 ---
 
-# Controlador de atitude
+# :material-rotate-orbit: Controlador de atitude
 
 Nesta secção você irá implementar o controlador de atitude, que comanda os torques $\tau_x$, $\tau_y$ e $\tau_z$ a partir da diferença entre os ângulos de Euler de referência $\phi_r$, $\theta_r$ e $\psi_r$ e estimados $\phi$, $\theta$ e $\psi$.
 

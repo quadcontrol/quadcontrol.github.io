@@ -1,8 +1,9 @@
 ---
+title: Modelo 2D
 icon: material/video-2d
 ---
 
-# Modelo 2D
+# :material-video-2d: Modelo 2D
 
 Inicialmente, vamos deduzir as equações diferenciais que descrevem a dinâmica 2D de um quadricóptero. Partiremos de um caso simplificado em duas dimensões, o que reduz a complexidade matemática e facilita uma compreensão mais intuitiva. Esse modelo funciona como um primeiro passo essencial para visualizar como as entradas influenciam as saídas.
 

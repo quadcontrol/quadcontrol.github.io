@@ -22,7 +22,7 @@
     
     
       
-        <title>Estimador - QuadControl</title>
+        <title>Estimador horizontal - QuadControl</title>
       
     
     
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Estimador
+              Estimador horizontal
             
           </span>
         </div>
@@ -1485,6 +1485,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#observador-de-estados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observador de estados
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1665,6 +1674,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#observador-de-estados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observador de estados
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1696,7 +1714,7 @@
 
 
 
-<h1 id="estimador-horizontal">Estimador horizontal</h1>
+<h1 id="estimador-horizontal"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m7 8-4.5 4L7 16zm10 0v8l4.5-4zm-5 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg></span> Estimador horizontal</h1>
 <p>Nesta secção você irá implementar o estimador horizontal, que estima as posições <span class="arithmatex">\({\color{var(--c1)}x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}y}\)</span> e velocidades <span class="arithmatex">\({\color{var(--c1)}v_x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}v_y}\)</span> a partir das leituras do sensor de fluxo óptico <span class="arithmatex">\({\color{var(--c3)}p_x}\)</span> e <span class="arithmatex">\({\color{var(--c3)}p_y}\)</span>.</p>
 <p><img alt="Architecture - Horizontal Estimator" src="../../../architecture/images/architecture_horizontal_estimator.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Para isto, será implementada uma nova função:</p>
@@ -1798,16 +1816,16 @@
 <span class="w">            </span><span class="n">gy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">gyroscope</span><span class="p">.</span><span class="n">gyro</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">180.0f</span><span class="p">;</span>
 <span class="w">            </span><span class="n">gz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">gyroscope</span><span class="p">.</span><span class="n">gyro</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">180.0f</span><span class="p">;</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
-<span class="hll"><span class="w">        </span><span class="c1">// Get flow sensor readings [m]</span>
-</span><span class="hll"><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">MeasurementTypeTOF</span><span class="p">:</span>
-</span><span class="hll"><span class="w">            </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">tof</span><span class="p">.</span><span class="n">distance</span><span class="p">;</span>
-</span><span class="hll"><span class="w">            </span><span class="k">break</span><span class="p">;</span>
-</span><span class="w">        </span><span class="c1">// Get optical flow sensor readings and convert [10px -&gt; px]</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">MeasurementTypeFlow</span><span class="p">:</span>
-<span class="w">            </span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">flow</span><span class="p">.</span><span class="n">dpixelx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span>
-<span class="w">            </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">flow</span><span class="p">.</span><span class="n">dpixely</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Get flow sensor readings [m]</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">MeasurementTypeTOF</span><span class="p">:</span>
+<span class="w">            </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">tof</span><span class="p">.</span><span class="n">distance</span><span class="p">;</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
-<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="hll"><span class="w">        </span><span class="c1">// Get optical flow sensor readings and convert [10px -&gt; px]</span>
+</span><span class="hll"><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">MeasurementTypeFlow</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">flow</span><span class="p">.</span><span class="n">dpixelx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span>
+</span><span class="hll"><span class="w">            </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">flow</span><span class="p">.</span><span class="n">dpixely</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span>
+</span><span class="hll"><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span class="w">        </span><span class="k">default</span><span class="o">:</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1826,7 +1844,7 @@
 <p>Sensores de fluxo óptico medem a velocidade de objetos dentro de seu feixe de visão.  conforme a Figura </p>
 <p>Sensores de fluxo óptico são dispositivos capazes de medir a velocidade de objetos dentro de seu feixe de visão sem contato físico, geralmente por uso de câmeras e processamento de imagem. Caso os objetos dentro do feixe de visão estejam parados, pode ser utilizado para medir a velocidade do dispositivo ao qual o sensor está preso. Isso é muito utilizado como uma alternativa ao GPS em locais internos.</p>
 <h5 id="valor-medido">Valor medido</h5>
-<p>Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao sistema inercial. Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.</p>
+<p>Embora o sensor de fluxo óptico meça a velocidade do solo no referencial do drone, o que realmente nos interessa é a velocidade em relação ao sistema inercial. Para isso, precisamos corrigir a medida levando em conta a posição vertical e velocidade angular do drone.</p>
 <div class="admonition question">
 <p class="admonition-title">2D</p>
 <p>Determine a velocidade horizontal medida <span class="arithmatex">\({\color{var(--c3)}v_{y_m}}\)</span> a partir do número de pixels lido pelo sensor fluxo óptico <span class="arithmatex">\({\color{var(--c3)}p_y}\)</span> em um intervalo de tempo <span class="arithmatex">\(\Delta t\)</span> (sabe-se que o sensor tem um ângulo de visão <span class="arithmatex">\(\gamma\)</span> e resolução de <span class="arithmatex">\(W\)</span> pixels). Considere a posição vertical <span class="arithmatex">\({\color{var(--c1)}z}\)</span> e velocidade angular <span class="arithmatex">\({\color{var(--c1)}\omega_x}\)</span> já obtidos pelos outros estimadores.</p>
@@ -1899,6 +1917,71 @@
 <div class="admonition info">
 <p class="admonition-title">Resultado esperado</p>
 <p>Você deve notar que estamos compensando corretamente movimentos de rotação do drone. No entanto, a estimativa possui muito ruído. Para resolver isso, vamos implementar um observador de estados.</p>
+</div>
+<h5 id="observador-de-estados">Observador de estados</h5>
+<p>Já vimos que um observador de estados é modelo que, a partir das entradas e saídas do sistema real (planta), estima internamente os seus estados. Como a dinâmica horizontal do drone é desacoplada, vamos projetar dois observadores de estados, um para cada eixo:</p>
+<ul>
+<li>O primeiro é um sistema cujas entradas são o ângulo de inclinação <span class="arithmatex">\({\color{var(--c1)}\theta}\)</span> e a velocidade horizontal medida <span class="arithmatex">\({\color{var(--c3)}v_{x_m}}\)</span>, e as saídas são a posição e velocidade horizontais estimadas <span class="arithmatex">\({\color{var(--c1)}x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}v_x}\)</span>.</li>
+</ul>
+<p><img alt="" src="../images/state_observer_x.svg" style="display: block; margin: auto;" width="75%" /></p>
+<ul>
+<li>O segundo é um sistema cujas entradas são o ângulo de rolagem <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> e a velocidade horizontal medida <span class="arithmatex">\({\color{var(--c3)}v_{y_m}}\)</span>, e as saídas são a posição e velocidade horizontais estimadas <span class="arithmatex">\({\color{var(--c1)}y}\)</span> e <span class="arithmatex">\({\color{var(--c1)}v_y}\)</span>.</li>
+</ul>
+<p><img alt="" src="../images/state_observer_y.svg" style="display: block; margin: auto;" width="75%" /></p>
+<p class="annotate">Note que em ambos os casos estamos realimentando a diferença entre a velocidade horizontal medida e estimada, garantindo assim que a velocidade horizontal estimada convirja exponencialmente à velocidade horizontal medida, desde que o ganho do observador <span class="arithmatex">\(l\)</span> seja positivo(1). No entanto, como não estamos realimentando a posição (pois não temos sensor para isso), nossa estimativa de posição irá divergir com o tempo, algo que só seria possível de evitar com um sensor adicional(2).</p>
+<ol>
+<li>Lembre-se que o ganho do estimador <span class="arithmatex">\(l\)</span> equivale à frequência de corte <span class="arithmatex">\(\omega_c\)</span>}.</li>
+<li>Por exemplo, um GPS.</li>
+</ol>
+<p>As etapas de predição e e correção correspondentes ao diagrama de blocos acima são as seguintes:</p>
+<div class="arithmatex">\[
+\begin{align}
+    \text{Predição:} &amp;\quad 
+    \left\{
+    \begin{array}{l}
+        {\color{var(--c1)}x[k+1]} = {\color{var(--c1)}x[k]} + {\color{var(--c1)}v_x[k]} \Delta t \\
+        {\color{var(--c1)}y[k+1]} = {\color{var(--c1)}y[k]} + {\color{var(--c1)}v_y[k]} \Delta t \\
+        {\color{var(--c1)}v_x[k+1]} = {\color{var(--c1)}v_x[k]} + g {\color{var(--c1)}\theta[k]} \Delta t \\
+        {\color{var(--c1)}v_y[k+1]} = {\color{var(--c1)}v_y[k]} - g {\color{var(--c1)}\phi[k]} \Delta t
+    \end{array}
+    \right.  \\ \\
+    \text{Correção:} &amp;\quad 
+    \left\{
+    \begin{array}{l}
+        {\color{var(--c1)}v_x[k+1]} = {\color{var(--c1)}v_x[k+1]} + l \Delta t \left({\color{var(--c3)}v_{x_m}[k]} - {\color{var(--c1)}v_x[k+1]}\right) \\
+        {\color{var(--c1)}v_y[k+1]} = {\color{var(--c1)}v_y[k+1]} + l \Delta t \left({\color{var(--c3)}v_{y_m}[k]} - {\color{var(--c1)}v_y[k+1]}\right)
+    \end{array}
+    \right.
+\end{align}
+\]</div>
+<p>Modifique a etapa de predição de <span class="arithmatex">\(v_z\)</span> na sua função <code>verticalEstimator()</code> para que ela leve em consideração também as entradas do sistema.</p>
+<p>Modifique sua função <code>horizontalEstimator()</code> para que as posições horizontais <span class="arithmatex">\({\color{var(--c1)}x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}y}\)</span> e velocidades horizontais <span class="arithmatex">\({\color{var(--c1)}v_x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}v_y}\)</span> sejam estimadas através de um observador de estados com as etapas de predição e correção.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Estimate horizontal position/velocity from optical flow sensor</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">horizontalEstimator</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Estimator parameters</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span>
+<span class="w">    </span><span class="c1">// Measured velocities from optical flow</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vx_m</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vy_m</span><span class="w"> </span><span class="o">=</span>
+
+<span class="w">    </span><span class="c1">// Prediction step (model)</span>
+<span class="hll"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">vx</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">vy</span><span class="w"> </span><span class="o">=</span>
+</span>
+<span class="w">    </span><span class="c1">// Correction step (measurement)</span>
+<span class="hll"><span class="w">    </span><span class="n">vx</span><span class="w"> </span><span class="o">=</span>
+</span><span class="hll"><span class="w">    </span><span class="n">vy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+</span><span class="p">}</span>
+</code></pre></div>
+<p>Experimente uma frequência de corte <span class="arithmatex">\(\omega_c = 50\)</span>rad/s e verifique como isso influencia na sua estimativa.</p>
+<div class="admonition info">
+<p class="admonition-title">Resultado esperado</p>
+<p>Sua estimativa deve estar muito melhor, filtrando ruídos adequadamente.</p>
 </div>
 
 

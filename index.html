@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#inicio" class="md-skip">
+        <a href="#quadcontrol" class="md-skip">
           Skip to content
         </a>
       
@@ -225,6 +225,21 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 5.69 5 4.5V18h-2v-6H9v6H7v-7.81zM12 3 2 12h3v8h6v-6h2v6h6v-8h3"/></svg>
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -238,6 +253,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drone
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-voce-aprende" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que você aprende
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tudo-direto-na-planta-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tudo direto na planta real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veja-o-curso-em-acao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Veja o curso em ação
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1424,6 +1494,50 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drone
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-voce-aprende" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que você aprende
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tudo-direto-na-planta-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tudo direto na planta real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veja-o-curso-em-acao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Veja o curso em ação
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1438,42 +1552,92 @@
 
 
 
-<h1 id="inicio">Início</h1>
-<p>QuadControl é um curso sobre teoria de controle totalmente inovador!</p>
-<p>Enquanto os cursos convencionais abordam apenas sistemas lineares de uma entrada e uma saída, quase sempre em ambiente de simulação, aqui você trabalha com um sistema real, não linear e multivariável: o <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">Bitcraze Crazyflie 2.1 Brushless</a> — um quadricóptero open source voltado para ensino e pesquisa.</p>
-<p><img alt="Crazyflie" src="images/crazyflie.png" style="display: block; margin: auto;" width="400" /></p>
-<p>O objetivo é romper a barreira entre teoria e prática, mostrando que é possível compreender e aplicar conceitos avançados de controle de forma simples, didática e acessível. A famosa frase “a teoria na prática é outra” cai por terra aqui.</p>
+<h1 id="quadcontrol">QuadControl</h1>
+<p>Um curso inovador sobre teoria de controle — totalmente prático, acessível e baseado em um sistema real.</p>
 <hr />
-<p>A arquitetura de controle, que abrange diversos conceitos da teoria de controle clássico e moderno, é organizada em três camadas principais:</p>
-<div class="admonition question">
-<p class="admonition-title">Controle de atitude</p>
-<p>Estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e deslocamento angular, formando a base da malha mais rápida do sistema.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Controle vertical</p>
-<p>Introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Controle horizontal</p>
-<p>Avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizados em conjunto, integrando estimação e controle de maneira otimizada, formam o famoso LQG.</p>
-</div>
-<!-- - Controle de atitude — estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e ângulo, formando a base da malha mais rápida do sistema.
-
-- Controle vertical — introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição vertical. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.
-
-- Controle horizontal — avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizado em conjunto, integrando estimação e controle de maneira otimizada, temos o famoso LQG. -->
-
+<h2 id="drone">Drone</h2>
+<p><img alt="Crazyflie 2.1 Brushless, vista superior" src="images/crazyflie.png" style="display:block;margin:auto" width="400" /></p>
+<p><strong>Bitcraze Crazyflie 2.1 Brushless</strong> - compacto, open source e projetado para ensino e pesquisa, esse pequeno quadricóptero é o coração do curso. É nele que você vai implementar e testar <strong>todo o algoritmo de estimação e controle</strong>, do sensor ao motor.</p>
 <hr />
-<p>Diferente da maior parte dos cursos de controle, tudo aqui é feito diretamente na planta final, sem a etapa de simulação.
-Você observa na prática como estabilidade, tempo de resposta e saturação são influenciados pelos ganhos de cada controlador e estimador.</p>
-<p>Com o apoio de dispositivos especialmente projetados para restringir graus de liberdade e permitir a identificação precisa de parâmetros físicos e aerodinâmicos, o aprendizado deixa de ser teórico e se torna experimental, visual e concreto — exatamente como o controle deve ser.</p>
-<div align="center">
-  <iframe width="560" height="315" 
-          src="https://www.youtube.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8" 
-          frameborder="0" 
-          allowfullscreen>
-  </iframe>
+<h2 id="o-que-voce-aprende">O que você aprende</h2>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 11h-1l-1-2h-6.25L16 12.5h-2L10.75 9H4c-.55 0-2-.45-2-1s1.5-2.5 3.5-2.5S7.67 6.5 9 7h12a1 1 0 0 1 1 1v3M10.75 6.5 14 3h2l-2.25 3.5zM18 11V9.5h1.75L19 11zM3 19a1 1 0 0 1-1-1 1 1 0 0 1 1-1 4 4 0 0 1 4 4 1 1 0 0 1-1 1 1 1 0 0 1-1-1 2 2 0 0 0-2-2m8 2a1 1 0 0 1-1 1 1 1 0 0 1-1-1 6 6 0 0 0-6-6 1 1 0 0 1-1-1 1 1 0 0 1 1-1 8 8 0 0 1 8 8"/></svg></span> <strong>Hardware real</strong></p>
+<hr />
+<p>Usamos um <strong>quadricóptero de verdade</strong> — o <strong>Bitcraze Crazyflie 2.1 Brushless</strong> — compacto, robusto e feito para ensino e pesquisa.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 4h12v1h3v2h-3v2h3v2h-3v2h3v2h-3v2h3v2h-3v1H6v-1H3v-2h3v-2H3v-2h3v-2H3V9h3V7H3V5h3zm5 11v3h1v-3zm2 0v3h1v-3zm2 0v3h1v-3z"/></svg></span> <strong>Programação embarcada</strong></p>
+<hr />
+<p>Você programa um <strong>ARM</strong> em <strong>C</strong> com <strong>FreeRTOS</strong> e integra sensores (IMU, ToF e fluxo óptico) via <strong>I²C/SPI</strong>.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg></span> <strong>Fundamentos de aeronáutica</strong></p>
+<hr />
+<p>Conceitos essenciais de aerodinâmica e dinâmica de corpo rígido, explicados de forma direta e aplicados no drone.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 22a3 3 0 0 1-3-3c0-.6.18-1.16.5-1.63L9 7.81V6a1 1 0 0 1-1-1V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1v1.81l5.5 9.56c.32.47.5 1.03.5 1.63a3 3 0 0 1-3 3zm-1-3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1c0-.21-.07-.41-.18-.57l-2.29-3.96L14 17l-5.07-5.07-3.75 6.5c-.11.16-.18.36-.18.57m8-9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1"/></svg></span> <strong>Controle aplicado</strong></p>
+<hr />
+<p>Do <strong>PID</strong> e <strong>filtro complementar</strong> ao <strong>LQR</strong> e <strong>Kalman</strong> — diferentes conceitos de controle clássico e moderno testados <strong>em voo</strong>, na planta real.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 16.54 7.37-5.74L21 12.07l-9 7-9-7 1.62-1.26zM12 14 3 7l9-7 9 7zm0-11.47L6.26 7 12 11.47 17.74 7zm0 18.94 7.37-5.74L21 17l-9 7-9-7 1.62-1.26z"/></svg></span> <strong>Arquitetura em camadas</strong></p>
+<hr />
+<p>Três níveis de controle: <strong>atitude</strong> (fusão sensorial + P–P), <strong>posição vertical</strong> (observadores 1ª/2ª ordem + PD/PID) e <strong>posição horizontal</strong> (LQE + LQR = LQG).</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m13.78 15.3 6 6 2.11-2.16-6-6zm3.72-5.2c-.39 0-.81-.05-1.14-.19L4.97 21.25l-2.11-2.11 7.41-7.4L8.5 9.96l-.72.7-1.45-1.41v2.86l-.7.7-3.52-3.56.7-.7h2.81l-1.4-1.41 3.56-3.56a2.976 2.976 0 0 1 4.22 0L9.89 5.74l1.41 1.4-.71.71 1.79 1.78 1.82-1.88c-.14-.33-.2-.75-.2-1.12a3.49 3.49 0 0 1 3.5-3.52c.59 0 1.11.14 1.58.42L16.41 6.2l1.5 1.5 2.67-2.67c.28.47.42.97.42 1.6 0 1.92-1.55 3.47-3.5 3.47"/></svg></span> <strong>100% prático</strong></p>
+<hr />
+<p><strong>Sem simulação</strong>: cada ganho altera o comportamento do sistema e a estabilidade é verificada <strong>no hardware</strong>.</p>
+</li>
+</ul>
 </div>
+<hr />
+<h2 id="tudo-direto-na-planta-real">Tudo direto na planta real</h2>
+<p>Nada aqui é simulado.  Você observa <strong>na prática</strong> como cada ganho altera o comportamento do drone — estabilidade, ultrapassagem percentual, tempo de resposta. Usamos <strong>dispositivos de teste e suportes físicos</strong> que restringem graus de liberdade e permitem <strong>identificar parâmetros físicos e aerodinâmicos com precisão</strong>, transformando cada voo em uma aula viva de teoria de controle.</p>
+<hr />
+<h2 id="veja-o-curso-em-acao">Veja o curso em ação</h2>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px">
+  <iframe src="https://www.youtube-nocookie.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8"
+          title="QuadControl demo"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+          allowfullscreen></iframe>
+</div>
+
+<!-- Enquanto os cursos convencionais abordam apenas sistemas lineares de uma entrada e uma saída, quase sempre em ambiente de simulação, aqui você trabalha com um sistema real, não linear e multivariável: o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} — um quadricóptero open source voltado para ensino e pesquisa.
+
+O objetivo é romper a barreira entre teoria e prática, mostrando que é possível compreender e aplicar conceitos avançados de controle de forma simples, didática e acessível. A famosa frase “a teoria na prática é outra” cai por terra aqui.
+
+Diferente da maior parte dos cursos de controle, tudo aqui é feito diretamente na planta final, sem a etapa de simulação.
+Você observa na prática como estabilidade, tempo de resposta e saturação são influenciados pelos ganhos de cada controlador e estimador.
+
+Com o apoio de dispositivos especialmente projetados para restringir graus de liberdade e permitir a identificação precisa de parâmetros físicos e aerodinâmicos, o aprendizado deixa de ser teórico e se torna experimental, visual e concreto — exatamente como o controle deve ser. -->
+
+<!-- A arquitetura de controle, que abrange diversos conceitos da teoria de controle clássico e moderno, é organizada em três camadas principais:
+
+!!! question "Controle de atitude"
+
+    Estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e deslocamento angular, formando a base da malha mais rápida do sistema.
+
+!!! question "Controle vertical"
+
+    Introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.
+
+!!! question "Controle horizontal"
+
+    Avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizados em conjunto, integrando estimação e controle de maneira otimizada, formam o famoso LQG. -->
+
+<!-- ---
+template: home.html
+title: Início
+icon: material/home-outline
+hide:
+  - navigation
+  - toc
+title: ""   # deixa o título limpo; o hero vai dominar a página
+--- --
 
 <!-- # Bem-vindo!
 

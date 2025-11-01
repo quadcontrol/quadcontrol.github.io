@@ -3,8 +3,9 @@ site_url: https://quadcontrol.io       # Ajuda a gerar URLs absolutas (sitemap, 
 
 theme:
   name: material
-  logo: images/logo.png                # Logo no topo (ideal em PNG/SVG com fundo transparente)
-  favicon: images/logo_black.png       # Ícone da aba (ideal 32×32 ou SVG quadrado)
+  logo: images/logo.svg                # Logo no topo (ideal em PNG/SVG com fundo transparente)
+  favicon: images/logo_black.svg       # Ícone da aba (ideal 32×32 ou SVG quadrado)
+  custom_dir: overrides 
   palette:
     - scheme: slate                    # Tema escuro pronto do Material
   features:

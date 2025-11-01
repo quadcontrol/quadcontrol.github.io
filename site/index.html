@@ -15,7 +15,7 @@
         <link rel="next" href="pages/setup/">
       
       
-      <link rel="icon" href="images/logo_black.png">
+      <link rel="icon" href="images/logo_black.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bem-vindo" class="md-skip">
+        <a href="#quadcontrol" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="images/logo.png" alt="logo">
+  <img src="images/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -201,7 +201,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="images/logo.png" alt="logo">
+  <img src="images/logo.svg" alt="logo">
 
     </a>
     QuadControl
@@ -225,6 +225,21 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 5.69 5 4.5V18h-2v-6H9v6H7v-7.81zM12 3 2 12h3v8h6v-6h2v6h6v-8h3"/></svg>
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -238,6 +253,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-voce-aprende" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que você aprende
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veja-o-curso-em-acao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Veja o curso em ação
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1424,6 +1485,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardware real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-voce-aprende" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que você aprende
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veja-o-curso-em-acao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Veja o curso em ação
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1438,41 +1534,133 @@
 
 
 
-<h1 id="bem-vindo">Bem-vindo!</h1>
-<p>Este site reúne toda a documentação da eletiva de Drones do Insper — uma espécie de apostila online, cuidadosamente organizada com:</p>
-<ul>
-<li>📚 Explicações teóricas e fórmulas fundamentais</li>
-<li>💻 Códigos em C, Python e MATLAB</li>
-<li>🖼️ Figuras, diagramas e vídeos demonstrativos</li>
-<li>🛸 Exemplos de aplicações práticas</li>
-</ul>
-<p>Nosso objetivo é ensinar conceitos de controle e programação embarcada de forma prática e acessível, usando um quadricoptero real. Explore os tópicos no menu lateral — e boa jornada! 🚀</p>
+<h1 id="quadcontrol">QuadControl</h1>
+<p>Um <strong>curso inovador</strong> sobre teoria de controle — totalmente prático, acessível e baseado em um sistema real.</p>
 <hr />
-<h1 id="sobre-a-eletiva">Sobre a eletiva</h1>
-<p>Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero — o <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">Bitcraze Crazyflie 2.1 Brushless</a>.</p>
-<p><img alt="Crazyflie" src="images/crazyflie.png" style="display: block; margin: auto;" width="400" /></p>
-<p>A jornada começa com os clássicos <code>led_blink.c</code> e <code>hello_world.c</code>, e termina com o drone voando sozinho. Ao longo do curso, o aluno:</p>
-<div class="annotate">
+<h2 id="hardware-real">Hardware real</h2>
+<p><img alt="Crazyflie 2.1 Brushless, vista superior" src="images/crazyflie.png" style="display:block;margin:auto" width="400" /></p>
+<p>Utilizamos um <strong>quadricóptero de verdade</strong> - o <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank"><strong>Bitcraze Crazyflie 2.1 Brushless</strong></a> - compacto, open source e projetado especificamente para ensino e pesquisa, esse pequeno dispositivo é o coração do curso. É nele que você vai implementar e testar <strong>todo o algoritmo de estimação e controle</strong>, do sensor ao motor.</p>
+<hr />
+<h2 id="o-que-voce-aprende">O que você aprende</h2>
+<div class="grid cards">
 <ul>
-<li>🧠 Programa um microcontrolador ARM(1) usando FreeRTOS(2)</li>
-<li>📡 Trabalha com sensores embarcados (IMU(3), proximidade e fluxo óptico) via I²C(4) e SPI(5)</li>
-<li>🔧 Controla motores BLDC(6) por meio de ESCs(7)</li>
-<li>💻 Implementa em C(8) algoritmos de estimação e controle</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73z"/></svg></span> <strong>Fundamentos de aeronáutica</strong></p>
+<hr />
+<p>Conceitos essenciais de <strong>aerodinâmica</strong> e <strong>dinâmica de corpo rígido</strong>, explicados de forma direta e aplicados no drone.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6z"/></svg></span> <strong>Programação embarcada</strong></p>
+<hr />
+<p>Você programa um microcontrolador <strong>ARM</strong> em <strong>C</strong> utilizando <strong>FreeRTOS</strong> e integra sensores (IMU, ToF e fluxo óptico) via <strong>I²C/SPI</strong>.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 22a3 3 0 0 1-3-3c0-.6.18-1.16.5-1.63L9 7.81V6a1 1 0 0 1-1-1V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1v1.81l5.5 9.56c.32.47.5 1.03.5 1.63a3 3 0 0 1-3 3zm-1-3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1c0-.21-.07-.41-.18-.57l-2.29-3.96L14 17l-5.07-5.07-3.75 6.5c-.11.16-.18.36-.18.57m8-9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1"/></svg></span> <strong>Controle aplicado</strong></p>
+<hr />
+<p>Do <strong>PID</strong> e <strong>filtro complementar</strong> ao <strong>LQR</strong> e <strong>Kalman</strong> — diferentes conceitos de controle clássico e moderno testados <strong>em voo</strong>, na planta real.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 16.54 7.37-5.74L21 12.07l-9 7-9-7 1.62-1.26zM12 14 3 7l9-7 9 7zm0-11.47L6.26 7 12 11.47 17.74 7zm0 18.94 7.37-5.74L21 17l-9 7-9-7 1.62-1.26z"/></svg></span> <strong>Arquitetura em camadas</strong></p>
+<hr />
+<p>Três níveis de controle: <strong>atitude</strong> (fusão sensorial + P–P), <strong>posição vertical</strong> (observadores 1ª/2ª ordem + PD/PID) e <strong>posição horizontal</strong> (LQE + LQR = LQG).</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m13.78 15.3 6 6 2.11-2.16-6-6zm3.72-5.2c-.39 0-.81-.05-1.14-.19L4.97 21.25l-2.11-2.11 7.41-7.4L8.5 9.96l-.72.7-1.45-1.41v2.86l-.7.7-3.52-3.56.7-.7h2.81l-1.4-1.41 3.56-3.56a2.976 2.976 0 0 1 4.22 0L9.89 5.74l1.41 1.4-.71.71 1.79 1.78 1.82-1.88c-.14-.33-.2-.75-.2-1.12a3.49 3.49 0 0 1 3.5-3.52c.59 0 1.11.14 1.58.42L16.41 6.2l1.5 1.5 2.67-2.67c.28.47.42.97.42 1.6 0 1.92-1.55 3.47-3.5 3.47"/></svg></span> <strong>100% prático</strong></p>
+<hr />
+<p><strong>Sem simulação</strong>: você observa <strong>na prática</strong> como cada ganho altera o comportamento do drone — estabilidade, ultrapassagem percentual, tempo de resposta.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm3.5 4C13 6 15 8 15 10.5c0 .88-.25 1.7-.69 2.4l3.26 3.26-1.41 1.41-3.26-3.26c-.7.44-1.52.69-2.4.69C8 15 6 13 6 10.5S8 6 10.5 6m0 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5"/></svg></span> <strong>Identificação</strong></p>
+<hr />
+<p>Usamos <strong>dispositivos de teste e suportes físicos</strong> que restringem graus de liberdade e permitem <strong>identificar parâmetros físicos e aerodinâmicos com precisão</strong>.</p>
+</li>
 </ul>
 </div>
-<ol>
-<li>Chips compactos e eficientes, usados como "cérebro" de muitos dispositivos embarcados, como drones, celulares e eletrodomésticos.</li>
-<li>Sistema operacional leve e em tempo real (Real-Time Operating System), que permite rodar várias tarefas no microcontrolador de forma organizada e com alta precisão de tempo.</li>
-<li>Unidade de Medição Inercial (Inertial Measurement Unit), composta por acelerômetros e giroscópios, usada para medir a orientação.</li>
-<li>Protocolo de comunicação digital simples, que conecta sensores ao microcontrolador usando apenas dois fios.</li>
-<li>Protocolo de comunicação digital mais rápido que o I²C, usado quando há necessidade de maior desempenho mas necessitando de quatro fios.</li>
-<li>Motores elétrico sem escovas (Brushless DC Motor), mais eficientes e duráveis.</li>
-<li>Controlador Eletrônico de Velocidade (Electronic Speed Controller), que regula a potência enviada aos motores e faz a comutação eletrônica na frequência correta.</li>
-<li>Linguagem de programação de baixo nível, muito utilizada em sistemas embarcados.</li>
-</ol>
-<p>A avaliação é 100% prática: ao final do curso, o drone deve voar até um dos helipontos, cada um com uma nota associada à sua dificuldade - quanto mais longe ou de difícil acesso o heliponto, maior sua média final na disciplina.</p>
-<p><img alt="Alvos" src="images/alvos.svg" style="display: block; margin: auto;" width="100%" /></p>
-<p>Quer ver um pouco disso na prática? Assista o vídeo abaixo!</p>
+<hr />
+<h2 id="veja-o-curso-em-acao">Veja o curso em ação</h2>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px">
+  <iframe src="https://www.youtube-nocookie.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8"
+          title="QuadControl demo"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+          allowfullscreen></iframe>
+</div>
+
+<!-- Enquanto os cursos convencionais abordam apenas sistemas lineares de uma entrada e uma saída, quase sempre em ambiente de simulação, aqui você trabalha com um sistema real, não linear e multivariável: o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} — um quadricóptero open source voltado para ensino e pesquisa.
+
+O objetivo é romper a barreira entre teoria e prática, mostrando que é possível compreender e aplicar conceitos avançados de controle de forma simples, didática e acessível. A famosa frase “a teoria na prática é outra” cai por terra aqui.
+
+Diferente da maior parte dos cursos de controle, tudo aqui é feito diretamente na planta final, sem a etapa de simulação.
+Você observa na prática como estabilidade, tempo de resposta e saturação são influenciados pelos ganhos de cada controlador e estimador.
+
+Com o apoio de dispositivos especialmente projetados para restringir graus de liberdade e permitir a identificação precisa de parâmetros físicos e aerodinâmicos, o aprendizado deixa de ser teórico e se torna experimental, visual e concreto — exatamente como o controle deve ser. -->
+
+<!-- A arquitetura de controle, que abrange diversos conceitos da teoria de controle clássico e moderno, é organizada em três camadas principais:
+
+!!! question "Controle de atitude"
+
+    Estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e deslocamento angular, formando a base da malha mais rápida do sistema.
+
+!!! question "Controle vertical"
+
+    Introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.
+
+!!! question "Controle horizontal"
+
+    Avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizados em conjunto, integrando estimação e controle de maneira otimizada, formam o famoso LQG. -->
+
+<!-- ---
+template: home.html
+title: Início
+icon: material/home-outline
+hide:
+  - navigation
+  - toc
+title: ""   # deixa o título limpo; o hero vai dominar a página
+--- --
+
+<!-- # Bem-vindo!
+
+Este site reúne toda a documentação da eletiva de Drones do Insper — uma espécie de apostila online, cuidadosamente organizada com:
+
+- 📚 Explicações teóricas e fórmulas fundamentais
+- 💻 Códigos em C, Python e MATLAB
+- 🖼️ Figuras, diagramas e vídeos demonstrativos
+- 🛸 Exemplos de aplicações práticas
+
+Nosso objetivo é ensinar conceitos de controle e programação embarcada de forma prática e acessível, usando um quadricoptero real. Explore os tópicos no menu lateral — e boa jornada! 🚀
+
+---
+
+# Sobre a eletiva
+
+Nesta eletiva, os alunos desenvolvem do zero todo o algoritmo de estimação e controle de um quadricóptero — o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank}.
+
+![Crazyflie](images/crazyflie.png){: width="400" style="display: block; margin: auto;" }
+
+A jornada começa com os clássicos `led_blink.c` e `hello_world.c`, e termina com o drone voando sozinho. Ao longo do curso, o aluno:
+
+<div class="annotate" markdown>
+- 🧠 Programa um microcontrolador ARM(1) usando FreeRTOS(2)
+- 📡 Trabalha com sensores embarcados (IMU(3), proximidade e fluxo óptico) via I²C(4) e SPI(5)
+- 🔧 Controla motores BLDC(6) por meio de ESCs(7)
+- 💻 Implementa em C(8) algoritmos de estimação e controle
+</div>
+
+1. Chips compactos e eficientes, usados como "cérebro" de muitos dispositivos embarcados, como drones, celulares e eletrodomésticos.
+2. Sistema operacional leve e em tempo real (Real-Time Operating System), que permite rodar várias tarefas no microcontrolador de forma organizada e com alta precisão de tempo.
+3. Unidade de Medição Inercial (Inertial Measurement Unit), composta por acelerômetros e giroscópios, usada para medir a orientação.
+4. Protocolo de comunicação digital simples, que conecta sensores ao microcontrolador usando apenas dois fios.
+5. Protocolo de comunicação digital mais rápido que o I²C, usado quando há necessidade de maior desempenho mas necessitando de quatro fios.
+6. Motores elétrico sem escovas (Brushless DC Motor), mais eficientes e duráveis.
+7. Controlador Eletrônico de Velocidade (Electronic Speed Controller), que regula a potência enviada aos motores e faz a comutação eletrônica na frequência correta.
+8. Linguagem de programação de baixo nível, muito utilizada em sistemas embarcados.
+
+A avaliação é 100% prática: ao final do curso, o drone deve voar até um dos helipontos, cada um com uma nota associada à sua dificuldade - quanto mais longe ou de difícil acesso o heliponto, maior sua média final na disciplina.
+
+![Alvos](images/alvos.svg){: width=100% style="display: block; margin: auto;" }
+
+Quer ver um pouco disso na prática? Assista o vídeo abaixo!
+
 <div align="center">
   <iframe width="560" height="315" 
           src="https://www.youtube.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8" 
@@ -1481,41 +1669,29 @@
   </iframe>
 </div>
 
-<hr />
-<div class="grid cards">
-<ul>
-<li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64z"/></svg></span> <strong>Pré-requisitos</strong></p>
-<hr />
-<p>Hardware, software e firmware necessários.</p>
-</li>
-<li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m16.56 5.44-1.45 1.45A5.97 5.97 0 0 1 18 12a6 6 0 0 1-6 6 6 6 0 0 1-6-6c0-2.17 1.16-4.06 2.88-5.12L7.44 5.44A7.96 7.96 0 0 0 4 12a8 8 0 0 0 8 8 8 8 0 0 0 8-8c0-2.72-1.36-5.12-3.44-6.56M13 3h-2v10h2"/></svg></span> <strong>Interface</strong></p>
-<hr />
-<p>Atuadores e sensores.</p>
-</li>
-<li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73z"/></svg></span> <strong>Fundamentos</strong></p>
-<hr />
-<p>Conceitos teóricos fundamentais.</p>
-</li>
-<li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm3.5 4C13 6 15 8 15 10.5c0 .88-.25 1.7-.69 2.4l3.26 3.26-1.41 1.41-3.26-3.26c-.7.44-1.52.69-2.4.69C8 15 6 13 6 10.5S8 6 10.5 6m0 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5"/></svg></span> <strong>Identificação</strong></p>
-<hr />
-<p>Experimentos para identificação de parâmetros do sistema.</p>
-</li>
-<li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15 6.04 7.5 12 10.85l5.96-3.35zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg></span> <strong>Modelagem</strong></p>
-<hr />
-<p>Modelagem matemática do sistema.</p>
-</li>
-<li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 13c-1.86 0-3.41 1.28-3.86 3H2v2h2.14c.45 1.72 2 3 3.86 3s3.41-1.28 3.86-3H22v-2H11.86c-.45-1.72-2-3-3.86-3m0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2M19.86 6c-.45-1.72-2-3-3.86-3s-3.41 1.28-3.86 3H2v2h10.14c.45 1.72 2 3 3.86 3s3.41-1.28 3.86-3H22V6zM16 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2"/></svg></span> <strong>Controle</strong></p>
-<hr />
-<p>Arquitetura de estimação e controle.</p>
-</li>
-</ul>
-</div>
+---
+
+<div class="grid cards" markdown>
+
+-   :material-cog:{ .lg .middle } **Controle de atitude**
+
+    ---
+
+    Estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e ângulo, formando a base da malha mais rápida do sistema.
+
+-   :material-power:{ .lg .middle } **Controle vertical**
+
+    ---
+
+    Introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição vertical. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.
+
+-   :material-school-outline:{ .lg .middle } **Controle horizontal**
+
+    ---
+
+    Avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizado em conjunto, integrando estimação e controle de maneira otimizada, temos o famoso LQG.
+
+</div> -->
 
 
 

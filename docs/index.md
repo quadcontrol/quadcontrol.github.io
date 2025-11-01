@@ -3,7 +3,110 @@ title: Início
 icon: material/home-outline
 ---
 
-# Bem-vindo!
+# QuadControl
+
+Um **curso inovador** sobre teoria de controle — totalmente prático, acessível e baseado em um sistema real.
+
+---
+
+## Hardware real
+
+![Crazyflie 2.1 Brushless, vista superior](images/crazyflie.png){ width="400" style="display:block;margin:auto" }
+
+Utilizamos um **quadricóptero de verdade** - o [**Bitcraze Crazyflie 2.1 Brushless**](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} - compacto, open source e projetado especificamente para ensino e pesquisa, esse pequeno dispositivo é o coração do curso. É nele que você vai implementar e testar **todo o algoritmo de estimação e controle**, do sensor ao motor.
+
+---
+
+## O que você aprende
+
+<div class="grid cards" markdown>
+
+- :material-school-outline:{ .lg .middle } **Fundamentos de aeronáutica**
+  
+    ---
+    
+    Conceitos essenciais de **aerodinâmica** e **dinâmica de corpo rígido**, explicados de forma direta e aplicados no drone.
+
+- :material-memory:{ .lg .middle } **Programação embarcada**
+  
+    ---
+    
+    Você programa um microcontrolador **ARM** em **C** utilizando **FreeRTOS** e integra sensores (IMU, ToF e fluxo óptico) via **I²C/SPI**.
+
+
+- :material-flask:{ .lg .middle } **Controle aplicado**
+  
+    ---
+    
+    Do **PID** e **filtro complementar** ao **LQR** e **Kalman** — diferentes conceitos de controle clássico e moderno testados **em voo**, na planta real.
+
+- :material-layers-triple-outline:{ .lg .middle } **Arquitetura em camadas**
+  
+    ---
+    
+    Três níveis de controle: **atitude** (fusão sensorial + P–P), **posição vertical** (observadores 1ª/2ª ordem + PD/PID) e **posição horizontal** (LQE + LQR = LQG).
+
+- :material-hammer-wrench:{ .lg .middle } **100% prático**
+  
+    ---
+    
+    **Sem simulação**: você observa **na prática** como cada ganho altera o comportamento do drone — estabilidade, ultrapassagem percentual, tempo de resposta.
+
+- :material-magnify-scan:{ .lg .middle } **Identificação**
+  
+    ---
+    
+    Usamos **dispositivos de teste e suportes físicos** que restringem graus de liberdade e permitem **identificar parâmetros físicos e aerodinâmicos com precisão**.
+
+</div>
+
+---
+
+## Veja o curso em ação
+
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px">
+  <iframe src="https://www.youtube-nocookie.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8"
+          title="QuadControl demo"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+          allowfullscreen></iframe>
+</div>
+
+
+<!-- Enquanto os cursos convencionais abordam apenas sistemas lineares de uma entrada e uma saída, quase sempre em ambiente de simulação, aqui você trabalha com um sistema real, não linear e multivariável: o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} — um quadricóptero open source voltado para ensino e pesquisa.
+
+O objetivo é romper a barreira entre teoria e prática, mostrando que é possível compreender e aplicar conceitos avançados de controle de forma simples, didática e acessível. A famosa frase “a teoria na prática é outra” cai por terra aqui.
+
+Diferente da maior parte dos cursos de controle, tudo aqui é feito diretamente na planta final, sem a etapa de simulação.
+Você observa na prática como estabilidade, tempo de resposta e saturação são influenciados pelos ganhos de cada controlador e estimador.
+
+Com o apoio de dispositivos especialmente projetados para restringir graus de liberdade e permitir a identificação precisa de parâmetros físicos e aerodinâmicos, o aprendizado deixa de ser teórico e se torna experimental, visual e concreto — exatamente como o controle deve ser. -->
+
+
+<!-- A arquitetura de controle, que abrange diversos conceitos da teoria de controle clássico e moderno, é organizada em três camadas principais:
+
+!!! question "Controle de atitude"
+
+    Estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e deslocamento angular, formando a base da malha mais rápida do sistema.
+
+!!! question "Controle vertical"
+
+    Introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.
+
+!!! question "Controle horizontal"
+
+    Avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizados em conjunto, integrando estimação e controle de maneira otimizada, formam o famoso LQG. -->
+
+<!-- ---
+template: home.html
+title: Início
+icon: material/home-outline
+hide:
+  - navigation
+  - toc
+title: ""   # deixa o título limpo; o hero vai dominar a página
+--- --
+
+<!-- # Bem-vindo!
 
 Este site reúne toda a documentação da eletiva de Drones do Insper — uma espécie de apostila online, cuidadosamente organizada com:
 
@@ -58,40 +161,24 @@ Quer ver um pouco disso na prática? Assista o vídeo abaixo!
 
 <div class="grid cards" markdown>
 
--   :material-cog:{ .lg .middle } **Pré-requisitos**
+-   :material-cog:{ .lg .middle } **Controle de atitude**
 
     ---
 
-    Hardware, software e firmware necessários.
+    Estudamos filtros passa-baixa, passa-alta e o filtro complementar para fusão sensorial. A estabilização é feita com um controlador P–P em cascata, que atua sobre velocidade e ângulo, formando a base da malha mais rápida do sistema.
 
--   :material-power:{ .lg .middle } **Interface**
-
-    ---
-
-    Atuadores e sensores.
-
--   :material-school-outline:{ .lg .middle } **Fundamentos**
+-   :material-power:{ .lg .middle } **Controle vertical**
 
     ---
 
-    Conceitos teóricos fundamentais.
+    Introduzimos o uso de observadores de estados de 1ª e 2ª ordem para estimar velocidade e posição vertical. Partimos de um controlador PD, que se transforma naturalmente em um PID ao lidar com o erro em regime permanente causado por distúrbios constantes, como a gravidade.
 
--   :material-magnify-scan:{ .lg .middle } **Identificação**
-
-    ---
-
-    Experimentos para identificação de parâmetros do sistema.
-
--   :material-cube-outline:{ .lg .middle } **Modelagem**
+-   :material-school-outline:{ .lg .middle } **Controle horizontal**
 
     ---
 
-    Modelagem matemática do sistema.
+    Avançamos para um observador e regulador de estados ótimo. Mostramos que o LQE nada mais é do que um filtro de Kalman linear, enquanto o LQR equivale a um controlador PD com ganhos ideais. Quando utilizado em conjunto, integrando estimação e controle de maneira otimizada, temos o famoso LQG.
 
--   :material-tune-variant:{ .lg .middle } **Controle**
+</div> -->
 
-    ---
 
-    Arquitetura de estimação e controle.
-
-</div>

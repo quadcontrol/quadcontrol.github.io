@@ -1,19 +1,23 @@
 ---
-title: Início
 icon: material/home-outline
+title: Início
+description: Domine controle embarcado em um curso 100% prático, desenvolvido para conectar teoria, programação e voo real.
 ---
 
 # QuadControl
 
-Um **curso inovador** sobre teoria de controle — totalmente prático, acessível e baseado em um sistema real.
+![Crazyflie 2.1 Brushless, vista superior](images/logo.svg){ width=25% style="display:block;margin:auto" }
+
+
+Domine **controle embarcado** em um curso **100% prático**, desenvolvido para conectar teoria, programação e voo real.
 
 ---
 
-## Hardware real
+## O drone como laboratório
 
-![Crazyflie 2.1 Brushless, vista superior](images/crazyflie.png){ width="400" style="display:block;margin:auto" }
+![Crazyflie 2.1 Brushless, vista superior](images/crazyflie.png){ width=40% style="display:block;margin:auto" }
 
-Utilizamos um **quadricóptero de verdade** - o [**Bitcraze Crazyflie 2.1 Brushless**](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} - compacto, open source e projetado especificamente para ensino e pesquisa, esse pequeno dispositivo é o coração do curso. É nele que você vai implementar e testar **todo o algoritmo de estimação e controle**, do sensor ao motor.
+No QuadControl, o protagonista é o [**Bitcraze Crazyflie 2.1 Brushless**](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank}: um **micro-drone open source** criado para ensino e pesquisa. Com ele, você vai desenvolver toda a **arquitetura de estimação e controle** — dos sensores aos motores — e ver seus algoritmos voarem de verdade.
 
 ---
 
@@ -25,13 +29,13 @@ Utilizamos um **quadricóptero de verdade** - o [**Bitcraze Crazyflie 2.1 Brushl
   
     ---
     
-    Conceitos essenciais de **aerodinâmica** e **dinâmica de corpo rígido**, explicados de forma direta e aplicados no drone.
+    Conceitos essenciais de **aerodinâmica** e **dinâmica de corpo rígido**, explicados de forma didática e aplicados a um quadricoptero.
 
 - :material-memory:{ .lg .middle } **Programação embarcada**
   
     ---
     
-    Você programa um microcontrolador **ARM** em **C** utilizando **FreeRTOS** e integra sensores (IMU, ToF e fluxo óptico) via **I²C/SPI**.
+    Microcontrolador **ARM** programado em **C** utilizando **FreeRTOS** — integra sensores (IMU, ToF e fluxo óptico) via **I²C/SPI** e comanda os motores (BLDC) com ESCs.
 
 
 - :material-flask:{ .lg .middle } **Controle aplicado**
@@ -44,19 +48,19 @@ Utilizamos um **quadricóptero de verdade** - o [**Bitcraze Crazyflie 2.1 Brushl
   
     ---
     
-    Três níveis de controle: **atitude** (fusão sensorial + P–P), **posição vertical** (observadores 1ª/2ª ordem + PD/PID) e **posição horizontal** (LQE + LQR = LQG).
+    Três níveis de controle com diferentes abordagens: **atitude** (fusão sensorial + P–P), **vertical** (observadores 1ª/2ª ordem + PD/PID) e **horizontal** (LQE + LQR = LQG).
 
 - :material-hammer-wrench:{ .lg .middle } **100% prático**
   
     ---
     
-    **Sem simulação**: você observa **na prática** como cada ganho altera o comportamento do drone — estabilidade, ultrapassagem percentual, tempo de resposta.
+    **Sem simulação**: você observa **na prática** como cada ganho altera o comportamento do sistema — estabilidade, ultrapassagem percentual, tempo de resposta.
 
 - :material-magnify-scan:{ .lg .middle } **Identificação**
   
     ---
     
-    Usamos **dispositivos de teste e suportes físicos** que restringem graus de liberdade e permitem **identificar parâmetros físicos e aerodinâmicos com precisão**.
+    **Dispositivos de teste** e suportes físicos que restringem graus de liberdade e permitem **identificar parâmetros** físicos e aerodinâmicos com precisão.
 
 </div>
 

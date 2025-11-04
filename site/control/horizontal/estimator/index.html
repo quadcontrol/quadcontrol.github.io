@@ -1622,7 +1622,7 @@
 </span>
 <span class="c1">// System references</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">phi_r</span><span class="p">,</span><span class="w"> </span><span class="n">theta_r</span><span class="p">,</span><span class="w"> </span><span class="n">psi_r</span><span class="p">;</span><span class="w"> </span><span class="c1">// Euler angles reference [rad]</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">z_r</span><span class="w">                    </span><span class="c1">// Vertical position reference [m]</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">z_r</span><span class="p">;</span><span class="w">                   </span><span class="c1">// Vertical position reference [m]</span>
 </code></pre></div>
 <h4 id="variaveis-de-registro">Variáveis de registro</h4>
 <p>Adicione as variáveis criadas ao grupo de registro previamente definido, para que seja possível visualizar nossa estimativa em tempo real no Crazyflie Client.</p>
@@ -1631,8 +1631,8 @@
 <span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">roll</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">log_phi</span><span class="p">)</span>
 <span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">pitch</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">log_theta</span><span class="p">)</span>
 <span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">yaw</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">log_psi</span><span class="p">)</span>
-<span class="hll"><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">z</span><span class="p">)</span>
-</span><span class="hll"><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">z</span><span class="p">)</span>
+<span class="hll"><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">)</span>
+</span><span class="hll"><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
 </span><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">z</span><span class="p">)</span>
 <span class="hll"><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vx</span><span class="p">)</span>
 </span><span class="hll"><span class="n">LOG_ADD_CORE</span><span class="p">(</span><span class="n">LOG_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vy</span><span class="p">)</span>
@@ -1650,9 +1650,9 @@
 <span class="w">        </span><span class="n">reference</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Read reference setpoints (from Crazyflie Client)</span>
 <span class="w">        </span><span class="n">sensors</span><span class="p">();</span><span class="w">                    </span><span class="c1">// Read raw sensor measurements</span>
 <span class="w">        </span><span class="n">attitudeEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate orientation (roll/pitch/yaw) from IMU sensor</span>
+<span class="w">        </span><span class="n">verticalEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate vertical position/velocity from range sensor</span>
 <span class="hll"><span class="w">        </span><span class="n">horizontalEstimator</span><span class="p">();</span><span class="w">        </span><span class="c1">// Estimate horizontal positions/velocities from optical flow sensor</span>
-</span><span class="w">        </span><span class="n">verticalEstimator</span><span class="p">();</span><span class="w">          </span><span class="c1">// Estimate vertical position/velocity from range sensor</span>
-<span class="w">        </span><span class="n">verticalController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired thrust force</span>
+</span><span class="w">        </span><span class="n">verticalController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired thrust force</span>
 <span class="w">        </span><span class="n">attitudeController</span><span class="p">();</span><span class="w">         </span><span class="c1">// Compute desired roll/pitch/yaw torques</span>
 <span class="w">        </span><span class="n">mixer</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Convert desired force/torques into motor PWM</span>
 <span class="w">        </span><span class="n">actuators</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Send commands to motors</span>

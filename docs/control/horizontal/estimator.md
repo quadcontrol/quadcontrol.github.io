@@ -51,7 +51,7 @@ float vx, vy, vz;            // Velocities [m/s]
 
 // System references
 float phi_r, theta_r, psi_r; // Euler angles reference [rad]
-float z_r                    // Vertical position reference [m]
+float z_r;                   // Vertical position reference [m]
 ```
 
 #### Variáveis de registro
@@ -64,8 +64,8 @@ LOG_GROUP_START(stateEstimate)
 LOG_ADD_CORE(LOG_FLOAT, roll, &log_phi)
 LOG_ADD_CORE(LOG_FLOAT, pitch, &log_theta)
 LOG_ADD_CORE(LOG_FLOAT, yaw, &log_psi)
-LOG_ADD_CORE(LOG_FLOAT, x, &z)
-LOG_ADD_CORE(LOG_FLOAT, y, &z)
+LOG_ADD_CORE(LOG_FLOAT, x, &x)
+LOG_ADD_CORE(LOG_FLOAT, y, &y)
 LOG_ADD_CORE(LOG_FLOAT, z, &z)
 LOG_ADD_CORE(LOG_FLOAT, vx, &vx)
 LOG_ADD_CORE(LOG_FLOAT, vy, &vy)
@@ -77,7 +77,7 @@ LOG_GROUP_STOP(stateEstimate)
 
 Inclua a chamada da função `horizontalEstimator()` no loop principal.
 
-```c hl_lines="10"
+```c hl_lines="11"
 // Main application task
 void appMain(void *param)
 {
@@ -87,8 +87,8 @@ void appMain(void *param)
         reference();                  // Read reference setpoints (from Crazyflie Client)
         sensors();                    // Read raw sensor measurements
         attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
-        horizontalEstimator();        // Estimate horizontal positions/velocities from optical flow sensor
         verticalEstimator();          // Estimate vertical position/velocity from range sensor
+        horizontalEstimator();        // Estimate horizontal positions/velocities from optical flow sensor
         verticalController();         // Compute desired thrust force
         attitudeController();         // Compute desired roll/pitch/yaw torques
         mixer();                      // Convert desired force/torques into motor PWM

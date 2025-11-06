@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/foundation/mixer/">
+        <link rel="canonical" href="https://quadcontrol.io/fundamentals/">
       
       
-        <link rel="prev" href="../aerodynamics/">
+        <link rel="prev" href="../setup/firmware/">
       
       
-        <link rel="next" href="../inertia/">
+        <link rel="next" href="aerodynamics/">
       
       
-      <link rel="icon" href="../../images/logo_black.svg">
+      <link rel="icon" href="../images/logo_black.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Mixer - QuadControl</title>
+        <title>Conceitos básicos - QuadControl</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/css/configure-colors.css">
+      <link rel="stylesheet" href="../assets/css/configure-colors.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,11 +59,11 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Mixer - QuadControl" >
+        <meta  property="og:title"  content="Conceitos básicos - QuadControl" >
       
         <meta  property="og:description"  content="None" >
       
-        <meta  property="og:image"  content="https://quadcontrol.io/assets/images/social/foundation/mixer.png" >
+        <meta  property="og:image"  content="https://quadcontrol.io/assets/images/social/fundamentals/index.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -71,15 +71,15 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://quadcontrol.io/foundation/mixer/" >
+        <meta  property="og:url"  content="https://quadcontrol.io/fundamentals/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Mixer - QuadControl" >
+        <meta  name="twitter:title"  content="Conceitos básicos - QuadControl" >
       
         <meta  name="twitter:description"  content="None" >
       
-        <meta  name="twitter:image"  content="https://quadcontrol.io/assets/images/social/foundation/mixer.png" >
+        <meta  name="twitter:image"  content="https://quadcontrol.io/assets/images/social/fundamentals/index.png" >
       
     
     
@@ -101,11 +101,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#mixer" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -118,9 +113,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
+    <a href=".." title="QuadControl" class="md-header__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../images/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -137,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Mixer
+              Conceitos básicos
             
           </span>
         </div>
@@ -187,9 +182,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
+    <a href=".." title="QuadControl" class="md-nav__button md-logo" aria-label="QuadControl" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../images/logo.svg" alt="logo">
 
     </a>
     QuadControl
@@ -204,14 +199,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 5.69 5 4.5V18h-2v-6H9v6H7v-7.81zM12 3 2 12h3v8h6v-6h2v6h6v-8h3"/></svg>
   
   <span class="md-ellipsis">
-    Início
+    Home
     
   </span>
   
@@ -252,14 +247,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../setup/" class="md-nav__link ">
+            <a href="../setup/" class="md-nav__link ">
               
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m-2 12c-.25 0-.46-.18-.5-.42l-.37-2.65c-.63-.25-1.17-.59-1.69-.99l-2.49 1.01c-.22.08-.49 0-.61-.22l-2-3.46a.493.493 0 0 1 .12-.64l2.11-1.66L4.5 12l.07-1-2.11-1.63a.493.493 0 0 1-.12-.64l2-3.46c.12-.22.39-.31.61-.22l2.49 1c.52-.39 1.06-.73 1.69-.98l.37-2.65c.04-.24.25-.42.5-.42h4c.25 0 .46.18.5.42l.37 2.65c.63.25 1.17.59 1.69.98l2.49-1c.22-.09.49 0 .61.22l2 3.46c.13.22.07.49-.12.64L19.43 11l.07 1-.07 1 2.11 1.63c.19.15.25.42.12.64l-2 3.46c-.12.22-.39.31-.61.22l-2.49-1c-.52.39-1.06.73-1.69.98l-.37 2.65c-.04.24-.25.42-.5.42zm1.25-18-.37 2.61c-1.2.25-2.26.89-3.03 1.78L5.44 7.35l-.75 1.3L6.8 10.2a5.55 5.55 0 0 0 0 3.6l-2.12 1.56.75 1.3 2.43-1.04c.77.88 1.82 1.52 3.01 1.76l.37 2.62h1.52l.37-2.61c1.19-.25 2.24-.89 3.01-1.77l2.43 1.04.75-1.3-2.12-1.55c.4-1.17.4-2.44 0-3.61l2.11-1.55-.75-1.3-2.41 1.04a5.42 5.42 0 0 0-3.03-1.77L12.75 4z"/></svg>
   
   <span class="md-ellipsis">
-    Pré-requisitos
+    Setup
     
   </span>
   
@@ -276,7 +271,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Pré-requisitos
+            Setup
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -289,7 +284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup/hardware/" class="md-nav__link">
+      <a href="../setup/hardware/" class="md-nav__link">
         
   
   
@@ -314,7 +309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup/software/" class="md-nav__link">
+      <a href="../setup/software/" class="md-nav__link">
         
   
   
@@ -339,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup/firmware/" class="md-nav__link">
+      <a href="../setup/firmware/" class="md-nav__link">
         
   
   
@@ -385,6 +380,8 @@
       
         
       
+        
+      
     
     
     
@@ -397,14 +394,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73z"/></svg>
   
   <span class="md-ellipsis">
-    Fundamentos
+    Fundamentals
     
   </span>
   
@@ -412,7 +409,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -421,7 +418,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Fundamentos
+            Fundamentals
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -434,106 +431,19 @@
   
   
     <li class="md-nav__item">
-      <a href="../aerodynamics/" class="md-nav__link">
+      <a href="aerodynamics/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.56 3.91c.59.59.59 1.54 0 2.12l-3.89 3.89 2.12 9.19-1.41 1.42-3.88-7.43L9.6 17l.36 2.47-1.07 1.06-1.76-3.18-3.19-1.77L5 14.5l2.5.37L11.37 11 3.94 7.09l1.42-1.41 9.19 2.12 3.89-3.89c.56-.58 1.56-.58 2.12 0"/></svg>
   
   <span class="md-ellipsis">
-    Aerodinâmica
+    Aerodynamics
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20h4V4h-4zm-6 0h4v-8H4zM16 9v11h4V9z"/></svg>
-  
-  <span class="md-ellipsis">
-    Mixer
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20h4V4h-4zm-6 0h4v-8H4zM16 9v11h4V9z"/></svg>
-  
-  <span class="md-ellipsis">
-    Mixer
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#movimentos-basicos-de-um-quadricoptero" class="md-nav__link">
-    <span class="md-ellipsis">
-      Movimentos básicos de um quadricóptero
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transformacao-de-entradas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transformação de entradas
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -546,14 +456,64 @@
   
   
     <li class="md-nav__item">
-      <a href="../inertia/" class="md-nav__link">
+      <a href="mixer/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20h4V4h-4zm-6 0h4v-8H4zM16 9v11h4V9z"/></svg>
+  
+  <span class="md-ellipsis">
+    Mixer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="inertia/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg>
   
   <span class="md-ellipsis">
-    Inércia
+    Inertia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coordinate_system/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg>
+  
+  <span class="md-ellipsis">
+    Coordinate system
     
   </span>
   
@@ -602,14 +562,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../identification/" class="md-nav__link ">
+            <a href="../identification/" class="md-nav__link ">
               
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm3.5 4C13 6 15 8 15 10.5c0 .88-.25 1.7-.69 2.4l3.26 3.26-1.41 1.41-3.26-3.26c-.7.44-1.52.69-2.4.69C8 15 6 13 6 10.5S8 6 10.5 6m0 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5"/></svg>
   
   <span class="md-ellipsis">
-    Identificação
+    Identification
     
   </span>
   
@@ -626,7 +586,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Identificação
+            Identification
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -639,14 +599,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/motor_coefficients/" class="md-nav__link">
+      <a href="../identification/motor_coefficients/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h6a2 2 0 0 1 2 2v8h-2V9h-2v7h-2V9H9v8H7V9a2 2 0 0 1 2-2M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Coeficientes do motor
+    Motor coefficients
     
   </span>
   
@@ -664,14 +624,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/lift_constant/" class="md-nav__link">
+      <a href="../identification/lift_constant/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v8h4v2H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Constante de sustentação
+    Lift constant
     
   </span>
   
@@ -689,14 +649,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/drag_constant/" class="md-nav__link">
+      <a href="../identification/drag_constant/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Constante de arrasto
+    Drag constant
     
   </span>
   
@@ -731,8 +691,6 @@
       
         
       
-        
-      
     
     
     
@@ -745,14 +703,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../modeling/" class="md-nav__link ">
+            <a href="../modeling/" class="md-nav__link ">
               
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15 6.04 7.5 12 10.85l5.96-3.35zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg>
   
   <span class="md-ellipsis">
-    Modelagem
+    Modeling
     
   </span>
   
@@ -769,7 +727,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            Modelagem
+            Modeling
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -782,39 +740,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/coordinate_system/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg>
-  
-  <span class="md-ellipsis">
-    Sistema de coordenadas
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../modeling/2d_model/" class="md-nav__link">
+      <a href="../modeling/2d_model/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 7h3c1.66 0 3 1.34 3 3v4c0 1.66-1.34 3-3 3h-3zm3 8c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1h-1v6zM5 7h4a2 2 0 0 1 2 2v2c0 1.11-.89 2-2 2H7v2h4v2H5v-4c0-1.1.9-2 2-2h2V9H5z"/></svg>
   
   <span class="md-ellipsis">
-    Modelo 2D
+    2D model
     
   </span>
   
@@ -832,14 +765,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modeling/3d_model/" class="md-nav__link">
+      <a href="../modeling/3d_model/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5v-2h4v-2H6v-2h3V9H5zm8 0h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3zm3 8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-1v6z"/></svg>
   
   <span class="md-ellipsis">
-    Modelo 3D
+    3D model
     
   </span>
   
@@ -892,14 +825,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../control/" class="md-nav__link ">
+            <a href="../control/" class="md-nav__link ">
               
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 13c-1.86 0-3.41 1.28-3.86 3H2v2h2.14c.45 1.72 2 3 3.86 3s3.41-1.28 3.86-3H22v-2H11.86c-.45-1.72-2-3-3.86-3m0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2M19.86 6c-.45-1.72-2-3-3.86-3s-3.41 1.28-3.86 3H2v2h10.14c.45 1.72 2 3 3.86 3s3.41-1.28 3.86-3H22V6zM16 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2"/></svg>
   
   <span class="md-ellipsis">
-    Controle
+    Control
     
   </span>
   
@@ -916,7 +849,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            Controle
+            Control
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -929,14 +862,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/architecture/" class="md-nav__link">
+      <a href="../control/architecture/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16v-3c0-1.11-.89-2-2-2h-6V8h2V2H9v6h2v3H5c-1.11 0-2 .89-2 2v3H1v6h6v-6H5v-3h6v3H9v6h6v-6h-2v-3h6v3h-2v6h6v-6zM11 4h2v2h-2zM5 20H3v-2h2zm8 0h-2v-2h2zm8 0h-2v-2h2z"/></svg>
   
   <span class="md-ellipsis">
-    Arquitetura
+    Architecture
     
   </span>
   
@@ -954,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/mixer/" class="md-nav__link">
+      <a href="../control/mixer/" class="md-nav__link">
         
   
   
@@ -1001,14 +934,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../control/attitude/" class="md-nav__link ">
+            <a href="../control/attitude/" class="md-nav__link ">
               
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 14.25 4.75 11H7c.25-5.61 2.39-10 5-10 2 0 3.77 2.64 4.55 6.45C20.36 8.23 23 10 23 12c0 1.83-2.17 3.43-5.4 4.3l.29-2.03C19.8 13.72 21 12.91 21 12c0-1.06-1.65-2-4.13-2.5.08.79.13 1.63.13 2.5 0 6.08-2.24 11-5 11-1.83 0-3.43-2.17-4.3-5.4l2.03.29C10.28 19.8 11.09 21 12 21c1.66 0 3-4.03 3-9q0-1.5-.15-2.85Q13.5 9 12 9l-1.86.06.29-2.01L12 7c.87 0 1.71.05 2.5.13C14 4.65 13.06 3 12 3c-1.54 0-2.82 3.5-3 8h2.25zM14.25 16 11 19.25V17c-5.61-.25-10-2.39-10-5 0-1.83 2.17-3.43 5.4-4.3l-.29 2.03C4.2 10.28 3 11.09 3 12c0 1.54 3.5 2.82 8 3v-2.25z"/></svg>
   
   <span class="md-ellipsis">
-    Atitude
+    Attitude
     
   </span>
   
@@ -1025,7 +958,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6_4">
             <span class="md-nav__icon md-icon"></span>
-            Atitude
+            Attitude
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1038,14 +971,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/attitude/estimator/" class="md-nav__link">
+      <a href="../control/attitude/estimator/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.07 4.93-1.41 1.41A8.01 8.01 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.38-1-1.72V2h-1A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10c0-2.76-1.12-5.26-2.93-7.07"/></svg>
   
   <span class="md-ellipsis">
-    Estimador
+    Estimator
     
   </span>
   
@@ -1063,14 +996,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/attitude/controller/" class="md-nav__link">
+      <a href="../control/attitude/controller/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m0 12a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
   
   <span class="md-ellipsis">
-    Controlador
+    Controller
     
   </span>
   
@@ -1118,7 +1051,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../control/vertical/" class="md-nav__link ">
+            <a href="../control/vertical/" class="md-nav__link ">
               
   
   
@@ -1155,14 +1088,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/vertical/estimator/" class="md-nav__link">
+      <a href="../control/vertical/estimator/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.07 4.93-1.41 1.41A8.01 8.01 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.38-1-1.72V2h-1A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10c0-2.76-1.12-5.26-2.93-7.07"/></svg>
   
   <span class="md-ellipsis">
-    Estimador
+    Estimator
     
   </span>
   
@@ -1180,14 +1113,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/vertical/controller/" class="md-nav__link">
+      <a href="../control/vertical/controller/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m0 12a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
   
   <span class="md-ellipsis">
-    Controlador
+    Controller
     
   </span>
   
@@ -1235,7 +1168,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../control/horizontal/" class="md-nav__link ">
+            <a href="../control/horizontal/" class="md-nav__link ">
               
   
   
@@ -1272,14 +1205,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/horizontal/estimator/" class="md-nav__link">
+      <a href="../control/horizontal/estimator/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.07 4.93-1.41 1.41A8.01 8.01 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.38-1-1.72V2h-1A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10c0-2.76-1.12-5.26-2.93-7.07"/></svg>
   
   <span class="md-ellipsis">
-    Estimador
+    Estimator
     
   </span>
   
@@ -1297,14 +1230,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/horizontal/controller/" class="md-nav__link">
+      <a href="../control/horizontal/controller/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m0 12a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
   
   <span class="md-ellipsis">
-    Controlador
+    Controller
     
   </span>
   
@@ -1347,34 +1280,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#movimentos-basicos-de-um-quadricoptero" class="md-nav__link">
-    <span class="md-ellipsis">
-      Movimentos básicos de um quadricóptero
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transformacao-de-entradas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transformação de entradas
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1390,112 +1295,9 @@
 
 
 
-<h1 id="mixer"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20h4V4h-4zm-6 0h4v-8H4zM16 9v11h4V9z"/></svg></span> Mixer</h1>
-<p>O voo de um drone depende diretamente das forças e torques gerados pelos motores. Aqui, você vai entender como esses efeitos se combinam para movimentar o quadricóptero no espaço.</p>
-<hr />
-<h2 id="movimentos-basicos-de-um-quadricoptero">Movimentos básicos de um quadricóptero</h2>
-<p>Um quadricóptero possui quatro hélices que, uma vez em movimento com velocidades angulares <span class="arithmatex">\({\color{var(--c1)}\omega_1}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_2}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_3}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\omega_4}\)</span>, produzem quatro forças de sustentação <span class="arithmatex">\({\color{var(--c2)}f_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_3}\)</span> e <span class="arithmatex">\({\color{var(--c2)}f_4}\)</span> e quatro torques de arrasto <span class="arithmatex">\({\color{var(--c2)}\tau_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_3}\)</span> e <span class="arithmatex">\({\color{var(--c2)}\tau_4}\)</span>, conforme a figura abaixo.</p>
-<p><img alt="Quadcopter1" src="../images/quadcopter1.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>Para um quadricóptero se movimentar verticalmente, basta variar as velocidades angulares das quatro hélices simultaneamente, conforme a figura abaixo.</p>
-<p>Enquanto que, para um quadricóptero rotacionar em torno de seus eixos, basta variar as velocidades angulares de 2 hélices simultaneamente, conforme a figura abaixo.</p>
-<div class="admonition question">
-<p class="admonition-title">Exercício 1</p>
-<p>Sobre os movimentos de um quadricóptero, determine as respostas a seguir. </p>
-<details class="info">
-<summary>a) Quantas formas diferentes é possível transladar um quadricóptero</summary>
-<p>3 (ao longo dos eixos <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span> e <span class="arithmatex">\(z\)</span>)</p>
-</details>
-<details class="info">
-<summary>b) Quantas formas diferentes é possível rotacionar um quadricóptero</summary>
-<p>3 (em torno dos eixos <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span> e <span class="arithmatex">\(z\)</span>) </p>
-</details>
-<details class="info">
-<summary>c) Quantos graus de liberdade possui um quadricóptero</summary>
-<p>6 (3 de translação + 3 de rotação) </p>
-</details>
-<details class="info">
-<summary>d) Como o quadricóptero realiza movimentos de translação no plano (eixos <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span>)</summary>
-<p>Através de uma composição de movimentos de translação (ao longo do eixo <span class="arithmatex">\(z\)</span>) e rotação (em torno dos eixos <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span>) </p>
-</details>
-</div>
-<hr />
-<h2 id="transformacao-de-entradas">Transformação de entradas</h2>
-<p>As quatro forças e quatro torques de cada uma das hélices podem ser representadas por uma única força de propulsão total <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> e três torques <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span> e <span class="arithmatex">\({\color{var(--c2)}\tau_z}\)</span>, um em torno de cada eixo do quadricóptero, conforme a figura abaixo.</p>
-<p><img alt="Quadcopter2" src="../images/quadcopter2.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>Na secção de <a href="../basic_concepts/aerodynamics.md">aerodinâmica</a> verificamos que as forças e torques das hélices são proporcionais ao quadrado de suas velocidades angulares:</p>
-<div class="arithmatex">\[
-\left\{
-\begin{array}{l}
-    {\color{var(--c2)}f_i} = k_l {\color{var(--c1)}\omega_i}^2 \\
-   {\color{var(--c2)}\tau_i} = k_d {\color{var(--c1)}\omega_i}^2 \\
-\end{array}
-\right.
-\]</div>
-<p>Isso significa que as quatro equações determinadas anteriormente podem ser escritas no formato matricial:</p>
-<div class="arithmatex">\[
-\begin{bmatrix}
-    {\color{var(--c2)}f_t} \\
-    {\color{var(--c2)}\tau_x} \\
-    {\color{var(--c2)}\tau_y} \\
-    {\color{var(--c2)}\tau_z}
-\end{bmatrix}
-= M 
-\begin{bmatrix}
-    {\color{var(--c1)}\omega_1}^2 \\
-    {\color{var(--c1)}\omega_2}^2 \\
-    {\color{var(--c1)}\omega_3}^2 \\
-    {\color{var(--c1)}\omega_4}^2
-\end{bmatrix}
-\]</div>
-<p>Onde <span class="arithmatex">\(M\)</span> é uma matriz <span class="arithmatex">\(4\times4\)</span> que transforma as velocidades angulares das hélices na força total e nos torques de um quadricóptero.</p>
-<div class="admonition question">
-<p class="admonition-title">Exercício 2</p>
-<p>Determine a matriz <span class="arithmatex">\(M\)</span> em função das constantes de sustentação e arrasto da hélice <span class="arithmatex">\(k_l\)</span> e <span class="arithmatex">\(k_d\)</span> e do comprimento <span class="arithmatex">\(l\)</span>. </p>
-<details class="info">
-<summary>Resposta</summary>
-<div class="arithmatex">\[
-M = 
-\begin{bmatrix} 
-    k_l &amp; k_l &amp; k_l &amp; k_l \\ 
-    -k_l l &amp; -k_l l &amp; k_l l &amp; k_l l \\ 
-    -k_l l &amp; k_l l &amp; k_l l &amp; -k_l l  \\ 
-    -k_d &amp; k_d &amp; -k_d &amp; k_d 
-\end{bmatrix}
-\]</div>
-</details>
-</div>
-<p>Para obter as velocidades angulares das hélices em função da força total e dos torques, basta multiplicar a equação anterior pela matriz inversa <span class="arithmatex">\(M^{-1}\)</span>:</p>
-<div class="arithmatex">\[
-\begin{bmatrix}
-    {\color{var(--c1)}\omega_1}^2 \\
-    {\color{var(--c1)}\omega_2}^2 \\
-    {\color{var(--c1)}\omega_3}^2 \\
-    {\color{var(--c1)}\omega_4}^2
-\end{bmatrix}
-= M^{-1} 
-\begin{bmatrix}
-    {\color{var(--c2)}f_t} \\
-    {\color{var(--c2)}\tau_x} \\
-    {\color{var(--c2)}\tau_y} \\
-    {\color{var(--c2)}\tau_z}
-\end{bmatrix}
-\]</div>
-<div class="admonition question">
-<p class="admonition-title">Exercício 3</p>
-<p>Determine a matriz inversa <span class="arithmatex">\(M^{-1}\)</span> (dica: utilize o Symbolic Math Toolbox do MATLAB).</p>
-<details class="info">
-<summary>Resposta</summary>
-<div class="arithmatex">\[
-M^{-1} = 
-\begin{bmatrix} 
-    \frac{1}{4 k_l} &amp; - \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_d}  \\ 
-    \frac{1}{4 k_l} &amp; - \frac{1}{4 k_l l} &amp; \frac{1}{4 k_l l} &amp; \frac{1}{4 k_d} \\ 
-    \frac{1}{4 k_l} &amp; \frac{1}{4 k_l l} &amp; \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_d} \\ 
-    \frac{1}{4 k_l} &amp; \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_l l} &amp; \frac{1}{4 k_d} 
-\end{bmatrix}
-\]</div>
-</details>
-</div>
+  <h1>Conceitos básicos</h1>
+
+
 
 
 
@@ -1547,16 +1349,16 @@ M^{-1} =
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.code.title", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.title", "navigation.indexes"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="../../assets/js/disable-parent-click.js"></script>
+        <script src="../assets/js/disable-parent-click.js"></script>
       
     
   </body>

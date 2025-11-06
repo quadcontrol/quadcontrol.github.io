@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/foundation/inertia/">
+        <link rel="canonical" href="https://quadcontrol.io/fundamentals/coordinate_system/">
       
       
-        <link rel="prev" href="../mixer/">
+        <link rel="prev" href="../inertia/">
       
       
         <link rel="next" href="../../identification/">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Inércia - QuadControl</title>
+        <title>Sistema de coordenadas - QuadControl</title>
       
     
     
@@ -59,11 +59,11 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Inércia - QuadControl" >
+        <meta  property="og:title"  content="Sistema de coordenadas - QuadControl" >
       
         <meta  property="og:description"  content="None" >
       
-        <meta  property="og:image"  content="https://quadcontrol.io/assets/images/social/foundation/inertia.png" >
+        <meta  property="og:image"  content="https://quadcontrol.io/assets/images/social/fundamentals/coordinate_system.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -71,15 +71,15 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://quadcontrol.io/foundation/inertia/" >
+        <meta  property="og:url"  content="https://quadcontrol.io/fundamentals/coordinate_system/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Inércia - QuadControl" >
+        <meta  name="twitter:title"  content="Sistema de coordenadas - QuadControl" >
       
         <meta  name="twitter:description"  content="None" >
       
-        <meta  name="twitter:image"  content="https://quadcontrol.io/assets/images/social/foundation/inertia.png" >
+        <meta  name="twitter:image"  content="https://quadcontrol.io/assets/images/social/fundamentals/coordinate_system.png" >
       
     
     
@@ -102,7 +102,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#inercia" class="md-skip">
+        <a href="#sistema-de-coordenadas" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inércia
+              Sistema de coordenadas
             
           </span>
         </div>
@@ -211,7 +211,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 5.69 5 4.5V18h-2v-6H9v6H7v-7.81zM12 3 2 12h3v8h6v-6h2v6h6v-8h3"/></svg>
   
   <span class="md-ellipsis">
-    Início
+    Home
     
   </span>
   
@@ -259,7 +259,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m-2 12c-.25 0-.46-.18-.5-.42l-.37-2.65c-.63-.25-1.17-.59-1.69-.99l-2.49 1.01c-.22.08-.49 0-.61-.22l-2-3.46a.493.493 0 0 1 .12-.64l2.11-1.66L4.5 12l.07-1-2.11-1.63a.493.493 0 0 1-.12-.64l2-3.46c.12-.22.39-.31.61-.22l2.49 1c.52-.39 1.06-.73 1.69-.98l.37-2.65c.04-.24.25-.42.5-.42h4c.25 0 .46.18.5.42l.37 2.65c.63.25 1.17.59 1.69.98l2.49-1c.22-.09.49 0 .61.22l2 3.46c.13.22.07.49-.12.64L19.43 11l.07 1-.07 1 2.11 1.63c.19.15.25.42.12.64l-2 3.46c-.12.22-.39.31-.61.22l-2.49-1c-.52.39-1.06.73-1.69.98l-.37 2.65c-.04.24-.25.42-.5.42zm1.25-18-.37 2.61c-1.2.25-2.26.89-3.03 1.78L5.44 7.35l-.75 1.3L6.8 10.2a5.55 5.55 0 0 0 0 3.6l-2.12 1.56.75 1.3 2.43-1.04c.77.88 1.82 1.52 3.01 1.76l.37 2.62h1.52l.37-2.61c1.19-.25 2.24-.89 3.01-1.77l2.43 1.04.75-1.3-2.12-1.55c.4-1.17.4-2.44 0-3.61l2.11-1.55-.75-1.3-2.41 1.04a5.42 5.42 0 0 0-3.03-1.77L12.75 4z"/></svg>
   
   <span class="md-ellipsis">
-    Pré-requisitos
+    Setup
     
   </span>
   
@@ -276,7 +276,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Pré-requisitos
+            Setup
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -385,6 +385,8 @@
       
         
       
+        
+      
     
     
     
@@ -404,7 +406,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73z"/></svg>
   
   <span class="md-ellipsis">
-    Fundamentos
+    Fundamentals
     
   </span>
   
@@ -421,7 +423,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Fundamentos
+            Fundamentals
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -441,7 +443,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.56 3.91c.59.59.59 1.54 0 2.12l-3.89 3.89 2.12 9.19-1.41 1.42-3.88-7.43L9.6 17l.36 2.47-1.07 1.06-1.76-3.18-3.19-1.77L5 14.5l2.5.37L11.37 11 3.94 7.09l1.42-1.41 9.19 2.12 3.89-3.89c.56-.58 1.56-.58 2.12 0"/></svg>
   
   <span class="md-ellipsis">
-    Aerodinâmica
+    Aerodynamics
     
   </span>
   
@@ -481,6 +483,31 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../inertia/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg>
+  
+  <span class="md-ellipsis">
+    Inertia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -497,10 +524,10 @@
           
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg>
   
   <span class="md-ellipsis">
-    Inércia
+    Coordinate system
     
   </span>
   
@@ -512,10 +539,10 @@
         
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg>
   
   <span class="md-ellipsis">
-    Inércia
+    Coordinate system
     
   </span>
   
@@ -538,20 +565,68 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#massa" class="md-nav__link">
+  <a href="#matriz-de-rotacao" class="md-nav__link">
     <span class="md-ellipsis">
-      Massa
+      Matriz de rotação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Matriz de rotação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      2D
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#momento-de-inercia" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#3d" class="md-nav__link">
     <span class="md-ellipsis">
-      Momento de Inércia
+      3D
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propriedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propriedades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#angulos-de-euler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ângulos de Euler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ângulos de Euler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#singularidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singularidades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -609,7 +684,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm3.5 4C13 6 15 8 15 10.5c0 .88-.25 1.7-.69 2.4l3.26 3.26-1.41 1.41-3.26-3.26c-.7.44-1.52.69-2.4.69C8 15 6 13 6 10.5S8 6 10.5 6m0 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5"/></svg>
   
   <span class="md-ellipsis">
-    Identificação
+    Identification
     
   </span>
   
@@ -626,7 +701,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Identificação
+            Identification
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -646,7 +721,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h6a2 2 0 0 1 2 2v8h-2V9h-2v7h-2V9H9v8H7V9a2 2 0 0 1 2-2M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Coeficientes do motor
+    Motor coefficients
     
   </span>
   
@@ -671,7 +746,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v8h4v2H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Constante de sustentação
+    Lift constant
     
   </span>
   
@@ -696,7 +771,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Constante de arrasto
+    Drag constant
     
   </span>
   
@@ -731,8 +806,6 @@
       
         
       
-        
-      
     
     
     
@@ -752,7 +825,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15 6.04 7.5 12 10.85l5.96-3.35zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg>
   
   <span class="md-ellipsis">
-    Modelagem
+    Modeling
     
   </span>
   
@@ -769,35 +842,10 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            Modelagem
+            Modeling
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../modeling/coordinate_system/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg>
-  
-  <span class="md-ellipsis">
-    Sistema de coordenadas
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -814,7 +862,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 7h3c1.66 0 3 1.34 3 3v4c0 1.66-1.34 3-3 3h-3zm3 8c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1h-1v6zM5 7h4a2 2 0 0 1 2 2v2c0 1.11-.89 2-2 2H7v2h4v2H5v-4c0-1.1.9-2 2-2h2V9H5z"/></svg>
   
   <span class="md-ellipsis">
-    Modelo 2D
+    2D model
     
   </span>
   
@@ -839,7 +887,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5v-2h4v-2H6v-2h3V9H5zm8 0h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3zm3 8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-1v6z"/></svg>
   
   <span class="md-ellipsis">
-    Modelo 3D
+    3D model
     
   </span>
   
@@ -899,7 +947,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 13c-1.86 0-3.41 1.28-3.86 3H2v2h2.14c.45 1.72 2 3 3.86 3s3.41-1.28 3.86-3H22v-2H11.86c-.45-1.72-2-3-3.86-3m0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2M19.86 6c-.45-1.72-2-3-3.86-3s-3.41 1.28-3.86 3H2v2h10.14c.45 1.72 2 3 3.86 3s3.41-1.28 3.86-3H22V6zM16 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2"/></svg>
   
   <span class="md-ellipsis">
-    Controle
+    Control
     
   </span>
   
@@ -916,7 +964,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            Controle
+            Control
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -936,7 +984,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16v-3c0-1.11-.89-2-2-2h-6V8h2V2H9v6h2v3H5c-1.11 0-2 .89-2 2v3H1v6h6v-6H5v-3h6v3H9v6h6v-6h-2v-3h6v3h-2v6h6v-6zM11 4h2v2h-2zM5 20H3v-2h2zm8 0h-2v-2h2zm8 0h-2v-2h2z"/></svg>
   
   <span class="md-ellipsis">
-    Arquitetura
+    Architecture
     
   </span>
   
@@ -1008,7 +1056,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 14.25 4.75 11H7c.25-5.61 2.39-10 5-10 2 0 3.77 2.64 4.55 6.45C20.36 8.23 23 10 23 12c0 1.83-2.17 3.43-5.4 4.3l.29-2.03C19.8 13.72 21 12.91 21 12c0-1.06-1.65-2-4.13-2.5.08.79.13 1.63.13 2.5 0 6.08-2.24 11-5 11-1.83 0-3.43-2.17-4.3-5.4l2.03.29C10.28 19.8 11.09 21 12 21c1.66 0 3-4.03 3-9q0-1.5-.15-2.85Q13.5 9 12 9l-1.86.06.29-2.01L12 7c.87 0 1.71.05 2.5.13C14 4.65 13.06 3 12 3c-1.54 0-2.82 3.5-3 8h2.25zM14.25 16 11 19.25V17c-5.61-.25-10-2.39-10-5 0-1.83 2.17-3.43 5.4-4.3l-.29 2.03C4.2 10.28 3 11.09 3 12c0 1.54 3.5 2.82 8 3v-2.25z"/></svg>
   
   <span class="md-ellipsis">
-    Atitude
+    Attitude
     
   </span>
   
@@ -1025,7 +1073,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6_4">
             <span class="md-nav__icon md-icon"></span>
-            Atitude
+            Attitude
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1045,7 +1093,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.07 4.93-1.41 1.41A8.01 8.01 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.38-1-1.72V2h-1A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10c0-2.76-1.12-5.26-2.93-7.07"/></svg>
   
   <span class="md-ellipsis">
-    Estimador
+    Estimator
     
   </span>
   
@@ -1070,7 +1118,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m0 12a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
   
   <span class="md-ellipsis">
-    Controlador
+    Controller
     
   </span>
   
@@ -1162,7 +1210,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.07 4.93-1.41 1.41A8.01 8.01 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.38-1-1.72V2h-1A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10c0-2.76-1.12-5.26-2.93-7.07"/></svg>
   
   <span class="md-ellipsis">
-    Estimador
+    Estimator
     
   </span>
   
@@ -1187,7 +1235,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m0 12a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
   
   <span class="md-ellipsis">
-    Controlador
+    Controller
     
   </span>
   
@@ -1279,7 +1327,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.07 4.93-1.41 1.41A8.01 8.01 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.74-.4-1.38-1-1.72V2h-1A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10c0-2.76-1.12-5.26-2.93-7.07"/></svg>
   
   <span class="md-ellipsis">
-    Estimador
+    Estimator
     
   </span>
   
@@ -1304,7 +1352,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m0 12a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m7-9a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
   
   <span class="md-ellipsis">
-    Controlador
+    Controller
     
   </span>
   
@@ -1357,20 +1405,68 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#massa" class="md-nav__link">
+  <a href="#matriz-de-rotacao" class="md-nav__link">
     <span class="md-ellipsis">
-      Massa
+      Matriz de rotação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Matriz de rotação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      2D
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#momento-de-inercia" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#3d" class="md-nav__link">
     <span class="md-ellipsis">
-      Momento de Inércia
+      3D
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propriedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propriedades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#angulos-de-euler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ângulos de Euler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ângulos de Euler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#singularidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singularidades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1390,116 +1486,433 @@
 
 
 
-<h1 id="inercia"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg></span> Inércia</h1>
-<p>Todo corpo resiste a mudanças em seu estado de movimento — essa resistência é o que chamamos de inércia.</p>
-<p>No caso de um drone, que está livre para se mover e girar no espaço, a inércia se manifesta de duas formas principais, e ambas são fundamentais para entender como ele responde aos comandos de controle:</p>
-<ul>
-<li>Massa — representa a resistência a movimentos lineares (como subir/descer, avançar/recuar ou deslocar-se lateralmente). É a chamada inércia translacional.</li>
-<li>Momento de inércia — representa a resistência a movimentos angulares (como rolar, inclinar ou guinar). É a chamada inércia rotacional.</li>
-</ul>
-<p>Controlar bem um drone exige compreender essas duas formas de inércia — e como elas influenciam as acelerações que conseguimos impor a ele.</p>
+<h1 id="sistema-de-coordenadas"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg></span> Sistema de coordenadas</h1>
+<p>No controle de drones, o uso de sistemas de coordenadas é fundamental para descrever posições e orientações relativas. Alguns exemplos comuns são: a posição do drone em relação ao solo, a orientação da câmera em relação ao drone e a velocidade do drone em relação ao vento.</p>
+<p>A escolha do sistema de coordenadas adequado torna muitos cálculos mais simples. Por exemplo, forças e torques aerodinâmicos são mais naturalmente descritos em um sistema de coordenadas móvel (fixo no drone), enquanto a aceleração da gravidade é melhor representada em um sistema de coordenadas inercial (fixo na Terra).</p>
 <hr />
-<h2 id="massa">Massa</h2>
-<p>A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.</p>
-<p><img alt="Mass" src="../images/mass.svg" style="display: block; margin: auto;" width="500" /></p>
+<h2 id="matriz-de-rotacao">Matriz de rotação</h2>
+<p>Quando trabalhamos com diferentes sistemas de coordenadas, precisamos de uma forma matemática para descrever a orientação relativa entre eles. Essa função é cumprida pelas matrizes de rotação, que permitem representar rotações tanto no plano (2D) quanto no espaço tridimensional (3D).</p>
+<h3 id="2d">2D</h3>
+<p class="annotate">Ao descrever a posição de um drone, precisamos definir uma referência. Um método geral é utilizar um sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span> (1).</p>
+<ol>
+<li>Fixo na Terra, que não acelera nem rotaciona.</li>
+</ol>
+<p><img alt="" src="../images/2d_position.svg" style="display: block; margin: auto;" width="600" /></p>
+<p class="annotate">Já para descrever a atitude (orientação) do drone, apenas esse sistema não é suficiente. É necessário introduzir também um sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> (1).</p>
+<ol>
+<li>Fixo no drone, que acelera e rotaciona com ele.</li>
+</ol>
+<p><img alt="" src="../images/2d_position_attitude.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>A atitude do drone é dada, portanto, pela orientação relativa do sistema móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> em relação ao sistema inercial <span class="arithmatex">\({\color{magenta}yz}\)</span>. Essa orientação pode ser representada matematicamente por uma matriz <span class="arithmatex">\(2 \times 2\)</span> chamada de matrix de rotação <span class="arithmatex">\(R\)</span>:</p>
+<div class="arithmatex">\[
+{\color{cyan}
+\begin{bmatrix}
+    y' \\
+    z'
+\end{bmatrix}
+}
+=
+\underbrace{
+\begin{bmatrix}
+    r_{11} &amp; r_{12} \\
+    r_{21} &amp; r_{22}
+\end{bmatrix}
+}_{R}
+{\color{magenta}
+\begin{bmatrix}
+    y \\
+    z
+\end{bmatrix}
+}
+\]</div>
+<p>Apesar de possuir quatro elementos, essa matriz pode ser descrita em função de um único parâmetro: o ângulo de rotação <span class="arithmatex">\(\phi\)</span>:</p>
+<div class="arithmatex">\[
+R(\phi)=
+\begin{bmatrix}
+    r_{11}(\phi) &amp; r_{12}(\phi)\\
+    r_{21}(\phi) &amp; r_{22}(\phi)
+\end{bmatrix}
+\]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
-<p>Podemos calcular a massa do drone somando a massa de seus componentes:</p>
-<ul>
-<li>O <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">drone</a> que já considera bateria, PCB, motores, hélices, etc.</li>
-<li>O <a href="https://www.bitcraze.io/products/flow-deck-v2/" target="_blank">módulo de expansão</a> que é acoplado embaixo</li>
-</ul>
-<p>Determine a massa total do drone somando a massa de seus componentes. Elas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\phi\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}yz}\)</span>.</p>
+<p><img alt="" src="../images/2d_rotation_x.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
-<summary>Resposta</summary>
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\phi\)</span>.</summary>
+<div class="arithmatex">\[
+R(\phi) = 
+\begin{bmatrix} 
+    \cos{\phi} &amp; \sin{\phi} \\ 
+    -\sin{\phi} &amp; \cos{\phi} 
+\end{bmatrix}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Calcule <span class="arithmatex">\(R(\phi)\)</span> para <span class="arithmatex">\(\phi = \frac{\pi}{2} \, \text{rad}\)</span> e interprete o resultado.</summary>
+<div class="arithmatex">\[
+R\left(\frac{\pi}{2}\right) 
+= 
+\begin{bmatrix} 
+    \cos{\frac{\pi}{2}} &amp; \sin{\frac{\pi}{2}} \\ 
+    -\sin{\frac{\pi}{2}} &amp; \cos{\frac{\pi}{2}} 
+\end{bmatrix} 
+=
+\begin{bmatrix} 
+    0 &amp; 1 \\ 
+    -1 &amp; 0
+\end{bmatrix}
+\]</div>
+<p>O resultado faz sentido: ao rotacionar <span class="arithmatex">\(90^{\circ}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> passa a coincidir com <span class="arithmatex">\({\color{magenta}z}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> fica no sentido oposto de <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
+</details>
+<details class="info">
+<summary>c) Determine o ângulo <span class="arithmatex">\(\phi\)</span> correspondente à matriz <br> <span class="arithmatex">\(R (\phi)= \begin{bmatrix} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \end{bmatrix}\)</span>.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    m &amp;= m_{cf} + m_{fd} \\
-    m &amp;= 37 + 1,6 \\
-    m &amp;= 38,6 g
+    \cos \phi &amp;= \frac{\sqrt{2}}{2} \\
+    \phi &amp;= \cos^{-1}\!\left(\frac{\sqrt{2}}{2}\right) \\
+    \phi &amp;= \frac{\pi}{4} \;\text{rad} \;\; (45^\circ)
 \end{align*}
 \]</div>
 </details>
 </div>
-<hr />
-<h2 id="momento-de-inercia">Momento de Inércia</h2>
-<p>O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.</p>
-<p><img alt="Moment of Inertia" src="../images/moment_of_inertia.svg" style="display: block; margin: auto;" width="500" /></p>
+<h3 id="3d">3D</h3>
+<p>Assim como no plano, no espaço a atitude do drone também é dada pela atitude relativa do sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span>.</p>
+<p><img alt="" src="../images/3d_position_attitude.svg" style="display: block; margin: auto;" width="600" /></p>
+<p>No entanto, como agora estamos lidando com três dimensões, a matriz de rotação <span class="arithmatex">\(R\)</span> passa a possuir dimensão <span class="arithmatex">\(3 \times 3\)</span>:</p>
+<div class="arithmatex">\[
+{\color{cyan}
+\begin{bmatrix}
+    x'\\y'\\z'
+\end{bmatrix}
+}
+=
+\underbrace{
+\begin{bmatrix}
+    r_{11} &amp; r_{12} &amp; r_{13}\\
+    r_{21} &amp; r_{22} &amp; r_{23}\\
+    r_{31} &amp; r_{32} &amp; r_{33}
+\end{bmatrix}
+}_{R}
+{\color{magenta}
+\begin{bmatrix}
+    x \\
+    y \\
+    z
+\end{bmatrix}
+}
+\]</div>
+<p class="annotate">De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita através de três rotações sucessivas em torno de eixos pré-definidos e mutuamente ortogonais(1). Dessa forma, os nove elementos da matriz de rotação podem ser expressos em função de três parâmetros: os ângulos de Euler <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span>:</p>
+<ol>
+<li>Formam um ângulo de <span class="arithmatex">\(90^{\circ}\)</span> entre si.</li>
+</ol>
+<div class="arithmatex">\[\begin{equation*}
+        R({\phi},{\theta},{\psi})
+        =
+        \begin{bmatrix}
+        r_{11}({\phi},{\theta},{\psi}) &amp; r_{12}({\phi},{\theta},{\psi}) &amp; r_{13}({\phi},{\theta},{\psi}) \\
+        r_{21}({\phi},{\theta},{\psi}) &amp; r_{22}({\phi},{\theta},{\psi}) &amp; r_{23}({\phi},{\theta},{\psi}) \\
+        r_{31}({\phi},{\theta},{\psi}) &amp; r_{32}({\phi},{\theta},{\psi}) &amp; r_{33}({\phi},{\theta},{\psi})
+        \end{bmatrix}
+\end{equation*}\]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
-<p>Podemos calcular os momentos de inércia do drone considerando um modelo mais simples<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\phi\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}x}\)</span>.</p>
+<p><img alt="" src="../images/3d_rotation_x.svg" style="display: block; margin: auto;" width="200" /></p>
+<details class="info">
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\phi\)</span>.</summary>
+<div class="arithmatex">\[
+R_x(\phi) = 
+\begin{bmatrix} 
+    1 &amp; 0 &amp; 0 \\
+    0 &amp; \cos\phi &amp; \sin\phi \\ 
+    0 &amp; -\sin\phi &amp; \cos\phi 
+\end{bmatrix}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Calcule <span class="arithmatex">\(R_x(\phi)\)</span> para <span class="arithmatex">\(\phi=\pi \, \text{rad}\)</span> e interprete o resultado.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    R_x\left(\pi\right) 
+    = 
+    \begin{bmatrix} 
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; \cos \pi &amp; \sin \pi \\ 
+        0 &amp; -\sin \pi &amp; \cos \pi
+    \end{bmatrix} 
+    = 
+    \begin{bmatrix} 
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; -1 &amp; 0 \\ 
+        0 &amp; 0 &amp; -1
+    \end{bmatrix}
+\end{align*}
+\]</div>
+<p>O resultado faz sentido: uma rotação de <span class="arithmatex">\(180^\circ\)</span> em torno de <span class="arithmatex">\({\color{magenta}x}\)</span> inverte os eixos <span class="arithmatex">\({\color{magenta}y}\)</span> e <span class="arithmatex">\({\color{magenta}z}\)</span>, de modo que <span class="arithmatex">\({\color{cyan}y'}\)</span> e <span class="arithmatex">\({\color{cyan}z'}\)</span> ficam em sentidos opostos a <span class="arithmatex">\({\color{magenta}y}\)</span> e <span class="arithmatex">\({\color{magenta}z}\)</span>, enquanto <span class="arithmatex">\({\color{cyan}x'}\)</span> permance alinhado com <span class="arithmatex">\({\color{magenta}x}\)</span>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 3</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\theta\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
+<p><img alt="" src="../images/3d_rotation_y.svg" style="display: block; margin: auto;" width="200" /></p>
+<details class="info">
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\theta\)</span>.</summary>
+<div class="arithmatex">\[
+R_y(\theta) = 
+\begin{bmatrix} 
+    \cos\theta &amp; 0 &amp; -\sin\theta \\ 
+    0 &amp; 1 &amp; 0 \\ 
+    \sin\theta &amp; 0 &amp; \cos\theta
+\end{bmatrix}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Calcule <span class="arithmatex">\(R_y(\theta)\)</span> para <span class="arithmatex">\(\theta=\tfrac{\pi}{2} \, \text{rad}\)</span> e interprete o resultado.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    R_y\left(\frac{\pi}{2}\right) 
+    = 
+    \begin{bmatrix} 
+        \cos\frac{\pi}{2} &amp; 0 &amp; -\sin\frac{\pi}{2} \\ 
+        0 &amp; 1 &amp; 0 \\ 
+        \sin\frac{\pi}{2} &amp; 0 &amp; \cos\frac{\pi}{2}
+    \end{bmatrix} 
+    = 
+    \begin{bmatrix} 
+        0 &amp; 0 &amp; -1 \\ 
+        0 &amp; 1 &amp; 0 \\ 
+        1 &amp; 0 &amp; 0
+    \end{bmatrix}
+\end{align*}
+\]</div>
+<p>O resultado faz sentido: ao rotacionar <span class="arithmatex">\(90^\circ\)</span> em torno de <span class="arithmatex">\({\color{magenta}y}\)</span>, o eixo <span class="arithmatex">\({\color{cyan}x'}\)</span> passa a apontar para o sentido oposto de <span class="arithmatex">\({\color{magenta}z}\)</span> e o eixo <span class="arithmatex">\({\color{cyan}z'}\)</span> passa a coincidir com <span class="arithmatex">\({\color{magenta}x}\)</span>, enquanto o eixo <span class="arithmatex">\({\color{cyan}y'}\)</span> permance alinhado com <span class="arithmatex">\({\color{magenta}y}\)</span>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 4</p>
+<p>Considere que o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> está rotacionado de um ângulo <span class="arithmatex">\(\psi\)</span> em relação ao sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> e em torno do eixo <span class="arithmatex">\({\color{magenta}z}\)</span>.</p>
+<p><img alt="" src="../images/3d_rotation_z.svg" style="display: block; margin: auto;" width="200" /></p>
+<details class="info">
+<summary>a) Escreva a matriz de rotação em função do ângulo <span class="arithmatex">\(\psi\)</span>.</summary>
+<div class="arithmatex">\[
+R_z(\psi) = 
+\begin{bmatrix} 
+    \cos\psi &amp; \sin\psi &amp; 0 \\ 
+    -\sin\psi &amp; \cos\psi &amp; 0 \\ 
+    0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</div>
+</details>
+<details class="info">
+<summary>b) Calcule <span class="arithmatex">\(R_z(\psi)\)</span> para <span class="arithmatex">\(\psi=2\pi \, \text{rad}\)</span> e interprete o resultado.</summary>
+<div class="arithmatex">\[
+\begin{align*}
+    R_z\left(2\pi\right) 
+    = 
+    \begin{bmatrix}  
+        \cos 2\pi &amp; \sin 2\pi &amp; 0 \\ 
+        -\sin 2\pi &amp; \cos 2\pi &amp; 0 \\ 
+        0 &amp; 0 &amp; 1
+    \end{bmatrix} 
+    = 
+    \begin{bmatrix} 
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 \\ 
+        0 &amp; 0 &amp; 1
+    \end{bmatrix}
+\end{align*}
+\]</div>
+<p>O resultado faz sentido: uma rotação completa de <span class="arithmatex">\(360^\circ\)</span> em torno de <span class="arithmatex">\({\color{magenta}z}\)</span> devolve <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> exatamente a <span class="arithmatex">\({\color{magenta}xyz}\)</span>, ou seja, todos os eixos voltam a coincidir.</p>
+</details>
+</div>
+<h3 id="propriedades">Propriedades</h3>
+<p>Matrizes de rotação possuem algumas propriedades fundamentais:</p>
 <ul>
-<li>A <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery" target="_blank">bateria</a> como um paralelepípedo</li>
-<li>Os <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor" target="_blank">motores</a> com  <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">hélices</a> e <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards" target="_blank">suportes</a> como massas puntiformes</li>
+<li>Cada linha e cada coluna tem norma unitária (comprimento igual a 1).</li>
+<li>Linhas e colunas são ortogonais entre si (o produto escalar entre elas é zero).</li>
+<li>São matrizes ortonormais (sua inversa é igual à transposta), isto é, <span class="arithmatex">\(R^{-1} = R^T\)</span>.</li>
+<li>Possuem determinante unitário, isto é, <span class="arithmatex">\(\det (R) = 1\)</span>.</li>
 </ul>
-<p>Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
+<div class="admonition question">
+<p class="admonition-title">Exercício 5</p>
+<p>Considere a matriz de rotação <span class="arithmatex">\(R\)</span> que relaciona o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> com o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span>:</p>
+<div class="arithmatex">\[
+R = 
+\begin{bmatrix} 
+    \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} &amp; 0 \\ 
+    -\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} &amp; 0 \\ 
+    0 &amp; 0 &amp; 1 
+\end{bmatrix}   
+\]</div>
+<p>Calcule a matriz de rotação inversa <span class="arithmatex">\(R^{-1}\)</span>, isto é, que relaciona o sistema inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> com o sistema móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span>.</p>
 <details class="info">
 <summary>Resposta</summary>
-<p>A bateria possui <span class="arithmatex">\(9,10 \, g\)</span> de massa e dimensões <span class="arithmatex">\(3,3 \times 2,0 \times 0,8 \, cm\)</span>: </p>
 <div class="arithmatex">\[
-\left\{
-\begin{align*}
-    m_b &amp;= 9,10 \, g\\
-    a &amp;= 3,3 \, cm\\
-    b &amp;= 2,0 \, cm\\
-    c &amp;= 0,8 \, cm\\
-\end{align*}
-\right.
-\]</div>
-<p>Assim, usando uma tabela de momentos de inércia de um paralelepípedo temos que:</p>
-<p><img alt="Moment of Inertia Battery" src="../images/moment_of_inertia_battery.svg" style="display: block; margin: auto;" width="500" /></p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{b_{xx}} &amp;= \frac{m_b}{12} (b^2 + c^2) &amp; \quad I_{b_{yy}} &amp;= \frac{m_b}{12} (a^2 + c^2) &amp; \quad I_{b_{zz}} &amp;= \frac{m_b}{12} (a^2 + b^2) \\
-    I_{b_{xx}} &amp;= \frac{9,1}{12} (2,0^2 + 0,8^2) &amp; \quad I_{b_{yy}} &amp;= \frac{9,1}{12} (3,3^2 + 0,8^2) &amp; \quad I_{b_{zz}} &amp;= \frac{9,1}{12} (3,3^2 + 2,0^2) \\
-    I_{b_{xx}} &amp;= 3,52 \, g.cm^2 &amp; \quad I_{b_{yy}} &amp;= 8,74 \, g.cm^2 &amp; \quad I_{b_{zz}} &amp;= 12,29 \, g.cm^2 \\
-\end{align*}
-\]</div>
-<p>Os motores (<span class="arithmatex">\(2,30 \, g\)</span>), com hélices (<span class="arithmatex">\(1,34 \, g\)</span>) e suportes (<span class="arithmatex">\(0,33 \, g\)</span>), possuem <span class="arithmatex">\(3,97 \, g\)</span> de massa total e estão a <span class="arithmatex">\(10 \, cm\)</span> de distância na diagonal: </p>
-<div class="arithmatex">\[
-\left\{
-\begin{align*}
-    m_m &amp;= 3,97 \, g\\
-    l_x &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
-    l_y &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
-    l_z &amp;= 5 \, cm\\
-\end{align*}
-\right.
-\]</div>
-<p>Assim, considerando eles como massas puntiformes temos que:</p>
-<p><img alt="Moment of Inertia Motors" src="../images/moment_of_inertia_motors.svg" style="display: block; margin: auto;" width="500" /></p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{m_{xx}} &amp;= m_m l_x^2 &amp; \quad I_{m_{yy}} &amp;= m_m l_y^2 &amp; \quad I_{m_{zz}} &amp;= m_m l_z^2 \\
-    I_{m_{xx}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{yy}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{zz}} &amp;= 3,97 \cdot 5,0^2 \\
-    I_{m_{xx}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{yy}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{zz}} &amp;= 99,25 \, g.cm^2 \\
-\end{align*}
-\]</div>
-<p>Dessa forma, os momentos de inércia totais são dados por:</p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{xx} &amp;= I_{b_{xx}} + 4 I_{m_{xx}} &amp; \quad I_{yy} &amp;= I_{b_{yy}} + 4 I_{m_{yy}} &amp; \quad I_{zz} &amp;= I_{b_{zz}} + 4 I_{m_{zz}} \\
-    I_{xx} &amp;= 3,52 + 4 \cdot 49,62 &amp; \quad I_{yy} &amp;= 8,74 + 4 \cdot 49,62 &amp; \quad I_{zz} &amp;= 12,29 + 4 \cdot 99,25 \\
-    I_{xx} &amp;= 202,02 \, g.cm^2 &amp; \quad I_{yy} &amp;= 207,24 \, g.cm^2 &amp; \quad I_{zz} &amp;= 408,29 \, g.cm^2 \\
-\end{align*}
-\]</div>
-<p>Ou, de forma aproximada, e no S.I. (Sistema Internacional de Unidades):</p>
-<div class="arithmatex">\[
-\begin{align*}
-    I_{xx} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{yy} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{zz} &amp;= 4 \cdot 10^{-5} \, kg.m^2 \\
-\end{align*}
+R^{-1} =
+R^{T} =
+\begin{bmatrix} 
+    \frac{\sqrt{2}}{2} &amp; -\frac{\sqrt{2}}{2} &amp; 0 \\ 
+    \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} &amp; 0 \\ 
+    0 &amp; 0 &amp; 1 
+\end{bmatrix}
 \]</div>
 </details>
 </div>
-<p>​</p>
-<div class="footnote">
 <hr />
-<ol>
-<li id="fn:1">
-<p>Estamos desprezando a estrutura de PCB do drone, já que sua massa é pequena comparada à da bateria e dos motores, além de estar concentrada próxima ao centro de massa.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
+<h2 id="angulos-de-euler">Ângulos de Euler</h2>
+<p>Os ângulos de Euler são um conjunto de três rotações sucessivas em torno de eixos distintos, que permitem levar o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> até o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span>.  </p>
+<p><img alt="" src="../images/euler_angles.svg" style="display: block; margin: auto;" width="800" /></p>
+<p>De acordo com a convenção adotada aqui, usamos:</p>
+<ul>
+<li><span class="arithmatex">\(\psi\)</span>: rotação em torno do eixo <span class="arithmatex">\({\color{magenta}z'}\)</span> (<em>yaw</em> - guinagem)  </li>
+<li><span class="arithmatex">\(\theta\)</span>: rotação em torno do eixo <span class="arithmatex">\({\color{magenta}y'}\)</span> (<em>pitch</em> - inclinação)  </li>
+<li><span class="arithmatex">\(\phi\)</span>: rotação em torno do eixo <span class="arithmatex">\({\color{magenta}x'}\)</span> (<em>roll</em> - rolagem)  </li>
+</ul>
+<p>A matriz de rotação total é obtida pela composição das três matrizes individuais.  </p>
+<div class="arithmatex">\[
+R(\phi,\theta,\psi) = 
+\underbrace{
+\begin{bmatrix} 
+    1 &amp; 0 &amp; 0 \\
+    0 &amp; \cos\phi &amp; \sin\phi \\ 
+    0 &amp; -\sin\phi &amp; \cos\phi
+\end{bmatrix}
+}_{R_x(\phi)}
+\underbrace{
+\begin{bmatrix} 
+    \cos\theta &amp; 0 &amp; -\sin\theta \\ 
+    0 &amp; 1 &amp; 0 \\ 
+    \sin\theta &amp; 0 &amp; \cos\theta 
+\end{bmatrix}
+}_{R_y(\theta)}
+\underbrace{
+\begin{bmatrix} 
+    \cos\psi &amp; \sin\psi &amp; 0 \\ 
+    -\sin\psi &amp; \cos\psi &amp; 0 \\ 
+    0 &amp; 0 &amp; 1 
+\end{bmatrix}   
+}_{R_z(\psi)}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Observe que a primeira rotação aplicada, <span class="arithmatex">\(R_z(\psi)\)</span>, aparece mais à direita, enquanto a última rotação, <span class="arithmatex">\(R_x(\phi)\)</span>, aparece mais à esquerda. Isso ocorre porque a multiplicação de matrizes segue a ordem inversa da aplicação das transformações.</p>
 </div>
+<div class="admonition question">
+<p class="admonition-title">Exercício 6</p>
+<p>Determine a matriz de rotação total <span class="arithmatex">\(R(\phi,\theta,\psi)\)</span> que relaciona o sistema de coordenadas móvel <span class="arithmatex">\({\color{cyan}x'y'z'}\)</span> com o sistema de coordenadas inercial <span class="arithmatex">\({\color{magenta}xyz}\)</span> em função dos ângulos de Euler <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span> e <span class="arithmatex">\(\psi\)</span>.</p>
+<p>Dica: utilize o Symbolic Math Toolbox do MATLAB.</p>
+<details class="info">
+<summary>Resposta</summary>
+<div class="arithmatex">\[
+R (\phi,\theta,\psi) = 
+\begin{bmatrix} \cos\theta\cos\psi &amp; \cos\theta\sin\psi &amp; -\sin\theta \\ 
+\sin\phi\sin\theta\cos\psi - \cos\phi\sin\psi &amp; \sin\phi\sin\theta\sin\psi + \cos\phi\cos\psi &amp; \sin\phi\cos\theta \\ 
+ \cos\phi\sin\theta\cos\psi + \sin\phi\sin\psi &amp; \cos\phi\sin\theta\sin\psi - \sin\phi\cos\psi &amp; \cos\phi\cos\theta 
+\end{bmatrix}
+\]</div>
+</details>
+</div>
+<h3 id="singularidades">Singularidades</h3>
+<p>Singularidades são pontos nos quais uma variável matemática torna-se indefinida. No caso dos ângulos de Euler, é uma orientação na qual há mais de uma única sequência de rotações possíveis. </p>
+<p>Quando a segunda rotação é igual a <span class="arithmatex">\(\theta = \frac{\pi}{2}\)</span> rad, a direção dos eixos da primeira (<span class="arithmatex">\({\color{cyan}z'}\)</span>) e terceira (<span class="arithmatex">\({\color{cyan}x'}\)</span>) rotação coincidem, tornando-se impossível discernir os valores de <span class="arithmatex">\(\psi\)</span> e <span class="arithmatex">\(\phi\)</span>.</p>
+<p>Não há acordo sobre a notação (sequência de rotações) utilizada pelos ângulos de Euler. Existe um total de 12 combinações, pois a rotação seguinte deve sempre ocorrer em um eixo distinto da anterior, conforme a tabela abaixo:</p>
+<style>
+  /* Tabela com visual do tema e centralização */
+  table.rotacoes {
+    width: 100%;
+    border-collapse: collapse;
+    margin: .75rem 0;
+  }
+  table.rotacoes th, table.rotacoes td {
+    border: 1px solid var(--md-typeset-table-color, rgba(0,0,0,.12));
+    padding: .4rem .6rem;
+    text-align: center;
+    vertical-align: middle; /* centraliza verticalmente com rowspan */
+  }
+  /* Cor ciano apenas para os eixos */
+  .axis { color: #00BCD4; }
+</style>
+
+<table class="rotacoes">
+  <thead>
+    <tr>
+      <th>Notação</th>
+      <th>Eixo da 1ª rotação</th>
+      <th>Eixo da 2ª rotação</th>
+      <th>Eixo da 3ª rotação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="arithmatex">\( x\!-\!y\!-\!x \)</span></td>
+      <td rowspan="4"><span class="arithmatex axis">\( x' \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( y' \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( x\!-\!y\!-\!z \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( x\!-\!z\!-\!x \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( z' \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( x\!-\!z\!-\!y \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( y\!-\!x\!-\!y \)</span></td>
+      <td rowspan="4"><span class="arithmatex axis">\( y' \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( x' \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( y\!-\!x\!-\!z \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( y\!-\!z\!-\!y \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( z' \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( y\!-\!z\!-\!x \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( z\!-\!x\!-\!z \)</span></td>
+      <td rowspan="4"><span class="arithmatex axis">\( z' \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( x' \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( z\!-\!x\!-\!y \)</span></td>
+      <td><span class="arithmatex axis">\( y' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( z\!-\!y\!-\!z \)</span></td>
+      <td rowspan="2"><span class="arithmatex axis">\( y' \)</span></td>
+      <td><span class="arithmatex axis">\( z' \)</span></td>
+    </tr>
+    <tr>
+      <td><span class="arithmatex">\( z\!-\!y\!-\!x \)</span></td>
+      <td><span class="arithmatex axis">\( x' \)</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note que todas as combinações possuem singularidades; a única diferença é o ângulo no qual elas ocorrem:</p>
+<ul>
+<li class="annotate">Quando o eixo da primeira e terceira rotação são iguais (Ângulos de Euler), as singularidades ocorrem quando a segunda rotação é igual a <span class="arithmatex">\(0 \, \text{rad}\)</span>.</li>
+<li class="annotate">Quando o eixo da primeira e terceira rotação são distintos (Ângulos de Tait–Bryan), as singularidades ocorrem quando a segunda rotação é igual a <span class="arithmatex">\(\frac{\pi}{2} \, \text{rad}\)</span>. </li>
+</ul>
+<p class="annotate">Como a posição de equilíbrio do drone ocorre quando a segunda rotação é igual a <span class="arithmatex">\(0 \, \text{rad}\)</span>, utiliza-se a notação em que o eixo da primeira e terceira rotação são distintos (<span class="arithmatex">\(z-y-x\)</span>), também conhecido por <em>yaw</em>, <em>pitch</em> e <em>roll</em>(1).  Assim, a singularidade fica distante de ocorrer (apesar de ainda ser uma possibilidade).</p>
+<ol>
+<li>Guinagem (<span class="arithmatex">\(\psi\)</span> no eixo <span class="arithmatex">\(z\)</span>), inclinação (<span class="arithmatex">\(\theta\)</span> no eixo <span class="arithmatex">\(y\)</span>) e rolagem (<span class="arithmatex">\(\phi\)</span> no eixo <span class="arithmatex">\(x\)</span>)</li>
+</ol>
+<p>Uma alternativa aos ângulos de Euler, que não possuem singularidades, são os quatérnios.</p>
 
 
 

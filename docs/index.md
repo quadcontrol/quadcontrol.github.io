@@ -1,5 +1,82 @@
 ---
 icon: material/home-outline
+title: Home
+description: Master embedded control in a 100% hands-on course that connects theory, programming, and real flight.
+---
+
+# QuadControl
+
+![Crazyflie 2.1 Brushless, top view](images/logo.svg){ width=25% style="display:block;margin:auto" }
+
+Master **embedded control** in a **100% hands-on** course designed to bridge **theory, programming, and real flight**.
+
+---
+
+## The drone as a laboratory
+
+![Crazyflie 2.1 Brushless, top view](images/crazyflie.png){ width=40% style="display:block;margin:auto" }
+
+At QuadControl, the star is the [**Bitcraze Crazyflie 2.1 Brushless**](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank}: an **open-source micro-drone** built for education and research. You’ll design the **entire estimation and control architecture** — from sensors to motors — and watch your algorithms actually fly.
+
+---
+
+## What you’ll learn
+
+<div class="grid cards" markdown>
+
+- :material-school-outline:{ .lg .middle } **Flight fundamentals**
+  
+    ---
+    
+    Key concepts of **aerodynamics** and **rigid-body dynamics**, explained in a clear, intuitive way and applied to a quadcopter.
+
+- :material-memory:{ .lg .middle } **Embedded programming**
+  
+    ---
+    
+    Program an **ARM microcontroller** in **C** using **FreeRTOS** — integrate sensors (IMU, ToF, and optical flow) via **I²C/SPI**, and drive **BLDC motors** through ESCs.
+
+- :material-flask:{ .lg .middle } **Applied control**
+  
+    ---
+    
+    From **PID** and **complementary filters** to **LQR** and **Kalman filtering** — explore classical and modern control techniques tested **in real flight**.
+
+- :material-layers-triple-outline:{ .lg .middle } **Layered architecture**
+  
+    ---
+    
+    Three control levels with distinct strategies: **attitude** (sensor fusion + P–P), **vertical** (1st/2nd-order observers + PD/PID) and **horizontal** (LQE + LQR = LQG).
+
+- :material-hammer-wrench:{ .lg .middle } **100% practical**
+  
+    ---
+    
+    **No simulations** — observe **in real time** how each gain shapes system behavior: stability, overshoot, and response time.
+
+- :material-magnify-scan:{ .lg .middle } **System identification**
+  
+    ---
+    
+    Use **custom test rigs** and jigs that constrain motion to specific axes, enabling precise **identification of physical and aerodynamic parameters**.
+
+</div>
+
+---
+
+## Watch it in action
+
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px">
+  <iframe src="https://www.youtube-nocookie.com/embed/BWKetwaHiyc?si=Z6z0i3ECyBbCU5V8"
+          title="QuadControl demo"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+          allowfullscreen></iframe>
+</div>
+
+
+
+<!-- ---
+icon: material/home-outline
 title: Início
 description: Domine controle embarcado em um curso 100% prático, desenvolvido para conectar teoria, programação e voo real.
 ---
@@ -73,7 +150,7 @@ No QuadControl, o protagonista é o [**Bitcraze Crazyflie 2.1 Brushless**](https
           title="QuadControl demo"
           style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
           allowfullscreen></iframe>
-</div>
+</div> -->
 
 
 <!-- Enquanto os cursos convencionais abordam apenas sistemas lineares de uma entrada e uma saída, quase sempre em ambiente de simulação, aqui você trabalha com um sistema real, não linear e multivariável: o [Bitcraze Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} — um quadricóptero open source voltado para ensino e pesquisa.

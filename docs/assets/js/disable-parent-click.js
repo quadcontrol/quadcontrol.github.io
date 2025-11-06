@@ -2,13 +2,12 @@
 (function () {
   // Edite a lista abaixo com os “pais” que NÃO devem navegar:
   const BLOCK = new Set([
-    "Pré-requisitos",
-    "Interface",
-    "Fundamentos",
-    "Identificação",
-    "Modelagem",
-    "Controle",
-    "Atitude",
+    "Setup",
+    "Fundamentals",
+    "Identification",
+    "Modeling",
+    "Control",
+    "Attitude",
     "Vertical",
     "Horizontal",
     // "Início", // só adicione se quiser bloquear também

@@ -45,43 +45,43 @@ extra_javascript:
   - assets/js/disable-parent-click.js  # Script custom (evitar cliques no pai, etc.)
 
 nav:
-  - Início: index.md
-  - Pré-requisitos:
+  - Home: index.md
+  - Setup:
       - setup/index.md
       - Hardware: setup/hardware.md
       - Software: setup/software.md
       - Firmware: setup/firmware.md
-  - Fundamentos:
-      - foundation/index.md
-      - Aerodinâmica: foundation/aerodynamics.md
-      - Mixer: foundation/mixer.md
-      - Inércia: foundation/inertia.md
-  - Identificação:
+  - Fundamentals:
+      - fundamentals/index.md
+      - Aerodynamics: fundamentals/aerodynamics.md
+      - Mixer: fundamentals/mixer.md
+      - Inertia: fundamentals/inertia.md
+      - Coordinate system: fundamentals/coordinate_system.md  
+  - Identification:
       - identification/index.md
-      - Coeficientes do motor: identification/motor_coefficients.md  
-      - Constante de sustentação: identification/lift_constant.md
-      - Constante de arrasto: identification/drag_constant.md
-  - Modelagem:
+      - Motor coefficients: identification/motor_coefficients.md  
+      - Lift constant: identification/lift_constant.md
+      - Drag constant: identification/drag_constant.md
+  - Modeling:
       - modeling/index.md
-      - Sistema de coordenadas: modeling/coordinate_system.md        
-      - Modelo 2D: modeling/2d_model.md
-      - Modelo 3D: modeling/3d_model.md
-  - Controle:
+      - 2D model: modeling/2d_model.md
+      - 3D model: modeling/3d_model.md
+  - Control:
       - control/index.md
-      - Arquitetura: control/architecture.md
+      - Architecture: control/architecture.md
       # - Referências: control/setpoints.md
       # - Atuadores: control/actuators.md
       # - Sensores: control/sensors.md
       - Mixer: control/mixer.md
-      - Atitude:
+      - Attitude:
           - control/attitude/index.md
-          - Estimador: control/attitude/estimator.md
-          - Controlador: control/attitude/controller.md
+          - Estimator: control/attitude/estimator.md
+          - Controller: control/attitude/controller.md
       - Vertical:
           - control/vertical/index.md
-          - Estimador: control/vertical/estimator.md
-          - Controlador: control/vertical/controller.md
+          - Estimator: control/vertical/estimator.md
+          - Controller: control/vertical/controller.md
       - Horizontal:
           - control/horizontal/index.md
-          - Estimador: control/horizontal/estimator.md
-          - Controlador: control/horizontal/controller.md
+          - Estimator: control/horizontal/estimator.md
+          - Controller: control/horizontal/controller.md

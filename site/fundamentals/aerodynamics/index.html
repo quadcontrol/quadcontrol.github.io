@@ -1487,13 +1487,13 @@
 
 
 <h1 id="aerodynamics"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.56 3.91c.59.59.59 1.54 0 2.12l-3.89 3.89 2.12 9.19-1.41 1.42-3.88-7.43L9.6 17l.36 2.47-1.07 1.06-1.76-3.18-3.19-1.77L5 14.5l2.5.37L11.37 11 3.94 7.09l1.42-1.41 9.19 2.12 3.89-3.89c.56-.58 1.56-.58 2.12 0"/></svg></span> Aerodynamics</h1>
-<p>In this section, you’ll learn the basic aerodynamic principles — the forces that explain how a drone generates lift and moves through the air.</p>
+<p>This section presents basic aerodynamic principles, the forces that explain how a drone generates lift and moves through the air.</p>
 <hr />
 <h2 id="airfoil">Airfoil</h2>
-<p>Every mathematical model of a drone includes aerodynamic parameters. To understand where they come from, let’s begin by examining the aerodynamic forces acting on an airfoil — the building block of any wing or propeller blade.</p>
+<p>Every mathematical model of a drone includes aerodynamic parameters. To understand where they come from, let’s begin by examining the aerodynamic forces acting on an airfoil, the building block of any wing or propeller blade.</p>
 <h3 id="aerodynamic-forces">Aerodynamic forces</h3>
 <p>The figure below shows a cross section of an airfoil, a body shaped to generate lift when placed in an airflow:</p>
-<p><img alt="Airfoil1" src="../images/airfoil1.svg" style="display: block; margin: auto;" width="50%" /></p>
+<p><img alt="" src="../images/airfoil1.svg" style="display: block; margin: auto;" width="50%" /></p>
 <p>While the airfoil is designed to produce a desired lift force <span class="arithmatex">\({\color{var(--c2)}f_l}\)</span> (perpendicular to the velocity <span class="arithmatex">\({\color{var(--c1)}v}\)</span>), it also produces an undesired drag force <span class="arithmatex">\({\color{var(--c2)}f_d}\)</span> (parallel to the velocity <span class="arithmatex">\({\color{var(--c1)}v}\)</span>):</p>
 <div class="arithmatex">\[
 {\color{var(--c2)}f_l} = \frac{1}{2} \rho A C_l {\color{var(--c1)}v}^2 
@@ -1512,46 +1512,61 @@
 <p>The lift and drag coefficients are not constant.  They vary according to three main aerodynamic conditions:</p>
 <ul>
 <li>Angle of attack (<span class="arithmatex">\(\alpha\)</span>): the angle between the airfoil’s mean line (its <em>chord line</em>) and the airflow velocity vector  </li>
-<li>Reynolds number (<span class="arithmatex">\(\frac{\rho v D}{\mu}\)</span>): a dimensionless quantity defining the flow regime (laminar or turbulent)  </li>
-<li>Mach number (<span class="arithmatex">\(\frac{\color{var(--c1)}v}{v_s}\)</span>): the ratio between the airspeed and the speed of sound, which defines whether the flow is subsonic, supersonic, or hypersonic  </li>
-</ul>
-<p class="annotate">For airfoils operating at subsonic speeds(1), the angle of attack <span class="arithmatex">\(\alpha\)</span> is the dominant factor:</p>
+<li>
+<p class="annotate">Reynolds number (<span class="arithmatex">\(Re = \frac{\rho {\color{var(--c1)}v} D}{\mu}\)</span>): a dimensionless quantity defining the flow regime, which can be laminar(1) or turbulent(2)<br /></p>
 <ol>
-<li><span class="arithmatex">\({\color{var(--c1)}v}&lt;1.000\, km/h\)</span></li>
+<li><span class="arithmatex">\(Re&lt;2300\)</span></li>
+<li><span class="arithmatex">\(Re&gt;4000\)</span></li>
 </ol>
-<p><img alt="Airfoil2" src="../images/airfoil2.svg" style="display: block; margin: auto;" width="50%" /></p>
+</li>
+<li>
+<p class="annotate">Mach number (<span class="arithmatex">\(M = \frac{\color{var(--c1)}v}{v_s}\)</span>): the ratio between the airspeed and the speed of sound, which defines whether the flow is subsonic(1), supersonic(2) or hypersonic(3)</p>
+<ol>
+<li><span class="arithmatex">\(M&lt;1\)</span></li>
+<li><span class="arithmatex">\(1&lt;M&lt;5\)</span></li>
+<li><span class="arithmatex">\(M&gt;5\)</span></li>
+</ol>
+</li>
+</ul>
+<p>For airfoils operating in laminar flow at subsonic speeds, the angle of attack is the dominant factor:</p>
+<p><img alt="" src="../images/airfoil2.svg" style="display: block; margin: auto;" width="50%" /></p>
 <p class="annotate">There are many possible airfoil shapes. One of the most widely used profiles is the Clark Y, whose lift and drag coefficients as functions of the angle of attack are well known and shown below(1):</p>
 <ol>
-<li>Assuming the Reynolds and Mach numbers remain within typical subsonic ranges.</li>
+<li>Assuming the Reynolds and Mach numbers remain within typical laminar subsonic ranges.</li>
 </ol>
-<p><img alt="ClarkY" src="../images/clarky.svg" style="display: block; margin: auto;" width="80%" /></p>
-<p>While the drag coefficient increases monotonically with <span class="arithmatex">\(\alpha\)</span>, the lift coefficient reaches a maximum around <span class="arithmatex">\(\alpha = 18^{\circ}\)</span>. This point is known as the stall, which occurs when the airflow separates from the wing’s upper surface, creating turbulence and loss of lift. Note also that the lift coefficient is zero for a small negative angle (<span class="arithmatex">\(\alpha = -5^{\circ}\)</span>) and becomes negative below that.</p>
+<p><img alt="" src="../images/clarky.svg" style="display: block; margin: auto;" width="80%" /></p>
+<p>While the drag coefficient increases monotonically with <span class="arithmatex">\(\alpha\)</span>, the lift coefficient reaches a maximum around <span class="arithmatex">\(\alpha = 18^{\circ}\)</span>. This point is known as the stall, which occurs when the airflow separates from the wing’s upper surface, creating turbulence and loss of lift. Note also that the lift coefficient is zero for a small negative angle and becomes negative only below that.</p>
 <p><a id="exercise-1"></a></p>
 <div class="admonition question">
 <p class="admonition-title">Exercise 1</p>
 <p>To consolidate these concepts, consider a fixed-wing drone (flying wing) using Clark Y airfoils, flying in level cruise with the following parameters:</p>
+<p><img align="right" alt="" src="images/fixed_wind_drone.svg" style="display: block; margin: auto;" width="30%" /> </p>
 <ul>
 <li>Mass: <span class="arithmatex">\(m = 40~\text{g}\)</span>  </li>
 <li>Length: <span class="arithmatex">\(l = 10~\text{cm}\)</span>  </li>
 <li>Wing span: <span class="arithmatex">\(b = 10~\text{cm}\)</span>  </li>
-<li>Propeller efficiency: <span class="arithmatex">\(\eta = 60~\%\)</span>  </li>
+<li>Propeller efficiency: <span class="arithmatex">\(\eta_p = 60~\%\)</span></li>
+<li>Motor efficiency: <span class="arithmatex">\(\eta_m = 75~\%\)</span>  </li>
+<li>ESC efficiency: <span class="arithmatex">\(\eta_e = 95~\%\)</span>  </li>
+<li>Battery efficiency: <span class="arithmatex">\(\eta_b = 95~\%\)</span>  </li>
 <li>Battery voltage: <span class="arithmatex">\(e_s = 3.7~\text{V}\)</span>  </li>
 <li>Battery capacity: <span class="arithmatex">\(q_s = 350~\text{mAh}\)</span>  </li>
 <li>Gravitational acceleration: <span class="arithmatex">\(g = 9.81~\text{m/s}^2\)</span>  </li>
-<li>Air density: <span class="arithmatex">\(\rho = 1.225~\text{kg·m}^{-3}\)</span>  </li>
+<li>Air density: <span class="arithmatex">\(\rho = 1.225~\text{kg.m}^{-3}\)</span> </li>
 </ul>
 <details class="info">
 <summary>a) Draw the free-body diagram of the forces acting on the drone.</summary>
+<p><img alt="" src="images/fixed_wind_drone_fbl.svg" style="display: block; margin: auto;" width="50%" /></p>
 </details>
 <details class="info">
 <summary>b) Compute the total wing area assuming the body is triangular.</summary>
 <p>Given that it is a flying-wing drone, the wing area can be approximated as a triangle with a base equal to the wing span and a height equal to the length of the drone:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     A &amp;= \frac{b \cdot l}{2} \\
     A &amp;= \frac{10 \cdot 10}{2} \\
     A &amp;= 50~\text{cm}^2
-\end{align*}
+\end{align}
 \]</div>
 </details>
 <details class="info">
@@ -1570,71 +1585,74 @@
 <summary>d) Compute the drone’s cruise speed.</summary>
 <p>In level cruise, the net vertical force is zero, allowing us to compute the cruising velocity:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     \sum {\color{var(--c2)}f_y} &amp;= 0 \\
     {\color{var(--c2)}f_l} - {\color{var(--c2)}f_w} &amp;= 0 \\
     \frac{1}{2} \rho A C_l {\color{var(--c1)}v}^2 - mg &amp;= 0 \\
     {\color{var(--c1)}v} &amp;= \sqrt{\frac{2mg}{\rho A C_l}} \\
     {\color{var(--c1)}v} &amp;= \sqrt{\frac{2 \cdot 0.04 \cdot 9.81}{1.225 \cdot 50 \times 10^{-4} \cdot 0.35}} \\
     {\color{var(--c1)}v} &amp;= 19.13~\text{m/s} \quad (\approx 69~\text{km/h})
-\end{align*}
+\end{align}
 \]</div>
 </details>
 <details class="info">
 <summary>e) Compute the thrust generated by the propellers.</summary>
 <p>In level cruise, the net horizontal force is zero, which allows us to compute the thrust force:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     \sum {\color{var(--c2)}f_x} &amp;= 0 \\
     {\color{var(--c2)}f_t} - {\color{var(--c2)}f_d} &amp;= 0 \\
     {\color{var(--c2)}f_t} &amp;= \frac{1}{2} \rho A C_d {\color{var(--c1)}v}^2 \\
     {\color{var(--c2)}f_t} &amp;= \frac{1}{2} \cdot 1.225 \cdot 50 \times 10^{-4} \cdot 0.02 \cdot {\color{var(--c1)}19.13}^2 \\
-    {\color{var(--c2)}f_t} &amp;= 0.0224~\text{N}
-\end{align*}
+    {\color{var(--c2)}f_t} &amp;= 2.24 \times 10^{-2}~\text{N}
+\end{align}
 \]</div>
 </details>
 <details class="info">
 <summary>f) Calculate the mechanical and electrical power required.</summary>
 <p>Mechanical power is given by the product of thrust and velocity:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     P_m &amp;= {\color{var(--c2)}f_t} {\color{var(--c1)}v} \\
-    P_m &amp;= {\color{var(--c2)}0.0224} \cdot {\color{var(--c1)}19.13} \\
-    P_m &amp;= 0.429~\text{W}
-\end{align*}
+    P_m &amp;= {\color{var(--c2)}2.24 \times 10^{-2}} \cdot {\color{var(--c1)}19.13} \\
+    P_m &amp;= 0.43~\text{W}
+\end{align}
 \]</div>
 <p>The electrical power accounts for the propulsion system efficiency:</p>
 <div class="arithmatex">\[
-\begin{align*}
-    P_e &amp;= \frac{P_m}{\eta} \\
-    P_e &amp;= \frac{0.429}{0.6} \\
-    P_e &amp;= 0.715~\text{W}
-\end{align*}
+\begin{align}
+    P_e &amp;= \frac{P_m}{\eta_p \eta_m \eta_e \eta_b} \\
+    P_e &amp;= \frac{0.43}{0.6 \cdot 0.75 \cdot 0.95 \cdot 0.95} \\
+    P_e &amp;= 1.06~\text{W}
+\end{align}
 \]</div>
 </details>
 <details class="info">
 <summary>g) Estimate how long the drone can stay airborne.</summary>
 <p>The total energy stored in the battery is given by the product of its voltage and capacity:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     E_s &amp;= e_s q_s \\
     E_s &amp;= 3.7 \cdot 0.35 \\
-    E_s &amp;= 1.295~\text{Wh}
-\end{align*}
+    E_s &amp;= 1.3~\text{Wh}
+\end{align}
 \]</div>
 <p>Dividing this energy by the electrical power consumption gives an estimate of the flight time:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     \Delta t &amp;= \frac{E_s}{P_e} \\
-    \Delta t &amp;= \frac{1.295 \cdot 3600}{0.715} \\
-    \Delta t &amp;= 6519~\text{s} \quad (\approx 1~\text{h}49~\text{min})
-\end{align*}
+    \Delta t &amp;= \frac{1.3 \cdot 3600}{1.06} \\
+    \Delta t &amp;= 4413~\text{s} \quad (\approx 1~\text{h}~14~\text{min})
+\end{align}
 \]</div>
 </details>
 </div>
 <hr />
 <h2 id="propeller">Propeller</h2>
-<p>A propeller consists of <span class="arithmatex">\(n\)</span> blades, each of which can be treated as an individual airfoil.</p>
+<p class="annotate">A propeller consists of <span class="arithmatex">\(n\)</span> blades(1), each of which can be treated as an individual airfoil.</p>
+<ol>
+<li>Typically 2–4 blades, though certain applications may use 5–6.</li>
+</ol>
 <h3 id="aerodynamic-forces-and-torques">Aerodynamic forces and torques</h3>
 <p>As the propeller spins, each blade generates lift and drag forces, as illustrated below:</p>
 <p><img alt="Propeller1" src="../images/propeller1.svg" style="display: block; margin: auto;" width="50%" /></p>
@@ -1650,19 +1668,19 @@
 <summary>Answer</summary>
 <p>Starting from the general lift equation and substituting <span class="arithmatex">\({\color{var(--c1)}v} = {\color{var(--c1)}\omega} d\)</span> gives:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     {\color{var(--c2)}f_l} &amp;= \frac{1}{2} \rho A C_l {\color{var(--c1)}v}^2 \\ 
     {\color{var(--c2)}f_l} &amp;= \frac{1}{2} \rho A C_l ({\color{var(--c1)}\omega} d)^2 \\
     {\color{var(--c2)}f_l} &amp;= \frac{1}{2} \rho A C_l d^2 {\color{var(--c1)}\omega}^2 
-\end{align*}
+\end{align}
 \]</div>
 <p>Repeating the same procedure for the drag force yields:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     {\color{var(--c2)}f_d} &amp;= \frac{1}{2} \rho A C_d {\color{var(--c1)}v}^2 \\ 
     {\color{var(--c2)}f_d} &amp;= \frac{1}{2} \rho A C_d ({\color{var(--c1)}\omega} d)^2 \\
     {\color{var(--c2)}f_d} &amp;= \frac{1}{2} \rho A C_d d^2 {\color{var(--c1)}\omega}^2 
-\end{align*}
+\end{align}
 \]</div>
 </details>
 </div>
@@ -1673,29 +1691,29 @@
 <p>Determine the thrust force <span class="arithmatex">\({\color{var(--c2)}f}\)</span> and drag torque <span class="arithmatex">\({\color{var(--c2)}\tau}\)</span> of the propeller.</p>
 <details class="info">
 <summary>Answer</summary>
-<p>The thrust force <span class="arithmatex">\({\color{var(--c2)}f}\)</span> of the propeller is simply the sum of each blade lift force:</p>
+<p>The thrust force <span class="arithmatex">\({\color{var(--c2)}f}\)</span> of the propeller is simply the sum of each blade lift force <span class="arithmatex">\({\color{var(--c2)}f_l}\)</span>:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     {\color{var(--c2)}f} &amp;= 2 {\color{var(--c2)}f_l} \\ 
     {\color{var(--c2)}f} &amp;= \cancel{2} \left( \frac{1}{\cancel{2}} \rho A C_l d^2 {\color{var(--c1)}\omega}^2 \right) \\
     {\color{var(--c2)}f} &amp;= \rho A C_l d^2 {\color{var(--c1)}\omega}^2 
-\end{align*}
+\end{align}
 \]</div>
-<p>Whereas the drag torque is the sum of each blade drag force multiplied by its arm:</p>
+<p>Whereas the drag torque <span class="arithmatex">\({\color{var(--c2)}\tau}\)</span> is the sum of each blade drag force <span class="arithmatex">\({\color{var(--c2)}f_d}\)</span> multiplied by its arm <span class="arithmatex">\(d\)</span>:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     {\color{var(--c2)}\tau} &amp;= 2 {\color{var(--c2)}f_d} d \\ 
     {\color{var(--c2)}\tau} &amp;= \cancel{2} \left( \frac{1}{\cancel{2}} \rho A C_d d^2 {\color{var(--c1)}\omega}^2  \right) d \\
-    {\color{var(--c2)}\tau} &amp;= \rho A C_l d^3 {\color{var(--c1)}\omega}^2 
-\end{align*}
+    {\color{var(--c2)}\tau} &amp;= \rho A C_d d^3 {\color{var(--c1)}\omega}^2 
+\end{align}
 \]</div>
 </details>
 </div>
-<p>Since all other parameters are constant, the thrust and drag torque depend only on the square of the angular speed:</p>
+<p>Since all other parameters are constant, the thrust and drag torque depend only on the square of the angular velocity:</p>
 <div class="arithmatex">\[
 {\color{var(--c2)}f} = \underbrace{\rho A C_l d^2}_{k_l} {\color{var(--c1)}\omega}^2 
 \qquad \qquad
-{\color{var(--c2)}\tau} = \underbrace{\rho A C_l d^3}_{k_d} {\color{var(--c1)}\omega}^2 
+{\color{var(--c2)}\tau} = \underbrace{\rho A C_d d^3}_{k_d} {\color{var(--c1)}\omega}^2 
 \]</div>
 <p>Where:</p>
 <ul>
@@ -1712,29 +1730,51 @@
 \]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercise 4</p>
-<p class="annotate">Using a ruler, roughly estimate(1) the aerodynamic constants of the Bitcraze Crazyflie 2.1 brushless propellers. Assume the blade shape resembles a Clark Y profile with an angle of attack <span class="arithmatex">\(\alpha = 5^\circ\)</span>, where the lift coefficient is similar, but the drag coefficient is ten times larger(2).</p>
+<p><img align="right" alt="" src="../images/crazyflie_propellers.png" style="display: block; margin: auto;" width="20%" /> </p>
+<p class="annotate">Using a ruler, roughly estimate(1) the aerodynamic constants of the <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">Bitcraze Crazyflie 2.1 brushless propellers</a>. Assume the blade shape resembles a Clark Y profile with an angle of attack <span class="arithmatex">\(\alpha = 5^\circ\)</span>, where the lift coefficient is similar, but the drag coefficient is eight times larger(2).</p>
 <ol>
 <li>We are interested only in the order of magnitude.  </li>
 <li>Due to additional turbulence generated by the propeller.</li>
 </ol>
 <details class="info">
 <summary>Answer</summary>
+<p>The air density can be assumed as:</p>
+<div class="arithmatex">\[
+\rho = 1.225~\text{kg/m}^3
+\]</div>
+<p>The surface area can be estimated with a ruler assuming each blade is a rectangle:</p>
+<p><img alt="" src="../images/crazyflie_propeller_dimension_1.png" style="display: block; margin: auto;" width="50%" /></p>
+<div class="arithmatex">\[
+A = 2.5 \cdot 0.5 = 1.25~\text{cm}^2 \\    
+\]</div>
+<p>The coefficients can be determined from the Clark Y airfoil graph with an angle of attack <span class="arithmatex">\(\alpha = 5^\circ\)</span>:</p>
 <div class="arithmatex">\[
 \left\{
-\begin{align*}
-    \rho &amp;= 1.225\,kg/m^3 \\
-    A &amp;= 2.5 \times 0.5 = 1.25\,cm^2 \\
-    d &amp;= 1.5\,cm \\
-    C_l &amp;= 0.7 \\
-    C_d &amp;= 0.04 \times 10 = 0.4
-\end{align*}
+\begin{array}{l}
+    C_l = 0.7 \\
+    C_d = 0.04 \cdot 8 = 0.32
+\end{array}
 \right.
 \]</div>
+<p>The  distance from the pressure center to the rotation axis can be estimated with a ruler:</p>
+<p><img alt="" src="../images/crazyflie_propeller_dimension_2.png" style="display: block; margin: auto;" width="40%" /></p>
 <div class="arithmatex">\[
-k_l = 1.225 (1.25\times10^{-4}) (0.7) (1.5\times10^{-2})^2 = 2.41\times10^{-8}\,N·s^2/rad^2
+    d = 1.5~\text{cm}
+\]</div>
+<p>With all those values, the lift and drag constants can be determined:</p>
+<div class="arithmatex">\[
+\begin{align}
+k_l &amp;= \rho A C_l d^2 \\
+k_l &amp;= 1.225 \cdot 1.25\times10^{-4} \cdot 0.7 \cdot {\left( 1.5\times10^{-2} \right)}^2 \\
+k_l &amp;= 2.41\times10^{-8}~\text{N.s}^2/\text{rad}^2
+\end{align}
 \]</div>
 <div class="arithmatex">\[
-k_d = 1.225 (1.25\times10^{-4}) (0.4) (1.5\times10^{-2})^3 = 2.07\times10^{-10}\,N·m·s^2/rad^2
+\begin{align}
+k_d &amp;= \rho A C_d d^3 \\
+k_d &amp;= 1.225 \cdot 1.25\times10^{-4} \cdot 0.32 \cdot {\left( 1.5\times10^{-2} \right)}^3 \\
+k_d &amp;= 1.65\times10^{-10}~\text{N.m.s}^2/\text{rad}^2
+\end{align}
 \]</div>
 </details>
 </div>
@@ -1744,9 +1784,11 @@ k_d = 1.225 (1.25\times10^{-4}) (0.4) (1.5\times10^{-2})^3 = 2.07\times10^{-10}\
 <p>To consolidate these ideas, consider a quadrotor drone hovering in place with the following parameters:</p>
 <ul>
 <li>Mass: <span class="arithmatex">\(m = 40~\text{g}\)</span>  </li>
-<li>Lift constant: <span class="arithmatex">\(k_l = 2.0\times10^{-8}~\text{N·s}^2\text{/rad}^2\)</span>  </li>
-<li>Drag constant: <span class="arithmatex">\(k_d = 2.0\times10^{-10}~\text{N·m·s}^2\text{/rad}^2\)</span>  </li>
-<li>Motor efficiency: <span class="arithmatex">\(\eta = 90~\%\)</span>  </li>
+<li>Lift constant: <span class="arithmatex">\(k_l = 2.4\times10^{-8}~\text{N·s}^2\text{/rad}^2\)</span>  </li>
+<li>Drag constant: <span class="arithmatex">\(k_d = 1.6\times10^{-10}~\text{N·m·s}^2\text{/rad}^2\)</span>  </li>
+<li>Motor efficiency: <span class="arithmatex">\(\eta_m = 75~\%\)</span></li>
+<li>ESC efficiency: <span class="arithmatex">\(\eta_e = 95~\%\)</span></li>
+<li>Battery efficiency: <span class="arithmatex">\(\eta_b = 95~\%\)</span>  </li>
 <li>Battery voltage: <span class="arithmatex">\(e_s = 3.7~\text{V}\)</span>  </li>
 <li>Battery capacity: <span class="arithmatex">\(q_s = 350~\text{mAh}\)</span>  </li>
 <li>Gravitational acceleration: <span class="arithmatex">\(g = 9.81~\text{m/s}^2\)</span>  </li>
@@ -1756,34 +1798,73 @@ k_d = 1.225 (1.25\times10^{-4}) (0.4) (1.5\times10^{-2})^3 = 2.07\times10^{-10}\
 <summary>a) Draw the free-body diagram of the forces acting on the drone.</summary>
 </details>
 <details class="info">
-<summary>b) Compute the angular speed of the propellers.</summary>
+<summary>b) Compute the angular velocity of the propellers.</summary>
+<p>In hover, the net vertical force is zero, allowing us to compute the angular velocity of the propellers:</p>
 <div class="arithmatex">\[
-\omega = \sqrt{\frac{mg}{4k_l}} = \sqrt{\frac{0.04\cdot9.81}{4(2.0\times10^{-8})}} = 2215\text{ rad/s} \approx 21,150\text{ rpm}
+\begin{align}
+    \sum {\color{var(--c2)}f_y} &amp;= 0 \\
+    4 {\color{var(--c2)}f} - {\color{var(--c2)}f_w} &amp;= 0 \\
+    4 k_l {\color{var(--c1)}\omega}^2 - mg &amp;= 0 \\
+    {\color{var(--c1)}\omega} &amp;= \sqrt{\frac{mg}{4k_l}} \\
+    {\color{var(--c1)}\omega} &amp;= \sqrt{\frac{0.04\cdot9.81}{4 \cdot 2.6\times10^{-8}}} \\
+    {\color{var(--c1)}\omega} &amp;= 2022~\text{rad/s} \quad (\approx 19306~\text{rpm})
+\end{align}
 \]</div>
 </details>
 <details class="info">
-<summary>c) Compute the torque per motor.</summary>
+<summary>c) Compute each motor torque.</summary>
+<p>Since the angular velocity of the motors is constant, their net torque is zero, which allows us to compute the motor torque:</p>
 <div class="arithmatex">\[
-\tau_m = k_d \omega^2 = 2.0\times10^{-10} (2215)^2 = 9.81\times10^{-4}\text{ N·m}
+\begin{align}
+    \sum {\color{var(--c2)}\tau_z} &amp;= 0 \\
+    {\color{var(--c2)}\tau_m} - {\color{var(--c2)}\tau} &amp;= 0 \\
+    {\color{var(--c2)}\tau_m} - k_d {\color{var(--c1)}\omega}^2 &amp;= 0 \\
+    {\color{var(--c2)}\tau_m} &amp;= k_d {\color{var(--c1)}\omega}^2 \\
+    {\color{var(--c2)}\tau_m} &amp;= 1.4\times10^{-10} \cdot {\color{var(--c1)}2022}^2 \\
+    {\color{var(--c2)}\tau_m} &amp;= 6.54\times10^{-4}\text{ N·m}
+\end{align}
 \]</div>
 </details>
 <details class="info">
-<summary>d) Compute the power consumption.</summary>
+<summary>d) Calculate the mechanical and electrical power required.</summary>
+<p>Mechanical power is given by the product of torque and angular velocity times the number of motors:</p>
 <div class="arithmatex">\[
-P_m = 4 \tau_m \omega = 4 (9.81\times10^{-4})(2215) = 8.69\text{ W}
-$$
-$$
-P_e = \frac{P_m}{\eta} = \frac{8.69}{0.9} = 9.66\text{ W}
+\begin{align}
+    P_m &amp;= 4 {\color{var(--c2)}\tau} {\color{var(--c1)}\omega} \\
+    P_m &amp;= 4 \cdot {\color{var(--c2)}6.54\times10^{-4}} \cdot {\color{var(--c1)}2022} \\
+    P_m &amp;= 5.29~\text{W}
+\end{align}
+\]</div>
+<p>The electrical power accounts for the propulsion system efficiency:</p>
+<div class="arithmatex">\[
+\begin{align}
+    P_e &amp;= \frac{P_m}{\eta_b \eta_e \eta_m} \\
+    P_e &amp;= \frac{5.29}{0.95 \cdot 0.95 \cdot 0.7} \\
+    P_e &amp;= 7.81~\text{W}
+\end{align}
 \]</div>
 </details>
 <details class="info">
-<summary>e) Estimate how long the drone can hover.</summary>
+<summary>e) Estimate how long the drone can stay airborne.</summary>
+<p>The total energy stored in the battery is given by the product of its voltage and capacity:</p>
 <div class="arithmatex">\[
-\Delta t = \frac{e_s i_s}{P_e} = \frac{3.7 (0.35 \times 3600)}{9.66} = 483\text{ s} \approx 8\text{ min}
+\begin{align}
+    E_s &amp;= e_s q_s \\
+    E_s &amp;= 3.7 \cdot 0.35 \\
+    E_s &amp;= 1.30~\text{Wh}
+\end{align}
+\]</div>
+<p>Dividing this energy by the electrical power consumption gives an estimate of the flight time:</p>
+<div class="arithmatex">\[
+\begin{align}
+    \Delta t &amp;= \frac{E_s}{P_e} \\
+    \Delta t &amp;= \frac{1.30 \cdot 3600}{7.81} \\
+    \Delta t &amp;= 597~\text{s} \quad (\approx 10~\text{min})
+\end{align}
 \]</div>
 </details>
 </div>
-<p>Compare this result with the fixed-wing drone from <a href="#exercise-1">Exercise 1</a>. Notice how the fixed-wing configuration can stay airborne nearly ten times longer, though it cannot hover or perform vertical take-off and landing like a multirotor drone. Those are the advantages and disavantages of each configuration</p>
+<p>Compare this result with the fixed-wing drone from <a href="#exercise-1">Exercise 1</a>. Notice how the fixed-wing configuration can stay airborne nearly eight times longer, though it cannot hover or perform vertical take-off and landing like a multirotor drone. Those are the advantages and disavantages of each configuration</p>
 <!-- ---
 title: Aerodinâmica
 icon: material/airplane
@@ -1855,71 +1936,71 @@ Enquanto o coeficiente de arrasto só aumenta com o ângulo de ataque, o coefici
 
     ??? info "b) Determine a área total das asas do drone assumindo que seu corpo é triangular"
         $$
-        \begin{align*}
+        \begin{align}
             A &= \frac{10 \cdot 10}{2} \\
             A &= 50 \text{cm}^2
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "c) Determine os coeficientes de arrasto e sustentação das asas do drone"
         $$
-        \begin{align*}
+        \begin{align}
             C_l &= 0,35 \\
             C_d &= 0,02
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "d) Determine a velocidade do drone"
         $$
-        \begin{align*}
+        \begin{align}
             \sum f_y &= 0 \\
             f_l - f_p &= 0 \\
             \frac{1}{2} \rho A C_l v^2 - mg &= 0 \\
             v &= \sqrt{\frac{2mg}{\rho AC_l}} \\
             v &= \sqrt{\frac{2 \cdot 0,04 \cdot 9,81}{1,225 \cdot 50 \times 10^{-4} \cdot 0,35}} \\
             v &= 19,13 \text{m/s} \quad (\approx 69\text{km/h})
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "e) Determine a força de empuxo dos propulsores do drone"
         $$
-        \begin{align*}
+        \begin{align}
             \sum f_x &= 0 \\
             f_e - f_d &= 0 \\
             f_e - \frac{1}{2} \rho A C_d v^2  &= 0 \\
             f_e &= \frac{1}{2} \rho A C_d v^2 \\
             f_e &= \frac{1}{2} 1,225 \cdot 50 \times 10^{-4} \cdot 0,02 \cdot 19,13^2 \\
             f_e &= 0,0224 \text{N}
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "f) Determine o consumo energético do drone"
         $$
-        \begin{align*}
+        \begin{align}
             P_m &= f_e v \\
             P_m &= 0,0224 \cdot 19,13 \\
             P_m &= 0,429 \text{W}
-        \end{align*}
+        \end{align}
         $$
 
         $$
-        \begin{align*}
+        \begin{align}
             \eta &= \frac{P_m}{P_e} \\
             P_e &= \frac{P_m}{\eta} \\
             P_e &= \frac{0,429}{0,6} \\
             P_e &= 0,715 \text{W}
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "g) Determine quanto tempo que o drone consegue permanecer no ar"
         $$
-        \begin{align*}
+        \begin{align}
             E &= P_e \Delta t \\
             e_s i_s &= P_e \Delta t \\
             \Delta t &= \frac{e_s i_s}{P_e} \\
             \Delta t &= \frac{3,7 \cdot ( 0,35 \cdot 3600)}{0,715} \\
             \Delta t &= 6.519 \text{s} \quad (\approx 1\text{h}49\text{min})
-        \end{align*}
+        \end{align}
         $$
 
 ---
@@ -1943,19 +2024,19 @@ Onde:
     Determine as forças de sustentação ${\color{var(--c2)}f_l}$ e arrasto ${\color{var(--c2)}f_d}$ nas pás da hélice em função de sua velocidade angular ${\color{var(--c1)}\omega}$
     ??? info "Resposta"
         $$
-        \begin{align*}
+        \begin{align}
             f_l &= \frac{1}{2} \rho A C_l v^2 \\ 
             f_l &= \frac{1}{2} \rho A C_l (\omega d )^2 \\
             f_l &= \frac{1}{2} \rho A C_l d^2 \omega^2 
-        \end{align*}
+        \end{align}
         $$
 
         $$
-        \begin{align*}
+        \begin{align}
             f_d &= \frac{1}{2} \rho A C_d v^2 \\ 
             f_d &= \frac{1}{2} \rho A C_d (\omega d )^2 \\
             f_d &= \frac{1}{2} \rho A C_d d^2 \omega^2 
-        \end{align*}
+        \end{align}
         $$
 
 As forças de sustentação e arrasto em cada uma das pás podem ser representadas por uma única força de sustentação e torque de arrasto da hélice, conforme a figura abaixo.
@@ -1966,19 +2047,19 @@ As forças de sustentação e arrasto em cada uma das pás podem ser representad
     Determine a força de sustentação ${\color{var(--c2)}f}$ e torque de arrasto ${\color{var(--c2)}\tau}$ da hélice
     ??? info "Resposta"
         $$
-        \begin{align*}
+        \begin{align}
             f &= 2 f_l \\
             f &= 2 \left( \frac{1}{2} \rho A C_l d^2 \omega^2  \right) \\
             f &= \rho A C_l d^2 \omega^2 
-        \end{align*}
+        \end{align}
         $$
 
         $$
-        \begin{align*}
+        \begin{align}
             \tau &= 2 \left( d f_d \right) \\ 
             \tau &= 2 \left( d \left( \frac{1}{2} \rho A C_d d^2 \omega^2 \right) \right) \\
             \tau &= \rho A C_d d^3 \omega^2 
-        \end{align*}
+        \end{align}
         $$
 
 Como todos os parâmetros são constantes e apenas a velocidade angular ${\color{var(--c1)}\omega}$ varia, a força de sustentação e torque de arrasto de uma hélice podem ser simplificados por:
@@ -2016,30 +2097,30 @@ $$
     ??? info "Resposta"
         $$
         \left\{
-            \begin{align*}
+            \begin{align}
                 \rho &= 1,225 kg/m^3 \\
                 A &= 2,5 \cdot 0,5 = 1,25 cm^2 \\
                 d &= 1,5 cm \\
                 C_l &= 0,7 \\
                 C_d &= 0,04 \cdot 10 = 0,4 
-            \end{align*}
+            \end{align}
         \right.
         $$
 
         $$
-        \begin{align*}
+        \begin{align}
             k_l &= \rho A C_l d^2\\
             k_l &= 1,225 \cdot (1,25 \cdot 10^{-4}) \cdot 0,7 \cdot (1,5 \times 10^{-2})^2 \\
             k_l &= 2,41 \times10^{-8} \text{N.s}^2\text{/rad}^2
-        \end{align*}
+        \end{align}
         $$
 
         $$
-        \begin{align*}
+        \begin{align}
             k_d &= \rho A C_d d^3 \\
             k_d &= 1,225 \cdot (1,25 \cdot 10^{-4}) \cdot 0,4 \cdot (1,5 \times 10^{-2})^3 \\
             k_d &= 2,07 \times10^{-10} \text{N.m.s}^2\text{/rad}^2
-        \end{align*}
+        \end{align}
         $$
 
 Esses dois parâmetros serão determinados experimentalmente ([$k_l$](../identification/lift_constant.md) e [$k_d$](../identification/drag_constant.md)), e você verá que a chegará em valores muito próximos aos estimados acima.
@@ -2058,55 +2139,55 @@ Esses dois parâmetros serão determinados experimentalmente ([$k_l$](../identif
 
     ??? info "b) Determine a velocidade angular das hélices do drone"
         $$
-        \begin{align*}
+        \begin{align}
             \sum f_y &= 0 \\
             4 f - f_w &= 0 \\
             4 k_l \omega^2 - mg &= 0 \\
             \omega &= \sqrt{\frac{mg}{4 k_l}} \\
             \omega &= \sqrt{\frac{0,04 \cdot 9,81}{4 \cdot (2,0\times10^{-8})}} \\
             \omega &= 2.215 \text{rad/s} \quad (\approx 21.149\text{rpm})
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "c) Determine o torque dos motores do drone"
         $$
-        \begin{align*}
+        \begin{align}
             \sum \tau &= 0 \\
             \tau_m - \tau_d &= 0 \\
             \tau_m - k_d \omega^2 &= 0 \\
             \tau_m &= k_d \omega^2 \\
             \tau_m &= 2,0 \times 10 ^{-10} \cdot 2215^2 \\
             \tau_m &= 0,000981 \text{N.m} \\
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "d) Determine o consumo energético do drone"
         $$
-        \begin{align*}
+        \begin{align}
             P_m &= 4 \tau_m \omega \\
             P_m &= 4 \cdot 0,000981 \cdot 2215 \\
             P_m &= 8,69 \text{W}
-        \end{align*}   
+        \end{align}   
         $$
 
         $$
-        \begin{align*}
+        \begin{align}
             \eta &= \frac{P_m}{P_e} \\
             P_e &= \frac{P_m}{\eta} \\
             P_e &= \frac{8,69}{0,9} \\
             P_e &= 9,66 \text{W}
-        \end{align*}
+        \end{align}
         $$
 
     ??? info "e) Determine quanto tempo que o drone consegue permanecer no ar"
         $$
-        \begin{align*}
+        \begin{align}
             E &= P_e \Delta t \\
             e_s i_s &= P_e \Delta t \\
             \Delta t &= \frac{e_s i_s}{P_e} \\
             \Delta t &= \frac{3,7 (\cdot 0,35 \cdot 3600)}{9,66} \\
             \Delta t &= 483\text{s} \quad (\approx 8\text{min})
-        \end{align*}
+        \end{align}
         $$
 
 Compare este resultado, do drone multi rotor, com o anterior, do drone de asas fixa. Note como o drone de asa fixa consegue permanecer muito mais tempo no ar (>10x), com a desvatagem de não conseguir permanecer parado e nem decolar/pousar na vertical como um drone multi-rotor. -->

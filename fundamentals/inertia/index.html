@@ -22,7 +22,7 @@
     
     
       
-        <title>Inércia - QuadControl</title>
+        <title>Inertia - QuadControl</title>
       
     
     
@@ -59,7 +59,7 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Inércia - QuadControl" >
+        <meta  property="og:title"  content="Inertia - QuadControl" >
       
         <meta  property="og:description"  content="None" >
       
@@ -75,7 +75,7 @@
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Inércia - QuadControl" >
+        <meta  name="twitter:title"  content="Inertia - QuadControl" >
       
         <meta  name="twitter:description"  content="None" >
       
@@ -102,7 +102,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#inercia" class="md-skip">
+        <a href="#inertia" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inércia
+              Inertia
             
           </span>
         </div>
@@ -540,18 +540,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#massa" class="md-nav__link">
+  <a href="#mass" class="md-nav__link">
     <span class="md-ellipsis">
-      Massa
+      Mass
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#momento-de-inercia" class="md-nav__link">
+  <a href="#moment-of-inertia" class="md-nav__link">
     <span class="md-ellipsis">
-      Momento de Inércia
+      Moment of Inertia
     </span>
   </a>
   
@@ -691,14 +691,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/lift_constant/" class="md-nav__link">
+      <a href="../../identification/thrust_constant/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v8h4v2H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Lift constant
+    Thrust constant
     
   </span>
   
@@ -1357,18 +1357,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#massa" class="md-nav__link">
+  <a href="#mass" class="md-nav__link">
     <span class="md-ellipsis">
-      Massa
+      Mass
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#momento-de-inercia" class="md-nav__link">
+  <a href="#moment-of-inertia" class="md-nav__link">
     <span class="md-ellipsis">
-      Momento de Inércia
+      Moment of Inertia
     </span>
   </a>
   
@@ -1390,113 +1390,289 @@
 
 
 
-<h1 id="inercia"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg></span> Inércia</h1>
-<p>Todo corpo resiste a mudanças em seu estado de movimento — essa resistência é o que chamamos de inércia.</p>
-<p>No caso de um drone, que está livre para se mover e girar no espaço, a inércia se manifesta de duas formas principais, e ambas são fundamentais para entender como ele responde aos comandos de controle:</p>
-<ul>
-<li>Massa — representa a resistência a movimentos lineares (como subir/descer, avançar/recuar ou deslocar-se lateralmente). É a chamada inércia translacional.</li>
-<li>Momento de inércia — representa a resistência a movimentos angulares (como rolar, inclinar ou guinar). É a chamada inércia rotacional.</li>
-</ul>
-<p>Controlar bem um drone exige compreender essas duas formas de inércia — e como elas influenciam as acelerações que conseguimos impor a ele.</p>
+<h1 id="inertia"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 12 4 4-4 4v-3.1c-4.56-.46-8-2.48-8-4.9s3.44-4.44 8-4.9v1.99C6.55 9.43 4 10.6 4 12s2.55 2.57 6 2.91zm10 0c0-1.4-2.55-2.57-6-2.91V7.1c4.56.46 8 2.48 8 4.9 0 2.16-2.74 4-6.58 4.7l.7-.7-1.2-1.21C17.89 14.36 20 13.27 20 12M11 2h2v11l-2-2zm0 20v-1l2-2v3z"/></svg></span> Inertia</h1>
+<p>This section introduces the concept of inertia and how it affects the motion of a drone. A multirotor resists changes in both linear and angular motion, and this resistance appears through two quantities: mass, which governs translational dynamics, and the moment of inertia, which governs rotational dynamics. Understanding both is essential for predicting how the drone accelerates and how it responds to control inputs.</p>
 <hr />
-<h2 id="massa">Massa</h2>
-<p>A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.</p>
-<p><img alt="Mass" src="../images/mass.svg" style="display: block; margin: auto;" width="500" /></p>
+<h2 id="mass">Mass</h2>
+<p>Mass represents how much the drone resists changes in velocity along any translational axis. It depends only on the total amount of matter and is the same in every direction. In other words, it does not matter whether the motion is upward, forward, or sideways, the vehicle has a single mass value.</p>
+<p><img alt="Mass" src="../images/mass.svg" style="display: block; margin: auto;" width="60%" /></p>
 <div class="admonition question">
-<p class="admonition-title">Exercício 1</p>
-<p>Podemos calcular a massa do drone somando a massa de seus componentes:</p>
+<p class="admonition-title">Exercise 1</p>
+<p>We can estimate the total mass of the drone by summing the mass of its components:</p>
 <ul>
-<li>O <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">drone</a> que já considera bateria, PCB, motores, hélices, etc.</li>
-<li>O <a href="https://www.bitcraze.io/products/flow-deck-v2/" target="_blank">módulo de expansão</a> que é acoplado embaixo</li>
+<li>The <a href="https://www.bitcraze.io/products/crazyflie-2-1-brushless/" target="_blank">Crazyflie 2.1 Brushless</a>, which already includes battery, PCB, motors, propellers, etc.</li>
+<li>The <a href="https://www.bitcraze.io/products/flow-deck-v2/" target="_blank">Flow Deck</a>, mounted underneath</li>
 </ul>
-<p>Determine a massa total do drone somando a massa de seus componentes. Elas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
+<p>Determine the total mass by adding the component masses. The values can be obtained from the technical specifications on Bitcraze’s website (links provided above).</p>
 <details class="info">
-<summary>Resposta</summary>
+<summary>Solution</summary>
+<p>The total mass is given by:</p>
 <div class="arithmatex">\[
-\begin{align*}
+\begin{align}
     m &amp;= m_{cf} + m_{fd} \\
-    m &amp;= 37 + 1,6 \\
-    m &amp;= 38,6 g
-\end{align*}
+    m &amp;= 37 + 1.6 \\
+    m &amp;= 38.6 \, g
+\end{align}
+\]</div>
+<p>In SI units, the approximate value is:</p>
+<div class="arithmatex">\[
+m \approx 0.04 \, ~\text{kg}
 \]</div>
 </details>
 </div>
 <hr />
-<h2 id="momento-de-inercia">Momento de Inércia</h2>
-<p>O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.</p>
-<p><img alt="Moment of Inertia" src="../images/moment_of_inertia.svg" style="display: block; margin: auto;" width="500" /></p>
+<h2 id="moment-of-inertia">Moment of Inertia</h2>
+<p>The moment of inertia represents how much the drone resists changes in angular velocity about a particular axis. Unlike mass, it depends not only on the amount of matter but also on how that matter is distributed relative to the axis of rotation.  </p>
+<p>Since the drone can rotate around three axes, it has three corresponding moments of inertia.</p>
+<p><img alt="Moment of Inertia" src="../images/moment_of_inertia.svg" style="display: block; margin: auto;" width="60%" /></p>
 <div class="admonition question">
-<p class="admonition-title">Exercício 2</p>
-<p>Podemos calcular os momentos de inércia do drone considerando um modelo mais simples<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
+<p class="admonition-title">Exercise 2</p>
+<p>We can estimate the drone’s moments of inertia using a simplified model<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
 <ul>
-<li>A <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery" target="_blank">bateria</a> como um paralelepípedo</li>
-<li>Os <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor" target="_blank">motores</a> com  <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">hélices</a> e <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards" target="_blank">suportes</a> como massas puntiformes</li>
+<li>Treat the <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery" target="_blank">battery</a> as a rectangular block.</li>
+<li>Treat the <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor" target="_blank">motors</a> with <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green" target="_blank">propellers</a> and <a href="https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards" target="_blank">mounts</a> as point masses.</li>
 </ul>
-<p>Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).</p>
+<p>Determine the total moment of inertia of the drone about each axis. The dimensions and masses can be obtained from the technical specifications on Bitcraze’s website (links provided above).</p>
 <details class="info">
-<summary>Resposta</summary>
-<p>A bateria possui <span class="arithmatex">\(9,10 \, g\)</span> de massa e dimensões <span class="arithmatex">\(3,3 \times 2,0 \times 0,8 \, cm\)</span>: </p>
+<summary>Solution</summary>
+<p>The battery has mass <span class="arithmatex">\(9.10 ~\text{g}\)</span> and dimensions <span class="arithmatex">\(3.3 \times 2.0 \times 0.8 ~\text{cm}\)</span>:</p>
 <div class="arithmatex">\[
 \left\{
-\begin{align*}
-    m_b &amp;= 9,10 \, g\\
-    a &amp;= 3,3 \, cm\\
-    b &amp;= 2,0 \, cm\\
-    c &amp;= 0,8 \, cm\\
-\end{align*}
+\begin{align}
+    m_b &amp;= 9.10 ~\text{g}\\
+    a &amp;= 3.3 ~\text{cm}\\
+    b &amp;= 2.0 ~\text{cm}\\
+    c &amp;= 0.8 ~\text{cm}
+\end{align}
 \right.
 \]</div>
-<p>Assim, usando uma tabela de momentos de inércia de um paralelepípedo temos que:</p>
-<p><img alt="Moment of Inertia Battery" src="../images/moment_of_inertia_battery.svg" style="display: block; margin: auto;" width="500" /></p>
+<p>Using the standard formulas for the moment of inertia of a rectangular block, we can calculate the battery moment of inertia around each axis:</p>
+<p><img alt="Moment of Inertia Battery" src="../images/moment_of_inertia_battery.svg" style="display: block; margin: auto;" width="60%" /></p>
 <div class="arithmatex">\[
-\begin{align*}
-    I_{b_{xx}} &amp;= \frac{m_b}{12} (b^2 + c^2) &amp; \quad I_{b_{yy}} &amp;= \frac{m_b}{12} (a^2 + c^2) &amp; \quad I_{b_{zz}} &amp;= \frac{m_b}{12} (a^2 + b^2) \\
-    I_{b_{xx}} &amp;= \frac{9,1}{12} (2,0^2 + 0,8^2) &amp; \quad I_{b_{yy}} &amp;= \frac{9,1}{12} (3,3^2 + 0,8^2) &amp; \quad I_{b_{zz}} &amp;= \frac{9,1}{12} (3,3^2 + 2,0^2) \\
-    I_{b_{xx}} &amp;= 3,52 \, g.cm^2 &amp; \quad I_{b_{yy}} &amp;= 8,74 \, g.cm^2 &amp; \quad I_{b_{zz}} &amp;= 12,29 \, g.cm^2 \\
-\end{align*}
+\begin{align}
+    I_{b_{xx}} &amp;= \frac{m_b}{12} (b^2 + c^2)
+    &amp;
+    I_{b_{yy}} &amp;= \frac{m_b}{12} (a^2 + c^2)
+    &amp;
+    I_{b_{zz}} &amp;= \frac{m_b}{12} (a^2 + b^2)
+    \\
+    I_{b_{xx}} &amp;= \frac{9.1}{12} (2.0^2 + 0.8^2)
+    &amp;
+    I_{b_{yy}} &amp;= \frac{9.1}{12} (3.3^2 + 0.8^2)
+    &amp;
+    I_{b_{zz}} &amp;= \frac{9.1}{12} (3.3^2 + 2.0^2)
+    \\
+    I_{b_{xx}} &amp;= 3.52 ~\text{g·cm}^2
+    &amp;
+    I_{b_{yy}} &amp;= 8.74 ~\text{g·cm}^2
+    &amp;
+    I_{b_{zz}} &amp;= 12.29 ~\text{g·cm}^2
+\end{align}
 \]</div>
-<p>Os motores (<span class="arithmatex">\(2,30 \, g\)</span>), com hélices (<span class="arithmatex">\(1,34 \, g\)</span>) e suportes (<span class="arithmatex">\(0,33 \, g\)</span>), possuem <span class="arithmatex">\(3,97 \, g\)</span> de massa total e estão a <span class="arithmatex">\(10 \, cm\)</span> de distância na diagonal: </p>
+<p>The motors (<span class="arithmatex">\(2.30 ~\text{g}\)</span>) with propellers (<span class="arithmatex">\(1.34 ~\text{g}\)</span>) and mounts (<span class="arithmatex">\(0.33 ~\text{g}\)</span>) has a total mass of <span class="arithmatex">\(3.97 ~\text{g}\)</span> each and are located <span class="arithmatex">\(10 ~\text{cm}\)</span> apart diagonally:</p>
 <div class="arithmatex">\[
 \left\{
-\begin{align*}
-    m_m &amp;= 3,97 \, g\\
-    l_x &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
-    l_y &amp;= 5 \frac{\sqrt{2}}{2} \, cm \\
-    l_z &amp;= 5 \, cm\\
-\end{align*}
+\begin{align}
+    m_m &amp;= 3.97 ~\text{g}\\
+    l_x &amp;= 5 \frac{\sqrt{2}}{2} ~\text{cm} \\
+    l_y &amp;= 5 \frac{\sqrt{2}}{2} ~\text{cm} \\
+    l_z &amp;= 5 ~\text{cm}
+\end{align}
 \right.
 \]</div>
-<p>Assim, considerando eles como massas puntiformes temos que:</p>
-<p><img alt="Moment of Inertia Motors" src="../images/moment_of_inertia_motors.svg" style="display: block; margin: auto;" width="500" /></p>
+<p>Considering them as point masses, we can calculate its moment of inertia around each axis:</p>
+<p><img alt="Moment of Inertia Motors" src="../images/moment_of_inertia_motors.svg" style="display: block; margin: auto;" width="60%" /></p>
 <div class="arithmatex">\[
-\begin{align*}
-    I_{m_{xx}} &amp;= m_m l_x^2 &amp; \quad I_{m_{yy}} &amp;= m_m l_y^2 &amp; \quad I_{m_{zz}} &amp;= m_m l_z^2 \\
-    I_{m_{xx}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{yy}} &amp;= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 &amp; \quad I_{m_{zz}} &amp;= 3,97 \cdot 5,0^2 \\
-    I_{m_{xx}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{yy}} &amp;= 49,62 \, g.cm^2 &amp; \quad I_{m_{zz}} &amp;= 99,25 \, g.cm^2 \\
-\end{align*}
+\begin{align}
+    I_{m_{xx}} &amp;= m_m l_x^2
+    &amp;
+    I_{m_{yy}} &amp;= m_m l_y^2
+    &amp;
+    I_{m_{zz}} &amp;= m_m l_z^2
+    \\
+    I_{m_{xx}} &amp;= 3.97 \left( 5\frac{\sqrt{2}}{2} \right)^2
+    &amp;
+    I_{m_{yy}} &amp;= 3.97 \left( 5\frac{\sqrt{2}}{2} \right)^2
+    &amp;
+    I_{m_{zz}} &amp;= 3.97 \cdot 5^2
+    \\
+    I_{m_{xx}} &amp;= 49.62 ~\text{g·cm}^2
+    &amp;
+    I_{m_{yy}} &amp;= 49.62 ~\text{g·cm}^2
+    &amp;
+    I_{m_{zz}} &amp;= 99.25 ~\text{g·cm}^2
+\end{align}
 \]</div>
-<p>Dessa forma, os momentos de inércia totais são dados por:</p>
+<p>herefore, the total moments of inertia are the sum of the moments of inertia of the battery and the moments of inertia of the four motors:</p>
 <div class="arithmatex">\[
-\begin{align*}
-    I_{xx} &amp;= I_{b_{xx}} + 4 I_{m_{xx}} &amp; \quad I_{yy} &amp;= I_{b_{yy}} + 4 I_{m_{yy}} &amp; \quad I_{zz} &amp;= I_{b_{zz}} + 4 I_{m_{zz}} \\
-    I_{xx} &amp;= 3,52 + 4 \cdot 49,62 &amp; \quad I_{yy} &amp;= 8,74 + 4 \cdot 49,62 &amp; \quad I_{zz} &amp;= 12,29 + 4 \cdot 99,25 \\
-    I_{xx} &amp;= 202,02 \, g.cm^2 &amp; \quad I_{yy} &amp;= 207,24 \, g.cm^2 &amp; \quad I_{zz} &amp;= 408,29 \, g.cm^2 \\
-\end{align*}
+\begin{align}
+    I_{xx} &amp;= I_{b_{xx}} + 4 I_{m_{xx}}
+    &amp;
+    I_{yy} &amp;= I_{b_{yy}} + 4 I_{m_{yy}}
+    &amp;
+    I_{zz} &amp;= I_{b_{zz}} + 4 I_{m_{zz}}
+    \\
+    I_{xx} &amp;= 3.52 + 4 \cdot 49.62
+    &amp;
+    I_{yy} &amp;= 8.74 + 4 \cdot 49.62
+    &amp;
+    I_{zz} &amp;= 12.29 + 4 \cdot 99.25
+    \\
+    I_{xx} &amp;= 202.02 ~\text{g·cm}^2
+    &amp;
+    I_{yy} &amp;= 207.24 ~\text{g·cm}^2
+    &amp;
+    I_{zz} &amp;= 408.29 ~\text{g·cm}^2
+\end{align}
 \]</div>
-<p>Ou, de forma aproximada, e no S.I. (Sistema Internacional de Unidades):</p>
+<p>In SI units, the approximate values ​​are:</p>
 <div class="arithmatex">\[
-\begin{align*}
-    I_{xx} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{yy} &amp;= 2 \cdot 10^{-5} \, kg.m^2 &amp; \quad I_{zz} &amp;= 4 \cdot 10^{-5} \, kg.m^2 \\
-\end{align*}
+\left\{
+\begin{align}
+    I_{xx} &amp;\approx 2 \times 10^{-5} \, ~\text{kg·m}^2 \\
+    I_{yy} &amp;\approx 2 \times 10^{-5} \, ~\text{kg·m}^2 \\
+    I_{zz} &amp;\approx 4 \times 10^{-5} \, ~\text{kg·m}^2
+\end{align}
+\right.
 \]</div>
 </details>
 </div>
+<!-- ---
+title: Inércia
+icon: material/axis-z-rotate-counterclockwise
+---
+
+# :material-axis-z-rotate-counterclockwise: Inércia
+
+Todo corpo resiste a mudanças em seu estado de movimento — essa resistência é o que chamamos de inércia.
+
+No caso de um drone, que está livre para se mover e girar no espaço, a inércia se manifesta de duas formas principais, e ambas são fundamentais para entender como ele responde aos comandos de controle:
+
+- Massa — representa a resistência a movimentos lineares (como subir/descer, avançar/recuar ou deslocar-se lateralmente). É a chamada inércia translacional.
+- Momento de inércia — representa a resistência a movimentos angulares (como rolar, inclinar ou guinar). É a chamada inércia rotacional.
+
+Controlar bem um drone exige compreender essas duas formas de inércia — e como elas influenciam as acelerações que conseguimos impor a ele.
+
+---
+
+## Massa
+
+A massa representa o quanto o drone resiste a mudanças na velocidade ao longo de um eixo de translação. Ela depende da quantidade de matéria e é a mesma em qualquer direção. Ou seja, não importa se o movimento é para cima, para frente ou para o lado: temos apenas uma única massa.
+
+![Mass](images/mass.svg){: width="500" style="display: block; margin: auto;" }
+
+!!! question "Exercício 1"
+
+    Podemos calcular a massa do drone somando a massa de seus componentes:
+
+    - O [drone](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank} que já considera bateria, PCB, motores, hélices, etc.
+    - O [módulo de expansão](https://www.bitcraze.io/products/flow-deck-v2/){target=_blank} que é acoplado embaixo
+
+    Determine a massa total do drone somando a massa de seus componentes. Elas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).
+
+    ??? info "Resposta"
+        $$
+        \begin{align}
+            m &= m_{cf} + m_{fd} \\
+            m &= 37 + 1,6 \\
+            m &= 38,6 g
+        \end{align}
+        $$
+
+---
+
+## Momento de Inércia
+
+O momento de inércia representa o quanto o drone resiste a mudanças na velocidade angular em torno de um eixo de rotação. Ao contrário da massa, ele depende não apenas da quantidade de matéria, mas também de como ela está distribuída em relação ao eixo de rotação. Como o drone pode girar em torno de três eixos (rolagem, inclinação e guinagem), ele possui três momentos de inércia: um para cada eixo.
+
+![Moment of Inertia](images/moment_of_inertia.svg){: width="500" style="display: block; margin: auto;" }
+
+!!! question "Exercício 2"
+
+    Podemos calcular os momentos de inércia do drone considerando um modelo mais simples[^1]:
+
+    - A [bateria](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/350mah-lipo-battery){target=_blank} como um paralelepípedo
+    - Os [motores](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-08028-10000kv-brushless-motor){target=_blank} com  [hélices](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/propeller-55-35-4ccw-4cw-green){target=_blank} e [suportes](https://store.bitcraze.io/collections/spare-parts-crazyflie-brushless/products/crazyflie-2-1-brushless-5-x-legs-5-x-guards){target=_blank} como massas puntiformes
+
+    [^1]: Estamos desprezando a estrutura de PCB do drone, já que sua massa é pequena comparada à da bateria e dos motores, além de estar concentrada próxima ao centro de massa.
+
+    Determine a momento de inércia total do drone em torno de cada um de seus eixos. As dimensões necessárias podem ser obtidas com o auxílio de um paquímetro, já as massas podem ser obtidas nas especificações técnicas no site da Bitcraze (cujos links foram disponibilizados acima).
+
+    ??? info "Resposta"
+        A bateria possui $9,10 \, g$ de massa e dimensões $3,3 \times 2,0 \times 0,8 \, cm$: 
+
+        $$
+        \left\{
+        \begin{align}
+            m_b &= 9,10 \, g\\
+            a &= 3,3 \, cm\\
+            b &= 2,0 \, cm\\
+            c &= 0,8 \, cm\\
+        \end{align}
+        \right.
+        $$
+
+        Assim, usando uma tabela de momentos de inércia de um paralelepípedo temos que:
+
+        ![Moment of Inertia Battery](images/moment_of_inertia_battery.svg){: width="500" style="display: block; margin: auto;" }
+
+        $$
+        \begin{align}
+            I_{b_{xx}} &= \frac{m_b}{12} (b^2 + c^2) & \quad I_{b_{yy}} &= \frac{m_b}{12} (a^2 + c^2) & \quad I_{b_{zz}} &= \frac{m_b}{12} (a^2 + b^2) \\
+            I_{b_{xx}} &= \frac{9,1}{12} (2,0^2 + 0,8^2) & \quad I_{b_{yy}} &= \frac{9,1}{12} (3,3^2 + 0,8^2) & \quad I_{b_{zz}} &= \frac{9,1}{12} (3,3^2 + 2,0^2) \\
+            I_{b_{xx}} &= 3,52 \, g.cm^2 & \quad I_{b_{yy}} &= 8,74 \, g.cm^2 & \quad I_{b_{zz}} &= 12,29 \, g.cm^2 \\
+        \end{align}
+        $$
+
+        Os motores ($2,30 \, g$), com hélices ($1,34 \, g$) e suportes ($0,33 \, g$), possuem $3,97 \, g$ de massa total e estão a $10 \, cm$ de distância na diagonal: 
+
+        $$
+        \left\{
+        \begin{align}
+            m_m &= 3,97 \, g\\
+            l_x &= 5 \frac{\sqrt{2}}{2} \, cm \\
+            l_y &= 5 \frac{\sqrt{2}}{2} \, cm \\
+            l_z &= 5 \, cm\\
+        \end{align}
+        \right.
+        $$
+
+        Assim, considerando eles como massas puntiformes temos que:
+
+        ![Moment of Inertia Motors](images/moment_of_inertia_motors.svg){: width="500" style="display: block; margin: auto;" }
+
+        $$
+        \begin{align}
+            I_{m_{xx}} &= m_m l_x^2 & \quad I_{m_{yy}} &= m_m l_y^2 & \quad I_{m_{zz}} &= m_m l_z^2 \\
+            I_{m_{xx}} &= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 & \quad I_{m_{yy}} &= 3,97 \cdot {\left( 5,0 \frac{\sqrt{2}}{2} \right)}^2 & \quad I_{m_{zz}} &= 3,97 \cdot 5,0^2 \\
+            I_{m_{xx}} &= 49,62 \, g.cm^2 & \quad I_{m_{yy}} &= 49,62 \, g.cm^2 & \quad I_{m_{zz}} &= 99,25 \, g.cm^2 \\
+        \end{align}
+        $$
+
+        Dessa forma, os momentos de inércia totais são dados por:
+
+        $$
+        \begin{align}
+            I_{xx} &= I_{b_{xx}} + 4 I_{m_{xx}} & \quad I_{yy} &= I_{b_{yy}} + 4 I_{m_{yy}} & \quad I_{zz} &= I_{b_{zz}} + 4 I_{m_{zz}} \\
+            I_{xx} &= 3,52 + 4 \cdot 49,62 & \quad I_{yy} &= 8,74 + 4 \cdot 49,62 & \quad I_{zz} &= 12,29 + 4 \cdot 99,25 \\
+            I_{xx} &= 202,02 \, g.cm^2 & \quad I_{yy} &= 207,24 \, g.cm^2 & \quad I_{zz} &= 408,29 \, g.cm^2 \\
+        \end{align}
+        $$  
+
+        Ou, de forma aproximada, e no S.I. (Sistema Internacional de Unidades):
+
+        $$
+        \begin{align}
+            I_{xx} &= 2 \cdot 10^{-5} \, kg.m^2 & \quad I_{yy} &= 2 \cdot 10^{-5} \, kg.m^2 & \quad I_{zz} &= 4 \cdot 10^{-5} \, kg.m^2 \\
+        \end{align}
+        $$ -->
+
 <p>​</p>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:1">
-<p>Estamos desprezando a estrutura de PCB do drone, já que sua massa é pequena comparada à da bateria e dos motores, além de estar concentrada próxima ao centro de massa.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>We are neglecting the PCB structure, as its mass is small compared to the battery and motors, and it lies close to the center of mass.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

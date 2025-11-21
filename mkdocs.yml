@@ -60,7 +60,7 @@ nav:
   - Identification:
       - identification/index.md
       - Motor coefficients: identification/motor_coefficients.md  
-      - Lift constant: identification/lift_constant.md
+      - Thrust constant: identification/thrust_constant.md
       - Drag constant: identification/drag_constant.md
   - Modeling:
       - modeling/index.md

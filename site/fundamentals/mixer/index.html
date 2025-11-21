@@ -515,18 +515,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#movimentos-basicos-de-um-quadricoptero" class="md-nav__link">
+  <a href="#basic-quadcopter-motions" class="md-nav__link">
     <span class="md-ellipsis">
-      Movimentos básicos de um quadricóptero
+      Basic quadcopter motions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#transformacao-de-entradas" class="md-nav__link">
+  <a href="#input-transformation" class="md-nav__link">
     <span class="md-ellipsis">
-      Transformação de entradas
+      Input transformation
     </span>
   </a>
   
@@ -691,14 +691,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../identification/lift_constant/" class="md-nav__link">
+      <a href="../../identification/thrust_constant/" class="md-nav__link">
         
   
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v8h4v2H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
-    Lift constant
+    Thrust constant
     
   </span>
   
@@ -1357,18 +1357,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#movimentos-basicos-de-um-quadricoptero" class="md-nav__link">
+  <a href="#basic-quadcopter-motions" class="md-nav__link">
     <span class="md-ellipsis">
-      Movimentos básicos de um quadricóptero
+      Basic quadcopter motions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#transformacao-de-entradas" class="md-nav__link">
+  <a href="#input-transformation" class="md-nav__link">
     <span class="md-ellipsis">
-      Transformação de entradas
+      Input transformation
     </span>
   </a>
   
@@ -1391,47 +1391,72 @@
 
 
 <h1 id="mixer"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20h4V4h-4zm-6 0h4v-8H4zM16 9v11h4V9z"/></svg></span> Mixer</h1>
-<p>O voo de um drone depende diretamente das forças e torques gerados pelos motores. Aqui, você vai entender como esses efeitos se combinam para movimentar o quadricóptero no espaço.</p>
+<p>The flight of a quadcopter is governed by the thrust forces and drag torques produced by its four propellers. This section explains how these individual effects are combined into total thrust and body torques using a transformation commonly known in multirotor flight controllers as the mixer. By understanding this mapping, and its inverse, you will see how the controller translates desired forces and moments into the motor speeds that actually move the vehicle.</p>
 <hr />
-<h2 id="movimentos-basicos-de-um-quadricoptero">Movimentos básicos de um quadricóptero</h2>
-<p>Um quadricóptero possui quatro hélices que, uma vez em movimento com velocidades angulares <span class="arithmatex">\({\color{var(--c1)}\omega_1}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_2}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_3}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\omega_4}\)</span>, produzem quatro forças de sustentação <span class="arithmatex">\({\color{var(--c2)}f_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_3}\)</span> e <span class="arithmatex">\({\color{var(--c2)}f_4}\)</span> e quatro torques de arrasto <span class="arithmatex">\({\color{var(--c2)}\tau_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_3}\)</span> e <span class="arithmatex">\({\color{var(--c2)}\tau_4}\)</span>, conforme a figura abaixo.</p>
-<p><img alt="Quadcopter1" src="../images/quadcopter1.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>Para um quadricóptero se movimentar verticalmente, basta variar as velocidades angulares das quatro hélices simultaneamente, conforme a figura abaixo.</p>
-<p>Enquanto que, para um quadricóptero rotacionar em torno de seus eixos, basta variar as velocidades angulares de 2 hélices simultaneamente, conforme a figura abaixo.</p>
+<h2 id="basic-quadcopter-motions">Basic quadcopter motions</h2>
+<p>A quadcopter has four propellers spinning at angular velocities <span class="arithmatex">\({\color{var(--c1)}\omega_1}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_2}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_3}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\omega_4}\)</span>. Each propeller generates a thrust force <span class="arithmatex">\({\color{var(--c2)}f_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_3}\)</span>, <span class="arithmatex">\({\color{var(--c2)}f_4}\)</span> and a drag torque <span class="arithmatex">\({\color{var(--c2)}\tau_1}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_2}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_3}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_4}\)</span>, as illustrated below.</p>
+<p><img alt="Quadcopter1" src="../images/quadcopter1.svg" style="display: block; margin: auto;" width="60%" /></p>
+<p>To move vertically (along <span class="arithmatex">\(z\)</span> axis), the quadcopter simply changes all four angular velocities simultaneously. To rotate (around the <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(z\)</span> axes), it varies the speeds of pairs of propellers in coordinated ways.</p>
 <div class="admonition question">
-<p class="admonition-title">Exercício 1</p>
-<p>Sobre os movimentos de um quadricóptero, determine as respostas a seguir. </p>
+<p class="admonition-title">Exercise 1</p>
+<p>Regarding quadcopter motion, answer the following:</p>
 <details class="info">
-<summary>a) Quantas formas diferentes é possível transladar um quadricóptero</summary>
-<p>3 (ao longo dos eixos <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span> e <span class="arithmatex">\(z\)</span>)</p>
+<summary>a) How many independent ways can a quadcopter translate?</summary>
+<p>3 (along the <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(z\)</span> axes)</p>
 </details>
 <details class="info">
-<summary>b) Quantas formas diferentes é possível rotacionar um quadricóptero</summary>
-<p>3 (em torno dos eixos <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span> e <span class="arithmatex">\(z\)</span>) </p>
+<summary>b) How many independent ways can a quadcopter rotate?</summary>
+<p>3 (around the <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(z\)</span> axes)</p>
 </details>
 <details class="info">
-<summary>c) Quantos graus de liberdade possui um quadricóptero</summary>
-<p>6 (3 de translação + 3 de rotação) </p>
+<summary>c) How many degrees of freedom does a quadcopter have?</summary>
+<p>6 (3 translational + 3 rotational)</p>
 </details>
 <details class="info">
-<summary>d) Como o quadricóptero realiza movimentos de translação no plano (eixos <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span>)</summary>
-<p>Através de uma composição de movimentos de translação (ao longo do eixo <span class="arithmatex">\(z\)</span>) e rotação (em torno dos eixos <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span>) </p>
+<summary>d) How does a quadcopter achieve translation in the horizontal plane (<span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> axes)?</summary>
+<p>Through a combination of translation (along <span class="arithmatex">\(z\)</span> axis) and rotation (around <span class="arithmatex">\(x\)</span> or <span class="arithmatex">\(y\)</span> axis), which tilt the thrust vector.</p>
 </details>
 </div>
 <hr />
-<h2 id="transformacao-de-entradas">Transformação de entradas</h2>
-<p>As quatro forças e quatro torques de cada uma das hélices podem ser representadas por uma única força de propulsão total <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> e três torques <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span>, <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span> e <span class="arithmatex">\({\color{var(--c2)}\tau_z}\)</span>, um em torno de cada eixo do quadricóptero, conforme a figura abaixo.</p>
-<p><img alt="Quadcopter2" src="../images/quadcopter2.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>Na secção de <a href="../basic_concepts/aerodynamics.md">aerodinâmica</a> verificamos que as forças e torques das hélices são proporcionais ao quadrado de suas velocidades angulares:</p>
+<h2 id="input-transformation">Input transformation</h2>
+<p>The individual thrust forces and drag torques generated by each propeller can be combined into a single total thrust force and three body-axis torques:</p>
+<ul>
+<li>
+<p class="annotate"><span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> — Total thrust (<span class="arithmatex">\(\text{N}\)</span>) (1)</p>
+<ol>
+<li>The net upward force generated by all propellers. </li>
+</ol>
+</li>
+<li>
+<p class="annotate"><span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span> — Roll torque (<span class="arithmatex">\(\text{N·m}\)</span>) (1)</p>
+<ol>
+<li>The net torque around the body <span class="arithmatex">\(x\)</span> axis, caused by lateral differences in thrust.</li>
+</ol>
+</li>
+<li>
+<p class="annotate"><span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span> — Pitch torque (<span class="arithmatex">\(\text{N·m}\)</span>) (1)</p>
+<ol>
+<li>The net torque around the body <span class="arithmatex">\(y\)</span> axis, caused by longitudinal differences in thrust.</li>
+</ol>
+</li>
+<li>
+<p class="annotate"><span class="arithmatex">\({\color{var(--c2)}\tau_z}\)</span> — Yaw torque (<span class="arithmatex">\(\text{N·m}\)</span>) (1)</p>
+<ol>
+<li>The net torque around the body <span class="arithmatex">\(z\)</span> axis, caused by differences in drag (clockwise propellers vs. counter-clockwise propellers).</li>
+</ol>
+</li>
+</ul>
+<p><img alt="Quadcopter2" src="../images/quadcopter2.svg" style="display: block; margin: auto;" width="60%" /></p>
+<p>In the <a href="../basic_concepts/aerodynamics.md">aerodynamics</a> section, we established that thrust and drag torque of a propeller are proportional to the square the angular velocity:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{var(--c2)}f_i} = k_l {\color{var(--c1)}\omega_i}^2 \\
-   {\color{var(--c2)}\tau_i} = k_d {\color{var(--c1)}\omega_i}^2 \\
+    {\color{var(--c2)}f_i} = k_l\, {\color{var(--c1)}\omega_i}^2 \\
+    {\color{var(--c2)}\tau_i} = k_d\, {\color{var(--c1)}\omega_i}^2 \\
 \end{array}
 \right.
 \]</div>
-<p>Isso significa que as quatro equações determinadas anteriormente podem ser escritas no formato matricial:</p>
+<p>Thus, the relationship between motor speeds and thrust/torques can be written in matrix form:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
     {\color{var(--c2)}f_t} \\
@@ -1447,24 +1472,24 @@
     {\color{var(--c1)}\omega_4}^2
 \end{bmatrix}
 \]</div>
-<p>Onde <span class="arithmatex">\(M\)</span> é uma matriz <span class="arithmatex">\(4\times4\)</span> que transforma as velocidades angulares das hélices na força total e nos torques de um quadricóptero.</p>
+<p>Where <span class="arithmatex">\(M\)</span> is the mixer matrix, a <span class="arithmatex">\(4\times4\)</span> matrix that maps squared motor speeds to thrust/torques.</p>
 <div class="admonition question">
-<p class="admonition-title">Exercício 2</p>
-<p>Determine a matriz <span class="arithmatex">\(M\)</span> em função das constantes de sustentação e arrasto da hélice <span class="arithmatex">\(k_l\)</span> e <span class="arithmatex">\(k_d\)</span> e do comprimento <span class="arithmatex">\(l\)</span>. </p>
+<p class="admonition-title">Exercise 2</p>
+<p>Derive the mixer matrix <span class="arithmatex">\(M\)</span> in terms of the thrust coefficient <span class="arithmatex">\(k_l\)</span>, drag coefficient <span class="arithmatex">\(k_d\)</span> and arm length <span class="arithmatex">\(l\)</span>.</p>
 <details class="info">
-<summary>Resposta</summary>
+<summary>Solution</summary>
 <div class="arithmatex">\[
 M = 
 \begin{bmatrix} 
-    k_l &amp; k_l &amp; k_l &amp; k_l \\ 
-    -k_l l &amp; -k_l l &amp; k_l l &amp; k_l l \\ 
-    -k_l l &amp; k_l l &amp; k_l l &amp; -k_l l  \\ 
-    -k_d &amp; k_d &amp; -k_d &amp; k_d 
+    k_l &amp; k_l &amp; k_l &amp; k_l \\[4pt] 
+    -k_l l &amp; -k_l l &amp; \;\,k_l l &amp; \;\,k_l l \\[4pt]
+    -k_l l &amp; \;\,k_l l &amp; \;\,k_l l &amp; -k_l l \\[4pt]
+    -k_d &amp; \;\,k_d &amp; -k_d &amp; \;\,k_d 
 \end{bmatrix}
 \]</div>
 </details>
 </div>
-<p>Para obter as velocidades angulares das hélices em função da força total e dos torques, basta multiplicar a equação anterior pela matriz inversa <span class="arithmatex">\(M^{-1}\)</span>:</p>
+<p>To compute the motor speeds required to generate a desired thrust/torques, we multiply by the inverse of the mixer:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
     {\color{var(--c1)}\omega_1}^2 \\
@@ -1481,17 +1506,20 @@ M =
 \end{bmatrix}
 \]</div>
 <div class="admonition question">
-<p class="admonition-title">Exercício 3</p>
-<p>Determine a matriz inversa <span class="arithmatex">\(M^{-1}\)</span> (dica: utilize o Symbolic Math Toolbox do MATLAB).</p>
+<p class="admonition-title">Exercise 3</p>
+<p class="annotate">Compute(1) the inverse matrix <span class="arithmatex">\(M^{-1}\)</span>.</p>
+<ol>
+<li>Hint: use MATLAB’s Symbolic Math Toolbox</li>
+</ol>
 <details class="info">
-<summary>Resposta</summary>
+<summary>Solution</summary>
 <div class="arithmatex">\[
-M^{-1} = 
+M^{-1} = \dfrac{1}{4}
 \begin{bmatrix} 
-    \frac{1}{4 k_l} &amp; - \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_d}  \\ 
-    \frac{1}{4 k_l} &amp; - \frac{1}{4 k_l l} &amp; \frac{1}{4 k_l l} &amp; \frac{1}{4 k_d} \\ 
-    \frac{1}{4 k_l} &amp; \frac{1}{4 k_l l} &amp; \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_d} \\ 
-    \frac{1}{4 k_l} &amp; \frac{1}{4 k_l l} &amp; - \frac{1}{4 k_l l} &amp; \frac{1}{4 k_d} 
+    \dfrac{1}{k_l} &amp; - \dfrac{1}{k_l l} &amp; - \dfrac{1}{k_l l} &amp; - \dfrac{1}{k_d}  \\[6pt]
+    \dfrac{1}{k_l} &amp; - \dfrac{1}{k_l l} &amp; \;\,\dfrac{1}{k_l l} &amp; \;\,\dfrac{1}{k_d} \\[6pt]
+    \dfrac{1}{k_l} &amp; \;\,\dfrac{1}{k_l l} &amp; \;\,\dfrac{1}{k_l l} &amp; - \dfrac{1}{k_d} \\[6pt]
+    \dfrac{1}{k_l} &amp; \;\,\dfrac{1}{k_l l} &amp; - \dfrac{1}{k_l l} &amp; \;\,\dfrac{1}{k_d} 
 \end{bmatrix}
 \]</div>
 </details>

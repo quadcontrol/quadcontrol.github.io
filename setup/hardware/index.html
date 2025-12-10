@@ -1591,7 +1591,7 @@
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <h1 id="hardware"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.5 1C8 1 10 3 10 5.5c0 .88-.25 1.7-.69 2.4l.1.1h5.18l.1-.1c-.44-.7-.69-1.52-.69-2.4C14 3 16 1 18.5 1S23 3 23 5.5 21 10 18.5 10c-.88 0-1.7-.25-2.4-.69l-1.1 1.1v3.18l1.1 1.1c.7-.44 1.52-.69 2.4-.69 2.5 0 4.5 2 4.5 4.5S21 23 18.5 23 14 21 14 18.5c0-.88.25-1.7.69-2.4l-.1-.1H9.41l-.1.1c.44.7.69 1.52.69 2.4C10 21 8 23 5.5 23S1 21 1 18.5 3 14 5.5 14c.88 0 1.7.25 2.4.69l1.1-1.1v-3.18l-1.1-1.1c-.7.44-1.52.69-2.4.69C3 10 1 8 1 5.5S3 1 5.5 1m0 2A2.5 2.5 0 0 0 3 5.5 2.5 2.5 0 0 0 5.5 8 2.5 2.5 0 0 0 8 5.5 2.5 2.5 0 0 0 5.5 3m0 13A2.5 2.5 0 0 0 3 18.5 2.5 2.5 0 0 0 5.5 21 2.5 2.5 0 0 0 8 18.5 2.5 2.5 0 0 0 5.5 16m13-13A2.5 2.5 0 0 0 16 5.5 2.5 2.5 0 0 0 18.5 8 2.5 2.5 0 0 0 21 5.5 2.5 2.5 0 0 0 18.5 3m0 13a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5M3.91 17.25l1.13.66c.13-.1.29-.16.46-.16a.75.75 0 0 1 .75.75l-.01.1 1.13.65-.28.5-1.13-.66c-.13.1-.29.16-.46.16a.75.75 0 0 1-.75-.75l.01-.1-1.13-.65zm-.28-11 1.13-.65-.01-.1a.75.75 0 0 1 .75-.75c.17 0 .33.06.46.16l1.13-.66.28.5-1.13.65.01.1a.75.75 0 0 1-.75.75c-.17 0-.33-.06-.46-.16l-1.13.66zm13.28-2 1.13.66c.13-.1.29-.16.46-.16a.75.75 0 0 1 .75.75l-.01.1 1.13.65-.28.5-1.13-.66c-.13.1-.29.16-.46.16a.75.75 0 0 1-.75-.75l.01-.1-1.13-.65zm-.28 15 1.12-.75a.75.75 0 0 1 .75-.75c.17 0 .33.06.46.16l1.13-.66.28.5-1.12.75a.75.75 0 0 1-.75.75c-.17 0-.33-.06-.46-.16l-1.13.66z"/></svg></span> Hardware</h1>
-<p>This section brings together all the hardware used in the course: the Bitcraze components that form the core of the system, the 3D printed fixtures used for controlled experiments, and the instruments that allow you to measure and validate the drone’s physical behavior. The goal is to make sure you know exactly what you need and have everything ready before moving on to the practical activities.</p>
+<p>This section brings together all the hardware used in the course: the Bitcraze components that form the core of the system, the test fixtures used for controlled experiments, and the measurement tools that allow you to measure and validate the drone’s physical behavior. The goal is to make sure you know exactly what you need and have everything ready before moving on to the practical activities.</p>
 <hr />
 <h2 id="bitcraze-components">Bitcraze Components</h2>
 <p class="annotate"><a href="https://bitcraze.io" target="_blank">Bitcraze</a> offers an entire ecosystem of drones, radios and expansion decks, but for this course you only need three of them(1). These devices form the drone you will program, communicate with and fly throughout the course.</p>
@@ -1607,7 +1607,7 @@
 <li>BLDC motor controllers (5 A ESCs)  </li>
 <li>Integrated IMU (BMI088)</li>
 </ul>
-<p>Released in 2025, the brushless version brings significantly more power and durability compared to earlier models.</p>
+<p>Released recently, the brushless version brings significantly more power and durability compared to earlier models.</p>
 <hr />
 <h3 id="crazyradio-20">Crazyradio 2.0</h3>
 <p><img alt="Crazyradio" src="../images/crazyradio.png" style="display: block; margin: auto;" width="250" /></p>
@@ -1628,7 +1628,7 @@
 </ul>
 <p class="annotate">Together, they allow the drone to measure its altitude above the ground and estimate horizontal motion relative to the floor, which is crucial for position estimation(1).</p>
 <ol>
-<li>Bitcraze also provides three absolute <a href="https://www.bitcraze.io/documentation/system/positioning/" target="_blank">positioning systems</a>: the Lighthouse Positioning System, the Loco Positioning System and Motion Capture Positioning. The Flow Deck, however, provides relative positioning with the advantage of performing all computation on-board.</li>
+<li>Bitcraze also provides three absolute <a href="https://www.bitcraze.io/documentation/system/positioning/" target="_blank">positioning systems</a>: the Lighthouse Positioning System, the Loco Positioning System and Motion Capture Positioning. The Flow Deck, however, offers relative positioning and does not rely on external infrastructure such as base stations, anchors or motion-capture cameras, which makes the entire positioning process self-contained on the drone.</li>
 </ol>
 <hr />
 <h2 id="test-fixtures">Test Fixtures</h2>
@@ -1638,17 +1638,38 @@
     disable-zoom
     camera-controls
     auto-rotate
-    style="width: 100%; max-width: 600px; height: 400px; margin: auto;">
+    style="width: 100%; max-width: 600px; height: 350px; margin: auto;">
 </model-viewer></p>
-<p class="annotate">The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. The <a href="">structure</a> can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) at the top (to fix the drone) and a neodymium magnet(2) at the bottom (to fix the thrust stand to the scale) that must be purchased separately and attached to the structure.</p>
+<p><strong>STL files</strong></p>
+<p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Thrust Stand (Base) </a></p>
+<p class="annotate">The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. The base can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) at the top (to fix the drone) and one neodymium magnet(2) at the bottom (to fix the thrust stand to the scale) that must be purchased separately and attached to the base.</p>
 <ol>
 <li>Outer diameter: 3.2mm / Length: 3mm</li>
 <li>Diameter: 20mm / Length: 2mm</li>
 </ol>
 <h3 id="yaw-rotation-rig">Yaw Rotation Rig</h3>
+<p><model-viewer src="../images/yaw_rotation_rig.glb"
+    disable-zoom
+    camera-controls
+    auto-rotate
+    style="width: 100%; max-width: 600px; height: 200px; margin: auto;">
+</model-viewer></p>
+<p><strong>STL files</strong></p>
+<p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Base) </a>
+<a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Mount) </a></p>
 <p>The yaw rotation rig constrains every degree of freedom except rotation around the vertical axis. </p>
 <p>With the drone free to spin only in yaw, you can observe the yaw torque balance, characterize drag torque coefficients and test your yaw control loops in isolation. This fixture makes it easy to experiment with step inputs, disturbances and controller tuning without worrying about the drone drifting away.</p>
 <h3 id="pitch-rotation-rig">Pitch Rotation Rig</h3>
+<p><model-viewer src="../images/pitch_rotation_rig.glb"
+    disable-zoom
+    camera-controls
+    auto-rotate
+    style="width: 100%; max-width: 600px; height: 600px; margin: auto;">
+</model-viewer></p>
+<p><strong>STL files</strong></p>
+<p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Base) </a>
+<a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Mount) </a>
+<a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Cap) </a></p>
 <p>The pitch rotation rig restricts the drone to rotate only around its lateral axis. It allows you to study pitch dynamics independently from roll and yaw, making it ideal for identifying inertia parameters, validating linearized models and tuning pitch controllers. By isolating the pitch motion, this fixture provides clean, repeatable experiments even with aggressive inputs.</p>
 <hr />
 <h2 id="measurement-tools">Measurement Tools</h2>

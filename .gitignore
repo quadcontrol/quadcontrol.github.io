@@ -1,12 +1,6 @@
-# Virtual environment
 .venv/
-
-# MkDocs build output
 site/
-
-# Python cache
+.cache/
 __pycache__/
 *.pyc
-
-# macOS
 .DS_Store

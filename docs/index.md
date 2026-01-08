@@ -10,8 +10,6 @@ description: Master embedded control in a 100% hands-on course that connects the
 
 Master **embedded control** in a **100% hands-on** course designed to bridge **theory, programming, and real flight**.
 
-Uhul
-
 ---
 
 ## The drone as a laboratory

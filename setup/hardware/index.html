@@ -1799,21 +1799,21 @@
 <h2 id="bitcraze-components">Bitcraze Components</h2>
 <p class="annotate"><a href="https://bitcraze.io" target="_blank">Bitcraze</a> offers an entire ecosystem of drones, radios and expansion decks, but for this course you only need three of them(1). These devices form the drone you will program, communicate with and fly throughout the course.</p>
 <ol>
-<li>These components are also available as a complete bundle from Bitcraze: the <a href="https://store.bitcraze.io/collections/bundles/products/stem-bundle-crazyflie-2-1-brushless" target="_blank">STEM Bundle – Crazyflie 2.1 Brushless</a>.  </li>
+<li>These three components are also available as a complete bundle from Bitcraze: the <a href="https://store.bitcraze.io/collections/bundles/products/stem-bundle-crazyflie-2-1-brushless" target="_blank">STEM Bundle – Crazyflie 2.1 Brushless</a>.  </li>
 </ol>
 <h3 id="crazyflie-21-brushless">Crazyflie 2.1 Brushless</h3>
-<p><img alt="Crazyflie" src="../images/crazyflie.png" style="display: block; margin: auto;" width="400" /></p>
+<p><img alt="" src="../images/crazyflie.png" style="display: block; margin: auto;" width="400" /></p>
 <p>The <a href="https://store.bitcraze.io/products/crazyflie-2-1-brushless" target="_blank">Crazyflie 2.1 Brushless</a> is the core of the system: an open-source minidrone built around a printed circuit board (PCB) frame. It is compact, robust and equipped with:</p>
 <ul>
 <li>ARM Cortex-M4 processor (168 MHz)  </li>
 <li>BLDC motors (08028-10000KV)  </li>
-<li>BLDC motor controllers (5 A ESCs)  </li>
+<li>BLDC motor controllers (5A ESCs)  </li>
 <li>Integrated IMU (BMI088)</li>
 </ul>
 <p>Released recently, the brushless version brings significantly more power and durability compared to earlier models.</p>
 <hr />
 <h3 id="crazyradio-20">Crazyradio 2.0</h3>
-<p><img alt="Crazyradio" src="../images/crazyradio.png" style="display: block; margin: auto;" width="250" /></p>
+<p><img alt="" src="../images/crazyradio.png" style="display: block; margin: auto;" width="250" /></p>
 <p>The <a href="https://store.bitcraze.io/products/crazyradio-2-0" target="_blank">Crazyradio 2.0</a> is the USB dongle that enables wireless communication between your computer and the drone. It allows you to:</p>
 <ul>
 <li>Upload firmware  </li>
@@ -1823,7 +1823,7 @@
 <p>It connects directly over USB and works seamlessly with Bitcraze’s official tools.</p>
 <hr />
 <h3 id="flow-deck-v2">Flow Deck v2</h3>
-<p><img alt="Flow deck" src="../images/flow_deck.png" style="display: block; margin: auto;" width="150" /></p>
+<p><img alt="" src="../images/flow_deck.png" style="display: block; margin: auto;" width="150" /></p>
 <p>The <a href="https://store.bitcraze.io/collections/decks/products/flow-deck-v2" target="_blank">Flow Deck v2</a> is a small expansion board mounted underneath the drone. It adds two essential sensors for autonomous flight:</p>
 <ul>
 <li>Time-of-Flight distance sensor (VL53L1X)  </li>
@@ -1831,7 +1831,7 @@
 </ul>
 <p class="annotate">Together, they allow the drone to measure its altitude above the ground and estimate horizontal motion relative to the floor, which is crucial for position estimation(1).</p>
 <ol>
-<li>Bitcraze also provides three absolute <a href="https://www.bitcraze.io/documentation/system/positioning/" target="_blank">positioning systems</a>: the Lighthouse Positioning System, the Loco Positioning System and Motion Capture Positioning. The Flow Deck, however, offers relative positioning and does not rely on external infrastructure such as base stations, anchors or motion-capture cameras, which makes the entire positioning process self-contained on the drone.</li>
+<li>Bitcraze also provides three absolute <a href="https://www.bitcraze.io/documentation/system/positioning/" target="_blank">positioning systems</a>: the Lighthouse Positioning System, the Loco Positioning System and Motion Capture Positioning. The Flow Deck v2, however, offers relative positioning and does not rely on external infrastructure such as base stations, anchors or motion-capture cameras, which makes the entire positioning process self-contained on the drone.</li>
 </ol>
 <hr />
 <h2 id="test-fixtures">Test Fixtures</h2>
@@ -1845,7 +1845,7 @@
 </model-viewer></p>
 <p><strong>STL files</strong></p>
 <p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Thrust Stand (Base) </a></p>
-<p class="annotate">The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. The base can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) at the top (to fix the drone) and one neodymium magnet(2) at the bottom (to fix the thrust stand to the scale) that must be purchased separately and attached to the base.</p>
+<p class="annotate">The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. The base can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) and one neodymium magnet(2) that must be purchased separately and attached.</p>
 <ol>
 <li>Outer diameter: 3.2mm / Length: 3mm</li>
 <li>Diameter: 20mm / Length: 2mm</li>
@@ -1860,8 +1860,12 @@
 <p><strong>STL files</strong></p>
 <p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Base) </a>
 <a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Mount) </a></p>
-<p>The yaw rotation rig constrains every degree of freedom except rotation around the vertical axis. </p>
-<p>With the drone free to spin only in yaw, you can observe the yaw torque balance, characterize drag torque coefficients and test your yaw control loops in isolation. This fixture makes it easy to experiment with step inputs, disturbances and controller tuning without worrying about the drone drifting away.</p>
+<p class="annotate">The yaw rotation rig constrains every degree of freedom except rotation around its vertical axis. The base and mount can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), one steel axis(2) and one bearing(3) that must be purchased separately and attached.</p>
+<ol>
+<li>Outer diameter: 3.2mm / Length: 3mm</li>
+<li>Diameter: 3mm / Length: XXmm</li>
+<li>Outer diameter: XXmm / Inner diameter: XXmm / Length: 2mm</li>
+</ol>
 <h3 id="pitch-rotation-rig">Pitch Rotation Rig</h3>
 <p><model-viewer src="../images/pitch_rotation_rig.glb"
     disable-zoom
@@ -1873,14 +1877,21 @@
 <p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Base) </a>
 <a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Mount) </a>
 <a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Cap) </a></p>
-<p>The pitch rotation rig restricts the drone to rotate only around its lateral axis. It allows you to study pitch dynamics independently from roll and yaw, making it ideal for identifying inertia parameters, validating linearized models and tuning pitch controllers. By isolating the pitch motion, this fixture provides clean, repeatable experiments even with aggressive inputs.</p>
+<p class="annotate">The pitch rotation rig constrains every degree of freedom except rotation around its lateral axis. The base, mount and cap can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), two steel axis(2) and two bearings(3) that must be purchased separately and attached.</p>
+<ol>
+<li>Outer diameter: 3.2mm / Length: 3mm</li>
+<li>Diameter: 3mm / Length: XXmm</li>
+<li>Outer diameter: XXmm / Inner diameter: XXmm / Length: 2mm</li>
+</ol>
 <hr />
 <h2 id="measurement-tools">Measurement Tools</h2>
-<p>The measurement tools listed here are used to capture key physical quantities during the experiments, such as motor speed, thrust and mass. Links to affordable AliExpress options are provided for convenience, but any equivalent instrument that performs the same function will work just as well.</p>
+<p>The measurement tools listed here are used to capture key physical quantities during the experiments, such as motor speed and propeller thrust. Links to affordable <a href="https://aliexpress.com/" target="_blank">AliExpress</a> options are provided for convenience, but any equivalent instrument that performs the same function will work just as well.</p>
 <h3 id="tachometer">Tachometer</h3>
-<p>A tachometer is used to measure the rotational speed of each motor. This reading is essential for identifying the thrust and drag coefficients, validating the motor model and checking whether the motor responds linearly to changes in PWM or commanded angular velocity. Any laser or optical tachometer capable of detecting reflective tape works fine. A link to an inexpensive AliExpress option is provided, but any equivalent instrument can be used.</p>
+<p><img alt="" src="../images/tachometer.png" style="display: block; margin: auto;" width="300" /></p>
+<p>The <a href="https://aliexpress.com/item/1005007466650764.html?spm=a2g0o.order_list.order_list_main.14.3db2caa4D5rDCi&amp;gatewayAdapt=glo2bra" target="_blank">UAN10034</a> tachometer is used to measure the rotational speed of each motor. This reading is essential for identifying the thrust and drag coefficients, validating the motor model and checking whether the motor responds linearly to changes in PWM or commanded angular velocity. </p>
 <h3 id="scale">Scale</h3>
-<p>The scale is used to measure the vertical force generated by the drone when mounted on the thrust stand. Since thrust acts directly against gravity, the scale reading provides an immediate measurement of total thrust for a given motor speed. This is the key instrument for building thrust curves and validating the mixer model. Any small, fast-response digital scale works, and an AliExpress link is included only as a reference.</p>
+<p><img alt="" src="../images/scale.png" style="display: block; margin: auto;" width="400" /></p>
+<p>The <a href="https://aliexpress.com/item/1005009694813506.html?spm=a2g0o.productlist.main.7.3b1b70acdrgjc1&amp;algo_pvid=99f3226a-38b7-422b-a01d-3c779e16e935&amp;algo_exp_id=99f3226a-38b7-422b-a01d-3c779e16e935-6&amp;pdp_ext_f=%7B%22order%22%3A%228539%22%2C%22spu_best_type%22%3A%22service%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&amp;pdp_npi=6%40dis%21BRL%2138.75%2118.60%21%21%2146.43%2122.29%21%40210325a917679814995746317ea1c3%2112000049878895282%21sea%21BR%212806959985%21X%211%210%21n_tag%3A-29919%3Bd%3A3670ffc3%3Bm03_new_user%3A-29895&amp;curPageLogUid=vDsE15HBtpoi&amp;utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005009694813506%7C_p_origin_prod%3A" target="_blank">MH-500</a> scale is used to measure the vertical force generated by the drone when mounted on the thrust stand. Since thrust acts directly against gravity, the scale reading provides an immediate measurement of total thrust for a given motor speed. This is the key instrument for building thrust curves. </p>
 
 
 

@@ -1794,7 +1794,8 @@
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <h1 id="hardware"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.5 1C8 1 10 3 10 5.5c0 .88-.25 1.7-.69 2.4l.1.1h5.18l.1-.1c-.44-.7-.69-1.52-.69-2.4C14 3 16 1 18.5 1S23 3 23 5.5 21 10 18.5 10c-.88 0-1.7-.25-2.4-.69l-1.1 1.1v3.18l1.1 1.1c.7-.44 1.52-.69 2.4-.69 2.5 0 4.5 2 4.5 4.5S21 23 18.5 23 14 21 14 18.5c0-.88.25-1.7.69-2.4l-.1-.1H9.41l-.1.1c.44.7.69 1.52.69 2.4C10 21 8 23 5.5 23S1 21 1 18.5 3 14 5.5 14c.88 0 1.7.25 2.4.69l1.1-1.1v-3.18l-1.1-1.1c-.7.44-1.52.69-2.4.69C3 10 1 8 1 5.5S3 1 5.5 1m0 2A2.5 2.5 0 0 0 3 5.5 2.5 2.5 0 0 0 5.5 8 2.5 2.5 0 0 0 8 5.5 2.5 2.5 0 0 0 5.5 3m0 13A2.5 2.5 0 0 0 3 18.5 2.5 2.5 0 0 0 5.5 21 2.5 2.5 0 0 0 8 18.5 2.5 2.5 0 0 0 5.5 16m13-13A2.5 2.5 0 0 0 16 5.5 2.5 2.5 0 0 0 18.5 8 2.5 2.5 0 0 0 21 5.5 2.5 2.5 0 0 0 18.5 3m0 13a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5M3.91 17.25l1.13.66c.13-.1.29-.16.46-.16a.75.75 0 0 1 .75.75l-.01.1 1.13.65-.28.5-1.13-.66c-.13.1-.29.16-.46.16a.75.75 0 0 1-.75-.75l.01-.1-1.13-.65zm-.28-11 1.13-.65-.01-.1a.75.75 0 0 1 .75-.75c.17 0 .33.06.46.16l1.13-.66.28.5-1.13.65.01.1a.75.75 0 0 1-.75.75c-.17 0-.33-.06-.46-.16l-1.13.66zm13.28-2 1.13.66c.13-.1.29-.16.46-.16a.75.75 0 0 1 .75.75l-.01.1 1.13.65-.28.5-1.13-.66c-.13.1-.29.16-.46.16a.75.75 0 0 1-.75-.75l.01-.1-1.13-.65zm-.28 15 1.12-.75a.75.75 0 0 1 .75-.75c.17 0 .33.06.46.16l1.13-.66.28.5-1.12.75a.75.75 0 0 1-.75.75c-.17 0-.33-.06-.46-.16l-1.13.66z"/></svg></span> Hardware</h1>
-<p>This section brings together all the hardware used in the course: the Bitcraze components that form the core of the system, the test fixtures used for controlled experiments, and the measurement tools that allow you to measure and validate the drone’s physical behavior. The goal is to make sure you know exactly what you need and have everything ready before moving on to the practical activities.</p>
+<p>This section brings together all the hardware used in the course: the Bitcraze components that form the core of the system, the test fixtures used for controlled experiments, and the measurement tools that allow you to measure and validate the drone’s physical behavior. </p>
+<p>The goal is to make sure you know exactly what you need and have everything ready before moving on.</p>
 <hr />
 <h2 id="bitcraze-components">Bitcraze Components</h2>
 <p class="annotate"><a href="https://bitcraze.io" target="_blank">Bitcraze</a> offers an entire ecosystem of drones, radios and expansion decks, but for this course you only need three of them(1). These devices form the drone you will program, communicate with and fly throughout the course.</p>
@@ -1835,7 +1836,7 @@
 </ol>
 <hr />
 <h2 id="test-fixtures">Test Fixtures</h2>
-<p>The test fixtures are 3D printed structures used to study the drone under controlled motion. Each one constrains specific degrees of freedom so you can isolate thrust, yaw or pitch behavior without risking the drone. All STL files are provided, and you can print every fixture yourself to build the full setup at home.</p>
+<p>The test fixtures are 3D printed structures used to study the drone under controlled motion. Each one constrains specific degrees of freedom so you can isolate thrust, yaw or pitch behavior without risking the drone. All STL files are provided, and you can manufacture every fixture yourself to build the full setup at home.</p>
 <h3 id="thrust-stand">Thrust Stand</h3>
 <p><model-viewer src="../images/thrust_stand.glb"
     disable-zoom
@@ -1844,8 +1845,8 @@
     style="width: 100%; max-width: 600px; height: 350px; margin: auto;">
 </model-viewer></p>
 <p><strong>STL files</strong></p>
-<p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Thrust Stand (Base) </a></p>
-<p class="annotate">The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. The base can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) and one neodymium magnet(2) that must be purchased separately and attached.</p>
+<p><a class="md-button" href="../files/thrust_stand.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Thrust Stand</a></p>
+<p class="annotate">The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. It can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) and one neodymium magnet(2) that must be purchased separately and installed.</p>
 <ol>
 <li>Outer diameter: 3.2mm / Length: 3mm</li>
 <li>Diameter: 20mm / Length: 2mm</li>
@@ -1858,13 +1859,13 @@
     style="width: 100%; max-width: 600px; height: 200px; margin: auto;">
 </model-viewer></p>
 <p><strong>STL files</strong></p>
-<p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Base) </a>
-<a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Mount) </a></p>
-<p class="annotate">The yaw rotation rig constrains every degree of freedom except rotation around its vertical axis. The base and mount can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), one steel axis(2) and one bearing(3) that must be purchased separately and attached.</p>
+<p><a class="md-button" href="../files/yaw_rig_base.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Base) </a>
+<a class="md-button" href="../files/yaw_rig_mount.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Yaw Rig (Mount) </a></p>
+<p class="annotate">The yaw rotation rig constrains every degree of freedom except rotation around its vertical axis. The base and mount can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), one steel axis(2) and one bearing(3) that must be purchased separately and installed.</p>
 <ol>
 <li>Outer diameter: 3.2mm / Length: 3mm</li>
-<li>Diameter: 3mm / Length: XXmm</li>
-<li>Outer diameter: XXmm / Inner diameter: XXmm / Length: 2mm</li>
+<li>Diameter: 4mm / Length: 23mm</li>
+<li>Inner diameter: 4mm / Outer diameter: 10mm / Length: 4mm</li>
 </ol>
 <h3 id="pitch-rotation-rig">Pitch Rotation Rig</h3>
 <p><model-viewer src="../images/pitch_rotation_rig.glb"
@@ -1874,14 +1875,14 @@
     style="width: 100%; max-width: 600px; height: 600px; margin: auto;">
 </model-viewer></p>
 <p><strong>STL files</strong></p>
-<p><a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Base) </a>
-<a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Mount) </a>
-<a class="md-button" href="models/pitch_rig_frame.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Cap) </a></p>
-<p class="annotate">The pitch rotation rig constrains every degree of freedom except rotation around its lateral axis. The base, mount and cap can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), two steel axis(2) and two bearings(3) that must be purchased separately and attached.</p>
+<p><a class="md-button" href="../files/pitch_rig_base.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Base) </a>
+<a class="md-button" href="../files/pitch_rig_mount.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Mount) </a>
+<a class="md-button" href="../files/pitch_rig_cap.stl"> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Pitch Rig (Cap) </a></p>
+<p class="annotate">The pitch rotation rig constrains every degree of freedom except rotation around its lateral axis. The base, mount and cap can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), two steel axis(2) and two bearings(3) that must be purchased separately and installed.</p>
 <ol>
 <li>Outer diameter: 3.2mm / Length: 3mm</li>
-<li>Diameter: 3mm / Length: XXmm</li>
-<li>Outer diameter: XXmm / Inner diameter: XXmm / Length: 2mm</li>
+<li>Diameter: 4mm / Length: 55mm</li>
+<li>Inner diameter: 4mm / Outer diameter: 10mm / Length: 4mm</li>
 </ol>
 <hr />
 <h2 id="measurement-tools">Measurement Tools</h2>
@@ -1912,6 +1913,8 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1944,7 +1947,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.title", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.title", "navigation.indexes", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

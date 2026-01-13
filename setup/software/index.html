@@ -1768,11 +1768,6 @@
 <p>Restart your computer.</p>
 </li>
 <li>
-<p>Open the WSL (Ubuntu) terminal:
-<div class="highlight"><pre><span></span><code>wsl
-</code></pre></div></p>
-</li>
-<li>
 <p>On first launch, create a Linux username and password.</p>
 </li>
 </ol>
@@ -1790,7 +1785,7 @@
 </code></pre></div></p>
 </li>
 <li>
-<p class="annotate">Add Homebrew to your <code>PATH</code> (1):</p>
+<p class="annotate">Add Homebrew to your <code>PATH</code>(1):</p>
 <ol>
 <li>Homebrew must be added to your <code>PATH</code> so that tools installed with Homebrew are correctly found by the system.</li>
 </ol>
@@ -1816,8 +1811,16 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="m0 93.7 183.6-25.3v177.4H0zm0 324.6 183.6 25.3V268.4H0zm203.8 28L448 480V268.4H203.8zm0-380.6v180.1H448V32z"/></svg></span> Windows</label><label for="__tabbed_2_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M319.1 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7-55.8.9-115.1 44.5-115.1 133.2 0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9m-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3"/></svg></span> Mac</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>All commands below must be executed inside the WSL (Ubuntu) terminal.</p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>All commands below must be executed inside the WSL terminal. Copying from Windows applications and pasting into the WSL terminal usually does not work, so you may need to type the commands manually.</p>
+</div>
 <ol>
+<li>
+<p>Open the WSL terminal:
+<div class="highlight"><pre><span></span><code>wsl
+</code></pre></div></p>
+</li>
 <li>
 <p>Update the package list:
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
@@ -1851,6 +1854,11 @@
 <li>
 <p>Verify the GCC installation:
 <div class="highlight"><pre><span></span><code>gcc<span class="w"> </span>--version
+</code></pre></div></p>
+</li>
+<li>
+<p>Close the WSL terminal:
+<div class="highlight"><pre><span></span><code><span class="nb">exit</span>
 </code></pre></div></p>
 </li>
 </ol>
@@ -1917,7 +1925,7 @@
 <h2 id="python-tools">Python Tools</h2>
 <p>Tools related specifically to Python development and isolation.</p>
 <h3 id="python">Python</h3>
-<p>A specific distribution (3.11) of Python is needed for everything to work.</p>
+<p>A specific distribution of Python (3.11) is needed for everything to work.</p>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
 <p>Do not skip this step even if you already have a Python distribution installed on your computer. But rest assured, any distribution already installed will remain unchanged.</p>
@@ -1961,7 +1969,11 @@
 <li>
 <p>Create a project directory:
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>crazyflie
-<span class="nb">cd</span><span class="w"> </span>crazyflie
+</code></pre></div></p>
+</li>
+<li>
+<p>Enter the project directory:
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>crazyflie
 </code></pre></div></p>
 </li>
 <li>
@@ -1973,6 +1985,13 @@
 <p>Activate the virtual environment:
 <div class="highlight"><pre><span></span><code>.venv<span class="se">\S</span>cripts<span class="se">\A</span>ctivate.ps1
 </code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">PowerShell script execution</p>
+<p>On Windows, PowerShell may block the execution of activation scripts by default.
+If you get a permission error when activating the virtual environment, run the command below once to allow local scripts for your user:
+<div class="highlight"><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-ExecutionPolicy</span> <span class="n">RemoteSigned</span>
+</code></pre></div></p>
+</div>
 </li>
 <li>
 <p>Verify the Python version inside the venv:
@@ -1991,7 +2010,11 @@
 <li>
 <p>Create a project directory:
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>crazyflie
-<span class="nb">cd</span><span class="w"> </span>crazyflie
+</code></pre></div></p>
+</li>
+<li>
+<p>Enter the project directory:
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>crazyflie
 </code></pre></div></p>
 </li>
 <li>
@@ -2019,8 +2042,11 @@
 </div>
 </div>
 <div class="admonition info">
-<p class="admonition-title">Important</p>
-<p>Python 3.11 is used only to create the virtual environment. When <code>(.venv)</code> appears in your terminal prompt, the virtual environment is active.</p>
+<p class="admonition-title">About the virtual environment and pip versions</p>
+<p>Python 3.11 is used only to create the virtual environment.
+When <code>(.venv)</code> appears in your terminal prompt, the virtual environment is active.</p>
+<p>When using Python 3.11, the latest compatible version of <code>pip</code> may be in the 24.x series.
+Warnings about newer pip releases (for example, 25.x) can be safely ignored.</p>
 </div>
 <hr />
 <h2 id="crazyflie-tools">Crazyflie Tools</h2>

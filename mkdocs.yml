@@ -17,6 +17,7 @@ theme:
     - content.code.copy                # Botão “copiar” nos blocos de código
     - content.code.title               # Título nos blocos de código (```python title="..."```)
     - navigation.indexes               # Usa index.md como landing de cada seção
+    - content.tabs.link
 
 markdown_extensions:
   - footnotes                          # Notas de rodapé com [^1]

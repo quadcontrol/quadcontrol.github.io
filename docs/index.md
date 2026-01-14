@@ -8,7 +8,7 @@ description: Master embedded control in a 100% hands-on course that connects the
 
 ![Crazyflie 2.1 Brushless, top view](images/logo.svg){ width=25% style="display:block;margin:auto" }
 
-Master **embedded control** in a **100% hands-on** course designed to bridge **theory, programming, and real flight**.
+Master embedded control in a 100% hands-on course designed to bridge theory, programming, and real flight.
 
 ---
 
@@ -16,7 +16,7 @@ Master **embedded control** in a **100% hands-on** course designed to bridge **t
 
 ![Crazyflie 2.1 Brushless, top view](images/crazyflie.png){ width=40% style="display:block;margin:auto" }
 
-At QuadControl, the star is the [**Bitcraze Crazyflie 2.1 Brushless**](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank}: an **open-source micro-drone** built for education and research. You’ll design the **entire estimation and control architecture** — from sensors to motors — and watch your algorithms actually fly.
+At QuadControl, the centerpiece is the [Crazyflie 2.1 Brushless](https://www.bitcraze.io/products/crazyflie-2-1-brushless/){target=_blank}: an open-source micro-drone developed for education and research by the Swedish company [Bitcraze](https://www.bitcraze.io){target=_blank}. You’ll design the entire estimation and control architecture — from sensors to motors — and watch your algorithms actually fly.
 
 ---
 
@@ -28,37 +28,37 @@ At QuadControl, the star is the [**Bitcraze Crazyflie 2.1 Brushless**](https://w
   
     ---
     
-    Key concepts of **aerodynamics** and **rigid-body dynamics**, explained in a clear, intuitive way and applied to a quadcopter.
+    Key concepts of aerodynamics and rigid-body dynamics, explained in a clear, intuitive way and applied to a quadcopter.
 
 - :material-memory:{ .lg .middle } **Embedded programming**
   
     ---
     
-    Program an **ARM microcontroller** in **C** using **FreeRTOS** — integrate sensors (IMU, ToF, and optical flow) via **I²C/SPI**, and drive **BLDC motors** through ESCs.
+    Program an ARM microcontroller in C using FreeRTOS — integrate sensors (IMU, ToF, and optical flow) via I²C/SPI, and drive BLDC motors through ESCs.
 
 - :material-flask:{ .lg .middle } **Applied control**
   
     ---
     
-    From **PID** and **complementary filters** to **LQR** and **Kalman filtering** — explore classical and modern control techniques tested **in real flight**.
+    From PID and complementary filters to LQR and Kalman filtering — explore classical and modern control techniques tested in real flight.
 
 - :material-layers-triple-outline:{ .lg .middle } **Layered architecture**
   
     ---
     
-    Three control levels with distinct strategies: **attitude** (sensor fusion + P–P), **vertical** (1st/2nd-order observers + PD/PID) and **horizontal** (LQE + LQR = LQG).
+    Three control levels with distinct strategies: attitude (sensor fusion + P–P), vertical (1st/2nd-order observers + PD/PID) and horizontal (LQE + LQR = LQG).
 
 - :material-hammer-wrench:{ .lg .middle } **100% practical**
   
     ---
     
-    **No simulations** — observe **in real time** how each gain shapes system behavior: stability, overshoot, and response time.
+    No simulations — observe in real time how each gain shapes system behavior: stability, overshoot, and response time.
 
 - :material-magnify-scan:{ .lg .middle } **System identification**
   
     ---
     
-    Use **custom test rigs** and jigs that constrain motion to specific axes, enabling precise **identification of physical and aerodynamic parameters**.
+    Use custom test rigs and jigs that constrain motion to specific axes, enabling precise identification of physical and aerodynamic parameters.
 
 </div>
 

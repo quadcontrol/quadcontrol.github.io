@@ -7,7 +7,9 @@ icon: material/quadcopter
 
 # :material-quadcopter: Hardware
 
-This section brings together all the hardware used in the course: the Bitcraze components that form the core of the system, the test fixtures used for controlled experiments, and the measurement tools that allow you to measure and validate the drone’s physical behavior. The goal is to make sure you know exactly what you need and have everything ready before moving on to the practical activities.
+This section brings together all the hardware used in the course: the Bitcraze components that form the core of the system, the test fixtures used for controlled experiments, and the measurement tools that allow you to measure and validate the drone’s physical behavior. 
+
+The goal is to make sure you know exactly what you need and have everything ready before moving on.
 
 ---
 
@@ -66,7 +68,7 @@ Together, they allow the drone to measure its altitude above the ground and esti
 
 ## Test Fixtures
 
-The test fixtures are 3D printed structures used to study the drone under controlled motion. Each one constrains specific degrees of freedom so you can isolate thrust, yaw or pitch behavior without risking the drone. All STL files are provided, and you can print every fixture yourself to build the full setup at home.
+The test fixtures are 3D printed structures used to study the drone under controlled motion. Each one constrains specific degrees of freedom so you can isolate thrust, yaw or pitch behavior without risking the drone. All STL files are provided, and you can manufacture every fixture yourself to build the full setup at home.
 
 ### Thrust Stand
 
@@ -80,9 +82,9 @@ The test fixtures are 3D printed structures used to study the drone under contro
 
 **STL files**
 
-[ :material-download: Thrust Stand (Base) ](models/pitch_rig_frame.stl){ .md-button }
+[ :material-download: Thrust Stand](files/thrust_stand.stl){ .md-button }
 
-The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. The base can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) and one neodymium magnet(2) that must be purchased separately and attached.
+The thrust stand holds the drone firmly above a scale so the vertical force produced by the motors can be measured directly. It can be manufactured on any 3D printer, but there are also two M2 brass inserts(1) and one neodymium magnet(2) that must be purchased separately and installed.
 {.annotate}
 
 1. Outer diameter: 3.2mm / Length: 3mm
@@ -101,15 +103,15 @@ The thrust stand holds the drone firmly above a scale so the vertical force prod
 
 **STL files**
 
-[ :material-download: Yaw Rig (Base) ](models/pitch_rig_frame.stl){ .md-button }
-[ :material-download: Yaw Rig (Mount) ](models/pitch_rig_frame.stl){ .md-button }
+[ :material-download: Yaw Rig (Base) ](files/yaw_rig_base.stl){ .md-button }
+[ :material-download: Yaw Rig (Mount) ](files/yaw_rig_mount.stl){ .md-button }
 
-The yaw rotation rig constrains every degree of freedom except rotation around its vertical axis. The base and mount can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), one steel axis(2) and one bearing(3) that must be purchased separately and attached.
+The yaw rotation rig constrains every degree of freedom except rotation around its vertical axis. The base and mount can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), one steel axis(2) and one bearing(3) that must be purchased separately and installed.
 {.annotate}
 
 1. Outer diameter: 3.2mm / Length: 3mm
-2. Diameter: 3mm / Length: XXmm
-3. Outer diameter: XXmm / Inner diameter: XXmm / Length: 2mm
+2. Diameter: 4mm / Length: 23mm
+3. Inner diameter: 4mm / Outer diameter: 10mm / Length: 4mm
 
 ### Pitch Rotation Rig
 
@@ -122,16 +124,16 @@ The yaw rotation rig constrains every degree of freedom except rotation around i
 
 **STL files**
 
-[ :material-download: Pitch Rig (Base) ](models/pitch_rig_frame.stl){ .md-button }
-[ :material-download: Pitch Rig (Mount) ](models/pitch_rig_frame.stl){ .md-button }
-[ :material-download: Pitch Rig (Cap) ](models/pitch_rig_frame.stl){ .md-button }
+[ :material-download: Pitch Rig (Base) ](files/pitch_rig_base.stl){ .md-button }
+[ :material-download: Pitch Rig (Mount) ](files/pitch_rig_mount.stl){ .md-button }
+[ :material-download: Pitch Rig (Cap) ](files/pitch_rig_cap.stl){ .md-button }
 
-The pitch rotation rig constrains every degree of freedom except rotation around its lateral axis. The base, mount and cap can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), two steel axis(2) and two bearings(3) that must be purchased separately and attached.
+The pitch rotation rig constrains every degree of freedom except rotation around its lateral axis. The base, mount and cap can be manufactured on any 3D printer, but there are also two M2 brass inserts(1), two steel axis(2) and two bearings(3) that must be purchased separately and installed.
 {.annotate}
 
 1. Outer diameter: 3.2mm / Length: 3mm
-2. Diameter: 3mm / Length: XXmm
-3. Outer diameter: XXmm / Inner diameter: XXmm / Length: 2mm
+2. Diameter: 4mm / Length: 55mm
+3. Inner diameter: 4mm / Outer diameter: 10mm / Length: 4mm
 
 
 ---

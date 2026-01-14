@@ -1842,7 +1842,7 @@
 <h2 id="visual-studio-code">Visual Studio Code</h2>
 <p>We will use Visual Studio Code as our IDE.</p>
 <ol>
-<li>Download and install Visual Studio Code from the <a href="https://code.visualstudio.com/Download" target="_blank">official website</a>.</li>
+<li>Download and install Visual Studio Code from its <a href="https://code.visualstudio.com/Download" target="_blank">official website</a>.</li>
 </ol>
 <hr />
 <h2 id="cloning">Cloning</h2>
@@ -1857,40 +1857,50 @@
 <p>Open Visual Studio Code.</p>
 </li>
 <li>
-<p>Click on <span class="keys"><kbd>Clone Git Repository...</kbd></span>.</p>
-</li>
-<li>
-<p>Enter the address of the repository <em>forked</em> into your GitHub account:
-<div class="highlight"><pre><span></span><code>https://github.com/username/quadcontrol-firmware.git
-</code></pre></div></p>
+<p class="annotate">Open a terminal window by clicking <span class="keys"><kbd>Terminal</kbd></span> &gt; <span class="keys"><kbd>New Terminal</kbd></span>(1).</p>
+<ol>
+<li>You can also use the shortcut <span class="keys"><kbd class="key-control">Ctrl</kbd></span> + <span class="keys"><kbd class="key-shift">Shift</kbd></span> + <span class="keys"><kbd>'</kbd></span>.</li>
+</ol>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
-<p>You must replace <code>username</code> with your GitHub username.</p>
-</div>
-</li>
-<li>
-<p>Press <span class="keys"><kbd>Enter</kbd></span> and select the location where you want to save the repository.</p>
-</li>
-<li>
-<p>When the cloning process finishes and VS Code asks whether you want to open the cloned repository, click <span class="keys"><kbd>Open</kbd></span>.</p>
-</li>
-<li>
-<p>Open a terminal window by clicking <span class="keys"><kbd>Terminal</kbd></span> &gt; <span class="keys"><kbd>New Terminal</kbd></span> (or using the shortcut <span class="keys"><kbd class="key-control">Ctrl</kbd></span> + <span class="keys"><kbd class="key-shift">Shift</kbd></span> + <span class="keys"><kbd>'</kbd></span>).</p>
-<div class="admonition warning">
-<p class="admonition-title">Important</p>
-<p>If you are using Windows, VS Code opens a PowerShell terminal by default. You must switch to a WSL (Ubuntu) terminal instead:</p>
+<p>If you are using Windows, Visual Studio Code opens a PowerShell terminal by default. You must switch to a WSL either by typing:
+<div class="highlight"><pre><span></span><code>wsl
+</code></pre></div>
+Or manually by clicking in the <span class="keys"><kbd>⌄</kbd></span> button:</p>
 <p><img alt="WSL" src="../images/wsl.png" style="display: block; margin: auto;" width="200" /></p>
 </div>
 </li>
 <li>
-<p class="annotate">Initialize all Git submodules(1) from the terminal:</p>
+<p class="annotate">Clone your forked repository and initialize all Git submodules(1):</p>
 <ol>
-<li>Git submodules are like “repositories inside repositories.” This command ensures that you also fetch the official Crazyflie firmware (<code>crazyflie-firmware</code>), which is included as a submodule.</li>
+<li>Git submodules are like “repositories inside repositories”, and they are initialize with the  the <code>--recursive</code> flag.</li>
 </ol>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/username/quadcontrol-firmware.git
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>You must replace <code>username</code> with your GitHub username and clone with </p>
+</div>
+</li>
+<li>
+<p>Open the project folder by clicking <span class="keys"><kbd>File</kbd></span> &gt; ++"Open Folder...".</p>
 </li>
 </ol>
+<!-- 4. Press ++"Enter"++ and select the location where you want to save the repository.
+
+5. When the cloning process finishes and VS Code asks whether you want to open the cloned repository, click ++"Open"++.
+
+
+
+7. Initialize all Git submodules(1) from the terminal:
+    {.annotate}
+
+
+
+    ```bash
+    git submodule update --init --recursive
+    ``` -->
+
 <h3 id="organization">Organization</h3>
 <p>The firmware is composed of two folders and two files:</p>
 <p><img alt="Firmware" src="../images/firmware.png" style="display: block; margin: auto;" width="450" /></p>
@@ -2040,9 +2050,15 @@
 <h2 id="testing">Testing</h2>
 <p>All set! Now let’s connect to the drone using the Crazyflie Client and verify that your code is running correctly. If everything is working as expected, you’ll see messages appearing in the console — and your drone will officially be under your control.</p>
 <ol>
-<li>Open the Crazyflie Client:
+<li>
+<p>Open the Crazyflie Client:
 <div class="highlight"><pre><span></span><code>cfclient
-</code></pre></div></li>
+</code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>If you are using Windows, this is the only command that must be run in PowerShell terminal instead of WSL.</p>
+</div>
+</li>
 <li>
 <p>Click on <span class="keys"><kbd>Scan</kbd></span> button</p>
 </li>

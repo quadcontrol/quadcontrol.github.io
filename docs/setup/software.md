@@ -74,7 +74,7 @@ The ARM toolchain is used to compile the firmware that runs on the Crazyflie mic
     !!! warning "Important"
         All commands below must be executed inside the WSL terminal. Copying from Windows applications and pasting into the WSL terminal usually does not work, so you may need to type the commands manually.
 
-    1. Open the WSL terminal:
+    1. Initialize the WSL terminal:
     ```bash
     wsl
     ```
@@ -182,8 +182,6 @@ Python is required because the Crazyflie Client and related utilities are writte
     python3 --version
     ```
 
-    If the command prints `Python 3.11.x`, the installation was successful.
-
 ### Crazyflie Client
 
 The Crazyflie Client is the main desktop application used to communicate with the drone and flash it firmware. It provides a graphical interface for interacting with the Crazyflie during development and testing.
@@ -201,7 +199,7 @@ The Crazyflie Client is the main desktop application used to communicate with th
     ```
 
     !!! warning "Important"
-        The Crazyflie Client runs on Windows, not inside WSL.
+        If you are using Windows, you must restart your computer to make sure the Crazyflie Client can be called from the WSL.
 
 
 === ":fontawesome-brands-apple: Mac"
@@ -211,7 +209,7 @@ The Crazyflie Client is the main desktop application used to communicate with th
     python3 -m pip install cfclient
     ```
 
-    2. Launch the client:
+    3. Launch the client:
     ```bash
     cfclient
     ```

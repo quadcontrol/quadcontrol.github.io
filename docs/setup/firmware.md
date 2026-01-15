@@ -20,7 +20,7 @@ We will use Visual Studio Code as our IDE.
 
 ---
 
-## Cloning
+## Repository
 
 Before you start programming, we need to bring the firmware code to your machine. We’ll do this in two steps: first, you create a copy (*fork*) of the repository, and then you donwload (*clone*) that copy to your computer.
 
@@ -37,13 +37,10 @@ Before you start programming, we need to bring the firmware code to your machine
     1. You can also use the shortcut ++ctrl++ + ++shift++ + ++"'"++.
 
     !!! warning "Important"
-        If you are using Windows, Visual Studio Code opens a PowerShell terminal by default. You must switch to a WSL either by typing:
+        If you are using Windows, Visual Studio Code opens a PowerShell terminal by default. You must initialize the WSL terminal first:
         ```bash
         wsl
         ```
-        Or manually by clicking in the ++"⌄"++ button:
-        
-        ![WSL](images/wsl.png){: width="200" style="display: block; margin: auto;" }
 
 3. Clone your forked repository and initialize all Git submodules(1):
     {.annotate}
@@ -55,9 +52,9 @@ Before you start programming, we need to bring the firmware code to your machine
     ```
 
     !!! warning "Important"
-        You must replace `username` with your GitHub username and clone with 
+        You must replace `username` with your GitHub username.
 
-4. Open the project folder by clicking ++"File"++ > ++"Open Folder...".
+4. Open the project folder by clicking ++"File"++ > ++"Open Folder..."++.
 
 <!-- 4. Press ++"Enter"++ and select the location where you want to save the repository.
 
@@ -74,9 +71,9 @@ Before you start programming, we need to bring the firmware code to your machine
     git submodule update --init --recursive
     ``` -->
 
-### Organization
+### Structure
 
-The firmware is composed of two folders and two files:
+The repository is composed of two folders and two files:
 
 ![Firmware](images/firmware.png){: width="450" style="display: block; margin: auto;" }
 
@@ -90,7 +87,7 @@ Let’s take a closer look at each one:
 The `src` folder contains a subfolder called `examples` with two example programs: `led_blink.c` and `hello_world.c`. Open these files to see some very simple example programs:
 
 === "`led_blink.c`"
-    ```c
+    ```c linenums="1"
     #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
     #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
     #include "led.h"           // LED functions (e.g., ledSet)
@@ -114,7 +111,7 @@ The `src` folder contains a subfolder called `examples` with two example program
     ```
 
 === "`hello_world.c`"
-    ```c
+    ```c linenums="1"
     #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
     #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
     #include "debug.h"         // Debug printing functions (e.g., DEBUG_PRINT)
@@ -135,7 +132,7 @@ The `src` folder contains a subfolder called `examples` with two example program
 
 We define which program will be compiled through the `Kbuild` file:
 
-```bash
+```bash linenums="1" title="Kbuild"
 obj-y += src/examples/led_blink.o
 ```
 
@@ -146,20 +143,20 @@ As we develop new programs, don’t forget to update the `Kbuild` file with the 
 
 ---
 
-## Configuration
+## Configure
 
-Now that you have the code on your machine, let’s adjust some important settings: the radio channel used for communication and the drone hardware platform. These settings ensure everything is properly aligned with your Crazyflie before compiling the code.
+Now that you have the firmware on your machine, let’s adjust some important configurations. These settings ensure everything is properly aligned with your Crazyflie before compiling the code.
 
-### Radio
+### Radio Channel
 
 1. Open the `radio.config` file.
 
 2. Change the radio channel according to your Crazyflie configuration:
-```c
+```c linenums="1" title="radio.config"
 RADIO_CHANNEL=1
 ```
 
-### Submodule
+### Bypass the Stabilizer
 
 1. Navigate to `crazyflie-firmware/src/modules/src` and open the `stabilizer.c` file.
 
@@ -167,6 +164,10 @@ RADIO_CHANNEL=1
     {.annotate}
 
     1. We do this to bypass the proprietary Crazyflie control algorithm. It will continue running in the background, but its commands will be ignored so that we can use our own control logic.
+
+
+    ```c title="stabilizer.c"
+    ```
 
     ```c linenums="221" hl_lines="3-6"
     static void setMotorRatios(const motors_thrust_pwm_t* motorPwm)
@@ -186,7 +187,7 @@ RADIO_CHANNEL=1
         }
     ```
 
-### Platform
+### Select the Hardware Platform
 
 1. Configure the firmware for the Crazyflie 2.1 Brushless platform by running the following command in the terminal:
 
@@ -196,9 +197,9 @@ RADIO_CHANNEL=1
 
 ---
 
-## Compiling
+## Compile and Upload
 
-With the code properly configured, it’s time to turn it into something the drone can understand. We will compile the firmware and upload it to the Crazyflie. This process will be repeated every time you want to test a new version of your program.
+With the firmware properly configured, it’s time to turn it into something the drone can understand. We will compile and upload it to the Crazyflie. This process will be repeated every time you want to test a new version of your program.
 
 ### Build
 
@@ -220,7 +221,7 @@ make cload
 
 ---
 
-## Testing
+## Connect and Test
 
 All set! Now let’s connect to the drone using the Crazyflie Client and verify that your code is running correctly. If everything is working as expected, you’ll see messages appearing in the console — and your drone will officially be under your control.
 

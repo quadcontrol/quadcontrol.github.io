@@ -1606,7 +1606,7 @@
 <hr />
 <h2 id="fundamentos-teoricos">Fundamentos teóricos</h2>
 <p>As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já <a href="../basic_concepts/aerodynamics.md">deduzimos</a> que a força de sustentação de uma hélice <span class="arithmatex">\(f\)</span> é proporcional à velocidade angular da hélice <span class="arithmatex">\(\omega\)</span> ao quadrado.</p>
-<p><img alt="Lift Force" src="../images/lift_force.svg" style="display: block; margin: auto;" width="350" /></p>
+<p><img alt="Thrust Force" src="../images/thrust_force.svg" style="display: block; margin: auto;" width="350" /></p>
 <div class="arithmatex">\[
     \tau = k_l \omega^2
 \]</div>
@@ -1625,11 +1625,11 @@
 <p><img alt="Device 1 (Readings)" src="../images/device1.jpeg" style="display: block; margin: auto;" width="60%" /></p>
 <p>Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular. Serão levantados dados de peso na balança para 10 valores distintos, e, para cada valor de, você deverá realizar o experimento três vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor da velocidade angular com os botões <code>Up</code> e <code>Down</code> do Command Based Flight Control através do CFClient.</p>
 <p><img alt="Commando Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
-<p class="annotate">Crie um arquivo chamado <code>lift_constant.c</code> dentro da pasta <code>src/identification</code> com o seguinte código(1):</p>
+<p class="annotate">Crie um arquivo chamado <code>thrust_constant.c</code> dentro da pasta <code>src/identification</code> com o seguinte código(1):</p>
 <ol>
 <li>Não esqueça de atualizar os valores dos coeficientes dos motores <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (linhas 8-9) estimados <a href="../identifications/motor_coeficientes.md">anteriormente</a>.</li>
 </ol>
-<div class="highlight"><span class="filename">lift_constant.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
+<div class="highlight"><span class="filename">thrust_constant.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;commander.h&quot;</span><span class="c1">     // Access to commanded setpoints (e.g., commanderGetSetpoint)</span>

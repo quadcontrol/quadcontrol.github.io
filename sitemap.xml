@@ -2,130 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://quadcontrol.io/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/actuators/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/architecture/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/mixer/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/sensors/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/setpoints/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/attitude/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/attitude/controller/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/attitude/estimator/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/horizontal/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/horizontal/controller/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/horizontal/estimator/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/vertical/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/vertical/controller/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/vertical/estimator/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/fundamentals/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/fundamentals/aerodynamics/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/fundamentals/coordinate_system/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/fundamentals/inertia/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/fundamentals/mixer/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/identification/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/identification/drag_constant/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/identification/motor_coefficients/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/identification/thrust_constant/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/modeling/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/modeling/2d_model/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/modeling/3d_model/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/setup/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/setup/firmware/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/setup/hardware/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/setup/software/</loc>
-         <lastmod>2026-01-30</lastmod>
+         <lastmod>2026-02-05</lastmod>
     </url>
 </urlset>

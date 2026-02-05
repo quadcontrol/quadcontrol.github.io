@@ -25,7 +25,7 @@
     
     
       
-        <title>Constante de arrasto - QuadControl</title>
+        <title>Drag constant - QuadControl</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#constante-de-arrasto" class="md-skip">
+        <a href="#drag-constant" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Constante de arrasto
+              Drag constant
             
           </span>
         </div>
@@ -771,10 +771,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#fundamentos-teoricos" class="md-nav__link">
+  <a href="#theoretical-background" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fundamentos teóricos
+        Theoretical background
       
     </span>
   </a>
@@ -782,10 +782,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#procedimento-experimental" class="md-nav__link">
+  <a href="#experimental-procedure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Procedimento experimental
+        Experimental procedure
       
     </span>
   </a>
@@ -793,10 +793,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#analise-de-dados" class="md-nav__link">
+  <a href="#data-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Análise de dados
+        Data analysis
       
     </span>
   </a>
@@ -804,10 +804,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validacao-dos-resultados" class="md-nav__link">
+  <a href="#results-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validação dos resultados
+        Results validation
       
     </span>
   </a>
@@ -1541,10 +1541,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#fundamentos-teoricos" class="md-nav__link">
+  <a href="#theoretical-background" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fundamentos teóricos
+        Theoretical background
       
     </span>
   </a>
@@ -1552,10 +1552,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#procedimento-experimental" class="md-nav__link">
+  <a href="#experimental-procedure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Procedimento experimental
+        Experimental procedure
       
     </span>
   </a>
@@ -1563,10 +1563,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#analise-de-dados" class="md-nav__link">
+  <a href="#data-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Análise de dados
+        Data analysis
       
     </span>
   </a>
@@ -1574,10 +1574,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validacao-dos-resultados" class="md-nav__link">
+  <a href="#results-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validação dos resultados
+        Results validation
       
     </span>
   </a>
@@ -1601,34 +1601,186 @@
 
 
 
-<h1 id="constante-de-arrasto"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z"/></svg></span> Constante de arrasto</h1>
-<p>Nesta secção, você irá determinar experimentalmente a constante de arrasto das hélices <span class="arithmatex">\(k_d\)</span>.</p>
+<h1 id="drag-constant"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z"/></svg></span> Drag constant</h1>
+<p>In this section, you will experimentally determine the propeller drag constant <span class="arithmatex">\(k_d\)</span>.</p>
 <hr />
-<h2 id="fundamentos-teoricos">Fundamentos teóricos</h2>
-<p>As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já <a href="../basic_concepts/aerodynamics.md">deduzimos</a> que o torque de arrasto de uma hélice <span class="arithmatex">\(\tau\)</span> é proporcional à velocidade angular da hélice <span class="arithmatex">\(\omega\)</span> ao quadrado.</p>
+<h2 id="theoretical-background">Theoretical background</h2>
+<p>The propellers of a quadcopter act as aerodynamic surfaces, accelerating the airflow through them. This process consumes energy from the batteries and generates both thrust forces and aerodynamic drag torques on the quadcopter. As <a href="../../fundamentals/aerodynamics/#propeller">previously derived</a>, the drag torque <span class="arithmatex">\({\color{var(--c2)}\tau}\)</span> produced by a propeller is proportional to the square of its angular velocity <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span>.</p>
 <p><img alt="Drag Torque" src="../images/drag_torque.svg" style="display: block; margin: auto;" width="350" /></p>
 <div class="arithmatex">\[
-    \tau = k_d \omega^2
+    {\color{var(--c2)}\tau} = k_d {\color{var(--c1)}\omega}^2
 \]</div>
-<p>Onde:</p>
-<ul>
-<li><span class="arithmatex">\(k_d\)</span> - Constante de arrasto (<span class="arithmatex">\(N.m.s^2\)</span>)   </li>
-</ul>
+<p>Where <span class="arithmatex">\(k_d\)</span> is the drag constant (<span class="arithmatex">\(\text{N·m·s}^2\)</span>).</p>
 <hr />
-<h2 id="procedimento-experimental">Procedimento experimental</h2>
-<p class="annotate">Você vai medir o torque de arrasto <span class="arithmatex">\(\tau\)</span> das hélices com um suporte(1) que restringe todos os graus de liberdade do drone deixando apenas o ângulo de guinagem <span class="arithmatex">\(\psi\)</span> livre.<br /></p>
+<h2 id="experimental-procedure">Experimental procedure</h2>
+<p class="annotate">You will measure the propeller drag torque <span class="arithmatex">\(\tau\)</span> using a mechanical fixture (1) that constrains all degrees of freedom of the drone, leaving only the yaw angle <span class="arithmatex">\(\psi\)</span> free.<br /></p>
 <ol>
-<li>Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. </li>
+<li>To mount the quadcopter on the fixture, insert it from the side and secure it using the two screws.</li>
 </ol>
 <p><img alt="Device 2" src="../images/device2.jpeg" style="display: block; margin: auto;" width="60%" /></p>
-<p>Sabendo o momento de inércia do drone <span class="arithmatex">\(I_{zz}\)</span> e o ângulo de guinagem ao longo do tempo <span class="arithmatex">\(\psi\)</span>, é possível determinar o torque de arrasto total das hélices <span class="arithmatex">\(\tau_z\)</span> através de uma análise dinâmica. Para realizar a leitura do ângulo de guinagem ao longo do tempo, você deve filmar o procedimento no modo câmera lenta de seu celular com um cronômetro no campo de visão.</p>
+<p>Knowing the drone yaw moment of inertia <span class="arithmatex">\(I_{zz}\)</span> and measuring the yaw angle <span class="arithmatex">\(\psi\)</span> as a function of time, it is possible to determine the total drag torque generated by the propellers, <span class="arithmatex">\(\tau_z\)</span>, through a dynamic analysis. To record the yaw angle over time, you should film the experiment using the slow-motion mode of your smartphone, with a stopwatch visible in the field of view.</p>
 <p><img alt="Device 2 (Readings)" src="../images/device2_readings.jpeg" style="display: block; margin: auto;" width="60%" /></p>
-<p>Você deve carregar no drone um programa que faz com que as hélices <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(3\)</span> rotacionem com velocidade angular de <span class="arithmatex">\(1.000\,\text{rad/s}\)</span> e as hélices <span class="arithmatex">\(2\)</span> e <span class="arithmatex">\(4\)</span> com <span class="arithmatex">\(2.000\,\text{rad/s}\)</span>. Como as hélices <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(3\)</span> giram no sentido horário e as hélices <span class="arithmatex">\(2\)</span> e <span class="arithmatex">\(4\)</span> no anti-horário, haverá um torque resultante que fará com que o drone rotacione no sentido anti-horário. Para cada quarto de volta (<span class="arithmatex">\(90^{\circ}\)</span>), você deverá anotar o tempo decorrido. Você deverá realizar o experimento três vezes e tirar uma média. Para facilitar o experimento, você pode ligar/desligar as hélices com os botões <code>Take off</code> e <code>Land</code> do Command Based Flight Control através do CFClient.</p>
-<p><img alt="Commando Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
-<p class="annotate">Crie um arquivo chamado <code>drag_constant.c</code> dentro da pasta <code>src/identification</code> com o seguinte código(1):</p>
+<p>Upload to the drone a program that sets propellers <span class="arithmatex">\(1\)</span> and <span class="arithmatex">\(3\)</span> to rotate at an angular velocity of <span class="arithmatex">\(1{,}000\,\text{rad/s}\)</span>, and propellers <span class="arithmatex">\(2\)</span> and <span class="arithmatex">\(4\)</span> at <span class="arithmatex">\(2{,}000\,\text{rad/s}\)</span>. Since propellers <span class="arithmatex">\(1\)</span> and <span class="arithmatex">\(3\)</span> rotate clockwise and propellers <span class="arithmatex">\(2\)</span> and <span class="arithmatex">\(4\)</span> rotate counter-clockwise, a net torque will be produced, causing the drone to rotate in the counter-clockwise direction. For each quarter turn (<span class="arithmatex">\(90^{\circ}\)</span>), record the elapsed time. Repeat the experiment three times and compute the average. </p>
+<p><img alt="" src="../images/device3_experiment.gif" style="display: block; margin: auto;" width="100%" /></p>
+<p>To simplify the procedure, you may start and stop the propellers using the <span class="keys"><kbd>Take off</kbd></span> and <span class="keys"><kbd>Land</kbd></span> buttons in the Command Based Flight Control, located at the bottom-right corner of the Crazyflie Client.</p>
+<p><img alt="Command Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="40%" /></p>
+<p class="annotate">Create a file named <code>drag_constant.c</code> inside the <code>src/identification</code> folder with the following code (1):<br /></p>
 <ol>
-<li>Não esqueça de atualizar os valores dos coeficientes dos motores <span class="arithmatex">\(a_2\)</span> e <span class="arithmatex">\(a_1\)</span> (linhas 8-9) estimados <a href="../identifications/motor_coeficientes.md">anteriormente</a>.</li>
+<li>Do not forget to update the motor model coefficients <span class="arithmatex">\(a_2\)</span> and <span class="arithmatex">\(a_1\)</span> (lines 8–9), as estimated <a href="../identifications/motor_coeficientes.md">previously</a>.</li>
 </ol>
+<p>The steps to collect the data are:</p>
+<ol>
+<li>Make sure the drone battery is fully charged  </li>
+<li>Attach the drone to the fixture and place a stopwatch next to it  </li>
+<li>Arm the drone by pressing the <code>Arm</code> button in the CFClient  </li>
+<li>Start recording with your smartphone in slow-motion mode  </li>
+<li>Turn on the motors using the Command-Based Flight Control in the CFClient  </li>
+<li>Let the drone complete two full rotations and stop recording  </li>
+</ol>
+<p>After the experiment, extract the data and fill in the table below.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\psi\,(^{\circ})\)</span></th>
+<th><span class="arithmatex">\(t_1\,(s)\)</span></th>
+<th><span class="arithmatex">\(t_2\,(s)\)</span></th>
+<th><span class="arithmatex">\(t_3\,(s)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(90\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(180\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(270\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(360\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(450\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(540\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(630\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(720\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="data-analysis">Data analysis</h2>
+<p>Using the collected data, fit a curve relating the yaw angle <span class="arithmatex">\(\psi\)</span> to time <span class="arithmatex">\(t\)</span> (remember to convert the yaw angle from degrees to radians).</p>
+<p><img alt="Drag Torque" src="../images/drag_torque_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
+<p>Under the action of a constant torque, the angular displacement as a function of time is given by:</p>
+<div class="arithmatex">\[
+\psi = \frac{\tau_z}{2 I_{zz}} \, t^2
+\]</div>
+<p>As <a href="../basic_concepts/mixer.md">derived earlier</a>, this torque corresponds to the sum of the drag torques produced by each propeller <span class="arithmatex">\(\tau_i\)</span>, which are proportional to the square of their angular velocities <span class="arithmatex">\(\omega_i\)</span>:</p>
+<div class="arithmatex">\[
+\tau_z = -k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2
+\]</div>
+<p>Given that <span class="arithmatex">\(\omega_1 = \omega_3 = 1{,}000\,\text{rad/s}\)</span>, <span class="arithmatex">\(\omega_2 = \omega_4 = 2{,}000\,\text{rad/s}\)</span>, and <span class="arithmatex">\(I_{zz} = 4 \times 10^{-5}\,\text{kg·m}^2\)</span>, substituting into the previous equation yields:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\psi &amp;= \frac{\tau_z}{2I_{zz}} t^2 \\
+\psi &amp;= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{2I_{zz}} t^2 \\
+\psi &amp;= \frac{\left(-\omega_1^2 + \omega_2^2 - \omega_3^2 + \omega_4^2\right)k_d}{2I_{zz}} t^2 \\
+\psi &amp;= \frac{- \cancel{2}\omega_1^2 + \cancel{2} \omega_2^2}{\cancel{2}I_{zz}} k_d t^2 \\
+\psi &amp;= \frac{-1000^2 + 2000^2}{4 \times 10^{-5}} k_d t^2 \\
+\psi &amp;= \left(75 \times 10^{9}\right) k_d t^2
+\end{align*}
+\]</div>
+<p>Therefore, the most appropriate model for curve fitting is a second-order polynomial whose constant and linear coefficients are zero.</p>
+<p>Determine the value of <span class="arithmatex">\(k_d\)</span> by performing this curve fit (hint: use the Curve Fitting Toolbox in MATLAB). Record the obtained value, as it will be used shortly in subsequent experiments.</p>
+<hr />
+<h2 id="results-validation">Results validation</h2>
+<p>Compare your experimentally obtained value with the one previously estimated with a ruler in <a href="../../fundamentals/aerodynamics/#exercise_1_4">Exercise 1.4</a>. The drag constant <span class="arithmatex">\(k_d\)</span> is expected to be on the order of magnitude of <span class="arithmatex">\(10^{-10}\,\text{N·s}^2\)</span>.</p>
+<!-- ---
+title: Constante de arrasto
+icon: material/alpha-d-box-outline
+---
+
+# :material-alpha-d-box-outline: Constante de arrasto
+
+Nesta secção, você irá determinar experimentalmente a constante de arrasto das hélices $k_d$.
+
+---
+
+## Fundamentos teóricos
+
+As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já [deduzimos](../basic_concepts/aerodynamics.md) que o torque de arrasto de uma hélice $\tau$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado.
+
+![Drag Torque](images/drag_torque.svg){: width="350" style="display: block; margin: auto;" }
+
+$$
+    \tau = k_d \omega^2
+$$
+
+Onde:
+
+- $k_d$ - Constante de arrasto ($N.m.s^2$)   
+
+---
+
+## Procedimento experimental
+
+Você vai medir o torque de arrasto $\tau$ das hélices com um suporte(1) que restringe todos os graus de liberdade do drone deixando apenas o ângulo de guinagem $\psi$ livre.  
+{ .annotate }
+
+1. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
+
+![Device 2](images/device2.jpeg){: width=60% style="display: block; margin: auto;" }
+
+Sabendo o momento de inércia do drone $I_{zz}$ e o ângulo de guinagem ao longo do tempo $\psi$, é possível determinar o torque de arrasto total das hélices $\tau_z$ através de uma análise dinâmica. Para realizar a leitura do ângulo de guinagem ao longo do tempo, você deve filmar o procedimento no modo câmera lenta de seu celular com um cronômetro no campo de visão.
+
+![Device 2 (Readings)](images/device2_readings.jpeg){: width=60% style="display: block; margin: auto;" }
+
+Você deve carregar no drone um programa que faz com que as hélices $1$ e $3$ rotacionem com velocidade angular de $1.000\,\text{rad/s}$ e as hélices $2$ e $4$ com $2.000\,\text{rad/s}$. Como as hélices $1$ e $3$ giram no sentido horário e as hélices $2$ e $4$ no anti-horário, haverá um torque resultante que fará com que o drone rotacione no sentido anti-horário. Para cada quarto de volta ($90^{\circ}$), você deverá anotar o tempo decorrido. Você deverá realizar o experimento três vezes e tirar uma média. Para facilitar o experimento, você pode ligar/desligar as hélices com os botões `Take off` e `Land` do Command Based Flight Control através do CFClient.
+
+![Commando Based Flight Control](images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
+
+Crie um arquivo chamado `drag_constant.c` dentro da pasta `src/identification` com o seguinte código(1):
+{ .annotate }
+
+1. Não esqueça de atualizar os valores dos coeficientes dos motores $a_2$ e $a_1$ (linhas 8-9) estimados [anteriormente](../identifications/motor_coeficientes.md).
+
 <div class="highlight"><span class="filename">drag_constant.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
@@ -1697,110 +1849,73 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>As etapas para coletar os dados são as seguintes:</p>
-<ol>
-<li>Garanta que a bateria do drone está carregada </li>
-<li>Prenda o drone no dispositivo e posicione um cronômetro ao seu lado</li>
-<li>Arme o drone apertando o botão <code>Arm</code> no CFClient</li>
-<li>Comece a filmar com seu celular no modo câmera lenta</li>
-<li>Ligue os motores com o Command Based Flight Control do CFClient</li>
-<li>Espere o drone dar duas voltas e pare de filmar</li>
-</ol>
-<p>Após o experimento, você deverá coletar dados para preencher a tabela abaixo.</p>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\(\psi \, (^{\circ})\)</span></th>
-<th><span class="arithmatex">\(t_1 \, (s)\)</span></th>
-<th><span class="arithmatex">\(t_2 \, (s)\)</span></th>
-<th><span class="arithmatex">\(t_3 \, (s)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(0\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(90\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(180\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(270\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(360\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(450\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(540\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(630\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(720\)</span></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="analise-de-dados">Análise de dados</h2>
-<p>Utilizando os dados coletados, você deverá ajustar uma curva que correlacione o ângulo de guinagem <span class="arithmatex">\(\psi\)</span> com o tempo <span class="arithmatex">\(t\)</span> da hélice (note que você precisa converter o ângulo de guinagem de <span class="arithmatex">\(^{\circ}\)</span> para <span class="arithmatex">\(rad\)</span>).</p>
-<p><img alt="Drag Torque" src="../images/drag_torque_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
-<p>Aplicando um torque constante, o deslocamento angular em função do tempo é dado por:</p>
-<p>$$
+
+As etapas para coletar os dados são as seguintes:
+
+1. Garanta que a bateria do drone está carregada 
+2. Prenda o drone no dispositivo e posicione um cronômetro ao seu lado
+3. Arme o drone apertando o botão `Arm` no CFClient
+4. Comece a filmar com seu celular no modo câmera lenta
+5. Ligue os motores com o Command Based Flight Control do CFClient
+6. Espere o drone dar duas voltas e pare de filmar
+
+Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
+
+| $\psi \, (^{\circ})$ | $t_1 \, (s)$ | $t_2 \, (s)$ | $t_3 \, (s)$ |
+|-------|----------|----------|----------|
+| $0$ |          |          |          |
+| $90$ |          |          |          |
+| $180$ |          |          |          |
+| $270$ |          |          |          |
+| $360$ |          |          |          |
+| $450$ |          |          |          |
+| $540$ |          |          |          |
+| $630$ |          |          |          |
+| $720$ |          |          |          |
+
+
+---
+
+## Análise de dados
+
+Utilizando os dados coletados, você deverá ajustar uma curva que correlacione o ângulo de guinagem $\psi$ com o tempo $t$ da hélice (note que você precisa converter o ângulo de guinagem de $^{\circ}$ para $rad$).
+
+![Drag Torque](images/drag_torque_graph.svg){: width=100% style="display: block; margin: auto;" }
+
+
+Aplicando um torque constante, o deslocamento angular em função do tempo é dado por:
+
+$$
     \psi = \frac{\tau_z}{2 I_{zz}} t^2
 $$
-Já <a href="../basic_concepts/mixer.md">deduzimos</a> que esse torque é dado pela soma dos torques de arrasto de cada hélice <span class="arithmatex">\(\tau_i\)</span>, que por sua vez são proporcionais às velocidades angulares das hélices <span class="arithmatex">\(\omega_i\)</span> ao quadrado:</p>
-<div class="arithmatex">\[
+Já [deduzimos](../basic_concepts/mixer.md) que esse torque é dado pela soma dos torques de arrasto de cada hélice $\tau_i$, que por sua vez são proporcionais às velocidades angulares das hélices $\omega_i$ ao quadrado:
+
+$$
     \tau_z = -k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2
-\]</div>
-<p>Como <span class="arithmatex">\(\omega_1 = \omega_3 = 1.000 \, rad/s\)</span>, <span class="arithmatex">\(\omega_2 = \omega_4 = 2.000 \, rad/s\)</span> e <span class="arithmatex">\(I_{zz} = 4 \cdot 10^{-5} \, kg.m^2\)</span>. substituindo na equação anterior:</p>
-<div class="arithmatex">\[
+$$
+
+Como $\omega_1 = \omega_3 = 1.000 \, rad/s$, $\omega_2 = \omega_4 = 2.000 \, rad/s$ e $I_{zz} = 4 \cdot 10^{-5} \, kg.m^2$. substituindo na equação anterior:
+
+$$
 \begin{align*}
-    \psi &amp;= \frac{\tau_z}{2I_{zz}} t^2 \\
-    \psi &amp;= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{2I_{zz}} t^2 \\
-    \psi &amp;= \frac{\left(-\omega_1^2 + \omega_2^2 - \omega_3^2 + \omega_4^2\right)k_d}{2I_{zz}} t^2 \\
-    \psi &amp;= \frac{- \cancel{2}\omega_1^2 + \cancel{2} \omega_2^2}{\cancel{2}I_{zz}} k_d t^2 \\
-    \psi &amp;= \frac{- 1000^2 + 2000^2}{4 \cdot 10^{-5}} k_d t^2 \\
-    \psi &amp;= \left( 75 \times 10^{9} \right) k_d t^2 \\
+    \psi &= \frac{\tau_z}{2I_{zz}} t^2 \\
+    \psi &= \frac{\left(-k_d \omega_1^2 + k_d \omega_2^2 - k_d \omega_3^2 + k_d \omega_4^2\right)}{2I_{zz}} t^2 \\
+    \psi &= \frac{\left(-\omega_1^2 + \omega_2^2 - \omega_3^2 + \omega_4^2\right)k_d}{2I_{zz}} t^2 \\
+    \psi &= \frac{- \cancel{2}\omega_1^2 + \cancel{2} \omega_2^2}{\cancel{2}I_{zz}} k_d t^2 \\
+    \psi &= \frac{- 1000^2 + 2000^2}{4 \cdot 10^{-5}} k_d t^2 \\
+    \psi &= \left( 75 \times 10^{9} \right) k_d t^2 \\
 \end{align*}
-\]</div>
-<p>Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujos coeficientes de ordem zero e um são nulos.</p>
-<p>Determine o valor de <span class="arithmatex">\(k_d\)</span> fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.</p>
-<hr />
-<h2 id="validacao-dos-resultados">Validação dos resultados</h2>
-<p>Compare o resultado obtido com o <a href="../basic_concepts/aerodynamics.md">estimado anteriormente</a>. É esperado que a constante de sustentação <span class="arithmatex">\(k_d\)</span> seja da ordem de grandeza de <span class="arithmatex">\(10^{-10}N.s^2\)</span>. </p>
+$$
+
+Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujos coeficientes de ordem zero e um são nulos.
+
+Determine o valor de $k_d$ fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.
+
+---
+
+## Validação dos resultados
+
+Compare o resultado obtido com o [estimado anteriormente](../basic_concepts/aerodynamics.md). É esperado que a constante de sustentação $k_d$ seja da ordem de grandeza de $10^{-10}N.s^2$.  -->
 
 
 

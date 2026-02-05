@@ -744,10 +744,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation-of-the-results" class="md-nav__link">
+  <a href="#results-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation of the results
+        Results validation
       
     </span>
   </a>
@@ -1574,10 +1574,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation-of-the-results" class="md-nav__link">
+  <a href="#results-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation of the results
+        Results validation
       
     </span>
   </a>
@@ -1602,7 +1602,7 @@
 
 
 <h1 id="motor-coefficients"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h6a2 2 0 0 1 2 2v8h-2V9h-2v7h-2V9H9v8H7V9a2 2 0 0 1 2-2M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg></span> Motor coefficients</h1>
-<p>In this section, you will experimentally identify the coefficients of the electric motor model.</p>
+<p>In this section, you will experimentally identify the electric motor model coefficients.</p>
 <hr />
 <h2 id="theoretical-background">Theoretical background</h2>
 <p>PWM (Pulse-Width Modulation) is a technique used to control the average power delivered by a digitally switched signal. By rapidly switching the signal between its maximum value and zero (on-off) and varying the fraction of time the signal stays at its maximum (duty cycle), you can control the average power delivered to the load (i.e., by modulating the pulse width).</p>
@@ -1617,8 +1617,9 @@
 <p><img alt="" src="../images/tachometer.png" style="display: block; margin: auto;" width="300" /></p>
 <p>The <span class="keys"><kbd>POWER</kbd></span> button turns on the devide, while the <span class="keys"><kbd>SET</kbd></span> button configure the number of blades of the propeller. The screen will display the current angular velocity in <span class="arithmatex">\(\text{rpm}\)</span>, while the maximum value will be memorized as "peak" data at the bottom.</p>
 <p>You must flash a program to the drone that turns on only one motor using a chosen PWM value. You will collect propeller angular velocity data for 10 distinct PWM values. For each PWM value, repeat the experiment 3 times and compute the average.</p>
-<p>To simplify the workflow, you can change the PWM command using the <span class="keys"><kbd>Up</kbd></span> and <span class="keys"><kbd>Down</kbd></span> buttons in the Command Based Flight Control in the Crazyflie Client bottom right.</p>
-<p><img alt="Command Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="100%" /></p>
+<p><img alt="" src="images/device1_experiment.gif" style="display: block; margin: auto;" width="100%" /></p>
+<p>To simplify the procedure, you can change the PWM command using the <span class="keys"><kbd>Up</kbd></span> and <span class="keys"><kbd>Down</kbd></span> buttons in the Command Based Flight Control, located at the bottom-right corner of the Crazyflie Client.</p>
+<p><img alt="Command Based Flight Control" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="40%" /></p>
 <p>Create a file named <code>motor_coefficients.c</code> inside <code>src/identification</code> with the following code:</p>
 <div class="highlight"><span class="filename">motor_coeficients.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
@@ -1748,7 +1749,7 @@
 <h2 id="data-analysis">Data analysis</h2>
 <p class="annotate">Using your dataset, fit a curve that relates the propeller angular velocity <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span>(1) to the corresponding <span class="arithmatex">\({\color{var(--c3)}PWM}\)</span> command.</p>
 <ol>
-<li>Note that you must convert speed from <span class="arithmatex">\(\text{rpm}\)</span> to <span class="arithmatex">\(\text{rad/s}\)</span></li>
+<li>Note that you must convert from <span class="arithmatex">\(\text{rpm}\)</span> to <span class="arithmatex">\(\text{rad/s}\)</span></li>
 </ol>
 <p><img alt="PWM" src="../images/pwm_graph.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>There are many possible model choices for this curve (linear, exponential, polynomial, etc.):</p>
@@ -1757,7 +1758,7 @@
 \]</div>
 <p class="annotate">To decide which one is most appropriate here, we need to look more closely at the system dynamics. A simplified electromechanical model of an electric motor driving a propeller is shown below(1).</p>
 <ol>
-<li>Although the Crazyflie uses a brushless DC motor (BLDC) rather than a brushed DC motor, the mathematical form used below is equivalent for this steady-state analysis.</li>
+<li>Although the Crazyflie uses a brushless DC motor (BLDC), its mathematical model at steady state is equivalent to a brushed DC motor.</li>
 </ol>
 <p><img alt="Electric Motor" src="../images/electric_motor.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Where:</p>
@@ -1799,19 +1800,19 @@
 \]</div>
 </details>
 </div>
-<p>For a DC motor, the motor torque <span class="arithmatex">\({\color{var(--c2)}\tau_m}\)</span> is directly proportional to the armature current <span class="arithmatex">\({\color{var(--c2)}i_a}\)</span>, and the back-EMF voltage <span class="arithmatex">\(e_b\)</span> is directly proportional to the angular velocity <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span>:</p>
+<p>For a DC motor, the motor torque <span class="arithmatex">\({\color{var(--c2)}\tau_m}\)</span> is directly proportional to the armature current <span class="arithmatex">\({\color{var(--c2)}i_a}\)</span>, and the back-EMF voltage <span class="arithmatex">\({\color{var(--c1)}e_b}\)</span> is directly proportional to the angular velocity <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span>:</p>
 <div class="arithmatex">\[
 {\color{var(--c2)}\tau_m} = K_m {\color{var(--c2)}i_a} 
 \qquad
-e_b = K_m {\color{var(--c1)}\omega}
+{\color{var(--c1)}e_b} = K_m {\color{var(--c1)}\omega}
 \]</div>
 <p>Where:</p>
 <ul>
-<li><span class="arithmatex">\(K_m\)</span> - Motor torque constant (<span class="arithmatex">\(N.m/A\)</span> or equivalently <span class="arithmatex">\(V.s/rad\)</span>).</li>
+<li><span class="arithmatex">\(K_m\)</span> - Motor torque constant (<span class="arithmatex">\(\text{N.m/A}\)</span> or <span class="arithmatex">\(\text{V.s/rad}\)</span>).</li>
 </ul>
 <div class="admonition question">
 <p class="admonition-title">Exercise 3</p>
-<p>Substitute <span class="arithmatex">\({\color{var(--c2)}\tau_m}\)</span> and <span class="arithmatex">\(e_b\)</span> into the two differential equations obtained above.</p>
+<p>Substitute <span class="arithmatex">\({\color{var(--c2)}\tau_m}\)</span> and <span class="arithmatex">\({\color{var(--c1)}e_b}\)</span> into the two differential equations obtained above.</p>
 <details class="info">
 <summary>Answer</summary>
 <div class="arithmatex">\[
@@ -1885,7 +1886,7 @@ e_b = K_m {\color{var(--c1)}\omega}
 <div class="arithmatex">\[
     {\color{var(--c3)}\text{PWM}} =\dfrac{R_a k_d}{K_m e_s} {\color{var(--c1)}\omega}^2 + \dfrac{R_a b + K_m^2}{K_m e_s} {\color{var(--c1)}\omega}
 \]</div>
-<p>Since <span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span>, and <span class="arithmatex">\(e_s\)</span> are constants, we can group them into two coefficients:</p>
+<p>Since <span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span>, and <span class="arithmatex">\(e_s\)</span> are constant, we can group them into two coefficients:</p>
 <div class="arithmatex">\[
     {\color{var(--c3)}\text{PWM}} = \underbrace{\dfrac{R_a k_d}{K_m e_s}}_{a_2} \, {\color{var(--c1)}\omega}^2
                + \underbrace{\dfrac{R_a b + K_m^2}{K_m e_s}}_{a_1} \, {\color{var(--c1)}\omega}
@@ -1894,16 +1895,18 @@ e_b = K_m {\color{var(--c1)}\omega}
 <div class="arithmatex">\[
     {\color{var(--c3)}\text{PWM}} = a_2 {\color{var(--c1)}\omega}^2 + a_1 {\color{var(--c1)}\omega} + \cancelto{0}{a_0}
 \]</div>
-<p>So, instead of identifying each physical parameter (<span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span>, and <span class="arithmatex">\(e_s\)</span>), you will experimentally identify only the coefficients <span class="arithmatex">\(a_2\)</span> and <span class="arithmatex">\(a_1\)</span> (tip: use MATLAB’s Curve Fitting Toolbox).</p>
+<p class="annotate">So, instead of identifying each physical parameter (<span class="arithmatex">\(R_a\)</span>, <span class="arithmatex">\(k_d\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(K_m\)</span>, and <span class="arithmatex">\(e_s\)</span>), you will experimentally identify only the coefficients <span class="arithmatex">\(a_2\)</span> and <span class="arithmatex">\(a_1\)</span>(1).</p>
+<ol>
+<li>Tip: use MATLAB’s Curve Fitting Toolbox.</li>
+</ol>
 <hr />
-<h2 id="validation-of-the-results">Validation of the results</h2>
-<p>Once you have estimated <span class="arithmatex">\(a_2\)</span> and <span class="arithmatex">\(a_1\)</span>, declare their values in the code and modify your program so that, given a commanded angular velocity <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span>, it computes the corresponding PWM value and sends it to motor M1. Note that we also print the commanded angular velocity to the console, so you must include an additional debug header.</p>
+<h2 id="results-validation">Results validation</h2>
+<p>Once you have estimated <span class="arithmatex">\(a_2\)</span> and <span class="arithmatex">\(a_1\)</span>, declare their values in the code and modify your program so that, given a commanded angular velocity <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span>, it computes the corresponding PWM value and sends it to motor M1.</p>
 <div class="highlight"><span class="filename">motor_coeficients.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;commander.h&quot;</span><span class="c1">     // Access to commanded setpoints (e.g., commanderGetSetpoint)</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
 
 <span class="c1">// Motor coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
@@ -1933,9 +1936,6 @@ e_b = K_m {\color{var(--c1)}\omega}
 <span class="w">            </span><span class="c1">// by 200 rad/s for each step. Therefore, we multiply Z by 400.0 so that: 0.5 m → 200 rad/s</span>
 <span class="w">            </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">400.0f</span><span class="p">;</span>
 
-<span class="w">            </span><span class="c1">// Print the computed omega value to the debug console (rounded to nearest integer)</span>
-<span class="w">            </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Omega (rad/s): %.0f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">omega</span><span class="p">);</span>
-
 <span class="w">            </span><span class="c1">// Convert angular velocity to PWM using the motor model: PWM = a_2 * omega^2 + a_1 * omega</span>
 <span class="w">            </span><span class="n">pwm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a_1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
@@ -1953,7 +1953,10 @@ e_b = K_m {\color{var(--c1)}\omega}
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>This code uses <strong>Command Based Flight Control</strong> to command <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span> in steps of <span class="arithmatex">\(200\,rad/s\)</span>. Test it by checking whether the commanded angular velocity is close<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">1</a></sup> to the tachometer reading.</p>
+<p class="annotate">This code uses Command Based Flight Control to command <span class="arithmatex">\({\color{var(--c1)}\omega}\)</span> in steps of <span class="arithmatex">\(200\,\text{rad/s}\)</span>. Test it by checking whether the commanded angular velocity is close(1) to the tachometer reading.</p>
+<ol>
+<li>It will not match perfectly because we are using a curve fit. This is not a problem, since we will later close the loop at a higher control level.</li>
+</ol>
 <!-- ---
 title: Coeficientes do motor 
 icon: material/alpha-m-box-outline
@@ -2282,15 +2285,6 @@ Uma vez determinados os coeficientes $a_2$ e $a_1$, declare os seus valores no c
 O código acima faz uso do Command Based Flight Control para comandar a velocidade angular $\omega$ em incrementos de $200rad/s$. Você deve testá-lo verificando se a velocidade angular comandada está próxima[^2] da leitura do tacômetro.
 
 [^2]: Ela não vai bater na vírgula, pois fizemos um ajuste de curva. No entanto, essa divergência não será um problema pois ainda vamos fechar a malha de controle em um nível superior. -->
-
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:2">
-<p>It will not match perfectly because we are using a curve fit. This is not a problem, since we will later close the loop at a higher control level.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
 
 
 

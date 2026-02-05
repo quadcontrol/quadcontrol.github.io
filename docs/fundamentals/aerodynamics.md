@@ -66,8 +66,8 @@ There are many possible airfoil shapes. One of the most widely used profiles is 
 
 While the drag coefficient increases monotonically with $\alpha$, the lift coefficient reaches a maximum around $\alpha = 18^{\circ}$. This point is known as the stall, which occurs when the airflow separates from the wing’s upper surface, creating turbulence and loss of lift. Note also that the lift coefficient is zero for a small negative angle and becomes negative only below that.
 
-<a id="exercise-1"></a>
-!!! question "Exercise 1"
+<a id="exercise_1_1"></a>
+!!! question "Exercise 1.1"
 
     To consolidate these concepts, consider a fixed-wing drone (flying wing) using Clark Y airfoils, flying in level cruise with the following parameters:
 
@@ -189,6 +189,7 @@ While the drag coefficient increases monotonically with $\alpha$, the lift coeff
 
 ---
 
+<a id="propeller"></a>
 ## Propeller
 
 A propeller consists of $n$ blades(1), each of which can be treated as an individual airfoil.
@@ -207,7 +208,7 @@ Where:
 - $d$ — Distance from the pressure center to the rotation axis ($\text{m}$)  
 - ${\color{var(--c1)}\omega}$ — Angular velocity of the propeller ($\text{rad/s}$)
 
-!!! question "Exercise 2"
+!!! question "Exercise 1.2"
 
     Derive the expressions for the lift ${\color{var(--c2)}f_l}$ and drag ${\color{var(--c2)}f_d}$ forces acting on the propeller blades as functions of the angular velocity ${\color{var(--c1)}\omega}$.
 
@@ -237,7 +238,7 @@ The lift and drag forces on each blades can be represented by an equivalent thru
 
 ![Propeller2](images/propeller2.svg){: width=50% style="display: block; margin: auto;" }
 
-!!! question "Exercise 3"
+!!! question "Exercise 1.3"
 
     Determine the thrust force ${\color{var(--c2)}f}$ and drag torque ${\color{var(--c2)}\tau}$ of the propeller.
 
@@ -288,7 +289,8 @@ $$
 {\color{var(--c2)}\tau} = k_d {\color{var(--c1)}\omega}^2 
 $$
 
-!!! question "Exercise 4"
+<a id="exercise_1_4"></a>
+!!! question "Exercise 1.4"
 
     ![](images/crazyflie_propellers.png){: width=20% style="display: block; margin: auto;" align=right } 
 
@@ -353,7 +355,7 @@ $$
 
 These two parameters will later be determined experimentally in the indentification section of [thrust constant](../identification/thrust_constant.md) and [drag constant](../identification/drag_constant.md), and you’ll find that the measured values closely match these estimates.
 
-!!! question "Exercise 5"
+!!! question "Exercise 1.5"
 
     To consolidate these ideas, consider a quadrotor drone hovering in place with the following parameters:
 
@@ -445,4 +447,4 @@ These two parameters will later be determined experimentally in the indentificat
         \end{align}
         $$
 
-Compare this result with the fixed-wing drone from [Exercise 1](#exercise-1). Notice how the fixed-wing configuration can stay airborne nearly eight times longer, though it cannot hover or perform vertical take-off and landing like a multirotor drone. Those are the advantages and disavantages of each configuration
+Compare this result with the fixed-wing drone from [Exercise 1.1](#exercise_1_1). Notice how the fixed-wing configuration can stay airborne nearly eight times longer, though it cannot hover or perform vertical take-off and landing like a multirotor drone. Those are the advantages and disavantages of each configuration

@@ -17,7 +17,7 @@ A quadcopter has four propellers spinning at angular velocities ${\color{var(--c
 
 To move vertically (along $z$ axis), the quadcopter simply changes all four angular velocities simultaneously. To rotate (around the $x$, $y$, and $z$ axes), it varies the speeds of pairs of propellers in coordinated ways.
 
-!!! question "Exercise 1"
+!!! question "Exercise 2.1"
 
     Regarding quadcopter motion, answer the following:
 
@@ -92,7 +92,7 @@ $$
 
 Where $M$ is the mixer matrix, a $4\times4$ matrix that maps squared motor speeds to thrust/torques.
 
-!!! question "Exercise 2"
+!!! question "Exercise 2.2"
 
     Derive the mixer matrix $M$ in terms of the thrust coefficient $k_l$, drag coefficient $k_d$ and arm length $l$.
 
@@ -125,7 +125,7 @@ $$
 \end{bmatrix}
 $$
 
-!!! question "Exercise 3"
+!!! question "Exercise 2.3"
 
     Compute(1) the inverse matrix $M^{-1}$.
     {.annotate} 

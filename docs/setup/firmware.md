@@ -84,31 +84,7 @@ Let’s take a closer look at each one:
 - `Kbuild` – File that defines which program will be compiled  
 - `radio.config` – File that defines the radio channel used to communicate with the Crazyflie  
 
-The `src` folder contains a subfolder called `examples` with two example programs: `led_blink.c` and `hello_world.c`. Open these files to see some very simple example programs:
-
-=== "`led_blink.c`"
-    ```c linenums="1"
-    #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
-    #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
-    #include "led.h"           // LED functions (e.g., ledSet)
-
-    // Main application loop
-    void appMain(void *param)
-    {
-        // Infinite loop (runs continuously while the quadcopter is powered on)
-        while (true)
-        {
-            // Turn on left green led
-            ledSet(LED_GREEN_L, true);
-            // Wait for 100 milliseconds (2 Hz loop)
-            vTaskDelay(pdMS_TO_TICKS(500));
-            // Turn off left green led
-            ledSet(LED_GREEN_L, false);
-            // Wait for 100 milliseconds (2 Hz loop)
-            vTaskDelay(pdMS_TO_TICKS(500));
-        }
-    }
-    ```
+The `src` folder contains a subfolder called `examples` with three example programs: `hello_world.c`, `led_blink.c` and `motor_test.c`. Open these files to see some very simple example programs:
 
 === "`hello_world.c`"
     ```c linenums="1"
@@ -124,8 +100,56 @@ The `src` folder contains a subfolder called `examples` with two example program
         {
             // Print message to console
             DEBUG_PRINT("Hello world!\n");
-            // Wait for 100 milliseconds (2 Hz loop)
+            // Wait for 500 milliseconds (2 Hz loop)
             vTaskDelay(pdMS_TO_TICKS(500));
+        }
+    }
+    ```
+
+=== "`led_blink.c`"
+    ```c linenums="1"
+    #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
+    #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
+    #include "led.h"           // LED functions (e.g., ledSet)
+
+    // Main application loop
+    void appMain(void *param)
+    {
+        // Infinite loop (runs continuously while the quadcopter is powered on)
+        while (true)
+        {
+            // Turn on left green led
+            ledSet(LED_GREEN_L, true);
+            // Wait for 500 milliseconds (2 Hz loop)
+            vTaskDelay(pdMS_TO_TICKS(500));
+            // Turn off left green led
+            ledSet(LED_GREEN_L, false);
+            // Wait for 500 milliseconds (2 Hz loop)
+            vTaskDelay(pdMS_TO_TICKS(500));
+        }
+    }
+    ```
+
+=== "`motor_test.c`"
+    ```c linenums="1"
+    #include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
+    #include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
+    #include "motors.h"        // Low-level motor control interface (e.g., motorsSetRatio)
+
+    // Main application loop
+    void appMain(void *param)
+    {
+        // Infinite loop (runs continuously while the quadcopter is powered on)
+        while (true)
+        {
+            // Turn on motor M1 with 20% power, scaling it to match the expected range [0, UINT16_MAX]
+            motorsSetRatio(MOTOR_M1, 0.1f * UINT16_MAX);
+            // Wait for 1000 milliseconds (1 Hz loop)
+            vTaskDelay(pdMS_TO_TICKS(1000));
+            // Turn off motor M1
+            motorsSetRatio(MOTOR_M1, 0.0f * UINT16_MAX);
+            // Wait for 1000 milliseconds (1 Hz loop)
+            vTaskDelay(pdMS_TO_TICKS(1000));
         }
     }
     ```

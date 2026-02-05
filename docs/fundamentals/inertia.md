@@ -15,7 +15,7 @@ Mass represents how much the drone resists changes in velocity along any transla
 
 ![Mass](images/mass.svg){: width=60% style="display: block; margin: auto;" }
 
-!!! question "Exercise 1"
+!!! question "Exercise 3.1"
 
     We can estimate the total mass of the drone by summing the mass of its components:
 
@@ -52,7 +52,7 @@ Since the drone can rotate around three axes, it has three corresponding moments
 
 ![Moment of Inertia](images/moment_of_inertia.svg){: width=60% style="display: block; margin: auto;" }
 
-!!! question "Exercise 2"
+!!! question "Exercise 3.2"
 
     We can estimate the drone’s moments of inertia using a simplified model[^1]:
 

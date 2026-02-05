@@ -8,7 +8,7 @@ description: Master embedded control in a 100% hands-on course that connects the
 
 ![Crazyflie 2.1 Brushless, top view](images/logo.svg){ width=25% style="display:block;margin:auto" }
 
-Master embedded control in a 100% hands-on course designed to bridge theory, programming, and real flight.
+Master quadcopter flight control in a 100% hands-on course designed to bridge theory, embedded programming, and real flight experiments.
 
 ---
 

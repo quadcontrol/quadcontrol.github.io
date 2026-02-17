@@ -52,6 +52,7 @@ Since the drone can rotate around three axes, it has three corresponding moments
 
 ![Moment of Inertia](images/moment_of_inertia.svg){: width=60% style="display: block; margin: auto;" }
 
+<a id="exercise_3_2"></a>
 !!! question "Exercise 3.2"
 
     We can estimate the drone’s moments of inertia using a simplified model[^1]:

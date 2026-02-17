@@ -13,9 +13,9 @@ In this section, you will experimentally identify the electric motor model coeff
 
 PWM (Pulse-Width Modulation) is a technique used to control the average power delivered by a digitally switched signal. By rapidly switching the signal between its maximum value and zero (on-off) and varying the fraction of time the signal stays at its maximum (duty cycle), you can control the average power delivered to the load (i.e., by modulating the pulse width).
 
-![PWM1](images/pwm1.svg){: width="450" style="display: block; margin: auto;" }
-![PWM2](images/pwm2.svg){: width="450" style="display: block; margin: auto;" }
-![PWM3](images/pwm3.svg){: width="450" style="display: block; margin: auto;" }
+![](images/pwm1.svg){: width="450" style="display: block; margin: auto;" }
+![](images/pwm2.svg){: width="450" style="display: block; margin: auto;" }
+![](images/pwm3.svg){: width="450" style="display: block; margin: auto;" }
 
 This is the mechanism used by the Crazyflie to drive its motors. In code you can set a real value between `0.0` and `1.0`, which corresponds to the motor PWM.
 
@@ -25,9 +25,9 @@ You will implement a function that, given a desired angular velocity, computes t
 
 ## Experimental procedure
 
-To measure the propeller angular velocity, you will use a tachometer. The tachometer detects the interruption of light when the propeller blade crosses its light beam. The rotational speed is then computed by counting how many times this happens within a given time interval.
+To measure the propeller angular velocity, you will use a [tachometer](../setup/hardware.md/#tachometer). The tachometer detects the interruption of light when the propeller blade crosses its light beam. The rotational speed is then computed by counting how many times this happens within a given time interval.
 
-![](images/tachometer.png){: width="300" style="display: block; margin: auto;" }
+![](../setup/images/tachometer.png){: width="300" style="display: block; margin: auto;" }
 
 The ++"POWER"++ button turns on the devide, while the ++"SET"++ button configure the number of blades of the propeller. The screen will display the current angular velocity in $\text{rpm}$, while the maximum value will be memorized as "peak" data at the bottom.
 
@@ -37,7 +37,7 @@ You must flash a program to the drone that turns on only one motor using a chose
 
 To simplify the procedure, you can change the PWM command using the ++"Up"++ and ++"Down"++ buttons in the Command Based Flight Control, located at the bottom-right corner of the Crazyflie Client.
 
-![Command Based Flight Control](images/command_based_flight_control.png){: width=40% style="display: block; margin: auto;" }
+![](images/command_based_flight_control.png){: width=40% style="display: block; margin: auto;" }
 
 Create a file named `motor_coefficients.c` inside `src/identification` with the following code:
 
@@ -85,18 +85,18 @@ void appMain(void *param)
 
 Follow these measurement steps:
 
-1. Make sure the drone battery is fully charged.
-2. Fix the drone at the table using masking tape.
-3. Arm the drone by clicking ++"Arm"++ in the Crazyflie Client.
-4. Turn on the motor at a specific PWM value using ++"Up"++ and ++"Down"++ buttons in the Command Based Flight Control.
-5. Turn on the tachometer by clicking ++"POWER"++.
-6. Point the tachometer at the propeller from approximately $30~\text{cm}$ away.
-7. Write down the peak data shown on the display.
-8. Repeat steps 1–7 for the other PWM values.
+1. Ensure that the drone battery is fully charged 
+2. Fix the drone at the table using masking tape
+3. Arm the drone by pressing the ++"Arm"++ button in the Crazyflie Client
+4. Turn on the motor at a specific PWM value using ++"Up"++ and ++"Down"++ buttons in the Command Based Flight Control
+5. Turn on the tachometer by clicking ++"POWER"++
+6. Point the tachometer at the propeller from approximately $30~\text{cm}$ away
+7. Write down the peak data shown on the display
+8. Repeat steps 1–7 for the other PWM values
 
 After the experiment, fill in the table below:
 
-| ${\color{var(--c3)}PWM}$  | ${\color{var(--c1)}\omega_1}$ | ${\color{var(--c1)}\omega_2}$ | ${\color{var(--c1)}\omega_3}$ |
+| ${\color{var(--c3)}PWM}$  | ${\color{var(--c1)}\omega_1}~(\text{rad/s})$ | ${\color{var(--c1)}\omega_2}~(\text{rad/s})$ | ${\color{var(--c1)}\omega_3}~(\text{rad/s})$ |
 |-------|----------|----------|----------|
 | `0.1` |          |          |          |
 | `0.2` |          |          |          |
@@ -113,14 +113,14 @@ After the experiment, fill in the table below:
 
 ## Data analysis
 
-Using your dataset, fit a curve that relates the propeller angular velocity ${\color{var(--c1)}\omega}$(1) to the corresponding ${\color{var(--c3)}PWM}$ command.
+Using the collected data, we should fit a curve relating the propeller angular velocity ${\color{var(--c1)}\omega}$(1) with the corresponding ${\color{var(--c3)}PWM}$ command.
 {.annotate}
 
 1. Note that you must convert from $\text{rpm}$ to $\text{rad/s}$
 
-![PWM](images/pwm_graph.svg){: width=100% style="display: block; margin: auto;" }
+![](images/pwm_graph.svg){: width=100% style="display: block; margin: auto;" }
 
-There are many possible model choices for this curve (linear, exponential, polynomial, etc.):
+There are many possible fitting models (linear, exponential, polynomial, etc.):
 
 $$
     {\color{var(--c3)}\text{PWM}} = f({\color{var(--c1)}\omega})
@@ -131,7 +131,7 @@ To decide which one is most appropriate here, we need to look more closely at th
 
 1. Although the Crazyflie uses a brushless DC motor (BLDC), its mathematical model at steady state is equivalent to a brushed DC motor.
 
-![Electric Motor](images/electric_motor.svg){: width="600" style="display: block; margin: auto;" }
+![](images/electric_motor.svg){: width="600" style="display: block; margin: auto;" }
 
 Where:
 

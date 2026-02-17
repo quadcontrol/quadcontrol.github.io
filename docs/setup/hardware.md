@@ -70,6 +70,7 @@ Together, they allow the drone to measure its altitude above the ground and esti
 
 The test fixtures are 3D printed structures used to study the drone under controlled motion. Each one constrains specific degrees of freedom so you can isolate thrust, yaw or pitch behavior without risking the drone. All STL files are provided, and you can manufacture every fixture yourself to build the full setup at home.
 
+<a id="thrust_stand"></a>
 ### Thrust Stand
 
 <model-viewer src="../images/thrust_stand.glb"
@@ -90,7 +91,7 @@ The thrust stand holds the drone firmly above a scale so the vertical force prod
 1. Outer diameter: 3.2mm / Length: 3mm
 2. Diameter: 20mm / Length: 2mm
 
-
+<a id="yaw_rotation_rig"></a>
 ### Yaw Rotation Rig
 
 <model-viewer src="../images/yaw_rotation_rig.glb"
@@ -113,6 +114,7 @@ The yaw rotation rig constrains every degree of freedom except rotation around i
 2. Diameter: 4mm / Length: 23mm
 3. Inner diameter: 4mm / Outer diameter: 10mm / Length: 4mm
 
+<a id="pitch_rotation_rig"></a>
 ### Pitch Rotation Rig
 
 <model-viewer src="../images/pitch_rotation_rig.glb"
@@ -142,12 +144,14 @@ The pitch rotation rig constrains every degree of freedom except rotation around
 
 The measurement tools listed here are used to capture key physical quantities during the experiments, such as motor speed and propeller thrust. Links to affordable [AliExpress](https://aliexpress.com/){target=_blank} options are provided for convenience, but any equivalent instrument that performs the same function will work just as well.
 
+<a id="tachometer"></a>
 ### Tachometer
 
 ![](images/tachometer.png){: width="300" style="display: block; margin: auto;" }
 
 The [UAN10034](https://aliexpress.com/item/1005007466650764.html?spm=a2g0o.order_list.order_list_main.14.3db2caa4D5rDCi&gatewayAdapt=glo2bra){target=_blank} tachometer is used to measure the rotational speed of each motor. This reading is essential for identifying the thrust and drag coefficients, validating the motor model and checking whether the motor responds linearly to changes in PWM or commanded angular velocity. 
 
+<a id="scale"></a>
 ### Scale
 
 ![](images/scale.png){: width="400" style="display: block; margin: auto;" }

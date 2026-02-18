@@ -70,9 +70,9 @@ nav:
   - Control:
       - control/index.md
       - Architecture: control/architecture.md
-      # - Referências: control/setpoints.md
-      # - Atuadores: control/actuators.md
-      # - Sensores: control/sensors.md
+      - Actuators: control/actuators.md
+      - Sensors: control/sensors.md
+      - Reference: control/references.md
       - Mixer: control/mixer.md
       - Attitude:
           - control/attitude/index.md

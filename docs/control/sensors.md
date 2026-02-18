@@ -1,5 +1,5 @@
 ---
-title: Sensores
+title: Sensors
 icon: material/compass-outline
 ---
 

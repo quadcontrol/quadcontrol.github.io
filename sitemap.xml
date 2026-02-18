@@ -9,23 +9,11 @@
          <lastmod>2026-02-18</lastmod>
     </url>
     <url>
-         <loc>https://quadcontrol.io/control/actuators/</loc>
-         <lastmod>2026-02-18</lastmod>
-    </url>
-    <url>
          <loc>https://quadcontrol.io/control/architecture/</loc>
          <lastmod>2026-02-18</lastmod>
     </url>
     <url>
          <loc>https://quadcontrol.io/control/mixer/</loc>
-         <lastmod>2026-02-18</lastmod>
-    </url>
-    <url>
-         <loc>https://quadcontrol.io/control/references/</loc>
-         <lastmod>2026-02-18</lastmod>
-    </url>
-    <url>
-         <loc>https://quadcontrol.io/control/sensors/</loc>
          <lastmod>2026-02-18</lastmod>
     </url>
     <url>
@@ -50,6 +38,22 @@
     </url>
     <url>
          <loc>https://quadcontrol.io/control/horizontal/estimator/</loc>
+         <lastmod>2026-02-18</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/interface/</loc>
+         <lastmod>2026-02-18</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/interface/actuators/</loc>
+         <lastmod>2026-02-18</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/interface/references/</loc>
+         <lastmod>2026-02-18</lastmod>
+    </url>
+    <url>
+         <loc>https://quadcontrol.io/control/interface/sensors/</loc>
          <lastmod>2026-02-18</lastmod>
     </url>
     <url>

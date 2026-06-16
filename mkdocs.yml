@@ -70,19 +70,23 @@ nav:
   - Control:
       - control/index.md
       - Architecture: control/architecture.md
-      - Actuators: control/actuators.md
-      - Sensors: control/sensors.md
-      - Reference: control/references.md
-      - Mixer: control/mixer.md
-      - Attitude:
-          - control/attitude/index.md
-          - Estimator: control/attitude/estimator.md
-          - Controller: control/attitude/controller.md
-      - Vertical:
-          - control/vertical/index.md
-          - Estimator: control/vertical/estimator.md
-          - Controller: control/vertical/controller.md
-      - Horizontal:
-          - control/horizontal/index.md
-          - Estimator: control/horizontal/estimator.md
-          - Controller: control/horizontal/controller.md
+      - Interface:
+        - control/interface/index.md
+        - Actuators: control/interface/actuators.md
+        - Sensors: control/interface/sensors.md
+        - References: control/interface/references.md
+      - Stabilization: 
+        - control/stabilization/index.md
+        - Mixer: control/stabilization/mixer.md
+        - Attitude:
+            - control/stabilization/attitude/index.md
+            - Estimator: control/stabilization/attitude/estimator.md
+            - Controller: control/stabilization/attitude/controller.md
+        - Height:
+            - control/stabilization/vertical/index.md
+            - Estimator: control/stabilization/vertical/estimator.md
+            - Controller: control/stabilization/vertical/controller.md
+        - Position:
+            - control/stabilization/horizontal/index.md
+            - Estimator: control/stabilization/horizontal/estimator.md
+            - Controller: control/stabilization/horizontal/controller.md

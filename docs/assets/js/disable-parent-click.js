@@ -7,10 +7,11 @@
     "Identification",
     "Modeling",
     "Control",
+    "Interface",
+    "Stabilization",
     "Attitude",
-    "Vertical",
-    "Horizontal",
-    // "Início", // só adicione se quiser bloquear também
+    "Height",
+    "Position",
   ]);
 
   function shouldBlock(linkEl) {

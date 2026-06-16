@@ -130,53 +130,53 @@ LOG_GROUP_STOP(stateEstimate)
 The second part consists of the functions that will be called inside the main loop:
 
 ```c linenums="62"
-// Get reference setpoints from commander module
+// Read reference setpoints (from Crazyflie Client)
 void reference()
 {
 }
 
-// Get sensor readings from estimator module
+// Read raw sensor measurements
 void sensors()
 {
 }
 
-// Apply motor commands
+// Send commands to motors
 void actuators()
 {
 }
 
-// Compute motor commands
+// Convert desired force/torques into motor PWM
 void mixer()
 {
 }
 
-// Estimate orientation from IMU sensor
+// Estimate orientation (roll/pitch/yaw) from IMU sensor
 void attitudeEstimator()
 {
 }
 
-// Compute desired torques
+// Compute desired roll/pitch/yaw torques
 void attitudeController()
 {
 }
 
-// Estimate vertical position/velocity from range sensor
-void verticalEstimator()
+// Estimate height (z) from range sensor
+void heightEstimator()
 {
 }
 
 // Compute desired thrust force
-void verticalController()
+void heightController()
 {
 }
 
-// Estimate horizontal position/velocity from optical flow sensor
-void horizontalEstimator()
+// Estimate position (x/y) from optical flow sensor
+void positionEstimator()
 {
 }
 
 // Compute desired roll/pitch angles
-void horizontalController()
+void positionController()
 {
 }
 ```
@@ -185,11 +185,41 @@ Notice that all functions are currently declared but left empty. This is intenti
 
 ![Architecture](images/architecture.gif){: width=100% style="display: block; margin: auto;" }
 
-In the next sections, we begin with the actuators, sensors and reference functions — which form the interface between our code and the physical world. After that, we introduce the mixer and then move on to estimators and controllers. Each subsystem will be studied in pairs — attitude (orientation), vertical (altitude) and horizontal (planar position) — combining estimation and control concepts from both classical and modern control theory in a structured and pedagogically progressive sequence.
+#### Interface functions
+
+In the next sections, we will begin by implementing the actuators, sensors and references functions, which form the interface between our code and the physical world. 
 
 <div class="grid cards" markdown>
 
--   :material-power:{ .lg .middle } **Mixer**
+-   :material-fan:{ .lg .middle } **Actuators**
+
+    ---
+
+    We send PWM commands to the BLDC motor drivers and study safety mechanisms used to arm and disarm the motors.
+
+-   :material-compass-outline:{ .lg .middle } **Sensors**
+
+    ---
+
+    We read raw measurements from the IMU, range sensor and optical flow sensor by consuming data from the firmware's internal sensor pipeline.
+
+
+-   :material-knob:{ .lg .middle } **References**
+
+    ---
+
+    We send and receive setpoints transmitted wirelessly from the Crazyflie Client and learn how to access them from the firmware.
+
+</div>
+
+
+#### Stabilization functions
+
+After that, we introduce the mixer and then move on to estimators and controllers, which are the core stabilization funcions. Each subsystem will be studied in pairs — attitude (orientation), height (altitude) and position (planar) — combining estimation and control concepts from both classical and modern control theory in a structured and pedagogically progressive sequence.
+
+<div class="grid cards" markdown>
+
+-   :material-equalizer:{ .lg .middle } **Mixer**
 
     ---
 
@@ -201,13 +231,13 @@ In the next sections, we begin with the actuators, sensors and reference functio
 
     We study low-pass filters, high-pass filters, and the complementary filter for sensor fusion. Stabilization is achieved using a cascaded P–P controller acting on angular velocity and angle, forming the fastest control loop in the system.
 
--   :material-pan-vertical:{ .lg .middle } **Vertical**
+-   :material-altimeter:{ .lg .middle } **Height**
 
     ---
 
-    We introduce first- and second-order state observers to estimate vertical velocity and position. We start with a PD controller, which naturally evolves into a PID when compensating for steady-state error caused by constant disturbances such as gravity.
+    We introduce first and second-order state observers to estimate it height. We start with a PD controller, which naturally evolves into a PID when compensating for steady-state error caused by constant disturbances such as gravity.
 
--   :material-pan-horizontal:{ .lg .middle } **Horizontal**
+-   :material-crosshairs-gps:{ .lg .middle } **Position**
 
     ---
 
@@ -231,10 +261,10 @@ void appMain(void *param)
         reference();                  // Read reference setpoints (from Crazyflie Client)
         sensors();                    // Read raw sensor measurements
         attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
-        verticalEstimator();          // Estimate vertical position/velocity from range sensor
-        horizontalEstimator();        // Estimate horizontal positions/velocities from optical flow sensor
-        horizontalController();       // Compute desired roll/pitch angles
-        verticalController();         // Compute desired thrust force
+        heightEstimator();            // Estimate height (z) from range sensor
+        positionEstimator();          // Estimate position (x/y) from optical flow sensor
+        positionController();         // Compute desired roll/pitch angles
+        heightController();           // Compute desired thrust force
         attitudeController();         // Compute desired roll/pitch/yaw torques
         mixer();                      // Convert desired force/torques into motor PWM
         actuators();                  // Send commands to motors

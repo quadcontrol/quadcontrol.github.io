@@ -3,11 +3,11 @@ title: Estimador vertical
 icon: material/radar
 ---
 
-# :material-pan-vertical: Estimador vertical
+# :altimeter: Estimador vertical
 
 Nesta secção você irá implementar o estimador vertical, que estima a posição ${\color{var(--c1)}z}$ e velocidade ${\color{var(--c1)}v_z}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$.
 
-![Architecture - Vertical Estimator](../images/architecture_vertical_estimator.svg){: width=100% style="display: block; margin: auto;" }
+![Architecture - Vertical Estimator](../../images/architecture_height_estimator.svg){: width=100% style="display: block; margin: auto;" }
 
 Para isto, será implementada uma nova função:
 

@@ -3,11 +3,11 @@ title: Estimador horizontal
 icon: material/radar
 ---
 
-# :material-pan-horizontal: Estimador horizontal
+# :crosshairs-gps: Estimador horizontal
 
 Nesta secção você irá implementar o estimador horizontal, que estima as posições ${\color{var(--c1)}x}$ e ${\color{var(--c1)}y}$ e velocidades ${\color{var(--c1)}v_x}$ e ${\color{var(--c1)}v_y}$ a partir das leituras do sensor de fluxo óptico ${\color{var(--c3)}p_x}$ e ${\color{var(--c3)}p_y}$.
 
-![Architecture - Horizontal Estimator](../images/architecture_horizontal_estimator.svg){: width=100% style="display: block; margin: auto;" }
+![Architecture - Horizontal Estimator](../../images/architecture_position_estimator.svg){: width=100% style="display: block; margin: auto;" }
 
 Para isto, será implementada uma nova função:
 

@@ -83,10 +83,10 @@ nav:
             - Estimator: control/stabilization/attitude/estimator.md
             - Controller: control/stabilization/attitude/controller.md
         - Height:
-            - control/stabilization/vertical/index.md
-            - Estimator: control/stabilization/vertical/estimator.md
-            - Controller: control/stabilization/vertical/controller.md
+            - control/stabilization/height/index.md
+            - Estimator: control/stabilization/height/estimator.md
+            - Controller: control/stabilization/height/controller.md
         - Position:
-            - control/stabilization/horizontal/index.md
-            - Estimator: control/stabilization/horizontal/estimator.md
-            - Controller: control/stabilization/horizontal/controller.md
+            - control/stabilization/position/index.md
+            - Estimator: control/stabilization/position/estimator.md
+            - Controller: control/stabilization/position/controller.md

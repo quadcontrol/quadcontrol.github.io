@@ -2212,8 +2212,8 @@
 <span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Read reference setpoints (from Crazyflie Client)</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Send commands to motors</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">actuators</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
@@ -2222,8 +2222,8 @@
 <span class="p">{</span>
 <span class="p">}</span>
 
-<span class="c1">// Send commands to motors</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">actuators</span><span class="p">()</span>
+<span class="c1">// Read reference setpoints (from Crazyflie Client)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
@@ -2313,7 +2313,10 @@
 </div>
 <hr />
 <h3 id="main-loop">Main Loop</h3>
-<p>The third and final part contains the main loop. All control logic is implemented inside a loop running at 200 Hz (i.e., every 5 ms). Inside this loop, we call the functions following the architecture diagram sequence: reference → sensors → estimators → controllers → mixer → actuators.</p>
+<p class="annotate">The third and final part contains the main loop. All control logic is implemented inside a loop running at 200 Hz (i.e., every 5 ms(1)). Inside this loop, we call the functions following the architecture diagram sequence: reference → sensors → estimators → controllers → mixer → actuators.</p>
+<ol>
+<li>In FreeRTOS, delays are implemented using the <code>vTaskDelay(pdMS_TO_TICKS(xTimeInMs))</code> function, which receives a time value in milliseconds and converts it to system ticks.</li>
+</ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>

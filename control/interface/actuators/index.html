@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#atuadores" class="md-skip">
+        <a href="#actuators" class="md-skip">
           Skip to content
         </a>
       
@@ -1115,10 +1115,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#visao-geral" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Visão geral
+        Overview
       
     </span>
   </a>
@@ -1126,32 +1126,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#codigo" class="md-nav__link">
+  <a href="#implementation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Código
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compilando" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compilando
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#testando" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Testando
+        Implementation
       
     </span>
   </a>
@@ -1787,10 +1765,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#visao-geral" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Visão geral
+        Overview
       
     </span>
   </a>
@@ -1798,32 +1776,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#codigo" class="md-nav__link">
+  <a href="#implementation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Código
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compilando" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compilando
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#testando" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Testando
+        Implementation
       
     </span>
   </a>
@@ -1847,73 +1803,88 @@
 
 
 
-<h1 id="atuadores"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m.5-9c4.5 0 4.61 3.57 2.25 4.75-.99.49-1.43 1.54-1.62 2.47.48.2.9.51 1.22.91 3.7-2 7.68-1.21 7.68 2.37 0 4.5-3.57 4.6-4.75 2.23-.5-.99-1.56-1.43-2.49-1.62-.2.48-.51.89-.91 1.23 1.99 3.69 1.2 7.66-2.38 7.66-4.5 0-4.59-3.58-2.23-4.76.98-.49 1.42-1.53 1.62-2.45-.49-.2-.92-.52-1.24-.92C5.96 15.85 2 15.07 2 11.5 2 7 5.56 6.89 6.74 9.26c.5.99 1.55 1.42 2.48 1.61.19-.48.51-.9.92-1.22C8.15 5.96 8.94 2 12.5 2"/></svg></span> Atuadores</h1>
-<p>Nesta secção, vamos fazer o drone girar um de seus motores pela primeira vez. Esse é o seu primeiro contato com controle real de hardware, um passo fundamental rumo ao voo autônomo.</p>
-<p>Vamos criar um programa simples que liga o motor 1 com 10% de potência, sempre que o drone estiver armado (ou seja, autorizado a voar).</p>
+<h1 id="actuators"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m.5-9c4.5 0 4.61 3.57 2.25 4.75-.99.49-1.43 1.54-1.62 2.47.48.2.9.51 1.22.91 3.7-2 7.68-1.21 7.68 2.37 0 4.5-3.57 4.6-4.75 2.23-.5-.99-1.56-1.43-2.49-1.62-.2.48-.51.89-.91 1.23 1.99 3.69 1.2 7.66-2.38 7.66-4.5 0-4.59-3.58-2.23-4.76.98-.49 1.42-1.53 1.62-2.45-.49-.2-.92-.52-1.24-.92C5.96 15.85 2 15.07 2 11.5 2 7 5.56 6.89 6.74 9.26c.5.99 1.55 1.42 2.48 1.61.19-.48.51-.9.92-1.22C8.15 5.96 8.94 2 12.5 2"/></svg></span> Actuators</h1>
+<p>In this section, you will implement the actuators function, which receives the PWM commands and sends them to the BLDC motor drivers.</p>
+<p><img alt="" src="../../images/architecture_actuators.svg" style="display: block; margin: auto;" width="100%" /></p>
 <hr />
-<h2 id="visao-geral">Visão geral</h2>
-<p>Antes de começar, é importante entender alguns conceitos:</p>
+<h2 id="overview">Overview</h2>
+<p>Before we begin, it is important to understand a few concepts:</p>
 <ul>
-<li>Armar o drone significa autorizar o funcionamento dos motores. Isso é feito manualmente pelo operador através do Crazyflie Client e verificado no código com a função <code>supervisorIsArmed()</code>.</li>
-<li>O controle dos motores é feito através da função <code>motorsSetRatio(id, ratio)</code>, onde <code>id</code> corresponde ao motor que vai ser acionado e <code>ratio</code> à sua potência.<ul>
-<li>O Crazyflie possui quatro motores, identificados como <code>MOTOR_M1</code>, <code>MOTOR_M2</code>, <code>MOTOR_M3</code> e <code>MOTOR_M4</code>.</li>
-<li>A potência vai de <code>0</code> (desligado) até <code>UINT16_MAX</code> (potência máxima).</li>
+<li>Arming the quadcopter means enabling the motors to operate. This is done manually by the operator through the Crazyflie Client and can be checked in the firmware using the <code>supervisorIsArmed()</code> function.</li>
+<li>The motors are controlled using the <code>motorsSetRatio(id, ratio)</code> function, where <code>id</code> specifies the motor and <code>ratio</code> specifies its power level:<ul>
+<li>The Crazyflie has four motors, identified as <code>MOTOR_M1</code>, <code>MOTOR_M2</code>, <code>MOTOR_M3</code>, and <code>MOTOR_M4</code>.</li>
+<li>The power level ranges from <code>0</code> (off) to <code>UINT16_MAX</code> (maximum power).</li>
 </ul>
 </li>
-<li>Em FreeRTOS, um delay é realizado através da função <code>vTaskDelay(pdMS_TO_TICKS(xTimeInMs))</code>, que recebe um tempo em milissegundos e o converte para ticks do sistema.</li>
 </ul>
 <hr />
-<h2 id="codigo">Código</h2>
-<p>Crie um arquivo chamado <code>motors.c</code> dentro da pasta <code>src/examples</code> com o seguinte código:</p>
-<div class="highlight"><span class="filename">motors.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
-
-<span class="c1">// Main application loop</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+<h2 id="implementation">Implementation</h2>
+<p>The first step in our function is to check whether the quadcopter is armed. If it is not, all motors must be commanded to stop.</p>
+<p>If the quadcopter is armed, we perform a second check: whether the height reference <span class="arithmatex">\(z_r\)</span> is greater than zero. In other words, we check if the quadcopter has been instructed to take off.</p>
+<p>If the height reference greater than zero, the PWM values stored in the global variables are applied to each of the four motors. Otherwise, all four motors are commanded to a fixed PWM value of 10%.</p>
+<p>This constant 10% duty cycle is known as the idle PWM. It keeps the BLDC motors spinning at a low speed so they are already running when takeoff is commanded, allowing them to respond immediately and reliably.</p>
+<p>The code below implements this logic.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Send commands to motors</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">actuators</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Infinite loop (runs continuously while the drone is powered on)</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Check is quadcopter is armed or disarmed</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">supervisorIsArmed</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Check if the drone is armed (i.e., ready to receive motor commands)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">supervisorIsArmed</span><span class="p">())</span>
+<span class="w">        </span><span class="c1">// Check if quadcopter has been commanded to take-off or land</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">z_r</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">)</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// If armed, turn on motor 1 with 10% power</span>
-<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// Apply calculated PWM values if is commanded to take-off</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M4</span><span class="p">,</span><span class="w"> </span><span class="n">pwm4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">else</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// If not armed, stop motor 1</span>
-<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// Apply idle PWM value if is commanded to land</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
+<span class="w">            </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="c1">// Wait for 100 milliseconds before checking again (10 Hz loop)</span>
-<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Turn-off all motor if disarmed</span>
+<span class="w">        </span><span class="n">motorsStop</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>Você pode simplesmente copiar e colar o código acima. Mas é importante que você leia e entenda o que cada linha está fazendo (o código está bem comentado).</p>
-<hr />
-<h2 id="compilando">Compilando</h2>
-<p>Para que o firmware compile seu novo programa, modifique o arquivo <code>Kbuild</code>:</p>
-<div class="highlight"><span class="filename">Kbuild</span><pre><span></span><code><span class="n">obj</span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">src</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">motors</span><span class="p">.</span><span class="n">o</span>
-</code></pre></div>
-<p>Em seguida, compile e programe o quadricoptero.</p>
-<hr />
-<h2 id="testando">Testando</h2>
-<p>Para testar o funcionamento, siga as etapas abaixo:</p>
-<ol>
-<li>Abra o Crazyflie Client e conecte-se ao drone.</li>
-<li>Clique no botão <code>Arm</code>.</li>
-<li>O motor 1 deve começar a girar com 10% de potência.</li>
-<li>Ao clicar em <code>Disarm</code>, o motor deve parar imediatamente.</li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Atenção</p>
-<p>O motor vai girar, mas o drone não vai levantar voo, pois estamos controlando apenas um motor isolado com baixa potência.</p>
-</div>
-<p>Você acaba de escrever seu primeiro programa que interage com o hardware real do drone — controlando motores com segurança. Um passo simples, mas poderoso, no caminho do voo autônomo.</p>
+</code></pre></div></td></tr></table></div>
+<p>You can simply copy and paste the code above. However, take some time to understand what each line does (the comments are there to guide you).</p>
 
 
 

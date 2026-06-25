@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#altimeter-controlador-vertical" class="md-skip">
+        <a href="#controlador-vertical" class="md-skip">
           Skip to content
         </a>
       
@@ -1625,7 +1625,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#controlador-vertical" class="md-nav__link">
+  <a href="#controlador-vertical_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Controlador vertical
@@ -1925,7 +1925,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#controlador-vertical" class="md-nav__link">
+  <a href="#controlador-vertical_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Controlador vertical
@@ -1973,7 +1973,7 @@
 
 
 
-<h1 id="altimeter-controlador-vertical">:altimeter: Controlador vertical</h1>
+<h1 id="controlador-vertical"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 3v2h10V3zm2 4v2h6V7zm-7 .96v8.08L6.03 12zm20.03 0L18 12l4.03 4.04zM7 11v2h10v-2zm2 4v2h6v-2zm-2 4v2h10v-2z"/></svg></span> Controlador vertical</h1>
 <p>Nesta secção você irá implementar o controlador vertical, que comanda a força de empuxo <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> a partir da diferença entre a posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> e estimada <span class="arithmatex">\({\color{var(--c1)}z}\)</span>.</p>
 <p><img alt="Architecture - Vertical Controller" src="../../../images/architecture_height_controller.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Para isto, será implementada uma nova função:</p>
@@ -2054,7 +2054,7 @@
 <span class="w">    </span><span class="n">psi_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                                     </span><span class="c1">// Yaw reference command [rad]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controlador-vertical">Controlador vertical</h4>
+<h4 id="controlador-vertical_1">Controlador vertical</h4>
 <p>A função <code>verticalController()</code> é quem comanda a força de empuxo <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> a partir da diferença entre a posição vertical de referência <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> e estimada <span class="arithmatex">\({\color{var(--c1)}z}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired thrust force</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">verticalController</span><span class="p">()</span>

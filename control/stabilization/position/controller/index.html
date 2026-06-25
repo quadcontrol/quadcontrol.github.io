@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#crosshairs-gps-controlador-horizontal" class="md-skip">
+        <a href="#controlador-horizontal" class="md-skip">
           Skip to content
         </a>
       
@@ -1759,7 +1759,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#controlador-horizontal" class="md-nav__link">
+  <a href="#controlador-horizontal_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Controlador horizontal
@@ -1912,7 +1912,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#controlador-horizontal" class="md-nav__link">
+  <a href="#controlador-horizontal_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Controlador horizontal
@@ -1949,7 +1949,7 @@
 
 
 
-<h1 id="crosshairs-gps-controlador-horizontal">:crosshairs-gps: Controlador horizontal</h1>
+<h1 id="controlador-horizontal"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m-8.95 5H1v-2h2.05C3.5 6.83 6.83 3.5 11 3.05V1h2v2.05c4.17.45 7.5 3.78 7.95 7.95H23v2h-2.05c-.45 4.17-3.78 7.5-7.95 7.95V23h-2v-2.05C6.83 20.5 3.5 17.17 3.05 13M12 5a7 7 0 0 0-7 7 7 7 0 0 0 7 7 7 7 0 0 0 7-7 7 7 0 0 0-7-7"/></svg></span> Controlador horizontal</h1>
 <p>Nesta secção você irá implementar o controlador horizontal, que comanda os ângulos de rolagem e inclinação de referência <span class="arithmatex">\({\color{var(--c3)}\phi_r}\)</span> e <span class="arithmatex">\({\color{var(--c3)}\theta_r}\)</span>a partir da diferença entre as posições horizontais de referência <span class="arithmatex">\({\color{var(--c3)}x_r}\)</span> e <span class="arithmatex">\({\color{var(--c3)}y_r}\)</span> e estimadas <span class="arithmatex">\({\color{var(--c1)}x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}y}\)</span>.</p>
 <p><img alt="Architecture - Horizontal Controller" src="../../../images/architecture_position_controller.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Para isto, será implementada uma nova função:</p>
@@ -2033,7 +2033,7 @@
 </span><span class="w">    </span><span class="n">psi_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">               </span><span class="c1">// Yaw reference command [rad]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controlador-horizontal">Controlador horizontal</h4>
+<h4 id="controlador-horizontal_1">Controlador horizontal</h4>
 <p>A função <code>horizontalController()</code> é quem comanda os ângulos de rolagem e inclinação de referência <span class="arithmatex">\({\color{var(--c3)}\phi_r}\)</span> e <span class="arithmatex">\({\color{var(--c3)}\theta_r}\)</span>a partir da diferença entre as posições horizontais de referência <span class="arithmatex">\({\color{var(--c3)}x_r}\)</span> e <span class="arithmatex">\({\color{var(--c3)}y_r}\)</span> e estimadas <span class="arithmatex">\({\color{var(--c1)}x}\)</span> e <span class="arithmatex">\({\color{var(--c1)}y}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Compute desired roll/pitch angles</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">horizontalController</span><span class="p">()</span>

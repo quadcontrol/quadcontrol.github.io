@@ -3,7 +3,7 @@ title: Controlador vertical
 icon: material/gamepad-circle-outline
 ---
 
-# :altimeter: Controlador vertical
+# :material-altimeter: Controlador vertical
 
 Nesta secção você irá implementar o controlador vertical, que comanda a força de empuxo ${\color{var(--c2)}f_t}$ a partir da diferença entre a posição vertical de referência ${\color{var(--c3)}z_r}$ e estimada ${\color{var(--c1)}z}$.
 

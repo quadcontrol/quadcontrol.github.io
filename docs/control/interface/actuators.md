@@ -3,86 +3,69 @@ title: Actuators
 icon: material/fan
 ---
 
-# :material-fan: Atuadores
+# :material-fan: Actuators
 
-Nesta secção, vamos fazer o drone girar um de seus motores pela primeira vez. Esse é o seu primeiro contato com controle real de hardware, um passo fundamental rumo ao voo autônomo.
+In this section, you will implement the actuators function, which receives the PWM commands and sends them to the BLDC motor drivers.
 
-Vamos criar um programa simples que liga o motor 1 com 10% de potência, sempre que o drone estiver armado (ou seja, autorizado a voar).
-
----
-
-## Visão geral
-
-Antes de começar, é importante entender alguns conceitos:
-
-- Armar o drone significa autorizar o funcionamento dos motores. Isso é feito manualmente pelo operador através do Crazyflie Client e verificado no código com a função `supervisorIsArmed()`.
-- O controle dos motores é feito através da função `motorsSetRatio(id, ratio)`, onde `id` corresponde ao motor que vai ser acionado e `ratio` à sua potência.
-    - O Crazyflie possui quatro motores, identificados como `MOTOR_M1`, `MOTOR_M2`, `MOTOR_M3` e `MOTOR_M4`.
-    - A potência vai de `0` (desligado) até `UINT16_MAX` (potência máxima).
-- Em FreeRTOS, um delay é realizado através da função `vTaskDelay(pdMS_TO_TICKS(xTimeInMs))`, que recebe um tempo em milissegundos e o converte para ticks do sistema.
+![](../images/architecture_actuators.svg){: width=100% style="display: block; margin: auto;" }
 
 ---
 
-## Código
+## Overview
 
-Crie um arquivo chamado `motors.c` dentro da pasta `src/examples` com o seguinte código:
+Before we begin, it is important to understand a few concepts:
 
-```c title="motors.c"
-#include "FreeRTOS.h"      // FreeRTOS core definitions (needed for task handling and timing)
-#include "task.h"          // FreeRTOS task functions (e.g., vTaskDelay)
-#include "supervisor.h"    // Functions to check flight status (e.g., supervisorIsArmed)
-#include "motors.h"        // Low-level motor control interface (e.g., motorsSetRatio)
-#include "debug.h"         // Debug printing functions (e.g., DEBUG_PRINT)
+- Arming the quadcopter means enabling the motors to operate. This is done manually by the operator through the Crazyflie Client and can be checked in the firmware using the `supervisorIsArmed()` function.
+- The motors are controlled using the `motorsSetRatio(id, ratio)` function, where `id` specifies the motor and `ratio` specifies its power level:
+    - The Crazyflie has four motors, identified as `MOTOR_M1`, `MOTOR_M2`, `MOTOR_M3`, and `MOTOR_M4`.
+    - The power level ranges from `0` (off) to `UINT16_MAX` (maximum power).
 
-// Main application loop
-void appMain(void *param)
+---
+
+## Implementation
+
+The first step in our function is to check whether the quadcopter is armed. If it is not, all motors must be commanded to stop.
+
+If the quadcopter is armed, we perform a second check: whether the height reference $z_r$ is greater than zero. In other words, we check if the quadcopter has been instructed to take off.
+
+If the height reference greater than zero, the PWM values stored in the global variables are applied to each of the four motors. Otherwise, all four motors are commanded to a fixed PWM value of 10%.
+
+This constant 10% duty cycle is known as the idle PWM. It keeps the BLDC motors spinning at a low speed so they are already running when takeoff is commanded, allowing them to respond immediately and reliably.
+
+The code below implements this logic.
+
+```c linenums="62"
+// Send commands to motors
+void actuators()
 {
-    // Infinite loop (runs continuously while the drone is powered on)
-    while (true)
+    // Check is quadcopter is armed or disarmed
+    if (supervisorIsArmed())
     {
-        // Check if the drone is armed (i.e., ready to receive motor commands)
-        if (supervisorIsArmed())
+        // Check if quadcopter has been commanded to take-off or land
+        if (z_r > 0.0f)
         {
-            // If armed, turn on motor 1 with 10% power
-            motorsSetRatio(MOTOR_M1, 0.1f * UINT16_MAX);
+            // Apply calculated PWM values if is commanded to take-off
+            motorsSetRatio(MOTOR_M1, pwm1 * UINT16_MAX);
+            motorsSetRatio(MOTOR_M2, pwm2 * UINT16_MAX);
+            motorsSetRatio(MOTOR_M3, pwm3 * UINT16_MAX);
+            motorsSetRatio(MOTOR_M4, pwm4 * UINT16_MAX);
         }
         else
         {
-            // If not armed, stop motor 1
-            motorsSetRatio(MOTOR_M1, 0);
+            // Apply idle PWM value if is commanded to land
+            motorsSetRatio(MOTOR_M1, 0.1f * UINT16_MAX);
+            motorsSetRatio(MOTOR_M2, 0.1f * UINT16_MAX);
+            motorsSetRatio(MOTOR_M3, 0.1f * UINT16_MAX);
+            motorsSetRatio(MOTOR_M4, 0.1f * UINT16_MAX);
         }
-        // Wait for 100 milliseconds before checking again (10 Hz loop)
-        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+    else
+    {
+        // Turn-off all motor if disarmed
+        motorsStop();
     }
 }
+
 ```
 
-Você pode simplesmente copiar e colar o código acima. Mas é importante que você leia e entenda o que cada linha está fazendo (o código está bem comentado).
-
----
-
-## Compilando
-
-Para que o firmware compile seu novo programa, modifique o arquivo `Kbuild`:
-
-```c title="Kbuild"
-obj-y += src/examples/motors.o
-```
-
-Em seguida, compile e programe o quadricoptero.
-
----
-
-## Testando
-
-Para testar o funcionamento, siga as etapas abaixo:
-
-1. Abra o Crazyflie Client e conecte-se ao drone.
-2. Clique no botão `Arm`.
-3. O motor 1 deve começar a girar com 10% de potência.
-4. Ao clicar em `Disarm`, o motor deve parar imediatamente.
-
-!!! warning "Atenção"
-    O motor vai girar, mas o drone não vai levantar voo, pois estamos controlando apenas um motor isolado com baixa potência.
-
-Você acaba de escrever seu primeiro programa que interage com o hardware real do drone — controlando motores com segurança. Um passo simples, mas poderoso, no caminho do voo autônomo.
+You can simply copy and paste the code above. However, take some time to understand what each line does (the comments are there to guide you).

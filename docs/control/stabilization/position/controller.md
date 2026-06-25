@@ -3,7 +3,7 @@ title: Controlador horizontal
 icon: material/gamepad-circle-outline
 ---
 
-# :crosshairs-gps: Controlador horizontal
+# :material-crosshairs-gps: Controlador horizontal
 
 Nesta secção você irá implementar o controlador horizontal, que comanda os ângulos de rolagem e inclinação de referência ${\color{var(--c3)}\phi_r}$ e ${\color{var(--c3)}\theta_r}$a partir da diferença entre as posições horizontais de referência ${\color{var(--c3)}x_r}$ e ${\color{var(--c3)}y_r}$ e estimadas ${\color{var(--c1)}x}$ e ${\color{var(--c1)}y}$.
 

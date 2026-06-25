@@ -3,112 +3,71 @@ title: Sensors
 icon: material/compass-outline
 ---
 
-# :material-compass-outline: Sensores
+# :material-compass-outline: Sensors
 
-Nesta secção, vamos aprender como ler os dados dos sensores do drone em tempo real. Esses dados são fundamentais para tarefas como estabilização, controle, navegação e autonomia.
+In this section, you will implement the sensors function, which read raw measurements from the accelerometer ($a_x$, $a_y$, $a_z$), gyroscope ($g_x$, $g_y$, $g_z$), range sensor ($d$) and optical flow sensor ($p_x$ and $p_y$) by consuming data from the firmware's internal sensor pipeline.
 
-Vamos criar um programa que lê e imprime no console os seguintes sensores:
-
-- Acelerômetro ($a_x$, $a_y$ e $a_z$)
-- Giroscópio ($g_x$, $g_y$ e $g_z$)
-- Proximidade ($d$)
-- Fluxo óptico ($p_x$ e $p_y$)
+![](../images/architecture_sensors.svg){: width=100% style="display: block; margin: auto;" }
 
 ---
 
-## Visão geral
+## Overview
 
-Antes de começar, é importante entender alguns conceitos:
+Before we begin, it is important to understand a few key concepts:
 
-- Os sensores no Crazyflie são processados por um sistema de estimação que envia os dados via uma fila interna. Usamos a função `estimatorDequeue(&m)`, para preencher a estrutura `measurement_t m`, que contém diferentes tipos de leitura, identificados por `m.type`.
-- O sistema coleta dados continuamente em alta frequência, que vêm da IMU (acelerômetro e giroscópio), do lidar (proximidade) e da câmera (fluxo óptico).
-- Usamos `DEBUG_PRINT()` para exibir os valores no console serial.
+- Sensor measurements in the Crazyflie are processed by the state estimation system and delivered through an internal queue. We use the `estimatorDequeue(&m)` function to retrieve the next measurement and store it in the `measurement_t m` structure. The type of measurement is identified by `m.type`.
+- The estimator continuously receives high-frequency data from the IMU (accelerometer and gyroscope), the range sensor (ToF lidar), and the optical flow camera.
 
 ---
 
-## Código
+## Implementation
 
-Crie um arquivo chamado `sensors.c` dentro da pasta `src/examples` com o seguinte código:
+The estimator continuously receives measurements from all onboard sensors and stores them in an internal queue. Our task is to retrieve these measurements one by one.
 
-```c title="sensors.c"
-#include "FreeRTOS.h"   // FreeRTOS core definitions (needed for task handling and timing)
-#include "task.h"       // FreeRTOS task functions (e.g., vTaskDelay)
-#include "supervisor.h" // Functions to check flight status (e.g., supervisorIsArmed)
-#include "debug.h"      // Debug printing functions (e.g., DEBUG_PRINT)
-#include "estimator.h"  // Estimator functions (e.g., estimatorDequeue)
+Each measurement contains a type identifier, which tells us which sensor produced the data. We use a switch statement to process each measurement accordingly.
 
-// Sensors data
-float ax, ay, az; // Accelerometer [m/s^2]
-float gx, gy, gz; // Gyroscope [rad/s]
-float d;          // Range [m]
-float px, py;     // Optical flow [pixels]
+For the accelerometer and gyroscope, the readings are converted to SI units ($\text{m/s}^2$ and $\text{rad/s}$, respectively). The range sensor already provides measurements in $\text{m}$, while the optical flow sensor values are scaled from tenths of a pixel to pixels.
 
-// Main application loop
-void appMain(void *param)
+The code below implements this logic.
+
+```c linenums="67"
+// Read raw sensor measurements
+void sensors()
 {
-    // Infinite loop (runs continuously while the drone is powered on)
-    while (true)
+    // Declare variable that store the most recent measurement from estimator
+    static measurement_t measurement;
+
+    // Retrieve the current measurement from estimator module
+    while (estimatorDequeue(&measurement))
     {
-        // Get sensor data from queue
-        measurement_t m;
-        while (estimatorDequeue(&m))
+        switch (measurement.type)
         {
-            switch (m.type)
-            {
-            case MeasurementTypeGyroscope:
-                gx = m.data.gyroscope.gyro.x;
-                gy = m.data.gyroscope.gyro.y;
-                gz = m.data.gyroscope.gyro.z;
-                break;
-            case MeasurementTypeAcceleration:
-                ax = m.data.acceleration.acc.x;
-                ay = m.data.acceleration.acc.y;
-                az = m.data.acceleration.acc.z;
-                break;
-            case MeasurementTypeTOF:
-                d = m.data.tof.distance;
-                break;
-            case MeasurementTypeFlow:
-                px = m.data.flow.dpixelx;
-                py = m.data.flow.dpixely;
-                break;
-            default:
-                break;
-            }
+        // Get accelerometer sensor readings and convert [G's -> m/s^2]
+        case MeasurementTypeAcceleration:
+            ax = -measurement.data.acceleration.acc.x * g;
+            ay = -measurement.data.acceleration.acc.y * g;
+            az = -measurement.data.acceleration.acc.z * g;
+            break;
+        // Get gyroscope sensor readings and convert [deg/s -> rad/s]
+        case MeasurementTypeGyroscope:
+            gx = measurement.data.gyroscope.gyro.x * pi / 180.0f;
+            gy = measurement.data.gyroscope.gyro.y * pi / 180.0f;
+            gz = measurement.data.gyroscope.gyro.z * pi / 180.0f;
+            break;
+        // Get flow sensor readings [m]
+        case MeasurementTypeTOF:
+            d = measurement.data.tof.distance;
+            break;
+        // Get optical flow sensor readings and convert [10.px -> px]
+        case MeasurementTypeFlow:
+            px = measurement.data.flow.dpixelx * 0.1f;
+            py = measurement.data.flow.dpixely * 0.1f;
+            break;
+        default:
+            break;
         }
-        // Print sensor data to console
-        DEBUG_PRINT("Acc: %4.2f %4.2f %4.2f | Gyr: %6.2f %6.2f %6.2f | Dis: %4.2f | Flow: %2.0f %2.0f\n",(double)ax,(double)ay,(double)az,(double)gx,(double)gy,(double)gz,(double)d,(double)px,(double)py);
-        // Wait for 100 milliseconds before checking again (10 Hz loop)
-        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 ```
 
-Você pode simplesmente copiar e colar o código acima. Mas é importante que você leia e entenda o que cada linha está fazendo (o código está bem comentado).
-
----
-
-## Compilando
-
-Para que o firmware compile seu novo programa, modifique o arquivo `Kbuild`:
-
-```c title="Kbuild"
-obj-y += src/examples/sensors.o
-```
-
-Em seguida, compile e programe o quadricoptero.
-
----
-
-## Testando
-
-Para testar o funcionamento, siga as etapas abaixo:
-
-1. Abra o Crazyflie Client e conecte-se ao drone.
-2. Clique em `View` > `Toolboxes` > `Console`
-3. Verifique se os dados dos sensores estão sendo impressos
-
-!!! warning "Atenção"
-    Movimente o drone com a mão e observe a variação dos sensores em tempo real.
-
-Agora você sabe como acessar dados brutos dos sensores do drone. Esses dados são a base para algoritmos de controle, filtros e navegação. A partir daqui, você terá todo o poder necessário para construir sistemas embarcados inteligentes — do jeito que quiser!
+You can simply copy and paste the code above. However, take some time to understand what each line does (the comments are there to guide you).

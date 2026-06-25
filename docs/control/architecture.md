@@ -130,8 +130,8 @@ LOG_GROUP_STOP(stateEstimate)
 The second part consists of the functions that will be called inside the main loop:
 
 ```c linenums="62"
-// Read reference setpoints (from Crazyflie Client)
-void reference()
+// Send commands to motors
+void actuators()
 {
 }
 
@@ -140,8 +140,8 @@ void sensors()
 {
 }
 
-// Send commands to motors
-void actuators()
+// Read reference setpoints (from Crazyflie Client)
+void reference()
 {
 }
 
@@ -249,7 +249,10 @@ After that, we introduce the mixer and then move on to estimators and controller
 
 ### Main Loop
 
-The third and final part contains the main loop. All control logic is implemented inside a loop running at 200 Hz (i.e., every 5 ms). Inside this loop, we call the functions following the architecture diagram sequence: reference → sensors → estimators → controllers → mixer → actuators.
+The third and final part contains the main loop. All control logic is implemented inside a loop running at 200 Hz (i.e., every 5 ms(1)). Inside this loop, we call the functions following the architecture diagram sequence: reference → sensors → estimators → controllers → mixer → actuators.
+{ .annotate }
+
+1. In FreeRTOS, delays are implemented using the `vTaskDelay(pdMS_TO_TICKS(xTimeInMs))` function, which receives a time value in milliseconds and converts it to system ticks.
 
 ```c linenums="112"
 // Main application task

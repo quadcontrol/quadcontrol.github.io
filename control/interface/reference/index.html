@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://quadcontrol.io/control/interface/references/">
+        <link rel="canonical" href="https://quadcontrol.io/control/interface/reference/">
       
       
         <link rel="prev" href="../sensors/">
@@ -679,7 +679,7 @@
         
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v8h4v2H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h6v2h-2v8h-2V9H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
     
@@ -1129,7 +1129,7 @@
   <span class="md-ellipsis">
     
   
-    References
+    Reference
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    References
+    Reference
   
 
     
@@ -1804,7 +1804,7 @@
 
 
 <h1 id="reference"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m1 8h-2V4.1c.3-.1.7-.1 1-.1s.7 0 1 .1z"/></svg></span> Reference</h1>
-<p>In this section, you will implement the reference function, which retrieves the desired flight references transmitted wirelessly from the Crazyflie Client.</p>
+<p>In this section, you will implement the reference function, which retrieves the desired flight setpoints transmitted wirelessly from the Crazyflie Client.</p>
 <p><img alt="" src="../../images/architecture_reference.svg" style="display: block; margin: auto;" width="100%" /></p>
 <hr />
 <h2 id="overview">Overview</h2>
@@ -1812,7 +1812,7 @@
 <p><img alt="" src="../images/reference.svg" style="display: block; margin: auto;" width="25%" /></p>
 <p>Before we begin, it is important to understand a few key concepts:</p>
 <ul>
-<li>The reference commands are sent wirelessly by the Command-Based Flight Control interface in the Crazyflie Client:<ul>
+<li>The setpoints are sent wirelessly by the Command-Based Flight Control interface in the Crazyflie Client:<ul>
 <li>The <span class="keys"><kbd>↑</kbd></span> and <span class="keys"><kbd>↓</kbd></span> buttons change <code>setpoint.position.x</code> in increments of <span class="arithmatex">\(0.5\)</span></li>
 <li>The <span class="keys"><kbd>←</kbd></span> and <span class="keys"><kbd>→</kbd></span> buttons change <code>setpoint.position.y</code> in increments of <span class="arithmatex">\(0.5\)</span></li>
 <li>The <span class="keys"><kbd>Up</kbd></span> and <span class="keys"><kbd>Down</kbd></span> buttons change <code>setpoint.position.z</code> in increments of <span class="arithmatex">\(0.5\)</span></li>
@@ -1826,7 +1826,7 @@
 </ul>
 <hr />
 <h2 id="implementation">Implementation</h2>
-<p>The first step is to retrieve the most recent setpoint from the commander module. The returned structure contains several reference variables. We extract these values and store them in the global variables used by the controller.</p>
+<p>The first step is to retrieve the most recent setpoint from the commander module. The returned structure contains several variables. We extract these values and store them in the global variables used by the controller.</p>
 <p>The code below implements this logic.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
 <span class="normal">73</span>
@@ -1860,6 +1860,7 @@
 <span class="w">    </span><span class="n">psi_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                </span><span class="c1">// Yaw angle reference [rad]</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<p>You can simply copy and paste the code above. However, take some time to understand what each line does (the comments are there to guide you).</p>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
 <p>The Command-Based Flight Control interface does not provide a yaw reference, therefore it is fixed at <span class="arithmatex">\(\psi_r=0\)</span>. However, it is possible to map <code>setpoint.position.y</code> to the yaw reference and keep the lateral position reference fixed at <span class="arithmatex">\(y_r = 0\)</span>:</p>
@@ -1869,13 +1870,12 @@
 <span class="normal">85</span>
 <span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Extract position references from the received setpoint</span>
 <span class="n">x_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w">               </span><span class="c1">// X position reference [m]</span>
-<span class="n">y_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                              </span><span class="c1">// Y position reference [m]</span>
-<span class="n">z_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span><span class="p">;</span><span class="w">               </span><span class="c1">// Z position reference [m]</span>
-<span class="n">psi_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Yaw angle reference [rad] (maps 0.5m -&gt; 45º)</span>
-</code></pre></div></td></tr></table></div>
+<span class="hll"><span class="n">y_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">                              </span><span class="c1">// Y position reference [m]</span>
+</span><span class="n">z_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span><span class="p">;</span><span class="w">               </span><span class="c1">// Z position reference [m]</span>
+<span class="hll"><span class="n">psi_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Yaw angle reference [rad] (maps 0.5m -&gt; 45º)</span>
+</span></code></pre></div></td></tr></table></div>
 <p>This allows the <span class="keys"><kbd>←</kbd></span> and <span class="keys"><kbd>→</kbd></span> buttons to rotate the quadcopter about its vertical axis rather than translate it sideways.</p>
 </div>
-<p>You can simply copy and paste the code above. However, take some time to understand what each line does (the comments are there to guide you).</p>
 
 
 

@@ -679,7 +679,7 @@
         
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v8h4v2H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h6v2h-2v8h-2V9H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
   
   <span class="md-ellipsis">
     
@@ -1109,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../interface/references/" class="md-nav__link">
+      <a href="../../interface/reference/" class="md-nav__link">
         
   
   
@@ -1118,7 +1118,7 @@
   <span class="md-ellipsis">
     
   
-    References
+    Reference
   
 
     
@@ -2021,7 +2021,7 @@
 </code></pre></div></td></tr></table></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Be careful when taking the square root of negative numbers. Check whether each value of <span class="arithmatex">\(\omega^2\)</span> is non-negative before computing its square root.</p>
+<p>Be careful when taking the square root of negative numbers. Check whether each value of <span class="arithmatex">\({\color{var(--c1)}\omega}^2\)</span> is non-negative before computing its square root.</p>
 </div>
 <hr />
 <h2 id="validation">Validation</h2>
@@ -2032,7 +2032,7 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Actuators</label><label for="__tabbed_1_2">Reference</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Since the quadcopter is not yet being controlled, comment out the lines that check whether the altitude reference <span class="arithmatex">\(z_r\)</span> is greater than zero:</p>
+<p>Because the quadcopter is not being controlled, comment out the lines that check whether the altitude reference <span class="arithmatex">\({\color{var(--c3)}z_r}\)</span> is greater than zero:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
@@ -2095,13 +2095,13 @@
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p class="annotate">We will use the variables transmitted by the Crazyflie Client's Command-Based Flight Control interface to command the total thrust <span class="arithmatex">\(f_t\)</span> in increments of <span class="arithmatex">\(0.01\,N\)</span>(1), and the roll torque <span class="arithmatex">\(\tau_x\)</span>(2) and pitch torque <span class="arithmatex">\(\tau_y\)</span> in increments of <span class="arithmatex">\(0.001\,N\cdot m\)</span>. Modify the code as follows:</p>
+<p class="annotate">We will use the variables transmitted by the Crazyflie Client's Command-Based Flight Control interface to command the total thrust <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> in increments of <span class="arithmatex">\(0.01~\text{N}\)</span>(1), and the roll torque <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span>(2) and pitch torque <span class="arithmatex">\({\color{var(--c2)}\tau_y}\)</span> in increments of <span class="arithmatex">\(0.001~\text{N}\cdot\text{m}\)</span>. Modify the code as follows:</p>
 <ol>
 <li>
-<p>We first multiply by 2, then round the result, and finally divide by 100 (or 1000). This ensures rounding to two (or three) decimal places.</p>
+<p>We first multiply by <span class="arithmatex">\(2\)</span>, then round the result, and finally divide by <span class="arithmatex">\(100\)</span> (or <span class="arithmatex">\(1000\)</span>). This ensures rounding to two (or three) decimal places.</p>
 </li>
 <li>
-<p>The roll torque <span class="arithmatex">\(\tau_x\)</span> requires a sign inversion because the <span class="arithmatex">\(y\)</span> axis, controlled by the <code>←</code> and <code>→</code> buttons, is opposite to the positive roll torque direction.</p>
+<p>The roll torque <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span> requires a sign inversion because the <span class="arithmatex">\({\color{var(--c1)}y}\)</span> axis, controlled by the <span class="keys"><kbd>←</kbd></span> and <span class="keys"><kbd>→</kbd></span> buttons, is opposite to the positive roll torque direction.</p>
 </li>
 </ol>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>

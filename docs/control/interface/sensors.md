@@ -13,6 +13,10 @@ In this section, you will implement the sensors function, which read raw measure
 
 ## Overview
 
+The following diagram illustrates the internal structure of the sensors function:
+
+![](images/sensors.svg){: width=60% style="display: block; margin: auto;" }
+
 Before we begin, it is important to understand a few key concepts:
 
 - Sensor measurements in the Crazyflie are processed by the state estimation system and delivered through an internal queue. We use the `estimatorDequeue(&m)` function to retrieve the next measurement and store it in the `measurement_t m` structure. The type of measurement is identified by `m.type`.

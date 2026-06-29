@@ -13,6 +13,10 @@ In this section, you will implement the actuators function, which receives the P
 
 ## Overview
 
+The following diagram illustrates the internal structure of the reference function:
+
+![](images/actuators.svg){: width=25% style="display: block; margin: auto;" }
+
 Before we begin, it is important to understand a few concepts:
 
 - Arming the quadcopter means enabling the motors to operate. This is done manually by the operator through the Crazyflie Client and can be checked in the firmware using the `supervisorIsArmed()` function.

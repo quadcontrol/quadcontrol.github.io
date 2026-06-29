@@ -1808,6 +1808,8 @@
 <p><img alt="" src="../../images/architecture_sensors.svg" style="display: block; margin: auto;" width="100%" /></p>
 <hr />
 <h2 id="overview">Overview</h2>
+<p>The following diagram illustrates the internal structure of the sensors function:</p>
+<p><img alt="" src="../images/sensors.svg" style="display: block; margin: auto;" width="60%" /></p>
 <p>Before we begin, it is important to understand a few key concepts:</p>
 <ul>
 <li>Sensor measurements in the Crazyflie are processed by the state estimation system and delivered through an internal queue. We use the <code>estimatorDequeue(&amp;m)</code> function to retrieve the next measurement and store it in the <code>measurement_t m</code> structure. The type of measurement is identified by <code>m.type</code>.</li>

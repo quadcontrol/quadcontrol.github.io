@@ -1808,6 +1808,8 @@
 <p><img alt="" src="../../images/architecture_reference.svg" style="display: block; margin: auto;" width="100%" /></p>
 <hr />
 <h2 id="overview">Overview</h2>
+<p>The following diagram illustrates the internal structure of the reference function:</p>
+<p><img alt="" src="../images/reference.svg" style="display: block; margin: auto;" width="25%" /></p>
 <p>Before we begin, it is important to understand a few key concepts:</p>
 <ul>
 <li>The reference commands are sent wirelessly by the Command-Based Flight Control interface in the Crazyflie Client:<ul>
@@ -1820,7 +1822,7 @@
 </ul>
 <p><img alt="Command-Based Flight Control" src="../../../identification/images/command_based_flight_control.png" style="display: block; margin: auto;" width="50%" /></p>
 <ul>
-<li>The commander module stores the latest reference commands in a setpoint_t structure. These values can be retrieved using the commanderGetSetpoint() function.</li>
+<li>The commander module stores the latest reference commands in a setpoint_t structure. These values can be retrieved using the <code>commanderGetSetpoint()</code> function.</li>
 </ul>
 <hr />
 <h2 id="implementation">Implementation</h2>

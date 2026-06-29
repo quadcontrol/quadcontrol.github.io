@@ -5,7 +5,7 @@ icon: material/fan
 
 # :material-fan: Actuators
 
-In this section, you will implement the actuators function, which receives the PWM commands and sends them to the BLDC motor drivers.
+In this section, you will implement the actuators function, which receives the ${\color{var(--c3)}\text{PWM}}$ commands and sends them to the BLDC motor drivers.
 
 ![](../images/architecture_actuators.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -13,26 +13,27 @@ In this section, you will implement the actuators function, which receives the P
 
 ## Overview
 
-The following diagram illustrates the internal structure of the reference function:
+The following diagram illustrates the internal structure of the actuators function:
 
 ![](images/actuators.svg){: width=25% style="display: block; margin: auto;" }
 
 Before we begin, it is important to understand a few concepts:
 
-- Arming the quadcopter means enabling the motors to operate. This is done manually by the operator through the Crazyflie Client and can be checked in the firmware using the `supervisorIsArmed()` function.
+- Arming the quadcopter means enabling the motors to operate. This is done manually through the Crazyflie Client and can be checked in the firmware using the `supervisorIsArmed()` function.
 - The motors are controlled using the `motorsSetRatio(id, ratio)` function, where `id` specifies the motor and `ratio` specifies its power level:
     - The Crazyflie has four motors, identified as `MOTOR_M1`, `MOTOR_M2`, `MOTOR_M3`, and `MOTOR_M4`.
     - The power level ranges from `0` (off) to `UINT16_MAX` (maximum power).
+- The `motorsStop()` function turns off all four motors at once.
 
 ---
 
 ## Implementation
 
-The first step in our function is to check whether the quadcopter is armed. If it is not, all motors must be commanded to stop.
+The first step in your function is to check whether the quadcopter is armed. If it is not, all motors must be turned off.
 
 If the quadcopter is armed, we perform a second check: whether the height reference $z_r$ is greater than zero. In other words, we check if the quadcopter has been instructed to take off.
 
-If the height reference greater than zero, the PWM values stored in the global variables are applied to each of the four motors. Otherwise, all four motors are commanded to a fixed PWM value of 10%.
+If the height reference is greater than zero, the PWM values stored in the global variables are applied to each of the four motors. Otherwise, all four motors are commanded to a fixed PWM value of 10%.
 
 This constant 10% duty cycle is known as the idle PWM. It keeps the BLDC motors spinning at a low speed so they are already running when takeoff is commanded, allowing them to respond immediately and reliably.
 
@@ -42,7 +43,7 @@ The code below implements this logic.
 // Send commands to motors
 void actuators()
 {
-    // Check is quadcopter is armed or disarmed
+    // Check if quadcopter is armed or disarmed
     if (supervisorIsArmed())
     {
         // Check if quadcopter has been commanded to take-off or land
@@ -65,7 +66,7 @@ void actuators()
     }
     else
     {
-        // Turn-off all motor if disarmed
+        // Turn off all motor if disarmed
         motorsStop();
     }
 }

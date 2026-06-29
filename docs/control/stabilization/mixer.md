@@ -87,7 +87,7 @@ void mixer()
 ```
 
 !!! warning "Warning"
-    Be careful when taking the square root of negative numbers. Check whether each value of $\omega^2$ is non-negative before computing its square root.
+    Be careful when taking the square root of negative numbers. Check whether each value of ${\color{var(--c1)}\omega}^2$ is non-negative before computing its square root.
 
 ---
 
@@ -100,7 +100,7 @@ To validate your implementation, perform a few simple tests by verifying that th
 
     === "Actuators"
 
-        Since the quadcopter is not yet being controlled, comment out the lines that check whether the altitude reference $z_r$ is greater than zero:
+        Because the quadcopter is not being controlled, comment out the lines that check whether the altitude reference ${\color{var(--c3)}z_r}$ is greater than zero:
 
         ```c linenums="62" hl_lines="7-9 15-23"
         // Send commands to motors
@@ -137,12 +137,12 @@ To validate your implementation, perform a few simple tests by verifying that th
 
     === "Reference"
 
-        We will use the variables transmitted by the Crazyflie Client's Command-Based Flight Control interface to command the total thrust $f_t$ in increments of $0.01\,N$(1), and the roll torque $\tau_x$(2) and pitch torque $\tau_y$ in increments of $0.001\,N\cdot m$. Modify the code as follows:
+        We will use the variables transmitted by the Crazyflie Client's Command-Based Flight Control interface to command the total thrust ${\color{var(--c2)}f_t}$ in increments of $0.01~\text{N}$(1), and the roll torque ${\color{var(--c2)}\tau_x}$(2) and pitch torque ${\color{var(--c2)}\tau_y}$ in increments of $0.001~\text{N}\cdot\text{m}$. Modify the code as follows:
         { .annotate }
 
-        1. We first multiply by 2, then round the result, and finally divide by 100 (or 1000). This ensures rounding to two (or three) decimal places.
+        1. We first multiply by $2$, then round the result, and finally divide by $100$ (or $1000$). This ensures rounding to two (or three) decimal places.
 
-        2. The roll torque $\tau_x$ requires a sign inversion because the $y$ axis, controlled by the `←` and `→` buttons, is opposite to the positive roll torque direction.
+        2. The roll torque ${\color{var(--c2)}\tau_x}$ requires a sign inversion because the ${\color{var(--c1)}y}$ axis, controlled by the ++"←"++ and ++"→"++ buttons, is opposite to the positive roll torque direction.
 
         ```c linenums="72" hl_lines="11-15 17-21"
         // Read reference setpoints (from Crazyflie Client)

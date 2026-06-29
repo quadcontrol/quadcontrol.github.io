@@ -1,9 +1,9 @@
 ---
 title: Thrust constant
-icon: material/alpha-l-box-outline
+icon: material/alpha-t-box-outline
 ---
 
-# :material-alpha-l-box-outline: Thrust constant
+# :material-alpha-t-box-outline: Thrust constant
 
 In this section, you will experimentally determine the propeller thrust constant $k_l$.
 

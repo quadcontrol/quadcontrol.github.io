@@ -5,7 +5,7 @@ icon: material/compass-outline
 
 # :material-compass-outline: Sensors
 
-In this section, you will implement the sensors function, which read raw measurements from the accelerometer ($a_x$, $a_y$, $a_z$), gyroscope ($g_x$, $g_y$, $g_z$), range sensor ($d$) and optical flow sensor ($p_x$ and $p_y$) by consuming data from the firmware's internal sensor pipeline.
+In this section, you will implement the sensors function, which reads raw measurements from the accelerometer (${\color{var(--c3)}a_x}$, ${\color{var(--c3)}a_y}$ and ${\color{var(--c3)}a_z}$), gyroscope (${\color{var(--c3)}g_x}$, ${\color{var(--c3)}g_y}$ and ${\color{var(--c3)}g_z}$), range sensor (${\color{var(--c3)}d}$) and optical flow sensor (${\color{var(--c3)}p_x}$ and ${\color{var(--c3)}p_y}$) by retrieving data from the firmware's internal sensor pipeline.
 
 ![](../images/architecture_sensors.svg){: width=100% style="display: block; margin: auto;" }
 
@@ -38,7 +38,7 @@ The code below implements this logic.
 // Read raw sensor measurements
 void sensors()
 {
-    // Declare variable that store the most recent measurement from estimator
+    // Declare a variable that stores the most recent measurement from the estimator
     static measurement_t measurement;
 
     // Retrieve the current measurement from estimator module

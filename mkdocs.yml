@@ -74,7 +74,7 @@ nav:
         - control/interface/index.md
         - Actuators: control/interface/actuators.md
         - Sensors: control/interface/sensors.md
-        - References: control/interface/references.md
+        - Reference: control/interface/reference.md
       - Stabilization: 
         - control/stabilization/index.md
         - Mixer: control/stabilization/mixer.md

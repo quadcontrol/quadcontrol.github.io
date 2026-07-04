@@ -2109,7 +2109,10 @@
 \]</div>
 <p>Initially, the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> is simply set equal to the accelerometer-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_a}\)</span>, as illustrated in the block diagram below:</p>
 <p><img alt="" src="../images/estimator_accelerometer.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>In the <code>attitudeEstimator()</code> function, compute <span class="arithmatex">\({\color{var(--c3)}\phi_a}\)</span> from the accelerometer measurements <span class="arithmatex">\({\color{var(--c3)}a_y}\)</span> and <span class="arithmatex">\({\color{var(--c3)}a_z}\)</span>, assign it to the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>, and store the result in a logging variable so it can be visualized in the Crazyflie Client.</p>
+<p class="annotate">In the <code>attitudeEstimator()</code> function, compute the accelerometer-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_a}\)</span> from the accelerometer measurements <span class="arithmatex">\({\color{var(--c3)}a_y}\)</span> and <span class="arithmatex">\({\color{var(--c3)}a_z}\)</span>, then assign it to the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>(1).</p>
+<ol>
+<li>The result is also stored in a logging variable in degrees (rather than radians) so it can be visualized in the Crazyflie Client.</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -2233,7 +2236,7 @@
 <p>Now implement an attitude estimator in which the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> is simply the angle obtained by integrating the gyroscope measurement <span class="arithmatex">\({\color{var(--c3)}g_x}\)</span>, as illustrated below:</p>
 <p>Now let's implement an attitude estimator in which the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> is simply the angle obtained by integrating the gyroscope measurement <span class="arithmatex">\({\color{var(--c3)}g_x}\)</span>, as illustrated below:</p>
 <p><img alt="" src="../images/estimator_gyroscope.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>In the <code>attitudeEstimator()</code> function, create a local variable <span class="arithmatex">\({\color{var(--c3)}\phi_g}\)</span> corresponding to the integrated gyroscope angle, then assign it to the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>.</p>
+<p>In the <code>attitudeEstimator()</code> function, compute the gyroscope-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_g}\)</span> integrating the gyroscope measurement <span class="arithmatex">\({\color{var(--c3)}g_x}\)</span>, then assign it to the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -2281,7 +2284,7 @@
 \]</div>
 <p>The resulting attitude estimator is shown below:</p>
 <p><img alt="" src="../images/estimator_gyroscope_high_pass_filter.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Modify the <code>attitudeEstimator()</code> function so that the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> is obtained by applying a high-pass filter to the gyroscope-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_g}\)</span>.</p>
+<p>Modify your <code>attitudeEstimator()</code> function so that the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> is obtained by applying a high-pass filter to the gyroscope-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_g}\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -2305,32 +2308,32 @@
 <p>You should notice that the estimated attitude always converges to zero. This eliminates the long-term drift caused by integrating the gyroscope bias, but it also prevents the estimator from maintaining a non-zero attitude while the quadcopter is stationary.</p>
 </div>
 <h2 id="accelerometer-and-gyroscope">Accelerometer and gyroscope</h2>
-<p>As we have seen, the accelerometer provides good attitude estimates under static conditions (low-frequency motion), whereas the gyroscope performs well under dynamic conditions (high-frequency motion). Each sensor succeeds precisely where the other falls short. So why not combine them to obtain accurate attitude estimates under both static and dynamic conditions? That is the idea behind a complementary filter!</p>
+<p>As we have seen, the accelerometer provides reliable attitude estimates under static conditions (low-frequency motion), whereas the gyroscope performs better under dynamic conditions (high-frequency motion). In other words, each sensor performs well precisely where the other falls short. By combining the strengths of both sensors, it is possible to obtain accurate attitude estimates under both static and dynamic conditions. This is the idea behind a complementary filter.</p>
 <h3 id="complementary-filter">Complementary filter</h3>
-<p>The idea behind a complementary filter is to pass the accelerometer-based angle through a low-pass filter and the gyroscope-based angle through a high-pass filter, as illustrated in the block diagram below:</p>
+<p>The idea behind a complementary filter is to pass the accelerometer-based angle through a low-pass filter while passing the gyroscope-based angle through a high-pass filter, as illustrated in the block diagram below:</p>
 <p><img alt="" src="../images/complementary_filter.svg" style="display: block; margin: auto;" width="500" /></p>
-<p class="annotate">Since the sum of these two filters has unity gain, they can simply be added together(1):</p>
+<p class="annotate">The outputs of these two filters can then be added together because the sum of theirs transfer functions has unity gain(1):</p>
 <ol>
 <li>This is where the term <em>complementary</em> comes from.</li>
 </ol>
 <div class="arithmatex">\[
     \underbrace{\frac{\omega_c}{s+\omega_c}}_{\begin{array}{c} \text{Low-pass} \\ \text{filter} \end{array}} + \underbrace{\frac{s}{s+\omega_c}}_{\begin{array}{c} \text{High-pass} \\ \text{filter} \end{array}} = 1
 \]</div>
-<p>Since the angular velocity is integrated before the high-pass filter, and both the low-pass and high-pass filters share the same transfer function denominator, the block diagram can be simplified as follows:</p>
+<p>A closer look at the block diagram reveals that the angular velocity is first integrated before being passed through the high-pass filter. Moreover, both filters share the same denominator. This allows the diagram to be simplified into the equivalent form shown below:</p>
 <p><img alt="" src="../images/complementary_filter_reduced.svg" style="display: block; margin: auto;" width="500" /></p>
-<p>Notice that we are now left with a single transfer function, namely that of a low-pass filter. Since we have already derived its discrete-time equivalent, we obtain:</p>
+<p>The simplified diagram contains only a single transfer function, namely a low-pass filter. Its discrete-time implementation has already been derived in the previous section, leading to:</p>
 <div class="arithmatex">\[
 \begin{align}
-    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c1)}\phi[k-1]}+\alpha \left( \frac{1}{\omega_c} {\color{var(--c3)}g_x[k]} + \phi_a[k] \right) \\
-    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c1)}\phi[k-1]}+ \underbrace{\alpha\frac{1}{\omega_c}}_{(1-\alpha)\Delta t} {\color{var(--c3)}g_x[k]} + \alpha \phi_a[k] \\
-    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c1)}\phi[k-1]}+ (1-\alpha) {\color{var(--c3)}g_x[k]}\Delta t + \alpha \phi_a[k] \\
-    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right)\underbrace{\left({\color{var(--c1)}\phi[k-1]}+{\color{var(--c3)}g_x[k]} \Delta t \right)}_{{\color{var(--c3)}\phi_g[k]}} + \alpha \phi_a[k] \\
-    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c3)}\phi_g[k]} + \alpha \phi_a[k]
+    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c1)}\phi[k-1]}+\alpha \left( \frac{1}{\omega_c} {\color{var(--c3)}g_x[k]} + {\color{var(--c3)}\phi_a[k]} \right) \\
+    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c1)}\phi[k-1]}+ \underbrace{\alpha\frac{1}{\omega_c}}_{(1-\alpha)\Delta t} {\color{var(--c3)}g_x[k]} + \alpha {\color{var(--c3)}\phi_a[k]} \\
+    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c1)}\phi[k-1]}+ (1-\alpha) {\color{var(--c3)}g_x[k]}\Delta t + \alpha {\color{var(--c3)}\phi_a[k]} \\
+    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right)\underbrace{\left({\color{var(--c1)}\phi[k-1]}+{\color{var(--c3)}g_x[k]} \Delta t \right)}_{{\color{var(--c3)}\phi_g[k]}} + \alpha {\color{var(--c3)}\phi_a[k]} \\
+    {\color{var(--c1)}\phi[k]} &amp;= \left( 1-\alpha \right){\color{var(--c3)}\phi_g[k]} + \alpha {\color{var(--c3)}\phi_a[k]}
 \end{align}
 \]</div>
-<p>In other words, a discrete-time complementary filter is simply a weighted average between the gyroscope-based angle <span class="arithmatex">\(\phi_g\)</span> and the accelerometer-based angle <span class="arithmatex">\(\phi_a\)</span>. This can be represented by the following block diagram:</p>
+<p>In other words, the complementary filter reduces to a simple weighted average of the gyroscope-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_g}\)</span> and the accelerometer-based angle <span class="arithmatex">\({\color{var(--c3)}\phi_a}\)</span>:</p>
 <p><img alt="" src="../images/estimator_accelerometer_gyroscope_complementary_filter.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>Modify your <code>attitudeEstimator()</code> function so that the estimated angle <span class="arithmatex">\(\phi\)</span> is obtained using a complementary filter that combines the accelerometer-based measurement <span class="arithmatex">\(\phi_a\)</span> and the gyroscope-based measurement <span class="arithmatex">\(\phi_g\)</span>.</p>
+<p>Modify your <code>attitudeEstimator()</code> function so that the estimated angle <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> is obtained using the complementary filter above.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>
 <span class="p">{</span>
@@ -2338,10 +2341,10 @@
 <span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">wc</span><span class="w"> </span><span class="o">=</span>
 </span><span class="hll"><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span>
 </span>
-<span class="w">    </span><span class="c1">// Measured angle from accelerometer</span>
+<span class="w">    </span><span class="c1">// Computed angle from accelerometer</span>
 <span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_a</span><span class="w"> </span><span class="o">=</span>
 </span>
-<span class="w">    </span><span class="c1">// Measured angle from gyroscope</span>
+<span class="w">    </span><span class="c1">// Computed angle from gyroscope</span>
 <span class="hll"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">phi_g</span><span class="w"> </span><span class="o">=</span>
 </span>
 <span class="w">    </span><span class="c1">// Estimated angle (accelerometer and gyroscope with complementary filter)</span>
@@ -2361,36 +2364,38 @@
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \phi =  \left( 1 - \alpha \right) \phi_g + \alpha \phi_a \\ 
-    \theta = \left( 1 - \alpha \right) \theta_g + \alpha \theta_a  \\
-    \psi = \psi_g
+    {\color{var(--c1)}\phi} =  \left( 1 - \alpha \right) {\color{var(--c3)}\phi_g} + \alpha {\color{var(--c3)}\phi_a} \\ 
+    {\color{var(--c1)}\theta} = \left( 1 - \alpha \right) {\color{var(--c3)}\theta_g} + \alpha {\color{var(--c3)}\theta_a}  \\
+    {\color{var(--c1)}\psi} = {\color{var(--c3)}\psi_g}
 \end{array}
 \right.
 \qquad \qquad \qquad
 \left\{
 \begin{array}{l}
-    \omega_x = g_x \\ 
-    \omega_y = g_y \\
-    \omega_z = g_z
+    {\color{var(--c1)}\omega_x} = {\color{var(--c3)}g_x} \\ 
+    {\color{var(--c1)}\omega_y} = {\color{var(--c3)}g_y} \\
+    {\color{var(--c1)}\omega_z} = {\color{var(--c3)}g_z}
 \end{array}
 \right.
 \]</div>
-<p class="annotate">Notice that the yaw angle <span class="arithmatex">\(\psi\)</span> cannot be estimated from the accelerometer measurements. Therefore, it is estimated using only the gyroscope. As a result, the yaw estimate <span class="arithmatex">\(\psi\)</span> is expected to drift over time. Fortunately, this angle is not essential for maintaining the quadcopter's stability(1).</p>
+<p class="annotate">Notice that the yaw angle <span class="arithmatex">\({\color{var(--c1)}\psi}\)</span> cannot be estimated from the accelerometer measurements. Therefore, it is estimated using only the gyroscope. As a result, the yaw estimate <span class="arithmatex">\({\color{var(--c1)}\psi}\)</span> is expected to drift over time. Fortunately, this angle is not essential for maintaining the quadcopter's stability(1).</p>
 <ol>
 <li>Attitude and Heading Reference Systems (AHRS) use a magnetometer to complement the gyroscope-based yaw estimate <span class="arithmatex">\(\psi\)</span>, preventing this angle from drifting over time.</li>
 </ol>
-<p>The Euler angles <span class="arithmatex">\(\phi_a\)</span> and <span class="arithmatex">\(\theta_a\)</span> computed from the accelerometer measurements <span class="arithmatex">\(a_x\)</span>, <span class="arithmatex">\({\color{var(--c3)}a_y}\)</span>, and <span class="arithmatex">\({\color{var(--c3)}a_z}\)</span> are given by:</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise 1</p>
+<p>Prove that the Euler angles <span class="arithmatex">\({\color{var(--c3)}\phi_a}\)</span> and <span class="arithmatex">\({\color{var(--c3)}\theta_a}\)</span> computed from the accelerometer measurements <span class="arithmatex">\({\color{var(--c3)}a_x}\)</span>, <span class="arithmatex">\({\color{var(--c3)}a_y}\)</span>, and <span class="arithmatex">\({\color{var(--c3)}a_z}\)</span> are given by:</p>
 <p><img alt="" src="../images/readings_accelerometer_3d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \phi_a = \tan^{-1} \left( \dfrac{-{\color{var(--c3)}a_y}}{-{\color{var(--c3)}a_z}} \right) \\
-    \theta_a = \tan^{-1} \left( \dfrac{a_x}{\sqrt{{\color{var(--c3)}a_y}^2+{\color{var(--c3)}a_z}^2}} \right)
+    {\color{var(--c3)}\phi_a} = \tan^{-1} \left( \dfrac{-{\color{var(--c3)}a_y}}{-{\color{var(--c3)}a_z}} \right) \\
+    {\color{var(--c3)}\theta_a} = \tan^{-1} \left( \dfrac{{\color{var(--c3)}a_x}}{\sqrt{{\color{var(--c3)}a_y}^2+{\color{var(--c3)}a_z}^2}} \right)
 \end{array}
 \right.
 \]</div>
 <details class="info">
-<summary>Derivation</summary>
+<summary>Solution</summary>
 <p>The accelerations <span class="arithmatex">\(a_x\)</span>, <span class="arithmatex">\({\color{var(--c3)}a_y}\)</span>, and <span class="arithmatex">\({\color{var(--c3)}a_z}\)</span> as functions of the gravitational acceleration <span class="arithmatex">\(g\)</span> and the Euler angles <span class="arithmatex">\(\phi\)</span> and <span class="arithmatex">\(\theta\)</span> are given by:</p>
 <div class="arithmatex">\[
 \begin{align}
@@ -2450,19 +2455,22 @@
 \end{align}
 \]</div>
 </details>
-<p>The Euler angles <span class="arithmatex">\(\phi_g\)</span>, <span class="arithmatex">\(\theta_g\)</span>, and <span class="arithmatex">\(\psi_g\)</span> computed from the gyroscope measurements <span class="arithmatex">\(g_x\)</span>, <span class="arithmatex">\(g_y\)</span>, and <span class="arithmatex">\(g_z\)</span> are given by:</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise 2</p>
+<p>Prove that the Euler angles <span class="arithmatex">\({\color{var(--c3)}\phi_g}\)</span>, <span class="arithmatex">\({\color{var(--c3)}\theta_g}\)</span>, and <span class="arithmatex">\({\color{var(--c3)}\psi_g}\)</span> computed from the gyroscope measurements <span class="arithmatex">\({\color{var(--c3)}g_x}\)</span>, <span class="arithmatex">\({\color{var(--c3)}g_y}\)</span>, and <span class="arithmatex">\({\color{var(--c3)}g_z}\)</span> are given by:</p>
 <p><img alt="" src="../images/readings_gyroscope_3d.svg" style="display: block; margin: auto;" width="250" /></p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    \phi_g = \phi + \left( g_x + g_y \sin\phi\tan\theta + g_z \cos\phi\tan\theta \right) \Delta t \\
-    \theta_g = \theta + \left( g_y \cos\phi - g_z \sin\phi \right) \Delta t \\
-    \psi_g = \psi + \left( g_y \sin\phi\sec\theta + g_z \cos\phi\sec\theta \right) \Delta t
+    {\color{var(--c3)}\phi_g} = \phi + \left( g_x + g_y \sin\phi\tan\theta + g_z \cos\phi\tan\theta \right) \Delta t \\
+    {\color{var(--c3)}\theta_g} = \theta + \left( g_y \cos\phi - g_z \sin\phi \right) \Delta t \\
+    {\color{var(--c3)}\psi_g} = \psi + \left( g_y \sin\phi\sec\theta + g_z \cos\phi\sec\theta \right) \Delta t
 \end{array}
 \right.
 \]</div>
 <details class="info">
-<summary>Derivation</summary>
+<summary>Solution</summary>
 <p>The derivatives of the Euler angles as functions of the angular velocities are given by the rotational kinematic equation:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
@@ -2541,6 +2549,7 @@
 \end{align*}
 \]</div>
 </details>
+</div>
 <p>Modify your <code>attitudeEstimator()</code> function so that the estimated angles <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span>, and <span class="arithmatex">\(\psi\)</span> are obtained using a complementary filter that combines the accelerometer-based measurements <span class="arithmatex">\(\phi_a\)</span> and <span class="arithmatex">\(\theta_a\)</span> with the gyroscope-based measurements <span class="arithmatex">\(\phi_g\)</span>, <span class="arithmatex">\(\theta_g\)</span>, and <span class="arithmatex">\(\psi_g\)</span>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Estimate orientation from IMU sensor</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">attitudeEstimator</span><span class="p">()</span>

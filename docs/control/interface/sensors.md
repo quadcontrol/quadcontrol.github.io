@@ -5,7 +5,7 @@ icon: material/compass-outline
 
 # :material-compass-outline: Sensors
 
-In this section, you will implement the sensors function, which reads raw measurements from the accelerometer (${\color{var(--c3)}a_x}$, ${\color{var(--c3)}a_y}$ and ${\color{var(--c3)}a_z}$), gyroscope (${\color{var(--c3)}g_x}$, ${\color{var(--c3)}g_y}$ and ${\color{var(--c3)}g_z}$), range sensor (${\color{var(--c3)}d}$) and optical flow sensor (${\color{var(--c3)}p_x}$ and ${\color{var(--c3)}p_y}$) by retrieving data from the firmware's internal sensor pipeline.
+In this section, you will implement the `sensors()` function, which reads raw measurements from the accelerometer (${\color{var(--c3)}a_x}$, ${\color{var(--c3)}a_y}$ and ${\color{var(--c3)}a_z}$), gyroscope (${\color{var(--c3)}g_x}$, ${\color{var(--c3)}g_y}$ and ${\color{var(--c3)}g_z}$), range sensor (${\color{var(--c3)}d}$) and optical flow sensor (${\color{var(--c3)}p_x}$ and ${\color{var(--c3)}p_y}$) by retrieving data from the firmware's internal sensor pipeline.
 
 ![](../images/architecture_sensors.svg){: width=100% style="display: block; margin: auto;" }
 

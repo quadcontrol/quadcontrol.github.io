@@ -5,7 +5,7 @@ icon: material/fan
 
 # :material-fan: Actuators
 
-In this section, you will implement the actuators function, which receives the ${\color{var(--c3)}\text{PWM}}$ commands and sends them to the BLDC motor drivers.
+In this section, you will implement the `actuators()` function, which receives the ${\color{var(--c3)}\text{PWM}}$ commands and sends them to the BLDC motor drivers.
 
 ![](../images/architecture_actuators.svg){: width=100% style="display: block; margin: auto;" }
 

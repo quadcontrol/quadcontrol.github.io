@@ -9,54 +9,7 @@ Nesta secção você irá implementar o controlador de atitude, que comanda os t
 
 ![Architecture - Attitude Controller](../../images/architecture_attitude_controller.svg){: width=100% style="display: block; margin: auto;" }
 
-Para isto, será implementada uma nova função:
 
-- `attitudeController()`
-
-Além de uma alteração em uma função já previamente implementada:
-
-- `reference()`
-
----
-
-## Implementação
-
-Para começar, copie e cole o arquivo `attitude_estimator.c` e renomeie ele para `attitude_controller.c`.
-
-### Definições
-
-#### Variáveis globais
-
-Declare mais algumas variáveis globais, que são as referências dos ângulos de Euler que entram na função do controlador de atitude.
-
-```c
-// System references
-float phi_r, theta_r, psi_r; // Euler angles reference [rad]
-```
-
-### Loop principal
-
-Inclua no seu loop principal a chamada da função `attitudeController()` entre as funções `attitudeEstimator()` e `mixer()`.
-
-```c hl_lines="10"
-// Main application task
-void appMain(void *param)
-{
-    // Infinite loop (runs at 200Hz)
-    while (true)
-    {
-        reference();                  // Read reference setpoints (from Crazyflie Client)
-        sensors();                    // Read raw sensor measurements
-        attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
-        attitudeController();         // Compute desired roll/pitch/yaw torques
-        mixer();                      // Convert desired force/torques into motor PWM
-        actuators();                  // Send commands to motors
-        vTaskDelay(pdMS_TO_TICKS(5)); // Loop delay (5 ms)
-    }
-}
-```
-
-### Funções
 
 #### Referência
 

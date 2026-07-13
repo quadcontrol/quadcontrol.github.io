@@ -1,195 +1,78 @@
 ---
-title: Estimador vertical
+title: Height Estimator
 icon: material/radar
 ---
 
-# :material-altimeter: Estimador vertical
+# :material-altimeter: Height Estimator
 
-Nesta secção você irá implementar o estimador vertical, que estima a posição ${\color{var(--c1)}z}$ e velocidade ${\color{var(--c1)}v_z}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$.
+In this section, you will implement the `heightEstimator()` function, which estimates position ${\color{var(--c1)}z}$ and velocity ${\color{var(--c1)}v_z}$ from the range sensor measurement ${\color{var(--c3)}d}$.
 
 ![Architecture - Vertical Estimator](../../images/architecture_height_estimator.svg){: width=100% style="display: block; margin: auto;" }
 
-Para isto, será implementada uma nova função:
+## Overview
 
-- `verticalEstimator()`
-
-Além de uma alteração em uma função já previamente implementada:
-
-- `sensors()`
-
----
-
-## Implementação
-
-Para começar, copie e cole o arquivo `attitude_controller.c` e renomeie ele para `vertical_estimator.c`.
-
-### Definições
-
-#### Variáveis globais
-
-Declare mais algumas variáveis globais, que são as variáveis que entram e saem da função do estimador vertical.
-
-```c hl_lines="7 16 17"
-// Actuators
-float pwm1, pwm2, pwm3, pwm4; // Motors PWM
-
-// Sensors
-float ax, ay, az;             // Accelerometer [m/s^2]
-float gx, gy, gz;             // Gyroscope [rad/s]
-float d;                      // Range [m]
-
-// System inputs
-float ft;                     // Thrust force [N]
-float tx, ty, tz;             // Roll, pitch and yaw torques [N.m]
-
-// System states
-float phi, theta, psi;        // Euler angles [rad]
-float wx, wy, wz;             // Angular velocities [rad/s]
-float z;                      // Vertical position [m]
-float vz;                     // Vertical velocity [m/s]
-
-// System references
-float phi_r, theta_r, psi_r; // Euler angles reference [rad]
-```
-
-#### Variáveis de registro
-
-Adicione as variáveis criadas ao grupo de registro previamente definido, para que seja possível visualizar nossa estimativa em tempo real no Crazyflie Client.
-
-```c hl_lines="6 7"
-// Logging group that stream variables to CFClient.
-LOG_GROUP_START(stateEstimate)
-LOG_ADD_CORE(LOG_FLOAT, roll, &log_phi)
-LOG_ADD_CORE(LOG_FLOAT, pitch, &log_theta)
-LOG_ADD_CORE(LOG_FLOAT, yaw, &log_psi)
-LOG_ADD_CORE(LOG_FLOAT, z, &z)
-LOG_ADD_CORE(LOG_FLOAT, vz, &vz)
-LOG_GROUP_STOP(stateEstimate)
-```
-
-### Loop principal
-
-Inclua no seu loop principal a chamada da função `verticalEstimator()` entre as funções `attitudeEstimator()` e `attitudeController()`.
-
-```c hl_lines="10"
-// Main application task
-void appMain(void *param)
-{
-    // Infinite loop (runs at 200Hz)
-    while (true)
-    {
-        reference();                  // Read reference setpoints (from Crazyflie Client)
-        sensors();                    // Read raw sensor measurements
-        attitudeEstimator();          // Estimate orientation (roll/pitch/yaw) from IMU sensor
-        verticalEstimator();          // Estimate vertical position/velocity from range sensor
-        attitudeController();         // Compute desired roll/pitch/yaw torques
-        mixer();                      // Convert desired force/torques into motor PWM
-        actuators();                  // Send commands to motors
-        vTaskDelay(pdMS_TO_TICKS(5)); // Loop delay (5 ms)
-    }
-}
-```
-
-### Funções
-
-#### Sensores
-
-Inclua na função `sensors()` um código adicional que pega a leitura do sensor de proximidade e armazena ela na variável global previamente declarada.
-
-```c hl_lines="24-27"
-// Get sensor readings from estimator module
-void sensors()
-{
-    // Declare variable that store the most recent measurement from estimator
-    static measurement_t measurement;
-
-    // Retrieve the current measurement from estimator module
-    while (estimatorDequeue(&measurement))
-    {
-        switch (measurement.type)
-        {
-        // Get accelerometer sensor readings and convert [G's -> m/s^2]
-        case MeasurementTypeAcceleration:
-            ax = -measurement.data.acceleration.acc.x * g;
-            ay = -measurement.data.acceleration.acc.y * g;
-            az = -measurement.data.acceleration.acc.z * g;
-            break;
-        // Get gyroscope sensor readings and convert [deg/s -> rad/s]
-        case MeasurementTypeGyroscope:
-            gx = measurement.data.gyroscope.gyro.x * pi / 180.0f;
-            gy = measurement.data.gyroscope.gyro.y * pi / 180.0f;
-            gz = measurement.data.gyroscope.gyro.z * pi / 180.0f;
-            break;
-        // Get flow sensor readings [m]
-        case MeasurementTypeTOF:
-            d = measurement.data.tof.distance;
-            break;
-        default:
-            break;
-        }
-    }
-}
-```
-
-#### Estimador vertical
-
-A função `verticalEstimator()` é quem estima a posição e velocidade vertical a partir da leitura do sensor de proximidade.
-
-```c
-// Estimate vertical position/velocity from range sensor
-void verticalEstimator()
-{
-}
-```
-
-O sensor de proximidade utilizado é o [VL53L1X](https://www.st.com/en/imaging-and-photonics-solutions/vl53l1x.html){target=_blank}, da STMicroelectronics, localizado no Flow Deck v2.
+The range sensor used by the Crazyflie 2.1 Brushless is the [VL53L1X](https://www.st.com/en/imaging-and-photonics-solutions/vl53l1x.html){target=_blank} from STMicroelectronics. It is located on the Flow Deck v2.
 
 ![](images/vl53l1x.png){: width=30% style="display: block; margin: auto;" }
 
-Esse sensor utiliza tecnologia VCSEL (*"Vertical Cavity Surface Emitting Laser"*), que mede a distância de um objeto com base no tempo de voo -  ToF (*"Time of Flight"*) - dos fótons emitidos. Ele possui um alcance de aproximadamente 4 cm a 4 m e uma taxa de amostragem máxima de 50 Hz.
+The sensor uses VCSEL(1) technology to measure distance using the ToF(2) of emitted photons. It has an operating range of $4~\text{cm} - 4~\text{m}$ and a maximum sampling rate of $50~\text{Hz}$.
+{.annotate}
 
-Sensores de proximidade são dispositivos capazes de medir a distância de um objeto sem contato físico, geralmente por meio da emissão e recepção de ondas refletidas. O princípio é sempre o mesmo — emite-se uma onda, analisa-se o retorno — variando apenas o tipo de onda e a propriedade medida (tempo de retorno, intensidade ou diferença de fase).
+1. Vertical Cavity Surface Emitting Laser
+2. Time-of-Flight 
 
-Eles podem ser classificados em três categorias principais:
+Range sensors measure the distance to an object without physical contact by transmitting a wave and analyzing its reflection. Although the underlying principle is the same, different technologies use different types of waves and extract different information from the returned signal, such as time of flight, intensity, or phase shift.
 
-- Radar (*"Radio Detection and Ranging"*) — utilizam ondas eletromagnéticas de rádio
-- Sonar (*"Sound Navigation and Ranging"*) — utilizam ondas sonoras (ultrassônicas)
-- Lidar (*"Light Detection and Ranging"*) — utilizam ondas eletromagnéticas de luz (infravermelha ou laser)
+Range sensors can be divided into three main categories:
 
-Sensores VCSEL, como o VL53L1X, são portanto um tipo específico de Lidar, operando no espectro infravermelho próximo e com alta precisão em curtas distâncias.
+- Radar(1) uses radio waves.
+    {.annotate}
 
-##### Valor medido
+    1. **RA**dio **D**etection **A**nd **R**anging
 
-Embora o sensor de proximidade meça a distância ao solo no referencial do drone, o que realmente nos interessa é a altura em relação ao sistema inercial. Para isso, precisamos corrigir a medida levando em conta a inclinação do drone.
+- Sonar(1) uses ultrasonic waves.
+    {.annotate}
 
-!!! question "2D"    
-    
-    Determine a posição vertical medida ${\color{var(--c3)}z_m}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$ e do ângulo de rolagem ${\color{var(--c1)}\phi}$.
+    1. **So**und **N**avigation **A**nd **R**anging
+
+- Lidar(1) uses infrared or laser light.
+    {.annotate}
+
+    1. **LI**ght **D**etection **A**nd **R**anging
+
+The VL53L1X is therefore a short-range infrared lidar based on VCSEL technology.
+
+## Measuring height with a range sensor
+
+Although the range sensor measures the distance to the ground in the quadcopter's body frame, the controller requires  its height in the inertial frame. Therefore, the measurement must be compensated for the quadcopter's orientation. To better understand this compensation, let us first consider the 2D case, which is simpler and more intuitive. We will then extend the same reasoning to the 3D case.
+
+!!! question "2D"
+
+    Determine the measured height ${\color{var(--c3)}z_m}$ from the range measurement ${\color{var(--c3)}d}$ and the estimated roll angle ${\color{var(--c1)}\phi}$.
 
     ![](images/readings_range_2d.svg){: width=60% style="display: block; margin: auto;" }
 
-    ??? info "Resposta"
+    ??? info "Solution"
 
         ![](images/readings_range_2d_geometry.svg){: width=20% style="display: block; margin: auto;" }
 
         $$
         \begin{align}
             \cos{\color{var(--c1)}\phi} &= \dfrac{{\color{var(--c3)}z_m}}{{\color{var(--c3)}d}} \\
-            {\color{var(--c3)}z_m} &= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi} \\
+            {\color{var(--c3)}z_m} &= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi}
         \end{align}
         $$
-        
 
-!!! question "3D"    
-    
-    Determine a posição vertical medida ${\color{var(--c3)}z_m}$ a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$ e dos ângulos de rolagem ${\color{var(--c1)}\phi}$ e inclinação ${\color{var(--c1)}\theta}$.
+!!! question "3D"
+
+    Determine the measured height ${\color{var(--c3)}z_m}$ from the range measurement ${\color{var(--c3)}d}$ and the estimated roll and pitch angles ${\color{var(--c1)}\phi}$ and ${\color{var(--c1)}\theta}$.
 
     ![](images/readings_range_3d.svg){: width=80% style="display: block; margin: auto;" }
 
-    ??? info "Resposta"
+    ??? info "Solution"
 
         ![](images/readings_range_3d_geometry.svg){: width=20% style="display: block; margin: auto;" }
-        
+
         $$
         \begin{align}
             \cos{\color{var(--c1)}\theta} &= \dfrac{{\color{var(--c3)}z_m}}{d'} \\
@@ -206,354 +89,539 @@ Embora o sensor de proximidade meça a distância ao solo no referencial do dron
 
         $$
         \begin{align}
-            {\color{var(--c3)}z_m} &= {\color{var(--c3)}d} \cos{\color{var(--c1)}\phi} \cos {\color{var(--c1)}\theta} 
+            {\color{var(--c3)}z_m} &= {\color{var(--c3)}d}\cos{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\theta}
         \end{align}
         $$
-        
-Inclua na função `verticalEstimator()` uma variável local ${\color{var(--c3)}z_m}$, que corresponde ao valor medido a partir da leitura do sensor de proximidade ${\color{var(--c3)}d}$ e dos ângulos de rolagem ${\color{var(--c1)}\phi}$ e inclinação ${\color{var(--c1)}\theta}$ e, em seguida, atribua ela a distância vertical estimada $z$.
+
+Add a local variable ${\color{var(--c3)}z_m}$ to the `heightEstimator()` function to compute the measured height from the range measurement ${\color{var(--c3)}d}$ together with the estimated roll and pitch angles ${\color{var(--c1)}\phi}$ and ${\color{var(--c1)}\theta}$. Then assign this value to the estimated height ${\color{var(--c1)}z}$.
 
 ```c hl_lines="5 8"
-// Estimate vertical position/velocity from range sensor
-void verticalEstimator()
+// Estimate height (z) from range sensor
+void heightEstimator()
 {
-    // Measured distante from range sensor
-    float z_m = 
+    // Measured height from range sensor
+    float z_m =
 
-    // Estimated distance
-    z = 
+    // Estimated height
+    z =
 }
 ```
 
-Verifique como está sua estimativa, para isso carregue esse programa no drone e utilize o Crazyflie Client para visualizar o resultado.
+Build and flash the firmware, then use the Crazyflie Client to visualize the estimated height. 
 
-!!! info "Resultado esperado"        
-    Você deve notar que estamos compensando corretamente alterações na orientação do drone. No entanto, a estimativa possui muito ruído. Ao invés de utilizarmos um filtro passa-baixas (como no estimador de atitude) para remover esse ruído, vamos utilizar agora um observador de estados.
+!!! info "Expected result" 
+    The estimated height should remain nearly constant while the quadcopter is tilted. However, the estimate is still quite noisy. Instead of applying a low-pass filter (as we did for the attitude estimator), we will now use a state observer.
 
-##### Observador de estados
+## State observer
 
-Um observador de estados é um modelo que, a partir das entradas e saídas do sistema real (planta), estima internamente os seus estados.
-    
-No nosso caso, a planta é a dinâmica vertical do drone e o observador de estados é um sistema cujas entradas são a força de propulsão total ${\color{var(--c2)}f_t}$ e a posição vertical medida ${\color{var(--c3)}z_m}$, e as saídas são a posição e velocidade verticais estimadas ${\color{var(--c1)}z}$ e ${\color{var(--c1)}v_z}$, conforme diagrama de blocos abaixo:
+A state observer is a mathematical model that estimates the internal states of a system using its inputs and outputs.
+
+In our case, the plant is the quadcopter's vertical dynamics. The observer receives the total thrust ${\color{var(--c2)}f_t}$ and the measured vertical position ${\color{var(--c3)}z_m}$ as inputs, and estimates the vertical position ${\color{var(--c1)}z}$ and vertical velocity ${\color{var(--c1)}v_z}$, as illustrated below.
 
 ![](images/state_observer.svg){: width=70% style="display: block; margin: auto;" }
 
-Vamos projetar três observadores de estados na sequência um do outro. O primeiro será bem simples, de ordem 1. Em seguida, vamos torná-lo mais sofisticado, de ordem 2. Por fim, vamos considerar a entrada da planta em nosso observador.
+We will progressively design three state observers.
 
-###### Observador de ordem 1
+- A first-order observer.
+- A second-order observer.
+- A second-order observer that also incorporates the control input.
 
-Vamos começar assumindo que o drone está parado, ou seja, sua posição vertical permanece constante:
+### First-order observer
+
+We begin with the simplest possible model by assuming that the quadcopter remains stationary, meaning that its vertical position is constant:
 
 $$
-{\color{var(--c1)}z} = \text{cte}
+{\color{var(--c1)}z} = \text{constant}
 $$
 
-Chamamos esse caso de observador de ordem 1, pois o modelo da planta é descrito por uma equação diferencial de primeira ordem:
+This is called a first-order observer, since the plant is described by a first-order differential equation:
 
 $$
 {\color{var(--c1)}\dot{z}} = 0
 $$
 
-Agora, se realimentarmos a diferença entre a posição vertical medida $z_m$ e a estimada $z$, obtemos um sistema cuja estimativa converge exponencialmente para a medida, desde que o ganho do observador $l$ seja positivo:
-        
+If we feedback the estimation error, the observer becomes
+
 $$
-{\color{var(--c1)}\dot{z}}  = 0 + l \left( {\color{var(--c3)}z_m}  - {\color{var(--c1)}z}  \right)
+{\color{var(--c1)}\dot{z}} = 0 + l\left({\color{var(--c3)}z_m}-{\color{var(--c1)}z}\right)
 $$
 
 ![](images/state_observer_order_1.svg){: width=70% style="display: block; margin: auto;" }
 
-Esse diagrama de blocos pode ser resumido em uma única função de transferência:
+As long as the observer gain $l$ is positive, the estimate converges exponentially to the measured position.
+
+This block diagram can be simplified into the following transfer function:
 
 ![](images/state_observer_order_1_tf.svg){: width=40% style="display: block; margin: auto;" }
 
-Note que essa função de transferência é idêntica à de um filtro passa-baixas de primeira ordem, com o ganho $l$ desempenhando o papel da frequência de corte $\omega_c$:
+Notice that this transfer function is identical to that of a first-order low-pass filter, with the observer gain playing the role of the cutoff frequency:
 
 $$
-l = \omega_c
+l=\omega_c
 $$
 
-Em outras palavras, um observador de ordem 1 é equivalente a um filtro passa-baixas: ele suaviza a medição, filtrando ruídos de alta frequência e preservando a tendência lenta da posição vertical.
-        
-Como o observador será implementado em um microcontrolador, precisamos encontrar sua forma discreta. Você já fez isso anteriormente para um filtro passa-baixas usando o método de Euler implícito. Desta vez, vamos aplicar o método de Euler explícito(1):
+In other words, a first-order observer behaves exactly like a first-order low-pass filter: it attenuates high-frequency measurement noise while preserving the slow variations of the true height.
+
+Since the observer will run on a microcontroller, we must discretize it. Previously, we discretized the low-pass filter using the implicit Euler method. This time, we will use the explicit Euler method.(1)
 {.annotate}
 
-1. A expressão derivada é idêntica à que você já viu antes:
+1. The resulting expression is very similar to the one derived previously:
 
     $$
-    {\color{var(--c1)}z[k+1]} = \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)} {\color{var(--c1)}z[k]} + \underbrace{l\Delta t}_{\alpha} {\color{var(--c3)}z_m[k]} 
-    $$
- 
-    No entanto, o valor de $\alpha$ agora é dado por:
-        
-    $$
-    \alpha = l \Delta t
+    {\color{var(--c1)}z[k+1]}=
+    \underbrace{\left(1-l\Delta t\right)}_{\left(1-\alpha\right)}
+    {\color{var(--c1)}z[k]}
+    +
+    \underbrace{l\Delta t}_{\alpha}
+    {\color{var(--c3)}z_m[k]}
     $$
 
-    Isso significa que ele pode ultrapassar 1 se $l$ for muito alto — o que torna o sistema instável. Essa é a desvantagem do método explícito em relação ao implícito. No entanto, basta garantir que:
+    However, the parameter $\alpha$ is now given by
 
     $$
-    l < \frac{1}{\Delta t}
+    \alpha=l\Delta t
+    $$
+
+    which means it can become greater than one if $l$ is chosen too large, making the system unstable. This is the main drawback of the explicit Euler method compared to the implicit one. Fortunately, stability is guaranteed as long as
+
+    $$
+    l<\frac{1}{\Delta t}.
     $$
 
 $$
 \begin{align*}
-    \frac{{\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]}}{\Delta t} + l{\color{var(--c1)}z[k]} &= l {\color{var(--c3)}z_m[k]} \\
-    {\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]} + l\Delta t{\color{var(--c1)}z[k]} &= l\Delta t {\color{var(--c3)}z_m[k]} \\
-    {\color{var(--c1)}z[k+1]} - \left( 1 - l\Delta t \right) {\color{var(--c1)}z[k]} &= l\Delta t {\color{var(--c3)}z_m[k]} \\
-    {\color{var(--c1)}z[k+1]} &= \left(1-l\Delta t\right) {\color{var(--c1)}z[k]} + l\Delta t {\color{var(--c3)}z_m[k]} 
+\frac{{\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]}}{\Delta t}
++l{\color{var(--c1)}z[k]}
+&=
+l{\color{var(--c3)}z_m[k]} \\
+{\color{var(--c1)}z[k+1]}-{\color{var(--c1)}z[k]}
++l\Delta t{\color{var(--c1)}z[k]}
+&=
+l\Delta t{\color{var(--c3)}z_m[k]} \\
+{\color{var(--c1)}z[k+1]}
+-\left(1-l\Delta t\right)
+{\color{var(--c1)}z[k]}
+&=
+l\Delta t{\color{var(--c3)}z_m[k]} \\
+{\color{var(--c1)}z[k+1]}
+&=
+\left(1-l\Delta t\right)
+{\color{var(--c1)}z[k]}
++l\Delta t
+{\color{var(--c3)}z_m[k]}
 \end{align*}
 $$
 
-A equação discretizada pode ser reescrita de modo a evidenciar suas duas partes - uma de predição e outra de correção:
+The discrete equation can be rewritten to explicitly separate the prediction and correction terms:
 
 $$
-{\color{var(--c1)}z[k+1]} = \underbrace{{\color{var(--c1)}z[k]}}_{\text{Predição}} + \quad  \underbrace{l \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
+{\color{var(--c1)}z[k+1]}
+=
+\underbrace{{\color{var(--c1)}z[k]}}_{\text{Prediction}}
++
+\underbrace{
+l\Delta t
+\left[
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k]}
+\right]
+}_{\text{Correction}}
 $$
 
+- The prediction step propagates the state according to the model.
+- The correction step updates the prediction using the measurement.
 
-
-
-- A parte de predição "prevê" o valor com base no modelo (neste caso, de que a posição vertical permanece constante)
-- A parte de correção "corrige" o valor com base na medição (neste caso, a diferença entre a posição medida e prevista)
-
-De forma equivalente, podemos representar o processo em duas etapas sequenciais, como será implementado no código(1):
+Equivalently, the observer can be implemented as two sequential steps.(1)
 {.annotate}
 
-1. A etapa de predição é redundante neste caso, pois o modelo é de ordem 1 e não há dinâmica a propagar — o estado simplesmente permanece constante. Ainda assim, mantemos essa etapa para preservar a estrutura geral do observador (predição seguida de correção), que será reutilizada nos casos de ordem 2, onde a predição efetivamente calcula a evolução do estado.
+1. In this case, the prediction step is redundant because the model assumes that the height remains constant. Nevertheless, we keep it to preserve the same observer structure (prediction followed by correction), which will also be used for the second-order observers.
 
 $$
 \begin{align}
-    \text{Predição:} &\quad {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} \\ \\
-    \text{Correção:} &\quad {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
+\text{Prediction:}
+&\quad
+{\color{var(--c1)}z[k+1]}
+=
+{\color{var(--c1)}z[k]}
+\\[10pt]
+\text{Correction:}
+&\quad
+{\color{var(--c1)}z[k+1]}
+=
+{\color{var(--c1)}z[k+1]}
++
+l\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k+1]}
+\right)
 \end{align}
 $$
 
-Modifique sua função `verticalEstimator()` para que a distância vertical $z$ seja estimada por um observador de ordem 1 com as etapas de predição e correção.
+Modify the `heightEstimator()` function so that the vertical position is estimated using a first-order state observer with separate prediction and correction steps.
 
 ```c hl_lines="5 6 12 15"
 // Estimate vertical position/velocity from range sensor
-void verticalEstimator()
+void heightEstimator()
 {
     // Estimator parameters
-    static const float wc =              
-    static const float l =               
+    static const float wc =
+    static const float l =
 
-    // Measured distante from range sensor
-    float z_m = 
+    // Measured distance from range sensor
+    float z_m =
 
     // Prediction step (model)
-    z = 
+    z =
 
     // Correction step (measurement)
-    z = 
+    z =
 }
 ```
-Experimente uma frequência de corte $\omega_c = 10$rad/s e verifique como isso influencia na sua estimativa.
 
-!!! info "Resultado esperado"        
-    Apesar da estimativa possuir bem menos ruído agora, ela está lenta quando movimentamos o drone. Isso ocorre pois nosso modelo assume que o drone está sempre parado, o que nem sempre é verdade. Para corrigir isso, vamos sofisticar um pouco nosso observador de estados.
+Try using a cutoff frequency of $\omega_c=10$ rad/s and observe how it affects the estimate.
 
-###### Observador de ordem 2
+!!! info "Expected result"
 
-Agora, vamos considerar que o drone está em movimento mas com velocidade constante:
-     
-$$
-{\color{var(--c1)}\dot{z}} = \text{cte}
-$$
+    The estimate should now be much smoother, but it will respond more slowly when the quadcopter moves. This happens because our model assumes that the quadcopter is always stationary. To improve the response, we need a more realistic model.
 
-Nesse caso, temos um observador de ordem 2, já que a planta é representada por uma equação diferencial de segunda ordem, ou seja, duas equações de primeira ordem encadeadas:
+
+### Second-order observer
+
+We now assume that the quadcopter is moving, but with constant vertical velocity:
 
 $$
-{\color{var(--c1)}\ddot{z}} = 0 
+{\color{var(--c1)}\dot{z}} = \text{constant}
+$$
+
+This leads to a second-order observer, since the plant is described by a second-order differential equation, or equivalently, by two coupled first-order differential equations:
+
+$$
+{\color{var(--c1)}\ddot{z}} = 0
 \qquad
-\longrightarrow
+\Longrightarrow
 \qquad
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
-    {\color{var(--c1)}\dot{v}_z} = 0
-\end{array}{}
+{\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+{\color{var(--c1)}\dot{v}_z} = 0
+\end{array}
 \right.
 $$
 
-Agora, se realimentarmos a diferença entre a posição vertical medida $z_m$ e a estimada $z$ em ambas as equações diferenciais, obtemos um sistema cuja estimativa converge exponencialmente para a medida, desde que os ganhos do observador $l_1$ e $l_2$ sejam positivos:
-        
+As before, we feed back the estimation error into the observer model. The resulting observer is
+
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} + l_1 \left( {\color{var(--c3)}z_m} - {\color{var(--c1)}z} \right) \\
-    {\color{var(--c1)}\dot{v}_z} = 0 + l_2 \left( {\color{var(--c3)}z_m} - {\color{var(--c1)}z} \right)
-\end{array}{}
+{\color{var(--c1)}\dot{z}}
+=
+{\color{var(--c1)}v_z}
++
+l_1
+\left(
+{\color{var(--c3)}z_m}
+-
+{\color{var(--c1)}z}
+\right)
+\\
+{\color{var(--c1)}\dot{v}_z}
+=
+0
++
+l_2
+\left(
+{\color{var(--c3)}z_m}
+-
+{\color{var(--c1)}z}
+\right)
+\end{array}
 \right.
 $$
 
 ![](images/state_observer_order_2.svg){: width=70% style="display: block; margin: auto;" }
 
-Esse diagrama de blocos pode ser resumido em uma única função de transferência:
+Provided that the observer gains $l_1$ and $l_2$ are positive, the estimated states converge exponentially to the measured position.
+
+This block diagram can be reduced to the following transfer function:
 
 ![](images/state_observer_order_2_tf.svg){: width=40% style="display: block; margin: auto;" }
 
-Agora, a função de transferência é idêntica a de um filtro passa baixas de ordem dois, em que os ganhos $l_1$ e $l_2$ dependem da frequência de corte $\omega_c$ mas também do fator de amortecimento $\zeta$:
-        
+Unlike the first-order observer, the transfer function is now equivalent to that of a second-order low-pass filter. The observer gains depend not only on the cutoff frequency $\omega_c$, but also on the damping ratio $\zeta$:
+
 $$
 \left\{
 \begin{array}{l}
-        l_1 = 2 \zeta \omega_c \\
-        l_2 = \omega_c^2
+l_1 = 2\zeta\omega_c \\
+l_2 = \omega_c^2
 \end{array}
 \right.
 $$
-        
-Sinais com frequências inferiores à frequência de corte $\omega_c$ possuem ganho 1 (não são atenuados), enquanto que, sinais com frequências superiores à frequência de corte $\omega_c$ possuem ganho 0 (são atenuados). Essa transição é contínua, podendo ser muito mais acentuada em um observador de ordem 2 do que de ordem 1, devido a possibilidade de ajustar o fator de amortecimento $\zeta$:
+
+Signals with frequencies well below the cutoff frequency pass through almost unchanged, while higher-frequency components are attenuated. Compared to a first-order observer, a second-order observer provides a much steeper transition between the passband and the stopband.
 
 ![](images/bode_plot_1.svg){: width=70% style="display: block; margin: auto;" }
 
-Quanto menor for o fator de amortecimento $\zeta$, mais acentuada será esta transição. No entanto, quando $\zeta < \frac{\sqrt{2}}{2}$, começa a haver um aumento do ganho para frequências próximas à frequência de corte, fenômeno conhecido como ``ressonância'':
+Reducing the damping ratio $\zeta$ makes this transition even steeper. However, if
+
+$$
+\zeta < \frac{\sqrt{2}}{2},
+$$
+
+the frequency response begins to exhibit a resonant peak near the cutoff frequency:
 
 ![](images/bode_plot_2.svg){: width=70% style="display: block; margin: auto;" }
 
-Queremos que a curva seja o mais acentuada possível porém sem gerar ressonância. É comum fixarmos o valor de $\zeta$ em $\frac{\sqrt{2}}{2}$, que nos garante isso.
+Ideally, we would like the transition to be as sharp as possible without introducing resonance. A common design choice is therefore
 
-Aplicando novamente o método de Euler, chegamos nas seguintes equações discretizadas:
-        
+$$
+\zeta = \frac{\sqrt{2}}{2},
+$$
+
+which provides the steepest response without overshoot in the frequency domain.
+
+Applying the Euler method once again yields the following discrete-time equations:
+
 $$
 \left\{
 \begin{array}{rll}
-    {\color{var(--c1)}z[k+1]} =& \overbrace{{\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t}^{\text{Predição}} &+  \quad \overbrace{l_1 \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}^{\text{Correção}} \\
-    {\color{var(--c1)}v_z[k+1]} =& \underbrace{{\color{var(--c1)}v_z[k]}\qquad\qquad}_{\text{Predição}} &+  \quad \underbrace{l_2 \Delta t \left[ {\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k]} \right]}_{\text{Correção}}
+{\color{var(--c1)}z[k+1]}
+=&
+\overbrace{
+{\color{var(--c1)}z[k]}
++
+{\color{var(--c1)}v_z[k]}\Delta t
+}^{\text{Prediction}}
+&
++
+\overbrace{
+l_1\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k]}
+\right)
+}^{\text{Correction}}
+\\
+{\color{var(--c1)}v_z[k+1]}
+=&
+\underbrace{
+{\color{var(--c1)}v_z[k]}
+\qquad \qquad
+}_{\text{Prediction}}
+&
++
+\underbrace{
+l_2\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k]}
+\right)
+}_{\text{Correction}}
 \end{array}
 \right.
 $$
 
-Que podem ser divididas em duas etapas, uma de predição e outra de correção:
+As before, the implementation can be separated into a prediction step followed by a correction step:
 
 $$
 \begin{align}
-    \text{Predição:} &\quad 
-    \left\{
-    \begin{array}{l}
-        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t \\
-        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k]}
-    \end{array}
-    \right.  \\ \\
-    \text{Correção:} &\quad 
-    \left\{
-    \begin{array}{l}
-        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l_1 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right) \\
-        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k+1]} + l_2 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
-    \end{array}
-    \right.
+\text{Prediction:}
+&\quad
+\left\{
+\begin{array}{l}
+{\color{var(--c1)}z[k+1]}
+=
+{\color{var(--c1)}z[k]}
++
+{\color{var(--c1)}v_z[k]}
+\Delta t
+\\
+{\color{var(--c1)}v_z[k+1]}
+=
+{\color{var(--c1)}v_z[k]}
+\end{array}
+\right.
+\\[12pt]
+\text{Correction:}
+&\quad
+\left\{
+\begin{array}{l}
+{\color{var(--c1)}z[k+1]}
+=
+{\color{var(--c1)}z[k+1]}
++
+l_1\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k+1]}
+\right)
+\\
+{\color{var(--c1)}v_z[k+1]}
+=
+{\color{var(--c1)}v_z[k+1]}
++
+l_2\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k+1]}
+\right)
+\end{array}
+\right.
 \end{align}
 $$
 
-Modifique sua função `verticalEstimator()` para que a distância vertical $z$ e velocidade vertical $v_z$ sejam estimados por um observador de ordem 2 com as etapas de predição e correção(1).
+Modify the `heightEstimator()` function so that both the vertical position $z$ and the vertical velocity $v_z$ are estimated using a second-order state observer with separate prediction and correction steps.(1)
 {.annotate}
 
-1. Na etapa de correção, primeiro nós corrigimos o valor de $v_z$ e depois de $z$ para garantir que o valor utilizado de $z$ no cáculo da correção seja o mesmo em ambas as equações.
-
+1. During the correction step, update $v_z$ before updating $z$. This ensures that both correction equations use the same predicted value of $z$.
 
 ```c hl_lines="5-8 14-15 18-19"
 // Estimate vertical position/velocity from range sensor
-void verticalEstimator()
+void heightEstimator()
 {
     // Estimator parameters
-    static const float wc = 
-    static const float zeta = 
-    static const float l1 = 
-    static const float l2 = 
+    static const float wc =
+    static const float zeta =
+    static const float l1 =
+    static const float l2 =
 
-    // Measured distante from range sensor
-    float z_m = 
+    // Measured distance from range sensor
+    float z_m =
 
     // Prediction step (model)
-    z = 
+    z =
     vz =
 
     // Correction step (measurement)
     vz =
-    z = 
+    z =
 }
 ```
 
-Carregue esse programa no drone e utilize o Crazyflie Client para verificar como está sua nova estimativa.
+Flash the firmware and use the Crazyflie Client to evaluate the new estimates.
 
-!!! info "Resultado esperado"        
-    Sua estimativa deve estar muito melhor, filtrando ruídos e respondendo mais rápido a variações na velocidade. Além disso, agora estamos estimando também a velocidade vertical, que será essencial ao controlador a ser implementado.
+!!! info "Expected result"
 
-###### Observador de ordem 2 (com entrada)
+    The estimated height should now respond much faster to motion while still effectively filtering measurement noise. In addition, the observer now estimates the vertical velocity, which will be required by the vertical controller.
 
-Por fim, vamos considerar que a aceleração do drone, em vez de ser nula, depende das forças atuantes — o peso e o empuxo gerado pelos motores:
+### Second-order observer with control input
+
+So far, we have assumed that the quadcopter's vertical acceleration is zero. A more realistic model accounts for the forces acting on the quadcopter: gravity and the total thrust generated by the propellers.
 
 $$
-{\color{var(--c1)}\ddot{z}} = - g + \frac{{\color{var(--c2)}f_t}}{m}
+{\color{var(--c1)}\ddot{z}}
+=
+-{\color{var(--c2)}g}
++
+\dfrac{{\color{var(--c2)}f_t}}{m}
 $$
 
-O observador permanece de ordem 2, mas inclui a entrada de controle:
+The observer remains second-order, but now incorporates the control input:
 
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
-    {\color{var(--c1)}\dot{v}_z} =  - g + \dfrac{{\color{var(--c2)}f_t}}{m}
-\end{array}{}
+{\color{var(--c1)}\dot{z}}={\color{var(--c1)}v_z} \\
+{\color{var(--c1)}\dot{v}_z}=-{\color{var(--c2)}g}+\dfrac{{\color{var(--c2)}f_t}}{m}
+\end{array}
 \right.
 $$
 
-Isso significa que agora sua dinâmica é uma cópia fiel da planta, conforme pode ser verificado no diagrama de blocos abaixo:
+The observer model now matches the plant dynamics much more closely, as illustrated in the block diagram below.
 
 ![](images/state_observer_order_2_input.svg){: width=70% style="display: block; margin: auto;" }
 
-As etapas depredição e e correção são quase idênticas, com uma leve alteração (apenas na predição da velocidade):
+Compared with the previous observer, only the prediction of the vertical velocity changes. The prediction and correction steps become
 
 $$
 \begin{align}
-    \text{Predição:} &\quad 
-    \left\{
-    \begin{array}{l}
-        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k]} + {\color{var(--c1)}v_z[k]} \Delta t \\
-        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k]} + \left( - g + \dfrac{{\color{var(--c2)}f_t[k]}}{m} \right)  \Delta t
-    \end{array}
-    \right.  \\ \\
-    \text{Correção:} &\quad 
-    \left\{
-    \begin{array}{l}
-        {\color{var(--c1)}z[k+1]} = {\color{var(--c1)}z[k+1]} + l_1 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right) \\
-        {\color{var(--c1)}v_z[k+1]} = {\color{var(--c1)}v_z[k+1]} + l_2 \Delta t \left({\color{var(--c3)}z_m[k]} - {\color{var(--c1)}z[k+1]}\right)
-    \end{array}
-    \right.
+\text{Prediction:}
+&\quad
+\left\{
+\begin{array}{l}
+{\color{var(--c1)}z[k+1]}
+=
+{\color{var(--c1)}z[k]}
++
+{\color{var(--c1)}v_z[k]}
+\Delta t
+\\
+{\color{var(--c1)}v_z[k+1]}
+=
+{\color{var(--c1)}v_z[k]}
++
+\left(
+-{\color{var(--c2)}g}
++
+\dfrac{{\color{var(--c2)}f_t[k]}}{m}
+\right)
+\Delta t
+\end{array}
+\right.
+\\[12pt]
+\text{Correction:}
+&\quad
+\left\{
+\begin{array}{l}
+{\color{var(--c1)}z[k+1]}
+=
+{\color{var(--c1)}z[k+1]}
++
+l_1\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k+1]}
+\right)
+\\
+{\color{var(--c1)}v_z[k+1]}
+=
+{\color{var(--c1)}v_z[k+1]}
++
+l_2\Delta t
+\left(
+{\color{var(--c3)}z_m[k]}
+-
+{\color{var(--c1)}z[k+1]}
+\right)
+\end{array}
+\right.
 \end{align}
 $$
 
-Modifique a etapa de predição de $v_z$ na sua função `verticalEstimator()` para que ela leve em consideração também as entradas do sistema.
+Modify the prediction step for $v_z$ in the `heightEstimator()` function so that it also accounts for the system input.
 
 ```c hl_lines="15"
 // Estimate vertical position/velocity from range sensor
-void verticalEstimator()
+void heightEstimator()
 {
     // Estimator parameters
-    static const float wc = 
-    static const float zeta = 
-    static const float l1 = 
-    static const float l2 = 
+    static const float wc =
+    static const float zeta =
+    static const float l1 =
+    static const float l2 =
 
-    // Measured distante from range sensor
-    float z_m = 
+    // Measured distance from range sensor
+    float z_m =
 
     // Prediction step (model)
-    z = 
+    z =
     vz =
 
     // Correction step (measurement)
     vz =
-    z = 
+    z =
 }
 ```
 
-Não é possível testar essa última versão segurando o drone com a mão, pois a força normal exercida ao segurá-lo não está contemplada no modelo e resultaria em respostas inconsistentes. 
+This final version cannot be tested by simply holding the quadcopter in your hand, since the contact force applied by your hand is not included in the model and therefore violates the assumptions of the observer.
 
-Ainda assim, se o seu observador de estados de ordem 2 sem entradas apresentou bons resultados, é esperado que este, com entradas, também funcione corretamente.
+Nevertheless, if your second-order observer without the control input behaved as expected, this version should also perform correctly.
 
-Guarde essa modificação — ela será essencial quando implementarmos o controlador vertical e finalmente colocarmos o drone para voar de forma autônoma.
-
----
-
-## Validação
+Save this implementation—it will become essential in the next section, where you will implement the vertical controller and finally fly the quadcopter autonomously.

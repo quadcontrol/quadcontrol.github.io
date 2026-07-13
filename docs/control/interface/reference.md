@@ -5,7 +5,7 @@ icon: material/knob
 
 # :material-knob: Reference
 
-In this section, you will implement the reference function, which retrieves the desired flight setpoints transmitted wirelessly from the Crazyflie Client.
+In this section, you will implement the `reference()` function, which retrieves the desired flight setpoints transmitted wirelessly from the Crazyflie Client.
 
 ![](../images/architecture_reference.svg){: width=100% style="display: block; margin: auto;" }
 

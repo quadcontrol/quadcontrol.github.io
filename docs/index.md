@@ -1,10 +1,11 @@
 ---
 icon: material/home-outline
 title: Home
-description: Master embedded control in a 100% hands-on course that connects theory, programming, and real flight.
 ---
 
-# QuadControl
+<!-- <meta http-equiv="refresh" content="0; url=https://quadcontrol.io"> -->
+
+<!-- # QuadControl
 
 ![Crazyflie 2.1 Brushless, top view](images/logo.svg){ width=25% style="display:block;margin:auto" }
 
@@ -71,7 +72,7 @@ At QuadControl, the centerpiece is the [Crazyflie 2.1 Brushless](https://www.bit
           title="QuadControl demo"
           style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
           allowfullscreen></iframe>
-</div>
+</div> -->
 
 
 

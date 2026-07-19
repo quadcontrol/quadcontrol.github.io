@@ -58,7 +58,7 @@ nav:
       - Aerodynamics: fundamentals/aerodynamics.md
       - Mixer: fundamentals/mixer.md
       - Inertia: fundamentals/inertia.md
-      - Coordinate system: fundamentals/coordinate_system.md  
+      - Coordinate Systems: fundamentals/coordinate_systems.md  
   - Identification:
       - identification/index.md
       - Motor coefficients: identification/motor_coefficients.md  

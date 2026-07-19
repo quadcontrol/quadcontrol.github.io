@@ -517,7 +517,7 @@ So far, we have assumed that the quadcopter's vertical acceleration is zero. A m
 $$
 {\color{var(--c1)}\ddot{z}}
 =
--{\color{var(--c2)}g}
+-g
 +
 \dfrac{{\color{var(--c2)}f_t}}{m}
 $$
@@ -528,7 +528,7 @@ $$
 \left\{
 \begin{array}{l}
 {\color{var(--c1)}\dot{z}}={\color{var(--c1)}v_z} \\
-{\color{var(--c1)}\dot{v}_z}=-{\color{var(--c2)}g}+\dfrac{{\color{var(--c2)}f_t}}{m}
+{\color{var(--c1)}\dot{v}_z}=-g+\dfrac{{\color{var(--c2)}f_t}}{m}
 \end{array}
 \right.
 $$
@@ -557,7 +557,7 @@ $$
 {\color{var(--c1)}v_z[k]}
 +
 \left(
--{\color{var(--c2)}g}
+-g
 +
 \dfrac{{\color{var(--c2)}f_t[k]}}{m}
 \right)

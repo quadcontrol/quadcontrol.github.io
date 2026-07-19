@@ -33,7 +33,7 @@ The ++"POWER"++ button turns on the devide, while the ++"SET"++ button configure
 
 You must flash a program to the drone that turns on only one motor using a chosen PWM value. You will collect propeller angular velocity data for 10 distinct PWM values. For each PWM value, repeat the experiment 3 times and compute the average.
 
-![](images/device1_experiment.gif){: width="100%" style="display: block; margin: auto;" }
+<!-- ![](images/device1_experiment.gif){: width="100%" style="display: block; margin: auto;" } -->
 
 To simplify the procedure, you can change the PWM command using the ++"Up"++ and ++"Down"++ buttons in the Command Based Flight Control, located at the bottom-right corner of the Crazyflie Client.
 

@@ -17,24 +17,24 @@ Quando trabalhamos com diferentes sistemas de coordenadas, precisamos de uma for
 
 ### 2D
 
-Ao descrever a posição de um drone, precisamos definir uma referência. Um método geral é utilizar um sistema de coordenadas inercial ${\color{magenta}yz}$ (1).
+Ao descrever a posição de um drone, precisamos definir uma referência. Um método geral é utilizar um sistema de coordenadas inercial ${\color{var(--c1)}yz}$ (1).
 {.annotate}
 
 1. Fixo na Terra, que não acelera nem rotaciona.
 
 ![](images/2d_position.svg){: width="600" style="display: block; margin: auto;" }
 
-Já para descrever a atitude (orientação) do drone, apenas esse sistema não é suficiente. É necessário introduzir também um sistema de coordenadas móvel ${\color{cyan}y'z'}$ (1).
+Já para descrever a atitude (orientação) do drone, apenas esse sistema não é suficiente. É necessário introduzir também um sistema de coordenadas móvel ${\color{var(--c3)}y'z'}$ (1).
 {.annotate}
     
 1. Fixo no drone, que acelera e rotaciona com ele.
 
 ![](images/2d_position_attitude.svg){: width="600" style="display: block; margin: auto;" }
 
-A atitude do drone é dada, portanto, pela orientação relativa do sistema móvel ${\color{cyan}y'z'}$ em relação ao sistema inercial ${\color{magenta}yz}$. Essa orientação pode ser representada matematicamente por uma matriz $2 \times 2$ chamada de matrix de rotação $R$:
+A atitude do drone é dada, portanto, pela orientação relativa do sistema móvel ${\color{var(--c3)}y'z'}$ em relação ao sistema inercial ${\color{var(--c1)}yz}$. Essa orientação pode ser representada matematicamente por uma matriz $2 \times 2$ chamada de matrix de rotação $R$:
 
 $$
-{\color{cyan}
+{\color{var(--c3)}
 \begin{bmatrix}
     y' \\
     z'
@@ -47,7 +47,7 @@ $$
     r_{21} & r_{22}
 \end{bmatrix}
 }_{R}
-{\color{magenta}
+{\color{var(--c1)}
 \begin{bmatrix}
     y \\
     z
@@ -67,7 +67,7 @@ $$
 
 !!! question "Exercício 1"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}y'z'}$ está rotacionado de um ângulo $\phi$ em relação ao sistema de coordenadas inercial ${\color{magenta}yz}$.
+    Considere que o sistema de coordenadas móvel ${\color{var(--c3)}y'z'}$ está rotacionado de um ângulo $\phi$ em relação ao sistema de coordenadas inercial ${\color{var(--c1)}yz}$.
 
     ![](images/2d_rotation_x.svg){: width="200" style="display: block; margin: auto;" }
     
@@ -95,7 +95,7 @@ $$
         \end{bmatrix}
         $$
 
-        O resultado faz sentido: ao rotacionar $90^{\circ}$, o eixo ${\color{cyan}y'}$ passa a coincidir com ${\color{magenta}z}$, enquanto o eixo ${\color{cyan}z'}$ fica no sentido oposto de ${\color{magenta}y}$.
+        O resultado faz sentido: ao rotacionar $90^{\circ}$, o eixo ${\color{var(--c3)}y'}$ passa a coincidir com ${\color{var(--c1)}z}$, enquanto o eixo ${\color{var(--c3)}z'}$ fica no sentido oposto de ${\color{var(--c1)}y}$.
  
     ??? info "c) Determine o ângulo $\phi$ correspondente à matriz <br> $R (\phi)= \begin{bmatrix} \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix}$."
     
@@ -109,14 +109,14 @@ $$
 
 ### 3D
 
-Assim como no plano, no espaço a atitude do drone também é dada pela atitude relativa do sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$.
+Assim como no plano, no espaço a atitude do drone também é dada pela atitude relativa do sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$ em relação ao sistema de coordenadas inercial ${\color{var(--c1)}xyz}$.
 
 ![](images/3d_position_attitude.svg){: width="600" style="display: block; margin: auto;" }
 
 No entanto, como agora estamos lidando com três dimensões, a matriz de rotação $R$ passa a possuir dimensão $3 \times 3$:
 
 $$
-{\color{cyan}
+{\color{var(--c3)}
 \begin{bmatrix}
     x'\\y'\\z'
 \end{bmatrix}
@@ -129,7 +129,7 @@ $$
     r_{31} & r_{32} & r_{33}
 \end{bmatrix}
 }_{R}
-{\color{magenta}
+{\color{var(--c1)}
 \begin{bmatrix}
     x \\
     y \\
@@ -155,7 +155,7 @@ De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita atra
 
 !!! question "Exercício 2"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\phi$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}x}$.
+    Considere que o sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$ está rotacionado de um ângulo $\phi$ em relação ao sistema de coordenadas inercial ${\color{var(--c1)}xyz}$ e em torno do eixo ${\color{var(--c1)}x}$.
 
     ![](images/3d_rotation_x.svg){: width="200" style="display: block; margin: auto;" }
     
@@ -188,11 +188,11 @@ De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita atra
         \end{align*}
         $$
 
-        O resultado faz sentido: uma rotação de $180^\circ$ em torno de ${\color{magenta}x}$ inverte os eixos ${\color{magenta}y}$ e ${\color{magenta}z}$, de modo que ${\color{cyan}y'}$ e ${\color{cyan}z'}$ ficam em sentidos opostos a ${\color{magenta}y}$ e ${\color{magenta}z}$, enquanto ${\color{cyan}x'}$ permance alinhado com ${\color{magenta}x}$.
+        O resultado faz sentido: uma rotação de $180^\circ$ em torno de ${\color{var(--c1)}x}$ inverte os eixos ${\color{var(--c1)}y}$ e ${\color{var(--c1)}z}$, de modo que ${\color{var(--c3)}y'}$ e ${\color{var(--c3)}z'}$ ficam em sentidos opostos a ${\color{var(--c1)}y}$ e ${\color{var(--c1)}z}$, enquanto ${\color{var(--c3)}x'}$ permance alinhado com ${\color{var(--c1)}x}$.
 
 !!! question "Exercício 3"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\theta$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}y}$.
+    Considere que o sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$ está rotacionado de um ângulo $\theta$ em relação ao sistema de coordenadas inercial ${\color{var(--c1)}xyz}$ e em torno do eixo ${\color{var(--c1)}y}$.
 
     ![](images/3d_rotation_y.svg){: width="200" style="display: block; margin: auto;" }
     
@@ -225,11 +225,11 @@ De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita atra
         \end{align*}
         $$
 
-        O resultado faz sentido: ao rotacionar $90^\circ$ em torno de ${\color{magenta}y}$, o eixo ${\color{cyan}x'}$ passa a apontar para o sentido oposto de ${\color{magenta}z}$ e o eixo ${\color{cyan}z'}$ passa a coincidir com ${\color{magenta}x}$, enquanto o eixo ${\color{cyan}y'}$ permance alinhado com ${\color{magenta}y}$.
+        O resultado faz sentido: ao rotacionar $90^\circ$ em torno de ${\color{var(--c1)}y}$, o eixo ${\color{var(--c3)}x'}$ passa a apontar para o sentido oposto de ${\color{var(--c1)}z}$ e o eixo ${\color{var(--c3)}z'}$ passa a coincidir com ${\color{var(--c1)}x}$, enquanto o eixo ${\color{var(--c3)}y'}$ permance alinhado com ${\color{var(--c1)}y}$.
 
 !!! question "Exercício 4"
 
-    Considere que o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ está rotacionado de um ângulo $\psi$ em relação ao sistema de coordenadas inercial ${\color{magenta}xyz}$ e em torno do eixo ${\color{magenta}z}$.
+    Considere que o sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$ está rotacionado de um ângulo $\psi$ em relação ao sistema de coordenadas inercial ${\color{var(--c1)}xyz}$ e em torno do eixo ${\color{var(--c1)}z}$.
 
     ![](images/3d_rotation_z.svg){: width="200" style="display: block; margin: auto;" }
     
@@ -262,7 +262,7 @@ De acordo com Leonhard Euler, qualquer atitude no espaço pode ser descrita atra
         \end{align*}
         $$
 
-        O resultado faz sentido: uma rotação completa de $360^\circ$ em torno de ${\color{magenta}z}$ devolve ${\color{cyan}x'y'z'}$ exatamente a ${\color{magenta}xyz}$, ou seja, todos os eixos voltam a coincidir.
+        O resultado faz sentido: uma rotação completa de $360^\circ$ em torno de ${\color{var(--c1)}z}$ devolve ${\color{var(--c3)}x'y'z'}$ exatamente a ${\color{var(--c1)}xyz}$, ou seja, todos os eixos voltam a coincidir.
 
 ### Propriedades
 
@@ -275,7 +275,7 @@ Matrizes de rotação possuem algumas propriedades fundamentais:
 
 !!! question "Exercício 5"
 
-    Considere a matriz de rotação $R$ que relaciona o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ com o sistema de coordenadas inercial ${\color{magenta}xyz}$:
+    Considere a matriz de rotação $R$ que relaciona o sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$ com o sistema de coordenadas inercial ${\color{var(--c1)}xyz}$:
 
     $$
     R = 
@@ -286,7 +286,7 @@ Matrizes de rotação possuem algumas propriedades fundamentais:
     \end{bmatrix}	
     $$
     
-    Calcule a matriz de rotação inversa $R^{-1}$, isto é, que relaciona o sistema inercial ${\color{magenta}xyz}$ com o sistema móvel ${\color{cyan}x'y'z'}$.
+    Calcule a matriz de rotação inversa $R^{-1}$, isto é, que relaciona o sistema inercial ${\color{var(--c1)}xyz}$ com o sistema móvel ${\color{var(--c3)}x'y'z'}$.
     
     ??? info "Resposta" 
         $$
@@ -303,17 +303,20 @@ Matrizes de rotação possuem algumas propriedades fundamentais:
 
 ## Ângulos de Euler
 
-Os ângulos de Euler são um conjunto de três rotações sucessivas em torno de eixos distintos, que permitem levar o sistema de coordenadas inercial ${\color{magenta}xyz}$ até o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$.  
+Os ângulos de Euler são um conjunto de três rotações sucessivas em torno de eixos distintos, que permitem levar o sistema de coordenadas inercial ${\color{var(--c1)}xyz}$ até o sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$.  
 
 ![](images/euler_angles.svg){: width="800" style="display: block; margin: auto;" }
 
 De acordo com a convenção adotada aqui, usamos:
 
-- $\psi$: rotação em torno do eixo ${\color{magenta}z'}$ (*yaw* - guinagem)  
-- $\theta$: rotação em torno do eixo ${\color{magenta}y'}$ (*pitch* - inclinação)  
-- $\phi$: rotação em torno do eixo ${\color{magenta}x'}$ (*roll* - rolagem)  
+- $\psi$: rotação em torno do eixo ${\color{var(--c3)}z'}$ (*yaw* - guinagem)  
+- $\theta$: rotação em torno do eixo ${\color{var(--c3)}y'}$ (*pitch* - inclinação)  
+- $\phi$: rotação em torno do eixo ${\color{var(--c3)}x'}$ (*roll* - rolagem)  
 
-A matriz de rotação total é obtida pela composição das três matrizes individuais.  
+A matriz de rotação total é obtida pela composição das três matrizes individuais(1).
+{.annotate}
+
+1. Observe que a primeira rotação aplicada, $R_z(\psi)$, aparece mais à direita, enquanto a última rotação, $R_x(\phi)$, aparece mais à esquerda. Isso ocorre porque a multiplicação de matrizes segue a ordem inversa da aplicação das transformações.
     
 $$
 R(\phi,\theta,\psi) = 
@@ -340,13 +343,9 @@ R(\phi,\theta,\psi) =
 }_{R_z(\psi)}
 $$
     
-
-!!! note
-    Observe que a primeira rotação aplicada, $R_z(\psi)$, aparece mais à direita, enquanto a última rotação, $R_x(\phi)$, aparece mais à esquerda. Isso ocorre porque a multiplicação de matrizes segue a ordem inversa da aplicação das transformações.
-
 !!! question "Exercício 6"
 
-    Determine a matriz de rotação total $R(\phi,\theta,\psi)$ que relaciona o sistema de coordenadas móvel ${\color{cyan}x'y'z'}$ com o sistema de coordenadas inercial ${\color{magenta}xyz}$ em função dos ângulos de Euler $\phi$, $\theta$ e $\psi$.
+    Determine a matriz de rotação total $R(\phi,\theta,\psi)$ que relaciona o sistema de coordenadas móvel ${\color{var(--c3)}x'y'z'}$ com o sistema de coordenadas inercial ${\color{var(--c1)}xyz}$ em função dos ângulos de Euler $\phi$, $\theta$ e $\psi$.
     
     Dica: utilize o Symbolic Math Toolbox do MATLAB.
     
@@ -363,7 +362,7 @@ $$
 
 Singularidades são pontos nos quais uma variável matemática torna-se indefinida. No caso dos ângulos de Euler, é uma orientação na qual há mais de uma única sequência de rotações possíveis. 
 
-Quando a segunda rotação é igual a $\theta = \frac{\pi}{2}$ rad, a direção dos eixos da primeira (${\color{cyan}z'}$) e terceira (${\color{cyan}x'}$) rotação coincidem, tornando-se impossível discernir os valores de $\psi$ e $\phi$.
+Quando a segunda rotação é igual a $\theta = \frac{\pi}{2}$ rad, a direção dos eixos da primeira (${\color{var(--c3)}z'}$) e terceira (${\color{var(--c3)}x'}$) rotação coincidem, tornando-se impossível discernir os valores de $\psi$ e $\phi$.
 
 Não há acordo sobre a notação (sequência de rotações) utilizada pelos ângulos de Euler. Existe um total de 12 combinações, pois a rotação seguinte deve sempre ocorrer em um eixo distinto da anterior, conforme a tabela abaixo:
 
@@ -381,7 +380,7 @@ Não há acordo sobre a notação (sequência de rotações) utilizada pelos ân
     vertical-align: middle; /* centraliza verticalmente com rowspan */
   }
   /* Cor ciano apenas para os eixos */
-  .axis { color: #00BCD4; }
+  .axis { color: #ffd54f; }
 </style>
 
 <table class="rotacoes">

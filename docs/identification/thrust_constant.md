@@ -141,7 +141,7 @@ Using the collected data, you should fit a curve relating the angular velocity $
 
 1. Note that you must convert from grams ($\text{g}$) to newtons ($\text{N}$) and also divide by four, since the total thrust is shared equally by the four propellers.
 
-![Lift Force](images/lift_force_graph.svg){: width=100% style="display: block; margin: auto;" }
+![](images/thrust_force_graph.svg){: width=100% style="display: block; margin: auto;" }
 
 Recall that the thrust force produced by a propeller is proportional to the square of its angular velocity:
 

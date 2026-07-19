@@ -151,7 +151,7 @@ Using the collected data, you should fit a curve relating the yaw angle ${\color
 
 1. Note that you must convert from degrees ($^\circ$) to radians ($\text{rad}$).
 
-![Drag Torque](images/drag_torque_graph.svg){: width=100% style="display: block; margin: auto;" }
+![](images/drag_torque_graph.svg){: width=100% style="display: block; margin: auto;" }
 
 Under the action of a constant torque, the angular displacement as a function of time is given by:
 

@@ -1964,9 +1964,9 @@
 <p class="annotate">A dinâmica 2D possui 3 graus de liberdade (2 de translação e 1 de rotação) e, portanto, devemos obter 6 equações diferenciais (2 para cada grau de liberdade)(1).</p>
 <ol>
 <li>Para facilitar o entendimento, utilizaremos as seguintes cores e notações:<ul>
-<li><span class="arithmatex">\({\color{magenta} x}\)</span> - Estados (sistema de coordenadas inercial)</li>
-<li><span class="arithmatex">\({\color{cyan} x\,'}\)</span> - Estados (sistema de coordenadas móvel)</li>
-<li><span class="arithmatex">\({\color{#65DD18} u}\)</span> - Entradas</li>
+<li><span class="arithmatex">\({\color{var(--c1)} x}\)</span> - Estados (sistema de coordenadas inercial)</li>
+<li><span class="arithmatex">\({\color{var(--c3)} x\,'}\)</span> - Estados (sistema de coordenadas móvel)</li>
+<li><span class="arithmatex">\({\color{var(--c2)} u}\)</span> - Entradas</li>
 <li><span class="arithmatex">\(m\)</span> - Constantes</li>
 </ul>
 </li>
@@ -1987,8 +1987,8 @@
     vertical-align: middle; /* centraliza verticalmente com rowspan */
   }
   /* Cor ciano apenas para os eixos */
-  .axis { color: #00BCD4; }
-  .axis_inertial { color: #FF00FF; }
+  .axis { color: #ffd54f; }
+  .axis_inertial { color: #03dac5; }
 </style>
 
 <table class="rotacoes">
@@ -2040,60 +2040,60 @@
 \]</div>
 <p>Ela deverá ser aplicada individualmente para cada grau de liberdade.</p>
 <h3 id="sistema-inercial">Sistema inercial</h3>
-<p>Inicialmente, a ideia é que tanto as posições como as velocidades sejam descritas no sistema de coordenadas inercial, de modo que os estados do sistema sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>. </p>
+<p>Inicialmente, a ideia é que tanto as posições como as velocidades sejam descritas no sistema de coordenadas inercial, de modo que os estados do sistema sejam <span class="arithmatex">\({\color{var(--c1)}y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}z}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>, <span class="arithmatex">\({\color{var(--c1)}v_y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}v_z}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\omega_x}\)</span>. </p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 1</p>
-<p>Determine as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span> e <span class="arithmatex">\({\color{magenta}\phi}\)</span>) em função dos estados do sistema.</p>
+<p>Determine as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{var(--c1)}y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}z}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>) em função dos estados do sistema.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{y}}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{y}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
-{\color{magenta}\dot{y}} = {\color{magenta}v_y}
+{\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y}
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{z}}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{z}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
-{\color{magenta}\dot{z}} = {\color{magenta}v_z}
+{\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z}
 \]</div>
 </details>
 <details class="info">
-<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\phi}}\)</span> em função dos estados do sistema.</summary>
+<summary>c) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\phi}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
-{\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x}
+{\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x}
 \]</div>
 </details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 2</p>
-<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{magenta}v_y}\)</span>, <span class="arithmatex">\({\color{magenta}v_z}\)</span> e <span class="arithmatex">\({\color{magenta}\omega_x}\)</span>) em função dos estados do sistema.</p>
+<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{var(--c1)}v_y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}v_z}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\omega_x}\)</span>) em função dos estados do sistema.</p>
 <p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas inercial.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_y}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{v}_y}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum  {\color{magenta}f_y} &amp;= m {\color{magenta}a_y} \\
-    - {\color{#65DD18}f_t} \sin {\color{magenta}\phi} &amp;= m {\color{magenta}\dot{v}_y} \\
-    {\color{magenta}\dot{v}_y} &amp;= - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t}
+    \sum  {\color{var(--c1)}f_y} &amp;= m {\color{var(--c1)}a_y} \\
+    - {\color{var(--c2)}f_t} \sin {\color{var(--c1)}\phi} &amp;= m {\color{var(--c1)}\dot{v}_y} \\
+    {\color{var(--c1)}\dot{v}_y} &amp;= - \frac{1}{m} \sin {\color{var(--c1)}\phi} {\color{var(--c2)}f_t}
 \end{align*}
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{v}_z}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{v}_z}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{magenta}f_z} &amp;= m {\color{magenta}a_z} \\
-    {\color{#65DD18}f_t} \cos {\color{magenta}\phi} - mg &amp;= m {\color{magenta}\dot{v}_z} \\
-        {\color{magenta}\dot{v}_z} &amp;= -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t}
+    \sum {\color{var(--c1)}f_z} &amp;= m {\color{var(--c1)}a_z} \\
+    {\color{var(--c2)}f_t} \cos {\color{var(--c1)}\phi} - mg &amp;= m {\color{var(--c1)}\dot{v}_z} \\
+        {\color{var(--c1)}\dot{v}_z} &amp;= -g + \frac{1}{m} \cos {\color{var(--c1)}\phi} {\color{var(--c2)}f_t}
 \end{align*}
 \]</div>
 </details>
 <details class="info">
-<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\omega}_x}\)</span> em função dos estados do sistema.</summary>
+<summary>c) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\omega}_x}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{magenta}\tau_x} &amp;= I_{xx} {\color{magenta}\alpha_x} \\
-    {\color{#65DD18}\tau_x} &amp;= I_{xx} {\color{magenta}\dot{\omega}_x} \\
-    {\color{magenta}\dot{\omega}_x} &amp;= \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    \sum {\color{var(--c1)}\tau_x} &amp;= I_{xx} {\color{var(--c1)}\alpha_x} \\
+    {\color{var(--c2)}\tau_x} &amp;= I_{xx} {\color{var(--c1)}\dot{\omega}_x} \\
+    {\color{var(--c1)}\dot{\omega}_x} &amp;= \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{align*}
 \]</div>
 </details>
@@ -2102,138 +2102,138 @@
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} = {\color{magenta}v_y} \\ 
-    {\color{magenta}\dot{z}} = {\color{magenta}v_z} \\
-    {\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x} \\ 
-    {\color{magenta}\dot{v}_y} = - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
-    {\color{magenta}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
-    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y} \\ 
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+    {\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x} \\ 
+    {\color{var(--c1)}\dot{v}_y} = - \frac{1}{m} \sin {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c1)}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c1)}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \]</div>
 <h3 id="sistema-movel">Sistema móvel</h3>
-<p>Outra forma de abordar esse problema é descrevendo as posições no sistema de coordenadas inercial mas as velocidades no sistema de coordenadas móvel, de modo que os estados agora sejam <span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span>, <span class="arithmatex">\({\color{magenta}\phi}\)</span>, <span class="arithmatex">\({\color{cyan}v_y\,'}\)</span>, <span class="arithmatex">\({\color{cyan}v_z\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\omega_x\,'}\)</span>. </p>
+<p>Outra forma de abordar esse problema é descrevendo as posições no sistema de coordenadas inercial mas as velocidades no sistema de coordenadas móvel, de modo que os estados agora sejam <span class="arithmatex">\({\color{var(--c1)}y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}z}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>, <span class="arithmatex">\({\color{var(--c3)}v_y\,'}\)</span>, <span class="arithmatex">\({\color{var(--c3)}v_z\,'}\)</span> e <span class="arithmatex">\({\color{var(--c3)}\omega_x\,'}\)</span>. </p>
 <p>Isso normalmente é feito pois faz muito mais sentido descrever as velocidades no sistema de coordenadas fixo no drone, além de que a maioria dos sensores (acelerômetro, giroscópio, proximidade, fluxo óptico, etc.) estão presos nele e alinhados com esse sistema de coordenadas. No entanto, conforme veremos, as equações agora ficam um pouco mais complexas e menos intuitivas.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercício 3</p>
-<p>Determine as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{magenta}y}\)</span>, <span class="arithmatex">\({\color{magenta}z}\)</span> e <span class="arithmatex">\({\color{magenta}\phi}\)</span>) em função dos estados do sistema.</p>
-<p>Dica: lembre-se das matrizes de rotação <a href="../coordinate_system">vistas</a> anteriormente e que os eixos <span class="arithmatex">\({\color{magenta}x}\)</span> e <span class="arithmatex">\({\color{cyan}x\,'}\)</span> estão alinhados.</p>
+<p>Determine as equações cinemáticas, isto é, as equações das derivadas das posições (<span class="arithmatex">\({\color{var(--c1)}y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}z}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>) em função dos estados do sistema.</p>
+<p>Dica: lembre-se das matrizes de rotação <a href="../coordinate_system">vistas</a> anteriormente e que os eixos <span class="arithmatex">\({\color{var(--c1)}x}\)</span> e <span class="arithmatex">\({\color{var(--c3)}x\,'}\)</span> estão alinhados.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{y}}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{y}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{bmatrix}
-    {\color{cyan}v_y\,'} \\
-    {\color{cyan}v_z\,'}
+    {\color{var(--c3)}v_y\,'} \\
+    {\color{var(--c3)}v_z\,'}
     \end{bmatrix}
     =
     \underbrace{
     \begin{bmatrix} 
-    \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\ 
-    -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+    \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\ 
+    -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi} 
 \end{bmatrix}
     }_{R}
     \begin{bmatrix}
-    {\color{magenta}\dot{y}} \\
-    {\color{magenta}\dot{z}}
+    {\color{var(--c1)}\dot{y}} \\
+    {\color{var(--c1)}\dot{z}}
 \end{bmatrix}
 \qquad \longrightarrow \qquad
     \begin{bmatrix}
-    {\color{magenta}\dot{y}} \\
-    {\color{magenta}\dot{z}}
+    {\color{var(--c1)}\dot{y}} \\
+    {\color{var(--c1)}\dot{z}}
     \end{bmatrix}
     =
     \underbrace{
     \begin{bmatrix} 
-    \cos{\color{magenta}\phi} &amp; -\sin{\color{magenta}\phi} \\ 
-    \sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+    \cos{\color{var(--c1)}\phi} &amp; -\sin{\color{var(--c1)}\phi} \\ 
+    \sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi} 
 \end{bmatrix}
     }_{R^{-1}}
     \begin{bmatrix}
-    {\color{cyan}v_y\,'} \\
-    {\color{cyan}v_z\,'}
+    {\color{var(--c3)}v_y\,'} \\
+    {\color{var(--c3)}v_z\,'}
 \end{bmatrix}
 \]</div>
 <div class="arithmatex">\[
-{\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \cos {\color{magenta}\phi} -  {\color{cyan}v_z\,'} \sin {\color{magenta}\phi}
+{\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cos {\color{var(--c1)}\phi} -  {\color{var(--c3)}v_z\,'} \sin {\color{var(--c1)}\phi}
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{z}}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{z}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{bmatrix}
-    {\color{cyan}v_y\,'} \\
-    {\color{cyan}v_z\,'}
+    {\color{var(--c3)}v_y\,'} \\
+    {\color{var(--c3)}v_z\,'}
     \end{bmatrix}
     =
     \underbrace{
     \begin{bmatrix} 
-    \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\ 
-    -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+    \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\ 
+    -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi} 
 \end{bmatrix}
     }_{R}
     \begin{bmatrix}
-    {\color{magenta}\dot{y}} \\
-    {\color{magenta}\dot{z}}
+    {\color{var(--c1)}\dot{y}} \\
+    {\color{var(--c1)}\dot{z}}
 \end{bmatrix}
 \qquad \longrightarrow \qquad
     \begin{bmatrix}
-    {\color{magenta}\dot{y}} \\
-    {\color{magenta}\dot{z}}
+    {\color{var(--c1)}\dot{y}} \\
+    {\color{var(--c1)}\dot{z}}
     \end{bmatrix}
     =
     \underbrace{
     \begin{bmatrix} 
-    \cos{\color{magenta}\phi} &amp; -\sin{\color{magenta}\phi} \\ 
-    \sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi} 
+    \cos{\color{var(--c1)}\phi} &amp; -\sin{\color{var(--c1)}\phi} \\ 
+    \sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi} 
 \end{bmatrix}
     }_{R^{-1}}
     \begin{bmatrix}
-    {\color{cyan}v_y\,'} \\
-    {\color{cyan}v_z\,'}
+    {\color{var(--c3)}v_y\,'} \\
+    {\color{var(--c3)}v_z\,'}
 \end{bmatrix}
 \]</div>
 <div class="arithmatex">\[
-{\color{magenta}\dot{z}} =  {\color{cyan}v_y\,'} \sin {\color{magenta}\phi} +  {\color{cyan}v_z\,'} \cos {\color{magenta}\phi}
+{\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \sin {\color{var(--c1)}\phi} +  {\color{var(--c3)}v_z\,'} \cos {\color{var(--c1)}\phi}
 \]</div>
 </details>
 <details class="info">
-<summary>c) Escreva <span class="arithmatex">\({\color{magenta}\dot{\phi}}\)</span> em função dos estados do sistema.</summary>
+<summary>c) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\phi}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
-{\color{magenta}\dot{\phi}} = {\color{cyan}\omega_x\,'}
+{\color{var(--c1)}\dot{\phi}} = {\color{var(--c3)}\omega_x\,'}
 \]</div>
 </details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 4</p>
-<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{cyan}v_y\,'}\)</span>, <span class="arithmatex">\({\color{cyan}v_z\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\omega_x\,'}\)</span>) em função dos estados do sistema.</p>
+<p>Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (<span class="arithmatex">\({\color{var(--c3)}v_y\,'}\)</span>, <span class="arithmatex">\({\color{var(--c3)}v_z\,'}\)</span> e <span class="arithmatex">\({\color{var(--c3)}\omega_x\,'}\)</span>) em função dos estados do sistema.</p>
 <p>Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas inercial.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{cyan}\dot{v}_y\,'}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{v}_y\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{cyan}f_y\,'} &amp;= m {\color{cyan}a_y\,'} \\
-    - m g \sin {\color{magenta}\phi} &amp;= m \left( {\color{cyan}\dot{v}_y\,'} - {\color{cyan}v_z\,' \omega_x\,'} \right) \\
-    {\color{cyan}\dot{v}_y\,'} &amp;= {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi}
+    \sum {\color{var(--c3)}f_y\,'} &amp;= m {\color{var(--c3)}a_y\,'} \\
+    - m g \sin {\color{var(--c1)}\phi} &amp;= m \left( {\color{var(--c3)}\dot{v}_y\,'} - {\color{var(--c3)}v_z\,' \omega_x\,'} \right) \\
+    {\color{var(--c3)}\dot{v}_y\,'} &amp;= {\color{var(--c3)}v_z\,' \omega_x\,'} - g \sin {\color{var(--c1)}\phi}
 \end{align*}
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{cyan}\dot{v}_z\,'}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{v}_z\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{cyan}f_z\,'} &amp;= m {\color{cyan}a_z\,'} \\
-    {\color{#65DD18}f_t} - m g {\color{magenta}\cos \phi} &amp;= m \left( {\color{cyan}\dot{v}_z\,'} + {\color{cyan}v_y\,' \omega_x\,'} \right) \\
-    {\color{cyan}\dot{v}_z\,'} &amp;= - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t}
+    \sum {\color{var(--c3)}f_z\,'} &amp;= m {\color{var(--c3)}a_z\,'} \\
+    {\color{var(--c2)}f_t} - m g {\color{var(--c1)}\cos \phi} &amp;= m \left( {\color{var(--c3)}\dot{v}_z\,'} + {\color{var(--c3)}v_y\,' \omega_x\,'} \right) \\
+    {\color{var(--c3)}\dot{v}_z\,'} &amp;= - {\color{var(--c3)}v_y\,' \omega_x\,'} - g \cos {\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t}
 \end{align*}
 \]</div>
 </details>
 <details class="info">
-<summary>c) Escreva <span class="arithmatex">\({\color{cyan}\dot{\omega}_x\,'}\)</span> em função dos estados do sistema.</summary>
+<summary>c) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{\omega}_x\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{cyan}\tau_x\,'} &amp;= I_{xx} {\color{cyan}\alpha_x\,'} \\
-    {\color{#65DD18}\tau_x} &amp;= I_{xx} {\color{cyan}\dot{\omega}_x\,'} \\
-    {\color{cyan}\dot{\omega}_x\,'} &amp;= \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    \sum {\color{var(--c3)}\tau_x\,'} &amp;= I_{xx} {\color{var(--c3)}\alpha_x\,'} \\
+    {\color{var(--c2)}\tau_x} &amp;= I_{xx} {\color{var(--c3)}\dot{\omega}_x\,'} \\
+    {\color{var(--c3)}\dot{\omega}_x\,'} &amp;= \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{align*}
 \]</div>
 </details>
@@ -2242,16 +2242,16 @@
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \cos {\color{magenta}\phi} -  {\color{cyan}v_z\,'} \sin {\color{magenta}\phi} \\ 
-    {\color{magenta}\dot{z}} =  {\color{cyan}v_y\,'} \sin {\color{magenta}\phi} +  {\color{cyan}v_z\,'} \cos {\color{magenta}\phi} \\
-    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
-    {\color{cyan}\dot{v}_y\,'} = {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi} \\ 
-    {\color{cyan}\dot{v}_z\,'} = - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cos {\color{var(--c1)}\phi} -  {\color{var(--c3)}v_z\,'} \sin {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \sin {\color{var(--c1)}\phi} +  {\color{var(--c3)}v_z\,'} \cos {\color{var(--c1)}\phi} \\
+    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
+    {\color{var(--c3)}\dot{v}_y\,'} = {\color{var(--c3)}v_z\,' \omega_x\,'} - g \sin {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c3)}\dot{v}_z\,'} = - {\color{var(--c3)}v_y\,' \omega_x\,'} - g \cos {\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \]</div>
-<p>Os termos <span class="arithmatex">\({\color{cyan}v_z\,' \omega_x\,'}\)</span> e <span class="arithmatex">\({\color{cyan}v_y\,' \omega_x\,'}\)</span> correspondem às pseudo-acelerações centrífugas, que surgem ao descrever o movimento no referencial não inercial do drone (sistema de coordenadas móvel).</p>
+<p>Os termos <span class="arithmatex">\({\color{var(--c3)}v_z\,' \omega_x\,'}\)</span> e <span class="arithmatex">\({\color{var(--c3)}v_y\,' \omega_x\,'}\)</span> correspondem às pseudo-acelerações centrífugas, que surgem ao descrever o movimento no referencial não inercial do drone (sistema de coordenadas móvel).</p>
 <hr />
 <h2 id="notacao-vetorial">Notação vetorial</h2>
 <p>A 2ª lei de Newton para translação e rotação utilizando notação vetorial é dada por:</p>
@@ -2283,25 +2283,25 @@ I =
 \]</div>
 <p>Como estamos trabalhando agora com vetores, estas equações podem ser aplicadas de uma única vez para todos os graus de liberdade.</p>
 <h3 id="sistema-inercial_1">Sistema inercial</h3>
-<p>Inicialmente, vamos definir o vetor aceleração da gravidade <span class="arithmatex">\({\color{magenta}\vec{g}}\)</span> no sistema de coordenadas inercial e os vetores de forças <span class="arithmatex">\({\color{cyan}\vec{f}_d\,'}\)</span> e torques <span class="arithmatex">\({\color{cyan}\vec{\tau}_d\,'}\)</span> do drone no sistema de coordenadas móvel:</p>
+<p>Inicialmente, vamos definir o vetor aceleração da gravidade <span class="arithmatex">\({\color{var(--c1)}\vec{g}}\)</span> no sistema de coordenadas inercial e os vetores de forças <span class="arithmatex">\({\color{var(--c3)}\vec{f}_d\,'}\)</span> e torques <span class="arithmatex">\({\color{var(--c3)}\vec{\tau}_d\,'}\)</span> do drone no sistema de coordenadas móvel:</p>
 <div class="arithmatex">\[
-{\color{magenta}\vec{g}} = 
+{\color{var(--c1)}\vec{g}} = 
 \begin{bmatrix}
     0 \\
     0 \\
     g
 \end{bmatrix}
 \qquad
-{\color{cyan}\vec{f_d}\,'} = 
+{\color{var(--c3)}\vec{f_d}\,'} = 
 \begin{bmatrix}
     0 \\
     0 \\
-    {\color{#65DD18}f_t} 
+    {\color{var(--c2)}f_t} 
 \end{bmatrix}
 \qquad
-{\color{cyan}\vec{\tau_d}\,'} = 
+{\color{var(--c3)}\vec{\tau_d}\,'} = 
 \begin{bmatrix}
-    {\color{#65DD18}\tau_x} \\
+    {\color{var(--c2)}\tau_x} \\
     0 \\
     0
 \end{bmatrix}
@@ -2312,26 +2312,26 @@ I =
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 6</p>
-<p>Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (<span class="arithmatex">\({\color{magenta}\vec{v}}\)</span> e <span class="arithmatex">\({\color{magenta}\vec{\omega}}\)</span>) em função das somatórias de forças e torques.</p>
+<p>Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (<span class="arithmatex">\({\color{var(--c1)}\vec{v}}\)</span> e <span class="arithmatex">\({\color{var(--c1)}\vec{\omega}}\)</span>) em função das somatórias de forças e torques.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{\vec{v}}}\)</span> em função de <span class="arithmatex">\(\sum{\color{magenta}\vec{f}}\)</span>.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\vec{v}}}\)</span> em função de <span class="arithmatex">\(\sum{\color{var(--c1)}\vec{f}}\)</span>.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{magenta}\vec{f}} &amp;= \frac{d}{dt} {\color{magenta}\vec{p}} \\
-    \sum {\color{magenta}\vec{f}} &amp;= \frac{d}{dt} \left( m {\color{magenta}\vec{v}} \right) \\
-    \sum {\color{magenta}\vec{f}} &amp;= m {\color{magenta}\dot{\vec{v}}} \\
-    {\color{magenta}\dot{\vec{v}}} &amp;= \frac{1}{m} \sum {\color{magenta}\vec{f}}
+    \sum {\color{var(--c1)}\vec{f}} &amp;= \frac{d}{dt} {\color{var(--c1)}\vec{p}} \\
+    \sum {\color{var(--c1)}\vec{f}} &amp;= \frac{d}{dt} \left( m {\color{var(--c1)}\vec{v}} \right) \\
+    \sum {\color{var(--c1)}\vec{f}} &amp;= m {\color{var(--c1)}\dot{\vec{v}}} \\
+    {\color{var(--c1)}\dot{\vec{v}}} &amp;= \frac{1}{m} \sum {\color{var(--c1)}\vec{f}}
 \end{align*}
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{\vec{\omega}}}\)</span> em função de <span class="arithmatex">\(\sum{\color{magenta}\vec{\tau}}\)</span>.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\vec{\omega}}}\)</span> em função de <span class="arithmatex">\(\sum{\color{var(--c1)}\vec{\tau}}\)</span>.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{magenta}\vec{\tau}} &amp;= \frac{d}{dt} {\color{magenta}\vec{h}} \\
-    \sum {\color{magenta}\vec{\tau}} &amp;= \frac{d}{dt} \left( I {\color{magenta}\vec{\omega}} \right) \\
-    \sum {\color{magenta}\vec{\tau}} &amp;= I {\color{magenta}\dot{\vec{\omega}}} \\
-    {\color{magenta}\dot{\vec{\omega}}} &amp;= I^{-1} \sum {\color{magenta}\vec{\tau}}
+    \sum {\color{var(--c1)}\vec{\tau}} &amp;= \frac{d}{dt} {\color{var(--c1)}\vec{h}} \\
+    \sum {\color{var(--c1)}\vec{\tau}} &amp;= \frac{d}{dt} \left( I {\color{var(--c1)}\vec{\omega}} \right) \\
+    \sum {\color{var(--c1)}\vec{\tau}} &amp;= I {\color{var(--c1)}\dot{\vec{\omega}}} \\
+    {\color{var(--c1)}\dot{\vec{\omega}}} &amp;= I^{-1} \sum {\color{var(--c1)}\vec{\tau}}
 \end{align*}
 \]</div>
 </details>
@@ -2340,8 +2340,8 @@ I =
 <div class="arithmatex">\[
     \left\{
     \begin{array}{l}
-            {\color{magenta}\dot{\vec{v}}} = \frac{1}{m} \sum {\color{magenta}\vec{f}} \\ 
-            {\color{magenta}\dot{\vec{\omega}}} = I^{-1} \sum {\color{magenta}\vec{\tau}}
+            {\color{var(--c1)}\dot{\vec{v}}} = \frac{1}{m} \sum {\color{var(--c1)}\vec{f}} \\ 
+            {\color{var(--c1)}\dot{\vec{\omega}}} = I^{-1} \sum {\color{var(--c1)}\vec{\tau}}
     \end{array}
     \right.
 \]</div>
@@ -2351,17 +2351,17 @@ I =
 <p>Substitua as somatórias de forças e torques definidos inicialmente e determine as equações cinéticas.</p>
 <p>Dica: cuidado com os sistemas de coordenadas em que eles estão descritos.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{magenta}\dot{\vec{v}}}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\vec{v}}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    {\color{magenta}\dot{\vec{v}}} &amp;= \frac{1}{m} \sum {\color{magenta}\vec{f}} \\
-    {\color{magenta}\dot{\vec{v}}} &amp;= \frac{1}{m} \left( - m {\color{magenta}\vec{g}} + {\color{magenta}\vec{f}_t} \right) \\
-    {\color{magenta}\dot{\vec{v}}} &amp;= - {\color{magenta}\vec{g}} + \frac{1}{m} {\color{magenta}\vec{f}_t} \\
-    {\color{magenta}\dot{\vec{v}}} &amp;= - {\color{magenta}\vec{g}} + \frac{1}{m} R^T {\color{cyan}\vec{f}_t\,'} \\
+    {\color{var(--c1)}\dot{\vec{v}}} &amp;= \frac{1}{m} \sum {\color{var(--c1)}\vec{f}} \\
+    {\color{var(--c1)}\dot{\vec{v}}} &amp;= \frac{1}{m} \left( - m {\color{var(--c1)}\vec{g}} + {\color{var(--c1)}\vec{f}_t} \right) \\
+    {\color{var(--c1)}\dot{\vec{v}}} &amp;= - {\color{var(--c1)}\vec{g}} + \frac{1}{m} {\color{var(--c1)}\vec{f}_t} \\
+    {\color{var(--c1)}\dot{\vec{v}}} &amp;= - {\color{var(--c1)}\vec{g}} + \frac{1}{m} R^T {\color{var(--c3)}\vec{f}_t\,'} \\
     \begin{bmatrix}
         0 \\
-        {\color{magenta}\dot{v}_y} \\
-        {\color{magenta}\dot{v}_z}
+        {\color{var(--c1)}\dot{v}_y} \\
+        {\color{var(--c1)}\dot{v}_z}
     \end{bmatrix}
     &amp;= -
     \begin{bmatrix}
@@ -2372,36 +2372,36 @@ I =
     + \frac{1}{m}
     \begin{bmatrix}
         1 &amp; 0 &amp; 0 \\
-        0 &amp; \cos{\color{magenta}\phi} &amp; -\sin{\color{magenta}\phi} \\
-        0 &amp; \sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+        0 &amp; \cos{\color{var(--c1)}\phi} &amp; -\sin{\color{var(--c1)}\phi} \\
+        0 &amp; \sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi}
     \end{bmatrix}
     \begin{bmatrix}
         0 \\
         0 \\
-        {\color{#65DD18}f_t}
+        {\color{var(--c2)}f_t}
     \end{bmatrix} \\
     \begin{bmatrix}
         0 \\
-        {\color{magenta}\dot{v}_y} \\
-        {\color{magenta}\dot{v}_z}
+        {\color{var(--c1)}\dot{v}_y} \\
+        {\color{var(--c1)}\dot{v}_z}
     \end{bmatrix}
     &amp;=
     \begin{bmatrix}
         0 \\
-        - \frac{1}{m} \sin{\color{magenta}\phi} {\color{#65DD18}f_t} \\
-        - g + \frac{1}{m} \cos{\color{magenta}\phi} {\color{#65DD18}f_t}
+        - \frac{1}{m} \sin{\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\
+        - g + \frac{1}{m} \cos{\color{var(--c1)}\phi} {\color{var(--c2)}f_t}
     \end{bmatrix} 
 \end{align*}  
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{magenta}\dot{\vec{\omega}}}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c1)}\dot{\vec{\omega}}}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    {\color{magenta}\dot{\vec{\omega}}} &amp;= I^{-1} \sum {\color{magenta}\vec{\tau}} \\
-    {\color{magenta}\dot{\vec{\omega}}} &amp;= I^{-1} {\color{magenta}\vec{\tau}_x} \\
+    {\color{var(--c1)}\dot{\vec{\omega}}} &amp;= I^{-1} \sum {\color{var(--c1)}\vec{\tau}} \\
+    {\color{var(--c1)}\dot{\vec{\omega}}} &amp;= I^{-1} {\color{var(--c1)}\vec{\tau}_x} \\
     \begin{bmatrix}
-        {\color{magenta}\dot{\omega}_x} \\
+        {\color{var(--c1)}\dot{\omega}_x} \\
         0 \\
         0
     \end{bmatrix}
@@ -2412,12 +2412,12 @@ I =
         0 &amp; 0 &amp; I_{zz}
     \end{bmatrix}^{-1}
     \begin{bmatrix}
-        {\color{#65DD18}\tau_x} \\
+        {\color{var(--c2)}\tau_x} \\
         0 \\
         0
     \end{bmatrix} \\
     \begin{bmatrix}
-        {\color{magenta}\dot{\omega}_x} \\
+        {\color{var(--c1)}\dot{\omega}_x} \\
         0 \\
         0
     \end{bmatrix}
@@ -2428,18 +2428,18 @@ I =
         0 &amp; 0 &amp; \frac{1}{I_{zz}}
     \end{bmatrix}
     \begin{bmatrix}
-        {\color{#65DD18}\tau_x} \\
+        {\color{var(--c2)}\tau_x} \\
         0 \\
         0
     \end{bmatrix} \\
     \begin{bmatrix}
-        {\color{magenta}\dot{\omega}_x} \\
+        {\color{var(--c1)}\dot{\omega}_x} \\
         0 \\
         0
     \end{bmatrix}
     &amp;= 
     \begin{bmatrix}
-        \frac{1}{I_{xx}} {\color{#65DD18}\tau_x} \\
+        \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x} \\
         0 \\
         0
     \end{bmatrix}
@@ -2451,12 +2451,12 @@ I =
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} = {\color{magenta}v_y} \\ 
-    {\color{magenta}\dot{z}} = {\color{magenta}v_z} \\
-    {\color{magenta}\dot{\phi}} = {\color{magenta}\omega_x} \\ 
-    {\color{magenta}\dot{v}_y} = - \frac{1}{m} \sin {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
-    {\color{magenta}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{magenta}\phi} {\color{#65DD18}f_t} \\ 
-    {\color{magenta}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y} \\ 
+    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
+    {\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x} \\ 
+    {\color{var(--c1)}\dot{v}_y} = - \frac{1}{m} \sin {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c1)}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c1)}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \]</div>
@@ -2470,8 +2470,8 @@ I =
 \xcancel{
 \left\{
 \begin{array}{l}
-        \sum {\color{cyan}\vec{f}\,'} = \frac{d}{dt} {\color{cyan}\vec{p}\,'} \\ 
-        \sum {\color{cyan}\vec{\tau}\,'} = \frac{d}{dt} {\color{cyan}\vec{h}\,'}
+        \sum {\color{var(--c3)}\vec{f}\,'} = \frac{d}{dt} {\color{var(--c3)}\vec{p}\,'} \\ 
+        \sum {\color{var(--c3)}\vec{\tau}\,'} = \frac{d}{dt} {\color{var(--c3)}\vec{h}\,'}
 \end{array}
 \right.
 }
@@ -2482,15 +2482,15 @@ I =
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercício 9</p>
-<p class="annotate">Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (<span class="arithmatex">\({\color{cyan}\dot{\vec{v}}\,'}\)</span> e <span class="arithmatex">\({\color{cyan}\dot{\vec{\omega}}\,'}\)</span>) em função das somatórias de forças e torques(1).</p>
+<p class="annotate">Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (<span class="arithmatex">\({\color{var(--c3)}\dot{\vec{v}}\,'}\)</span> e <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{\omega}}\,'}\)</span>) em função das somatórias de forças e torques(1).</p>
 <ol>
 <li>
-<p>O produto vetorial <span class="arithmatex">\({\color{cyan}\vec{\omega}\,'} \times\)</span>:</p>
+<p>O produto vetorial <span class="arithmatex">\({\color{var(--c3)}\vec{\omega}\,'} \times\)</span>:</p>
 <div class="arithmatex">\[
 \begin{align}
-    {\color{cyan}\vec{\omega}\,'} \times \vec{v} &amp;= 
+    {\color{var(--c3)}\vec{\omega}\,'} \times \vec{v} &amp;= 
     \begin{bmatrix}
-    {\color{cyan}\omega_x\,'} \\
+    {\color{var(--c3)}\omega_x\,'} \\
     0 \\
     0
     \end{bmatrix} 
@@ -2500,33 +2500,33 @@ I =
     v_2 \\
     v_3
     \end{bmatrix} \\
-    {\color{cyan}\vec{\omega}\,'} \times \vec{v} &amp;= 
+    {\color{var(--c3)}\vec{\omega}\,'} \times \vec{v} &amp;= 
     \begin{bmatrix}
     0 \\
-    - {\color{cyan}\omega_x\,'} v_3 \\
-    {\color{cyan}\omega_x\,'} v_2 
+    - {\color{var(--c3)}\omega_x\,'} v_3 \\
+    {\color{var(--c3)}\omega_x\,'} v_2 
     \end{bmatrix}
 \end{align}
 \]</div>
-<p>Também pode ser representado pelo produto de uma matriz anti-simétrica <span class="arithmatex">\({\color{cyan}\tilde{\omega}\,'}\)</span>:</p>
+<p>Também pode ser representado pelo produto de uma matriz anti-simétrica <span class="arithmatex">\({\color{var(--c3)}\tilde{\omega}\,'}\)</span>:</p>
 <div class="arithmatex">\[
 \begin{align}
-    {\color{cyan}\tilde{\omega}\,'} \vec{v} &amp;= 
+    {\color{var(--c3)}\tilde{\omega}\,'} \vec{v} &amp;= 
     \begin{bmatrix}
         0 &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; -{\color{cyan}\omega_x\,'} \\
-        0 &amp; {\color{cyan}\omega_x\,'} &amp; 0
+        0 &amp; 0 &amp; -{\color{var(--c3)}\omega_x\,'} \\
+        0 &amp; {\color{var(--c3)}\omega_x\,'} &amp; 0
     \end{bmatrix}  
     \begin{bmatrix}
     v_1 \\
     v_2 \\
     v_3
     \end{bmatrix} \\
-    {\color{cyan}\tilde{\omega}\,'} \vec{v} &amp;= 
+    {\color{var(--c3)}\tilde{\omega}\,'} \vec{v} &amp;= 
     \begin{bmatrix}
     0 \\
-    - {\color{cyan}\omega_x\,'} v_3 \\
-    {\color{cyan}\omega_x\,'} v_2 
+    - {\color{var(--c3)}\omega_x\,'} v_3 \\
+    {\color{var(--c3)}\omega_x\,'} v_2 
     \end{bmatrix}
 \end{align}
 \]</div>
@@ -2536,91 +2536,91 @@ I =
     R \dot{R}^T &amp;= 
     \begin{bmatrix}
         1 &amp; 0 &amp; 0 \\
-        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
-        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+        0 &amp; \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\
+        0 &amp; -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi}
     \end{bmatrix}   
     {
     \left(
     \frac{d}{dt}
     \begin{bmatrix}
         1 &amp; 0 &amp; 0 \\
-        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
-        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+        0 &amp; \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\
+        0 &amp; -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi}
     \end{bmatrix} 
     \right)
     }^{T} \\
     R \dot{R}^T &amp;= 
     \begin{bmatrix}
         1 &amp; 0 &amp; 0 \\
-        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
-        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+        0 &amp; \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\
+        0 &amp; -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi}
     \end{bmatrix}   
     {
     \begin{bmatrix}
         0 &amp; 0 &amp; 0 \\
-        0 &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; \cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} \\
-        0 &amp; -\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}
+        0 &amp; -\sin{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} &amp; \cos{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} \\
+        0 &amp; -\cos{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} &amp; -\sin{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}
     \end{bmatrix} 
     }^{T} \\
     R \dot{R}^T &amp;= 
     \begin{bmatrix}
         1 &amp; 0 &amp; 0 \\
-        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
-        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+        0 &amp; \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\
+        0 &amp; -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi}
     \end{bmatrix}   
     \begin{bmatrix}
         0 &amp; 0 &amp; 0 \\
-        0 &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; -\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} \\
-        0 &amp; \cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; -\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}
+        0 &amp; -\sin{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} &amp; -\cos{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} \\
+        0 &amp; \cos{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} &amp; -\sin{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}
     \end{bmatrix} \\
     R \dot{R}^T &amp;= 
     \begin{bmatrix}
         0 &amp; 0 &amp; 0 \\
-        0 &amp; -\cancel{\cos{\color{magenta}\phi}\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}} + \cancel{\sin{\color{magenta}\phi}\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'}} &amp; -\cos^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'} -\sin^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'}\\
-        0 &amp; \sin^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'} + \cos^2{\color{magenta}\phi}{\color{cyan}\omega_x\,'} &amp; \cancel{\sin{\color{magenta}\phi}\cos{\color{magenta}\phi}{\color{cyan}\omega_x\,'}} - \cancel{\cos{\color{magenta}\phi}\sin{\color{magenta}\phi}{\color{cyan}\omega_x\,'}}
+        0 &amp; -\cancel{\cos{\color{var(--c1)}\phi}\sin{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}} + \cancel{\sin{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}} &amp; -\cos^2{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} -\sin^2{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}\\
+        0 &amp; \sin^2{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} + \cos^2{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'} &amp; \cancel{\sin{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}} - \cancel{\cos{\color{var(--c1)}\phi}\sin{\color{var(--c1)}\phi}{\color{var(--c3)}\omega_x\,'}}
     \end{bmatrix}  \\
     R \dot{R}^T &amp;= 
     \begin{bmatrix}
         0 &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; -{\color{cyan}\omega_x\,'} \cancelto{1}{\left(\cos^2{\color{magenta}\phi} + \sin^2{\color{magenta}\phi} \right)} \\
-        0 &amp; {\color{cyan}\omega_x\,'} \cancelto{1}{\left(\sin^2{\color{magenta}\phi} + \cos^2{\color{magenta}\phi} \right)} &amp; 0
+        0 &amp; 0 &amp; -{\color{var(--c3)}\omega_x\,'} \cancelto{1}{\left(\cos^2{\color{var(--c1)}\phi} + \sin^2{\color{var(--c1)}\phi} \right)} \\
+        0 &amp; {\color{var(--c3)}\omega_x\,'} \cancelto{1}{\left(\sin^2{\color{var(--c1)}\phi} + \cos^2{\color{var(--c1)}\phi} \right)} &amp; 0
     \end{bmatrix} \\
     R \dot{R}^T &amp;= 
     \begin{bmatrix}
         0 &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; -{\color{cyan}\omega_x\,'} \\
-        0 &amp; {\color{cyan}\omega_x\,'} &amp; 0
+        0 &amp; 0 &amp; -{\color{var(--c3)}\omega_x\,'} \\
+        0 &amp; {\color{var(--c3)}\omega_x\,'} &amp; 0
     \end{bmatrix} 
 \end{align}
 \]</div>
-<p>Concluimos que <span class="arithmatex">\(R \dot{R}^T = {\color{cyan}\vec{\omega}\,'} \times\)</span>.</p>
+<p>Concluimos que <span class="arithmatex">\(R \dot{R}^T = {\color{var(--c3)}\vec{\omega}\,'} \times\)</span>.</p>
 </li>
 </ol>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{cyan}\dot{\vec{v}}\,'}\)</span> em função de <span class="arithmatex">\(\sum{\color{cyan}\vec{f}\,'}\)</span>.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{v}}\,'}\)</span> em função de <span class="arithmatex">\(\sum{\color{var(--c3)}\vec{f}\,'}\)</span>.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{magenta}\vec{f}} &amp;= \frac{d}{dt} {\color{magenta}\vec{p}} \\
-    \sum {\color{magenta}\vec{f}} &amp;= \frac{d}{dt} \left( R^T {\color{cyan}\vec{p}\,'} \right) \\
-    \sum {\color{magenta}\vec{f}} &amp;= \dot{R}^T {\color{cyan}\vec{p}\,'} + R^T {\color{cyan}\dot{\vec{p}}\,'} \\
-    R \sum {\color{magenta}\vec{f}} &amp;= R \dot{R}^T {\color{cyan}\vec{p}\,'} + \cancel{R R^T} {\color{cyan}\dot{\vec{p}}\,'} \\
-    \sum R {\color{magenta}\vec{f}} &amp;= {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{p}\,'} + {\color{cyan}\dot{\vec{p}}\,'} \\
-    \sum {\color{cyan}\vec{f}\,'} &amp;= {\color{cyan}\vec{\omega}\,'} \times m {\color{cyan}\vec{v}\,'} + m {\color{cyan}\dot{\vec{v}}\,'} \\
-    {\color{cyan}\dot{\vec{v}}\,'} &amp;= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \sum {\color{cyan}\vec{f}\,'}
+    \sum {\color{var(--c1)}\vec{f}} &amp;= \frac{d}{dt} {\color{var(--c1)}\vec{p}} \\
+    \sum {\color{var(--c1)}\vec{f}} &amp;= \frac{d}{dt} \left( R^T {\color{var(--c3)}\vec{p}\,'} \right) \\
+    \sum {\color{var(--c1)}\vec{f}} &amp;= \dot{R}^T {\color{var(--c3)}\vec{p}\,'} + R^T {\color{var(--c3)}\dot{\vec{p}}\,'} \\
+    R \sum {\color{var(--c1)}\vec{f}} &amp;= R \dot{R}^T {\color{var(--c3)}\vec{p}\,'} + \cancel{R R^T} {\color{var(--c3)}\dot{\vec{p}}\,'} \\
+    \sum R {\color{var(--c1)}\vec{f}} &amp;= {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{p}\,'} + {\color{var(--c3)}\dot{\vec{p}}\,'} \\
+    \sum {\color{var(--c3)}\vec{f}\,'} &amp;= {\color{var(--c3)}\vec{\omega}\,'} \times m {\color{var(--c3)}\vec{v}\,'} + m {\color{var(--c3)}\dot{\vec{v}}\,'} \\
+    {\color{var(--c3)}\dot{\vec{v}}\,'} &amp;= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \sum {\color{var(--c3)}\vec{f}\,'}
 \end{align*} 
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{cyan}\dot{\vec{\omega}}\,'}\)</span> em função de <span class="arithmatex">\(\sum{\color{cyan}\vec{\tau}\,'}\)</span>.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{\omega}}\,'}\)</span> em função de <span class="arithmatex">\(\sum{\color{var(--c3)}\vec{\tau}\,'}\)</span>.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    \sum {\color{magenta}\vec{\tau}} &amp;= \frac{d}{dt} {\color{magenta}\vec{h}} \\
-    \sum {\color{magenta}\vec{\tau}} &amp;= \frac{d}{dt} \left( R^T {\color{cyan}\vec{h}\,'} \right) \\
-    \sum {\color{magenta}\vec{\tau}} &amp;= \dot{R}^T {\color{cyan}\vec{h}\,'} + R^T {\color{cyan}\dot{\vec{h}}\,'} \\
-    R \sum {\color{magenta}\vec{\tau}} &amp;= R \dot{R}^T {\color{cyan}\vec{h}\,'} + \cancel{R R^T} {\color{cyan}\dot{\vec{h}}\,'} \\
-    \sum R {\color{magenta}\vec{\tau}} &amp;= {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{h}\,'} + {\color{cyan}\dot{\vec{h}}\,'} \\
-    \sum {\color{cyan}\vec{\tau}\,'} &amp;= {\color{cyan}\vec{\omega}\,'} \times I {\color{cyan}\vec{\omega}\,'} + I {\color{cyan}\dot{\vec{\omega}}\,'} \\
-    {\color{cyan}\dot{\vec{\omega}}\,'} &amp;= - I^{-1} \left( {\color{cyan}\vec{\omega}\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{cyan}\vec{\tau}\,'}
+    \sum {\color{var(--c1)}\vec{\tau}} &amp;= \frac{d}{dt} {\color{var(--c1)}\vec{h}} \\
+    \sum {\color{var(--c1)}\vec{\tau}} &amp;= \frac{d}{dt} \left( R^T {\color{var(--c3)}\vec{h}\,'} \right) \\
+    \sum {\color{var(--c1)}\vec{\tau}} &amp;= \dot{R}^T {\color{var(--c3)}\vec{h}\,'} + R^T {\color{var(--c3)}\dot{\vec{h}}\,'} \\
+    R \sum {\color{var(--c1)}\vec{\tau}} &amp;= R \dot{R}^T {\color{var(--c3)}\vec{h}\,'} + \cancel{R R^T} {\color{var(--c3)}\dot{\vec{h}}\,'} \\
+    \sum R {\color{var(--c1)}\vec{\tau}} &amp;= {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{h}\,'} + {\color{var(--c3)}\dot{\vec{h}}\,'} \\
+    \sum {\color{var(--c3)}\vec{\tau}\,'} &amp;= {\color{var(--c3)}\vec{\omega}\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} + I {\color{var(--c3)}\dot{\vec{\omega}}\,'} \\
+    {\color{var(--c3)}\dot{\vec{\omega}}\,'} &amp;= - I^{-1} \left( {\color{var(--c3)}\vec{\omega}\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{var(--c3)}\vec{\tau}\,'}
 \end{align*}
 \]</div>
 </details>
@@ -2629,8 +2629,8 @@ I =
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-        {\color{cyan}\dot{\vec{v}}\,'} = - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \sum {\color{cyan}\vec{f}\,'} \\ 
-        {\color{cyan}\dot{\vec{\omega}}\,'} = - I^{-1} \left( {\color{cyan}\vec{\omega}\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{cyan}\vec{\tau}\,'}
+        {\color{var(--c3)}\dot{\vec{v}}\,'} = - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \sum {\color{var(--c3)}\vec{f}\,'} \\ 
+        {\color{var(--c3)}\dot{\vec{\omega}}\,'} = - I^{-1} \left( {\color{var(--c3)}\vec{\omega}\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{var(--c3)}\vec{\tau}\,'}
 \end{array}
 \right.
 \]</div>
@@ -2641,35 +2641,35 @@ I =
 <p>Substitua as somatórias de forças e torques definidos inicialmente e determine as equações cinéticas.</p>
 <p>Dica: cuidado com os sistemas de coordenadas em que eles estão descritos.</p>
 <details class="info">
-<summary>a) Escreva <span class="arithmatex">\({\color{cyan}\dot{\vec{v}}\,'}\)</span> em função dos estados do sistema.</summary>
+<summary>a) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{v}}\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    {\color{cyan}\dot{\vec{v}}\,'} &amp;= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \sum {\color{cyan}\vec{f}\,'} \\ 
-    {\color{cyan}\dot{\vec{v}}\,'} &amp;= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} + \frac{1}{m} \left( - m {\color{cyan}\vec{g}\,'} + {\color{cyan}\vec{f}\,'} \right) \\
-    {\color{cyan}\dot{\vec{v}}\,'} &amp;= - {\color{cyan}\vec{\omega}\,'} \times {\color{cyan}\vec{v}\,'} - R {\color{magenta}\vec{g}} + \frac{1}{m} {\color{cyan}\vec{f}\,'} \\ 
+    {\color{var(--c3)}\dot{\vec{v}}\,'} &amp;= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \sum {\color{var(--c3)}\vec{f}\,'} \\ 
+    {\color{var(--c3)}\dot{\vec{v}}\,'} &amp;= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \left( - m {\color{var(--c3)}\vec{g}\,'} + {\color{var(--c3)}\vec{f}\,'} \right) \\
+    {\color{var(--c3)}\dot{\vec{v}}\,'} &amp;= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} - R {\color{var(--c1)}\vec{g}} + \frac{1}{m} {\color{var(--c3)}\vec{f}\,'} \\ 
     \begin{bmatrix}
         0 \\
-        {\color{cyan}\dot{v}_y\,'} \\
-        {\color{cyan}\dot{v}_z\,'}
+        {\color{var(--c3)}\dot{v}_y\,'} \\
+        {\color{var(--c3)}\dot{v}_z\,'}
     \end{bmatrix}
     &amp;=
     -
     \begin{bmatrix}
-        {\color{cyan}\omega_x\,'} \\
+        {\color{var(--c3)}\omega_x\,'} \\
         0 \\
         0
     \end{bmatrix}
     \times
     \begin{bmatrix}
         0 \\
-        {\color{cyan}v_y\,'} \\
-        {\color{cyan}v_z\,'}
+        {\color{var(--c3)}v_y\,'} \\
+        {\color{var(--c3)}v_z\,'}
     \end{bmatrix}
     -
     \begin{bmatrix}
         1 &amp; 0 &amp; 0 \\
-        0 &amp; \cos{\color{magenta}\phi} &amp; \sin{\color{magenta}\phi} \\
-        0 &amp; -\sin{\color{magenta}\phi} &amp; \cos{\color{magenta}\phi}
+        0 &amp; \cos{\color{var(--c1)}\phi} &amp; \sin{\color{var(--c1)}\phi} \\
+        0 &amp; -\sin{\color{var(--c1)}\phi} &amp; \cos{\color{var(--c1)}\phi}
     \end{bmatrix}
     \begin{bmatrix}
         0 \\
@@ -2680,30 +2680,30 @@ I =
     \begin{bmatrix}
         0 \\
         0 \\
-        {\color{#65DD18}f_t}
+        {\color{var(--c2)}f_t}
     \end{bmatrix} \\
     \begin{bmatrix}
         0 \\
-        {\color{cyan}\dot{v}_y\,'} \\
-        {\color{cyan}\dot{v}_z\,'}
+        {\color{var(--c3)}\dot{v}_y\,'} \\
+        {\color{var(--c3)}\dot{v}_z\,'}
     \end{bmatrix}
     &amp;=
     \begin{bmatrix}
         0 \\
-        {\color{cyan}\omega_x\,' v_z\,'} - g \sin{\color{magenta}\phi} \\
-        -{\color{cyan}\omega_x\,' v_y\,'} - g \cos{\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t}
+        {\color{var(--c3)}\omega_x\,' v_z\,'} - g \sin{\color{var(--c1)}\phi} \\
+        -{\color{var(--c3)}\omega_x\,' v_y\,'} - g \cos{\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t}
     \end{bmatrix}
 \end{align*}  
 \]</div>
 </details>
 <details class="info">
-<summary>b) Escreva <span class="arithmatex">\({\color{cyan}\dot{\vec{\omega}}\,'}\)</span> em função dos estados do sistema.</summary>
+<summary>b) Escreva <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{\omega}}\,'}\)</span> em função dos estados do sistema.</summary>
 <div class="arithmatex">\[
 \begin{align*}
-    {\color{cyan}\dot{\vec{\omega}}\,'} &amp;= - I^{-1} \left( {\color{cyan}\omega\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{cyan}\vec{\tau}\,'} \\ 
-    {\color{cyan}\dot{\vec{\omega}}\,'} &amp;= - I^{-1} \left( {\color{cyan}\omega\,'} \times I {\color{cyan}\vec{\omega}\,'} \right) + I^{-1} {\color{cyan}\vec{\tau}_x\,'} \\ 
+    {\color{var(--c3)}\dot{\vec{\omega}}\,'} &amp;= - I^{-1} \left( {\color{var(--c3)}\omega\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{var(--c3)}\vec{\tau}\,'} \\ 
+    {\color{var(--c3)}\dot{\vec{\omega}}\,'} &amp;= - I^{-1} \left( {\color{var(--c3)}\omega\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} {\color{var(--c3)}\vec{\tau}_x\,'} \\ 
     \begin{bmatrix}
-        {\color{cyan}\dot{\omega}_x\,'} \\
+        {\color{var(--c3)}\dot{\omega}_x\,'} \\
         0 \\
         0
     \end{bmatrix}
@@ -2715,7 +2715,7 @@ I =
     \end{bmatrix}^{-1}
     \left( 
     \begin{bmatrix}
-        {\color{cyan}\omega_x\,'} \\
+        {\color{var(--c3)}\omega_x\,'} \\
         0 \\
         0
     \end{bmatrix}
@@ -2726,7 +2726,7 @@ I =
         0 &amp; 0 &amp; I_{zz}
     \end{bmatrix}
     \begin{bmatrix}
-        {\color{cyan}\omega_x\,'} \\
+        {\color{var(--c3)}\omega_x\,'} \\
         0 \\
         0
     \end{bmatrix}
@@ -2738,12 +2738,12 @@ I =
         0 &amp; 0 &amp; I_{zz}
     \end{bmatrix}^{-1}
     \begin{bmatrix}
-        {\color{#65DD18}\tau_x} \\
+        {\color{var(--c2)}\tau_x} \\
         0 \\
         0
     \end{bmatrix} \\
     \begin{bmatrix}
-        {\color{cyan}\dot{\omega}_x\,'} \\
+        {\color{var(--c3)}\dot{\omega}_x\,'} \\
         0 \\
         0
     \end{bmatrix}
@@ -2755,13 +2755,13 @@ I =
     \end{bmatrix}
     \left( 
     \begin{bmatrix}
-        {\color{cyan}\omega_x\,'} \\
+        {\color{var(--c3)}\omega_x\,'} \\
         0 \\
         0
     \end{bmatrix}
     \times
     \begin{bmatrix}
-        I_{xx} {\color{cyan}\omega_x\,'} \\
+        I_{xx} {\color{var(--c3)}\omega_x\,'} \\
         0 \\
         0
     \end{bmatrix}
@@ -2773,18 +2773,18 @@ I =
         0 &amp; 0 &amp; \frac{1}{I_{zz}}
     \end{bmatrix}
     \begin{bmatrix}
-        {\color{#65DD18}\tau_x} \\
+        {\color{var(--c2)}\tau_x} \\
         0 \\
         0
     \end{bmatrix} \\
     \begin{bmatrix}
-        {\color{cyan}\dot{\omega}_x\,'} \\
+        {\color{var(--c3)}\dot{\omega}_x\,'} \\
         0 \\
         0
     \end{bmatrix}
     &amp;= 
     \begin{bmatrix}
-        \frac{1}{I_{xx}} {\color{#65DD18}\tau_x} \\
+        \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x} \\
         0 \\
         0
     \end{bmatrix}
@@ -2796,19 +2796,19 @@ I =
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \cos {\color{magenta}\phi} -  {\color{cyan}v_z\,'} \sin {\color{magenta}\phi} \\ 
-    {\color{magenta}\dot{z}} =  {\color{cyan}v_y\,'} \sin {\color{magenta}\phi} +  {\color{cyan}v_z\,'} \cos {\color{magenta}\phi} \\
-    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
-    {\color{cyan}\dot{v}_y\,'} = {\color{cyan}v_z\,' \omega_x\,'} - g \sin {\color{magenta}\phi} \\ 
-    {\color{cyan}\dot{v}_z\,'} = - {\color{cyan}v_y\,' \omega_x\,'} - g \cos {\color{magenta}\phi} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cos {\color{var(--c1)}\phi} -  {\color{var(--c3)}v_z\,'} \sin {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \sin {\color{var(--c1)}\phi} +  {\color{var(--c3)}v_z\,'} \cos {\color{var(--c1)}\phi} \\
+    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
+    {\color{var(--c3)}\dot{v}_y\,'} = {\color{var(--c3)}v_z\,' \omega_x\,'} - g \sin {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c3)}\dot{v}_z\,'} = - {\color{var(--c3)}v_y\,' \omega_x\,'} - g \cos {\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \]</div>
 <p>Note que as equações acima são exatamente iguais às obtidas utilizando a notação escalar. </p>
 <hr />
 <h2 id="linearizacao">Linearização</h2>
-<p class="annotate">O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproximações quando os estados estão bem próximos de suas posições de equilíbrio. Neste caso, funções trigonométricas podem ser aproximadas (ex: <span class="arithmatex">\(\cos{\color{magenta}\phi} \approx 1\)</span> e <span class="arithmatex">\(\sin{\color{magenta}\phi} \approx {\color{magenta}\phi}\)</span>) (1), assim como o produto entre dois estados (ex: <span class="arithmatex">\({\color{cyan}v_z\,' \omega_x\,'} \approx 0\)</span>).</p>
+<p class="annotate">O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproximações quando os estados estão bem próximos de suas posições de equilíbrio. Neste caso, funções trigonométricas podem ser aproximadas (ex: <span class="arithmatex">\(\cos{\color{var(--c1)}\phi} \approx 1\)</span> e <span class="arithmatex">\(\sin{\color{var(--c1)}\phi} \approx {\color{var(--c1)}\phi}\)</span>) (1), assim como o produto entre dois estados (ex: <span class="arithmatex">\({\color{var(--c3)}v_z\,' \omega_x\,'} \approx 0\)</span>).</p>
 <ol>
 <li>Essas aproximações valem apenas para ângulos em radianos menores que <span class="arithmatex">\(10^{\circ}\)</span>.</li>
 </ol>
@@ -2820,34 +2820,34 @@ I =
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \cancelto{1}{\cos {\color{magenta}\phi}} -  {\color{cyan}v_z\,'} \cancelto{{\color{magenta}\phi}}{\sin {\color{magenta}\phi}} \\ 
-    {\color{magenta}\dot{z}} =  {\color{cyan}v_y\,'} \cancelto{{\color{magenta}\phi}}{\sin {\color{magenta}\phi}} +  {\color{cyan}v_z\,'} \cancelto{1}{\cos {\color{magenta}\phi}} \\
-    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
-    {\color{cyan}\dot{v}_y\,'} = \cancelto{0}{\color{cyan}v_z\,' \omega_x\,'} - g \cancelto{{\color{magenta}\phi}}{\sin {\color{magenta}\phi}} \\ 
-    {\color{cyan}\dot{v}_z\,'} = - \cancelto{0}{\color{cyan}v_y\,' \omega_x\,'} - g \cancelto{1}{\cos {\color{magenta}\phi}} + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cancelto{1}{\cos {\color{var(--c1)}\phi}} -  {\color{var(--c3)}v_z\,'} \cancelto{{\color{var(--c1)}\phi}}{\sin {\color{var(--c1)}\phi}} \\ 
+    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \cancelto{{\color{var(--c1)}\phi}}{\sin {\color{var(--c1)}\phi}} +  {\color{var(--c3)}v_z\,'} \cancelto{1}{\cos {\color{var(--c1)}\phi}} \\
+    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
+    {\color{var(--c3)}\dot{v}_y\,'} = \cancelto{0}{\color{var(--c3)}v_z\,' \omega_x\,'} - g \cancelto{{\color{var(--c1)}\phi}}{\sin {\color{var(--c1)}\phi}} \\ 
+    {\color{var(--c3)}\dot{v}_z\,'} = - \cancelto{0}{\color{var(--c3)}v_y\,' \omega_x\,'} - g \cancelto{1}{\cos {\color{var(--c1)}\phi}} + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \qquad \longrightarrow \qquad
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} - \cancelto{0}{{\color{cyan}v_z\,'} {\color{magenta}\phi}} \\
-    {\color{magenta}\dot{z}} =  \cancelto{0}{{\color{cyan}v_y\,'} {\color{magenta}\phi}} + {\color{cyan}v_z\,'} \\
-    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
-    {\color{cyan}\dot{v}_y\,'} = - g {\color{magenta}\phi} \\ 
-    {\color{cyan}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} - \cancelto{0}{{\color{var(--c3)}v_z\,'} {\color{var(--c1)}\phi}} \\
+    {\color{var(--c1)}\dot{z}} =  \cancelto{0}{{\color{var(--c3)}v_y\,'} {\color{var(--c1)}\phi}} + {\color{var(--c3)}v_z\,'} \\
+    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
+    {\color{var(--c3)}\dot{v}_y\,'} = - g {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \qquad \longrightarrow \qquad
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \\
-    {\color{magenta}\dot{z}} =  {\color{cyan}v_z\,'} \\
-    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
-    {\color{cyan}\dot{v}_y\,'} = - g {\color{magenta}\phi} \\ 
-    {\color{cyan}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \\
+    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_z\,'} \\
+    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
+    {\color{var(--c3)}\dot{v}_y\,'} = - g {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 \]</div>
@@ -2857,24 +2857,24 @@ I =
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
-    {\color{magenta}\dot{y}} =  {\color{cyan}v_y\,'} \\
-    {\color{magenta}\dot{z}} =  {\color{cyan}v_z\,'} \\
-    {\color{magenta}\dot{\phi}} =  {\color{cyan}\omega_x\,'} \\ 
-    {\color{cyan}\dot{v}_y\,'} = - g {\color{magenta}\phi} \\ 
-    {\color{cyan}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{#65DD18}f_t} \\ 
-    {\color{cyan}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{#65DD18}\tau_x}
+    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \\
+    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_z\,'} \\
+    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
+    {\color{var(--c3)}\dot{v}_y\,'} = - g {\color{var(--c1)}\phi} \\ 
+    {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
+    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
 \end{array}
 \right.    
 \]</div>
-<p>Apesar lembrar as equações diferenciais obtidas no sistema de coordenadas inercial, ela possui uma diferença muito importante, que aparece exatamente na dinâmica horizontal: a aceleração <span class="arithmatex">\({\color{cyan}\dot{v}_y\,'}\)</span> não depende da força <span class="arithmatex">\({\color{#65DD18}f_t}\)</span> mas sim do ângulo <span class="arithmatex">\({\color{magenta}\phi}\)</span>.</p>
+<p>Apesar lembrar as equações diferenciais obtidas no sistema de coordenadas inercial, ela possui uma diferença muito importante, que aparece exatamente na dinâmica horizontal: a aceleração <span class="arithmatex">\({\color{var(--c3)}\dot{v}_y\,'}\)</span> não depende da força <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> mas sim do ângulo <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>.</p>
 <p>Isso fica evidente ao representarmos as equações diferenciais em um diagrama de blocos:</p>
 <p><img alt="" src="../images/2d_plant.svg" style="display: block; margin: auto;" width="100%" /></p>
 <p>Observe o seguinte:</p>
 <ul>
-<li>A força <span class="arithmatex">\({\color{#65DD18}f_t}\)</span> integra duas vezes até a posição <span class="arithmatex">\({\color{magenta}z}\)</span> (2ª lei de Newton para translação), atuando de forma desacoplada na dinâmica de posição vertical.</li>
-<li>O torque <span class="arithmatex">\({\color{#65DD18}\tau_x}\)</span> integra duas vezes até o ângulo <span class="arithmatex">\({\color{magenta}\phi}\)</span> (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição <span class="arithmatex">\({\color{magenta}y}\)</span>. </li>
-<li>Portanto, de <span class="arithmatex">\({\color{#65DD18}\tau_x}\)</span> a <span class="arithmatex">\({\color{magenta}y}\)</span> há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. </li>
-<li>O sinal negativo em <span class="arithmatex">\(- g\)</span> decorre da convenção de eixos adotada (uma rotação positiva em torqno de <span class="arithmatex">\({\color{magenta}x}\)</span> implica em um deslocamento negativo ao longo de <span class="arithmatex">\({\color{magenta}y}\)</span>).</li>
+<li>A força <span class="arithmatex">\({\color{var(--c2)}f_t}\)</span> integra duas vezes até a posição <span class="arithmatex">\({\color{var(--c1)}z}\)</span> (2ª lei de Newton para translação), atuando de forma desacoplada na dinâmica de posição vertical.</li>
+<li>O torque <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span> integra duas vezes até o ângulo <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span> (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição <span class="arithmatex">\({\color{var(--c1)}y}\)</span>. </li>
+<li>Portanto, de <span class="arithmatex">\({\color{var(--c2)}\tau_x}\)</span> a <span class="arithmatex">\({\color{var(--c1)}y}\)</span> há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. </li>
+<li>O sinal negativo em <span class="arithmatex">\(- g\)</span> decorre da convenção de eixos adotada (uma rotação positiva em torqno de <span class="arithmatex">\({\color{var(--c1)}x}\)</span> implica em um deslocamento negativo ao longo de <span class="arithmatex">\({\color{var(--c1)}y}\)</span>).</li>
 </ul>
 
 

@@ -1861,7 +1861,8 @@
 <p><img alt="" src="../../setup/images/tachometer.png" style="display: block; margin: auto;" width="300" /></p>
 <p>The <span class="keys"><kbd>POWER</kbd></span> button turns on the devide, while the <span class="keys"><kbd>SET</kbd></span> button configure the number of blades of the propeller. The screen will display the current angular velocity in <span class="arithmatex">\(\text{rpm}\)</span>, while the maximum value will be memorized as "peak" data at the bottom.</p>
 <p>You must flash a program to the drone that turns on only one motor using a chosen PWM value. You will collect propeller angular velocity data for 10 distinct PWM values. For each PWM value, repeat the experiment 3 times and compute the average.</p>
-<p><img alt="" src="images/device1_experiment.gif" style="display: block; margin: auto;" width="100%" /></p>
+<!-- ![](images/device1_experiment.gif){: width="100%" style="display: block; margin: auto;" } -->
+
 <p>To simplify the procedure, you can change the PWM command using the <span class="keys"><kbd>Up</kbd></span> and <span class="keys"><kbd>Down</kbd></span> buttons in the Command Based Flight Control, located at the bottom-right corner of the Crazyflie Client.</p>
 <p><img alt="" src="../images/command_based_flight_control.png" style="display: block; margin: auto;" width="40%" /></p>
 <p>Create a file named <code>motor_coefficients.c</code> inside <code>src/identification</code> with the following code:</p>

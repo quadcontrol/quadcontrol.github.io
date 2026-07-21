@@ -759,6 +759,7 @@ However, we can apply Newton's second law in the inertial frame and then transfo
         \end{align*}
         $$
 
+<a id="newton_euler_equations"></a>
 You should have obtained:
 
 $$
@@ -1003,7 +1004,7 @@ Notice that these equations are identical to those obtained using the scalar not
 
 ## Linearization
 
-The system obtained so far is nonlinear. To linearize it, we assume that the states remain close to their equilibrium values. Under this assumption, the trigonometric functions can be approximated (e.g., $\cos{\color{var(--c1)}\phi}\approx1$ and $\sin{\color{var(--c1)}\phi}\approx{\color{var(--c1)}\phi}$)(1), and products of state variables can be neglected (e.g., ${\color{var(--c3)}v_z\,'\omega_x\,'}\approx0$).
+The system obtained so far is nonlinear. To linearize it, we assume that the states remain close to their equilibrium values. Under this assumption, the trigonometric functions can be approximated (e.g., $\cos{\color{var(--c1)}\phi}\approx1$ and $\sin{\color{var(--c1)}\phi}\approx{\color{var(--c1)}\phi}$)(1), and products of two state variables can be neglected (e.g., ${\color{var(--c3)}v_z\,'\omega_x\,'}\approx0$).
 {.annotate}
 
 1. These approximations are valid only for angles smaller than approximately $10^\circ$ (expressed in radians).

@@ -62,9 +62,9 @@ $$
 
 ---
 
-## Cinemática
+## Kinematics
 
-Já deduzimos a matriz de rotação utilizando os ângulos de Euler:
+The rotation matrix based on yaw-pitch-roll Euler-angles was [derived](../fundamentals/reference_frames.md/#exercise_4_6) previously:
 
 $$
 \begin{bmatrix}
@@ -87,13 +87,13 @@ $$
 \end{bmatrix}
 $$
 
-### Translação
+### Translation
 
-!!! question "Exercício 9.1"
+!!! question "Exercise 9.1"
 
-    Determine ${\color{var(--c1)}\dot{\vec{r}}}$ em função dos estados do sistema.
+    Express ${\color{var(--c1)}\dot{\vec{r}}}$ in terms of the system states.
     
-    ??? info "Resposta"
+    ??? info "Solution"
 
         $$
         \begin{align*}
@@ -129,18 +129,18 @@ $$
         $$
 
 
-### Rotação
+### Rotation
 
-!!! question "Exercício 9.2"
+!!! question "Exercise 9.2"
 
-    Determine ${\color{var(--c1)}\dot{\vec{\delta}}}$ em função dos estados do sistema.
-    
-    ??? info "Resposta"
+    Express ${\color{var(--c1)}\dot{\vec{\delta}}}$ in terms of the system states.
 
-        Suponhamos que o referencial móvel esteja em movimento rotacional em torno da origem, cujo vetor velocidade angular ${\color{var(--c3)}\vec{\omega}\,'}$ é dado por:
-        
+    ??? info "Solution"
+
+        Consider a body-fixed frame rotating about the origin with angular velocity vector ${\color{var(--c3)}\vec{\omega}\,'}$ given by:
+
         $$
-        {\color{var(--c3)}\vec{\omega}\,'} = 
+        {\color{var(--c3)}\vec{\omega}\,'} =
         \begin{bmatrix}
             {\color{var(--c3)}\omega_x\,'} \\
             {\color{var(--c3)}\omega_y\,'} \\
@@ -148,31 +148,31 @@ $$
         \end{bmatrix}
         $$
 
-        Como o vetor ${\color{var(--c1)}\vec{r}}$ é fixo no sistema de coordenadas inercial, sua derivada temporal, vista pelo sistema inercial, é nula:
-        
+        Since the vector ${\color{var(--c1)}\vec{r}}$ is fixed in the inertial frame, its time derivative, as observed from the inertial frame, is zero:
+
         $$
-            {\color{var(--c1)}\dot{\vec{r}}} = \vec{0}
+        {\color{var(--c1)}\dot{\vec{r}}} = \vec{0}
         $$
 
-        Por outro lado, sua derivada temporal, vista pelo sistema fixo ao corpo, depende do vetor velocidade angular do sistema fixo ao corpo(1):
+        On the other hand, its time derivative, as observed from the body-fixed frame, depends on the angular velocity of the body-fixed frame(1):
         {.annotate}
 
-        1. O sinal negativo aparece porque, se o sistema de coordenadas do corpo gira em uma direção, o vetor será visto pelo sistema fixo ao corpo como girando na direção oposta.
-                
+        1. The negative sign appears because, if the body-fixed frame rotates in one direction, the vector appears to rotate in the opposite direction when observed from the body-fixed frame.
+
         $$
         {\color{var(--c3)}\dot{\vec{r}}\,'} = -{\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{r}\,'}
         $$
-    
-        Outra forma de representar essa equação é:
-        
+
+        This equation can also be written as:
+
         $$
         {\color{var(--c3)}\dot{\vec{r}}\,'} = -{\color{var(--c3)}\tilde{\omega}\,'}{\color{var(--c3)}\vec{r}\,'}
         $$
 
-        Onde $\tilde{\omega},'$ é a velocidade angular representada como uma matriz antissimétrica correspondente ao seu produto vetorial:
-        
+        where $\tilde{\omega}\,'$ is the skew-symmetric matrix associated with the cross product by the angular velocity:
+
         $$
-        {\color{var(--c3)}\tilde{\omega}\,'} = {\color{var(--c3)}\vec{\omega}\,'} \times =
+        {\color{var(--c3)}\tilde{\omega}\,'} = {\color{var(--c3)}\vec{\omega}\,'}\times =
         \begin{bmatrix}
             0 & -{\color{var(--c3)}\omega_z\,'} & {\color{var(--c3)}\omega_y\,'} \\
             {\color{var(--c3)}\omega_z\,'} & 0 & -{\color{var(--c3)}\omega_x\,'} \\
@@ -180,35 +180,35 @@ $$
         \end{bmatrix}
         $$
 
-        Diferenciando a equação anterior e utilizando essa propriedade, obtém-se:
-        
+        Differentiating the coordinate transformation yields:
+
         \begin{align}
-            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \frac{d}{dt} \left( {\color{var(--c3)}\vec{r}\,'} \right) \nonumber \\
-            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \frac{d}{dt} \left( R {\color{var(--c1)}\vec{r}} \right) \nonumber \\ 
-            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \dot{R}{\color{var(--c1)}\vec{r}} + R \cancelto{\vec{0}}{{\color{var(--c1)}\dot{\vec{r}}}} \nonumber \\ 
-            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \dot{R} \left(R^T {\color{var(--c3)}\vec{r}\,'}\right) \nonumber \\ 
-            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \dot{R}R^T {\color{var(--c3)}\vec{r}\,'}
+            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \frac{d}{dt}\left({\color{var(--c3)}\vec{r}\,'}\right) \nonumber \\
+            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \frac{d}{dt}\left(R{\color{var(--c1)}\vec{r}}\right) \nonumber \\
+            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \dot{R}{\color{var(--c1)}\vec{r}} + R\cancelto{\vec{0}}{{\color{var(--c1)}\dot{\vec{r}}}} \nonumber \\
+            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \dot{R}\left(R^T{\color{var(--c3)}\vec{r}\,'}\right) \nonumber \\
+            {\color{var(--c3)}\dot{\vec{r}}\,'} &= \dot{R}R^T{\color{var(--c3)}\vec{r}\,'}
         \end{align}
 
-        Comparando essa equação com a anterior, é possível obter a matriz antissimétrica da velocidade angular em termos da matriz de rotação e sua derivada temporal:
-        
-        $$ 
-        {\color{var(--c3)}\tilde{\omega}\,'} = -\dot{R}R^T 
+        Comparing this result with the previous equation, we obtain the skew-symmetric matrix associated with the angular velocity in terms of the rotation matrix and its time derivative:
+
         $$
-        
-        Os ângulos de Euler não são um vetor e não podem ser facilmente isolados. Entretanto, substituindo $R$ e $\dot{R}$, as velocidades angulares podem ser escritas em função dos ângulos de Euler e de suas derivadas temporais em notação matricial:
-        
+        {\color{var(--c3)}\tilde{\omega}\,'} = -\dot{R}R^T
+        $$
+
+        Euler angles do not form a vector and therefore cannot be isolated directly. However, by substituting $R$ and $\dot{R}$, the angular velocities can be expressed in terms of the Euler angles and their time derivatives in matrix form:
+
         $$
         \begin{bmatrix}
             {\color{var(--c3)}\omega_x\,'} \\
             {\color{var(--c3)}\omega_y\,'} \\
             {\color{var(--c3)}\omega_z\,'}
         \end{bmatrix}
-        = 
+        =
         \begin{bmatrix}
-            1 & 0 & - \sin{\color{var(--c1)}\theta} \\
+            1 & 0 & -\sin{\color{var(--c1)}\theta} \\
             0 & \cos{\color{var(--c1)}\phi} & \sin{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\theta} \\
-            0 & -\sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\theta} \\
+            0 & -\sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\theta}
         \end{bmatrix}
         \begin{bmatrix}
             {\color{var(--c1)}\dot{\phi}} \\
@@ -216,20 +216,20 @@ $$
             {\color{var(--c1)}\dot{\psi}}
         \end{bmatrix}
         $$
-        
-        Invertendo a matriz acima, as derivadas temporais dos ângulos de Euler podem ser escritas em função deles próprios e das velocidades angulares:
-        
+
+        By inverting the matrix above, the time derivatives of the Euler angles can be expressed in terms of the Euler angles themselves and the angular velocities:
+
         $$
         \begin{bmatrix}
             {\color{var(--c1)}\dot{\phi}} \\
             {\color{var(--c1)}\dot{\theta}} \\
             {\color{var(--c1)}\dot{\psi}}
         \end{bmatrix}
-        = 
-        \begin{bmatrix} 
+        =
+        \begin{bmatrix}
             1 & \sin{\color{var(--c1)}\phi}\tan{\color{var(--c1)}\theta} & \cos{\color{var(--c1)}\phi}\tan{\color{var(--c1)}\theta} \\
-            0 & \cos{\color{var(--c1)}\phi} & - \sin{\color{var(--c1)}\phi}\\
-            0 & \sin{\color{var(--c1)}\phi}\sec{\color{var(--c1)}\theta} & \cos{\color{var(--c1)}\phi}\sec{\color{var(--c1)}\theta} 
+            0 & \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi} \\
+            0 & \sin{\color{var(--c1)}\phi}\sec{\color{var(--c1)}\theta} & \cos{\color{var(--c1)}\phi}\sec{\color{var(--c1)}\theta}
         \end{bmatrix}
         \begin{bmatrix}
             {\color{var(--c3)}\omega_x\,'} \\
@@ -238,9 +238,9 @@ $$
         \end{bmatrix}
         $$
 
-        Esta última equação é a equação cinemática de um corpo rígido utilizando ângulos de Euler com a sequência de rotações $z-y-z$. 
+        This equation is the kinematic equation of a rigid body expressed using yaw–pitch–roll Euler angles.
 
-        Como temos alguns termos $\tan{\color{var(--c1)}\theta}$ e $\sec{\color{var(--c1)}\theta}$, podemos colocar o $\frac{1}{\cos{\color{var(--c1)}\theta}}$ em evidência:
+        Since the matrix contains the terms $\tan{\color{var(--c1)}\theta}$ and $\sec{\color{var(--c1)}\theta}$, we can factor out $\frac{1}{\cos{\color{var(--c1)}\theta}}$:
 
         $$
         \begin{bmatrix}
@@ -248,11 +248,11 @@ $$
             {\color{var(--c1)}\dot{\theta}} \\
             {\color{var(--c1)}\dot{\psi}}
         \end{bmatrix}
-        = 
+        =
         \frac{1}{\cos{\color{var(--c1)}\theta}}
-        \begin{bmatrix} 
+        \begin{bmatrix}
             \cos{\color{var(--c1)}\theta} & \sin{\color{var(--c1)}\phi}\sin{\color{var(--c1)}\theta} & \cos{\color{var(--c1)}\phi}\sin{\color{var(--c1)}\theta} \\
-            0 & \cos{\color{var(--c1)}\phi} \cos{\color{var(--c1)}\theta} & - \sin{\color{var(--c1)}\phi} \cos{\color{var(--c1)}\theta} \\
+            0 & \cos{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\theta} & -\sin{\color{var(--c1)}\phi}\cos{\color{var(--c1)}\theta} \\
             0 & \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
         \end{bmatrix}
         \begin{bmatrix}
@@ -261,14 +261,14 @@ $$
             {\color{var(--c3)}\omega_z\,'}
         \end{bmatrix}
         $$
-        
-        Isso evidencia a singularidade que ocorre quando $\theta = \pm 90^{\circ}$.
+
+        This expression clearly reveals the singularity that occurs when $\theta=\pm90^\circ$, where the denominator $\cos{\color{var(--c1)}\theta}$ becomes zero.
 
 ---
 
-## Cinética
+## Kinetics
 
-Já deduzimos as equações de Newton-Euler:
+The Newton–Euler equations were [derived](2d_model.md/#newton_euler_equations) previously:
         
 $$
 \left\{
@@ -279,9 +279,9 @@ $$
 \right.
 $$
 
-### Translação
+### Translation
 
-O vetor de forças do drone ${\color{var(--c3)}\vec{f}_d\,'}$ é mais fácil de ser escrito no sistema de coordenadas móvel:
+The drone thrust vector ${\color{var(--c3)}\vec{f}_d\,'}$ is most conveniently expressed in the body-fixed frame, whereas the gravity ${\color{var(--c1)}\vec{g}}$ in the inertial frame:
 
 $$
 {\color{var(--c3)}\vec{f_d}\,'} = 
@@ -290,15 +290,22 @@ $$
     0 \\
     {\color{var(--c2)}f_t} 
 \end{bmatrix}
+\qquad
+{\color{var(--c1)}\vec{g}} =
+\begin{bmatrix}
+    0 \\
+    0 \\
+    g
+\end{bmatrix}
 $$
 
-!!! question "Exercício 9.3"
+!!! question "Exercise 9.3"
 
-    Determine ${\color{var(--c3)}\dot{\vec{v}}\,'}$ em função dos estados do sistema.
+    Express ${\color{var(--c3)}\dot{\vec{v}}\,'}$ in terms of the system states.
 
-    Dics: substitua as somatórias de forças $\sum {\color{var(--c3)}\vec{f}\,'}$ na equação de Newton-Euler de translação.
-    
-    ??? info "Resposta"
+    Hint: Substitute the force summation $\sum {\color{var(--c3)}\vec{f}\,'}$ into the translational Newton–Euler equation.
+
+    ??? info "Solution"
 
         $$
         \begin{align*}
@@ -353,26 +360,26 @@ $$
         \end{align*}
         $$
 
-### Rotação
+### Rotation
 
-O vetor de torques do drone ${\color{var(--c3)}\vec{\tau}_d\,'}$ é mais fácil de ser escrito no sistema de coordenadas móvel:
+The drone torque vector ${\color{var(--c3)}\vec{\tau}_d\,'}$ is most conveniently expressed in the body-fixed frame:
 
 $$
 {\color{var(--c3)}\vec{\tau_d}\,'} = 
 \begin{bmatrix}
     {\color{var(--c2)}\tau_x} \\
-    0 \\
-    0
+    {\color{var(--c2)}\tau_y} \\
+    {\color{var(--c2)}\tau_z}
 \end{bmatrix}
 $$
 
-!!! question "Exercício 9.4"
+!!! question "Exercise 9.4"
 
-    Determine ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ em função dos estados do sistema.
+    Express ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ in terms of the system states.
 
-    Dics: substitua as somatórias de torques $\sum {\color{var(--c3)}\vec{\tau}\,'}$ na equação de Newton-Euler de rotação.
-    
-    ??? info "Resposta"
+    Hint: Substitute the torque summation $\sum {\color{var(--c3)}\vec{\tau}\,'}$ into the rotational Newton–Euler equation.
+
+    ??? info "Solution"
 
         $$
         \begin{align*}
@@ -469,9 +476,9 @@ $$
 
 ---
 
-## Linearização
+## Linearization
 
-Se juntarmos as equações cinemática e cinéticas, obtemos a dinâmica completa do sistema:
+By combining the kinematic and kinetic equations, we obtain the complete dynamics of the system:
         
 $$
 \left\{
@@ -492,18 +499,18 @@ $$
 \right.  
 $$
 
-As equações acima são completamente não-lineares, o que, além de ser extremamente complexo, foge do escopo do nosso curso.
+The equations above are fully nonlinear. Besides being considerably more complex, their analysis is beyond the scope of this course.
 
-Para linearizar o sistema, podemos considerar aproximações quando os estados estão bem próximos de suas posições de equilíbrio. Neste caso, funções trigonométricas podem ser aproximadas (ex: $\cos{\color{var(--c1)}\phi} \approx 1$ e $\sin{\color{var(--c1)}\phi} \approx {\color{var(--c1)}\phi}$) (1), assim como o produto entre dois estados (ex: ${\color{var(--c3)}v_z\,' \omega_x\,'} \approx 0$).
+To linearize the system, we assume that the states remain close to their equilibrium values. Under this assumption, trigonometric functions can be approximated (e.g., $\cos{\color{var(--c1)}\phi} \approx 1$ and $\sin{\color{var(--c1)}\phi} \approx {\color{var(--c1)}\phi}$)(1). Likewise, products of two state variables can be neglected (e.g., ${\color{var(--c3)}v_z\,' \omega_x\,'} \approx 0$).
 {.annotate}
 
-1. Essas aproximações valem apenas para ângulos em radianos menores que $10^{\circ}$.
+1. These approximations are valid only for angles (in radians) smaller than approximately $10^\circ$.
 
-!!! question "Exercício 9.5"
+!!! question "Exercise 9.5"
 
-    Determine as equações dinâmicas do sistema linearizado.
+    Derive the dynamic equations of the linearized system.
     
-    ??? info "Resposta"
+    ??? info "Solution"
         $$
         \left\{
         \begin{array}{l}
@@ -557,7 +564,7 @@ Para linearizar o sistema, podemos considerar aproximações quando os estados e
         \right.    
         $$
 
-Você deve ter chegado a:
+You should have obtained:
 
 $$
 \left\{
@@ -578,23 +585,24 @@ $$
 \right.    
 $$
 
-Essas equações diferenciais podem ser representadas de forma mais simples em um diagrama de blocos:
+These differential equations can be represented more intuitively using the following block diagram:
 
 ![](images/3d_plant.svg){: width=100% style="display: block; margin: auto;" }
 
-Observe o seguinte:
+Notice the following:
 
-- A força ${\color{var(--c2)}f_t}$ integra duas vezes até a posição ${\color{var(--c1)}z}$ (2ª lei de Newton para translação), atuando de forma desacoplada na dinâmica de posição vertical.
-- O torque ${\color{var(--c2)}\tau_x}$ integra duas vezes até o ângulo ${\color{var(--c1)}\phi}$ (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição ${\color{var(--c1)}y}$(1). Portanto, de ${\color{var(--c2)}\tau_x}$ a ${\color{var(--c1)}y}$ há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. 
+- The force ${\color{var(--c2)}f_t}$ is integrated twice to obtain the vertical position ${\color{var(--c1)}z}$ (Newton's second law for translation), acting independently of the horizontal dynamics.
+
+- The torque ${\color{var(--c2)}\tau_x}$ is integrated twice to obtain the roll angle ${\color{var(--c1)}\phi}$ (Newton's second law for rotation), and integrating twice more yields the lateral position ${\color{var(--c1)}y}$(1). Therefore, the transfer from ${\color{var(--c2)}\tau_x}$ to ${\color{var(--c1)}y}$ contains four integrators in series, resulting from the coupling between the rotational dynamics and the horizontal translational dynamics.
     {.annotate}
 
-    1. O sinal negativo em $- g$ decorre da convenção de eixos adotada (uma rotação positiva em torno de ${\color{var(--c1)}x}$ implica em um deslocamento negativo ao longo de ${\color{var(--c1)}y}$).
+    1. The negative sign in $-g$ results from the adopted axis convention (a positive rotation about the ${\color{var(--c1)}x}$ axis produces a negative displacement along the ${\color{var(--c1)}y}$ axis).
 
-- O torque ${\color{var(--c2)}\tau_y}$ integra duas vezes até o ângulo ${\color{var(--c1)}\theta}$ (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição ${\color{var(--c1)}x}$(1). Portanto, de ${\color{var(--c2)}\tau_y}$ a ${\color{var(--c1)}x}$ há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. 
+- The torque ${\color{var(--c2)}\tau_y}$ is integrated twice to obtain the pitch angle ${\color{var(--c1)}\theta}$ (Newton's second law for rotation), and integrating twice more yields the horizontal position ${\color{var(--c1)}x}$(1). Therefore, the transfer from ${\color{var(--c2)}\tau_y}$ to ${\color{var(--c1)}x}$ contains four integrators in series, resulting from the coupling between the rotational dynamics and the horizontal translational dynamics.
     {.annotate}
 
-    1. O sinal positivo em $g$ decorre da convenção de eixos adotada (uma rotação positiva em torno de ${\color{var(--c1)}y}$ implica em um deslocamento positivo ao longo de ${\color{var(--c1)}x}$).
+    1. The positive sign in $g$ results from the adopted axis convention (a positive rotation about the ${\color{var(--c1)}y}$ axis produces a positive displacement along the ${\color{var(--c1)}x}$ axis).
 
-- O torque ${\color{var(--c2)}\tau_z}$ integra duas vezes até o ângulo ${\color{var(--c1)}\psi}$ (2ª lei de Newton para rotação), atuando de forma desacoplada na dinâmica de rotação de guinagem.
+- The torque ${\color{var(--c2)}\tau_z}$ is integrated twice to obtain the yaw angle ${\color{var(--c1)}\psi}$ (Newton's second law for rotation), acting independently of the vertical and horizontal dynamics.
 
 

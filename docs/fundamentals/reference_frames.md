@@ -1,37 +1,37 @@
 ---
-title: Coordinate Systems
+title: Reference Frames
 icon: material/axis-arrow
 ---
 
-# :material-axis-arrow: Coordinate Systems
+# :material-axis-arrow: Reference Frames
 
-In drone control, coordinate systems are essential for describing relative positions and orientations. Common examples include the drone's position relative to the ground, the camera's orientation relative to the drone, and the drone's velocity relative to the surrounding air.
+In drone control, reference frames are essential for describing relative positions and orientations. Common examples include the drone's position relative to the ground, the camera's orientation relative to the drone, and the drone's velocity relative to the surrounding air.
 
-Choosing an appropriate coordinate system greatly simplifies many calculations. For example, aerodynamic forces and torques are most naturally expressed in a moving coordinate system fixed to the drone (the body frame), whereas gravitational acceleration is more conveniently represented in an inertial coordinate system fixed to the Earth (the inertial frame).
+Choosing an appropriate reference frame greatly simplifies many calculations. For example, aerodynamic forces and torques are most naturally expressed in a body-fixed reference frame, whereas gravitational acceleration is more conveniently represented in an inertial reference frame.
 
 ---
 
 ## Rotation Matrices
 
-When working with multiple coordinate systems, we need a mathematical way to describe the orientation of one frame relative to another. This is accomplished using rotation matrices, which provide a compact and consistent way to represent rotations in both two-dimensional (2D) and three-dimensional (3D) space.
+When working with multiple reference frames, we need a mathematical way to describe the orientation of one frame relative to another. This is accomplished using rotation matrices, which provide a compact and consistent way to represent rotations in both two-dimensional (2D) and three-dimensional (3D) space.
 
 ### 2D
 
-To describe a drone's position, we first need to define a reference frame. In general, this is done using an inertial coordinate system ${\color{var(--c1)}yz}$ (1).
+To describe a drone's position, we first define an inertial frame ${\color{var(--c1)}yz}$ (1).
 {.annotate}
 
-1. Fixed to the Earth, which is assumed to neither accelerate nor rotate.
+1. Fixed to the ground, which is assumed to neither accelerate nor rotate.
 
 ![](images/2d_position.svg){: width="600" style="display: block; margin: auto;" }
 
-However, this coordinate system alone is not sufficient to describe the drone's attitude (orientation). We must also introduce a body-fixed coordinate system ${\color{var(--c3)}y'z'}$ (1).
+However, this frame alone is not sufficient to describe the drone's attitude (orientation). We must also introduce a body-fixed frame ${\color{var(--c3)}y'z'}$ (1).
 {.annotate}
 
 1. Fixed to the drone, accelerating and rotating together with it.
 
 ![](images/2d_position_attitude.svg){: width="600" style="display: block; margin: auto;" }
 
-The drone's attitude is defined by the orientation of the body-fixed coordinate system ${\color{var(--c3)}y'z'}$ relative to the inertial coordinate system ${\color{var(--c1)}yz}$. This relationship can be represented mathematically by a $2 \times 2$ matrix called the rotation matrix $R$:
+The drone's attitude is defined by the orientation of the body-fixed frame ${\color{var(--c3)}y'z'}$ relative to the inertial frame ${\color{var(--c1)}yz}$. This relationship can be represented mathematically by a $2 \times 2$ matrix called the rotation matrix $R$:
 
 $$
 {\color{var(--c3)}
@@ -67,7 +67,7 @@ $$
 
 !!! question "Exercise 4.1"
 
-    Consider a body-fixed coordinate system ${\color{var(--c3)}y'z'}$ rotated by an angle $\phi$ with respect to the inertial coordinate system ${\color{var(--c1)}yz}$.
+    Consider a body-fixed frame ${\color{var(--c3)}y'z'}$ rotated by an angle $\phi$ with respect to the inertial frame ${\color{var(--c1)}yz}$.
 
     ![](images/2d_rotation_x.svg){: width="200" style="display: block; margin: auto;" }
 
@@ -111,7 +111,7 @@ $$
 
 ### 3D
 
-As in the two-dimensional case, the drone's attitude in three-dimensional space is defined by the orientation of the body-fixed coordinate system ${\color{var(--c3)}x'y'z'}$ relative to the inertial coordinate system ${\color{var(--c1)}xyz}$.
+As in the two-dimensional case, the drone's attitude in three-dimensional space is defined by the orientation of the body-fixed frame ${\color{var(--c3)}x'y'z'}$ relative to the inertial frame ${\color{var(--c1)}xyz}$.
 
 ![](images/3d_position_attitude.svg){: width="600" style="display: block; margin: auto;" }
 
@@ -159,7 +159,7 @@ r_{31}({\phi},{\theta},{\psi}) & r_{32}({\phi},{\theta},{\psi}) & r_{33}({\phi},
 
 !!! question "Exercise 4.2"
 
-    Consider a body-fixed coordinate system ${\color{var(--c3)}x'y'z'}$ rotated by an angle $\phi$ about the ${\color{var(--c1)}x}$ axis with respect to the inertial coordinate system ${\color{var(--c1)}xyz}$.
+    Consider a body-fixed frame ${\color{var(--c3)}x'y'z'}$ rotated by an angle $\phi$ about the ${\color{var(--c1)}x}$ axis with respect to the inertial frame ${\color{var(--c1)}xyz}$.
 
     ![](images/3d_rotation_x.svg){: width="200" style="display: block; margin: auto;" }
 
@@ -198,7 +198,7 @@ r_{31}({\phi},{\theta},{\psi}) & r_{32}({\phi},{\theta},{\psi}) & r_{33}({\phi},
 
 !!! question "Exercise 4.3"
 
-    Consider a body-fixed coordinate system ${\color{var(--c3)}x'y'z'}$ rotated by an angle $\theta$ about the ${\color{var(--c1)}y}$ axis with respect to the inertial coordinate system ${\color{var(--c1)}xyz}$.
+    Consider a body-fixed frame ${\color{var(--c3)}x'y'z'}$ rotated by an angle $\theta$ about the ${\color{var(--c1)}y}$ axis with respect to the inertial frame ${\color{var(--c1)}xyz}$.
 
     ![](images/3d_rotation_y.svg){: width="200" style="display: block; margin: auto;" }
 
@@ -237,7 +237,7 @@ r_{31}({\phi},{\theta},{\psi}) & r_{32}({\phi},{\theta},{\psi}) & r_{33}({\phi},
 
 !!! question "Exercise 4.4"
 
-    Consider a body-fixed coordinate system ${\color{var(--c3)}x'y'z'}$ rotated by an angle $\psi$ about the ${\color{var(--c1)}z}$ axis with respect to the inertial coordinate system ${\color{var(--c1)}xyz}$.
+    Consider a body-fixed frame ${\color{var(--c3)}x'y'z'}$ rotated by an angle $\psi$ about the ${\color{var(--c1)}z}$ axis with respect to the inertial frame ${\color{var(--c1)}xyz}$.
 
     ![](images/3d_rotation_z.svg){: width="200" style="display: block; margin: auto;" }
 
@@ -272,7 +272,7 @@ r_{31}({\phi},{\theta},{\psi}) & r_{32}({\phi},{\theta},{\psi}) & r_{33}({\phi},
         \end{align*}
         $$
 
-        This confirms the expected orientation of the axes. A full $360^\circ$ rotation about the ${\color{var(--c1)}z}$ axis returns the body-fixed coordinate system ${\color{var(--c3)}x'y'z'}$ to exactly the same orientation as the inertial coordinate system ${\color{var(--c1)}xyz}$. In other words, all three axes coincide once again.
+        This confirms the expected orientation of the axes. A full $360^\circ$ rotation about the ${\color{var(--c1)}z}$ axis returns the body-fixed frame ${\color{var(--c3)}x'y'z'}$ to exactly the same orientation as the inertial frame ${\color{var(--c1)}xyz}$. In other words, all three axes coincide once again.
 
 ### Properties
 
@@ -322,7 +322,7 @@ Rotation matrices satisfy several important properties:
 
 ## Euler Angles
 
-Euler angles are a set of three successive rotations about distinct axes that transform the inertial frame ${\color{var(--c1)}xyz}$ into the body frame ${\color{var(--c3)}x'y'z'}$.
+Euler angles are a set of three successive rotations about distinct axes that transform the inertial frame ${\color{var(--c1)}xyz}$ into the body-fixed frame ${\color{var(--c3)}x'y'z'}$.
 
 ![](images/euler_angles.svg){: width="800" style="display: block; margin: auto;" }
 
@@ -362,9 +362,10 @@ R(\phi,\theta,\psi)=
 }_{R_z(\psi)}
 $$
 
+<a id="exercise_4_6"></a>
 !!! question "Exercise 4.6"
 
-    Determine the overall rotation matrix $R(\phi,\theta,\psi)$ relating the body frame ${\color{var(--c3)}x'y'z'}$ to the inertial frame ${\color{var(--c1)}xyz}$ as a function of the Euler angles $\phi$, $\theta$, and $\psi$.
+    Determine the overall rotation matrix $R(\phi,\theta,\psi)$ relating the body-fixed frame ${\color{var(--c3)}x'y'z'}$ to the inertial frame ${\color{var(--c1)}xyz}$ as a function of the Euler angles $\phi$, $\theta$, and $\psi$.
 
     **Hint:** Use MATLAB's Symbolic Math Toolbox.
 

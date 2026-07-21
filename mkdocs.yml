@@ -1,5 +1,4 @@
 site_name: QuadControl                 # Nome exibido no header e usado em meta tags
-site_url: https://docs.quadcontrol.io       # Ajuda a gerar URLs absolutas (sitemap, feeds, etc.)
 
 plugins:
   - social:

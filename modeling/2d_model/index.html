@@ -536,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fundamentals/coordinate_systems/" class="md-nav__link">
+      <a href="../../fundamentals/reference_frames/" class="md-nav__link">
         
   
   
@@ -545,7 +545,7 @@
   <span class="md-ellipsis">
     
   
-    Coordinate Systems
+    Reference Frames
   
 
     
@@ -1959,7 +1959,7 @@
 <p>We begin by deriving the differential equations that describe the 2D dynamics of a quadcopter. Starting with a simplified two-dimensional model reduces the mathematical complexity and provides a more intuitive understanding of the system. This model serves as an essential first step for visualizing how the inputs affect the outputs.</p>
 <hr />
 <h2 id="introduction">Introduction</h2>
-<p class="annotate">The 2D model has three degrees of freedom (two translational and one rotational). Therefore, we must derive six differential equations (two for each degree of freedom). (1)</p>
+<p class="annotate">The 2D model has three degrees of freedom (two translational and one rotational). Therefore, we must derive six differential equations (two for each degree of freedom)(1).</p>
 <ol>
 <li>For clarity, we will use the following colors and notation:<ul>
 <li><span class="arithmatex">\({\color{var(--c1)} x}\)</span> — States (inertial frame)</li>
@@ -2115,7 +2115,7 @@
 <div class="admonition question">
 <p class="admonition-title">Exercise 8.3</p>
 <p>Derive the kinematic equations, that is, the time derivatives of the positions (<span class="arithmatex">\({\color{var(--c1)}y}\)</span>, <span class="arithmatex">\({\color{var(--c1)}z}\)</span>, and <span class="arithmatex">\({\color{var(--c1)}\phi}\)</span>) in terms of the system states.</p>
-<p>Hint: Recall the rotation matrices <a href="../../fundamentals/coordinate_systems/">introduced</a> before and note that the <span class="arithmatex">\({\color{var(--c1)}x}\)</span> and <span class="arithmatex">\({\color{var(--c3)}x\,'}\)</span> axes are aligned.</p>
+<p>Hint: Recall the rotation matrices <a href="../fundamentals/coordinate_systems.md">introduced</a> before and note that the <span class="arithmatex">\({\color{var(--c1)}x}\)</span> and <span class="arithmatex">\({\color{var(--c3)}x\,'}\)</span> axes are aligned.</p>
 <details class="info">
 <summary>a) Express <span class="arithmatex">\({\color{var(--c1)}\dot{y}}\)</span> in terms of the system states.</summary>
 <div class="arithmatex">\[
@@ -2675,7 +2675,8 @@ R\dot{R}^{T}
 \]</div>
 </details>
 </div>
-<p>You should have obtained:</p>
+<p><a id="newton_euler_equations"></a>
+You should have obtained:</p>
 <div class="arithmatex">\[
 \left\{
 \begin{array}{l}
@@ -2911,7 +2912,7 @@ g\cos{\color{var(--c1)}\phi}
 <p>Notice that these equations are identical to those obtained using the scalar notation.</p>
 <hr />
 <h2 id="linearization">Linearization</h2>
-<p class="annotate">The system obtained so far is nonlinear. To linearize it, we assume that the states remain close to their equilibrium values. Under this assumption, the trigonometric functions can be approximated (e.g., <span class="arithmatex">\(\cos{\color{var(--c1)}\phi}\approx1\)</span> and <span class="arithmatex">\(\sin{\color{var(--c1)}\phi}\approx{\color{var(--c1)}\phi}\)</span>)(1), and products of state variables can be neglected (e.g., <span class="arithmatex">\({\color{var(--c3)}v_z\,'\omega_x\,'}\approx0\)</span>).</p>
+<p class="annotate">The system obtained so far is nonlinear. To linearize it, we assume that the states remain close to their equilibrium values. Under this assumption, the trigonometric functions can be approximated (e.g., <span class="arithmatex">\(\cos{\color{var(--c1)}\phi}\approx1\)</span> and <span class="arithmatex">\(\sin{\color{var(--c1)}\phi}\approx{\color{var(--c1)}\phi}\)</span>)(1), and products of two state variables can be neglected (e.g., <span class="arithmatex">\({\color{var(--c3)}v_z\,'\omega_x\,'}\approx0\)</span>).</p>
 <ol>
 <li>These approximations are valid only for angles smaller than approximately <span class="arithmatex">\(10^\circ\)</span> (expressed in radians).</li>
 </ol>

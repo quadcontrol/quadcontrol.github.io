@@ -23,7 +23,7 @@
     
     
       
-        <title>Coordinate Systems - QuadControl</title>
+        <title>Reference Frames - QuadControl</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#coordinate-systems" class="md-skip">
+        <a href="#reference-frames" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Coordinate Systems
+              Reference Frames
             
           </span>
         </div>
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Coordinate Systems
+    Reference Frames
   
 
     
@@ -576,7 +576,7 @@
   <span class="md-ellipsis">
     
   
-    Coordinate Systems
+    Reference Frames
   
 
     
@@ -1911,24 +1911,24 @@
 
 
 
-<h1 id="coordinate-systems"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg></span> Coordinate Systems</h1>
-<p>In drone control, coordinate systems are essential for describing relative positions and orientations. Common examples include the drone's position relative to the ground, the camera's orientation relative to the drone, and the drone's velocity relative to the surrounding air.</p>
-<p>Choosing an appropriate coordinate system greatly simplifies many calculations. For example, aerodynamic forces and torques are most naturally expressed in a moving coordinate system fixed to the drone (the body frame), whereas gravitational acceleration is more conveniently represented in an inertial coordinate system fixed to the Earth (the inertial frame).</p>
+<h1 id="reference-frames"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 2 4 4h-3v7.85l6.53 3.76L21 15.03l1.5 5.47-5.5 1.46 1.53-2.61L12 15.58l-6.53 3.77L7 21.96 1.5 20.5 3 15.03l1.47 2.58L11 13.85V6H8z"/></svg></span> Reference Frames</h1>
+<p>In drone control, reference frames are essential for describing relative positions and orientations. Common examples include the drone's position relative to the ground, the camera's orientation relative to the drone, and the drone's velocity relative to the surrounding air.</p>
+<p>Choosing an appropriate reference frame greatly simplifies many calculations. For example, aerodynamic forces and torques are most naturally expressed in a body-fixed reference frame, whereas gravitational acceleration is more conveniently represented in an inertial reference frame.</p>
 <hr />
 <h2 id="rotation-matrices">Rotation Matrices</h2>
-<p>When working with multiple coordinate systems, we need a mathematical way to describe the orientation of one frame relative to another. This is accomplished using rotation matrices, which provide a compact and consistent way to represent rotations in both two-dimensional (2D) and three-dimensional (3D) space.</p>
+<p>When working with multiple reference frames, we need a mathematical way to describe the orientation of one frame relative to another. This is accomplished using rotation matrices, which provide a compact and consistent way to represent rotations in both two-dimensional (2D) and three-dimensional (3D) space.</p>
 <h3 id="2d">2D</h3>
-<p class="annotate">To describe a drone's position, we first need to define a reference frame. In general, this is done using an inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}yz}\)</span> (1).</p>
+<p class="annotate">To describe a drone's position, we first define an inertial frame <span class="arithmatex">\({\color{var(--c1)}yz}\)</span> (1).</p>
 <ol>
-<li>Fixed to the Earth, which is assumed to neither accelerate nor rotate.</li>
+<li>Fixed to the ground, which is assumed to neither accelerate nor rotate.</li>
 </ol>
 <p><img alt="" src="../images/2d_position.svg" style="display: block; margin: auto;" width="600" /></p>
-<p class="annotate">However, this coordinate system alone is not sufficient to describe the drone's attitude (orientation). We must also introduce a body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}y'z'}\)</span> (1).</p>
+<p class="annotate">However, this frame alone is not sufficient to describe the drone's attitude (orientation). We must also introduce a body-fixed frame <span class="arithmatex">\({\color{var(--c3)}y'z'}\)</span> (1).</p>
 <ol>
 <li>Fixed to the drone, accelerating and rotating together with it.</li>
 </ol>
 <p><img alt="" src="../images/2d_position_attitude.svg" style="display: block; margin: auto;" width="600" /></p>
-<p>The drone's attitude is defined by the orientation of the body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}y'z'}\)</span> relative to the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}yz}\)</span>. This relationship can be represented mathematically by a <span class="arithmatex">\(2 \times 2\)</span> matrix called the rotation matrix <span class="arithmatex">\(R\)</span>:</p>
+<p>The drone's attitude is defined by the orientation of the body-fixed frame <span class="arithmatex">\({\color{var(--c3)}y'z'}\)</span> relative to the inertial frame <span class="arithmatex">\({\color{var(--c1)}yz}\)</span>. This relationship can be represented mathematically by a <span class="arithmatex">\(2 \times 2\)</span> matrix called the rotation matrix <span class="arithmatex">\(R\)</span>:</p>
 <div class="arithmatex">\[
 {\color{var(--c3)}
 \begin{bmatrix}
@@ -1960,7 +1960,7 @@ r_{21}(\phi) &amp; r_{22}(\phi)
 \]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercise 4.1</p>
-<p>Consider a body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\phi\)</span> with respect to the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}yz}\)</span>.</p>
+<p>Consider a body-fixed frame <span class="arithmatex">\({\color{var(--c3)}y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\phi\)</span> with respect to the inertial frame <span class="arithmatex">\({\color{var(--c1)}yz}\)</span>.</p>
 <p><img alt="" src="../images/2d_rotation_x.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
 <summary>a) Write the rotation matrix as a function of the angle <span class="arithmatex">\(\phi\)</span>.</summary>
@@ -2001,7 +2001,7 @@ R\left(\frac{\pi}{2}\right)
 </details>
 </div>
 <h3 id="3d">3D</h3>
-<p>As in the two-dimensional case, the drone's attitude in three-dimensional space is defined by the orientation of the body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> relative to the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
+<p>As in the two-dimensional case, the drone's attitude in three-dimensional space is defined by the orientation of the body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> relative to the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
 <p><img alt="" src="../images/3d_position_attitude.svg" style="display: block; margin: auto;" width="600" /></p>
 <p>Since we are now working in three dimensions, the rotation matrix <span class="arithmatex">\(R\)</span> becomes a <span class="arithmatex">\(3 \times 3\)</span> matrix:</p>
 <div class="arithmatex">\[
@@ -2043,7 +2043,7 @@ r_{31}({\phi},{\theta},{\psi}) &amp; r_{32}({\phi},{\theta},{\psi}) &amp; r_{33}
 \end{equation*}\]</div>
 <div class="admonition question">
 <p class="admonition-title">Exercise 4.2</p>
-<p>Consider a body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\phi\)</span> about the <span class="arithmatex">\({\color{var(--c1)}x}\)</span> axis with respect to the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
+<p>Consider a body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\phi\)</span> about the <span class="arithmatex">\({\color{var(--c1)}x}\)</span> axis with respect to the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
 <p><img alt="" src="../images/3d_rotation_x.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
 <summary>a) Write the rotation matrix as a function of the angle <span class="arithmatex">\(\phi\)</span>.</summary>
@@ -2080,7 +2080,7 @@ R_x(\phi)=
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercise 4.3</p>
-<p>Consider a body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\theta\)</span> about the <span class="arithmatex">\({\color{var(--c1)}y}\)</span> axis with respect to the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
+<p>Consider a body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\theta\)</span> about the <span class="arithmatex">\({\color{var(--c1)}y}\)</span> axis with respect to the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
 <p><img alt="" src="../images/3d_rotation_y.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
 <summary>a) Write the rotation matrix as a function of the angle <span class="arithmatex">\(\theta\)</span>.</summary>
@@ -2117,7 +2117,7 @@ R_y(\theta)=
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercise 4.4</p>
-<p>Consider a body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\psi\)</span> about the <span class="arithmatex">\({\color{var(--c1)}z}\)</span> axis with respect to the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
+<p>Consider a body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> rotated by an angle <span class="arithmatex">\(\psi\)</span> about the <span class="arithmatex">\({\color{var(--c1)}z}\)</span> axis with respect to the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>.</p>
 <p><img alt="" src="../images/3d_rotation_z.svg" style="display: block; margin: auto;" width="200" /></p>
 <details class="info">
 <summary>a) Write the rotation matrix as a function of the angle <span class="arithmatex">\(\psi\)</span>.</summary>
@@ -2149,7 +2149,7 @@ R_z(\psi)=
     \end{bmatrix}
 \end{align*}
 \]</div>
-<p>This confirms the expected orientation of the axes. A full <span class="arithmatex">\(360^\circ\)</span> rotation about the <span class="arithmatex">\({\color{var(--c1)}z}\)</span> axis returns the body-fixed coordinate system <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> to exactly the same orientation as the inertial coordinate system <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>. In other words, all three axes coincide once again.</p>
+<p>This confirms the expected orientation of the axes. A full <span class="arithmatex">\(360^\circ\)</span> rotation about the <span class="arithmatex">\({\color{var(--c1)}z}\)</span> axis returns the body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> to exactly the same orientation as the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span>. In other words, all three axes coincide once again.</p>
 </details>
 </div>
 <h3 id="properties">Properties</h3>
@@ -2195,7 +2195,7 @@ R^T
 </div>
 <hr />
 <h2 id="euler-angles">Euler Angles</h2>
-<p>Euler angles are a set of three successive rotations about distinct axes that transform the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span> into the body frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span>.</p>
+<p>Euler angles are a set of three successive rotations about distinct axes that transform the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span> into the body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span>.</p>
 <p><img alt="" src="../images/euler_angles.svg" style="display: block; margin: auto;" width="800" /></p>
 <p>In this course, we will use what is called the yaw-pitch-roll sequence:</p>
 <ul>
@@ -2231,9 +2231,10 @@ R(\phi,\theta,\psi)=
 \end{bmatrix}
 }_{R_z(\psi)}
 \]</div>
+<p><a id="exercise_4_6"></a></p>
 <div class="admonition question">
 <p class="admonition-title">Exercise 4.6</p>
-<p>Determine the overall rotation matrix <span class="arithmatex">\(R(\phi,\theta,\psi)\)</span> relating the body frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> to the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span> as a function of the Euler angles <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span>, and <span class="arithmatex">\(\psi\)</span>.</p>
+<p>Determine the overall rotation matrix <span class="arithmatex">\(R(\phi,\theta,\psi)\)</span> relating the body-fixed frame <span class="arithmatex">\({\color{var(--c3)}x'y'z'}\)</span> to the inertial frame <span class="arithmatex">\({\color{var(--c1)}xyz}\)</span> as a function of the Euler angles <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\theta\)</span>, and <span class="arithmatex">\(\psi\)</span>.</p>
 <p><strong>Hint:</strong> Use MATLAB's Symbolic Math Toolbox.</p>
 <details class="info">
 <summary>Solution</summary>

@@ -536,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fundamentals/coordinate_systems/" class="md-nav__link">
+      <a href="../../fundamentals/reference_frames/" class="md-nav__link">
         
   
   
@@ -545,7 +545,7 @@
   <span class="md-ellipsis">
     
   
-    Coordinate Systems
+    Reference Frames
   
 
     
@@ -2078,163 +2078,6 @@
 <hr />
 <h2 id="results-validation">Results validation</h2>
 <p>Compare your experimentally obtained value with the one previously estimated with a ruler in <a href="../../fundamentals/aerodynamics/#exercise_1_4">Exercise 1.4</a>. The thrust constant <span class="arithmatex">\(k_l\)</span> is expected to be on the order of magnitude of <span class="arithmatex">\(10^{-8}\,\text{N.s}^2\)</span>.</p>
-<!-- ---
-title: Constante de sustentação
-icon: material/alpha-l-box-outline
----
-
-# :material-alpha-l-box-outline: Constante de sustentação
-
-Nesta secção, você irá determinar experimentalmente a constante de sustentação das hélices $k_l$.
-
----
-
-## Fundamentos teóricos
-
-As hélices de um quadricoptero atuam como superfícies aerodinâmicas, acelerando o fluxo de ar através delas. Isso consome energia das baterias e produz forças de sustentação e torques de arrasto no quadricoptero. Já [deduzimos](../basic_concepts/aerodynamics.md) que a força de sustentação de uma hélice $f$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado.
-
-![Thrust Force](images/thrust_force.svg){: width="350" style="display: block; margin: auto;" }
-
-$$
-    \tau = k_l \omega^2
-$$
-
-Onde:
-
-- $k_l$ - Constante de sustentação ($N.s^2$)   
-
----
-
-## Procedimento experimental
-
-Você vai medir a força de de sustentação $f$ das hélices com um suporte(1) que fixa o drone em uma balança através de um imã. 
-{ .annotate }
-
-1. Para prender o quadcoptero no suporte, você precisa encaixá-lo pela lateral e depois prender dois parafusos. 
-
-![Device 1](images/device1.jpeg){: width=60% style="display: block; margin: auto;" }
-
-Sabendo a leitura da balança, é possível determinar a força de sustentação das hélices. Você pode zerar a balança com o quadcoptero apertando o botão `TARE`, assim, qualquer força de sustentação que as hélices produzirem vai gerar uma leitura negativa na balança.
-
-![Device 1 (Readings)](images/device1.jpeg){: width=60% style="display: block; margin: auto;" }
-
-Você deve carregar no drone um programa que ligue os quatro motores com um determinado valor de velocidade angular. Serão levantados dados de peso na balança para 10 valores distintos, e, para cada valor de, você deverá realizar o experimento três vezes e tirar uma média. Para facilitar o experimento, você pode controlar o valor da velocidade angular com os botões `Up` e `Down` do Command Based Flight Control através do CFClient.
-
-![Commando Based Flight Control](images/command_based_flight_control.png){: width=100% style="display: block; margin: auto;" }
-
-Crie um arquivo chamado `thrust_constant.c` dentro da pasta `src/identification` com o seguinte código(1):
-{ .annotate }
-
-1. Não esqueça de atualizar os valores dos coeficientes dos motores $a_2$ e $a_1$ (linhas 8-9) estimados [anteriormente](../identifications/motor_coeficientes.md).
-
-<div class="highlight"><span class="filename">thrust_constant.c</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FreeRTOS.h&quot;</span><span class="c1">      // FreeRTOS core definitions (needed for task handling and timing)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;task.h&quot;</span><span class="c1">          // FreeRTOS task functions (e.g., vTaskDelay)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;supervisor.h&quot;</span><span class="c1">    // Functions to check flight status (e.g., supervisorIsArmed)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;commander.h&quot;</span><span class="c1">     // Access to commanded setpoints (e.g., commanderGetSetpoint)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;motors.h&quot;</span><span class="c1">        // Low-level motor control interface (e.g., motorsSetRatio)</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;debug.h&quot;</span><span class="c1">         // Debug printing functions (e.g., DEBUG_PRINT)</span>
-
-<span class="c1">// Motor coefficients of the quadratic model: PWM = a_2 * omega^2 + a_1 * omega</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-
-<span class="c1">// Global variables to store the desired setpoint, the current state (not used here), </span>
-<span class="c1">// the computed PWM value, and the desired angular velocity (omega)</span>
-<span class="n">setpoint_t</span><span class="w"> </span><span class="n">setpoint</span><span class="p">;</span>
-<span class="n">state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">pwm</span><span class="p">;</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
-
-<span class="c1">// Main application</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">appMain</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Infinite loop (runs forever)</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Check if the drone is armed (i.e., ready to fly)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">supervisorIsArmed</span><span class="p">())</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// Fetch the latest setpoint from the commander and also fetch the current estimated state (not used here)</span>
-<span class="w">            </span><span class="n">commanderGetSetpoint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">setpoint</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
-
-<span class="w">            </span><span class="c1">// Compute an angular velocity value proportional to the commanded altitude (Z axis position)</span>
-<span class="w">            </span><span class="c1">// The altitude command increases in 0.5 m steps, and we want the angular velocity to increase </span>
-<span class="w">            </span><span class="c1">// by 200 rad/s for each step. Therefore, we multiply Z by 400.0 so that: 0.5 m → 200 rad/s</span>
-<span class="w">            </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">setpoint</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">400.0f</span><span class="p">;</span>
-
-<span class="w">            </span><span class="c1">// Print the computed omega value to the debug console (rounded to nearest integer)</span>
-<span class="w">            </span><span class="n">DEBUG_PRINT</span><span class="p">(</span><span class="s">&quot;Omega (rad/s): %.0f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">omega</span><span class="p">);</span>
-
-<span class="w">            </span><span class="c1">// Convert angular velocity to PWM using the motor model: PWM = a_2 * omega^2 + a_1 * omega</span>
-<span class="w">            </span><span class="n">pwm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a_2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a_1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// If not armed, stop the motors (set PWM to zero)</span>
-<span class="w">            </span><span class="n">pwm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="c1">// Send the PWM signal to all four motors (M1–M4), scaling it to match the expected range [0, UINT16_MAX]</span>
-<span class="w">        </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M1</span><span class="p">,</span><span class="w"> </span><span class="n">pwm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
-<span class="w">        </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M2</span><span class="p">,</span><span class="w"> </span><span class="n">pwm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
-<span class="w">        </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M3</span><span class="p">,</span><span class="w"> </span><span class="n">pwm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
-<span class="w">        </span><span class="n">motorsSetRatio</span><span class="p">(</span><span class="n">MOTOR_M4</span><span class="p">,</span><span class="w"> </span><span class="n">pwm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Wait for 100 milliseconds before running the next iteration (10 Hz control loop)</span>
-<span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-
-As etapas para coletar os dados são as seguintes:
-
-1. Garanta que a bateria do drone está carregada 
-2. Prenda o drone no dispositivo e zere a balança presionando o botão `T`
-3. Arme o drone apertando o botão `Arm` no CFClient
-4. Ligue o motor com um valor específico de velocidade angular $\omega$ com o Command Based Flight Control do CFClient
-5. Anote o número que aparece na tela
-6. Repita as etapas 4-5 para outros valores de sinal PWM
-
-Após o experimento, você deverá coletar dados para preencher a tabela abaixo.
-
-| $\omega \, (rad/s)$ | $W_1 \, (g)$ | $W_2 \, (g)$ | $W_3 \, (g)$ |
-|-------|----------|----------|----------|
-| $600$ |          |          |          |
-| $800$ |          |          |          |
-| $1200$ |          |          |          |
-| $1400$ |          |          |          |
-| $1600$ |          |          |          |
-| $1800$ |          |          |          |
-| $2000$ |          |          |          |
-| $2200$ |          |          |          |
-| $2400$ |          |          |          |
-
----
-
-## Análise de dados
-
-Utilizando os dados coletados, você deverá ajustar uma curva que correlacione a velocidade angular $\omega$ com a força de sustentação $f$ da hélice (note que você precisa converter a a leitura da balança de $g$ para $N$ e dividir por 4, dado que estamos interessados na força de uma única hélice).
-
-![Lift Force](images/lift_force_graph.svg){: width=100% style="display: block; margin: auto;" }
-
-
-Você já sabe que a força de sustentação de uma hélice $f$ é proporcional à velocidade angular da hélice $\omega$ ao quadrado:
-
-$$
-    f = k_l \omega^2
-$$
-
-Ou seja, o tipo de função mais adequado para realizar esse ajuste de curva é uma função polinomial de 2º grau cujos coeficientes de ordem zero e um são nulos. 
-
-Determine o valor de $k_l$ fazendo esse ajuste de curva (dica: utilize o Curve Fitting Toolbox do MATLAB). Anote o valor obtido em algum lugar pois ele será utilizado em breve.
-
----
-
-## Validação dos resultados
-
-Compare o resultado obtido com o [estimado anteriormente](../basic_concepts/aerodynamics.md). É esperado que a constante de sustentação $k_l$ seja da ordem de grandeza de $10^{-8}N.s^2$.  -->
 
 
 

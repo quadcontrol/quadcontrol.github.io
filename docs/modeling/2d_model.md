@@ -11,7 +11,7 @@ We begin by deriving the differential equations that describe the 2D dynamics of
 
 ## Introduction
 
-The 2D model has three degrees of freedom (two translational and one rotational). Therefore, we must derive six differential equations (two for each degree of freedom). (1)
+The 2D model has three degrees of freedom (two translational and one rotational). Therefore, we must derive six differential equations (two for each degree of freedom)(1).
 {.annotate}
 
 1. For clarity, we will use the following colors and notation:

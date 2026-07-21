@@ -60,13 +60,13 @@ nav:
       - Coordinate Systems: fundamentals/coordinate_systems.md  
   - Identification:
       - identification/index.md
-      - Motor coefficients: identification/motor_coefficients.md  
-      - Thrust constant: identification/thrust_constant.md
-      - Drag constant: identification/drag_constant.md
+      - Motor Coefficients: identification/motor_coefficients.md  
+      - Thrust Constant: identification/thrust_constant.md
+      - Drag Constant: identification/drag_constant.md
   - Modeling:
       - modeling/index.md
-      - 2D model: modeling/2d_model.md
-      - 3D model: modeling/3d_model.md
+      - 2D Model: modeling/2d_model.md
+      - 3D Model: modeling/3d_model.md
   - Control:
       - control/index.md
       - Architecture: control/architecture.md

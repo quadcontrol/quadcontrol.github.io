@@ -3,21 +3,28 @@ title: Modelo 3D
 icon: material/video-3d
 ---
 
-# :material-video-3d: Modelo 3D
+# :material-video-3d: 3D Model
 
-Agora, vamos deduzir as equações diferenciais que descrevem a dinâmica 3D de um quadricóptero. Neste modelo completo, o drone pode se mover e girar livremente no espaço, o que traz toda a riqueza — e também a dificuldade — do problema. Para representá-lo, será necessário recorrer à álgebra vetorial e às matrizes de rotação, que permitem descrever posições, velocidades e orientações em três dimensões.
+We now derive the differential equations that describe the three-dimensional dynamics of a quadcopter. In this complete model, the drone can translate and rotate freely in space, capturing both the richness and the complexity of the problem. Describing this motion requires vector algebra and rotation matrices, which provide a convenient framework for representing positions, velocities, and orientations in three dimensions.
 
 ---
 
-## Introdução
+## Introduction
 
-A dinâmica 3D possui 6 graus de liberdade (3 de translação e 3 de rotação) e, portanto, devemos obter 12 equações diferenciais (2 para cada grau de liberdade).
+The 3D model has six degrees of freedom (three translational and three rotational). Therefore, we must derive twelve differential equations (two for each degree of freedom)(1).
+{.annotate}
+
+1. For clarity, we will use the following colors and notation:
+    - ${\color{var(--c1)} x}$ — States (inertial frame)
+    - ${\color{var(--c3)} x\,'}$ — States (body-fixed frame)
+    - ${\color{var(--c2)} u}$ — Inputs
+    - $m$ — Constants
 
 ![](images/3d_drone.svg){: width="800" style="display: block; margin: auto;" }
 
-É muito mais fácil trabalhar com a notação vetorial e aplicar as equações de Newton-Euler 2 vezes (uma para translação e outra para rotação) do que 6 vezes com a notação escalar (uma para cada grau de liberdade).
+Using vector notation is much simpler than using scalar notation, since the Newton–Euler equations need to be applied only twice, once for translation and once for rotation, instead of six times, once for each degree of freedom.
 
-As posições e ângulos serão descritos no sistema de coordenadas inercial, já as velocidades lineares e angulares no sistema de coordenadas móvel. Dessa forma, os vetores de estados do nosso sistema serão ${\color{var(--c1)}\vec{r}}$, ${\color{var(--c1)}\vec{\delta}}$, ${\color{var(--c3)}{\vec{v}}\,'}$ e ${\color{var(--c3)}{\vec{\omega}}\,'}$, onde:
+The positions and Euler angles will be expressed in the inertial frame, while the linear and angular velocities will be expressed in the body-fixed frame. Therefore, the system state vectors are ${\color{var(--c1)}\vec{r}}$, ${\color{var(--c1)}\vec{\delta}}$, ${\color{var(--c3)}\vec{v}\,'}$, and ${\color{var(--c3)}\vec{\omega}\,'}$, where:
 
 $$
 {\color{var(--c1)}\vec{r}}
@@ -25,7 +32,7 @@ $$
 \begin{bmatrix}
     {\color{var(--c1)}x} \\
     {\color{var(--c1)}y} \\
-    {\color{var(--c1)}z} \\
+    {\color{var(--c1)}z}
 \end{bmatrix}
 \qquad
 {\color{var(--c1)}\vec{\delta}}
@@ -33,25 +40,24 @@ $$
 \begin{bmatrix}
     {\color{var(--c1)}\phi} \\
     {\color{var(--c1)}\theta} \\
-    {\color{var(--c1)}\psi} \\
+    {\color{var(--c1)}\psi}
 \end{bmatrix}
 \qquad
-{\color{var(--c3)}{\vec{v}}\,'}
+{\color{var(--c3)}\vec{v}\,'}
 =
 \begin{bmatrix}
     {\color{var(--c3)}v_x\,'} \\
     {\color{var(--c3)}v_y\,'} \\
-    {\color{var(--c3)}v_z\,'} \\
+    {\color{var(--c3)}v_z\,'}
 \end{bmatrix}
 \qquad
-{\color{var(--c3)}{\vec{\omega}}\,'}
+{\color{var(--c3)}\vec{\omega}\,'}
 =
 \begin{bmatrix}
     {\color{var(--c3)}\omega_x\,'} \\
     {\color{var(--c3)}\omega_y\,'} \\
-    {\color{var(--c3)}\omega_z\,'} \\
+    {\color{var(--c3)}\omega_z\,'}
 \end{bmatrix}
-\qquad
 $$
 
 ---
@@ -83,7 +89,7 @@ $$
 
 ### Translação
 
-!!! question "Exercício 1"
+!!! question "Exercício 9.1"
 
     Determine ${\color{var(--c1)}\dot{\vec{r}}}$ em função dos estados do sistema.
     
@@ -125,7 +131,7 @@ $$
 
 ### Rotação
 
-!!! question "Exercício 2"
+!!! question "Exercício 9.2"
 
     Determine ${\color{var(--c1)}\dot{\vec{\delta}}}$ em função dos estados do sistema.
     
@@ -286,7 +292,7 @@ $$
 \end{bmatrix}
 $$
 
-!!! question "Exercício 3"
+!!! question "Exercício 9.3"
 
     Determine ${\color{var(--c3)}\dot{\vec{v}}\,'}$ em função dos estados do sistema.
 
@@ -360,7 +366,7 @@ $$
 \end{bmatrix}
 $$
 
-!!! question "Exercício 4"
+!!! question "Exercício 9.4"
 
     Determine ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ em função dos estados do sistema.
 
@@ -493,7 +499,7 @@ Para linearizar o sistema, podemos considerar aproximações quando os estados e
 
 1. Essas aproximações valem apenas para ângulos em radianos menores que $10^{\circ}$.
 
-!!! question "Exercício 5"
+!!! question "Exercício 9.5"
 
     Determine as equações dinâmicas do sistema linearizado.
     

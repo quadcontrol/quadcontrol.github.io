@@ -1,28 +1,28 @@
 ---
-title: Modelo 2D
+title: 2D Model
 icon: material/video-2d
 ---
 
-# :material-video-2d: Modelo 2D
+# :material-video-2d: 2D Model
 
-Inicialmente, vamos deduzir as equações diferenciais que descrevem a dinâmica 2D de um quadricóptero. Partiremos de um caso simplificado em duas dimensões, o que reduz a complexidade matemática e facilita uma compreensão mais intuitiva. Esse modelo funciona como um primeiro passo essencial para visualizar como as entradas influenciam as saídas.
+We begin by deriving the differential equations that describe the 2D dynamics of a quadcopter. Starting with a simplified two-dimensional model reduces the mathematical complexity and provides a more intuitive understanding of the system. This model serves as an essential first step for visualizing how the inputs affect the outputs.
 
 ---
 
-## Introdução
+## Introduction
 
-A dinâmica 2D possui 3 graus de liberdade (2 de translação e 1 de rotação) e, portanto, devemos obter 6 equações diferenciais (2 para cada grau de liberdade)(1).
+The 2D model has three degrees of freedom (two translational and one rotational). Therefore, we must derive six differential equations (two for each degree of freedom). (1)
 {.annotate}
 
-1. Para facilitar o entendimento, utilizaremos as seguintes cores e notações:
-    - ${\color{var(--c1)} x}$ - Estados (sistema de coordenadas inercial)
-    - ${\color{var(--c3)} x\,'}$ - Estados (sistema de coordenadas móvel)
-    - ${\color{var(--c2)} u}$ - Entradas
-    - $m$ - Constantes
+1. For clarity, we will use the following colors and notation:
+    - ${\color{var(--c1)} x}$ — States (inertial frame)
+    - ${\color{var(--c3)} x\,'}$ — States (body-fixed frame)
+    - ${\color{var(--c2)} u}$ — Inputs
+    - $m$ — Constants
 
 ![](images/2d_drone.svg){: width="600" style="display: block; margin: auto;" }
 
-Vamos modelar esse sistema sob quatro perspectivas diferentes, na seguinte ordem:
+We will derive this model from four different perspectives, in the following order:
 
 <style>
   /* Tabela com visual do tema e centralização */
@@ -45,16 +45,16 @@ Vamos modelar esse sistema sob quatro perspectivas diferentes, na seguinte ordem
 <table class="rotacoes">
   <thead>
     <tr>
-      <th>Ordem</th>
-      <th>Notação</th>
-      <th>Posições</th>
-      <th>Velocidades</th>
+      <th>Order</th>
+      <th>Notation</th>
+      <th>Positions</th>
+      <th>Velocities</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>1</td>
-      <td rowspan="2">Escalar</td>
+      <td rowspan="2">Scalar</td>
       <td><span class="arithmatex axis_inertial">\( y \quad z \quad \phi \)</span></td>
       <td><span class="arithmatex axis_inertial">\( v_y \quad v_z \quad \omega_x \)</span></td>
     </tr>
@@ -65,7 +65,7 @@ Vamos modelar esse sistema sob quatro perspectivas diferentes, na seguinte ordem
     </tr>
     <tr>
       <td>3</td>
-      <td rowspan="2">Vetorial</td>
+      <td rowspan="2">Vector</td>
       <td><span class="arithmatex axis_inertial">\( y \quad z \quad \phi \)</span></td>
       <td><span class="arithmatex axis_inertial">\( v_y \quad v_z \quad \omega_x \)</span></td>
     </tr>
@@ -77,14 +77,14 @@ Vamos modelar esse sistema sob quatro perspectivas diferentes, na seguinte ordem
   </tbody>
 </table>
 
-Apesar de ir ficando cada vez mais complicado, quando passarmos para a dinâmica 3D, a quarta (e última) perspectiva acaba sendo a mais simples.
+Although the formulations become progressively more complex, when we extend the model to 3D, the fourth (and final) perspective ultimately becomes the simplest one.
 
 ---
 
-## Notação escalar
+## Scalar notation
 
-A 2ª lei de Newton para translação e rotação, utilizando a notação escalar, é dada por:
-    
+Newton's second law for translation and rotation, written in scalar form, is: 
+
 $$
 \left\{
 \begin{array}{l}
@@ -94,255 +94,292 @@ $$
 \right.
 $$
     
-Ela deverá ser aplicada individualmente para cada grau de liberdade.
+These equations must be applied independently to each degree of freedom.
 
-### Sistema inercial
+### Inertial frame
 
-Inicialmente, a ideia é que tanto as posições como as velocidades sejam descritas no sistema de coordenadas inercial, de modo que os estados do sistema sejam ${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$, ${\color{var(--c1)}\phi}$, ${\color{var(--c1)}v_y}$, ${\color{var(--c1)}v_z}$ e ${\color{var(--c1)}\omega_x}$. 
+We begin by expressing both the positions and the velocities in the inertial frame. The system states are therefore ${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$, ${\color{var(--c1)}\phi}$, ${\color{var(--c1)}v_y}$, ${\color{var(--c1)}v_z}$, and ${\color{var(--c1)}\omega_x}$.
 
-!!! question "Exercício 1"
+!!! question "Exercise 8.1"
 
-    Determine as equações cinemáticas, isto é, as equações das derivadas das posições (${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$ e ${\color{var(--c1)}\phi}$) em função dos estados do sistema.
-    
-    ??? info "a) Escreva ${\color{var(--c1)}\dot{y}}$ em função dos estados do sistema."
+    Derive the kinematic equations, that is, the time derivatives of the positions (${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$, and ${\color{var(--c1)}\phi}$) as functions of the system states.
+
+    ??? info "a) Express ${\color{var(--c1)}\dot{y}}$ in terms of the system states."
         $$
         {\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y}
         $$
-    
-    ??? info "b) Escreva ${\color{var(--c1)}\dot{z}}$ em função dos estados do sistema."
+
+    ??? info "b) Express ${\color{var(--c1)}\dot{z}}$ in terms of the system states."
         $$
         {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z}
         $$
-    
-    ??? info "c) Escreva ${\color{var(--c1)}\dot{\phi}}$ em função dos estados do sistema."
+
+    ??? info "c) Express ${\color{var(--c1)}\dot{\phi}}$ in terms of the system states."
         $$
         {\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x}
         $$
 
-!!! question "Exercício 2"
+!!! question "Exercise 8.2"
 
-    Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (${\color{var(--c1)}v_y}$, ${\color{var(--c1)}v_z}$ e ${\color{var(--c1)}\omega_x}$) em função dos estados do sistema.
-    
-    Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas inercial.
-    
-    ??? info "a) Escreva ${\color{var(--c1)}\dot{v}_y}$ em função dos estados do sistema."
+    Derive the kinetic equations, that is, the time derivatives of the velocities (${\color{var(--c1)}v_y}$, ${\color{var(--c1)}v_z}$, and ${\color{var(--c1)}\omega_x}$) as functions of the system states.
+
+    Hint: Apply Newton's second law independently to each degree of freedom in the inertial frame.
+
+    ??? info "a) Express ${\color{var(--c1)}\dot{v}_y}$ in terms of the system states."
         $$
         \begin{align*}
-            \sum  {\color{var(--c1)}f_y} &= m {\color{var(--c1)}a_y} \\
-            - {\color{var(--c2)}f_t} \sin {\color{var(--c1)}\phi} &= m {\color{var(--c1)}\dot{v}_y} \\
-            {\color{var(--c1)}\dot{v}_y} &= - \frac{1}{m} \sin {\color{var(--c1)}\phi} {\color{var(--c2)}f_t}
+            \sum {\color{var(--c1)}f_y} &= m {\color{var(--c1)}a_y} \\
+            -{\color{var(--c2)}f_t}\sin{\color{var(--c1)}\phi} &= m{\color{var(--c1)}\dot{v}_y} \\
+            {\color{var(--c1)}\dot{v}_y} &= -\frac{1}{m}\sin{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t}
         \end{align*}
         $$
-    
-    ??? info "b) Escreva ${\color{var(--c1)}\dot{v}_z}$ em função dos estados do sistema."
+
+    ??? info "b) Express ${\color{var(--c1)}\dot{v}_z}$ in terms of the system states."
         $$
         \begin{align*}
             \sum {\color{var(--c1)}f_z} &= m {\color{var(--c1)}a_z} \\
-            {\color{var(--c2)}f_t} \cos {\color{var(--c1)}\phi} - mg &= m {\color{var(--c1)}\dot{v}_z} \\
-                {\color{var(--c1)}\dot{v}_z} &= -g + \frac{1}{m} \cos {\color{var(--c1)}\phi} {\color{var(--c2)}f_t}
+            {\color{var(--c2)}f_t}\cos{\color{var(--c1)}\phi} - mg &= m{\color{var(--c1)}\dot{v}_z} \\
+            {\color{var(--c1)}\dot{v}_z} &= -g + \frac{1}{m}\cos{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t}
         \end{align*}
         $$
-    
-    ??? info "c) Escreva ${\color{var(--c1)}\dot{\omega}_x}$ em função dos estados do sistema."
+
+    ??? info "c) Express ${\color{var(--c1)}\dot{\omega}_x}$ in terms of the system states."
         $$
         \begin{align*}
-            \sum {\color{var(--c1)}\tau_x} &= I_{xx} {\color{var(--c1)}\alpha_x} \\
-            {\color{var(--c2)}\tau_x} &= I_{xx} {\color{var(--c1)}\dot{\omega}_x} \\
-            {\color{var(--c1)}\dot{\omega}_x} &= \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+            \sum {\color{var(--c1)}\tau_x} &= I_{xx}{\color{var(--c1)}\alpha_x} \\
+            {\color{var(--c2)}\tau_x} &= I_{xx}{\color{var(--c1)}\dot{\omega}_x} \\
+            {\color{var(--c1)}\dot{\omega}_x} &= \frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
         \end{align*}
         $$
 
+By combining the kinematic and kinetic equations, we obtain the complete system dynamics:
 
-Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema:
-        
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y} \\ 
+    {\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y} \\
     {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
-    {\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x} \\ 
-    {\color{var(--c1)}\dot{v}_y} = - \frac{1}{m} \sin {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c1)}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c1)}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+    {\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x} \\
+    {\color{var(--c1)}\dot{v}_y} = -\dfrac{1}{m}\sin{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t} \\
+    {\color{var(--c1)}\dot{v}_z} = -g + \dfrac{1}{m}\cos{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t} \\
+    {\color{var(--c1)}\dot{\omega}_x} = \dfrac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 $$
 
-### Sistema móvel
+### Body-fixed frame
 
-Outra forma de abordar esse problema é descrevendo as posições no sistema de coordenadas inercial mas as velocidades no sistema de coordenadas móvel, de modo que os estados agora sejam ${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$, ${\color{var(--c1)}\phi}$, ${\color{var(--c3)}v_y\,'}$, ${\color{var(--c3)}v_z\,'}$ e ${\color{var(--c3)}\omega_x\,'}$. 
+Another way to formulate the problem is to express the positions in the inertial frame while expressing the velocities in the body-fixed frame. The system states then become ${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$, ${\color{var(--c1)}\phi}$, ${\color{var(--c3)}v_y\,'}$, ${\color{var(--c3)}v_z\,'}$, and ${\color{var(--c3)}\omega_x\,'}$.
 
-Isso normalmente é feito pois faz muito mais sentido descrever as velocidades no sistema de coordenadas fixo no drone, além de que a maioria dos sensores (acelerômetro, giroscópio, proximidade, fluxo óptico, etc.) estão presos nele e alinhados com esse sistema de coordenadas. No entanto, conforme veremos, as equações agora ficam um pouco mais complexas e menos intuitivas.
+This formulation is commonly used because it is more natural to describe velocities in the frame fixed to the drone. Moreover, most onboard sensors (accelerometers, gyroscopes, proximity sensors, optical flow sensors, etc.) are rigidly attached to the vehicle and aligned with this frame. As we will see, however, the resulting equations become slightly more complex and less intuitive.
 
-!!! question "Exercício 3"
+!!! question "Exercise 8.3"
 
-    Determine as equações cinemáticas, isto é, as equações das derivadas das posições (${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$ e ${\color{var(--c1)}\phi}$) em função dos estados do sistema.
+    Derive the kinematic equations, that is, the time derivatives of the positions (${\color{var(--c1)}y}$, ${\color{var(--c1)}z}$, and ${\color{var(--c1)}\phi}$) in terms of the system states.
 
-    Dica: lembre-se das matrizes de rotação [vistas](../coordinate_system) anteriormente e que os eixos ${\color{var(--c1)}x}$ e ${\color{var(--c3)}x\,'}$ estão alinhados.
-    
-    ??? info "a) Escreva ${\color{var(--c1)}\dot{y}}$ em função dos estados do sistema."
+    Hint: Recall the rotation matrices [introduced](../fundamentals/coordinate_systems.md) before and note that the ${\color{var(--c1)}x}$ and ${\color{var(--c3)}x\,'}$ axes are aligned.
+
+    ??? info "a) Express ${\color{var(--c1)}\dot{y}}$ in terms of the system states."
         $$
         \begin{bmatrix}
             {\color{var(--c3)}v_y\,'} \\
             {\color{var(--c3)}v_z\,'}
-            \end{bmatrix}
-            =
-            \underbrace{
-            \begin{bmatrix} 
-            \cos{\color{var(--c1)}\phi} & \sin{\color{var(--c1)}\phi} \\ 
-            -\sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi} 
         \end{bmatrix}
-            }_{R}
-            \begin{bmatrix}
+        =
+        \underbrace{
+        \begin{bmatrix}
+            \cos{\color{var(--c1)}\phi} & \sin{\color{var(--c1)}\phi} \\
+            -\sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
+        \end{bmatrix}
+        }_{R}
+        \begin{bmatrix}
             {\color{var(--c1)}\dot{y}} \\
             {\color{var(--c1)}\dot{z}}
         \end{bmatrix}
         \qquad \longrightarrow \qquad
-            \begin{bmatrix}
+        \begin{bmatrix}
             {\color{var(--c1)}\dot{y}} \\
             {\color{var(--c1)}\dot{z}}
-            \end{bmatrix}
-            =
-            \underbrace{
-            \begin{bmatrix} 
-            \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi} \\ 
-            \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi} 
         \end{bmatrix}
-            }_{R^{-1}}
-            \begin{bmatrix}
+        =
+        \underbrace{
+        \begin{bmatrix}
+            \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi} \\
+            \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
+        \end{bmatrix}
+        }_{R^{-1}}
+        \begin{bmatrix}
             {\color{var(--c3)}v_y\,'} \\
             {\color{var(--c3)}v_z\,'}
         \end{bmatrix}
         $$
 
         $$
-        {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cos {\color{var(--c1)}\phi} -  {\color{var(--c3)}v_z\,'} \sin {\color{var(--c1)}\phi}
+        {\color{var(--c1)}\dot{y}}
+        =
+        {\color{var(--c3)}v_y\,'}\cos{\color{var(--c1)}\phi}
+        -
+        {\color{var(--c3)}v_z\,'}\sin{\color{var(--c1)}\phi}
         $$
-    
-    ??? info "b) Escreva ${\color{var(--c1)}\dot{z}}$ em função dos estados do sistema."
+
+    ??? info "b) Express ${\color{var(--c1)}\dot{z}}$ in terms of the system states."
         $$
         \begin{bmatrix}
             {\color{var(--c3)}v_y\,'} \\
             {\color{var(--c3)}v_z\,'}
-            \end{bmatrix}
-            =
-            \underbrace{
-            \begin{bmatrix} 
-            \cos{\color{var(--c1)}\phi} & \sin{\color{var(--c1)}\phi} \\ 
-            -\sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi} 
         \end{bmatrix}
-            }_{R}
-            \begin{bmatrix}
+        =
+        \underbrace{
+        \begin{bmatrix}
+            \cos{\color{var(--c1)}\phi} & \sin{\color{var(--c1)}\phi} \\
+            -\sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
+        \end{bmatrix}
+        }_{R}
+        \begin{bmatrix}
             {\color{var(--c1)}\dot{y}} \\
             {\color{var(--c1)}\dot{z}}
         \end{bmatrix}
         \qquad \longrightarrow \qquad
-            \begin{bmatrix}
+        \begin{bmatrix}
             {\color{var(--c1)}\dot{y}} \\
             {\color{var(--c1)}\dot{z}}
-            \end{bmatrix}
-            =
-            \underbrace{
-            \begin{bmatrix} 
-            \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi} \\ 
-            \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi} 
         \end{bmatrix}
-            }_{R^{-1}}
-            \begin{bmatrix}
+        =
+        \underbrace{
+        \begin{bmatrix}
+            \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi} \\
+            \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
+        \end{bmatrix}
+        }_{R^{-1}}
+        \begin{bmatrix}
             {\color{var(--c3)}v_y\,'} \\
             {\color{var(--c3)}v_z\,'}
         \end{bmatrix}
         $$
 
         $$
-        {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \sin {\color{var(--c1)}\phi} +  {\color{var(--c3)}v_z\,'} \cos {\color{var(--c1)}\phi}
-        $$
-    
-    ??? info "c) Escreva ${\color{var(--c1)}\dot{\phi}}$ em função dos estados do sistema."
-        $$
-        {\color{var(--c1)}\dot{\phi}} = {\color{var(--c3)}\omega_x\,'}
+        {\color{var(--c1)}\dot{z}}
+        =
+        {\color{var(--c3)}v_y\,'}\sin{\color{var(--c1)}\phi}
+        +
+        {\color{var(--c3)}v_z\,'}\cos{\color{var(--c1)}\phi}
         $$
 
-!!! question "Exercício 4"
+    ??? info "c) Express ${\color{var(--c1)}\dot{\phi}}$ in terms of the system states."
+        $$
+        {\color{var(--c1)}\dot{\phi}}
+        =
+        {\color{var(--c3)}\omega_x\,'}
+        $$
 
-    Determine as equações cinéticas, isto é, as equações das derivadas das velocidades (${\color{var(--c3)}v_y\,'}$, ${\color{var(--c3)}v_z\,'}$ e ${\color{var(--c3)}\omega_x\,'}$) em função dos estados do sistema.
-    
-    Dica: você deve aplicar a 2ª lei de Newton para cada grau de liberdade do sistema de coordenadas inercial.
-    
-    ??? info "a) Escreva ${\color{var(--c3)}\dot{v}_y\,'}$ em função dos estados do sistema."
+!!! question "Exercise 8.4"
+
+    Derive the kinetic equations, that is, the time derivatives of the velocities (${\color{var(--c3)}v_y\,'}$, ${\color{var(--c3)}v_z\,'}$, and ${\color{var(--c3)}\omega_x\,'}$) in terms of the system states.
+
+    Hint: Apply Newton's second law independently to each degree of freedom in the body-fixed frame.
+
+    ??? info "a) Express ${\color{var(--c3)}\dot{v}_y\,'}$ in terms of the system states."
         $$
         \begin{align*}
-            \sum {\color{var(--c3)}f_y\,'} &= m {\color{var(--c3)}a_y\,'} \\
-            - m g \sin {\color{var(--c1)}\phi} &= m \left( {\color{var(--c3)}\dot{v}_y\,'} - {\color{var(--c3)}v_z\,' \omega_x\,'} \right) \\
-            {\color{var(--c3)}\dot{v}_y\,'} &= {\color{var(--c3)}v_z\,' \omega_x\,'} - g \sin {\color{var(--c1)}\phi}
-        \end{align*}
-        $$
-    
-    ??? info "b) Escreva ${\color{var(--c3)}\dot{v}_z\,'}$ em função dos estados do sistema."
-        $$
-        \begin{align*}
-            \sum {\color{var(--c3)}f_z\,'} &= m {\color{var(--c3)}a_z\,'} \\
-            {\color{var(--c2)}f_t} - m g {\color{var(--c1)}\cos \phi} &= m \left( {\color{var(--c3)}\dot{v}_z\,'} + {\color{var(--c3)}v_y\,' \omega_x\,'} \right) \\
-            {\color{var(--c3)}\dot{v}_z\,'} &= - {\color{var(--c3)}v_y\,' \omega_x\,'} - g \cos {\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t}
-        \end{align*}
-        $$
-    
-    ??? info "c) Escreva ${\color{var(--c3)}\dot{\omega}_x\,'}$ em função dos estados do sistema."
-        $$
-        \begin{align*}
-            \sum {\color{var(--c3)}\tau_x\,'} &= I_{xx} {\color{var(--c3)}\alpha_x\,'} \\
-            {\color{var(--c2)}\tau_x} &= I_{xx} {\color{var(--c3)}\dot{\omega}_x\,'} \\
-            {\color{var(--c3)}\dot{\omega}_x\,'} &= \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+            \sum {\color{var(--c3)}f_y\,'} &= m{\color{var(--c3)}a_y\,'} \\
+            -mg\sin{\color{var(--c1)}\phi} &= m\left({\color{var(--c3)}\dot{v}_y\,'} - {\color{var(--c3)}v_z\,'\omega_x\,'}\right) \\
+            {\color{var(--c3)}\dot{v}_y\,'} &= {\color{var(--c3)}v_z\,'\omega_x\,'} - g\sin{\color{var(--c1)}\phi}
         \end{align*}
         $$
 
-Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema:
-        
+    ??? info "b) Express ${\color{var(--c3)}\dot{v}_z\,'}$ in terms of the system states."
+        $$
+        \begin{align*}
+            \sum {\color{var(--c3)}f_z\,'} &= m{\color{var(--c3)}a_z\,'} \\
+            {\color{var(--c2)}f_t} - mg\cos{\color{var(--c1)}\phi} &= m\left({\color{var(--c3)}\dot{v}_z\,'} + {\color{var(--c3)}v_y\,'\omega_x\,'}\right) \\
+            {\color{var(--c3)}\dot{v}_z\,'} &= -{\color{var(--c3)}v_y\,'\omega_x\,'} - g\cos{\color{var(--c1)}\phi} + \frac{1}{m}{\color{var(--c2)}f_t}
+        \end{align*}
+        $$
+
+    ??? info "c) Express ${\color{var(--c3)}\dot{\omega}_x\,'}$ in terms of the system states."
+        $$
+        \begin{align*}
+            \sum {\color{var(--c3)}\tau_x\,'} &= I_{xx}{\color{var(--c3)}\alpha_x\,'} \\
+            {\color{var(--c2)}\tau_x} &= I_{xx}{\color{var(--c3)}\dot{\omega}_x\,'} \\
+            {\color{var(--c3)}\dot{\omega}_x\,'} &= \frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
+        \end{align*}
+        $$
+
+By combining the kinematic and kinetic equations, we obtain the complete system dynamics:
+
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cos {\color{var(--c1)}\phi} -  {\color{var(--c3)}v_z\,'} \sin {\color{var(--c1)}\phi} \\ 
-    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \sin {\color{var(--c1)}\phi} +  {\color{var(--c3)}v_z\,'} \cos {\color{var(--c1)}\phi} \\
-    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
-    {\color{var(--c3)}\dot{v}_y\,'} = {\color{var(--c3)}v_z\,' \omega_x\,'} - g \sin {\color{var(--c1)}\phi} \\ 
-    {\color{var(--c3)}\dot{v}_z\,'} = - {\color{var(--c3)}v_y\,' \omega_x\,'} - g \cos {\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+{\color{var(--c1)}\dot{y}}
+=
+{\color{var(--c3)}v_y\,'}\cos{\color{var(--c1)}\phi}
+-
+{\color{var(--c3)}v_z\,'}\sin{\color{var(--c1)}\phi}
+\\
+{\color{var(--c1)}\dot{z}}
+=
+{\color{var(--c3)}v_y\,'}\sin{\color{var(--c1)}\phi}
++
+{\color{var(--c3)}v_z\,'}\cos{\color{var(--c1)}\phi}
+\\
+{\color{var(--c1)}\dot{\phi}}
+=
+{\color{var(--c3)}\omega_x\,'}
+\\
+{\color{var(--c3)}\dot{v}_y\,'}
+=
+{\color{var(--c3)}v_z\,'\omega_x\,'}
+-
+g\sin{\color{var(--c1)}\phi}
+\\
+{\color{var(--c3)}\dot{v}_z\,'}
+=
+-
+{\color{var(--c3)}v_y\,'\omega_x\,'}
+-
+g\cos{\color{var(--c1)}\phi}
++
+\frac{1}{m}{\color{var(--c2)}f_t}
+\\
+{\color{var(--c3)}\dot{\omega}_x\,'}
+=
+\frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 $$
 
-Os termos ${\color{var(--c3)}v_z\,' \omega_x\,'}$ e ${\color{var(--c3)}v_y\,' \omega_x\,'}$ correspondem às pseudo-acelerações centrífugas, que surgem ao descrever o movimento no referencial não inercial do drone (sistema de coordenadas móvel).
+The terms ${\color{var(--c3)}v_z,'\omega_x,'}$ and ${\color{var(--c3)}v_y,'\omega_x,'}$ are pseudo-acceleration terms that appear because the equations are expressed in the drone's rotating (non-inertial) body-fixed frame.
 
 ---
 
-## Notação vetorial
+## Vector notation
 
-A 2ª lei de Newton para translação e rotação utilizando notação vetorial é dada por:
-
-$$
-\left\{
-\begin{array}{l}
-        \sum \vec{f} = \frac{d}{dt} \vec{p} \\ 
-        \sum \vec{\tau} = \frac{d}{dt} \vec{h}
-\end{array}
-\right.
-$$
-
-Onde $\vec{p}$ e $\vec{h}$ são, respectivamente, os vetores de momentos lineares e angulares:
+Newton's second law for translation and rotation, written in vector form, is given by:
 
 $$
 \left\{
 \begin{array}{l}
-        \vec{p} = m \vec{v} \\ 
-        \vec{h} = I \vec{\omega}
+        \sum {\color{var(--c1)}\vec{f}} = \dfrac{d}{dt}{\color{var(--c1)}\vec{p}} \\[2mm]
+        \sum {\color{var(--c1)}\vec{\tau}} = \dfrac{d}{dt}{\color{var(--c1)}\vec{h}}
 \end{array}
 \right.
 $$
 
-Apesar de $m$ continuar sendo um escalar que representa a massa do corpo, $I$ agora é uma matriz que representa os momentos de inércia em torno dos 3 eixos de rotação:
+Where ${\color{var(--c1)}\vec{p}}$ and ${\color{var(--c1)}\vec{h}}$ are the linear and angular momentum vectors, respectively:
 
 $$
-I = 
+\left\{
+\begin{array}{l}
+        {\color{var(--c1)}\vec{p}} = m{\color{var(--c1)}\vec{v}} \\[2mm]
+        {\color{var(--c1)}\vec{h}} = I{\color{var(--c1)}\vec{\omega}}
+\end{array}
+\right.
+$$
+
+Although $m$ remains a scalar representing the mass of the body, $I$ is now the inertia matrix, which contains the moments of inertia about the three rotational axes:
+
+$$
+I =
 \begin{bmatrix}
     I_{xx} & 0 & 0 \\
     0 & I_{yy} & 0 \\
@@ -350,28 +387,28 @@ I =
 \end{bmatrix}
 $$
 
-Como estamos trabalhando agora com vetores, estas equações podem ser aplicadas de uma única vez para todos os graus de liberdade.
+Since we are now working with vectors, these equations can be applied simultaneously to all degrees of freedom.
 
-### Sistema inercial
+### Inertial frame
 
-Inicialmente, vamos definir o vetor aceleração da gravidade ${\color{var(--c1)}\vec{g}}$ no sistema de coordenadas inercial e os vetores de forças ${\color{var(--c3)}\vec{f}_d\,'}$ e torques ${\color{var(--c3)}\vec{\tau}_d\,'}$ do drone no sistema de coordenadas móvel:
+We begin by defining the gravity vector ${\color{var(--c1)}\vec{g}}$ in the inertial frame and the drone's force and torque vectors, ${\color{var(--c3)}\vec{f}_d\,'}$ and ${\color{var(--c3)}\vec{\tau}_d\,'}$, in the body-fixed frame:
 
 $$
-{\color{var(--c1)}\vec{g}} = 
+{\color{var(--c1)}\vec{g}} =
 \begin{bmatrix}
     0 \\
     0 \\
     g
 \end{bmatrix}
 \qquad
-{\color{var(--c3)}\vec{f_d}\,'} = 
+{\color{var(--c3)}\vec{f_d}\,'} =
 \begin{bmatrix}
     0 \\
     0 \\
-    {\color{var(--c2)}f_t} 
+    {\color{var(--c2)}f_t}
 \end{bmatrix}
 \qquad
-{\color{var(--c3)}\vec{\tau_d}\,'} = 
+{\color{var(--c3)}\vec{\tau_d}\,'} =
 \begin{bmatrix}
     {\color{var(--c2)}\tau_x} \\
     0 \\
@@ -379,241 +416,251 @@ $$
 \end{bmatrix}
 $$
 
-Fazemos isso pois eles estão alinhados com estes sistemas de coordenadas e portanto é muito mais fácil descrevê-los assim.
+This choice is convenient because each vector is naturally aligned with its corresponding frame, making it much easier to express.
 
-!!! question "Exercício 5"
+!!! question "Exercise 8.5"
 
-!!! question "Exercício 6"
+!!! question "Exercise 8.6"
 
-    Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (${\color{var(--c1)}\vec{v}}$ e ${\color{var(--c1)}\vec{\omega}}$) em função das somatórias de forças e torques.
-    
-    ??? info "a) Escreva ${\color{var(--c1)}\dot{\vec{v}}}$ em função de $\sum{\color{var(--c1)}\vec{f}}$."
+    Derive the vector kinetic equations, that is, the time derivatives of the velocity vectors (${\color{var(--c1)}\vec{v}}$ and ${\color{var(--c1)}\vec{\omega}}$) in terms of the net force and torque vectors.
+
+    ??? info "a) Express ${\color{var(--c1)}\dot{\vec{v}}}$ in terms of $\sum{\color{var(--c1)}\vec{f}}$."
         $$
         \begin{align*}
-            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt} {\color{var(--c1)}\vec{p}} \\
-            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt} \left( m {\color{var(--c1)}\vec{v}} \right) \\
-            \sum {\color{var(--c1)}\vec{f}} &= m {\color{var(--c1)}\dot{\vec{v}}} \\
-            {\color{var(--c1)}\dot{\vec{v}}} &= \frac{1}{m} \sum {\color{var(--c1)}\vec{f}}
-        \end{align*}
-        $$
-    
-    ??? info "b) Escreva ${\color{var(--c1)}\dot{\vec{\omega}}}$ em função de $\sum{\color{var(--c1)}\vec{\tau}}$."
-        $$
-        \begin{align*}
-            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt} {\color{var(--c1)}\vec{h}} \\
-            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt} \left( I {\color{var(--c1)}\vec{\omega}} \right) \\
-            \sum {\color{var(--c1)}\vec{\tau}} &= I {\color{var(--c1)}\dot{\vec{\omega}}} \\
-            {\color{var(--c1)}\dot{\vec{\omega}}} &= I^{-1} \sum {\color{var(--c1)}\vec{\tau}}
+            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt}{\color{var(--c1)}\vec{p}} \\
+            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt}\left(m{\color{var(--c1)}\vec{v}}\right) \\
+            \sum {\color{var(--c1)}\vec{f}} &= m{\color{var(--c1)}\dot{\vec{v}}} \\
+            {\color{var(--c1)}\dot{\vec{v}}} &= \frac{1}{m}\sum{\color{var(--c1)}\vec{f}}
         \end{align*}
         $$
 
-Você deve ter chegado a:
-                
-$$
-    \left\{
-    \begin{array}{l}
-            {\color{var(--c1)}\dot{\vec{v}}} = \frac{1}{m} \sum {\color{var(--c1)}\vec{f}} \\ 
-            {\color{var(--c1)}\dot{\vec{\omega}}} = I^{-1} \sum {\color{var(--c1)}\vec{\tau}}
-    \end{array}
-    \right.
-$$
-
-Essas equações são genéricas, ou seja, valem pro movimento de translação e rotação de qualquer corpo rígido, basta substituir o valor das somatórias de forças e torques.
-
-!!! question "Exercício 7"
-
-    Substitua as somatórias de forças e torques definidos inicialmente e determine as equações cinéticas.
-        
-    Dica: cuidado com os sistemas de coordenadas em que eles estão descritos.
-    
-    ??? info "a) Escreva ${\color{var(--c1)}\dot{\vec{v}}}$ em função dos estados do sistema."
+    ??? info "b) Express ${\color{var(--c1)}\dot{\vec{\omega}}}$ in terms of $\sum{\color{var(--c1)}\vec{\tau}}$."
         $$
         \begin{align*}
-            {\color{var(--c1)}\dot{\vec{v}}} &= \frac{1}{m} \sum {\color{var(--c1)}\vec{f}} \\
-            {\color{var(--c1)}\dot{\vec{v}}} &= \frac{1}{m} \left( - m {\color{var(--c1)}\vec{g}} + {\color{var(--c1)}\vec{f}_t} \right) \\
-            {\color{var(--c1)}\dot{\vec{v}}} &= - {\color{var(--c1)}\vec{g}} + \frac{1}{m} {\color{var(--c1)}\vec{f}_t} \\
-            {\color{var(--c1)}\dot{\vec{v}}} &= - {\color{var(--c1)}\vec{g}} + \frac{1}{m} R^T {\color{var(--c3)}\vec{f}_t\,'} \\
-            \begin{bmatrix}
-                0 \\
-                {\color{var(--c1)}\dot{v}_y} \\
-                {\color{var(--c1)}\dot{v}_z}
-            \end{bmatrix}
-            &= -
-            \begin{bmatrix}
-                0 \\
-                0 \\
-                g
-            \end{bmatrix} 
-            + \frac{1}{m}
-            \begin{bmatrix}
-                1 & 0 & 0 \\
-                0 & \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi} \\
-                0 & \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
-            \end{bmatrix}
-            \begin{bmatrix}
-                0 \\
-                0 \\
-                {\color{var(--c2)}f_t}
-            \end{bmatrix} \\
-            \begin{bmatrix}
-                0 \\
-                {\color{var(--c1)}\dot{v}_y} \\
-                {\color{var(--c1)}\dot{v}_z}
-            \end{bmatrix}
-            &=
-            \begin{bmatrix}
-                0 \\
-                - \frac{1}{m} \sin{\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\
-                - g + \frac{1}{m} \cos{\color{var(--c1)}\phi} {\color{var(--c2)}f_t}
-            \end{bmatrix} 
-        \end{align*}  
-        $$
-    
-    ??? info "b) Escreva ${\color{var(--c1)}\dot{\vec{\omega}}}$ em função dos estados do sistema."
-        $$
-        \begin{align*}
-            {\color{var(--c1)}\dot{\vec{\omega}}} &= I^{-1} \sum {\color{var(--c1)}\vec{\tau}} \\
-            {\color{var(--c1)}\dot{\vec{\omega}}} &= I^{-1} {\color{var(--c1)}\vec{\tau}_x} \\
-            \begin{bmatrix}
-                {\color{var(--c1)}\dot{\omega}_x} \\
-                0 \\
-                0
-            \end{bmatrix}
-            &= 
-            \begin{bmatrix}
-                I_{xx} & 0 & 0 \\
-                0 & I_{yy} & 0 \\
-                0 & 0 & I_{zz}
-            \end{bmatrix}^{-1}
-            \begin{bmatrix}
-                {\color{var(--c2)}\tau_x} \\
-                0 \\
-                0
-            \end{bmatrix} \\
-            \begin{bmatrix}
-                {\color{var(--c1)}\dot{\omega}_x} \\
-                0 \\
-                0
-            \end{bmatrix}
-            &= 
-            \begin{bmatrix}
-                \frac{1}{I_{xx}} & 0 & 0 \\
-                0 & \frac{1}{I_{yy}} & 0 \\
-                0 & 0 & \frac{1}{I_{zz}}
-            \end{bmatrix}
-            \begin{bmatrix}
-                {\color{var(--c2)}\tau_x} \\
-                0 \\
-                0
-            \end{bmatrix} \\
-            \begin{bmatrix}
-                {\color{var(--c1)}\dot{\omega}_x} \\
-                0 \\
-                0
-            \end{bmatrix}
-            &= 
-            \begin{bmatrix}
-                \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x} \\
-                0 \\
-                0
-            \end{bmatrix}
+            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt}{\color{var(--c1)}\vec{h}} \\
+            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt}\left(I{\color{var(--c1)}\vec{\omega}}\right) \\
+            \sum {\color{var(--c1)}\vec{\tau}} &= I{\color{var(--c1)}\dot{\vec{\omega}}} \\
+            {\color{var(--c1)}\dot{\vec{\omega}}} &= I^{-1}\sum{\color{var(--c1)}\vec{\tau}}
         \end{align*}
         $$
 
-Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema:
-        
+You should have obtained
+
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{y}} = {\color{var(--c1)}v_y} \\ 
-    {\color{var(--c1)}\dot{z}} = {\color{var(--c1)}v_z} \\
-    {\color{var(--c1)}\dot{\phi}} = {\color{var(--c1)}\omega_x} \\ 
-    {\color{var(--c1)}\dot{v}_y} = - \frac{1}{m} \sin {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c1)}\dot{v}_z} = -g + \frac{1}{m} \cos {\color{var(--c1)}\phi} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c1)}\dot{\omega}_x} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+{\color{var(--c1)}\dot{\vec{v}}}=\dfrac{1}{m}\sum{\color{var(--c1)}\vec{f}} \\[2mm]
+{\color{var(--c1)}\dot{\vec{\omega}}}=I^{-1}\sum{\color{var(--c1)}\vec{\tau}}
 \end{array}
 \right.
 $$
 
-Note que as equações acima são exatamente iguais às obtidas utilizando a notação escalar. 
+These equations are completely general: they describe the translational and rotational motion of any rigid body. The only quantities that change from one system to another are the net force and net torque.
 
-### Sistema móvel
+!!! question "Exercise 8.7"
 
-Não podemos aplicar a 2ª lei de Newton no sistema de coordenadas móvel pois ele não é um sistema de coordenadas inercial(1):
+    Substitute the force and torque vectors defined at the beginning of this section to derive the kinetic equations.
+
+    Hint: Be careful with the reference frame in which each vector is expressed.
+
+    ??? info "a) Express ${\color{var(--c1)}\dot{\vec{v}}}$ in terms of the system states."
+        $$
+        \begin{align*}
+            {\color{var(--c1)}\dot{\vec{v}}} &= \frac{1}{m}\sum{\color{var(--c1)}\vec{f}} \\
+            {\color{var(--c1)}\dot{\vec{v}}} &= \frac{1}{m}\left(-m{\color{var(--c1)}\vec{g}}+{\color{var(--c1)}\vec{f}_t}\right) \\
+            {\color{var(--c1)}\dot{\vec{v}}} &= -{\color{var(--c1)}\vec{g}}+\frac{1}{m}{\color{var(--c1)}\vec{f}_t} \\
+            {\color{var(--c1)}\dot{\vec{v}}} &= -{\color{var(--c1)}\vec{g}}+\frac{1}{m}R^T{\color{var(--c3)}\vec{f}_t\,'} \\
+            \begin{bmatrix}
+                0\\
+                {\color{var(--c1)}\dot{v}_y}\\
+                {\color{var(--c1)}\dot{v}_z}
+            \end{bmatrix}
+            &=
+            -
+            \begin{bmatrix}
+                0\\
+                0\\
+                g
+            \end{bmatrix}
+            +
+            \frac{1}{m}
+            \begin{bmatrix}
+                1 & 0 & 0\\
+                0 & \cos{\color{var(--c1)}\phi} & -\sin{\color{var(--c1)}\phi}\\
+                0 & \sin{\color{var(--c1)}\phi} & \cos{\color{var(--c1)}\phi}
+            \end{bmatrix}
+            \begin{bmatrix}
+                0\\
+                0\\
+                {\color{var(--c2)}f_t}
+            \end{bmatrix} \\
+            \begin{bmatrix}
+                0\\
+                {\color{var(--c1)}\dot{v}_y}\\
+                {\color{var(--c1)}\dot{v}_z}
+            \end{bmatrix}
+            &=
+            \begin{bmatrix}
+                0\\
+                -\dfrac{1}{m}\sin{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t}\\
+                -g+\dfrac{1}{m}\cos{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t}
+            \end{bmatrix}
+        \end{align*}
+        $$
+
+    ??? info "b) Express ${\color{var(--c1)}\dot{\vec{\omega}}}$ in terms of the system states."
+        $$
+        \begin{align*}
+            {\color{var(--c1)}\dot{\vec{\omega}}} &= I^{-1}\sum{\color{var(--c1)}\vec{\tau}} \\
+            {\color{var(--c1)}\dot{\vec{\omega}}} &= I^{-1}{\color{var(--c1)}\vec{\tau}_x} \\
+            \begin{bmatrix}
+                {\color{var(--c1)}\dot{\omega}_x}\\
+                0\\
+                0
+            \end{bmatrix}
+            &=
+            \begin{bmatrix}
+                I_{xx} & 0 & 0\\
+                0 & I_{yy} & 0\\
+                0 & 0 & I_{zz}
+            \end{bmatrix}^{-1}
+            \begin{bmatrix}
+                {\color{var(--c2)}\tau_x}\\
+                0\\
+                0
+            \end{bmatrix} \\
+            \begin{bmatrix}
+                {\color{var(--c1)}\dot{\omega}_x}\\
+                0\\
+                0
+            \end{bmatrix}
+            &=
+            \begin{bmatrix}
+                \dfrac{1}{I_{xx}} & 0 & 0\\
+                0 & \dfrac{1}{I_{yy}} & 0\\
+                0 & 0 & \dfrac{1}{I_{zz}}
+            \end{bmatrix}
+            \begin{bmatrix}
+                {\color{var(--c2)}\tau_x}\\
+                0\\
+                0
+            \end{bmatrix} \\
+            \begin{bmatrix}
+                {\color{var(--c1)}\dot{\omega}_x}\\
+                0\\
+                0
+            \end{bmatrix}
+            &=
+            \begin{bmatrix}
+                \dfrac{1}{I_{xx}}{\color{var(--c2)}\tau_x}\\
+                0\\
+                0
+            \end{bmatrix}
+        \end{align*}
+        $$
+
+By combining the kinematic and kinetic equations, we obtain the complete system dynamics:
+
+$$
+\left\{
+\begin{array}{l}
+{\color{var(--c1)}\dot{y}}={\color{var(--c1)}v_y}\\
+{\color{var(--c1)}\dot{z}}={\color{var(--c1)}v_z}\\
+{\color{var(--c1)}\dot{\phi}}={\color{var(--c1)}\omega_x}\\
+{\color{var(--c1)}\dot{v}_y}=-\dfrac{1}{m}\sin{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t}\\
+{\color{var(--c1)}\dot{v}_z}=-g+\dfrac{1}{m}\cos{\color{var(--c1)}\phi}\,{\color{var(--c2)}f_t}\\
+{\color{var(--c1)}\dot{\omega}_x}=\dfrac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
+\end{array}
+\right.
+$$
+
+Notice that these equations are identical to those obtained using the scalar notation.
+
+### Body-fixed frame
+
+Newton's second law cannot be applied directly in the body-fixed frame because it is *not an inertial frame(1).
 {.annotate}
 
-1. Que não acelera ou rotaciona.
-    
+1. An inertial frame is one that does not accelerate or rotate.
+
 $$
 \xcancel{
 \left\{
 \begin{array}{l}
-        \sum {\color{var(--c3)}\vec{f}\,'} = \frac{d}{dt} {\color{var(--c3)}\vec{p}\,'} \\ 
-        \sum {\color{var(--c3)}\vec{\tau}\,'} = \frac{d}{dt} {\color{var(--c3)}\vec{h}\,'}
+        \sum {\color{var(--c3)}\vec{f}\,'} = \dfrac{d}{dt}{\color{var(--c3)}\vec{p}\,'} \\[2mm]
+        \sum {\color{var(--c3)}\vec{\tau}\,'} = \dfrac{d}{dt}{\color{var(--c3)}\vec{h}\,'}
 \end{array}
 \right.
 }
 $$
 
-No entanto, é possível aplicar ela no sistema de coordenadas inercial e efetuar algumas transformações para o sistema de coordenadas móvel.
+However, we can apply Newton's second law in the inertial frame and then transform the resulting equations into the body-fixed frame.
 
-!!! question "Exercício 8"
+!!! question "Exercise 8.8"
 
-!!! question "Exercício 9"
+!!! question "Exercise 8.9"
 
-    Determine as equações cinéticas vetoriais, isto é, as equações das derivadas dos vetores de velocidades (${\color{var(--c3)}\dot{\vec{v}}\,'}$ e ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$) em função das somatórias de forças e torques(1).
+    Derive the vector kinetic equations, that is, the time derivatives of the velocity vectors (${\color{var(--c3)}\dot{\vec{v}}\,'}$ and ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$) in terms of the net force and torque vectors.
+
+    Hint: Note(1) that $R\dot{R}^{T} = {\color{var(--c3)}\vec{\omega}\,'}\times$.
     {.annotate}
 
-    1. O produto vetorial ${\color{var(--c3)}\vec{\omega}\,'} \times$:
+    1. The cross product ${\color{var(--c3)}\vec{\omega}\,'}\times$:
 
         $$
         \begin{align}
-            {\color{var(--c3)}\vec{\omega}\,'} \times \vec{v} &= 
+            {\color{var(--c3)}\vec{\omega}\,'}\times\vec{v}
+            &=
             \begin{bmatrix}
-            {\color{var(--c3)}\omega_x\,'} \\
-            0 \\
+            {\color{var(--c3)}\omega_x\,'}\\
+            0\\
             0
-            \end{bmatrix} 
+            \end{bmatrix}
             \times
             \begin{bmatrix}
-            v_1 \\
-            v_2 \\
+            v_1\\
+            v_2\\
             v_3
-            \end{bmatrix} \\
-            {\color{var(--c3)}\vec{\omega}\,'} \times \vec{v} &= 
+            \end{bmatrix}
+            \\
+            {\color{var(--c3)}\vec{\omega}\,'}\times\vec{v}
+            &=
             \begin{bmatrix}
-            0 \\
-            - {\color{var(--c3)}\omega_x\,'} v_3 \\
-            {\color{var(--c3)}\omega_x\,'} v_2 
+            0\\
+            -{\color{var(--c3)}\omega_x\,'}v_3\\
+            {\color{var(--c3)}\omega_x\,'}v_2
             \end{bmatrix}
         \end{align}
         $$
 
-        Também pode ser representado pelo produto de uma matriz anti-simétrica ${\color{var(--c3)}\tilde{\omega}\,'}$:
+        Can also be represented as the product of the skew-symmetric matrix ${\color{var(--c3)}\tilde{\omega}\,'}$:
 
         $$
         \begin{align}
-            {\color{var(--c3)}\tilde{\omega}\,'} \vec{v} &= 
+            {\color{var(--c3)}\tilde{\omega}\,'}\vec{v}
+            &=
             \begin{bmatrix}
-                0 & 0 & 0 \\
-                0 & 0 & -{\color{var(--c3)}\omega_x\,'} \\
+                0 & 0 & 0\\
+                0 & 0 & -{\color{var(--c3)}\omega_x\,'}\\
                 0 & {\color{var(--c3)}\omega_x\,'} & 0
-            \end{bmatrix}  
+            \end{bmatrix}
             \begin{bmatrix}
-            v_1 \\
-            v_2 \\
+            v_1\\
+            v_2\\
             v_3
-            \end{bmatrix} \\
-            {\color{var(--c3)}\tilde{\omega}\,'} \vec{v} &= 
+            \end{bmatrix}
+            \\
+            {\color{var(--c3)}\tilde{\omega}\,'}\vec{v}
+            &=
             \begin{bmatrix}
-            0 \\
-            - {\color{var(--c3)}\omega_x\,'} v_3 \\
-            {\color{var(--c3)}\omega_x\,'} v_2 
+            0\\
+            -{\color{var(--c3)}\omega_x\,'}v_3\\
+            {\color{var(--c3)}\omega_x\,'}v_2
             \end{bmatrix}
         \end{align}
         $$
 
-        Se expandirmos o termo $R \dot{R}^T$:
+        Expanding the term $R\dot{R}^{T}$ yields:
 
         $$
         \begin{align}
@@ -678,61 +725,89 @@ No entanto, é possível aplicar ela no sistema de coordenadas inercial e efetua
         \end{align}
         $$
 
-        Concluimos que $R \dot{R}^T = {\color{var(--c3)}\vec{\omega}\,'} \times$.
-    
-    ??? info "a) Escreva ${\color{var(--c3)}\dot{\vec{v}}\,'}$ em função de $\sum{\color{var(--c3)}\vec{f}\,'}$."
+        From which we conclude that:
+
+        $$
+        R\dot{R}^{T}
+        =
+        {\color{var(--c3)}\vec{\omega}\,'}\times.
+        $$
+
+    ??? info "a) Express ${\color{var(--c3)}\dot{\vec{v}}\,'}$ in terms of $\sum{\color{var(--c3)}\vec{f}\,'}$."
         $$
         \begin{align*}
-            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt} {\color{var(--c1)}\vec{p}} \\
-            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt} \left( R^T {\color{var(--c3)}\vec{p}\,'} \right) \\
-            \sum {\color{var(--c1)}\vec{f}} &= \dot{R}^T {\color{var(--c3)}\vec{p}\,'} + R^T {\color{var(--c3)}\dot{\vec{p}}\,'} \\
-            R \sum {\color{var(--c1)}\vec{f}} &= R \dot{R}^T {\color{var(--c3)}\vec{p}\,'} + \cancel{R R^T} {\color{var(--c3)}\dot{\vec{p}}\,'} \\
-            \sum R {\color{var(--c1)}\vec{f}} &= {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{p}\,'} + {\color{var(--c3)}\dot{\vec{p}}\,'} \\
-            \sum {\color{var(--c3)}\vec{f}\,'} &= {\color{var(--c3)}\vec{\omega}\,'} \times m {\color{var(--c3)}\vec{v}\,'} + m {\color{var(--c3)}\dot{\vec{v}}\,'} \\
-            {\color{var(--c3)}\dot{\vec{v}}\,'} &= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \sum {\color{var(--c3)}\vec{f}\,'}
-        \end{align*} 
-        $$
-    
-    ??? info "b) Escreva ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ em função de $\sum{\color{var(--c3)}\vec{\tau}\,'}$."
-        $$
-        \begin{align*}
-            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt} {\color{var(--c1)}\vec{h}} \\
-            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt} \left( R^T {\color{var(--c3)}\vec{h}\,'} \right) \\
-            \sum {\color{var(--c1)}\vec{\tau}} &= \dot{R}^T {\color{var(--c3)}\vec{h}\,'} + R^T {\color{var(--c3)}\dot{\vec{h}}\,'} \\
-            R \sum {\color{var(--c1)}\vec{\tau}} &= R \dot{R}^T {\color{var(--c3)}\vec{h}\,'} + \cancel{R R^T} {\color{var(--c3)}\dot{\vec{h}}\,'} \\
-            \sum R {\color{var(--c1)}\vec{\tau}} &= {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{h}\,'} + {\color{var(--c3)}\dot{\vec{h}}\,'} \\
-            \sum {\color{var(--c3)}\vec{\tau}\,'} &= {\color{var(--c3)}\vec{\omega}\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} + I {\color{var(--c3)}\dot{\vec{\omega}}\,'} \\
-            {\color{var(--c3)}\dot{\vec{\omega}}\,'} &= - I^{-1} \left( {\color{var(--c3)}\vec{\omega}\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{var(--c3)}\vec{\tau}\,'}
+            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt}{\color{var(--c1)}\vec{p}} \\
+            \sum {\color{var(--c1)}\vec{f}} &= \frac{d}{dt}\left(R^T{\color{var(--c3)}\vec{p}\,'}\right) \\
+            \sum {\color{var(--c1)}\vec{f}} &= \dot{R}^T{\color{var(--c3)}\vec{p}\,'}+R^T{\color{var(--c3)}\dot{\vec{p}}\,'} \\
+            R\sum{\color{var(--c1)}\vec{f}} &= R\dot{R}^T{\color{var(--c3)}\vec{p}\,'}+\cancel{RR^T}{\color{var(--c3)}\dot{\vec{p}}\,'} \\
+            \sum{\color{var(--c3)}\vec{f}\,'} &= {\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{p}\,'}+{\color{var(--c3)}\dot{\vec{p}}\,'} \\
+            \sum{\color{var(--c3)}\vec{f}\,'} &= {\color{var(--c3)}\vec{\omega}\,'}\times m{\color{var(--c3)}\vec{v}\,'}+m{\color{var(--c3)}\dot{\vec{v}}\,'} \\
+            {\color{var(--c3)}\dot{\vec{v}}\,'} &= -{\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{v}\,'}+\frac{1}{m}\sum{\color{var(--c3)}\vec{f}\,'}
         \end{align*}
         $$
 
-Você deve ter chegado a:
+    ??? info "b) Express ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ in terms of $\sum{\color{var(--c3)}\vec{\tau}\,'}$."
+        $$
+        \begin{align*}
+            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt}{\color{var(--c1)}\vec{h}} \\
+            \sum {\color{var(--c1)}\vec{\tau}} &= \frac{d}{dt}\left(R^T{\color{var(--c3)}\vec{h}\,'}\right) \\
+            \sum {\color{var(--c1)}\vec{\tau}} &= \dot{R}^T{\color{var(--c3)}\vec{h}\,'}+R^T{\color{var(--c3)}\dot{\vec{h}}\,'} \\
+            R\sum{\color{var(--c1)}\vec{\tau}} &= R\dot{R}^T{\color{var(--c3)}\vec{h}\,'}+\cancel{RR^T}{\color{var(--c3)}\dot{\vec{h}}\,'} \\
+            \sum{\color{var(--c3)}\vec{\tau}\,'} &= {\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{h}\,'}+{\color{var(--c3)}\dot{\vec{h}}\,'} \\
+            \sum{\color{var(--c3)}\vec{\tau}\,'} &= {\color{var(--c3)}\vec{\omega}\,'}\times I{\color{var(--c3)}\vec{\omega}\,'}+I{\color{var(--c3)}\dot{\vec{\omega}}\,'} \\
+            {\color{var(--c3)}\dot{\vec{\omega}}\,'} &= -I^{-1}\left({\color{var(--c3)}\vec{\omega}\,'}\times I{\color{var(--c3)}\vec{\omega}\,'}\right)+I^{-1}\sum{\color{var(--c3)}\vec{\tau}\,'}
+        \end{align*}
+        $$
+
+You should have obtained:
 
 $$
 \left\{
 \begin{array}{l}
-        {\color{var(--c3)}\dot{\vec{v}}\,'} = - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \sum {\color{var(--c3)}\vec{f}\,'} \\ 
-        {\color{var(--c3)}\dot{\vec{\omega}}\,'} = - I^{-1} \left( {\color{var(--c3)}\vec{\omega}\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{var(--c3)}\vec{\tau}\,'}
+{\color{var(--c3)}\dot{\vec{v}}\,'}
+=
+-
+{\color{var(--c3)}\vec{\omega}\,'}
+\times
+{\color{var(--c3)}\vec{v}\,'}
++
+\dfrac{1}{m}
+\sum
+{\color{var(--c3)}\vec{f}\,'}
+\\[2mm]
+{\color{var(--c3)}\dot{\vec{\omega}}\,'}
+=
+-
+I^{-1}
+\left(
+{\color{var(--c3)}\vec{\omega}\,'}
+\times
+I{\color{var(--c3)}\vec{\omega}\,'}
+\right)
++
+I^{-1}
+\sum
+{\color{var(--c3)}\vec{\tau}\,'}
 \end{array}
 \right.
 $$
 
-Essas equações são genéricas, ou seja, valem pro movimento de translação e rotação de qualquer corpo rígido em qualquer sistema de coordenadas (seja ele inercial ou não), basta substituir o valor das somatórias de forças e torques. 
+These equations are completely general: they describe the translational and rotational motion of any rigid body, regardless of whether the reference frame is inertial or non-inertial. To apply them to a particular system, simply substitute the appropriate net force and net torque vectors.
 
-Elas também são chamadas de equações de Newton-Euler, que foi quem generalizou a 2ª lei de Newton de um ponto material em um sistema de coordenadas inercial para um corpo rígido em um sistema de coordenadas não inercial.
+These equations are known as the Newton–Euler equations. They extend Newton's second law from the motion of a particle in an inertial frame to the motion of a rigid body in a rotating (non-inertial) frame.
 
-!!! question "Exercício 10"
+!!! question "Exercise 8.10"
 
-    Substitua as somatórias de forças e torques definidos inicialmente e determine as equações cinéticas.
-        
-    Dica: cuidado com os sistemas de coordenadas em que eles estão descritos.
-    
-    ??? info "a) Escreva ${\color{var(--c3)}\dot{\vec{v}}\,'}$ em função dos estados do sistema."
+    Substitute the force and torque vectors defined at the beginning of this section to derive the kinetic equations.
+
+    Hint: Be careful with the reference frame in which each vector is expressed.
+
+    ??? info "a) Express ${\color{var(--c3)}\dot{\vec{v}}\,'}$ in terms of the system states."
         $$
         \begin{align*}
-            {\color{var(--c3)}\dot{\vec{v}}\,'} &= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \sum {\color{var(--c3)}\vec{f}\,'} \\ 
-            {\color{var(--c3)}\dot{\vec{v}}\,'} &= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} + \frac{1}{m} \left( - m {\color{var(--c3)}\vec{g}\,'} + {\color{var(--c3)}\vec{f}\,'} \right) \\
-            {\color{var(--c3)}\dot{\vec{v}}\,'} &= - {\color{var(--c3)}\vec{\omega}\,'} \times {\color{var(--c3)}\vec{v}\,'} - R {\color{var(--c1)}\vec{g}} + \frac{1}{m} {\color{var(--c3)}\vec{f}\,'} \\ 
+            {\color{var(--c3)}\dot{\vec{v}}\,'} &= -{\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{v}\,'} + \frac{1}{m}\sum{\color{var(--c3)}\vec{f}\,'} \\
+            {\color{var(--c3)}\dot{\vec{v}}\,'} &= -{\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{v}\,'} + \frac{1}{m}\left(-m{\color{var(--c3)}\vec{g}\,'}+{\color{var(--c3)}\vec{f}\,'}\right) \\
+            {\color{var(--c3)}\dot{\vec{v}}\,'} &= -{\color{var(--c3)}\vec{\omega}\,'}\times{\color{var(--c3)}\vec{v}\,'} - R{\color{var(--c1)}\vec{g}} + \frac{1}{m}{\color{var(--c3)}\vec{f}\,'} \\
             \begin{bmatrix}
                 0 \\
                 {\color{var(--c3)}\dot{v}_y\,'} \\
@@ -762,7 +837,8 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
                 0 \\
                 g
             \end{bmatrix}
-            + \frac{1}{m}
+            +
+            \frac{1}{m}
             \begin{bmatrix}
                 0 \\
                 0 \\
@@ -776,29 +852,30 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
             &=
             \begin{bmatrix}
                 0 \\
-                {\color{var(--c3)}\omega_x\,' v_z\,'} - g \sin{\color{var(--c1)}\phi} \\
-                -{\color{var(--c3)}\omega_x\,' v_y\,'} - g \cos{\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t}
+                {\color{var(--c3)}\omega_x\,'v_z\,'} - g\sin{\color{var(--c1)}\phi} \\
+                -{\color{var(--c3)}\omega_x\,'v_y\,'} - g\cos{\color{var(--c1)}\phi} + \frac{1}{m}{\color{var(--c2)}f_t}
             \end{bmatrix}
-        \end{align*}  
+        \end{align*}
         $$
-    
-    ??? info "b) Escreva ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ em função dos estados do sistema."
+
+    ??? info "b) Express ${\color{var(--c3)}\dot{\vec{\omega}}\,'}$ in terms of the system states."
         $$
         \begin{align*}
-            {\color{var(--c3)}\dot{\vec{\omega}}\,'} &= - I^{-1} \left( {\color{var(--c3)}\omega\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} \sum {\color{var(--c3)}\vec{\tau}\,'} \\ 
-            {\color{var(--c3)}\dot{\vec{\omega}}\,'} &= - I^{-1} \left( {\color{var(--c3)}\omega\,'} \times I {\color{var(--c3)}\vec{\omega}\,'} \right) + I^{-1} {\color{var(--c3)}\vec{\tau}_x\,'} \\ 
+            {\color{var(--c3)}\dot{\vec{\omega}}\,'} &= -I^{-1}\left({\color{var(--c3)}\vec{\omega}\,'}\times I{\color{var(--c3)}\vec{\omega}\,'}\right) + I^{-1}\sum{\color{var(--c3)}\vec{\tau}\,'} \\
+            {\color{var(--c3)}\dot{\vec{\omega}}\,'} &= -I^{-1}\left({\color{var(--c3)}\vec{\omega}\,'}\times I{\color{var(--c3)}\vec{\omega}\,'}\right) + I^{-1}{\color{var(--c3)}\vec{\tau}_x\,'} \\
             \begin{bmatrix}
                 {\color{var(--c3)}\dot{\omega}_x\,'} \\
                 0 \\
                 0
             \end{bmatrix}
-            &= -
+            &=
+            -
             \begin{bmatrix}
                 I_{xx} & 0 & 0 \\
                 0 & I_{yy} & 0 \\
                 0 & 0 & I_{zz}
             \end{bmatrix}^{-1}
-            \left( 
+            \left(
             \begin{bmatrix}
                 {\color{var(--c3)}\omega_x\,'} \\
                 0 \\
@@ -832,13 +909,14 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
                 0 \\
                 0
             \end{bmatrix}
-            &= -
+            &=
+            -
             \begin{bmatrix}
-                \frac{1}{I_{xx}} & 0 & 0 \\
-                0 & \frac{1}{I_{yy}} & 0 \\
-                0 & 0 & \frac{1}{I_{zz}}
+                \dfrac{1}{I_{xx}} & 0 & 0 \\
+                0 & \dfrac{1}{I_{yy}} & 0 \\
+                0 & 0 & \dfrac{1}{I_{zz}}
             \end{bmatrix}
-            \left( 
+            \left(
             \begin{bmatrix}
                 {\color{var(--c3)}\omega_x\,'} \\
                 0 \\
@@ -846,16 +924,16 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
             \end{bmatrix}
             \times
             \begin{bmatrix}
-                I_{xx} {\color{var(--c3)}\omega_x\,'} \\
+                I_{xx}{\color{var(--c3)}\omega_x\,'} \\
                 0 \\
                 0
             \end{bmatrix}
             \right)
             +
             \begin{bmatrix}
-                \frac{1}{I_{xx}} & 0 & 0 \\
-                0 & \frac{1}{I_{yy}} & 0 \\
-                0 & 0 & \frac{1}{I_{zz}}
+                \dfrac{1}{I_{xx}} & 0 & 0 \\
+                0 & \dfrac{1}{I_{yy}} & 0 \\
+                0 & 0 & \dfrac{1}{I_{zz}}
             \end{bmatrix}
             \begin{bmatrix}
                 {\color{var(--c2)}\tau_x} \\
@@ -867,105 +945,133 @@ Elas também são chamadas de equações de Newton-Euler, que foi quem generaliz
                 0 \\
                 0
             \end{bmatrix}
-            &= 
+            &=
             \begin{bmatrix}
-                \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x} \\
+                \dfrac{1}{I_{xx}}{\color{var(--c2)}\tau_x} \\
                 0 \\
                 0
             \end{bmatrix}
         \end{align*}
         $$
 
-Se juntarmos as equações cinéticas e cinemáticas, obtemos a dinâmica completa do sistema:
-        
+By combining the kinematic and kinetic equations, we obtain the complete system dynamics:
+
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cos {\color{var(--c1)}\phi} -  {\color{var(--c3)}v_z\,'} \sin {\color{var(--c1)}\phi} \\ 
-    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \sin {\color{var(--c1)}\phi} +  {\color{var(--c3)}v_z\,'} \cos {\color{var(--c1)}\phi} \\
-    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
-    {\color{var(--c3)}\dot{v}_y\,'} = {\color{var(--c3)}v_z\,' \omega_x\,'} - g \sin {\color{var(--c1)}\phi} \\ 
-    {\color{var(--c3)}\dot{v}_z\,'} = - {\color{var(--c3)}v_y\,' \omega_x\,'} - g \cos {\color{var(--c1)}\phi} + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+{\color{var(--c1)}\dot{y}}
+=
+{\color{var(--c3)}v_y\,'}\cos{\color{var(--c1)}\phi}
+-
+{\color{var(--c3)}v_z\,'}\sin{\color{var(--c1)}\phi}
+\\
+{\color{var(--c1)}\dot{z}}
+=
+{\color{var(--c3)}v_y\,'}\sin{\color{var(--c1)}\phi}
++
+{\color{var(--c3)}v_z\,'}\cos{\color{var(--c1)}\phi}
+\\
+{\color{var(--c1)}\dot{\phi}}
+=
+{\color{var(--c3)}\omega_x\,'}
+\\
+{\color{var(--c3)}\dot{v}_y\,'}
+=
+{\color{var(--c3)}v_z\,'\omega_x\,'}
+-
+g\sin{\color{var(--c1)}\phi}
+\\
+{\color{var(--c3)}\dot{v}_z\,'}
+=
+-
+{\color{var(--c3)}v_y\,'\omega_x\,'}
+-
+g\cos{\color{var(--c1)}\phi}
++
+\frac{1}{m}{\color{var(--c2)}f_t}
+\\
+{\color{var(--c3)}\dot{\omega}_x\,'}
+=
+\frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
 \end{array}
 \right.
 $$
 
-Note que as equações acima são exatamente iguais às obtidas utilizando a notação escalar. 
+Notice that these equations are identical to those obtained using the scalar notation.
 
 ---
 
-## Linearização
+## Linearization
 
-O sistema obtido é não-linear. Para linearizá-lo, podemos considerar aproximações quando os estados estão bem próximos de suas posições de equilíbrio. Neste caso, funções trigonométricas podem ser aproximadas (ex: $\cos{\color{var(--c1)}\phi} \approx 1$ e $\sin{\color{var(--c1)}\phi} \approx {\color{var(--c1)}\phi}$) (1), assim como o produto entre dois estados (ex: ${\color{var(--c3)}v_z\,' \omega_x\,'} \approx 0$).
+The system obtained so far is nonlinear. To linearize it, we assume that the states remain close to their equilibrium values. Under this assumption, the trigonometric functions can be approximated (e.g., $\cos{\color{var(--c1)}\phi}\approx1$ and $\sin{\color{var(--c1)}\phi}\approx{\color{var(--c1)}\phi}$)(1), and products of state variables can be neglected (e.g., ${\color{var(--c3)}v_z\,'\omega_x\,'}\approx0$).
 {.annotate}
 
-1. Essas aproximações valem apenas para ângulos em radianos menores que $10^{\circ}$.
+1. These approximations are valid only for angles smaller than approximately $10^\circ$ (expressed in radians).
 
-!!! question "Exercício 11"
+!!! question "Exercise 8.11"
 
-    Determine as equações dinâmicas do sistema linearizado.
-    
-    ??? info "Resposta"
+    Derive the dynamics of the linearized system.
+
+    ??? info "Solution"
         $$
         \left\{
         \begin{array}{l}
-            {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \cancelto{1}{\cos {\color{var(--c1)}\phi}} -  {\color{var(--c3)}v_z\,'} \cancelto{{\color{var(--c1)}\phi}}{\sin {\color{var(--c1)}\phi}} \\ 
-            {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_y\,'} \cancelto{{\color{var(--c1)}\phi}}{\sin {\color{var(--c1)}\phi}} +  {\color{var(--c3)}v_z\,'} \cancelto{1}{\cos {\color{var(--c1)}\phi}} \\
-            {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
-            {\color{var(--c3)}\dot{v}_y\,'} = \cancelto{0}{\color{var(--c3)}v_z\,' \omega_x\,'} - g \cancelto{{\color{var(--c1)}\phi}}{\sin {\color{var(--c1)}\phi}} \\ 
-            {\color{var(--c3)}\dot{v}_z\,'} = - \cancelto{0}{\color{var(--c3)}v_y\,' \omega_x\,'} - g \cancelto{1}{\cos {\color{var(--c1)}\phi}} + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
-            {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+            {\color{var(--c1)}\dot{y}} = {\color{var(--c3)}v_y\,'}\cancelto{1}{\cos{\color{var(--c1)}\phi}} - {\color{var(--c3)}v_z\,'}\cancelto{{\color{var(--c1)}\phi}}{\sin{\color{var(--c1)}\phi}} \\
+            {\color{var(--c1)}\dot{z}} = {\color{var(--c3)}v_y\,'}\cancelto{{\color{var(--c1)}\phi}}{\sin{\color{var(--c1)}\phi}} + {\color{var(--c3)}v_z\,'}\cancelto{1}{\cos{\color{var(--c1)}\phi}} \\
+            {\color{var(--c1)}\dot{\phi}} = {\color{var(--c3)}\omega_x\,'} \\
+            {\color{var(--c3)}\dot{v}_y\,'} = \cancelto{0}{{\color{var(--c3)}v_z\,'\omega_x\,'}} - g\cancelto{{\color{var(--c1)}\phi}}{\sin{\color{var(--c1)}\phi}} \\
+            {\color{var(--c3)}\dot{v}_z\,'} = -\cancelto{0}{{\color{var(--c3)}v_y\,'\omega_x\,'}} - g\cancelto{1}{\cos{\color{var(--c1)}\phi}} + \frac{1}{m}{\color{var(--c2)}f_t} \\
+            {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
         \end{array}
         \right.
-        \qquad \longrightarrow \qquad
+        \qquad\longrightarrow\qquad
         \left\{
         \begin{array}{l}
-            {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} - \cancelto{0}{{\color{var(--c3)}v_z\,'} {\color{var(--c1)}\phi}} \\
-            {\color{var(--c1)}\dot{z}} =  \cancelto{0}{{\color{var(--c3)}v_y\,'} {\color{var(--c1)}\phi}} + {\color{var(--c3)}v_z\,'} \\
-            {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
-            {\color{var(--c3)}\dot{v}_y\,'} = - g {\color{var(--c1)}\phi} \\ 
-            {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
-            {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+            {\color{var(--c1)}\dot{y}} = {\color{var(--c3)}v_y\,'} - \cancelto{0}{{\color{var(--c3)}v_z\,'}{\color{var(--c1)}\phi}} \\
+            {\color{var(--c1)}\dot{z}} = \cancelto{0}{{\color{var(--c3)}v_y\,'}{\color{var(--c1)}\phi}} + {\color{var(--c3)}v_z\,'} \\
+            {\color{var(--c1)}\dot{\phi}} = {\color{var(--c3)}\omega_x\,'} \\
+            {\color{var(--c3)}\dot{v}_y\,'} = -g{\color{var(--c1)}\phi} \\
+            {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m}{\color{var(--c2)}f_t} \\
+            {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
         \end{array}
         \right.
-        \qquad \longrightarrow \qquad
+        \qquad\longrightarrow\qquad
         \left\{
         \begin{array}{l}
-            {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \\
-            {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_z\,'} \\
-            {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
-            {\color{var(--c3)}\dot{v}_y\,'} = - g {\color{var(--c1)}\phi} \\ 
-            {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
-            {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+            {\color{var(--c1)}\dot{y}} = {\color{var(--c3)}v_y\,'} \\
+            {\color{var(--c1)}\dot{z}} = {\color{var(--c3)}v_z\,'} \\
+            {\color{var(--c1)}\dot{\phi}} = {\color{var(--c3)}\omega_x\,'} \\
+            {\color{var(--c3)}\dot{v}_y\,'} = -g{\color{var(--c1)}\phi} \\
+            {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m}{\color{var(--c2)}f_t} \\
+            {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
         \end{array}
         \right.
         $$
 
-Você deve ter chegado a:
+You should have obtained
 
 $$
 \left\{
 \begin{array}{l}
-    {\color{var(--c1)}\dot{y}} =  {\color{var(--c3)}v_y\,'} \\
-    {\color{var(--c1)}\dot{z}} =  {\color{var(--c3)}v_z\,'} \\
-    {\color{var(--c1)}\dot{\phi}} =  {\color{var(--c3)}\omega_x\,'} \\ 
-    {\color{var(--c3)}\dot{v}_y\,'} = - g {\color{var(--c1)}\phi} \\ 
-    {\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m} {\color{var(--c2)}f_t} \\ 
-    {\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}} {\color{var(--c2)}\tau_x}
+{\color{var(--c1)}\dot{y}} = {\color{var(--c3)}v_y\,'} \\
+{\color{var(--c1)}\dot{z}} = {\color{var(--c3)}v_z\,'} \\
+{\color{var(--c1)}\dot{\phi}} = {\color{var(--c3)}\omega_x\,'} \\
+{\color{var(--c3)}\dot{v}_y\,'} = -g{\color{var(--c1)}\phi} \\
+{\color{var(--c3)}\dot{v}_z\,'} = -g + \frac{1}{m}{\color{var(--c2)}f_t} \\
+{\color{var(--c3)}\dot{\omega}_x\,'} = \frac{1}{I_{xx}}{\color{var(--c2)}\tau_x}
 \end{array}
-\right.    
+\right.
 $$
 
-Apesar lembrar as equações diferenciais obtidas no sistema de coordenadas inercial, ela possui uma diferença muito importante, que aparece exatamente na dinâmica horizontal: a aceleração ${\color{var(--c3)}\dot{v}_y\,'}$ não depende da força ${\color{var(--c2)}f_t}$ mas sim do ângulo ${\color{var(--c1)}\phi}$.
+Although these system dynamics resemble those obtained using the inertial frame, there is one important difference: the horizontal dynamics. The horizontal acceleration ${\color{var(--c3)}\dot{v}_y\,'}$ is not directly driven by the thrust force ${\color{var(--c2)}f_t}$, but instead by the pitch angle ${\color{var(--c1)}\phi}$.
 
-Isso fica evidente ao representarmos as equações diferenciais em um diagrama de blocos:
+This becomes clear when the equations are represented as a block diagram:
 
 ![](images/2d_plant.svg){: width=100% style="display: block; margin: auto;" }
 
-Observe o seguinte:
+Notice the following:
 
-- A força ${\color{var(--c2)}f_t}$ integra duas vezes até a posição ${\color{var(--c1)}z}$ (2ª lei de Newton para translação), atuando de forma desacoplada na dinâmica de posição vertical.
-- O torque ${\color{var(--c2)}\tau_x}$ integra duas vezes até o ângulo ${\color{var(--c1)}\phi}$ (2ª lei de Newton para rotação), e, integrando mais duas vezes, chega-se a posição ${\color{var(--c1)}y}$. 
-- Portanto, de ${\color{var(--c2)}\tau_x}$ a ${\color{var(--c1)}y}$ há um integrador quádruplo, resultado do acoplamento entre a dinâmica de rotação e a dinâmica de posição horizontal. 
-- O sinal negativo em $- g$ decorre da convenção de eixos adotada (uma rotação positiva em torqno de ${\color{var(--c1)}x}$ implica em um deslocamento negativo ao longo de ${\color{var(--c1)}y}$).
+- The thrust force ${\color{var(--c2)}f_t}$ is integrated twice to obtain the vertical position ${\color{var(--c1)}z}$ (Newton's second law for translation), acting independently on the vertical dynamics.
+- The torque ${\color{var(--c2)}\tau_x}$ is integrated twice to obtain the pitch angle ${\color{var(--c1)}\phi}$ (Newton's second law for rotation), and integrating twice more yields the horizontal position ${\color{var(--c1)}y}$.
+- Therefore, the transfer from ${\color{var(--c2)}\tau_x}$ to ${\color{var(--c1)}y}$ contains four integrators in series. This quadruple integrator results from the coupling between the rotational dynamics and the horizontal translational dynamics.
+- The negative sign in $-g$ arises from the chosen axis convention: a positive rotation about the ${\color{var(--c1)}x}$ axis produces a negative acceleration along the ${\color{var(--c1)}y}$ axis.

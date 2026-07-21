@@ -40,7 +40,7 @@ extra_css:
   - assets/css/configure-colors.css    # Sobrescritos de cor (bom p/ palette custom)
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  # - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js   # MathJax v3
   - assets/js/disable-parent-click.js  # Script custom (evitar cliques no pai, etc.)
   - assets/js/redirect-home.js

@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#modelo-3d" class="md-skip">
+        <a href="#3d-model" class="md-skip">
           Skip to content
         </a>
       
@@ -652,7 +652,7 @@
   <span class="md-ellipsis">
     
   
-    Motor coefficients
+    Motor Coefficients
   
 
     
@@ -682,7 +682,7 @@
   <span class="md-ellipsis">
     
   
-    Thrust constant
+    Thrust Constant
   
 
     
@@ -712,7 +712,7 @@
   <span class="md-ellipsis">
     
   
-    Drag constant
+    Drag Constant
   
 
     
@@ -819,7 +819,7 @@
   <span class="md-ellipsis">
     
   
-    2D model
+    2D Model
   
 
     
@@ -858,7 +858,7 @@
   <span class="md-ellipsis">
     
   
-    3D model
+    3D Model
   
 
     
@@ -878,7 +878,7 @@
   <span class="md-ellipsis">
     
   
-    3D model
+    3D Model
   
 
     
@@ -904,10 +904,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introducao" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Introdução
+        Introduction
       
     </span>
   </a>
@@ -1839,10 +1839,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introducao" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Introdução
+        Introduction
       
     </span>
   </a>
@@ -1955,21 +1955,30 @@
 
 
 
-<h1 id="modelo-3d"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5v-2h4v-2H6v-2h3V9H5zm8 0h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3zm3 8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-1v6z"/></svg></span> Modelo 3D</h1>
-<p>Agora, vamos deduzir as equações diferenciais que descrevem a dinâmica 3D de um quadricóptero. Neste modelo completo, o drone pode se mover e girar livremente no espaço, o que traz toda a riqueza — e também a dificuldade — do problema. Para representá-lo, será necessário recorrer à álgebra vetorial e às matrizes de rotação, que permitem descrever posições, velocidades e orientações em três dimensões.</p>
+<h1 id="3d-model"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5v-2h4v-2H6v-2h3V9H5zm8 0h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3zm3 8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-1v6z"/></svg></span> 3D Model</h1>
+<p>We now derive the differential equations that describe the three-dimensional dynamics of a quadcopter. In this complete model, the drone can translate and rotate freely in space, capturing both the richness and the complexity of the problem. Describing this motion requires vector algebra and rotation matrices, which provide a convenient framework for representing positions, velocities, and orientations in three dimensions.</p>
 <hr />
-<h2 id="introducao">Introdução</h2>
-<p>A dinâmica 3D possui 6 graus de liberdade (3 de translação e 3 de rotação) e, portanto, devemos obter 12 equações diferenciais (2 para cada grau de liberdade).</p>
+<h2 id="introduction">Introduction</h2>
+<p class="annotate">The 3D model has six degrees of freedom (three translational and three rotational). Therefore, we must derive twelve differential equations (two for each degree of freedom)(1).</p>
+<ol>
+<li>For clarity, we will use the following colors and notation:<ul>
+<li><span class="arithmatex">\({\color{var(--c1)} x}\)</span> — States (inertial frame)</li>
+<li><span class="arithmatex">\({\color{var(--c3)} x\,'}\)</span> — States (body-fixed frame)</li>
+<li><span class="arithmatex">\({\color{var(--c2)} u}\)</span> — Inputs</li>
+<li><span class="arithmatex">\(m\)</span> — Constants</li>
+</ul>
+</li>
+</ol>
 <p><img alt="" src="../images/3d_drone.svg" style="display: block; margin: auto;" width="800" /></p>
-<p>É muito mais fácil trabalhar com a notação vetorial e aplicar as equações de Newton-Euler 2 vezes (uma para translação e outra para rotação) do que 6 vezes com a notação escalar (uma para cada grau de liberdade).</p>
-<p>As posições e ângulos serão descritos no sistema de coordenadas inercial, já as velocidades lineares e angulares no sistema de coordenadas móvel. Dessa forma, os vetores de estados do nosso sistema serão <span class="arithmatex">\({\color{var(--c1)}\vec{r}}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\vec{\delta}}\)</span>, <span class="arithmatex">\({\color{var(--c3)}{\vec{v}}\,'}\)</span> e <span class="arithmatex">\({\color{var(--c3)}{\vec{\omega}}\,'}\)</span>, onde:</p>
+<p>Using vector notation is much simpler than using scalar notation, since the Newton–Euler equations need to be applied only twice, once for translation and once for rotation, instead of six times, once for each degree of freedom.</p>
+<p>The positions and Euler angles will be expressed in the inertial frame, while the linear and angular velocities will be expressed in the body-fixed frame. Therefore, the system state vectors are <span class="arithmatex">\({\color{var(--c1)}\vec{r}}\)</span>, <span class="arithmatex">\({\color{var(--c1)}\vec{\delta}}\)</span>, <span class="arithmatex">\({\color{var(--c3)}\vec{v}\,'}\)</span>, and <span class="arithmatex">\({\color{var(--c3)}\vec{\omega}\,'}\)</span>, where:</p>
 <div class="arithmatex">\[
 {\color{var(--c1)}\vec{r}}
 =
 \begin{bmatrix}
     {\color{var(--c1)}x} \\
     {\color{var(--c1)}y} \\
-    {\color{var(--c1)}z} \\
+    {\color{var(--c1)}z}
 \end{bmatrix}
 \qquad
 {\color{var(--c1)}\vec{\delta}}
@@ -1977,25 +1986,24 @@
 \begin{bmatrix}
     {\color{var(--c1)}\phi} \\
     {\color{var(--c1)}\theta} \\
-    {\color{var(--c1)}\psi} \\
+    {\color{var(--c1)}\psi}
 \end{bmatrix}
 \qquad
-{\color{var(--c3)}{\vec{v}}\,'}
+{\color{var(--c3)}\vec{v}\,'}
 =
 \begin{bmatrix}
     {\color{var(--c3)}v_x\,'} \\
     {\color{var(--c3)}v_y\,'} \\
-    {\color{var(--c3)}v_z\,'} \\
+    {\color{var(--c3)}v_z\,'}
 \end{bmatrix}
 \qquad
-{\color{var(--c3)}{\vec{\omega}}\,'}
+{\color{var(--c3)}\vec{\omega}\,'}
 =
 \begin{bmatrix}
     {\color{var(--c3)}\omega_x\,'} \\
     {\color{var(--c3)}\omega_y\,'} \\
-    {\color{var(--c3)}\omega_z\,'} \\
+    {\color{var(--c3)}\omega_z\,'}
 \end{bmatrix}
-\qquad
 \]</div>
 <hr />
 <h2 id="cinematica">Cinemática</h2>
@@ -2022,7 +2030,7 @@
 \]</div>
 <h3 id="translacao">Translação</h3>
 <div class="admonition question">
-<p class="admonition-title">Exercício 1</p>
+<p class="admonition-title">Exercício 9.1</p>
 <p>Determine <span class="arithmatex">\({\color{var(--c1)}\dot{\vec{r}}}\)</span> em função dos estados do sistema.</p>
 <details class="info">
 <summary>Resposta</summary>
@@ -2062,7 +2070,7 @@
 </div>
 <h3 id="rotacao">Rotação</h3>
 <div class="admonition question">
-<p class="admonition-title">Exercício 2</p>
+<p class="admonition-title">Exercício 9.2</p>
 <p>Determine <span class="arithmatex">\({\color{var(--c1)}\dot{\vec{\delta}}}\)</span> em função dos estados do sistema.</p>
 <details class="info">
 <summary>Resposta</summary>
@@ -2195,7 +2203,7 @@
 \end{bmatrix}
 \]</div>
 <div class="admonition question">
-<p class="admonition-title">Exercício 3</p>
+<p class="admonition-title">Exercício 9.3</p>
 <p>Determine <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{v}}\,'}\)</span> em função dos estados do sistema.</p>
 <p>Dics: substitua as somatórias de forças <span class="arithmatex">\(\sum {\color{var(--c3)}\vec{f}\,'}\)</span> na equação de Newton-Euler de translação.</p>
 <details class="info">
@@ -2265,7 +2273,7 @@
 \end{bmatrix}
 \]</div>
 <div class="admonition question">
-<p class="admonition-title">Exercício 4</p>
+<p class="admonition-title">Exercício 9.4</p>
 <p>Determine <span class="arithmatex">\({\color{var(--c3)}\dot{\vec{\omega}}\,'}\)</span> em função dos estados do sistema.</p>
 <p>Dics: substitua as somatórias de torques <span class="arithmatex">\(\sum {\color{var(--c3)}\vec{\tau}\,'}\)</span> na equação de Newton-Euler de rotação.</p>
 <details class="info">
@@ -2391,7 +2399,7 @@
 <li>Essas aproximações valem apenas para ângulos em radianos menores que <span class="arithmatex">\(10^{\circ}\)</span>.</li>
 </ol>
 <div class="admonition question">
-<p class="admonition-title">Exercício 5</p>
+<p class="admonition-title">Exercício 9.5</p>
 <p>Determine as equações dinâmicas do sistema linearizado.</p>
 <details class="info">
 <summary>Resposta</summary>
